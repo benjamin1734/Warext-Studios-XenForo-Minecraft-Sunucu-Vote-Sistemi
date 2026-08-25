@@ -1,0 +1,61 @@
+<xf:title>Sunucu Başarımları</xf:title>
+
+<xf:pageaction>
+    <xf:form action="{{ link('warext-minecraft/achievement-rebuild') }}" class="buttonGroup">
+        <xf:button type="submit" class="button--primary">Başarımları Şimdi Hesapla</xf:button>
+    </xf:form>
+</xf:pageaction>
+
+<xf:form action="{{ link('warext-minecraft/achievements') }}" class="block" ajax="true">
+    <div class="block-container">
+        <div class="block-header">Yeni Başarım Tanımı</div>
+        <div class="block-body">
+            <xf:textboxrow name="achievement_key" label="Anahtar" placeholder="ornek_basari" maxlength="50" required="required" />
+            <xf:textboxrow name="title" label="Başlık" maxlength="100" required="required" />
+            <xf:textboxrow name="description" label="Açıklama" maxlength="255" />
+            <xf:textboxrow name="icon" value="fa-trophy" label="Font Awesome ikonu" maxlength="50" />
+            <xf:selectrow name="metric" label="Metrik">
+                <xf:foreach loop="$metrics" key="$metric" value="$metricTitle">
+                    <xf:option value="{$metric}">{$metricTitle}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:numberboxrow name="threshold" value="1" min="0" label="Eşik" />
+            <xf:numberboxrow name="display_order" value="100" min="0" label="Gösterim sırası" />
+            <xf:checkboxrow><xf:option name="is_active" value="1" selected="true">Aktif</xf:option></xf:checkboxrow>
+        </div>
+        <xf:submitrow submit="Başarım Oluştur" />
+    </div>
+</xf:form>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Tanımlı Başarımlar</div>
+        <div class="block-body">
+            <xf:if is="$achievements is not empty">
+                <xf:foreach loop="$achievements" value="$achievement">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{$achievement.title}</strong>
+                                    <span class="label">{$achievement.achievement_key}</span>
+                                    <xf:if is="$achievement.is_active"><span class="label label--green">Aktif</span><xf:else /><span class="label label--red">Kapalı</span></xf:if>
+                                </div>
+                                <div class="contentRow-snippet">{$achievement.description}</div>
+                                <div class="contentRow-minor">Metrik: {$achievement.metric} · Eşik: {$achievement.threshold} · Sıra: {$achievement.display_order}</div>
+                                <div class="buttonGroup" style="margin-top:8px">
+                                    <xf:button href="{{ link('warext-minecraft/achievement-edit', $achievement) }}">Düzenle</xf:button>
+                                    <xf:form action="{{ link('warext-minecraft/achievement-toggle', $achievement) }}" ajax="true">
+                                        <xf:button type="submit"><xf:if is="$achievement.is_active">Devre Dışı Bırak<xf:else />Etkinleştir</xf:if></xf:button>
+                                    </xf:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Başarım tanımı bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
