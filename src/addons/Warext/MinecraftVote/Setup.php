@@ -205,6 +205,21 @@ class Setup extends AbstractSetup
         $this->createServerUpdateTable();
     }
 
+    public function installStep13(): void
+    {
+        $this->createAchievementTables();
+    }
+
+    public function installStep14(): void
+    {
+        $this->createSponsorTable();
+    }
+
+    public function installStep15(): void
+    {
+        $this->createAuditLogTable();
+    }
+
     public function upgrade1000020Step1(): void
     {
         if (!$this->schemaManager()->columnExists('xf_warext_mc_server', 'last_ping_error'))
@@ -275,6 +290,21 @@ class Setup extends AbstractSetup
     public function upgrade1000080Step3(): void
     {
         $this->createServerUpdateTable();
+    }
+
+    public function upgrade1000100Step1(): void
+    {
+        $this->createAchievementTables();
+    }
+
+    public function upgrade1000100Step2(): void
+    {
+        $this->createSponsorTable();
+    }
+
+    public function upgrade1000100Step3(): void
+    {
+        $this->createAuditLogTable();
     }
 
     protected function addRankingColumns(): void
@@ -521,9 +551,121 @@ class Setup extends AbstractSetup
         });
     }
 
+    protected function createAchievementTables(): void
+    {
+        $sm = $this->schemaManager();
+        $created = false;
+
+        if (!$sm->tableExists('xf_warext_mc_achievement'))
+        {
+            $sm->createTable('xf_warext_mc_achievement', function (Create $table)
+            {
+                $table->addColumn('achievement_id', 'int')->autoIncrement();
+                $table->addColumn('achievement_key', 'varchar', 50)->setDefault('');
+                $table->addColumn('title', 'varchar', 100)->setDefault('');
+                $table->addColumn('description', 'varchar', 255)->setDefault('');
+                $table->addColumn('icon', 'varchar', 50)->setDefault('fa-trophy');
+                $table->addColumn('metric', 'varchar', 30)->setDefault('vote_total');
+                $table->addColumn('threshold', 'int')->setDefault(0);
+                $table->addColumn('display_order', 'int')->setDefault(10);
+                $table->addColumn('is_active', 'tinyint')->setDefault(1);
+                $table->addColumn('created_date', 'int')->setDefault(0);
+                $table->addColumn('updated_date', 'int')->setDefault(0);
+                $table->addUniqueKey('achievement_key', 'warext_mc_achievement_key');
+                $table->addKey(['is_active', 'display_order'], 'warext_mc_achievement_order');
+            });
+            $created = true;
+        }
+
+        if (!$sm->tableExists('xf_warext_mc_server_achievement'))
+        {
+            $sm->createTable('xf_warext_mc_server_achievement', function (Create $table)
+            {
+                $table->addColumn('server_id', 'int')->setDefault(0);
+                $table->addColumn('achievement_id', 'int')->setDefault(0);
+                $table->addColumn('awarded_date', 'int')->setDefault(0);
+                $table->addColumn('metric_value', 'int')->setDefault(0);
+                $table->addColumn('source', 'varchar', 30)->setDefault('automatic');
+                $table->addPrimaryKey(['server_id', 'achievement_id']);
+                $table->addKey(['achievement_id', 'awarded_date'], 'warext_mc_server_achievement_award');
+                $table->addKey(['server_id', 'awarded_date'], 'warext_mc_server_achievement_server');
+            });
+        }
+
+        if ($created)
+        {
+            $now = \XF::$time;
+            $this->db()->insertBulk('xf_warext_mc_achievement', [
+                ['achievement_key' => 'votes_100', 'title' => '100 Oy', 'description' => 'Toplam 100 topluluk oyuna ulaştı.', 'icon' => 'fa-check-to-slot', 'metric' => 'vote_total', 'threshold' => 100, 'display_order' => 10, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'votes_1000', 'title' => '1.000 Oy', 'description' => 'Toplam 1.000 topluluk oyuna ulaştı.', 'icon' => 'fa-box-ballot', 'metric' => 'vote_total', 'threshold' => 1000, 'display_order' => 20, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'votes_10000', 'title' => '10.000 Oy', 'description' => 'Toplam 10.000 topluluk oyuna ulaştı.', 'icon' => 'fa-award', 'metric' => 'vote_total', 'threshold' => 10000, 'display_order' => 30, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'uptime_99', 'title' => '%99 Uptime', 'description' => 'İzlenen çalışma süresinde %99 uptime seviyesine ulaştı.', 'icon' => 'fa-signal', 'metric' => 'uptime_bp', 'threshold' => 9900, 'display_order' => 40, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'peak_100', 'title' => '100 Eş Zamanlı Oyuncu', 'description' => 'En az 100 eş zamanlı oyuncu gördü.', 'icon' => 'fa-users', 'metric' => 'peak_players', 'threshold' => 100, 'display_order' => 50, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'peak_500', 'title' => '500 Eş Zamanlı Oyuncu', 'description' => 'En az 500 eş zamanlı oyuncu gördü.', 'icon' => 'fa-users', 'metric' => 'peak_players', 'threshold' => 500, 'display_order' => 60, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'one_year', 'title' => '1 Yıllık Sunucu', 'description' => 'Platformda 365 günü tamamladı.', 'icon' => 'fa-cake-candles', 'metric' => 'age_days', 'threshold' => 365, 'display_order' => 70, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'verified', 'title' => 'Doğrulanmış Sunucu', 'description' => 'Sunucu sahipliği başarıyla doğrulandı.', 'icon' => 'fa-badge-check', 'metric' => 'verified', 'threshold' => 1, 'display_order' => 80, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'month_champion', 'title' => 'Ayın Sunucusu', 'description' => 'Bir aylık oy sezonunu birinci tamamladı.', 'icon' => 'fa-crown', 'metric' => 'season_wins', 'threshold' => 1, 'display_order' => 90, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now],
+                ['achievement_key' => 'rising_star', 'title' => 'Yükselen Yıldız', 'description' => 'Trend sıralamasında ilk 3 içine girdi.', 'icon' => 'fa-arrow-trend-up', 'metric' => 'trend_rank_max', 'threshold' => 3, 'display_order' => 100, 'is_active' => 1, 'created_date' => $now, 'updated_date' => $now]
+            ]);
+        }
+    }
+
+    protected function createSponsorTable(): void
+    {
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_sponsor'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_sponsor', function (Create $table)
+        {
+            $table->addColumn('sponsor_id', 'int')->autoIncrement();
+            $table->addColumn('server_id', 'int')->setDefault(0);
+            $table->addColumn('label', 'varchar', 50)->setDefault('Sponsorlu');
+            $table->addColumn('placement', 'varchar', 30)->setDefault('list_top');
+            $table->addColumn('start_date', 'int')->setDefault(0);
+            $table->addColumn('end_date', 'int')->setDefault(0);
+            $table->addColumn('state', 'varchar', 20)->setDefault('active');
+            $table->addColumn('display_order', 'int')->setDefault(10);
+            $table->addColumn('created_by', 'int')->setDefault(0);
+            $table->addColumn('created_date', 'int')->setDefault(0);
+            $table->addColumn('updated_date', 'int')->setDefault(0);
+            $table->addKey(['state', 'placement', 'display_order'], 'warext_mc_sponsor_active');
+            $table->addKey(['server_id', 'start_date', 'end_date'], 'warext_mc_sponsor_server_date');
+        });
+    }
+
+    protected function createAuditLogTable(): void
+    {
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_audit_log'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_audit_log', function (Create $table)
+        {
+            $table->addColumn('log_id', 'bigint')->autoIncrement();
+            $table->addColumn('server_id', 'int')->setDefault(0);
+            $table->addColumn('actor_user_id', 'int')->setDefault(0);
+            $table->addColumn('target_user_id', 'int')->setDefault(0);
+            $table->addColumn('action', 'varchar', 50)->setDefault('');
+            $table->addColumn('details', 'mediumblob')->nullable(true);
+            $table->addColumn('log_date', 'int')->setDefault(0);
+            $table->addKey(['server_id', 'log_date'], 'warext_mc_audit_server_date');
+            $table->addKey(['actor_user_id', 'log_date'], 'warext_mc_audit_actor_date');
+            $table->addKey(['action', 'log_date'], 'warext_mc_audit_action_date');
+        });
+    }
+
     public function uninstallStep1(): void
     {
         $sm = $this->schemaManager();
+        $sm->dropTable('xf_warext_mc_audit_log');
+        $sm->dropTable('xf_warext_mc_sponsor');
+        $sm->dropTable('xf_warext_mc_server_achievement');
+        $sm->dropTable('xf_warext_mc_achievement');
         $sm->dropTable('xf_warext_mc_server_update');
         $sm->dropTable('xf_warext_mc_favorite');
         $sm->dropTable('xf_warext_mc_review');
