@@ -1,0 +1,10 @@
+{
+    "parent_navigation_id": "warextMinecraftVote",
+    "display_order": 25,
+    "link": "warext-minecraft/reports",
+    "icon": "fa-flag",
+    "admin_permission_id": "warextMinecraftVote",
+    "debug_only": false,
+    "development_only": false,
+    "hide_no_children": false
+}

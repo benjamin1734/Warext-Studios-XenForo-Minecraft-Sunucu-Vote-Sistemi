@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "warext-minecraft",
+    "sub_name": "reports",
+    "format": "",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Report",
+    "context": "",
+    "action_prefix": ""
+}

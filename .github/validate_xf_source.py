@@ -30,6 +30,11 @@ def class_to_path(addon: Path, value: str) -> Path | None:
     return addon / f'{short}.php'
 
 
+def action_prefix_to_method(action_prefix: str) -> str:
+    parts = [part for part in re.split(r'[^A-Za-z0-9]+', action_prefix) if part]
+    return 'action' + ''.join(part[:1].upper() + part[1:] for part in parts)
+
+
 def validate_short_ids(addon: Path):
     errors = []
     for folder, label in [
@@ -67,6 +72,7 @@ def validate_routes(addon: Path):
         prefix = str(obj.get('route_prefix', ''))
         sub_name = str(obj.get('sub_name', ''))
         controller = str(obj.get('controller', ''))
+        action_prefix = str(obj.get('action_prefix', ''))
         key = (route_type, prefix, sub_name)
         if key in seen:
             errors.append(f'{path}: yinelenen route {key}')
@@ -82,6 +88,47 @@ def validate_routes(addon: Path):
             expected = addon_short_to_path(addon, controller, base)
             if expected and not expected.is_file():
                 errors.append(f'{path}: controller bulunamadı: {expected.relative_to(addon)}')
+                continue
+            if expected and expected.is_file() and action_prefix:
+                content = expected.read_text(encoding='utf-8-sig')
+                method = action_prefix_to_method(action_prefix)
+                if not re.search(r'function\s+' + re.escape(method) + r'\s*\(', content):
+                    errors.append(f'{path}: route action metodu bulunamadı: {method}()')
+    return errors
+
+
+def validate_admin_navigation(addon: Path):
+    errors = []
+    nav_root = addon / '_output' / 'admin_navigation'
+    phrase_root = addon / '_output' / 'phrases'
+    routes_root = addon / '_output' / 'routes'
+
+    admin_routes = set()
+    for route_path in sorted(routes_root.glob('*.json')):
+        obj = load_json(route_path)
+        if str(obj.get('route_type', '')) != 'admin':
+            continue
+        prefix = str(obj.get('route_prefix', '')).strip('/')
+        sub_name = str(obj.get('sub_name', '')).strip('/')
+        if prefix:
+            admin_routes.add(prefix if not sub_name else f'{prefix}/{sub_name}')
+
+    nav_ids = {path.stem for path in nav_root.glob('*.json')}
+    for path in sorted(nav_root.glob('*.json')):
+        nav_id = path.stem
+        obj = load_json(path)
+        phrase = phrase_root / f'admin_navigation.{nav_id}.txt'
+        if not phrase.is_file():
+            errors.append(f'{path}: admin navigation phrase bulunamadı: {phrase.name}')
+
+        parent_id = str(obj.get('parent_navigation_id', ''))
+        if parent_id.startswith('warext') and parent_id not in nav_ids:
+            errors.append(f'{path}: addon parent navigation bulunamadı: {parent_id}')
+
+        link = str(obj.get('link', '')).strip('/')
+        if link.startswith('warext-minecraft') and link not in admin_routes:
+            errors.append(f'{path}: admin navigation link route bulunamadı: {link}')
+
     return errors
 
 
@@ -150,6 +197,7 @@ def validate_addon(addon: Path):
         errors.append('Setup.php bulunamadı')
     errors += validate_short_ids(addon)
     errors += validate_routes(addon)
+    errors += validate_admin_navigation(addon)
     errors += validate_cron(addon)
     errors += validate_content_types(addon)
     errors += validate_controller_templates(addon)
@@ -164,7 +212,7 @@ def main():
         for error in errors:
             print(f'- {error}', file=sys.stderr)
         raise SystemExit(1)
-    print('XenForo ID/route/controller/cron/content-type/template doğrulaması başarılı.')
+    print('XenForo ID/route/action/navigation/cron/content-type/template doğrulaması başarılı.')
 
 
 if __name__ == '__main__':

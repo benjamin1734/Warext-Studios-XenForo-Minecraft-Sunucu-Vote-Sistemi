@@ -141,6 +141,8 @@ class Setup extends AbstractSetup
             $table->addKey(['server_id', 'vote_date'], 'warext_mc_vote_server_date');
             $table->addKey(['user_id', 'server_id', 'vote_date'], 'warext_mc_vote_user_server');
             $table->addKey(['minecraft_uuid', 'server_id', 'vote_date'], 'warext_mc_vote_uuid_server');
+            $table->addKey(['server_id', 'minecraft_username', 'vote_date'], 'warext_mc_vote_server_name');
+            $table->addKey(['server_id', 'ip_hash', 'vote_date'], 'warext_mc_vote_server_ip');
             $table->addKey(['status', 'next_attempt_date'], 'warext_mc_vote_queue');
         });
     }
@@ -218,6 +220,11 @@ class Setup extends AbstractSetup
     public function installStep15(): void
     {
         $this->createAuditLogTable();
+    }
+
+    public function installStep16(): void
+    {
+        $this->createReportTable();
     }
 
     public function upgrade1000020Step1(): void
@@ -307,6 +314,16 @@ class Setup extends AbstractSetup
         $this->createAuditLogTable();
     }
 
+    public function upgrade1000130Step1(): void
+    {
+        $this->addVoteAbuseIndexes();
+    }
+
+    public function upgrade1000130Step2(): void
+    {
+        $this->createReportTable();
+    }
+
     protected function addRankingColumns(): void
     {
         $sm = $this->schemaManager();
@@ -329,6 +346,21 @@ class Setup extends AbstractSetup
                 });
             }
         }
+    }
+
+    protected function addVoteAbuseIndexes(): void
+    {
+        $sm = $this->schemaManager();
+        if (!$sm->tableExists('xf_warext_mc_vote'))
+        {
+            return;
+        }
+
+        $sm->alterTable('xf_warext_mc_vote', function (Alter $table)
+        {
+            $table->addKey(['server_id', 'minecraft_username', 'vote_date'], 'warext_mc_vote_server_name');
+            $table->addKey(['server_id', 'ip_hash', 'vote_date'], 'warext_mc_vote_server_ip');
+        });
     }
 
     protected function addSeasonSnapshotColumns(): void
@@ -659,9 +691,37 @@ class Setup extends AbstractSetup
         });
     }
 
+    protected function createReportTable(): void
+    {
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_report'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_report', function (Create $table)
+        {
+            $table->addColumn('report_id', 'bigint')->autoIncrement();
+            $table->addColumn('server_id', 'int')->setDefault(0);
+            $table->addColumn('reporter_user_id', 'int')->setDefault(0);
+            $table->addColumn('reason', 'varchar', 30)->setDefault('other');
+            $table->addColumn('message', 'text')->nullable(true);
+            $table->addColumn('state', 'varchar', 20)->setDefault('open');
+            $table->addColumn('moderator_user_id', 'int')->setDefault(0);
+            $table->addColumn('resolution', 'varchar', 255)->setDefault('');
+            $table->addColumn('created_date', 'int')->setDefault(0);
+            $table->addColumn('updated_date', 'int')->setDefault(0);
+            $table->addColumn('resolved_date', 'int')->setDefault(0);
+            $table->addKey(['state', 'created_date'], 'warext_mc_report_state_date');
+            $table->addKey(['server_id', 'state', 'created_date'], 'warext_mc_report_server_state');
+            $table->addKey(['server_id', 'reporter_user_id', 'created_date'], 'warext_mc_report_duplicate');
+        });
+    }
+
     public function uninstallStep1(): void
     {
         $sm = $this->schemaManager();
+        $sm->dropTable('xf_warext_mc_report');
         $sm->dropTable('xf_warext_mc_audit_log');
         $sm->dropTable('xf_warext_mc_sponsor');
         $sm->dropTable('xf_warext_mc_server_achievement');

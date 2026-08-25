@@ -208,6 +208,39 @@ class Server extends Entity
         }
     }
 
+    protected function _postDelete(): void
+    {
+        $db = $this->db();
+        $serverId = (int)$this->server_id;
+
+        $updateRows = $db->fetchAll(
+            'SELECT update_id FROM xf_warext_mc_server_update WHERE server_id = ?',
+            [$serverId]
+        );
+        $alertRepo = $this->repository('XF:UserAlert');
+        foreach ($updateRows as $row)
+        {
+            $alertRepo->fastDeleteAlertsForContent('warext_mc_server_update', (int)$row['update_id']);
+        }
+
+        foreach ([
+            'xf_warext_mc_sponsor',
+            'xf_warext_mc_server_achievement',
+            'xf_warext_mc_server_update',
+            'xf_warext_mc_favorite',
+            'xf_warext_mc_review',
+            'xf_warext_mc_report',
+            'xf_warext_mc_server_category',
+            'xf_warext_mc_server_team',
+            'xf_warext_mc_ping_history',
+            'xf_warext_mc_vote',
+            'xf_warext_mc_votifier'
+        ] as $table)
+        {
+            $db->delete($table, 'server_id = ?', $serverId);
+        }
+    }
+
     protected function hasEndpointChanges(): bool
     {
         foreach (['server_type', 'host', 'port', 'bedrock_host', 'bedrock_port'] as $field)
