@@ -21,18 +21,31 @@
 
             <xf:form action="{{ link('sunucular/oy', $server) }}" class="block" ajax="true">
                 <div class="block-body">
+                    <xf:if is="$linkedAccounts is not empty">
+                        <xf:selectrow
+                            name="minecraft_account_id"
+                            label="Bağlı Minecraft hesabı"
+                            explain="Bir hesap seçerseniz aşağıdaki elle girilen kullanıcı adı ve UUID alanları yok sayılır.">
+                            <xf:option value="0">Elle gir</xf:option>
+                            <xf:foreach loop="$linkedAccounts" value="$account">
+                                <xf:option value="{$account.account_id}" selected="$account.is_primary">
+                                    {$account.minecraft_username}<xf:if is="$account.verification_state == 'verified'"> · Doğrulanmış</xf:if>
+                                </xf:option>
+                            </xf:foreach>
+                        </xf:selectrow>
+                    </xf:if>
+
                     <xf:textboxrow
                         name="minecraft_username"
                         label="Minecraft kullanıcı adı"
                         maxlength="16"
-                        required="required"
-                        explain="Java/Minecraft kullanıcı adınızı yazın. 3-16 karakter; harf, rakam ve alt çizgi kullanılabilir." />
+                        explain="Bağlı hesap seçmediyseniz Java/Minecraft kullanıcı adınızı yazın. 3-16 karakter; harf, rakam ve alt çizgi kullanılabilir." />
 
                     <xf:textboxrow
                         name="minecraft_uuid"
                         label="Minecraft UUID"
                         maxlength="36"
-                        explain="İsteğe bağlıdır. Hesap bağlantı sistemi tamamlandığında doğrulanmış hesaplarda otomatik doldurulacaktır." />
+                        explain="Bağlı hesap seçmediyseniz isteğe bağlı olarak UUID girebilirsiniz." />
                 </div>
 
                 <xf:submitrow submit="Oy Ver" />
