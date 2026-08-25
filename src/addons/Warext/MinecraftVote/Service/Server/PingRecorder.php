@@ -24,23 +24,39 @@ class PingRecorder extends AbstractService
         try
         {
             $isOnline = !empty($result['is_online']);
+            $pingMs = $isOnline
+                ? min(60000, max(0, (int)($result['ping_ms'] ?? 0)))
+                : 0;
+            $playersOnline = $isOnline
+                ? min(10000000, max(0, (int)($result['players_online'] ?? 0)))
+                : 0;
+            $playersMax = $isOnline
+                ? min(10000000, max(0, (int)($result['players_max'] ?? 0)))
+                : 0;
+
+            if ($playersOnline > $playersMax)
+            {
+                $playersMax = $playersOnline;
+            }
+
+            $version = $isOnline
+                ? mb_substr(trim((string)($result['detected_version'] ?? '')), 0, 100)
+                : '';
 
             $history = $this->em()->create('Warext\MinecraftVote:PingHistory');
             $history->server_id = $this->server->server_id;
             $history->check_date = \XF::$time;
             $history->is_online = $isOnline;
-            $history->ping_ms = $isOnline ? max(0, (int)($result['ping_ms'] ?? 0)) : 0;
-            $history->players_online = $isOnline ? max(0, (int)($result['players_online'] ?? 0)) : 0;
-            $history->players_max = $isOnline ? max(0, (int)($result['players_max'] ?? 0)) : 0;
-            $history->detected_version = $isOnline
-                ? mb_substr(trim((string)($result['detected_version'] ?? '')), 0, 100)
-                : '';
+            $history->ping_ms = $pingMs;
+            $history->players_online = $playersOnline;
+            $history->players_max = $playersMax;
+            $history->detected_version = $version;
             $history->save();
 
             $this->server->is_online = $isOnline;
-            $this->server->ping_ms = $history->ping_ms;
-            $this->server->players_online = $history->players_online;
-            $this->server->players_max = $history->players_max;
+            $this->server->ping_ms = $pingMs;
+            $this->server->players_online = $playersOnline;
+            $this->server->players_max = $playersMax;
             $this->server->last_ping_date = \XF::$time;
             $this->server->last_ping_error = $isOnline
                 ? ''
@@ -49,7 +65,6 @@ class PingRecorder extends AbstractService
             if ($isOnline)
             {
                 $motd = trim((string)($result['motd'] ?? ''));
-                $version = trim((string)($result['detected_version'] ?? ''));
 
                 if ($motd !== '')
                 {
@@ -58,7 +73,7 @@ class PingRecorder extends AbstractService
 
                 if ($version !== '')
                 {
-                    $this->server->detected_version = mb_substr($version, 0, 100);
+                    $this->server->detected_version = $version;
                 }
             }
 
