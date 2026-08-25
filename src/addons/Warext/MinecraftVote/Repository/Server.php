@@ -2,6 +2,7 @@
 
 namespace Warext\MinecraftVote\Repository;
 
+use Warext\MinecraftVote\Entity\Server as ServerEntity;
 use Warext\MinecraftVote\Finder\Server as ServerFinder;
 use XF\Mvc\Entity\Repository;
 
@@ -39,10 +40,19 @@ class Server extends Repository
             ->order('last_update_date', 'DESC');
     }
 
-    public function getServerBySlug(string $slug): ?\Warext\MinecraftVote\Entity\Server
+    public function getServerBySlug(string $slug): ?ServerEntity
     {
         return $this->finder('Warext\MinecraftVote:Server')
             ->where('slug', $slug)
             ->fetchOne();
+    }
+
+    public function incrementViewCount(ServerEntity $server): void
+    {
+        $this->db()->query(
+            'UPDATE xf_warext_mc_server SET view_count = view_count + 1 WHERE server_id = ?',
+            $server->server_id
+        );
+        $server->view_count++;
     }
 }
