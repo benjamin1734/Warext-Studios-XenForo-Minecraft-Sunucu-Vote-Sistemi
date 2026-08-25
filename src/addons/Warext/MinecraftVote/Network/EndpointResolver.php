@@ -165,11 +165,6 @@ class EndpointResolver
 
     protected function privateHostsAllowed(): bool
     {
-        if (\XF::$developmentMode)
-        {
-            return true;
-        }
-
         return (bool)(\XF::options()->warextMcAllowPrivateHosts ?? false);
     }
 
