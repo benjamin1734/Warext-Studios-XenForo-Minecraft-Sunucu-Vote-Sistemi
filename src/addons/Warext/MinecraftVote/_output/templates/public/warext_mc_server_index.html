@@ -16,6 +16,73 @@
     </xf:if>
 </xf:pageaction>
 
+<xf:form action="{{ link('sunucular') }}" method="get" class="block">
+    <div class="block-container">
+        <div class="block-header">Sunucu Ara ve Filtrele</div>
+        <div class="block-body">
+            <xf:textboxrow name="q" value="{$query}" maxlength="80" label="Arama" explain="Sunucu adı, adresi, oyun modu veya açıklama içinde ara." />
+
+            <xf:selectrow name="sort" value="{$sort}" label="Sıralama">
+                <xf:option value="popular">Popüler</xf:option>
+                <xf:option value="trend">Yükselişte</xf:option>
+                <xf:option value="votes">En Çok Oy</xf:option>
+                <xf:option value="players">En Kalabalık</xf:option>
+                <xf:option value="uptime">En Yüksek Uptime</xf:option>
+                <xf:option value="new">Yeni Eklenenler</xf:option>
+            </xf:selectrow>
+
+            <xf:selectrow name="type" value="{$type}" label="Sunucu Türü">
+                <xf:option value="">Tümü</xf:option>
+                <xf:option value="java">Java</xf:option>
+                <xf:option value="bedrock">Bedrock</xf:option>
+                <xf:option value="crossplay">Crossplay</xf:option>
+            </xf:selectrow>
+
+            <xf:selectrow name="category" value="{$categoryId}" label="Kategori">
+                <xf:option value="0">Tüm kategoriler</xf:option>
+                <xf:foreach loop="$categories" value="$category">
+                    <xf:option value="{$category.category_id}">{$category.title}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+
+            <xf:selectrow name="country" value="{$countryCode}" label="Ülke">
+                <xf:option value="">Tüm ülkeler</xf:option>
+                <xf:foreach loop="$countryOptions" key="$countryKey" value="$countryLabel">
+                    <xf:option value="{$countryKey}">{$countryLabel}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+
+            <xf:textboxrow name="version" value="{$version}" maxlength="30" label="Minecraft Sürümü" explain="Örn. 1.21.4" />
+            <xf:textboxrow name="game_mode" value="{$gameMode}" maxlength="50" label="Oyun Modu" explain="Örn. SkyBlock, Survival, Factions" />
+            <xf:numberboxrow name="min_players" value="{$minPlayers}" min="0" max="1000000" step="1" label="Minimum Online Oyuncu" />
+
+            <xf:selectrow name="online" value="{{ $online ? '1' : '0' }}" label="Çevrim İçi Durumu">
+                <xf:option value="0">Tümü</xf:option>
+                <xf:option value="1">Sadece online</xf:option>
+            </xf:selectrow>
+
+            <xf:selectrow name="verified" value="{{ $verified ? '1' : '0' }}" label="Doğrulama">
+                <xf:option value="0">Tümü</xf:option>
+                <xf:option value="1">Sadece doğrulanmış</xf:option>
+            </xf:selectrow>
+
+            <xf:selectrow name="premium" value="{$premium}" label="Premium Durumu">
+                <xf:option value="">Tümü</xf:option>
+                <xf:option value="yes">Premium</xf:option>
+                <xf:option value="no">Premium değil</xf:option>
+            </xf:selectrow>
+
+            <xf:selectrow name="cracked" value="{$cracked}" label="Crack Desteği">
+                <xf:option value="">Tümü</xf:option>
+                <xf:option value="yes">Crack destekli</xf:option>
+                <xf:option value="no">Crack desteklemiyor</xf:option>
+            </xf:selectrow>
+        </div>
+        <xf:submitrow submit="Filtreleri Uygula" />
+        <div class="block-footer"><a href="{{ link('sunucular') }}">Filtreleri temizle</a> · {$total} sonuç</div>
+    </div>
+</xf:form>
+
 <xf:if is="$sponsors is not empty">
     <div class="block">
         <div class="block-container">
@@ -43,21 +110,6 @@
         </div>
     </div>
 </xf:if>
-
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Sunucu Listesi</div>
-        <div class="block-body warextMcFilterBar">
-            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'popular'}) }}">Popüler</a>
-            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'trend'}) }}">Yükselişte</a>
-            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'votes'}) }}">En Çok Oy</a>
-            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'players'}) }}">En Kalabalık</a>
-            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'uptime'}) }}">En Yüksek Uptime</a>
-            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'new'}) }}">Yeni Eklenenler</a>
-            <a class="button button--link" href="{{ link('sunucular', null, {'online': 1, 'sort': $sort}) }}">Sadece Online</a>
-        </div>
-    </div>
-</div>
 
 <xf:if is="$servers is not empty">
     <div class="warextMcServerGrid">
@@ -100,9 +152,11 @@
                                 <xf:if is="$sort == 'trend'"> · Trend: {$server.trend_score}</xf:if>
                             </div>
 
-                            <xf:if is="$server.detected_version">
-                                <div class="contentRow-minor">Sürüm: {$server.detected_version}</div>
-                            </xf:if>
+                            <div class="contentRow-minor">
+                                <xf:if is="$server.detected_version">Sürüm: {$server.detected_version}</xf:if>
+                                <xf:if is="$server.game_modes"> · Modlar: {$server.game_modes}</xf:if>
+                                <xf:if is="$server.country_code"> · Ülke: {$server.country_code}</xf:if>
+                            </div>
 
                             <div class="warextMcServerCard-actions">
                                 <xf:button href="{{ link('sunucular/detay', $server) }}" class="button--primary">Detaylar</xf:button>
@@ -115,7 +169,7 @@
         </xf:foreach>
     </div>
 
-    <xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular" params="{{ {'sort': $sort, 'type': $type, 'online': $online} }}" />
+    <xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular" params="{$filterParams}" />
 <xf:else />
-    <div class="blockMessage">Henüz listelenen aktif bir Minecraft sunucusu bulunmuyor.</div>
+    <div class="blockMessage">Filtrelerinize uyan aktif bir Minecraft sunucusu bulunamadı.</div>
 </xf:if>
