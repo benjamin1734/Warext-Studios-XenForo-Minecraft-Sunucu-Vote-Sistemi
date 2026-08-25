@@ -6,6 +6,7 @@ use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
 use XF\AddOn\StepRunnerUninstallTrait;
 use XF\AddOn\StepRunnerUpgradeTrait;
+use XF\Db\Schema\Alter;
 use XF\Db\Schema\Create;
 
 class Setup extends AbstractSetup
@@ -47,6 +48,7 @@ class Setup extends AbstractSetup
             $table->addColumn('players_max', 'int')->setDefault(0);
             $table->addColumn('motd', 'text')->nullable(true);
             $table->addColumn('detected_version', 'varchar', 100)->setDefault('');
+            $table->addColumn('last_ping_error', 'varchar', 500)->setDefault('');
             $table->addColumn('uptime_bp', 'int')->setDefault(0);
             $table->addColumn('vote_count_total', 'int')->setDefault(0);
             $table->addColumn('vote_count_month', 'int')->setDefault(0);
@@ -159,6 +161,17 @@ class Setup extends AbstractSetup
             $table->addColumn('detected_version', 'varchar', 100)->setDefault('');
             $table->addKey(['server_id', 'check_date'], 'warext_mc_ping_server_date');
         });
+    }
+
+    public function upgrade1000020Step1(): void
+    {
+        if (!$this->schemaManager()->columnExists('xf_warext_mc_server', 'last_ping_error'))
+        {
+            $this->schemaManager()->alterTable('xf_warext_mc_server', function (Alter $table)
+            {
+                $table->addColumn('last_ping_error', 'varchar', 500)->setDefault('')->after('detected_version');
+            });
+        }
     }
 
     public function uninstallStep1(): void
