@@ -1,0 +1,1 @@
+NuVotifier teslimatı başarısız olduğunda kuyruğun kaç kez yeniden deneyeceğini belirler. Denemeler artan bekleme süreleriyle yapılır.
