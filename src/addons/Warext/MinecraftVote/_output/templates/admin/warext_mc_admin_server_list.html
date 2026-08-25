@@ -51,6 +51,10 @@
                                     <div class="contentRow-minor">MOTD: {$server.motd}</div>
                                 </xf:if>
 
+                                <xf:if is="$server.last_ping_error">
+                                    <div class="blockMessage blockMessage--error" style="margin-top:8px">Son ping hatası: {$server.last_ping_error}</div>
+                                </xf:if>
+
                                 <div class="buttonGroup buttonGroup--alignOpposite" style="margin-top:10px">
                                     <xf:form action="{{ link('warext-minecraft/ping') }}" class="buttonGroup">
                                         <xf:hiddenval name="server_id" value="{$server.server_id}" />
