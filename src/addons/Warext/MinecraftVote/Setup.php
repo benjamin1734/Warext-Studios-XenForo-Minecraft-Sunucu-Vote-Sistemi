@@ -55,6 +55,14 @@ class Setup extends AbstractSetup
             $table->addColumn('vote_count_total', 'int')->setDefault(0);
             $table->addColumn('vote_count_month', 'int')->setDefault(0);
             $table->addColumn('vote_count_today', 'int')->setDefault(0);
+            $table->addColumn('unique_voters_month', 'int')->setDefault(0);
+            $table->addColumn('votes_24h', 'int')->setDefault(0);
+            $table->addColumn('votes_72h', 'int')->setDefault(0);
+            $table->addColumn('popular_score_bp', 'int')->setDefault(0);
+            $table->addColumn('trend_score_bp', 'int')->setDefault(0);
+            $table->addColumn('rank_popular', 'int')->setDefault(0);
+            $table->addColumn('rank_trending', 'int')->setDefault(0);
+            $table->addColumn('ranking_updated_date', 'int')->setDefault(0);
             $table->addColumn('view_count', 'int')->setDefault(0);
             $table->addColumn('rating_count', 'int')->setDefault(0);
             $table->addColumn('rating_sum', 'int')->setDefault(0);
@@ -63,6 +71,8 @@ class Setup extends AbstractSetup
             $table->addColumn('last_ping_date', 'int')->setDefault(0);
             $table->addUniqueKey('slug', 'warext_mc_server_slug');
             $table->addKey(['state', 'vote_count_month'], 'warext_mc_server_rank');
+            $table->addKey(['state', 'popular_score_bp'], 'warext_mc_server_popular');
+            $table->addKey(['state', 'trend_score_bp'], 'warext_mc_server_trending');
             $table->addKey(['is_online', 'players_online'], 'warext_mc_server_online');
             $table->addKey('owner_user_id', 'warext_mc_server_owner');
         });
@@ -175,6 +185,11 @@ class Setup extends AbstractSetup
         $this->createMinecraftAccountTable();
     }
 
+    public function installStep9(): void
+    {
+        $this->createSeasonTables();
+    }
+
     public function upgrade1000020Step1(): void
     {
         if (!$this->schemaManager()->columnExists('xf_warext_mc_server', 'last_ping_error'))
@@ -213,6 +228,42 @@ class Setup extends AbstractSetup
             {
                 $table->addColumn('verified_date', 'int')->setDefault(0)->after('verification_token_date');
             });
+        }
+    }
+
+    public function upgrade1000060Step1(): void
+    {
+        $this->addRankingColumns();
+    }
+
+    public function upgrade1000060Step2(): void
+    {
+        $this->createSeasonTables();
+    }
+
+    protected function addRankingColumns(): void
+    {
+        $sm = $this->schemaManager();
+        $columns = [
+            'unique_voters_month',
+            'votes_24h',
+            'votes_72h',
+            'popular_score_bp',
+            'trend_score_bp',
+            'rank_popular',
+            'rank_trending',
+            'ranking_updated_date'
+        ];
+
+        foreach ($columns as $column)
+        {
+            if (!$sm->columnExists('xf_warext_mc_server', $column))
+            {
+                $sm->alterTable('xf_warext_mc_server', function (Alter $table) use ($column)
+                {
+                    $table->addColumn($column, 'int')->setDefault(0);
+                });
+            }
         }
     }
 
@@ -257,9 +308,47 @@ class Setup extends AbstractSetup
         });
     }
 
+    protected function createSeasonTables(): void
+    {
+        $this->schemaManager()->createTable('xf_warext_mc_season', function (Create $table)
+        {
+            $table->addColumn('season_id', 'int')->autoIncrement();
+            $table->addColumn('season_key', 'char', 7)->setDefault('');
+            $table->addColumn('start_date', 'int')->setDefault(0);
+            $table->addColumn('end_date', 'int')->setDefault(0);
+            $table->addColumn('status', 'varchar', 10)->setDefault('open');
+            $table->addColumn('winner_server_id', 'int')->setDefault(0);
+            $table->addColumn('total_votes', 'int')->setDefault(0);
+            $table->addColumn('unique_voters', 'int')->setDefault(0);
+            $table->addColumn('server_count', 'int')->setDefault(0);
+            $table->addColumn('created_date', 'int')->setDefault(0);
+            $table->addColumn('finalized_date', 'int')->setDefault(0);
+            $table->addUniqueKey('season_key', 'warext_mc_season_key');
+            $table->addKey(['status', 'end_date'], 'warext_mc_season_status');
+        });
+
+        $this->schemaManager()->createTable('xf_warext_mc_season_rank', function (Create $table)
+        {
+            $table->addColumn('season_id', 'int')->setDefault(0);
+            $table->addColumn('server_id', 'int')->setDefault(0);
+            $table->addColumn('rank', 'int')->setDefault(0);
+            $table->addColumn('vote_count', 'int')->setDefault(0);
+            $table->addColumn('unique_voters', 'int')->setDefault(0);
+            $table->addColumn('uptime_bp', 'int')->setDefault(0);
+            $table->addColumn('peak_players', 'int')->setDefault(0);
+            $table->addColumn('season_score_bp', 'int')->setDefault(0);
+            $table->addColumn('snapshot_date', 'int')->setDefault(0);
+            $table->addPrimaryKey(['season_id', 'server_id']);
+            $table->addKey(['season_id', 'rank'], 'warext_mc_season_rank_order');
+            $table->addKey('server_id', 'warext_mc_season_rank_server');
+        });
+    }
+
     public function uninstallStep1(): void
     {
         $sm = $this->schemaManager();
+        $sm->dropTable('xf_warext_mc_season_rank');
+        $sm->dropTable('xf_warext_mc_season');
         $sm->dropTable('xf_warext_mc_account');
         $sm->dropTable('xf_warext_mc_votifier');
         $sm->dropTable('xf_warext_mc_ping_history');
