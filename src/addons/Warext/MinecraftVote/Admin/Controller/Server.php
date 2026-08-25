@@ -42,7 +42,7 @@ class Server extends AbstractController
     public function actionVotes()
     {
         $status = $this->filter('status', 'str');
-        $allowedStatuses = ['all', 'pending', 'retry', 'failed', 'delivered', 'skipped', 'rejected'];
+        $allowedStatuses = ['all', 'pending', 'processing', 'retry', 'failed', 'delivered', 'skipped', 'rejected'];
         if (!in_array($status, $allowedStatuses, true))
         {
             $status = 'pending';
@@ -73,7 +73,12 @@ class Server extends AbstractController
         $statusCounts = array_fill_keys($allowedStatuses, 0);
         foreach ($statusRows as $row)
         {
-            $statusCounts[(string)$row['status']] = (int)$row['total'];
+            $rowStatus = (string)$row['status'];
+            if (!array_key_exists($rowStatus, $statusCounts))
+            {
+                $statusCounts[$rowStatus] = 0;
+            }
+            $statusCounts[$rowStatus] = (int)$row['total'];
             $statusCounts['all'] += (int)$row['total'];
         }
 
@@ -85,6 +90,144 @@ class Server extends AbstractController
             'perPage' => $perPage,
             'total' => $total
         ]);
+    }
+
+    public function actionSuspectVotes()
+    {
+        $page = $this->filterPage();
+        $perPage = 50;
+        $minScore = min(100, max(1, (int)($this->filter('min_score', 'uint') ?: 40)));
+        $serverId = $this->filter('server_id', 'uint');
+
+        $finder = $this->finder('Warext\MinecraftVote:Vote')
+            ->with(['Server', 'User'])
+            ->where('fraud_score', '>=', $minScore)
+            ->order('fraud_score', 'DESC')
+            ->order('vote_date', 'DESC');
+
+        if ($serverId)
+        {
+            $finder->where('server_id', $serverId);
+        }
+
+        $total = $finder->total();
+        $this->assertValidPage($page, $perPage, $total, 'warext-minecraft/suspect-votes');
+
+        $votes = $finder
+            ->limitByPage($page, $perPage)
+            ->fetch();
+
+        return $this->view('Warext\MinecraftVote:Vote\Suspects', 'warext_mc_admin_suspect_votes', [
+            'votes' => $votes,
+            'minScore' => $minScore,
+            'serverId' => $serverId,
+            'page' => $page,
+            'perPage' => $perPage,
+            'total' => $total
+        ]);
+    }
+
+    public function actionVoteModerate()
+    {
+        $this->assertPostOnly();
+
+        $voteId = $this->filter('vote_id', 'uint');
+        $operation = $this->filter('operation', 'str');
+        $vote = $this->assertVoteExists($voteId);
+
+        if (!in_array($operation, ['reject', 'restore'], true))
+        {
+            return $this->error('Geçersiz oy moderasyon işlemi.');
+        }
+
+        if ($vote->status === 'processing')
+        {
+            return $this->error('Bu oy şu anda NuVotifier teslimatı tarafından işleniyor. İşlem tamamlandıktan veya lease süresi dolduktan sonra tekrar deneyin.');
+        }
+
+        $db = $this->db();
+        $db->beginTransaction();
+
+        try
+        {
+            if ($operation === 'reject')
+            {
+                if ($vote->status === 'rejected')
+                {
+                    $db->commit();
+                    return $this->redirect($this->buildLink('warext-minecraft/suspect-votes'));
+                }
+
+                $previousStatus = (string)$vote->status;
+                $vote->status = 'rejected';
+                $vote->next_attempt_date = 0;
+                $vote->last_error = $vote->delivered_date
+                    ? 'ACP tarafından sıralama hesabından çıkarıldı. NuVotifier teslimatı daha önce tamamlanmıştı.'
+                    : 'ACP tarafından şüpheli oy olarak reddedildi.';
+                $vote->save();
+
+                if ($vote->Server)
+                {
+                    $this->repository('Warext\MinecraftVote:Vote')->rebuildServerCounters($vote->Server);
+                }
+
+                $this->service('Warext\MinecraftVote:Audit\Logger')->log(
+                    'vote_rejected',
+                    $vote->server_id,
+                    \XF::visitor()->user_id,
+                    $vote->user_id,
+                    [
+                        'vote_id' => $vote->vote_id,
+                        'previous_status' => $previousStatus,
+                        'fraud_score' => $vote->fraud_score,
+                        'minecraft_username' => $vote->minecraft_username
+                    ]
+                );
+            }
+            else
+            {
+                if ($vote->status !== 'rejected')
+                {
+                    $db->rollback();
+                    return $this->error('Yalnızca reddedilmiş bir oy geri alınabilir.');
+                }
+
+                $vote->status = $vote->delivered_date ? 'delivered' : 'skipped';
+                $vote->next_attempt_date = 0;
+                $vote->last_error = '';
+                $vote->save();
+
+                if ($vote->Server)
+                {
+                    $this->repository('Warext\MinecraftVote:Vote')->rebuildServerCounters($vote->Server);
+                }
+
+                $this->service('Warext\MinecraftVote:Audit\Logger')->log(
+                    'vote_restored',
+                    $vote->server_id,
+                    \XF::visitor()->user_id,
+                    $vote->user_id,
+                    [
+                        'vote_id' => $vote->vote_id,
+                        'restored_status' => $vote->status,
+                        'fraud_score' => $vote->fraud_score,
+                        'minecraft_username' => $vote->minecraft_username
+                    ]
+                );
+            }
+
+            $db->commit();
+        }
+        catch (\Throwable $e)
+        {
+            $db->rollback();
+            throw $e;
+        }
+
+        return $this->redirect(
+            $this->buildLink('warext-minecraft/suspect-votes', null, ['min_score' => 40]),
+            $operation === 'reject' ? 'Oy sıralama hesaplarından çıkarıldı.' : 'Oy yeniden geçerli sayıldı.'
+        );
     }
 
     public function actionVoteRetry()
