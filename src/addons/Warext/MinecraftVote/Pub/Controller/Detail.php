@@ -3,6 +3,7 @@
 namespace Warext\MinecraftVote\Pub\Controller;
 
 use Warext\MinecraftVote\Entity\Server;
+use Warext\MinecraftVote\Security\PublicPermissions;
 use XF\Mvc\ParameterBag;
 use XF\Pub\Controller\AbstractController;
 
@@ -20,10 +21,16 @@ class Detail extends AbstractController
         $achievements = $this->repository('Warext\MinecraftVote:Achievement')
             ->findForServer($server->server_id)
             ->fetch();
+        $visitor = \XF::visitor();
+        $allowGuests = (bool)(\XF::options()->warextMcAllowGuestVotes ?? true);
 
         return $this->view('Warext\MinecraftVote:Server\View', 'warext_mc_server_view', [
             'server' => $server,
-            'achievements' => $achievements
+            'achievements' => $achievements,
+            'canVote' => $server->state === 'active' && PublicPermissions::allows('vote', $allowGuests, true),
+            'canFavorite' => $server->state === 'active' && $visitor->user_id && PublicPermissions::allows('favorite', false, true),
+            'canReview' => $server->state === 'active' && PublicPermissions::allows('review', true, true),
+            'canReport' => $server->state === 'active' && $visitor->user_id && !$server->is_owner && PublicPermissions::allows('report', false, true)
         ]);
     }
 
