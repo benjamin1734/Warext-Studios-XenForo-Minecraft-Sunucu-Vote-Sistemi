@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "warext-minecraft",
+    "sub_name": "sponsor-toggle",
+    "format": ":int<sponsor_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Sponsor",
+    "context": "",
+    "action_prefix": "toggle"
+}
