@@ -2,6 +2,12 @@
 <xf:description>{$server.host}:{$server.port}</xf:description>
 <xf:css src="warext_mc_servers.less" />
 
+<xf:if is="$server.state == 'active'">
+    <xf:pageaction>
+        <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta">Oy Ver</xf:button>
+    </xf:pageaction>
+</xf:if>
+
 <div class="block warextMcServerHero">
     <div class="block-container">
         <div class="block-body">
@@ -9,6 +15,7 @@
                 <div>
                     <h1>{$server.title}</h1>
                     <div class="warextMcServerHero-address">{$server.host}:{$server.port}</div>
+                    <xf:if is="$server.motd"><div class="contentRow-minor">{$server.motd}</div></xf:if>
                 </div>
                 <div>
                     <xf:if is="$server.state != 'active'">
@@ -32,6 +39,10 @@
                 <div><strong>{$server.ping_ms} ms</strong><span>Ping</span></div>
                 <div><strong>{$server.view_count}</strong><span>Görüntülenme</span></div>
             </div>
+
+            <xf:if is="$server.last_ping_date">
+                <div class="contentRow-minor" style="margin-top:10px">Son durum kontrolü: <xf:date time="$server.last_ping_date" /></div>
+            </xf:if>
         </div>
     </div>
 </div>
