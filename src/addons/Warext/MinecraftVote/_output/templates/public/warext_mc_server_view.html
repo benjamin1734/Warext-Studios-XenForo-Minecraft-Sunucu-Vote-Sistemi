@@ -7,6 +7,9 @@
         <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta">Oy Ver</xf:button>
     </xf:if>
     <xf:if is="$xf.visitor.user_id && $xf.visitor.user_id == $server.owner_user_id">
+        <xf:button href="{{ link('sunucular/dogrula', $server) }}">
+            <xf:if is="$server.is_verified">Doğrulama Bilgisi<xf:else />Sahipliği Doğrula</xf:if>
+        </xf:button>
         <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
     </xf:if>
 </xf:pageaction>
@@ -45,6 +48,9 @@
 
             <xf:if is="$server.last_ping_date">
                 <div class="contentRow-minor" style="margin-top:10px">Son durum kontrolü: <xf:date time="$server.last_ping_date" /></div>
+            </xf:if>
+            <xf:if is="$server.is_verified && $server.verified_date">
+                <div class="contentRow-minor">Sahiplik doğrulaması: <xf:date time="$server.verified_date" /></div>
             </xf:if>
         </div>
     </div>
