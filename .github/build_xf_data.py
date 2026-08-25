@@ -4,11 +4,21 @@ import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
+MAX_XF_SHORT_ID = 25
+
 
 def scalar(value):
     if isinstance(value, bool):
         return "1" if value else "0"
     return str(value)
+
+
+def ensure_short_id(value: str, label: str, source: Path | None = None):
+    if len(value) > MAX_XF_SHORT_ID:
+        where = f" ({source})" if source else ""
+        raise SystemExit(
+            f"{label} {value!r} {len(value)} karakter; XenForo sınırı {MAX_XF_SHORT_ID}{where}"
+        )
 
 
 def write_xml(path: Path, root: ET.Element):
@@ -38,6 +48,13 @@ def build_admin_navigation(output: Path, data: Path):
     root = ET.Element("admin_navigation")
     for p in files:
         obj = load_json(p)
+        ensure_short_id(p.stem, "admin navigation ID", p)
+        parent_id = str(obj.get("parent_navigation_id", ""))
+        admin_permission_id = str(obj.get("admin_permission_id", ""))
+        if parent_id:
+            ensure_short_id(parent_id, "parent navigation ID", p)
+        if admin_permission_id:
+            ensure_short_id(admin_permission_id, "admin permission ID", p)
         attrs = {"navigation_id": p.stem}
         for key in ["parent_navigation_id", "display_order", "link", "icon", "admin_permission_id", "debug_only", "development_only", "hide_no_children"]:
             value = obj.get(key, "")
@@ -56,6 +73,7 @@ def build_admin_permissions(output: Path, data: Path):
     root = ET.Element("admin_permission")
     for p in files:
         obj = load_json(p)
+        ensure_short_id(p.stem, "admin permission ID", p)
         ET.SubElement(root, "admin_permission", {
             "admin_permission_id": p.stem,
             "display_order": scalar(obj.get("display_order", 0))
@@ -71,8 +89,10 @@ def build_content_type_fields(output: Path, data: Path):
     root = ET.Element("content_type_fields")
     for p in files:
         obj = load_json(p)
+        content_type = str(obj["content_type"])
+        ensure_short_id(content_type, "content type ID", p)
         node = ET.SubElement(root, "field", {
-            "content_type": str(obj["content_type"]),
+            "content_type": content_type,
             "field_name": str(obj["field_name"])
         })
         node.text = str(obj.get("field_value", ""))
@@ -87,6 +107,7 @@ def build_cron(output: Path, data: Path):
     root = ET.Element("cron")
     for p in files:
         obj = load_json(p)
+        ensure_short_id(p.stem, "cron entry ID", p)
         node = ET.SubElement(root, "entry", {
             "entry_id": p.stem,
             "cron_class": str(obj.get("cron_class", "")),
