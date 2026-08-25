@@ -4,13 +4,13 @@ XenForo için Minecraft sunucu listeleme, keşif, oylama, NuVotifier entegrasyon
 
 ## Sürüm
 
-0.12.3 Beta
+0.12.4 Beta
 
 ## Kurulum
 
 Kurulum ZIP dosyaları yalnızca GitHub Releases bölümünde yayımlanır.
 
-Güncel paket: `v0.12.3`
+Güncel paket: `v0.12.4`
 
 XenForo ACP üzerinden Add-ons bölümündeki arşiv yükleme alanından ZIP dosyasını seçerek kurabilirsiniz.
 
