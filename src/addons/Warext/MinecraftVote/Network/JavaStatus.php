@@ -6,6 +6,7 @@ class JavaStatus
 {
     protected EndpointResolver $resolver;
     protected float $timeout;
+    protected int $maxStatusBytes = 262144;
 
     public function __construct(?EndpointResolver $resolver = null, float $timeout = 3.0)
     {
@@ -48,7 +49,7 @@ class JavaStatus
             $this->writeAll($stream, "\x01\x00");
 
             $packetLength = $this->readVarInt($stream);
-            if ($packetLength < 1 || $packetLength > 2097152)
+            if ($packetLength < 1 || $packetLength > $this->maxStatusBytes)
             {
                 throw new \RuntimeException('Geçersiz Java durum paketi uzunluğu.');
             }
@@ -60,7 +61,7 @@ class JavaStatus
             }
 
             $jsonLength = $this->readVarInt($stream);
-            if ($jsonLength < 2 || $jsonLength > 2097152)
+            if ($jsonLength < 2 || $jsonLength > $this->maxStatusBytes || $jsonLength > $packetLength)
             {
                 throw new \RuntimeException('Geçersiz Java durum yanıtı.');
             }
@@ -75,7 +76,7 @@ class JavaStatus
                 'players_online' => max(0, (int)($payload['players']['online'] ?? 0)),
                 'players_max' => max(0, (int)($payload['players']['max'] ?? 0)),
                 'motd' => $this->extractDescription($payload['description'] ?? ''),
-                'detected_version' => trim((string)($payload['version']['name'] ?? '')),
+                'detected_version' => mb_substr(trim((string)($payload['version']['name'] ?? '')), 0, 100),
                 'protocol' => (int)($payload['version']['protocol'] ?? 0),
                 'resolved_host' => $endpoint['host'],
                 'resolved_port' => $endpoint['port']
@@ -139,6 +140,11 @@ class JavaStatus
 
     protected function readBytes($stream, int $length): string
     {
+        if ($length < 0 || $length > $this->maxStatusBytes)
+        {
+            throw new \RuntimeException('Java durum yanıtı güvenli boyut sınırını aşıyor.');
+        }
+
         $buffer = '';
 
         while (strlen($buffer) < $length)
