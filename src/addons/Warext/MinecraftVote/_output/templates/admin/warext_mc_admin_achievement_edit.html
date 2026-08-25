@@ -1,0 +1,21 @@
+<xf:title>Başarımı Düzenle: {$achievement.title}</xf:title>
+
+<xf:form action="{{ link('warext-minecraft/achievement-edit', $achievement) }}" class="block" ajax="true">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:formrow label="Anahtar"><code>{$achievement.achievement_key}</code></xf:formrow>
+            <xf:textboxrow name="title" value="{$achievement.title}" label="Başlık" maxlength="100" required="required" />
+            <xf:textboxrow name="description" value="{$achievement.description}" label="Açıklama" maxlength="255" />
+            <xf:textboxrow name="icon" value="{$achievement.icon}" label="Font Awesome ikonu" maxlength="50" />
+            <xf:selectrow name="metric" value="{$achievement.metric}" label="Metrik">
+                <xf:foreach loop="$metrics" key="$metric" value="$metricTitle">
+                    <xf:option value="{$metric}">{$metricTitle}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:numberboxrow name="threshold" value="{$achievement.threshold}" min="0" label="Eşik" />
+            <xf:numberboxrow name="display_order" value="{$achievement.display_order}" min="0" label="Gösterim sırası" />
+            <xf:checkboxrow><xf:option name="is_active" value="1" selected="$achievement.is_active">Aktif</xf:option></xf:checkboxrow>
+        </div>
+        <xf:submitrow submit="Kaydet" />
+    </div>
+</xf:form>
