@@ -59,6 +59,40 @@ class Server extends AbstractController
         ]));
     }
 
+    public function actionPing()
+    {
+        $this->assertPostOnly();
+
+        $serverId = $this->filter('server_id', 'uint');
+        $server = $this->assertServerExists($serverId);
+
+        $pinger = $this->service('Warext\MinecraftVote:Server\Pinger', $server);
+        $result = $pinger->ping();
+
+        $recorder = $this->service('Warext\MinecraftVote:Server\PingRecorder', $server);
+        $recorder->record($result);
+
+        if (!empty($result['is_online']))
+        {
+            $message = sprintf(
+                'Sunucu çevrimiçi. Ping: %d ms, Oyuncu: %d/%d, Sürüm: %s',
+                (int)$result['ping_ms'],
+                (int)$result['players_online'],
+                (int)$result['players_max'],
+                (string)($result['detected_version'] ?? '-')
+            );
+        }
+        else
+        {
+            $message = 'Sunucuya ulaşılamadı: ' . (string)($result['error'] ?? 'Bilinmeyen hata');
+        }
+
+        return $this->redirect(
+            $this->buildLink('warext-minecraft', null, ['state' => 'all']),
+            $message
+        );
+    }
+
     public function actionDelete()
     {
         $this->assertPostOnly();
@@ -88,7 +122,6 @@ class Server extends AbstractController
 
     protected function assertServerExists(int $serverId): ServerEntity
     {
-        /** @var ServerEntity|null $server */
         $server = $this->em()->find('Warext\MinecraftVote:Server', $serverId, ['Owner']);
         if (!$server)
         {
