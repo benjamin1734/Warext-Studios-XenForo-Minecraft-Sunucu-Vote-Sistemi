@@ -1,8 +1,14 @@
 <xf:title>{$server.title} - Güncellemeler</xf:title>
-<xf:description>Sunucu sahibinin yayınladığı sürüm notları ve değişiklikler.</xf:description>
+<xf:description>Sunucu sahibinin ve yetkili ekip üyelerinin yayınladığı sürüm notları ve değişiklikler.</xf:description>
 
 <xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
 <xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<xf:pageaction>
+    <xf:if is="$canManageVotifier">
+        <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
+    </xf:if>
+</xf:pageaction>
 
 <xf:if is="$canPublish">
     <xf:form action="{{ link('sunucular/guncellemeler', $server) }}" class="block" ajax="true">
