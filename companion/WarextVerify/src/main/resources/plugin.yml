@@ -1,0 +1,15 @@
+name: WarextVerify
+version: '0.16.0'
+main: com.warext.verify.WarextVerifyPlugin
+api-version: '1.21'
+authors: [Warext Studios]
+description: Warext XenForo Minecraft hesap sahipliği doğrulama köprüsü.
+commands:
+  warextverify:
+    description: Minecraft hesabını XenForo hesabıyla doğrular.
+    usage: /warextverify <kod>
+    permission: warextverify.use
+permissions:
+  warextverify.use:
+    description: Hesap doğrulama komutunu kullanma izni.
+    default: true

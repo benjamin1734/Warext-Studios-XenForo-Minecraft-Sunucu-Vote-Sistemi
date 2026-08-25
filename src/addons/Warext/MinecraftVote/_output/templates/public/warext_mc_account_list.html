@@ -24,11 +24,16 @@
                                 </div>
 
                                 <div class="contentRow-minor">
-                                    UUID: <xf:if is="$account.minecraft_uuid">{$account.minecraft_uuid}<xf:else />Belirtilmedi</xf:if>
+                                    UUID: <xf:if is="$account.minecraft_uuid">{$account.minecraft_uuid}<xf:else />Doğrulama sırasında alınacak</xf:if>
                                     · Eklenme: <xf:date time="$account.created_date" />
+                                    <xf:if is="$account.verified_date"> · Doğrulama: <xf:date time="$account.verified_date" /></xf:if>
                                 </div>
 
                                 <div class="buttonGroup" style="margin-top:10px">
+                                    <xf:button href="{{ link('sunucular/hesap-dogrula', $account) }}">
+                                        <xf:if is="$account.verification_state == 'verified'">Doğrulama Bilgisi<xf:else />Hesabı Doğrula</xf:if>
+                                    </xf:button>
+
                                     <xf:if is="!$account.is_primary">
                                         <xf:form action="{{ link('sunucular/hesap-birincil', $account) }}" class="buttonGroup">
                                             <xf:button type="submit">Birincil Yap</xf:button>
@@ -59,13 +64,13 @@
                 label="Minecraft kullanıcı adı"
                 maxlength="16"
                 required="required"
-                explain="Java Edition kullanıcı adınızı girin. Hesap ilk aşamada doğrulanmamış olarak eklenir." />
+                explain="Java Edition kullanıcı adınızı girin. Hesap doğrulanana kadar doğrulanmış oyuncu olarak kabul edilmez." />
 
             <xf:textboxrow
                 name="minecraft_uuid"
                 label="Minecraft UUID"
                 maxlength="36"
-                explain="İsteğe bağlıdır. UUID biliyorsanız tireli veya tiresiz biçimde girebilirsiniz." />
+                explain="İsteğe bağlıdır. Doğrulama tamamlandığında gerçek server-side UUID otomatik olarak kaydedilir." />
         </div>
 
         <xf:submitrow submit="Hesabı Ekle" />

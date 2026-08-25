@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'src/addons/Warext/MinecraftVote/**'
+      - 'companion/WarextVerify/**'
       - '.github/build_xf_data.py'
       - '.github/build_xf_permissions.py'
       - '.github/validate_xf_source.py'
@@ -47,7 +48,17 @@ jobs:
               print(file)
           PY
 
-      - name: Build direct-install ZIP
+      - name: Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Build WarextVerify
+        run: mvn -B -q -f companion/WarextVerify/pom.xml package
+
+      - name: Build release files
         id: package
         run: |
           VERSION=$(python3 - <<'PY'
@@ -69,16 +80,20 @@ jobs:
           cp -R src/addons/Warext/MinecraftVote build/upload/src/addons/Warext/MinecraftVote
           rm -rf build/upload/src/addons/Warext/MinecraftVote/_output
           cp README.md build/README.md
-          FILE="build/releases/Warext-MinecraftVote-${VERSION}.zip"
+          XF_FILE="build/releases/Warext-MinecraftVote-${VERSION}.zip"
+          MC_FILE="build/releases/WarextVerify-${VERSION_NUMBER}.jar"
           (cd build && zip -qr "releases/Warext-MinecraftVote-${VERSION}.zip" upload README.md)
-          echo "file=${FILE}" >> "$GITHUB_OUTPUT"
+          cp "companion/WarextVerify/target/WarextVerify-${VERSION_NUMBER}.jar" "$MC_FILE"
+          echo "xf_file=${XF_FILE}" >> "$GITHUB_OUTPUT"
+          echo "mc_file=${MC_FILE}" >> "$GITHUB_OUTPUT"
           echo "tag=v${VERSION_NUMBER}" >> "$GITHUB_OUTPUT"
 
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.package.outputs.tag }}
-          FILE: ${{ steps.package.outputs.file }}
+          XF_FILE: ${{ steps.package.outputs.xf_file }}
+          MC_FILE: ${{ steps.package.outputs.mc_file }}
         run: |
           for OLD_TAG in $(gh release list --limit 100 --json tagName --jq '.[].tagName'); do
             if [ "$OLD_TAG" != "$TAG" ]; then
@@ -87,14 +102,16 @@ jobs:
           done
 
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" "$FILE" --clobber
+            gh release upload "$TAG" "$XF_FILE" "$MC_FILE" --clobber
           else
             git tag "$TAG" "$GITHUB_SHA"
             git push origin "$TAG"
-            gh release create "$TAG" "$FILE" --title "$TAG" --notes "$TAG"
+            gh release create "$TAG" "$XF_FILE" "$MC_FILE" --title "$TAG" --notes "$TAG"
           fi
 
       - uses: actions/upload-artifact@v4
         with:
           name: Warext-MinecraftVote
-          path: ${{ steps.package.outputs.file }}
+          path: |
+            ${{ steps.package.outputs.xf_file }}
+            ${{ steps.package.outputs.mc_file }}
