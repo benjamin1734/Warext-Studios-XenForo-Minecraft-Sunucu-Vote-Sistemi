@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "sunucular",
+    "sub_name": "duzenle",
+    "format": ":int<server_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Edit",
+    "context": "",
+    "action_prefix": ""
+}
