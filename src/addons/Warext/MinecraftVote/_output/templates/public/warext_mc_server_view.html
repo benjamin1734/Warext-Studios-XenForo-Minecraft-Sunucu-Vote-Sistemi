@@ -65,6 +65,27 @@
     </div>
 </div>
 
+<xf:if is="$achievements is not empty">
+    <div class="block">
+        <div class="block-container">
+            <h2 class="block-header">Başarımlar</h2>
+            <div class="block-body">
+                <xf:foreach loop="$achievements" value="$award">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title"><strong>{$award.Achievement.title}</strong></div>
+                                <div class="contentRow-snippet">{$award.Achievement.description}</div>
+                                <div class="contentRow-minor">Kazanılma: <xf:date time="$award.awarded_date" /> · Ölçüm değeri: {$award.metric_value}</div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            </div>
+        </div>
+    </div>
+</xf:if>
+
 <div class="block">
     <div class="block-container">
         <h2 class="block-header">Sunucu Bilgileri</h2>
