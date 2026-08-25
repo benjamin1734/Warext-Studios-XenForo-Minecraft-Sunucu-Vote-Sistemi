@@ -1,0 +1,50 @@
+<xf:title>{$season.season_key} Minecraft Sunucu Sezonu</xf:title>
+<xf:description>Tamamlanan sezonun kalıcı sunucu sıralaması ve istatistikleri.</xf:description>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/sezonlar') }}">Sezonlar</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{$season.season_key} Sezon Özeti</h2>
+        <div class="block-body">
+            <div class="block-row">
+                <div class="contentRow-minor">
+                    {$season.total_votes} toplam oy · {$season.unique_voters} benzersiz seçmen · {$season.server_count} sıralanan sunucu
+                    <xf:if is="$season.Winner"> · Kazanan: {$season.Winner.title}</xf:if>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">Sezon Sıralaması</h2>
+        <div class="block-body">
+            <xf:if is="$ranks is not empty">
+                <xf:foreach loop="$ranks" value="$rank">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>#{$rank.rank}</strong>
+                                    <xf:if is="$rank.Server">
+                                        <a href="{{ link('sunucular/detay', $rank.Server) }}">{$rank.Server.title}</a>
+                                    <xf:else />
+                                        Silinmiş sunucu #{$rank.server_id}
+                                    </xf:if>
+                                </div>
+                                <div class="contentRow-minor">
+                                    {$rank.vote_count} oy · {$rank.unique_voters} benzersiz seçmen · Peak {$rank.peak_players} oyuncu · Uptime {{ number($rank.uptime_bp / 100, 2) }}% · Sezon puanı {{ number($rank.season_score_bp / 100, 2) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Bu sezon için sıralama kaydı bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
