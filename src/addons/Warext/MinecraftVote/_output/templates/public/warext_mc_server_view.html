@@ -13,13 +13,28 @@
             <xf:button type="submit">Favoriye Ekle / Çıkar</xf:button>
         </xf:form>
     </xf:if>
-    <xf:if is="$xf.visitor.user_id && $xf.visitor.user_id == $server.owner_user_id">
-        <xf:button href="{{ link('sunucular/ekip', $server) }}">Sunucu Ekibi</xf:button>
+
+    <xf:if is="$server.can_edit">
+        <xf:button href="{{ link('sunucular/duzenle', $server) }}">Sunucuyu Düzenle</xf:button>
+    </xf:if>
+    <xf:if is="$server.can_publish_updates">
         <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncelleme Yayınla</xf:button>
+    </xf:if>
+    <xf:if is="$server.can_view_stats">
+        <xf:button href="{{ link('sunucular/istatistik', $server) }}">İstatistikler</xf:button>
+    </xf:if>
+    <xf:if is="$server.can_manage_votifier">
+        <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
+    </xf:if>
+    <xf:if is="$server.can_manage_reviews">
+        <xf:button href="{{ link('sunucular/degerlendirme-yonet', $server) }}">Değerlendirmeleri Yönet</xf:button>
+    </xf:if>
+
+    <xf:if is="$server.is_owner">
+        <xf:button href="{{ link('sunucular/ekip', $server) }}">Sunucu Ekibi</xf:button>
         <xf:button href="{{ link('sunucular/dogrula', $server) }}">
             <xf:if is="$server.is_verified">Doğrulama Bilgisi<xf:else />Sahipliği Doğrula</xf:if>
         </xf:button>
-        <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
         <xf:button href="{{ link('sunucular/sahiplik-devret', $server) }}">Sahipliği Devret</xf:button>
     </xf:if>
 </xf:pageaction>
@@ -96,12 +111,16 @@
                 <dd>{$server.server_type}</dd>
             </dl>
             <dl class="pairs pairs--columns pairs--fixedSmall">
+                <dt>Oyun modları</dt>
+                <dd><xf:if is="$server.game_modes">{$server.game_modes}<xf:else />Belirtilmedi</xf:if></dd>
+            </dl>
+            <dl class="pairs pairs--columns pairs--fixedSmall">
                 <dt>Tespit edilen sürüm</dt>
                 <dd><xf:if is="$server.detected_version">{$server.detected_version}<xf:else />Henüz tespit edilmedi</xf:if></dd>
             </dl>
             <dl class="pairs pairs--columns pairs--fixedSmall">
                 <dt>Desteklenen sürüm</dt>
-                <dd>{$server.version_min}<xf:if is="$server.version_max"> - {$server.version_max}</xf:if></dd>
+                <dd><xf:if is="$server.version_min">{$server.version_min}<xf:if is="$server.version_max"> - {$server.version_max}</xf:if><xf:else />Belirtilmedi</xf:if></dd>
             </dl>
             <dl class="pairs pairs--columns pairs--fixedSmall">
                 <dt>Ülke</dt>
