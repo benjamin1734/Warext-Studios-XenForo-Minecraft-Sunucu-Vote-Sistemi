@@ -95,7 +95,6 @@ class Server extends AbstractController
 
         $closedSeasons = $this->finder('Warext\MinecraftVote:Season')
             ->where('status', 'closed')
-            ->with('Winner')
             ->order('start_date', 'DESC')
             ->limit(12)
             ->fetch();
@@ -109,7 +108,7 @@ class Server extends AbstractController
 
     public function actionSezon(ParameterBag $params)
     {
-        $season = $this->em()->find('Warext\MinecraftVote:Season', (int)$params->season_id, ['Winner']);
+        $season = $this->em()->find('Warext\MinecraftVote:Season', (int)$params->season_id);
         if (!$season || $season->status !== 'closed')
         {
             throw $this->exception($this->notFound());
@@ -117,7 +116,6 @@ class Server extends AbstractController
 
         $ranks = $this->finder('Warext\MinecraftVote:SeasonRank')
             ->where('season_id', $season->season_id)
-            ->with('Server')
             ->order('rank', 'ASC')
             ->fetch();
 
