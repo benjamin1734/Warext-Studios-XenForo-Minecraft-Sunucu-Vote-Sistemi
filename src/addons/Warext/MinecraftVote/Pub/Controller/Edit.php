@@ -25,6 +25,7 @@ class Edit extends AbstractController
                 'website_url' => 'str',
                 'discord_url' => 'str',
                 'store_url' => 'str',
+                'game_modes' => 'str',
                 'version_min' => 'str',
                 'version_max' => 'str',
                 'country_code' => 'str',
