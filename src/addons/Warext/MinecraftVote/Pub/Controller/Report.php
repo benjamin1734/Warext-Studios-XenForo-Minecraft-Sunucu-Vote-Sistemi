@@ -2,6 +2,7 @@
 
 namespace Warext\MinecraftVote\Pub\Controller;
 
+use Warext\MinecraftVote\Security\PublicPermissions;
 use XF\Mvc\ParameterBag;
 use XF\Pub\Controller\AbstractController;
 
@@ -10,7 +11,7 @@ class Report extends AbstractController
     public function actionIndex(ParameterBag $params)
     {
         $visitor = \XF::visitor();
-        if (!$visitor->user_id)
+        if (!$visitor->user_id || !PublicPermissions::allows('report', false, true))
         {
             return $this->noPermission();
         }
