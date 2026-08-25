@@ -2,6 +2,7 @@
 
 namespace Warext\MinecraftVote\Pub\Controller;
 
+use Warext\MinecraftVote\Entity\MinecraftAccount;
 use Warext\MinecraftVote\Entity\Server as ServerEntity;
 use XF\Mvc\ParameterBag;
 use XF\Pub\Controller\AbstractController;
@@ -125,6 +126,78 @@ class Server extends AbstractController
         ]);
     }
 
+    public function actionHesaplar()
+    {
+        $visitor = \XF::visitor();
+        if (!$visitor->user_id)
+        {
+            return $this->noPermission();
+        }
+
+        if ($this->isPost())
+        {
+            $username = $this->filter('minecraft_username', 'str');
+            $uuid = $this->filter('minecraft_uuid', 'str');
+
+            try
+            {
+                $creator = $this->service('Warext\MinecraftVote:MinecraftAccount\Creator', $visitor);
+                $creator->setData($username, $uuid);
+                $creator->save();
+            }
+            catch (\XF\PrintableException $e)
+            {
+                return $this->error($e->getMessage(), 400);
+            }
+
+            return $this->redirect(
+                $this->buildLink('sunucular/hesaplar'),
+                'Minecraft hesabı profilinize eklendi.'
+            );
+        }
+
+        $accounts = $this->repository('Warext\MinecraftVote:MinecraftAccount')
+            ->findForUser($visitor->user_id)
+            ->fetch();
+
+        return $this->view('Warext\MinecraftVote:MinecraftAccount\List', 'warext_mc_account_list', [
+            'accounts' => $accounts
+        ]);
+    }
+
+    public function actionHesapSil(ParameterBag $params)
+    {
+        $this->assertPostOnly();
+
+        $account = $this->assertOwnedMinecraftAccount((int)$params->account_id);
+        $userId = $account->user_id;
+        $wasPrimary = $account->is_primary;
+        $account->delete();
+
+        if ($wasPrimary)
+        {
+            $this->repository('Warext\MinecraftVote:MinecraftAccount')->promotePrimaryIfNeeded($userId);
+        }
+
+        return $this->redirect(
+            $this->buildLink('sunucular/hesaplar'),
+            'Minecraft hesabı bağlantısı kaldırıldı.'
+        );
+    }
+
+    public function actionHesapBirincil(ParameterBag $params)
+    {
+        $this->assertPostOnly();
+
+        $account = $this->assertOwnedMinecraftAccount((int)$params->account_id);
+        $this->repository('Warext\MinecraftVote:MinecraftAccount')->makePrimary($account);
+
+        return $this->redirect(
+            $this->buildLink('sunucular/hesaplar'),
+            'Birincil Minecraft hesabınız güncellendi.'
+        );
+    }
+
     public function actionOy(ParameterBag $params)
     {
         $server = $this->assertViewableServer((int)$params->server_id);
@@ -141,10 +214,33 @@ class Server extends AbstractController
             return $this->noPermission();
         }
 
+        $linkedAccounts = $visitor->user_id
+            ? $this->repository('Warext\MinecraftVote:MinecraftAccount')->findForUser($visitor->user_id)->fetch()
+            : [];
+
         if ($this->isPost())
         {
+            $accountId = $this->filter('minecraft_account_id', 'uint');
             $username = $this->filter('minecraft_username', 'str');
             $uuid = $this->filter('minecraft_uuid', 'str');
+
+            if ($accountId)
+            {
+                if (!$visitor->user_id)
+                {
+                    return $this->noPermission();
+                }
+
+                $linkedAccount = $this->repository('Warext\MinecraftVote:MinecraftAccount')
+                    ->getForUser($accountId, $visitor->user_id);
+                if (!$linkedAccount)
+                {
+                    return $this->error('Seçilen Minecraft hesabı bulunamadı.', 404);
+                }
+
+                $username = $linkedAccount->minecraft_username;
+                $uuid = $linkedAccount->minecraft_uuid;
+            }
 
             try
             {
@@ -172,7 +268,8 @@ class Server extends AbstractController
         return $this->view('Warext\MinecraftVote:Server\Vote', 'warext_mc_server_vote', [
             'server' => $server,
             'cooldownHours' => min(168, max(1, (int)(\XF::options()->warextMcVoteCooldownHours ?? 24))),
-            'allowGuests' => $allowGuests
+            'allowGuests' => $allowGuests,
+            'linkedAccounts' => $linkedAccounts
         ]);
     }
 
@@ -255,6 +352,24 @@ class Server extends AbstractController
                 false
             );
         }
+    }
+
+    protected function assertOwnedMinecraftAccount(int $accountId): MinecraftAccount
+    {
+        $visitor = \XF::visitor();
+        if (!$visitor->user_id)
+        {
+            throw $this->exception($this->noPermission());
+        }
+
+        $account = $this->repository('Warext\MinecraftVote:MinecraftAccount')
+            ->getForUser($accountId, $visitor->user_id);
+        if (!$account)
+        {
+            throw $this->exception($this->notFound());
+        }
+
+        return $account;
     }
 
     protected function assertOwnedServer(int $serverId): ServerEntity
