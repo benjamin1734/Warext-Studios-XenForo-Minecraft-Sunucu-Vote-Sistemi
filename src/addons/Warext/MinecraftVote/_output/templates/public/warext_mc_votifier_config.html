@@ -1,0 +1,63 @@
+<xf:title>{$server.title} - NuVotifier Ayarları</xf:title>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">NuVotifier V2 Entegrasyonu</div>
+        <div class="block-body block-row">
+            Oylar platformda kaydedildikten sonra bu bağlantı üzerinden Minecraft sunucunuza gönderilir. Token şifreli saklanır ve kaydedildikten sonra arayüzde tekrar gösterilmez.
+            <xf:if is="$config.last_success_date">
+                <div class="contentRow-minor" style="margin-top:8px">Son başarılı bağlantı: <xf:date time="$config.last_success_date" /></div>
+            </xf:if>
+            <xf:if is="$config.last_error">
+                <div class="blockMessage blockMessage--error" style="margin-top:8px">Son hata: {$config.last_error}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
+
+<xf:form action="{{ link('sunucular/votifier', $server) }}" class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:checkboxrow>
+                <xf:option name="enabled" value="1" selected="$config.enabled">NuVotifier ödül teslimatını etkinleştir</xf:option>
+            </xf:checkboxrow>
+
+            <xf:textboxrow
+                name="host"
+                value="{$config.host}"
+                label="NuVotifier Host"
+                explain="Aynı bilgisayarda test ediyorsanız lokal test izni açıkken 127.0.0.1 veya localhost kullanabilirsiniz." />
+
+            <xf:numberboxrow
+                name="port"
+                value="{$config.port}"
+                min="1"
+                max="65535"
+                label="NuVotifier Port"
+                explain="Varsayılan NuVotifier portu 8192'dir." />
+
+            <xf:textboxrow
+                name="service_name"
+                value="{$config.service_name}"
+                maxlength="64"
+                label="Servis Adı"
+                explain="NuVotifier tarafında vote serviceName olarak gönderilir. Örnek: Warext." />
+
+            <xf:textboxrow
+                name="token"
+                type="password"
+                maxlength="255"
+                label="NuVotifier V2 Token"
+                explain="{$tokenExplain}" />
+        </div>
+
+        <xf:submitrow submit="Kaydet">
+            <xf:html>
+                <xf:button type="submit" name="test" value="1">Kaydet ve Test Oyu Gönder</xf:button>
+            </xf:html>
+        </xf:submitrow>
+    </div>
+</xf:form>
