@@ -21,7 +21,7 @@ class UpdateAlert extends AbstractJob
         }
 
         $update = $this->app->em()->find('Warext\MinecraftVote:ServerUpdate', $updateId, ['Server', 'User']);
-        if (!$update || $update->state !== 'visible' || !$update->Server)
+        if (!$update || $update->state !== 'visible' || !$update->Server || $update->Server->state !== 'active')
         {
             return $this->complete();
         }
@@ -62,7 +62,8 @@ class UpdateAlert extends AbstractJob
                     'warext_mc_server_update',
                     $update->update_id,
                     'publish',
-                    ['depends_on_addon_id' => 'Warext/MinecraftVote']
+                    [],
+                    ['dependsOnAddOnId' => 'Warext/MinecraftVote']
                 );
             }
 
