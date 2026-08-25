@@ -13,8 +13,11 @@ class Update extends AbstractController
     {
         $server = $this->assertViewableServer((int)$params->server_id);
         $visitor = \XF::visitor();
-        $canPublish = $visitor->user_id && $this->repository('Warext\MinecraftVote:ServerTeam')
+        $teamRepo = $this->repository('Warext\MinecraftVote:ServerTeam');
+        $canPublish = $visitor->user_id && $teamRepo
             ->hasPermission($server, $visitor->user_id, 'publish_updates');
+        $canManageVotifier = $visitor->user_id && $teamRepo
+            ->hasPermission($server, $visitor->user_id, 'manage_votifier');
 
         if ($this->isPost())
         {
@@ -67,7 +70,8 @@ class Update extends AbstractController
             'page' => $page,
             'perPage' => $perPage,
             'total' => $total,
-            'canPublish' => $canPublish
+            'canPublish' => $canPublish,
+            'canManageVotifier' => $canManageVotifier
         ]);
     }
 
