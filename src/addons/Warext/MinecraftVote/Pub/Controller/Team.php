@@ -18,13 +18,25 @@ class Team extends AbstractController
             $input = $this->filter([
                 'username' => 'str',
                 'role' => 'str',
-                'permissions' => 'array-bool'
+                'edit_content' => 'bool',
+                'publish_updates' => 'bool',
+                'view_stats' => 'bool',
+                'manage_votifier' => 'bool',
+                'manage_reviews' => 'bool'
             ]);
+
+            $permissions = [
+                'edit_content' => $input['edit_content'],
+                'publish_updates' => $input['publish_updates'],
+                'view_stats' => $input['view_stats'],
+                'manage_votifier' => $input['manage_votifier'],
+                'manage_reviews' => $input['manage_reviews']
+            ];
 
             try
             {
                 $manager = $this->service('Warext\MinecraftVote:Team\Manager', $server, $visitor);
-                $manager->addOrUpdate($input['username'], $input['role'], $input['permissions']);
+                $manager->addOrUpdate($input['username'], $input['role'], $permissions);
             }
             catch (\XF\PrintableException $e)
             {
