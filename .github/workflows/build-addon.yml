@@ -1,0 +1,25 @@
+name: Build Add-on
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build ZIP
+        run: |
+          mkdir -p build/upload/src/addons/Warext
+          cp -R src/addons/Warext/MinecraftVote build/upload/src/addons/Warext/MinecraftVote
+          rm -rf build/upload/src/addons/Warext/MinecraftVote/_output
+          cp README.md build/README.md
+          cd build
+          zip -r ../Warext-MinecraftVote-${GITHUB_REF_NAME:-dev}.zip upload README.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Warext-MinecraftVote
+          path: Warext-MinecraftVote-*.zip
