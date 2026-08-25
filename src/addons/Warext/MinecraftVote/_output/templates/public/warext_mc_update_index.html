@@ -5,6 +5,9 @@
 <xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
 
 <xf:pageaction>
+    <xf:if is="$canViewStats">
+        <xf:button href="{{ link('sunucular/istatistik', $server) }}">İstatistikler</xf:button>
+    </xf:if>
     <xf:if is="$canManageVotifier">
         <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
     </xf:if>
