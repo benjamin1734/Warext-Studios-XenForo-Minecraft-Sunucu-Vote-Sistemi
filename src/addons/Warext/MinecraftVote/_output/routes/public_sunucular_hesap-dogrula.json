@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "sunucular",
+    "sub_name": "hesap-dogrula",
+    "format": ":int<account_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:AccountVerification",
+    "context": "",
+    "action_prefix": ""
+}

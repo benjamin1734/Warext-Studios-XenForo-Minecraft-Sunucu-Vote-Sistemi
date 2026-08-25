@@ -1,0 +1,38 @@
+<xf:title>Minecraft Hesabını Doğrula</xf:title>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/hesaplar') }}">Minecraft Hesaplarım</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{$account.minecraft_username}</div>
+        <div class="block-body">
+            <div class="block-row">
+                <xf:if is="$account.verification_state == 'verified'">
+                    <div class="blockMessage blockMessage--success">Bu Minecraft hesabı doğrulanmış.</div>
+                    <div>UUID: {$account.minecraft_uuid}</div>
+                    <div>Doğrulama tarihi: <xf:date time="$account.verified_date" /></div>
+                <xf:elseif is="!$bridgeEnabled" />
+                    <div class="blockMessage blockMessage--error">Site yöneticisi Minecraft hesap doğrulama köprüsünü henüz etkinleştirmedi.</div>
+                <xf:else />
+                    <p>Doğrulama kodu 10 dakika geçerlidir ve yalnız bir kez kullanılabilir.</p>
+                    <xf:if is="$verificationServer">
+                        <p>Doğrulama sunucusu: <strong>{$verificationServer}</strong></p>
+                    </xf:if>
+                    <xf:if is="$challenge">
+                        <div class="blockMessage blockMessage--success">
+                            Kodunuz: <strong style="font-size:1.25em">{$challenge.code}</strong><br />
+                            Oyunda bu hesapla giriş yaptıktan sonra <code>/warextverify {$challenge.code}</code> komutunu kullanın.<br />
+                            Son geçerlilik: <xf:date time="$challenge.expires" />
+                        </div>
+                    </xf:if>
+                </xf:if>
+            </div>
+        </div>
+        <xf:if is="$account.verification_state != 'verified' && $bridgeEnabled">
+            <xf:form action="{{ link('sunucular/hesap-dogrula', $account) }}">
+                <xf:submitrow submit="Yeni Doğrulama Kodu Oluştur" />
+            </xf:form>
+        </xf:if>
+    </div>
+</div>

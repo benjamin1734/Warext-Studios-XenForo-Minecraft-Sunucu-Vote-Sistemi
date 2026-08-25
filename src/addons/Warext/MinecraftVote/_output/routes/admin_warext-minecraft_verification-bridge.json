@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "warext-minecraft",
+    "sub_name": "verification-bridge",
+    "format": "",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:VerificationBridge",
+    "context": "",
+    "action_prefix": ""
+}

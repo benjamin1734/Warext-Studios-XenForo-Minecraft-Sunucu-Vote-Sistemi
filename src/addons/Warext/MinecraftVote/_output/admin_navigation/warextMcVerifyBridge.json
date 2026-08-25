@@ -1,0 +1,10 @@
+{
+    "parent_navigation_id": "warextMinecraftVote",
+    "display_order": 35,
+    "link": "warext-minecraft/verification-bridge",
+    "icon": "fa-link",
+    "admin_permission_id": "warextMinecraftVote",
+    "debug_only": false,
+    "development_only": false,
+    "hide_no_children": false
+}

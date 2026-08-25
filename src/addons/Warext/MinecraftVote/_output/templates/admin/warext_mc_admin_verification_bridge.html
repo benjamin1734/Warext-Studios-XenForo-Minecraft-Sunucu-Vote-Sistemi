@@ -1,0 +1,36 @@
+<xf:title>Minecraft Hesap Doğrulama Köprüsü</xf:title>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Trusted Bridge Ayarları</div>
+        <div class="block-body">
+            <xf:formrow label="Callback URL"><code>{$endpoint}</code></xf:formrow>
+            <xf:formrow label="Bridge generation"><code>{$generation}</code></xf:formrow>
+            <xf:formrow label="Bridge secret"><code style="word-break:break-all">{$secret}</code></xf:formrow>
+        </div>
+        <div class="block-footer">Secret yalnız güvenilen WarextVerify Minecraft eklentisinin config dosyasına yazılmalıdır. Anahtar yenilenirse eski secret anında geçersiz olur.</div>
+    </div>
+</div>
+
+<xf:form action="{{ link('warext-minecraft/verification-bridge') }}" class="block">
+    <div class="block-container">
+        <div class="block-header">Köprü Durumu</div>
+        <div class="block-body">
+            <xf:checkboxrow label="Durum">
+                <xf:option name="enabled" selected="$enabled">Minecraft hesap doğrulama köprüsünü etkinleştir</xf:option>
+            </xf:checkboxrow>
+            <xf:textboxrow name="server_address" value="{$serverAddress}" maxlength="255" label="Doğrulama Sunucusu Adresi" explain="Kullanıcılara gösterilecek Java sunucu adresi. Örn. verify.example.com" />
+            <xf:hiddenval name="operation" value="save" />
+        </div>
+        <xf:submitrow submit="Kaydet" />
+    </div>
+</xf:form>
+
+<xf:form action="{{ link('warext-minecraft/verification-bridge') }}" class="block" data-xf-init="delete">
+    <div class="block-container">
+        <div class="block-header">Bridge Anahtarını Yenile</div>
+        <div class="block-body block-row">Bu işlem mevcut secret değerini anında geçersiz kılar. Minecraft sunucusundaki WarextVerify config dosyasını yeni secret ile güncellemeniz gerekir.</div>
+        <xf:hiddenval name="operation" value="rotate" />
+        <xf:submitrow submit="Secret Yenile" />
+    </div>
+</xf:form>

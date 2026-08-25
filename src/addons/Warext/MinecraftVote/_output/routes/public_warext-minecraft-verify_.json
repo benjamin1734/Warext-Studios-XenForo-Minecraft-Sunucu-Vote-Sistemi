@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "warext-minecraft-verify",
+    "sub_name": "",
+    "format": "",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:VerificationBridge",
+    "context": "",
+    "action_prefix": ""
+}
