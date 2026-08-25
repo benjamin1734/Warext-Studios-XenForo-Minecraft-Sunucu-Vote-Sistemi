@@ -122,7 +122,7 @@ class Index extends AbstractController
             return $value !== '' && $value !== 0 && $value !== false && $value !== null;
         });
 
-        $this->assertValidPage($page, $perPage, $total, 'sunucular', null, $filterParams);
+        $this->assertValidPage($page, $perPage, $total, 'sunucular');
 
         $servers = $finder
             ->limitByPage($page, $perPage)
