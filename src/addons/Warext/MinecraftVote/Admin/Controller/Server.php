@@ -199,6 +199,20 @@ class Server extends AbstractController
         $serverId = $this->filter('server_id', 'uint');
         $server = $this->assertServerExists($serverId);
         $db = $this->db();
+
+        $updateRows = $db->fetchAll(
+            'SELECT update_id FROM xf_warext_mc_server_update WHERE server_id = ?',
+            [$server->server_id]
+        );
+        $alertRepo = $this->repository('XF:UserAlert');
+        foreach ($updateRows as $row)
+        {
+            $alertRepo->fastDeleteAlertsForContent(
+                'warext_mc_server_update',
+                (int)$row['update_id']
+            );
+        }
+
         $db->beginTransaction();
 
         try
