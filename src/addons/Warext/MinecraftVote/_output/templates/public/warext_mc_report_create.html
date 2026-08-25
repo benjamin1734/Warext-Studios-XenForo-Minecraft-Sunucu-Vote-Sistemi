@@ -1,0 +1,27 @@
+<xf:title>{$server.title} - Sunucuyu Raporla</xf:title>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">Sunucuyu raporla</h2>
+        <div class="block-body">
+            <xf:form action="{{ link('sunucular/rapor', $server) }}" method="post" class="block">
+                <xf:selectrow name="reason" label="Rapor nedeni" required="true">
+                    <xf:option value="fake">Sahte / yanıltıcı sunucu bilgisi</xf:option>
+                    <xf:option value="malicious">Zararlı içerik veya güvenlik riski</xf:option>
+                    <xf:option value="scam">Dolandırıcılık / yanıltıcı satış</xf:option>
+                    <xf:option value="offline">Uzun süredir kapalı / erişilemiyor</xf:option>
+                    <xf:option value="inappropriate">Uygunsuz içerik</xf:option>
+                    <xf:option value="other">Diğer</xf:option>
+                </xf:selectrow>
+
+                <xf:textarearow name="message"
+                    label="Açıklama"
+                    explain="Sorunu açıkça belirtin. 10-1000 karakter."
+                    maxlength="1000"
+                    required="true" />
+
+                <xf:submitrow submit="Raporu gönder" />
+            </xf:form>
+        </div>
+    </div>
+</div>
