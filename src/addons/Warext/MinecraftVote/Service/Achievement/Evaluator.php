@@ -72,7 +72,19 @@ class Evaluator extends AbstractService
                 return (int)$this->server->vote_count_total;
 
             case 'uptime_bp':
-                return (int)$this->server->uptime_bp;
+                $cutOff = \XF::$time - 30 * 86400;
+                $row = $this->db()->fetchRow(
+                    'SELECT COUNT(*) AS total_checks, SUM(is_online = 1) AS online_checks
+                     FROM xf_warext_mc_ping_history
+                     WHERE server_id = ? AND check_date >= ?',
+                    [$this->server->server_id, $cutOff]
+                );
+                $totalChecks = (int)($row['total_checks'] ?? 0);
+                if ($totalChecks < 100)
+                {
+                    return 0;
+                }
+                return (int)round(((int)($row['online_checks'] ?? 0) / $totalChecks) * 10000);
 
             case 'peak_players':
                 return (int)$this->db()->fetchOne(
