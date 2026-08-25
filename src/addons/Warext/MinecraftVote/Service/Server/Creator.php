@@ -36,6 +36,12 @@ class Creator extends AbstractService
         $data['country_code'] = strtoupper(trim($data['country_code'] ?? ''));
         $data['port'] = (int)($data['port'] ?? 0) ?: 25565;
         $data['bedrock_port'] = (int)($data['bedrock_port'] ?? 0) ?: 19132;
+        $serverType = $data['server_type'] ?? 'java';
+
+        if (in_array($serverType, ['bedrock', 'crossplay'], true) && $data['bedrock_host'] === '')
+        {
+            $data['bedrock_host'] = $data['host'];
+        }
 
         foreach (['website_url', 'discord_url', 'store_url'] as $urlField)
         {
@@ -56,7 +62,6 @@ class Creator extends AbstractService
             $this->server->error('Geçerli bir Java sunucu adresi girin.', 'host');
         }
 
-        $serverType = $data['server_type'] ?? 'java';
         if (in_array($serverType, ['bedrock', 'crossplay'], true) && !$this->isValidHost($data['bedrock_host']))
         {
             $this->server->error('Bedrock veya Crossplay sunucuları için geçerli bir Bedrock adresi girin.', 'bedrock_host');
