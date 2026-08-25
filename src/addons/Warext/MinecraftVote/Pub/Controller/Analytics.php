@@ -24,7 +24,7 @@ class Analytics extends AbstractController
                 SUM(vote_date >= ?) AS votes_7d,
                 SUM(vote_date >= ?) AS votes_24h
              FROM xf_warext_mc_vote
-             WHERE server_id = ? AND vote_date >= ?",
+             WHERE server_id = ? AND vote_date >= ? AND status <> 'rejected'",
             [$now - 7 * $day, $now - $day, $server->server_id, $now - 30 * $day]
         );
 
@@ -43,7 +43,7 @@ class Analytics extends AbstractController
         $dailyVotes = $this->db()->fetchAll(
             "SELECT DATE(FROM_UNIXTIME(vote_date)) AS vote_day, COUNT(*) AS total
              FROM xf_warext_mc_vote
-             WHERE server_id = ? AND vote_date >= ?
+             WHERE server_id = ? AND vote_date >= ? AND status <> 'rejected'
              GROUP BY DATE(FROM_UNIXTIME(vote_date))
              ORDER BY vote_day ASC",
             [$server->server_id, $now - 14 * $day]
