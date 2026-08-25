@@ -68,6 +68,12 @@ jobs:
           TAG: ${{ steps.package.outputs.tag }}
           FILE: ${{ steps.package.outputs.file }}
         run: |
+          for OLD_TAG in $(gh release list --limit 100 --json tagName --jq '.[].tagName'); do
+            if [ "$OLD_TAG" != "$TAG" ]; then
+              gh release delete "$OLD_TAG" --cleanup-tag -y || true
+            fi
+          done
+
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" "$FILE" --clobber
           else
