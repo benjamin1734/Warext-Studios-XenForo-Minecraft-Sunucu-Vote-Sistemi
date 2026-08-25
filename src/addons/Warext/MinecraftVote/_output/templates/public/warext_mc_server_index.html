@@ -5,11 +5,15 @@
 <xf:pageaction>
     <xf:button href="{{ link('sunucular/karsilastir') }}">Karşılaştır</xf:button>
     <xf:button href="{{ link('sunucular/sezonlar') }}">Sezonlar</xf:button>
-    <xf:if is="$xf.visitor.user_id">
+    <xf:if is="$canUseFavorites">
         <xf:button href="{{ link('sunucular/favoriler') }}">Favorilerim</xf:button>
+    </xf:if>
+    <xf:if is="$xf.visitor.user_id">
         <xf:button href="{{ link('sunucular/hesaplar') }}">Minecraft Hesaplarım</xf:button>
     </xf:if>
-    <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">Sunucu Ekle</xf:button>
+    <xf:if is="$canAddServer">
+        <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">Sunucu Ekle</xf:button>
+    </xf:if>
 </xf:pageaction>
 
 <xf:if is="$sponsors is not empty">
