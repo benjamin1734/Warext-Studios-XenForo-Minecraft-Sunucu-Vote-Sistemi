@@ -12,6 +12,7 @@ use XF\Service\AbstractService;
 class Delivery extends AbstractService
 {
     protected Vote $vote;
+    protected int $leaseSeconds = 300;
 
     public function __construct(App $app, Vote $vote)
     {
@@ -21,9 +22,9 @@ class Delivery extends AbstractService
 
     public function deliver(): string
     {
-        if (!in_array($this->vote->status, ['pending', 'retry'], true))
+        if (!$this->claimForDelivery())
         {
-            return $this->vote->status;
+            return (string)$this->vote->status;
         }
 
         $server = $this->vote->Server;
@@ -41,8 +42,6 @@ class Delivery extends AbstractService
             $this->vote->save();
             return 'skipped';
         }
-
-        $this->vote->attempt_count++;
 
         if (!$config->token_encrypted)
         {
@@ -78,6 +77,55 @@ class Delivery extends AbstractService
         catch (\Throwable $e)
         {
             return $this->handleFailure($config, $e->getMessage());
+        }
+    }
+
+    protected function claimForDelivery(): bool
+    {
+        $db = $this->db();
+        $now = \XF::$time;
+        $db->beginTransaction();
+
+        try
+        {
+            $row = $db->fetchRow(
+                'SELECT status, attempt_count, next_attempt_date FROM xf_warext_mc_vote WHERE vote_id = ? FOR UPDATE',
+                $this->vote->vote_id
+            );
+
+            if (!$row)
+            {
+                $db->commit();
+                return false;
+            }
+
+            $status = (string)$row['status'];
+            $nextAttempt = (int)$row['next_attempt_date'];
+            $eligible = in_array($status, ['pending', 'retry'], true)
+                || ($status === 'processing' && $nextAttempt <= $now);
+
+            if (!$eligible || $nextAttempt > $now)
+            {
+                $this->vote->status = $status;
+                $this->vote->attempt_count = (int)$row['attempt_count'];
+                $this->vote->next_attempt_date = $nextAttempt;
+                $db->commit();
+                return false;
+            }
+
+            $this->vote->status = 'processing';
+            $this->vote->attempt_count = (int)$row['attempt_count'] + 1;
+            $this->vote->next_attempt_date = $now + $this->leaseSeconds;
+            $this->vote->last_error = '';
+            $this->vote->save();
+
+            $db->commit();
+            return true;
+        }
+        catch (\Throwable $e)
+        {
+            $db->rollback();
+            throw $e;
         }
     }
 
