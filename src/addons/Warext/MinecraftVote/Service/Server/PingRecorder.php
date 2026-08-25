@@ -42,6 +42,9 @@ class PingRecorder extends AbstractService
             $this->server->players_online = $history->players_online;
             $this->server->players_max = $history->players_max;
             $this->server->last_ping_date = \XF::$time;
+            $this->server->last_ping_error = $isOnline
+                ? ''
+                : mb_substr(trim((string)($result['error'] ?? 'Bilinmeyen ping hatası')), 0, 500);
 
             if ($isOnline)
             {
