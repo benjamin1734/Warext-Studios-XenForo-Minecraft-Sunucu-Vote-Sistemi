@@ -17,6 +17,18 @@ class Server extends Repository
     public function findPopularServers(): ServerFinder
     {
         return $this->findServersForList()
+            ->orderByPopularity();
+    }
+
+    public function findTrendingServers(): ServerFinder
+    {
+        return $this->findServersForList()
+            ->orderByTrend();
+    }
+
+    public function findMostVotedServers(): ServerFinder
+    {
+        return $this->findServersForList()
             ->orderByVotes();
     }
 
