@@ -20,6 +20,8 @@ class Update extends AbstractController
             ->hasPermission($server, $visitor->user_id, 'manage_votifier');
         $canViewStats = $visitor->user_id && $teamRepo
             ->hasPermission($server, $visitor->user_id, 'view_stats');
+        $canEdit = $visitor->user_id && $teamRepo
+            ->hasPermission($server, $visitor->user_id, 'edit_content');
 
         if ($this->isPost())
         {
@@ -74,7 +76,8 @@ class Update extends AbstractController
             'total' => $total,
             'canPublish' => $canPublish,
             'canManageVotifier' => $canManageVotifier,
-            'canViewStats' => $canViewStats
+            'canViewStats' => $canViewStats,
+            'canEdit' => $canEdit
         ]);
     }
 
