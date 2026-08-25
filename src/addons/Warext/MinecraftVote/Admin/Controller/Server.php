@@ -195,7 +195,7 @@ class Server extends AbstractController
             $db->delete('xf_warext_mc_server_team', 'server_id = ?', $server->server_id);
             $db->delete('xf_warext_mc_ping_history', 'server_id = ?', $server->server_id);
             $db->delete('xf_warext_mc_vote', 'server_id = ?', $server->server_id);
-            $db->delete('xf_warext_mc_votifier_config', 'server_id = ?', $server->server_id);
+            $db->delete('xf_warext_mc_votifier', 'server_id = ?', $server->server_id);
             $server->delete();
             $db->commit();
         }
