@@ -3,20 +3,26 @@
 namespace Warext\MinecraftVote\Pub\Controller;
 
 use Warext\MinecraftVote\Entity\Server;
+use Warext\MinecraftVote\Security\PublicPermissions;
 use XF\Mvc\ParameterBag;
 use XF\Pub\Controller\AbstractController;
 
 class Favorite extends AbstractController
 {
+    protected function canUseFavorites(): bool
+    {
+        return \XF::visitor()->user_id > 0 && PublicPermissions::allows('favorite', false, true);
+    }
+
     public function actionToggle(ParameterBag $params)
     {
         $this->assertPostOnly();
-        $visitor = \XF::visitor();
-        if (!$visitor->user_id)
+        if (!$this->canUseFavorites())
         {
             return $this->noPermission();
         }
 
+        $visitor = \XF::visitor();
         $server = $this->assertActiveServer((int)$params->server_id);
         $active = $this->repository('Warext\MinecraftVote:Favorite')
             ->toggle($server, $visitor->user_id);
@@ -30,12 +36,12 @@ class Favorite extends AbstractController
     public function actionNotify(ParameterBag $params)
     {
         $this->assertPostOnly();
-        $visitor = \XF::visitor();
-        if (!$visitor->user_id)
+        if (!$this->canUseFavorites())
         {
             return $this->noPermission();
         }
 
+        $visitor = \XF::visitor();
         $server = $this->assertActiveServer((int)$params->server_id);
         $enabled = $this->filter('enabled', 'bool');
         $updated = $this->repository('Warext\MinecraftVote:Favorite')
@@ -54,12 +60,12 @@ class Favorite extends AbstractController
 
     public function actionIndex()
     {
-        $visitor = \XF::visitor();
-        if (!$visitor->user_id)
+        if (!$this->canUseFavorites())
         {
             return $this->noPermission();
         }
 
+        $visitor = \XF::visitor();
         $repo = $this->repository('Warext\MinecraftVote:Favorite');
         $favorites = $repo->findForUser($visitor->user_id)->fetch();
         $unreadCounts = $repo->getUnreadUpdateCounts($visitor->user_id);

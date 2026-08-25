@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<xf:if is="$xf.visitor.user_id && $xf.visitor.user_id != $server.owner_user_id">
+<xf:if is="$canReview && $xf.visitor.user_id != $server.owner_user_id">
     <xf:form action="{{ link('sunucular/degerlendir', $server) }}" ajax="true" class="block">
         <div class="block-container">
             <div class="block-header"><xf:if is="$userReview">Değerlendirmeni Güncelle<xf:else />Değerlendirme Yap</xf:if></div>

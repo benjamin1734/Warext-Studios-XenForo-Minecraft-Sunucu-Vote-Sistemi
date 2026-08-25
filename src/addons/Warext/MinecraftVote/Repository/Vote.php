@@ -104,6 +104,20 @@ class Vote extends Repository
             ->total();
     }
 
+    public function countRecentIpActivity(int $serverId, string $ipHash, int $since): int
+    {
+        if ($serverId <= 0 || $ipHash === '')
+        {
+            return 0;
+        }
+
+        return $this->finder('Warext\MinecraftVote:Vote')
+            ->forServer($serverId)
+            ->where('ip_hash', $ipHash)
+            ->since($since)
+            ->total();
+    }
+
     public function getLatestVoteForUsername(int $serverId, string $username): ?\Warext\MinecraftVote\Entity\Vote
     {
         return $this->finder('Warext\MinecraftVote:Vote')

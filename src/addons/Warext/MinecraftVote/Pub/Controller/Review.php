@@ -3,6 +3,7 @@
 namespace Warext\MinecraftVote\Pub\Controller;
 
 use Warext\MinecraftVote\Entity\Server;
+use Warext\MinecraftVote\Security\PublicPermissions;
 use XF\Mvc\ParameterBag;
 use XF\Pub\Controller\AbstractController;
 
@@ -18,7 +19,7 @@ class Review extends AbstractController
 
         if ($this->isPost())
         {
-            if (!$visitor->user_id)
+            if (!$visitor->user_id || !PublicPermissions::allows('review', false, true))
             {
                 return $this->noPermission();
             }
@@ -80,6 +81,7 @@ class Review extends AbstractController
             'reviews' => $reviews,
             'userReview' => $userReview,
             'canModerate' => $canModerate,
+            'canReview' => $visitor->user_id && PublicPermissions::allows('review', false, true),
             'page' => $page,
             'perPage' => $perPage,
             'total' => $total
@@ -92,7 +94,7 @@ class Review extends AbstractController
         $server = $this->assertActiveServer((int)$params->server_id);
         $visitor = \XF::visitor();
 
-        if (!$visitor->user_id)
+        if (!$visitor->user_id || !PublicPermissions::allows('review', false, true))
         {
             return $this->noPermission();
         }
