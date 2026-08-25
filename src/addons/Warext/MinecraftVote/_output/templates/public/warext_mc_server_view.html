@@ -14,6 +14,7 @@
         </xf:form>
     </xf:if>
     <xf:if is="$xf.visitor.user_id && $xf.visitor.user_id == $server.owner_user_id">
+        <xf:button href="{{ link('sunucular/ekip', $server) }}">Sunucu Ekibi</xf:button>
         <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncelleme Yayınla</xf:button>
         <xf:button href="{{ link('sunucular/dogrula', $server) }}">
             <xf:if is="$server.is_verified">Doğrulama Bilgisi<xf:else />Sahipliği Doğrula</xf:if>
