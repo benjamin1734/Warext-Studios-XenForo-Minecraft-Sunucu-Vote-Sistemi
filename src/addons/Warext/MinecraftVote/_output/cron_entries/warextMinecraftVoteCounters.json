@@ -1,0 +1,17 @@
+{
+    "cron_class": "Warext\\MinecraftVote\\Cron\\VoteCounters",
+    "cron_method": "run",
+    "run_rules": {
+        "day_type": "dom",
+        "dom": [
+            -1
+        ],
+        "hours": [
+            0
+        ],
+        "minutes": [
+            10
+        ]
+    },
+    "active": true
+}
