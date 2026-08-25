@@ -12,6 +12,34 @@
     <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">Sunucu Ekle</xf:button>
 </xf:pageaction>
 
+<xf:if is="$sponsors is not empty">
+    <div class="block">
+        <div class="block-container">
+            <div class="block-header">Sponsorlu Sunucular</div>
+            <div class="block-body">
+                <div class="warextMcServerGrid">
+                    <xf:foreach loop="$sponsors" value="$sponsor">
+                        <div class="block-row block-row--separated warextMcServerCard">
+                            <div class="contentRow">
+                                <div class="contentRow-main">
+                                    <div class="contentRow-title">
+                                        <a href="{{ link('sunucular/detay', $sponsor.Server) }}"><strong>{$sponsor.Server.title}</strong></a>
+                                        <span class="label label--orange">{$sponsor.label}</span>
+                                        <xf:if is="$sponsor.Server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
+                                    </div>
+                                    <div class="contentRow-minor">{$sponsor.Server.host}:{$sponsor.Server.port}</div>
+                                    <div class="contentRow-minor">{$sponsor.Server.players_online} oyuncu · {$sponsor.Server.vote_count_month} bu ay oy · {$sponsor.Server.uptime_percent}% uptime</div>
+                                </div>
+                            </div>
+                        </div>
+                    </xf:foreach>
+                </div>
+            </div>
+            <div class="block-footer">Bu bölüm ücretli/sponsorlu gösterimdir ve organik sıralama puanlarını değiştirmez.</div>
+        </div>
+    </div>
+</xf:if>
+
 <div class="block">
     <div class="block-container">
         <div class="block-header">Sunucu Listesi</div>
