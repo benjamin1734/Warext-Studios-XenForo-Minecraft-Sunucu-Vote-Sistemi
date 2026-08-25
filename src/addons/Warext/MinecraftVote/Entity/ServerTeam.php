@@ -43,5 +43,19 @@ class ServerTeam extends Entity
         {
             $this->joined_date = \XF::$time;
         }
+
+        if (!in_array($this->role, ['manager', 'editor', 'analyst', 'support', 'member'], true))
+        {
+            $this->error('Geçersiz ekip rolü.', 'role');
+        }
+
+        $allowed = ['edit_content', 'publish_updates', 'view_stats', 'manage_votifier', 'manage_reviews'];
+        $permissions = is_array($this->permissions) ? $this->permissions : [];
+        $clean = [];
+        foreach ($allowed as $permission)
+        {
+            $clean[$permission] = !empty($permissions[$permission]);
+        }
+        $this->permissions = $clean;
     }
 }
