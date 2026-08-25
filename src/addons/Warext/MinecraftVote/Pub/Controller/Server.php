@@ -103,7 +103,6 @@ class Server extends AbstractController
                 'category_ids' => 'array-uint'
             ]);
 
-            /** @var \Warext\MinecraftVote\Service\Server\Creator $creator */
             $creator = $this->service('Warext\MinecraftVote:Server\Creator');
             $creator->setOwner($visitor);
             $creator->setData($input);
@@ -126,9 +125,58 @@ class Server extends AbstractController
         ]);
     }
 
+    public function actionOy(ParameterBag $params)
+    {
+        $server = $this->assertViewableServer((int)$params->server_id);
+        if ($server->state !== 'active')
+        {
+            throw $this->exception($this->notFound());
+        }
+
+        $visitor = \XF::visitor();
+        $allowGuests = (bool)(\XF::options()->warextMcAllowGuestVotes ?? true);
+
+        if (!$visitor->user_id && !$allowGuests)
+        {
+            return $this->noPermission();
+        }
+
+        if ($this->isPost())
+        {
+            $username = $this->filter('minecraft_username', 'str');
+            $uuid = $this->filter('minecraft_uuid', 'str');
+
+            try
+            {
+                $creator = $this->service('Warext\MinecraftVote:Vote\Creator', $server, $visitor);
+                $creator->setIdentity($username, $uuid);
+                $creator->setRequestFingerprint(
+                    (string)$this->request->getIp(),
+                    (string)$this->request->getServer('HTTP_USER_AGENT', '')
+                );
+                $vote = $creator->create();
+            }
+            catch (\XF\PrintableException $e)
+            {
+                return $this->error($e->getMessage(), 400);
+            }
+
+            return $this->redirect(
+                $this->buildLink('sunucular/detay', $server),
+                'Oyunuz kaydedildi. Sunucu ödül entegrasyonu aktifse ödül teslimatı kuyruğa alındı.'
+            );
+        }
+
+        return $this->view('Warext\MinecraftVote:Server\Vote', 'warext_mc_server_vote', [
+            'server' => $server,
+            'cooldownHours' => min(168, max(1, (int)(\XF::options()->warextMcVoteCooldownHours ?? 24))),
+            'allowGuests' => $allowGuests
+        ]);
+    }
+
     public function actionDetay(ParameterBag $params)
     {
-        $server = $this->assertViewableServer($params->server_id);
+        $server = $this->assertViewableServer((int)$params->server_id);
 
         if ($server->state === 'active')
         {
@@ -142,7 +190,6 @@ class Server extends AbstractController
 
     protected function assertViewableServer(int $serverId): ServerEntity
     {
-        /** @var ServerEntity|null $server */
         $server = $this->em()->find('Warext\MinecraftVote:Server', $serverId, ['Owner']);
         if (!$server)
         {
