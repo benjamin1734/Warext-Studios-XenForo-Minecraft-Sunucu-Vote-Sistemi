@@ -94,6 +94,7 @@ class Creator extends AbstractService
 
             /** @var VoteRepository $voteRepo */
             $voteRepo = $this->repository('Warext\MinecraftVote:Vote');
+            $this->assertIpVelocity($voteRepo);
             $this->assertCooldown($voteRepo, $since, $cooldownHours);
 
             $fraudScore = $this->calculateFraudScore($voteRepo);
@@ -143,6 +144,27 @@ class Creator extends AbstractService
         if ($remaining > 0)
         {
             throw new PrintableException("Çok hızlı oy isteği gönderiyorsunuz. {$remaining} saniye sonra tekrar deneyin.");
+        }
+    }
+
+    protected function assertIpVelocity(VoteRepository $voteRepo): void
+    {
+        if ($this->ipHash === null || $this->user->hasPermission('general', 'bypassFloodCheck'))
+        {
+            return;
+        }
+
+        $serverId = (int)$this->server->server_id;
+        $lastTenMinutes = $voteRepo->countRecentIpActivity($serverId, $this->ipHash, \XF::$time - 600);
+        if ($lastTenMinutes >= 12)
+        {
+            throw new PrintableException('Bu bağlantı üzerinden kısa sürede çok fazla oy gönderildi. Birkaç dakika sonra tekrar deneyin.');
+        }
+
+        $lastHour = $voteRepo->countRecentIpActivity($serverId, $this->ipHash, \XF::$time - 3600);
+        if ($lastHour >= 40)
+        {
+            throw new PrintableException('Bu bağlantı için saatlik oy sınırına ulaşıldı. Daha sonra tekrar deneyin.');
         }
     }
 
