@@ -29,7 +29,6 @@ class Detail extends AbstractController
             'achievements' => $achievements,
             'canVote' => $server->state === 'active' && PublicPermissions::allows('vote', $allowGuests, true),
             'canFavorite' => $server->state === 'active' && $visitor->user_id && PublicPermissions::allows('favorite', false, true),
-            'canReview' => $server->state === 'active' && PublicPermissions::allows('review', true, true),
             'canReport' => $server->state === 'active' && $visitor->user_id && !$server->is_owner && PublicPermissions::allows('report', false, true)
         ]);
     }
