@@ -1,7 +1,10 @@
 <xf:title>Minecraft Sunucuları</xf:title>
 
 <xf:pageaction>
-    <xf:button href="{{ link('warext-minecraft/votes') }}" class="button--primary">Oy Teslimat Kuyruğu</xf:button>
+    <xf:form action="{{ link('warext-minecraft/ranking') }}" class="buttonGroup">
+        <xf:button type="submit" class="button--primary">Sıralamayı Şimdi Hesapla</xf:button>
+    </xf:form>
+    <xf:button href="{{ link('warext-minecraft/votes') }}">Oy Teslimat Kuyruğu</xf:button>
     <xf:button href="{{ link('warext-minecraft', null, {'state': 'pending'}) }}">Bekleyenler</xf:button>
     <xf:button href="{{ link('warext-minecraft', null, {'state': 'active'}) }}">Aktifler</xf:button>
     <xf:button href="{{ link('warext-minecraft', null, {'state': 'suspended'}) }}">Askıya Alınanlar</xf:button>
@@ -21,6 +24,8 @@
                                 <div class="contentRow-title">
                                     <strong>{$server.title}</strong>
                                     <span class="label">{$server.state}</span>
+                                    <xf:if is="$server.rank_popular"><span class="label label--primary">Popüler #{$server.rank_popular}</span></xf:if>
+                                    <xf:if is="$server.rank_trending"><span class="label label--orange">Trend #{$server.rank_trending}</span></xf:if>
                                     <xf:if is="$server.is_verified"><span class="label label--green">Doğrulanmış</span></xf:if>
                                     <xf:if is="$server.is_online">
                                         <span class="label label--green">Online</span>
@@ -34,18 +39,23 @@
                                     <xf:if is="$server.Owner"> · Sahip: {$server.Owner.username}</xf:if>
                                     · Tür: {$server.server_type}
                                     · Oy: {$server.vote_count_month}
+                                    · Benzersiz: {$server.unique_voters_month}
                                 </div>
 
                                 <div class="contentRow-minor">
                                     Oyuncu: {$server.players_online}/{$server.players_max}
                                     · Ping: {$server.ping_ms} ms
                                     · Uptime: {$server.uptime_percent}%
+                                    · 24s oy: {$server.votes_24h}
+                                    · Popülerlik: {$server.popular_score}
+                                    · Trend: {$server.trend_score}
                                     <xf:if is="$server.detected_version"> · Sürüm: {$server.detected_version}</xf:if>
                                 </div>
 
                                 <div class="contentRow-minor">
                                     Eklenme: <xf:date time="$server.created_date" />
                                     <xf:if is="$server.last_ping_date"> · Son kontrol: <xf:date time="$server.last_ping_date" /></xf:if>
+                                    <xf:if is="$server.ranking_updated_date"> · Son sıralama: <xf:date time="$server.ranking_updated_date" /></xf:if>
                                 </div>
 
                                 <xf:if is="$server.motd">
