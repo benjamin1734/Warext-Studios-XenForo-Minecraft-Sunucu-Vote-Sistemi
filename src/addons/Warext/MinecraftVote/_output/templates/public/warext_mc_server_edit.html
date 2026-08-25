@@ -28,7 +28,7 @@
             <xf:textarearow name="description" value="{$server.description}" label="Sunucu açıklaması" rows="8" />
         </div>
 
-        <h2 class="block-header">Kategori ve Sürüm</h2>
+        <h2 class="block-header">Kategori, Mod ve Sürüm</h2>
         <div class="block-body">
             <xf:checkboxrow label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz.">
                 <xf:foreach loop="$categories" value="$category">
@@ -36,6 +36,13 @@
                 </xf:foreach>
             </xf:checkboxrow>
 
+            <xf:textboxrow
+                name="game_modes"
+                value="{$server.game_modes}"
+                label="Oyun modları"
+                placeholder="Survival, SkyBlock, PvP"
+                maxlength="255"
+                explain="Virgül, noktalı virgül veya yeni satır ile ayırın. En fazla 12 mod kaydedilir." />
             <xf:textboxrow name="version_min" value="{$server.version_min}" label="Minimum sürüm" maxlength="30" />
             <xf:textboxrow name="version_max" value="{$server.version_max}" label="Maksimum sürüm" maxlength="30" />
             <xf:textboxrow name="country_code" value="{$server.country_code}" label="Ülke kodu" maxlength="2" />
