@@ -63,10 +63,18 @@ class Favorite extends AbstractController
         $repo = $this->repository('Warext\MinecraftVote:Favorite');
         $favorites = $repo->findForUser($visitor->user_id)->fetch();
         $unreadCounts = $repo->getUnreadUpdateCounts($visitor->user_id);
+        $entries = [];
+
+        foreach ($favorites as $favorite)
+        {
+            $entries[] = [
+                'favorite' => $favorite,
+                'unread_count' => (int)($unreadCounts[$favorite->server_id] ?? 0)
+            ];
+        }
 
         return $this->view('Warext\MinecraftVote:Favorite\Index', 'warext_mc_favorite_index', [
-            'favorites' => $favorites,
-            'unreadCounts' => $unreadCounts
+            'entries' => $entries
         ]);
     }
 
