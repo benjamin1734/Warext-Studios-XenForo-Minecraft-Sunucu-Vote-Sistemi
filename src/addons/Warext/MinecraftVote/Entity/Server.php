@@ -68,7 +68,13 @@ class Server extends Entity
             'uptime_percent' => true,
             'rating_average' => true,
             'popular_score' => true,
-            'trend_score' => true
+            'trend_score' => true,
+            'is_owner' => true,
+            'can_edit' => true,
+            'can_publish_updates' => true,
+            'can_view_stats' => true,
+            'can_manage_votifier' => true,
+            'can_manage_reviews' => true
         ];
         $structure->relations = [
             'Owner' => [
@@ -105,6 +111,49 @@ class Server extends Entity
     public function getTrendScore(): float
     {
         return min(100, max(0, $this->trend_score_bp / 100));
+    }
+
+    public function getIsOwner(): bool
+    {
+        $visitor = \XF::visitor();
+        return $visitor->user_id > 0 && (int)$this->owner_user_id === (int)$visitor->user_id;
+    }
+
+    public function getCanEdit(): bool
+    {
+        return $this->hasTeamPermission('edit_content');
+    }
+
+    public function getCanPublishUpdates(): bool
+    {
+        return $this->hasTeamPermission('publish_updates');
+    }
+
+    public function getCanViewStats(): bool
+    {
+        return $this->hasTeamPermission('view_stats');
+    }
+
+    public function getCanManageVotifier(): bool
+    {
+        return $this->hasTeamPermission('manage_votifier');
+    }
+
+    public function getCanManageReviews(): bool
+    {
+        return $this->hasTeamPermission('manage_reviews');
+    }
+
+    protected function hasTeamPermission(string $permission): bool
+    {
+        $visitor = \XF::visitor();
+        if (!$visitor->user_id)
+        {
+            return false;
+        }
+
+        return $this->repository('Warext\MinecraftVote:ServerTeam')
+            ->hasPermission($this, (int)$visitor->user_id, $permission);
     }
 
     protected function _preSave(): void
