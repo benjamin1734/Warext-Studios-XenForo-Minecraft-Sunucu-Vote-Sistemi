@@ -4,7 +4,7 @@ XenForo için Minecraft sunucu listeleme, keşif, oylama, NuVotifier entegrasyon
 
 ## Durum
 
-Geliştirme sürümü: 0.9.0 Alpha
+Geliştirme sürümü: 0.10.0 Alpha
 
 ## Hedef
 
@@ -13,12 +13,13 @@ Geliştirme sürümü: 0.9.0 Alpha
 - Güvenli vote sistemi
 - NuVotifier entegrasyonu
 - Vote kuyruğu ve yeniden gönderim
-- Sunucu sahipliği ve doğrulama
+- Sunucu sahipliği, doğrulama ve güvenli sahiplik devri
 - Minecraft hesabı bağlantısı
-- Vote streak ve başarımlar
+- Vote streak ve sunucu başarımları
 - Yorumlar, favoriler ve bildirimler
-- Organik sıralama ve sponsorlu listelemeler
+- Organik sıralamadan bağımsız sponsorlu listelemeler
 - Gelişmiş sunucu sahibi ve ekip paneli
+- Kritik işlemler için audit kayıtları
 - XenForo ACP moderasyon araçları
 
 ## XenForo Add-on ID
