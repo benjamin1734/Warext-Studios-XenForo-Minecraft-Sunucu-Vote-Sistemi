@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/addons/Warext/MinecraftVote/**'
       - '.github/build_xf_data.py'
+      - '.github/validate_xf_source.py'
       - '.github/workflows/build-addon.yml'
   workflow_dispatch:
 
@@ -18,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Validate XenForo source links
+        run: python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
 
       - name: Build XenForo release data
         run: python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
