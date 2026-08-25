@@ -1,0 +1,55 @@
+<xf:title>Sunucu Raporları</xf:title>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:form action="{{ link('warext-minecraft/reports') }}" method="get" class="block">
+                <xf:selectrow name="state" value="{$state}" label="Durum">
+                    <xf:option value="">Tümü</xf:option>
+                    <xf:option value="open">Açık</xf:option>
+                    <xf:option value="resolved">Çözüldü</xf:option>
+                    <xf:option value="rejected">Reddedildi</xf:option>
+                </xf:selectrow>
+                <xf:textboxrow name="server_id" value="{$serverId}" label="Sunucu ID" inputmode="numeric" />
+                <xf:submitrow submit="Filtrele" />
+            </xf:form>
+        </div>
+    </div>
+</div>
+
+<xf:if is="$reports is not empty">
+    <xf:foreach loop="$reports" value="$report">
+        <div class="block">
+            <div class="block-container">
+                <h3 class="block-header">
+                    Rapor #{$report.report_id}
+                    <span class="u-muted">— {$report.Server ? $report.Server.title : 'Silinmiş sunucu'}</span>
+                </h3>
+                <div class="block-body">
+                    <div class="block-row">
+                        <dl class="pairs pairs--columns pairs--fixedSmall">
+                            <dt>Durum</dt><dd>{$report.state}</dd>
+                            <dt>Neden</dt><dd>{$report.reason}</dd>
+                            <dt>Raporlayan</dt><dd>{$report.Reporter ? $report.Reporter.username : 'Kullanıcı #' . $report.reporter_user_id}</dd>
+                            <dt>Tarih</dt><dd><xf:date time="$report.created_date" /></dd>
+                        </dl>
+                        <div class="message-body">{{ nl2br($report.message) }}</div>
+                    </div>
+                    <xf:form action="{{ link('warext-minecraft/report-update', $report) }}" method="post" class="block">
+                        <xf:selectrow name="state" value="{$report.state}" label="Yeni durum">
+                            <xf:option value="open">Açık</xf:option>
+                            <xf:option value="resolved">Çözüldü</xf:option>
+                            <xf:option value="rejected">Reddedildi</xf:option>
+                        </xf:selectrow>
+                        <xf:textboxrow name="resolution" value="{$report.resolution}" maxlength="255" label="Moderasyon notu" />
+                        <xf:submitrow submit="Kaydet" />
+                    </xf:form>
+                </div>
+            </div>
+        </div>
+    </xf:foreach>
+
+    <xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/reports" params="{{ {'state': $state, 'server_id': $serverId} }}" />
+<xf:else />
+    <div class="blockMessage">Bu filtreye uygun rapor bulunamadı.</div>
+</xf:if>
