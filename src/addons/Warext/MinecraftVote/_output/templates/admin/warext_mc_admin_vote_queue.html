@@ -1,6 +1,7 @@
 <xf:title>Oy Teslimat Kuyruğu</xf:title>
 
 <xf:pageaction>
+    <xf:button href="{{ link('warext-minecraft/suspect-votes') }}">Şüpheli Oylar</xf:button>
     <xf:button href="{{ link('warext-minecraft') }}">Sunucular</xf:button>
     <xf:form action="{{ link('warext-minecraft/run-vote-queue') }}" class="buttonGroup">
         <xf:button type="submit" class="button--primary">Kuyruğu Çalıştır</xf:button>
@@ -13,6 +14,7 @@
         <div class="block-body block-row">
             <div class="buttonGroup">
                 <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'pending'}) }}">Bekleyen ({$statusCounts.pending})</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'processing'}) }}">İşleniyor ({$statusCounts.processing})</xf:button>
                 <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'retry'}) }}">Tekrar ({$statusCounts.retry})</xf:button>
                 <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'failed'}) }}">Başarısız ({$statusCounts.failed})</xf:button>
                 <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'delivered'}) }}">Teslim Edildi ({$statusCounts.delivered})</xf:button>
@@ -41,6 +43,8 @@
                                         <span class="label label--red">{$vote.status}</span>
                                     <xf:elseif is="$vote.status == 'retry'" />
                                         <span class="label label--orange">Tekrar Denenecek</span>
+                                    <xf:elseif is="$vote.status == 'processing'" />
+                                        <span class="label label--primary">İşleniyor</span>
                                     <xf:else />
                                         <span class="label">{$vote.status}</span>
                                     </xf:if>
@@ -56,7 +60,7 @@
                                     Oy zamanı: <xf:date time="$vote.vote_date" />
                                     · Deneme: {$vote.attempt_count}
                                     · Risk: {$vote.fraud_score}
-                                    <xf:if is="$vote.next_attempt_date"> · Sonraki deneme: <xf:date time="$vote.next_attempt_date" /></xf:if>
+                                    <xf:if is="$vote.next_attempt_date"> · Sonraki deneme / lease: <xf:date time="$vote.next_attempt_date" /></xf:if>
                                     <xf:if is="$vote.delivered_date"> · Teslim: <xf:date time="$vote.delivered_date" /></xf:if>
                                 </div>
 
