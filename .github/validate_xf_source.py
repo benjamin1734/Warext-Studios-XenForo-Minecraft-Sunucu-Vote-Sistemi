@@ -30,6 +30,11 @@ def class_to_path(addon: Path, value: str) -> Path | None:
     return addon / f'{short}.php'
 
 
+def action_prefix_to_method(action_prefix: str) -> str:
+    parts = [part for part in re.split(r'[^A-Za-z0-9]+', action_prefix) if part]
+    return 'action' + ''.join(part[:1].upper() + part[1:] for part in parts)
+
+
 def validate_short_ids(addon: Path):
     errors = []
     for folder, label in [
@@ -86,7 +91,7 @@ def validate_routes(addon: Path):
                 continue
             if expected and expected.is_file() and action_prefix:
                 content = expected.read_text(encoding='utf-8-sig')
-                method = 'action' + action_prefix[:1].upper() + action_prefix[1:]
+                method = action_prefix_to_method(action_prefix)
                 if not re.search(r'function\s+' + re.escape(method) + r'\s*\(', content):
                     errors.append(f'{path}: route action metodu bulunamadı: {method}()')
     return errors
@@ -117,11 +122,11 @@ def validate_admin_navigation(addon: Path):
             errors.append(f'{path}: admin navigation phrase bulunamadı: {phrase.name}')
 
         parent_id = str(obj.get('parent_navigation_id', ''))
-        if parent_id and parent_id not in nav_ids:
-            errors.append(f'{path}: parent navigation bulunamadı: {parent_id}')
+        if parent_id.startswith('warext') and parent_id not in nav_ids:
+            errors.append(f'{path}: addon parent navigation bulunamadı: {parent_id}')
 
         link = str(obj.get('link', '')).strip('/')
-        if link and link not in admin_routes:
+        if link.startswith('warext-minecraft') and link not in admin_routes:
             errors.append(f'{path}: admin navigation link route bulunamadı: {link}')
 
     return errors
