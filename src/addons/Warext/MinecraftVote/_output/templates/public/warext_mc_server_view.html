@@ -4,17 +4,19 @@
 
 <xf:pageaction>
     <xf:if is="$server.state == 'active'">
-        <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta">Oy Ver</xf:button>
+        <xf:if is="$canVote">
+            <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta">Oy Ver</xf:button>
+        </xf:if>
         <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncellemeler</xf:button>
         <xf:button href="{{ link('sunucular/degerlendir', $server) }}">Değerlendirmeler ({$server.rating_count})</xf:button>
     </xf:if>
-    <xf:if is="$xf.visitor.user_id && $server.state == 'active'">
+    <xf:if is="$canFavorite">
         <xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true" class="buttonGroup">
             <xf:button type="submit">Favoriye Ekle / Çıkar</xf:button>
         </xf:form>
-        <xf:if is="!$server.is_owner">
-            <xf:button href="{{ link('sunucular/rapor', $server) }}">Raporla</xf:button>
-        </xf:if>
+    </xf:if>
+    <xf:if is="$canReport">
+        <xf:button href="{{ link('sunucular/rapor', $server) }}">Raporla</xf:button>
     </xf:if>
 
     <xf:if is="$server.can_edit">
