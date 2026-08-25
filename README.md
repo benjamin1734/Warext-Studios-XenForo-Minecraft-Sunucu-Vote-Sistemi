@@ -4,7 +4,7 @@ XenForo için Minecraft sunucu listeleme, keşif, oylama, NuVotifier entegrasyon
 
 ## Durum
 
-Geliştirme sürümü: 0.11.0 Beta
+Geliştirme sürümü: 0.12.0 Beta
 
 ## Hedef
 
@@ -32,6 +32,16 @@ Geliştirme sürümü: 0.11.0 Beta
 - XenForo 2.3+
 - PHP 8.2+
 - MySQL 8.0+ veya MariaDB eşdeğeri
+- NuVotifier (oyların Minecraft sunucusuna teslimi için)
+- İsteğe bağlı VotingPlugin veya uyumlu başka bir vote listener
+
+## Lokal geliştirme
+
+Windows/XenForo/Paper-NuVotifier lokal test akışı için:
+
+`docs/LOKAL_KURULUM.md`
+
+Bu repo geliştirme aşamasında XenForo `_output` verilerini içerir. Lokal geliştirme kurulumu CLI üzerinden yapılmalıdır.
 
 ## Kurulum
 
