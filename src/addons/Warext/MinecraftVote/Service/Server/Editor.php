@@ -34,7 +34,14 @@ class Editor extends AbstractService
         $data['country_code'] = strtoupper(trim((string)($data['country_code'] ?? '')));
         $data['port'] = (int)($data['port'] ?? 0) ?: 25565;
         $data['bedrock_port'] = (int)($data['bedrock_port'] ?? 0) ?: 19132;
-        $serverType = (string)($data['server_type'] ?? 'java');
+        $data['server_type'] = strtolower(trim((string)($data['server_type'] ?? 'java')));
+        $data['game_modes'] = $this->normalizeGameModes((string)($data['game_modes'] ?? ''));
+        $serverType = $data['server_type'];
+
+        if (!in_array($serverType, ['java', 'bedrock', 'crossplay'], true))
+        {
+            throw new PrintableException('Geçerli bir sunucu türü seçin.');
+        }
 
         if (in_array($serverType, ['bedrock', 'crossplay'], true) && $data['bedrock_host'] === '')
         {
@@ -77,7 +84,7 @@ class Editor extends AbstractService
 
         $fields = [
             'title', 'description', 'server_type', 'host', 'port', 'bedrock_host', 'bedrock_port',
-            'website_url', 'discord_url', 'store_url', 'version_min', 'version_max', 'country_code',
+            'website_url', 'discord_url', 'store_url', 'game_modes', 'version_min', 'version_max', 'country_code',
             'is_premium', 'allow_cracked'
         ];
         $allowedData = array_intersect_key($data, array_flip($fields));
@@ -143,6 +150,39 @@ class Editor extends AbstractService
         }
 
         return $this->server;
+    }
+
+    protected function normalizeGameModes(string $value): string
+    {
+        $parts = preg_split('/[,;\r\n]+/u', $value) ?: [];
+        $clean = [];
+        $seen = [];
+
+        foreach ($parts as $part)
+        {
+            $part = trim((string)$part);
+            if ($part === '')
+            {
+                continue;
+            }
+
+            $part = mb_substr($part, 0, 30);
+            $key = mb_strtolower($part);
+            if (isset($seen[$key]))
+            {
+                continue;
+            }
+
+            $seen[$key] = true;
+            $clean[] = $part;
+        }
+
+        if (count($clean) > 12)
+        {
+            throw new PrintableException('En fazla 12 oyun modu girebilirsiniz.');
+        }
+
+        return mb_substr(implode(', ', $clean), 0, 255);
     }
 
     protected function assertAddressIsUnique(array $data): void
