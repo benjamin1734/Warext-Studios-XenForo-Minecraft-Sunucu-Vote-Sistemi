@@ -1,0 +1,11 @@
+{
+    "cron_class": "Warext\\MinecraftVote\\Cron\\Ranking",
+    "cron_method": "run",
+    "run_rules": {
+        "day_type": "dom",
+        "dom": [-1],
+        "hours": [-1],
+        "minutes": [0, 10, 20, 30, 40, 50]
+    },
+    "active": true
+}
