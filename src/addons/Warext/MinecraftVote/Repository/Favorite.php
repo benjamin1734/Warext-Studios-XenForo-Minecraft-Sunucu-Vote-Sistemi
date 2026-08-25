@@ -110,20 +110,28 @@ class Favorite extends Repository
 
     public function getUnreadUpdateCounts(int $userId): array
     {
-        $counts = [];
         if ($userId <= 0)
         {
-            return $counts;
+            return [];
         }
 
-        $favorites = $this->findForUser($userId)->fetch();
-        $updateRepo = $this->repository('Warext\MinecraftVote:ServerUpdate');
+        $rows = $this->db()->fetchAll(
+            "SELECT f.server_id, COUNT(u.update_id) AS unread_count
+             FROM xf_warext_mc_favorite AS f
+             LEFT JOIN xf_warext_mc_server_update AS u
+               ON u.server_id = f.server_id
+              AND u.state = 'visible'
+              AND u.update_id > f.last_seen_update_id
+             WHERE f.user_id = ?
+               AND f.notify_updates = 1
+             GROUP BY f.server_id",
+            [$userId]
+        );
 
-        foreach ($favorites as $favorite)
+        $counts = [];
+        foreach ($rows as $row)
         {
-            $counts[$favorite->server_id] = $favorite->notify_updates
-                ? $updateRepo->countUnreadForUser($favorite->server_id, $userId)
-                : 0;
+            $counts[(int)$row['server_id']] = (int)$row['unread_count'];
         }
 
         return $counts;
