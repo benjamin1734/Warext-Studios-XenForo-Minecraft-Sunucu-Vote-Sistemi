@@ -3,6 +3,7 @@
 <xf:css src="warext_mc_servers.less" />
 
 <xf:pageaction>
+    <xf:button href="{{ link('sunucular/sezonlar') }}">Sezonlar</xf:button>
     <xf:if is="$xf.visitor.user_id">
         <xf:button href="{{ link('sunucular/hesaplar') }}">Minecraft Hesaplarım</xf:button>
     </xf:if>
@@ -13,6 +14,8 @@
     <div class="block-container">
         <div class="block-header">Sunucu Listesi</div>
         <div class="block-body warextMcFilterBar">
+            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'popular'}) }}">Popüler</a>
+            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'trend'}) }}">Yükselişte</a>
             <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'votes'}) }}">En Çok Oy</a>
             <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'players'}) }}">En Kalabalık</a>
             <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'uptime'}) }}">En Yüksek Uptime</a>
@@ -33,11 +36,19 @@
                                 <h3 class="warextMcServerCard-title">
                                     <a href="{{ link('sunucular/detay', $server) }}">{$server.title}</a>
                                 </h3>
-                                <xf:if is="$server.is_online">
-                                    <span class="label label--green">Online</span>
-                                <xf:else />
-                                    <span class="label label--red">Offline</span>
-                                </xf:if>
+                                <div>
+                                    <xf:if is="$sort == 'popular' && $server.rank_popular">
+                                        <span class="label label--primary">#{$server.rank_popular} Popüler</span>
+                                    <xf:elseif is="$sort == 'trend' && $server.rank_trending" />
+                                        <span class="label label--orange">#{$server.rank_trending} Yükselişte</span>
+                                    </xf:if>
+                                    <xf:if is="$server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
+                                    <xf:if is="$server.is_online">
+                                        <span class="label label--green">Online</span>
+                                    <xf:else />
+                                        <span class="label label--red">Offline</span>
+                                    </xf:if>
+                                </div>
                             </div>
 
                             <div class="warextMcServerCard-address">{$server.host}:{$server.port}</div>
@@ -47,6 +58,12 @@
                                 <div><strong>{$server.vote_count_month}</strong><span>Bu ay oy</span></div>
                                 <div><strong>{$server.uptime_percent}%</strong><span>Uptime</span></div>
                                 <div><strong>{$server.ping_ms} ms</strong><span>Ping</span></div>
+                            </div>
+
+                            <div class="contentRow-minor">
+                                Son 24 saat: {$server.votes_24h} oy · Benzersiz seçmen: {$server.unique_voters_month}
+                                <xf:if is="$sort == 'popular'"> · Popülerlik: {$server.popular_score}</xf:if>
+                                <xf:if is="$sort == 'trend'"> · Trend: {$server.trend_score}</xf:if>
                             </div>
 
                             <xf:if is="$server.detected_version">
