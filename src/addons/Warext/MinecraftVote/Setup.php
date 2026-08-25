@@ -42,6 +42,8 @@ class Setup extends AbstractSetup
             $table->addColumn('is_verified', 'tinyint')->setDefault(0);
             $table->addColumn('verification_method', 'varchar', 20)->setDefault('');
             $table->addColumn('verification_token', 'varchar', 64)->setDefault('');
+            $table->addColumn('verification_token_date', 'int')->setDefault(0);
+            $table->addColumn('verified_date', 'int')->setDefault(0);
             $table->addColumn('is_online', 'tinyint')->setDefault(0);
             $table->addColumn('ping_ms', 'int')->setDefault(0);
             $table->addColumn('players_online', 'int')->setDefault(0);
@@ -192,6 +194,26 @@ class Setup extends AbstractSetup
     public function upgrade1000040Step1(): void
     {
         $this->createMinecraftAccountTable();
+    }
+
+    public function upgrade1000050Step1(): void
+    {
+        $sm = $this->schemaManager();
+        if (!$sm->columnExists('xf_warext_mc_server', 'verification_token_date'))
+        {
+            $sm->alterTable('xf_warext_mc_server', function (Alter $table)
+            {
+                $table->addColumn('verification_token_date', 'int')->setDefault(0)->after('verification_token');
+            });
+        }
+
+        if (!$sm->columnExists('xf_warext_mc_server', 'verified_date'))
+        {
+            $sm->alterTable('xf_warext_mc_server', function (Alter $table)
+            {
+                $table->addColumn('verified_date', 'int')->setDefault(0)->after('verification_token_date');
+            });
+        }
     }
 
     protected function createVotifierTable(): void
