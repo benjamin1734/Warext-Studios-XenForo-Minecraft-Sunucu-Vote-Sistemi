@@ -3,6 +3,9 @@
 <xf:css src="warext_mc_servers.less" />
 
 <xf:pageaction>
+    <xf:if is="$xf.visitor.user_id">
+        <xf:button href="{{ link('sunucular/hesaplar') }}">Minecraft Hesaplarım</xf:button>
+    </xf:if>
     <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">Sunucu Ekle</xf:button>
 </xf:pageaction>
 
