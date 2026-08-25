@@ -1,0 +1,73 @@
+<xf:title>Minecraft Hesaplarım</xf:title>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Bağlı Minecraft Hesapları</div>
+        <div class="block-body">
+            <xf:if is="$accounts is not empty">
+                <xf:foreach loop="$accounts" value="$account">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{$account.minecraft_username}</strong>
+                                    <xf:if is="$account.is_primary"><span class="label label--primary">Birincil</span></xf:if>
+                                    <xf:if is="$account.verification_state == 'verified'">
+                                        <span class="label label--green">Doğrulanmış</span>
+                                    <xf:elseif is="$account.verification_state == 'pending'" />
+                                        <span class="label label--orange">Doğrulama Bekliyor</span>
+                                    <xf:else />
+                                        <span class="label">Doğrulanmamış</span>
+                                    </xf:if>
+                                </div>
+
+                                <div class="contentRow-minor">
+                                    UUID: <xf:if is="$account.minecraft_uuid">{$account.minecraft_uuid}<xf:else />Belirtilmedi</xf:if>
+                                    · Eklenme: <xf:date time="$account.created_date" />
+                                </div>
+
+                                <div class="buttonGroup" style="margin-top:10px">
+                                    <xf:if is="!$account.is_primary">
+                                        <xf:form action="{{ link('sunucular/hesap-birincil', $account) }}" class="buttonGroup">
+                                            <xf:button type="submit">Birincil Yap</xf:button>
+                                        </xf:form>
+                                    </xf:if>
+
+                                    <xf:form action="{{ link('sunucular/hesap-sil', $account) }}" data-xf-init="delete" class="buttonGroup">
+                                        <xf:button type="submit" class="button--link">Bağlantıyı Kaldır</xf:button>
+                                    </xf:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Henüz profilinize bağlı Minecraft hesabı bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
+
+<xf:form action="{{ link('sunucular/hesaplar') }}" class="block">
+    <div class="block-container">
+        <div class="block-header">Minecraft Hesabı Ekle</div>
+        <div class="block-body">
+            <xf:textboxrow
+                name="minecraft_username"
+                label="Minecraft kullanıcı adı"
+                maxlength="16"
+                required="required"
+                explain="Java Edition kullanıcı adınızı girin. Hesap ilk aşamada doğrulanmamış olarak eklenir." />
+
+            <xf:textboxrow
+                name="minecraft_uuid"
+                label="Minecraft UUID"
+                maxlength="36"
+                explain="İsteğe bağlıdır. UUID biliyorsanız tireli veya tiresiz biçimde girebilirsiniz." />
+        </div>
+
+        <xf:submitrow submit="Hesabı Ekle" />
+    </div>
+</xf:form>
