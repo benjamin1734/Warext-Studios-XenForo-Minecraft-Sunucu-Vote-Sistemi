@@ -30,9 +30,26 @@ class Server extends Finder
         return $this;
     }
 
+    public function orderByPopularity(): self
+    {
+        $this->order('popular_score_bp', 'DESC');
+        $this->order('vote_count_month', 'DESC');
+        $this->order('server_id', 'ASC');
+        return $this;
+    }
+
+    public function orderByTrend(): self
+    {
+        $this->order('trend_score_bp', 'DESC');
+        $this->order('votes_24h', 'DESC');
+        $this->order('server_id', 'ASC');
+        return $this;
+    }
+
     public function orderByVotes(): self
     {
         $this->order('vote_count_month', 'DESC');
+        $this->order('unique_voters_month', 'DESC');
         $this->order('server_id', 'ASC');
         return $this;
     }
