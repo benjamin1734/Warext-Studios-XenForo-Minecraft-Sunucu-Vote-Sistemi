@@ -125,6 +125,18 @@ class Server extends AbstractController
         );
     }
 
+    public function actionRanking()
+    {
+        $this->assertPostOnly();
+
+        $result = $this->service('Warext\MinecraftVote:Ranking\Rebuilder')->rebuild();
+
+        return $this->redirect(
+            $this->buildLink('warext-minecraft', null, ['state' => 'all']),
+            sprintf('%d aktif sunucu için Popüler ve Trend sıralamaları yeniden hesaplandı.', (int)$result['updated'])
+        );
+    }
+
     public function actionState()
     {
         $this->assertPostOnly();
