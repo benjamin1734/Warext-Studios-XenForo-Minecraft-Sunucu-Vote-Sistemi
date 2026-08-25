@@ -1,0 +1,66 @@
+<xf:title>Minecraft Sunucuları</xf:title>
+<xf:description>Topluluk tarafından eklenen Minecraft sunucularını keşfet, durumlarını incele ve oy ver.</xf:description>
+<xf:css src="warext_mc_servers.less" />
+
+<xf:pageaction>
+    <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">Sunucu Ekle</xf:button>
+</xf:pageaction>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Sunucu Listesi</div>
+        <div class="block-body warextMcFilterBar">
+            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'votes'}) }}">En Çok Oy</a>
+            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'players'}) }}">En Kalabalık</a>
+            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'uptime'}) }}">En Yüksek Uptime</a>
+            <a class="button button--link" href="{{ link('sunucular', null, {'sort': 'new'}) }}">Yeni Eklenenler</a>
+            <a class="button button--link" href="{{ link('sunucular', null, {'online': 1, 'sort': $sort}) }}">Sadece Online</a>
+        </div>
+    </div>
+</div>
+
+<xf:if is="$servers is not empty">
+    <div class="warextMcServerGrid">
+        <xf:foreach loop="$servers" value="$server">
+            <div class="block warextMcServerCard">
+                <div class="block-container">
+                    <div class="block-body">
+                        <div class="warextMcServerCard-main">
+                            <div class="warextMcServerCard-titleRow">
+                                <h3 class="warextMcServerCard-title">
+                                    <a href="{{ link('sunucular/detay', $server) }}">{$server.title}</a>
+                                </h3>
+                                <xf:if is="$server.is_online">
+                                    <span class="label label--green">Online</span>
+                                <xf:else />
+                                    <span class="label label--red">Offline</span>
+                                </xf:if>
+                            </div>
+
+                            <div class="warextMcServerCard-address">{$server.host}:{$server.port}</div>
+
+                            <div class="warextMcServerStats">
+                                <div><strong>{$server.players_online}</strong><span>Oyuncu</span></div>
+                                <div><strong>{$server.vote_count_month}</strong><span>Bu ay oy</span></div>
+                                <div><strong>{$server.uptime_percent}%</strong><span>Uptime</span></div>
+                                <div><strong>{$server.ping_ms} ms</strong><span>Ping</span></div>
+                            </div>
+
+                            <xf:if is="$server.detected_version">
+                                <div class="contentRow-minor">Sürüm: {$server.detected_version}</div>
+                            </xf:if>
+
+                            <div class="warextMcServerCard-actions">
+                                <xf:button href="{{ link('sunucular/detay', $server) }}" class="button--primary">Detaylar</xf:button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xf:foreach>
+    </div>
+
+    <xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular" params="{{ {'sort': $sort, 'type': $type, 'online': $online} }}" />
+<xf:else />
+    <div class="blockMessage">Henüz listelenen aktif bir Minecraft sunucusu bulunmuyor.</div>
+</xf:if>
