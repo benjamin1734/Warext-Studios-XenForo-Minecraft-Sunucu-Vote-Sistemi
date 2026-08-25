@@ -23,6 +23,10 @@ class SeasonRank extends Entity
             'season_score_bp' => ['type' => self::UINT, 'default' => 0],
             'snapshot_date' => ['type' => self::UINT, 'default' => 0]
         ];
+        $structure->getters = [
+            'uptime_percent' => true,
+            'season_score' => true
+        ];
         $structure->relations = [
             'Season' => [
                 'entity' => 'Warext\MinecraftVote:Season',
@@ -39,5 +43,15 @@ class SeasonRank extends Entity
         ];
 
         return $structure;
+    }
+
+    public function getUptimePercent(): float
+    {
+        return round(min(100, max(0, $this->uptime_bp / 100)), 2);
+    }
+
+    public function getSeasonScore(): float
+    {
+        return round(min(100, max(0, $this->season_score_bp / 100)), 2);
     }
 }
