@@ -36,6 +36,7 @@ class Sponsor extends AbstractController
             {
                 $startDate = $this->parseDate($input['start_date'], false);
                 $endDate = $this->parseDate($input['end_date'], true);
+                $this->assertNoOverlap($server->server_id, $startDate, $endDate);
             }
             catch (PrintableException $e)
             {
@@ -95,6 +96,24 @@ class Sponsor extends AbstractController
     {
         $this->assertPostOnly();
         $sponsor = $this->assertSponsorExists((int)$params->sponsor_id);
+
+        if ($sponsor->state === 'paused')
+        {
+            try
+            {
+                $this->assertNoOverlap(
+                    $sponsor->server_id,
+                    $sponsor->start_date,
+                    $sponsor->end_date,
+                    $sponsor->sponsor_id
+                );
+            }
+            catch (PrintableException $e)
+            {
+                return $this->error($e->getMessage(), 400);
+            }
+        }
+
         $sponsor->state = $sponsor->state === 'active' ? 'paused' : 'active';
         $sponsor->save();
 
@@ -140,6 +159,27 @@ class Sponsor extends AbstractController
         }
 
         return $sponsor;
+    }
+
+    protected function assertNoOverlap(int $serverId, int $startDate, int $endDate, int $ignoreSponsorId = 0): void
+    {
+        $existingId = $this->db()->fetchOne(
+            "SELECT sponsor_id
+             FROM xf_warext_mc_sponsor
+             WHERE server_id = ?
+               AND placement = 'list_top'
+               AND state IN ('active', 'paused')
+               AND sponsor_id <> ?
+               AND (? = 0 OR start_date <= ?)
+               AND (end_date = 0 OR end_date >= ?)
+             LIMIT 1",
+            [$serverId, $ignoreSponsorId, $endDate, $endDate, $startDate]
+        );
+
+        if ($existingId)
+        {
+            throw new PrintableException('Bu sunucunun seçilen tarih aralığıyla çakışan başka bir sponsor kaydı var.');
+        }
     }
 
     protected function parseDate(string $value, bool $allowEmpty): int
