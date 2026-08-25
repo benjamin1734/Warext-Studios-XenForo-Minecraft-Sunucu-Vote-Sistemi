@@ -1,0 +1,95 @@
+<xf:title>{$server.title} - Değerlendirmeler</xf:title>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Sunucu Değerlendirmeleri</div>
+        <div class="block-body block-row">
+            <strong>{$server.rating_average} / 5</strong> · {$server.rating_count} değerlendirme
+        </div>
+    </div>
+</div>
+
+<xf:if is="$xf.visitor.user_id && $xf.visitor.user_id != $server.owner_user_id">
+    <xf:form action="{{ link('sunucular/degerlendir', $server) }}" ajax="true" class="block">
+        <div class="block-container">
+            <div class="block-header"><xf:if is="$userReview">Değerlendirmeni Güncelle<xf:else />Değerlendirme Yap</xf:if></div>
+            <div class="block-body">
+                <xf:selectrow name="rating" value="{{ $userReview ? $userReview.rating : 5 }}" label="Genel Puan">
+                    <xf:option value="5">5 - Mükemmel</xf:option>
+                    <xf:option value="4">4 - İyi</xf:option>
+                    <xf:option value="3">3 - Orta</xf:option>
+                    <xf:option value="2">2 - Zayıf</xf:option>
+                    <xf:option value="1">1 - Kötü</xf:option>
+                </xf:selectrow>
+
+                <xf:selectrow name="gameplay_rating" value="{{ $userReview ? $userReview.gameplay_rating : 0 }}" label="Oynanış">
+                    <xf:option value="0">Puan verme</xf:option>
+                    <xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option>
+                </xf:selectrow>
+                <xf:selectrow name="staff_rating" value="{{ $userReview ? $userReview.staff_rating : 0 }}" label="Yetkili Ekibi">
+                    <xf:option value="0">Puan verme</xf:option>
+                    <xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option>
+                </xf:selectrow>
+                <xf:selectrow name="performance_rating" value="{{ $userReview ? $userReview.performance_rating : 0 }}" label="Performans">
+                    <xf:option value="0">Puan verme</xf:option>
+                    <xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option>
+                </xf:selectrow>
+                <xf:selectrow name="community_rating" value="{{ $userReview ? $userReview.community_rating : 0 }}" label="Topluluk">
+                    <xf:option value="0">Puan verme</xf:option>
+                    <xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option>
+                </xf:selectrow>
+                <xf:selectrow name="originality_rating" value="{{ $userReview ? $userReview.originality_rating : 0 }}" label="Özgünlük">
+                    <xf:option value="0">Puan verme</xf:option>
+                    <xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option>
+                </xf:selectrow>
+
+                <xf:textarearow name="message" value="{{ $userReview ? $userReview.message : '' }}" maxlength="2000" rows="5" label="Yorum" explain="İsteğe bağlıdır. Yorum yazarsanız en az 10, en fazla 2000 karakter olmalıdır." />
+            </div>
+            <xf:submitrow submit="Kaydet" />
+        </div>
+    </xf:form>
+
+    <xf:if is="$userReview">
+        <xf:form action="{{ link('sunucular/degerlendirme-sil', $server) }}" ajax="true" data-xf-init="delete" class="block">
+            <div class="block-container">
+                <div class="block-body block-row">
+                    <xf:button type="submit" class="button--link">Değerlendirmemi Sil</xf:button>
+                </div>
+            </div>
+        </xf:form>
+    </xf:if>
+</xf:if>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Topluluk Yorumları</div>
+        <div class="block-body">
+            <xf:if is="$reviews is not empty">
+                <xf:foreach loop="$reviews" value="$review">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <xf:username user="$review.User" rich="true" /> · <strong>{$review.rating}/5</strong>
+                                    <xf:if is="$review.is_verified_player"><span class="label label--green">Doğrulanmış Oyuncu</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor"><xf:date time="$review.updated_date" /></div>
+                                <xf:if is="$review.message"><div class="contentRow-snippet" style="margin-top:8px">{$review.message}</div></xf:if>
+                                <div class="contentRow-minor" style="margin-top:8px">
+                                    Oynanış: {{ $review.gameplay_rating ?: '-' }} · Yetkili: {{ $review.staff_rating ?: '-' }} · Performans: {{ $review.performance_rating ?: '-' }} · Topluluk: {{ $review.community_rating ?: '-' }} · Özgünlük: {{ $review.originality_rating ?: '-' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Henüz değerlendirme yapılmamış.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
+
+<xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/degerlendir" data="$server" />
