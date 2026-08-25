@@ -154,12 +154,14 @@ class Server extends AbstractController
                     (string)$this->request->getIp(),
                     (string)$this->request->getServer('HTTP_USER_AGENT', '')
                 );
-                $vote = $creator->create();
+                $creator->create();
             }
             catch (\XF\PrintableException $e)
             {
                 return $this->error($e->getMessage(), 400);
             }
+
+            $this->enqueueVoteDelivery();
 
             return $this->redirect(
                 $this->buildLink('sunucular/detay', $server),
@@ -171,6 +173,57 @@ class Server extends AbstractController
             'server' => $server,
             'cooldownHours' => min(168, max(1, (int)(\XF::options()->warextMcVoteCooldownHours ?? 24))),
             'allowGuests' => $allowGuests
+        ]);
+    }
+
+    public function actionVotifier(ParameterBag $params)
+    {
+        $server = $this->assertOwnedServer((int)$params->server_id);
+        $writer = $this->service('Warext\MinecraftVote:Votifier\ConfigWriter', $server);
+        $config = $writer->getConfig();
+
+        if ($this->isPost())
+        {
+            $input = $this->filter([
+                'enabled' => 'bool',
+                'host' => 'str',
+                'port' => 'uint',
+                'service_name' => 'str',
+                'token' => 'str',
+                'test' => 'bool'
+            ]);
+
+            try
+            {
+                $writer->setData($input);
+                $config = $writer->save();
+
+                if ($input['test'])
+                {
+                    $result = $writer->testConnection();
+                    return $this->redirect(
+                        $this->buildLink('sunucular/votifier', $server),
+                        'NuVotifier V2 test oyu başarıyla gönderildi. Bağlantı: ' . (int)$result['ping_ms'] . ' ms.'
+                    );
+                }
+            }
+            catch (\XF\PrintableException $e)
+            {
+                return $this->error($e->getMessage(), 400);
+            }
+
+            return $this->redirect(
+                $this->buildLink('sunucular/votifier', $server),
+                'NuVotifier ayarları kaydedildi.'
+            );
+        }
+
+        return $this->view('Warext\MinecraftVote:Server\Votifier', 'warext_mc_votifier_config', [
+            'server' => $server,
+            'config' => $config,
+            'tokenExplain' => $config->token_encrypted
+                ? 'Token kayıtlı ve şifrelenmiş durumda. Değiştirmek istemiyorsanız bu alanı boş bırakın.'
+                : 'NuVotifier config dosyanızdaki default veya Warext servis tokenını girin.'
         ]);
     }
 
@@ -186,6 +239,44 @@ class Server extends AbstractController
         return $this->view('Warext\MinecraftVote:Server\View', 'warext_mc_server_view', [
             'server' => $server
         ]);
+    }
+
+    protected function enqueueVoteDelivery(): void
+    {
+        $jobManager = $this->app->jobManager();
+        $uniqueId = 'warextMinecraftVoteDelivery';
+
+        if (!$jobManager->getUniqueJob($uniqueId))
+        {
+            $jobManager->enqueueUnique(
+                $uniqueId,
+                'Warext\MinecraftVote:VoteDelivery',
+                [],
+                false
+            );
+        }
+    }
+
+    protected function assertOwnedServer(int $serverId): ServerEntity
+    {
+        $visitor = \XF::visitor();
+        if (!$visitor->user_id)
+        {
+            throw $this->exception($this->noPermission());
+        }
+
+        $server = $this->em()->find('Warext\MinecraftVote:Server', $serverId, ['Owner']);
+        if (!$server)
+        {
+            throw $this->exception($this->notFound());
+        }
+
+        if ($server->owner_user_id !== $visitor->user_id)
+        {
+            throw $this->exception($this->noPermission());
+        }
+
+        return $server;
     }
 
     protected function assertViewableServer(int $serverId): ServerEntity
