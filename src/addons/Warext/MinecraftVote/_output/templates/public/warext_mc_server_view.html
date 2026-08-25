@@ -20,6 +20,7 @@
             <xf:if is="$server.is_verified">Doğrulama Bilgisi<xf:else />Sahipliği Doğrula</xf:if>
         </xf:button>
         <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
+        <xf:button href="{{ link('sunucular/sahiplik-devret', $server) }}">Sahipliği Devret</xf:button>
     </xf:if>
 </xf:pageaction>
 
