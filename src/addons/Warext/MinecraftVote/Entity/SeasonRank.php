@@ -15,6 +15,7 @@ class SeasonRank extends Entity
         $structure->columns = [
             'season_id' => ['type' => self::UINT, 'required' => true],
             'server_id' => ['type' => self::UINT, 'required' => true],
+            'server_title' => ['type' => self::STR, 'maxLength' => 100, 'default' => ''],
             'rank' => ['type' => self::UINT, 'default' => 0],
             'vote_count' => ['type' => self::UINT, 'default' => 0],
             'unique_voters' => ['type' => self::UINT, 'default' => 0],
