@@ -53,7 +53,7 @@ def build_admin_permissions(output: Path, data: Path):
     files = json_files(src)
     if not files:
         return
-    root = ET.Element("admin_permissions")
+    root = ET.Element("admin_permission")
     for p in files:
         obj = load_json(p)
         ET.SubElement(root, "admin_permission", {
@@ -178,8 +178,21 @@ def build_routes(output: Path, data: Path):
         return
     root = ET.Element("routes")
     keys = ["route_type", "route_prefix", "sub_name", "format", "build_class", "build_method", "controller", "context", "action_prefix"]
+    seen = set()
     for p in files:
         obj = load_json(p)
+        route_type = str(obj.get("route_type", ""))
+        route_prefix = str(obj.get("route_prefix", ""))
+        sub_name = str(obj.get("sub_name", ""))
+        controller = str(obj.get("controller", ""))
+        if route_type not in {"public", "admin", "api"}:
+            raise SystemExit(f"Geçersiz route_type: {p}")
+        if not route_prefix or not controller:
+            raise SystemExit(f"Eksik route bilgisi: {p}")
+        route_key = (route_type, route_prefix, sub_name)
+        if route_key in seen:
+            raise SystemExit(f"Yinelenen route: {route_key}")
+        seen.add(route_key)
         attrs = {}
         for key in keys:
             value = obj.get(key, "")
@@ -202,14 +215,20 @@ def build_templates(output: Path, data: Path, version_id: int, version_string: s
         return
     root = ET.Element("templates")
     count = 0
+    seen = set()
     for template_type in ["public", "admin", "email"]:
         folder = src / template_type
         if not folder.exists():
             continue
         for p in sorted(x for x in folder.iterdir() if x.is_file() and not x.name.startswith("_")):
+            title = template_title(p)
+            key = (template_type, title)
+            if key in seen:
+                raise SystemExit(f"Yinelenen template: {template_type}:{title}")
+            seen.add(key)
             node = ET.SubElement(root, "template", {
                 "type": template_type,
-                "title": template_title(p),
+                "title": title,
                 "version_id": str(version_id),
                 "version_string": version_string
             })
@@ -217,6 +236,25 @@ def build_templates(output: Path, data: Path, version_id: int, version_string: s
             count += 1
     if count:
         write_xml(data / "templates.xml", root)
+
+
+def validate_master_data(data: Path):
+    expected_roots = {
+        "admin_navigation.xml": "admin_navigation",
+        "admin_permission.xml": "admin_permission",
+        "content_type_fields.xml": "content_type_fields",
+        "cron.xml": "cron",
+        "option_groups.xml": "option_groups",
+        "options.xml": "options",
+        "phrases.xml": "phrases",
+        "routes.xml": "routes",
+        "templates.xml": "templates"
+    }
+    for xml_file in sorted(data.glob("*.xml")):
+        root = ET.parse(xml_file).getroot()
+        expected = expected_roots.get(xml_file.name)
+        if expected and root.tag != expected:
+            raise SystemExit(f"{xml_file.name}: beklenen kök <{expected}>, bulunan <{root.tag}>")
 
 
 def main():
@@ -243,12 +281,11 @@ def main():
     build_phrases(output, data, version_id, version_string)
     build_routes(output, data)
     build_templates(output, data, version_id, version_string)
-    required = ["routes.xml", "templates.xml", "phrases.xml"]
+    required = ["routes.xml", "templates.xml", "phrases.xml", "admin_permission.xml"]
     missing = [name for name in required if not (data / name).exists()]
     if missing:
         raise SystemExit("Eksik release data: " + ", ".join(missing))
-    for xml_file in sorted(data.glob("*.xml")):
-        ET.parse(xml_file)
+    validate_master_data(data)
     print(f"{len(list(data.glob('*.xml')))} _data XML dosyası üretildi")
 
 
