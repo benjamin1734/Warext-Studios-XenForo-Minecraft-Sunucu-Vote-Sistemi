@@ -36,6 +36,8 @@ class Server extends Entity
             'is_verified' => ['type' => self::BOOL, 'default' => false],
             'verification_method' => ['type' => self::STR, 'maxLength' => 20, 'default' => ''],
             'verification_token' => ['type' => self::STR, 'maxLength' => 64, 'default' => ''],
+            'verification_token_date' => ['type' => self::UINT, 'default' => 0],
+            'verified_date' => ['type' => self::UINT, 'default' => 0],
             'is_online' => ['type' => self::BOOL, 'default' => false],
             'ping_ms' => ['type' => self::UINT, 'default' => 0],
             'players_online' => ['type' => self::UINT, 'default' => 0],
@@ -89,6 +91,15 @@ class Server extends Entity
     {
         $isNew = !$this->server_id;
 
+        if (!$isNew && $this->hasEndpointChanges())
+        {
+            $this->is_verified = false;
+            $this->verification_method = '';
+            $this->verification_token = '';
+            $this->verification_token_date = 0;
+            $this->verified_date = 0;
+        }
+
         if (!$this->created_date)
         {
             $this->created_date = \XF::$time;
@@ -121,6 +132,24 @@ class Server extends Entity
         {
             $this->error(\XF::phrase('please_enter_valid_value'), 'bedrock_port');
         }
+
+        if ($this->verification_method !== '' && !in_array($this->verification_method, ['motd', 'dns_txt'], true))
+        {
+            $this->error('Geçersiz sunucu doğrulama yöntemi.', 'verification_method');
+        }
+    }
+
+    protected function hasEndpointChanges(): bool
+    {
+        foreach (['server_type', 'host', 'port', 'bedrock_host', 'bedrock_port'] as $field)
+        {
+            if ($this->isChanged($field))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     protected function hasContentChanges(): bool
@@ -129,7 +158,8 @@ class Server extends Entity
             'owner_user_id', 'title', 'slug', 'description', 'server_type', 'host', 'port',
             'bedrock_host', 'bedrock_port', 'website_url', 'discord_url', 'store_url',
             'game_modes', 'version_min', 'version_max', 'country_code', 'is_premium',
-            'allow_cracked', 'state', 'is_verified', 'verification_method', 'verification_token'
+            'allow_cracked', 'state', 'is_verified', 'verification_method', 'verification_token',
+            'verification_token_date', 'verified_date'
         ] as $field)
         {
             if ($this->isChanged($field))
