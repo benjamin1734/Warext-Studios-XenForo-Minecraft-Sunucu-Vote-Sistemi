@@ -20,10 +20,19 @@ def write_xml(path: Path, root: ET.Element):
         f.write(b'\n')
 
 
+def require_phrase(phrase_root: Path, name: str, source: Path):
+    path = phrase_root / name
+    if not path.is_file():
+        raise SystemExit(f'Permission phrase bulunamadı: {name} ({source.name})')
+    if not path.read_text(encoding='utf-8-sig').strip():
+        raise SystemExit(f'Permission phrase boş: {name} ({source.name})')
+
+
 def main():
     addon = Path(sys.argv[1] if len(sys.argv) > 1 else 'src/addons/Warext/MinecraftVote').resolve()
     output = addon / '_output'
     data = addon / '_data'
+    phrase_root = output / 'phrases'
     data.mkdir(parents=True, exist_ok=True)
 
     interface_root = ET.Element('permission_interface_groups')
@@ -32,6 +41,7 @@ def main():
         interface_id = path.stem
         if len(interface_id) > 50 or not ID_RE.fullmatch(interface_id):
             raise SystemExit(f'Geçersiz permission interface ID: {interface_id}')
+        require_phrase(phrase_root, f'permission_interface.{interface_id}.txt', path)
         obj = load_json(path)
         interface_ids.add(interface_id)
         ET.SubElement(interface_root, 'interface_group', {
@@ -50,6 +60,7 @@ def main():
             raise SystemExit(f'Permission ID 25 karakter sınırını aşıyor: {path.name}')
         if not ID_RE.fullmatch(group_id) or not ID_RE.fullmatch(permission_id):
             raise SystemExit(f'Permission ID yalnız alfanumerik olabilir: {path.name}')
+        require_phrase(phrase_root, f'permission.{group_id}_{permission_id}.txt', path)
         obj = load_json(path)
         interface_id = str(obj.get('interface_group_id', ''))
         if interface_id not in interface_ids:
@@ -70,10 +81,11 @@ def main():
         })
         count += 1
 
-    if interface_ids:
-        write_xml(data / 'permission_interface_groups.xml', interface_root)
-    if count:
-        write_xml(data / 'permissions.xml', permission_root)
+    if not interface_ids or not count:
+        raise SystemExit('Permission master data boş bırakılamaz.')
+
+    write_xml(data / 'permission_interface_groups.xml', interface_root)
+    write_xml(data / 'permissions.xml', permission_root)
     print(f'{len(interface_ids)} permission interface, {count} permission üretildi.')
 
 
