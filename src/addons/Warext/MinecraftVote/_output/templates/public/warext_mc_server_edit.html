@@ -1,0 +1,58 @@
+<xf:title>{$server.title} - Sunucuyu Düzenle</xf:title>
+<xf:description>Sunucu bilgilerini, kategorilerini ve bağlantılarını güncelleyin.</xf:description>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<div class="blockMessage blockMessage--warning">
+    Sunucu türü, IP/adres veya port bilgileri değiştirilirse sahiplik doğrulaması sıfırlanır ve sunucu yeniden yönetici onayına gönderilir.
+</div>
+
+<xf:form action="{{ link('sunucular/duzenle', $server) }}" ajax="true" class="block">
+    <div class="block-container">
+        <h2 class="block-header">Temel Bilgiler</h2>
+        <div class="block-body">
+            <xf:textboxrow name="title" value="{$server.title}" label="Sunucu adı" required="true" maxlength="100" />
+
+            <xf:selectrow name="server_type" value="{$server.server_type}" label="Sunucu türü">
+                <xf:option value="java">Java</xf:option>
+                <xf:option value="bedrock">Bedrock</xf:option>
+                <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
+            </xf:selectrow>
+
+            <xf:textboxrow name="host" value="{$server.host}" label="Java adresi" required="true" maxlength="255" />
+            <xf:numberboxrow name="port" value="{$server.port}" min="1" max="65535" label="Java portu" />
+            <xf:textboxrow name="bedrock_host" value="{$server.bedrock_host}" label="Bedrock adresi" maxlength="255" />
+            <xf:numberboxrow name="bedrock_port" value="{$server.bedrock_port}" min="1" max="65535" label="Bedrock portu" />
+
+            <xf:textarearow name="description" value="{$server.description}" label="Sunucu açıklaması" rows="8" />
+        </div>
+
+        <h2 class="block-header">Kategori ve Sürüm</h2>
+        <div class="block-body">
+            <xf:checkboxrow label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz.">
+                <xf:foreach loop="$categories" value="$category">
+                    <xf:option name="category_ids[]" value="{$category.category_id}" selected="{{ in_array($category.category_id, $selectedCategoryIds) }}">{$category.title}</xf:option>
+                </xf:foreach>
+            </xf:checkboxrow>
+
+            <xf:textboxrow name="version_min" value="{$server.version_min}" label="Minimum sürüm" maxlength="30" />
+            <xf:textboxrow name="version_max" value="{$server.version_max}" label="Maksimum sürüm" maxlength="30" />
+            <xf:textboxrow name="country_code" value="{$server.country_code}" label="Ülke kodu" maxlength="2" />
+
+            <xf:checkboxrow>
+                <xf:option name="is_premium" value="1" selected="$server.is_premium">Premium hesap zorunlu</xf:option>
+                <xf:option name="allow_cracked" value="1" selected="$server.allow_cracked">Crack giriş destekleniyor</xf:option>
+            </xf:checkboxrow>
+        </div>
+
+        <h2 class="block-header">Bağlantılar</h2>
+        <div class="block-body">
+            <xf:textboxrow name="website_url" value="{$server.website_url}" label="Web sitesi" maxlength="255" />
+            <xf:textboxrow name="discord_url" value="{$server.discord_url}" label="Discord" maxlength="255" />
+            <xf:textboxrow name="store_url" value="{$server.store_url}" label="Mağaza" maxlength="255" />
+        </div>
+
+        <xf:submitrow submit="Değişiklikleri Kaydet" />
+    </div>
+</xf:form>
