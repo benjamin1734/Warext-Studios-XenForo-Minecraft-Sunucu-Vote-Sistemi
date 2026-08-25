@@ -1,0 +1,64 @@
+<xf:title>Minecraft Sunucu Sezonları</xf:title>
+<xf:description>Aylık oy sezonlarını, mevcut yarışmayı ve önceki sezon kazananlarını görüntüle.</xf:description>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">Aktif Sezon: {$currentSeason.season_key}</h2>
+        <div class="block-body">
+            <div class="block-row">
+                <div class="contentRow-minor">
+                    Başlangıç: <xf:date time="$currentSeason.start_date" /> · Bitiş: <xf:date time="$currentSeason.end_date" />
+                </div>
+            </div>
+
+            <xf:if is="$currentTop is not empty">
+                <xf:foreach loop="$currentTop" value="$server">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <a href="{{ link('sunucular/detay', $server) }}">{$server.title}</a>
+                                    <xf:if is="$server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">
+                                    Bu ay {$server.vote_count_month} oy · {$server.unique_voters_month} benzersiz seçmen · {$server.players_online} online oyuncu
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Bu sezon için henüz oy bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">Geçmiş Sezonlar</h2>
+        <div class="block-body">
+            <xf:if is="$closedSeasons is not empty">
+                <xf:foreach loop="$closedSeasons" value="$season">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <a href="{{ link('sunucular/sezon', $season) }}">{$season.season_key} Sezonu</a>
+                                </div>
+                                <div class="contentRow-minor">
+                                    <xf:if is="$season.Winner">Kazanan: {$season.Winner.title} · </xf:if>
+                                    {$season.total_votes} oy · {$season.unique_voters} benzersiz seçmen · {$season.server_count} sunucu
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Henüz tamamlanmış bir sezon bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
