@@ -1,0 +1,56 @@
+<xf:title>{$server.title} - Sunucu İstatistikleri</xf:title>
+<xf:description>Oy, teslimat, oyuncu ve topluluk performansını inceleyin.</xf:description>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Son 30 Gün Oy Performansı</div>
+        <div class="block-body block-row">
+            <div class="pairs-group pairs-group--columns">
+                <dl class="pairs pairs--columns"><dt>24 Saat</dt><dd>{{ $voteStats.votes_24h ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>7 Gün</dt><dd>{{ $voteStats.votes_7d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>30 Gün</dt><dd>{{ $voteStats.votes_30d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Benzersiz Seçmen</dt><dd>{{ $voteStats.unique_voters_30d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Teslimat Başarısı</dt><dd>{$deliveryRate}%</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Başarılı Teslimat</dt><dd>{{ $voteStats.delivered_30d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Başarısız</dt><dd>{{ $voteStats.failed_30d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Tekrar Kuyruğunda</dt><dd>{{ $voteStats.retry_30d ?: 0 }}</dd></dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Son 7 Gün Sunucu Sağlığı</div>
+        <div class="block-body block-row">
+            <div class="pairs-group pairs-group--columns">
+                <dl class="pairs pairs--columns"><dt>Uptime</dt><dd>{$uptime7d}%</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Zirve Oyuncu</dt><dd>{{ $pingStats.peak_players_7d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Ortalama Oyuncu</dt><dd>{{ $pingStats.avg_players_7d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Ortalama Ping</dt><dd>{{ $pingStats.avg_ping_7d ?: 0 }} ms</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Favori</dt><dd>{$favorites}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>Değerlendirme</dt><dd>{$reviews}</dd></dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Son 14 Gün Oy Hareketi</div>
+        <div class="block-body">
+            <xf:if is="$dailyVotes is not empty">
+                <xf:foreach loop="$dailyVotes" value="$row">
+                    <div class="block-row block-row--separated">
+                        <dl class="pairs pairs--columns"><dt>{$row.vote_day}</dt><dd>{$row.total} oy</dd></dl>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Bu dönem için oy verisi bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
