@@ -27,6 +27,31 @@ class Favorite extends AbstractController
         );
     }
 
+    public function actionNotify(ParameterBag $params)
+    {
+        $this->assertPostOnly();
+        $visitor = \XF::visitor();
+        if (!$visitor->user_id)
+        {
+            return $this->noPermission();
+        }
+
+        $server = $this->assertActiveServer((int)$params->server_id);
+        $enabled = $this->filter('enabled', 'bool');
+        $updated = $this->repository('Warext\MinecraftVote:Favorite')
+            ->setUpdateNotifications($server->server_id, $visitor->user_id, $enabled);
+
+        if (!$updated)
+        {
+            return $this->error('Bildirim ayarını değiştirmek için sunucu favorilerinizde olmalıdır.', 400);
+        }
+
+        return $this->redirect(
+            $this->buildLink('sunucular/favoriler'),
+            $enabled ? 'Sunucu güncelleme bildirimleri açıldı.' : 'Sunucu güncelleme bildirimleri kapatıldı.'
+        );
+    }
+
     public function actionIndex()
     {
         $visitor = \XF::visitor();
@@ -35,12 +60,13 @@ class Favorite extends AbstractController
             return $this->noPermission();
         }
 
-        $favorites = $this->repository('Warext\MinecraftVote:Favorite')
-            ->findForUser($visitor->user_id)
-            ->fetch();
+        $repo = $this->repository('Warext\MinecraftVote:Favorite');
+        $favorites = $repo->findForUser($visitor->user_id)->fetch();
+        $unreadCounts = $repo->getUnreadUpdateCounts($visitor->user_id);
 
         return $this->view('Warext\MinecraftVote:Favorite\Index', 'warext_mc_favorite_index', [
-            'favorites' => $favorites
+            'favorites' => $favorites,
+            'unreadCounts' => $unreadCounts
         ]);
     }
 
