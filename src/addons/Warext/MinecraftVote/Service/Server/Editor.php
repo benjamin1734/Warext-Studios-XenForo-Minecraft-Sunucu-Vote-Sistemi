@@ -75,11 +75,13 @@ class Editor extends AbstractService
 
         $this->assertAddressIsUnique($data);
 
-        $this->server->bulkSet($data, [
+        $fields = [
             'title', 'description', 'server_type', 'host', 'port', 'bedrock_host', 'bedrock_port',
             'website_url', 'discord_url', 'store_url', 'version_min', 'version_max', 'country_code',
             'is_premium', 'allow_cracked'
-        ]);
+        ];
+        $allowedData = array_intersect_key($data, array_flip($fields));
+        $this->server->bulkSet($allowedData);
 
         if ($endpointChanged)
         {
