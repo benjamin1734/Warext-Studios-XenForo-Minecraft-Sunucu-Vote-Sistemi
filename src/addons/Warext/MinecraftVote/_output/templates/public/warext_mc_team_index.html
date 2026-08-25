@@ -1,0 +1,65 @@
+<xf:title>{$server.title} - Sunucu Ekibi</xf:title>
+<xf:description>Sunucuyu yönetecek XenForo kullanıcılarını ve yetkilerini belirleyin.</xf:description>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<xf:form action="{{ link('sunucular/ekip', $server) }}" ajax="true" class="block">
+    <div class="block-container">
+        <div class="block-header">Ekip Üyesi Ekle / Güncelle</div>
+        <div class="block-body">
+            <xf:textboxrow name="username" label="XenForo Kullanıcı Adı" required="required" />
+            <xf:selectrow name="role" value="member" label="Rol">
+                <xf:option value="manager">Yönetici</xf:option>
+                <xf:option value="editor">Editör</xf:option>
+                <xf:option value="analyst">Analist</xf:option>
+                <xf:option value="support">Destek</xf:option>
+                <xf:option value="member">Ekip Üyesi</xf:option>
+            </xf:selectrow>
+            <xf:checkboxrow label="Yetkiler">
+                <xf:option name="permissions[edit_content]" value="1">Sunucu içeriğini düzenleyebilir</xf:option>
+                <xf:option name="permissions[publish_updates]" value="1">Güncelleme yayınlayabilir</xf:option>
+                <xf:option name="permissions[view_stats]" value="1">Sunucu istatistiklerini görebilir</xf:option>
+                <xf:option name="permissions[manage_votifier]" value="1">NuVotifier ayarlarını yönetebilir</xf:option>
+                <xf:option name="permissions[manage_reviews]" value="1">Değerlendirme yönetimine erişebilir</xf:option>
+            </xf:checkboxrow>
+        </div>
+        <xf:submitrow submit="Kaydet" />
+    </div>
+</xf:form>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Mevcut Ekip</div>
+        <div class="block-body">
+            <xf:if is="$members is not empty">
+                <xf:foreach loop="$members" value="$member">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <xf:username user="$member.User" rich="true" />
+                                    <span class="label label--primary">{$member.role}</span>
+                                </div>
+                                <div class="contentRow-minor">
+                                    <xf:if is="$member.permissions.edit_content">İçerik düzenleme · </xf:if>
+                                    <xf:if is="$member.permissions.publish_updates">Güncelleme yayınlama · </xf:if>
+                                    <xf:if is="$member.permissions.view_stats">İstatistik · </xf:if>
+                                    <xf:if is="$member.permissions.manage_votifier">NuVotifier · </xf:if>
+                                    <xf:if is="$member.permissions.manage_reviews">Değerlendirme yönetimi</xf:if>
+                                </div>
+                                <div class="contentRow-minor">Eklenme: <xf:date time="$member.joined_date" /></div>
+                                <xf:form action="{{ link('sunucular/ekip-sil', $server) }}" ajax="true" data-xf-init="delete" style="margin-top:8px">
+                                    <xf:hiddenval name="user_id" value="{$member.user_id}" />
+                                    <xf:button type="submit" class="button--link">Ekipten Çıkar</xf:button>
+                                </xf:form>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Bu sunucuya henüz ekip üyesi eklenmemiş.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
