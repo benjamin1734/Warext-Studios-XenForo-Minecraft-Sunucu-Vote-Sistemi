@@ -21,3 +21,9 @@ jobs:
 
       - name: PHP syntax check
         run: find src -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: XenForo output JSON check
+        run: |
+          find src -type f -path '*/_output/*' -name '*.json' -print0 | while IFS= read -r -d '' file; do
+            python -m json.tool "$file" >/dev/null
+          done
