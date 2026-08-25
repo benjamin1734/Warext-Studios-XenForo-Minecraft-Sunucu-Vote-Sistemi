@@ -86,12 +86,18 @@ class Server extends Entity
 
     protected function _preSave(): void
     {
+        $isNew = !$this->server_id;
+
         if (!$this->created_date)
         {
             $this->created_date = \XF::$time;
         }
 
-        $this->last_update_date = \XF::$time;
+        if ($isNew || !$this->last_update_date || $this->hasContentChanges())
+        {
+            $this->last_update_date = \XF::$time;
+        }
+
         $this->slug = trim(strtolower($this->slug));
         $this->country_code = strtoupper(trim($this->country_code));
 
@@ -114,5 +120,23 @@ class Server extends Entity
         {
             $this->error(\XF::phrase('please_enter_valid_value'), 'bedrock_port');
         }
+    }
+
+    protected function hasContentChanges(): bool
+    {
+        foreach ([
+            'owner_user_id', 'title', 'slug', 'description', 'server_type', 'host', 'port',
+            'bedrock_host', 'bedrock_port', 'website_url', 'discord_url', 'store_url',
+            'game_modes', 'version_min', 'version_max', 'country_code', 'is_premium',
+            'allow_cracked', 'state', 'is_verified', 'verification_method', 'verification_token'
+        ] as $field)
+        {
+            if ($this->isChanged($field))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
