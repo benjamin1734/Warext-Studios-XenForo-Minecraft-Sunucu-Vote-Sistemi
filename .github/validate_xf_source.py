@@ -6,6 +6,7 @@ from pathlib import Path
 
 ADDON_ID = 'Warext/MinecraftVote'
 ADDON_NS = 'Warext\\MinecraftVote'
+MAX_XF_SHORT_ID = 25
 
 
 def load_json(path: Path):
@@ -27,6 +28,33 @@ def class_to_path(addon: Path, value: str) -> Path | None:
         return None
     short = value[len(prefix):].replace('\\', '/')
     return addon / f'{short}.php'
+
+
+def validate_short_ids(addon: Path):
+    errors = []
+    for folder, label in [
+        ('admin_navigation', 'admin navigation ID'),
+        ('admin_permissions', 'admin permission ID'),
+        ('cron_entries', 'cron entry ID')
+    ]:
+        root = addon / '_output' / folder
+        if not root.exists():
+            continue
+        for path in sorted(root.glob('*.json')):
+            value = path.stem
+            if len(value) > MAX_XF_SHORT_ID:
+                errors.append(
+                    f'{path}: {label} {len(value)} karakter; XenForo sınırı {MAX_XF_SHORT_ID}'
+                )
+
+    for path in sorted((addon / '_output' / 'content_type_fields').glob('*.json')):
+        obj = load_json(path)
+        content_type = str(obj.get('content_type', ''))
+        if len(content_type) > MAX_XF_SHORT_ID:
+            errors.append(
+                f'{path}: content_type {len(content_type)} karakter; XenForo sınırı {MAX_XF_SHORT_ID}'
+            )
+    return errors
 
 
 def validate_routes(addon: Path):
@@ -120,6 +148,7 @@ def validate_addon(addon: Path):
         errors.append('addon.json sürüm bilgisi geçersiz')
     if not (addon / 'Setup.php').is_file():
         errors.append('Setup.php bulunamadı')
+    errors += validate_short_ids(addon)
     errors += validate_routes(addon)
     errors += validate_cron(addon)
     errors += validate_content_types(addon)
@@ -135,7 +164,7 @@ def main():
         for error in errors:
             print(f'- {error}', file=sys.stderr)
         raise SystemExit(1)
-    print('XenForo route/controller/cron/content-type/template doğrulaması başarılı.')
+    print('XenForo ID/route/controller/cron/content-type/template doğrulaması başarılı.')
 
 
 if __name__ == '__main__':
