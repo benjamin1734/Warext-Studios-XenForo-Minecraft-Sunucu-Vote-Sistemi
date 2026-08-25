@@ -1,0 +1,17 @@
+{
+    "cron_class": "Warext\\MinecraftVote\\Cron\\ServerStatus",
+    "cron_method": "run",
+    "run_rules": {
+        "day_type": "dom",
+        "dom": [
+            -1
+        ],
+        "hours": [
+            -1
+        ],
+        "minutes": [
+            -1
+        ]
+    },
+    "active": true
+}
