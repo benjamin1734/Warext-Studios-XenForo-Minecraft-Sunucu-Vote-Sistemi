@@ -4,9 +4,15 @@ XenForo için Minecraft sunucu listeleme, keşif, oylama, NuVotifier entegrasyon
 
 ## Durum
 
-Geliştirme sürümü: 0.12.0 Beta
+Geliştirme sürümü: 0.12.1 Beta
 
-## Hedef
+## Kurulum ZIP
+
+`releases/Warext-MinecraftVote-0.12.1-Beta.zip`
+
+XenForo ACP üzerinden Add-ons bölümündeki arşiv yükleme alanından ZIP dosyasını seçerek kurabilirsiniz.
+
+## Özellikler
 
 - Minecraft Java ve Bedrock sunucu listeleme
 - Sunucu durum ve oyuncu istatistikleri
@@ -41,8 +47,4 @@ Windows/XenForo/Paper-NuVotifier lokal test akışı için:
 
 `docs/LOKAL_KURULUM.md`
 
-Bu repo geliştirme aşamasında XenForo `_output` verilerini içerir. Lokal geliştirme kurulumu CLI üzerinden yapılmalıdır.
-
-## Kurulum
-
-Nihai sürüm, XenForo yönetim panelindeki Add-ons alanından doğrudan yüklenebilen ZIP olarak yayımlanacaktır.
+Kaynak geliştirme yapısı XenForo `_output` verilerini içerir. `releases/` altındaki paket ise `_data` master data üretilmiş doğrudan kurulum paketidir.
