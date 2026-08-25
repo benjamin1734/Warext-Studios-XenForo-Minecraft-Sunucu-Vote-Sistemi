@@ -51,6 +51,7 @@ class Manager extends AbstractService
 
         $repo = $this->repository('Warext\MinecraftVote:ServerTeam');
         $member = $repo->getMember($this->server->server_id, $user->user_id);
+        $operation = $member ? 'updated' : 'created';
         if (!$member)
         {
             $member = $this->em()->create('Warext\MinecraftVote:ServerTeam');
@@ -61,6 +62,27 @@ class Manager extends AbstractService
         $member->role = $role;
         $member->permissions = $repo->sanitizePermissions($permissions);
         $member->save();
+
+        $enabledPermissions = [];
+        foreach ($member->permissions as $permission => $enabled)
+        {
+            if ($enabled)
+            {
+                $enabledPermissions[] = $permission;
+            }
+        }
+
+        $this->service('Warext\MinecraftVote:Audit\Logger')->log(
+            'team_member_saved',
+            $this->server->server_id,
+            $this->actor->user_id,
+            $user->user_id,
+            [
+                'operation' => $operation,
+                'role' => $member->role,
+                'permissions' => implode(',', $enabledPermissions)
+            ]
+        );
 
         return $member;
     }
@@ -76,7 +98,17 @@ class Manager extends AbstractService
             return false;
         }
 
+        $role = $member->role;
         $member->delete();
+
+        $this->service('Warext\MinecraftVote:Audit\Logger')->log(
+            'team_member_removed',
+            $this->server->server_id,
+            $this->actor->user_id,
+            $userId,
+            ['role' => $role]
+        );
+
         return true;
     }
 
