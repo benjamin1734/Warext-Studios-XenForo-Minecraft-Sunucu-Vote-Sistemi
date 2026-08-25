@@ -166,7 +166,7 @@ class Achievement extends AbstractController
     {
         return [
             'vote_total' => 'Toplam oy',
-            'uptime_bp' => 'Uptime (basis point, %99 = 9900)',
+            'uptime_bp' => 'Son 30 günlük uptime (basis point, %99 = 9900; en az 100 kontrol)',
             'peak_players' => 'Zirve eş zamanlı oyuncu',
             'age_days' => 'Platform yaşı (gün)',
             'verified' => 'Sahiplik doğrulaması (1)',
