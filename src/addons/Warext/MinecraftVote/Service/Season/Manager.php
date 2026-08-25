@@ -60,7 +60,7 @@ class Manager extends AbstractService
         {
             $lockedStatus = $db->fetchOne(
                 'SELECT status FROM xf_warext_mc_season WHERE season_id = ? FOR UPDATE',
-                $season->season_id
+                [$season->season_id]
             );
 
             if ($lockedStatus === 'closed')
@@ -71,6 +71,7 @@ class Manager extends AbstractService
 
             $voteRows = $db->fetchAll(
                 "SELECT v.server_id,
+                        s.title AS server_title,
                         COUNT(*) AS vote_count,
                         COUNT(DISTINCT CASE
                             WHEN v.minecraft_uuid <> '' THEN CONCAT('m:', LOWER(v.minecraft_uuid))
@@ -83,7 +84,7 @@ class Manager extends AbstractService
                    AND v.vote_date >= ?
                    AND v.vote_date < ?
                    AND s.state <> 'rejected'
-                 GROUP BY v.server_id",
+                 GROUP BY v.server_id, s.title",
                 [$season->start_date, $season->end_date]
             );
 
@@ -117,6 +118,7 @@ class Manager extends AbstractService
                 $ping = $pingByServer[$serverId] ?? ['peak_players' => 0, 'uptime_bp' => 0];
                 $record = [
                     'server_id' => $serverId,
+                    'server_title' => trim((string)$row['server_title']),
                     'vote_count' => max(0, (int)$row['vote_count']),
                     'unique_voters' => max(0, (int)$row['unique_voters']),
                     'peak_players' => $ping['peak_players'],
@@ -149,13 +151,14 @@ class Manager extends AbstractService
                     ?: ($a['server_id'] <=> $b['server_id']);
             });
 
-            $db->delete('xf_warext_mc_season_rank', 'season_id = ?', $season->season_id);
+            $db->delete('xf_warext_mc_season_rank', 'season_id = ?', [$season->season_id]);
 
             foreach ($rows as $index => $row)
             {
                 $rank = $this->em()->create('Warext\MinecraftVote:SeasonRank');
                 $rank->season_id = $season->season_id;
                 $rank->server_id = $row['server_id'];
+                $rank->server_title = $row['server_title'];
                 $rank->rank = $index + 1;
                 $rank->vote_count = $row['vote_count'];
                 $rank->unique_voters = $row['unique_voters'];
@@ -168,16 +171,21 @@ class Manager extends AbstractService
 
             $platformUnique = (int)$db->fetchOne(
                 "SELECT COUNT(DISTINCT CASE
-                    WHEN minecraft_uuid <> '' THEN CONCAT('m:', LOWER(minecraft_uuid))
-                    WHEN user_id > 0 THEN CONCAT('u:', user_id)
-                    ELSE CONCAT('n:', LOWER(minecraft_username))
+                    WHEN v.minecraft_uuid <> '' THEN CONCAT('m:', LOWER(v.minecraft_uuid))
+                    WHEN v.user_id > 0 THEN CONCAT('u:', v.user_id)
+                    ELSE CONCAT('n:', LOWER(v.minecraft_username))
                  END)
-                 FROM xf_warext_mc_vote
-                 WHERE status <> 'rejected' AND vote_date >= ? AND vote_date < ?",
+                 FROM xf_warext_mc_vote AS v
+                 INNER JOIN xf_warext_mc_server AS s ON s.server_id = v.server_id
+                 WHERE v.status <> 'rejected'
+                   AND v.vote_date >= ?
+                   AND v.vote_date < ?
+                   AND s.state <> 'rejected'",
                 [$season->start_date, $season->end_date]
             );
 
             $season->winner_server_id = $rows[0]['server_id'] ?? 0;
+            $season->winner_title = $rows[0]['server_title'] ?? '';
             $season->total_votes = array_sum(array_column($rows, 'vote_count'));
             $season->unique_voters = $platformUnique;
             $season->server_count = count($rows);
