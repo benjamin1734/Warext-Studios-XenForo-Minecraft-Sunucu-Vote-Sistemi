@@ -190,6 +190,11 @@ class Setup extends AbstractSetup
         $this->createSeasonTables();
     }
 
+    public function installStep10(): void
+    {
+        $this->addSeasonSnapshotColumns();
+    }
+
     public function upgrade1000020Step1(): void
     {
         if (!$this->schemaManager()->columnExists('xf_warext_mc_server', 'last_ping_error'))
@@ -241,6 +246,11 @@ class Setup extends AbstractSetup
         $this->createSeasonTables();
     }
 
+    public function upgrade1000060Step3(): void
+    {
+        $this->addSeasonSnapshotColumns();
+    }
+
     protected function addRankingColumns(): void
     {
         $sm = $this->schemaManager();
@@ -264,6 +274,27 @@ class Setup extends AbstractSetup
                     $table->addColumn($column, 'int')->setDefault(0);
                 });
             }
+        }
+    }
+
+    protected function addSeasonSnapshotColumns(): void
+    {
+        $sm = $this->schemaManager();
+
+        if ($sm->tableExists('xf_warext_mc_season') && !$sm->columnExists('xf_warext_mc_season', 'winner_title'))
+        {
+            $sm->alterTable('xf_warext_mc_season', function (Alter $table)
+            {
+                $table->addColumn('winner_title', 'varchar', 100)->setDefault('')->after('winner_server_id');
+            });
+        }
+
+        if ($sm->tableExists('xf_warext_mc_season_rank') && !$sm->columnExists('xf_warext_mc_season_rank', 'server_title'))
+        {
+            $sm->alterTable('xf_warext_mc_season_rank', function (Alter $table)
+            {
+                $table->addColumn('server_title', 'varchar', 100)->setDefault('')->after('server_id');
+            });
         }
     }
 
@@ -318,6 +349,7 @@ class Setup extends AbstractSetup
             $table->addColumn('end_date', 'int')->setDefault(0);
             $table->addColumn('status', 'varchar', 10)->setDefault('open');
             $table->addColumn('winner_server_id', 'int')->setDefault(0);
+            $table->addColumn('winner_title', 'varchar', 100)->setDefault('');
             $table->addColumn('total_votes', 'int')->setDefault(0);
             $table->addColumn('unique_voters', 'int')->setDefault(0);
             $table->addColumn('server_count', 'int')->setDefault(0);
@@ -331,6 +363,7 @@ class Setup extends AbstractSetup
         {
             $table->addColumn('season_id', 'int')->setDefault(0);
             $table->addColumn('server_id', 'int')->setDefault(0);
+            $table->addColumn('server_title', 'varchar', 100)->setDefault('');
             $table->addColumn('rank', 'int')->setDefault(0);
             $table->addColumn('vote_count', 'int')->setDefault(0);
             $table->addColumn('unique_voters', 'int')->setDefault(0);
