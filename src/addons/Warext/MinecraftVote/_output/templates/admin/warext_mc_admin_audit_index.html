@@ -32,7 +32,7 @@
                                 <xf:if is="$log.details is not empty">
                                     <div class="contentRow-minor" style="margin-top:6px">
                                         <xf:foreach loop="$log.details" key="$detailKey" value="$detailValue">
-                                            <strong>{$detailKey}:</strong> {$detailValue}<xf:if is="!$xf.last"> · </xf:if>
+                                            <span style="margin-right:10px"><strong>{$detailKey}:</strong> {$detailValue}</span>
                                         </xf:foreach>
                                     </div>
                                 </xf:if>
