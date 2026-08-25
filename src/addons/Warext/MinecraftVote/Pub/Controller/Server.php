@@ -32,22 +32,31 @@ class Server extends AbstractController
 
         switch ($sort)
         {
+            case 'trend':
+                $finder->orderByTrend();
+                break;
+
+            case 'votes':
+                $finder->orderByVotes();
+                break;
+
             case 'players':
-                $finder->order('players_online', 'DESC');
+                $finder->orderByPlayers();
                 break;
 
             case 'new':
-                $finder->order('created_date', 'DESC');
+                $finder->newestFirst();
                 break;
 
             case 'uptime':
                 $finder->order('uptime_bp', 'DESC');
+                $finder->order('server_id', 'ASC');
                 break;
 
-            case 'votes':
+            case 'popular':
             default:
-                $sort = 'votes';
-                $finder->order('vote_count_month', 'DESC');
+                $sort = 'popular';
+                $finder->orderByPopularity();
                 break;
         }
 
@@ -72,6 +81,49 @@ class Server extends AbstractController
             'sort' => $sort,
             'type' => $type,
             'online' => $online
+        ]);
+    }
+
+    public function actionSezonlar()
+    {
+        $currentSeason = $this->service('Warext\MinecraftVote:Season\Manager')->ensureCurrentSeason();
+        $currentTop = $this->finder('Warext\MinecraftVote:Server')
+            ->activeOnly()
+            ->orderByVotes()
+            ->limit(10)
+            ->fetch();
+
+        $closedSeasons = $this->finder('Warext\MinecraftVote:Season')
+            ->where('status', 'closed')
+            ->with('Winner')
+            ->order('start_date', 'DESC')
+            ->limit(12)
+            ->fetch();
+
+        return $this->view('Warext\MinecraftVote:Season\Index', 'warext_mc_season_index', [
+            'currentSeason' => $currentSeason,
+            'currentTop' => $currentTop,
+            'closedSeasons' => $closedSeasons
+        ]);
+    }
+
+    public function actionSezon(ParameterBag $params)
+    {
+        $season = $this->em()->find('Warext\MinecraftVote:Season', (int)$params->season_id, ['Winner']);
+        if (!$season || $season->status !== 'closed')
+        {
+            throw $this->exception($this->notFound());
+        }
+
+        $ranks = $this->finder('Warext\MinecraftVote:SeasonRank')
+            ->where('season_id', $season->season_id)
+            ->with('Server')
+            ->order('rank', 'ASC')
+            ->fetch();
+
+        return $this->view('Warext\MinecraftVote:Season\View', 'warext_mc_season_view', [
+            'season' => $season,
+            'ranks' => $ranks
         ]);
     }
 
