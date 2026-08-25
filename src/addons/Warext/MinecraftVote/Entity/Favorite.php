@@ -15,11 +15,13 @@ class Favorite extends Entity
         $structure->columns = [
             'server_id' => ['type' => self::UINT, 'required' => true],
             'user_id' => ['type' => self::UINT, 'required' => true],
+            'notify_updates' => ['type' => self::BOOL, 'default' => true],
+            'last_seen_update_id' => ['type' => self::UINT, 'default' => 0],
             'created_date' => ['type' => self::UINT, 'default' => 0]
         ];
         $structure->relations = [
             'Server' => [
-                'entity' => 'Warext\MinecraftVote:Server',
+                'entity' => 'Warext\\MinecraftVote:Server',
                 'type' => self::TO_ONE,
                 'conditions' => 'server_id',
                 'primary' => true
