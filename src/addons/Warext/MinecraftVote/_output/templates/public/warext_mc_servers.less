@@ -1,0 +1,106 @@
+.warextMcFilterBar
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+}
+
+.warextMcServerGrid
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.warextMcServerCard
+{
+    margin-bottom: 0;
+}
+
+.warextMcServerCard-main
+{
+    padding: 16px;
+}
+
+.warextMcServerCard-titleRow,
+.warextMcServerHero-head
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.warextMcServerCard-title,
+.warextMcServerHero h1
+{
+    margin: 0;
+}
+
+.warextMcServerCard-address,
+.warextMcServerHero-address
+{
+    margin-top: 4px;
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.warextMcServerStats
+{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.warextMcServerStats--large
+{
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.warextMcServerStats > div
+{
+    padding: 10px;
+    text-align: center;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcServerStats strong,
+.warextMcServerStats span
+{
+    display: block;
+}
+
+.warextMcServerStats span
+{
+    margin-top: 3px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcServerCard-actions,
+.warextMcServerLinks
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+@media (max-width: @xf-responsiveMedium)
+{
+    .warextMcServerStats,
+    .warextMcServerStats--large
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .warextMcServerCard-titleRow,
+    .warextMcServerHero-head
+    {
+        flex-direction: column;
+    }
+}
