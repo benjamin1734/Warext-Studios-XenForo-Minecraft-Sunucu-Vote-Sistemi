@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "warext-minecraft",
+    "sub_name": "achievement-edit",
+    "format": ":int<achievement_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Achievement",
+    "context": "",
+    "action_prefix": "edit"
+}
