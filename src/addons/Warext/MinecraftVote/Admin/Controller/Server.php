@@ -203,6 +203,9 @@ class Server extends AbstractController
 
         try
         {
+            $db->delete('xf_warext_mc_server_update', 'server_id = ?', $server->server_id);
+            $db->delete('xf_warext_mc_favorite', 'server_id = ?', $server->server_id);
+            $db->delete('xf_warext_mc_review', 'server_id = ?', $server->server_id);
             $db->delete('xf_warext_mc_server_category', 'server_id = ?', $server->server_id);
             $db->delete('xf_warext_mc_server_team', 'server_id = ?', $server->server_id);
             $db->delete('xf_warext_mc_ping_history', 'server_id = ?', $server->server_id);
