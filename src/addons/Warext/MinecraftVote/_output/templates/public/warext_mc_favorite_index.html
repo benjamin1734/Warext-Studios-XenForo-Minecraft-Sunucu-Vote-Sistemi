@@ -7,8 +7,9 @@
     <div class="block-container">
         <div class="block-header">Favorilerim</div>
         <div class="block-body">
-            <xf:if is="$favorites is not empty">
-                <xf:foreach loop="$favorites" value="$favorite">
+            <xf:if is="$entries is not empty">
+                <xf:foreach loop="$entries" value="$entry">
+                    <xf:set var="$favorite" value="{$entry.favorite}" />
                     <xf:if is="$favorite.Server">
                         <div class="block-row block-row--separated">
                             <div class="contentRow">
@@ -17,8 +18,8 @@
                                         <a href="{{ link('sunucular/detay', $favorite.Server) }}"><strong>{$favorite.Server.title}</strong></a>
                                         <xf:if is="$favorite.Server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
                                         <xf:if is="$favorite.Server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
-                                        <xf:if is="$favorite.notify_updates && $unreadCounts[$favorite.server_id]">
-                                            <span class="label label--orange">{$unreadCounts[$favorite.server_id]} yeni güncelleme</span>
+                                        <xf:if is="$favorite.notify_updates && $entry.unread_count">
+                                            <span class="label label--orange">{$entry.unread_count} yeni güncelleme</span>
                                         </xf:if>
                                     </div>
                                     <div class="contentRow-minor">
