@@ -1,0 +1,5 @@
+{
+    "content_type": "warext_mc_server_update",
+    "field_name": "entity",
+    "field_value": "Warext\\MinecraftVote:ServerUpdate"
+}
