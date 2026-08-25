@@ -6,20 +6,41 @@ class EndpointResolver
 {
     public function resolveJava(string $host, int $port): array
     {
-        return $this->resolve($host, $port, 'tcp', 25565);
+        return $this->resolve($host, $port, 'tcp', 25565, true);
     }
 
     public function resolveBedrock(string $host, int $port): array
     {
-        return $this->resolve($host, $port, 'udp', 19132);
+        return $this->resolve($host, $port, 'udp', 19132, true);
     }
 
-    protected function resolve(string $host, int $port, string $transport, int $defaultPort): array
+    public function resolveTcp(string $host, int $port): array
     {
+        return $this->resolve($host, $port, 'tcp', 0, false);
+    }
+
+    protected function resolve(
+        string $host,
+        int $port,
+        string $transport,
+        int $defaultPort,
+        bool $allowMinecraftSrv
+    ): array
+    {
+        if ($port < 1 || $port > 65535)
+        {
+            throw new \InvalidArgumentException('Geçersiz sunucu portu.');
+        }
+
         $originalHost = $this->normalizeHost($host);
         $resolvedHost = $originalHost;
 
-        if ($port === $defaultPort && !filter_var($resolvedHost, FILTER_VALIDATE_IP))
+        if (
+            $allowMinecraftSrv
+            && $defaultPort > 0
+            && $port === $defaultPort
+            && !filter_var($resolvedHost, FILTER_VALIDATE_IP)
+        )
         {
             $srv = $this->resolveSrv($resolvedHost, $transport);
             if ($srv)
