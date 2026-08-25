@@ -23,7 +23,7 @@ class Writer extends AbstractService
 
     public function create(array $input): ServerUpdate
     {
-        if (!$this->user->user_id || $this->server->owner_user_id !== $this->user->user_id)
+        if (!$this->canPublish())
         {
             throw new PrintableException('Bu sunucu için güncelleme yayınlama yetkiniz yok.');
         }
@@ -54,12 +54,14 @@ class Writer extends AbstractService
         $update->state = 'visible';
         $update->save();
 
+        $this->enqueueAlerts($update);
+
         return $update;
     }
 
     public function delete(ServerUpdate $update): void
     {
-        if (!$this->user->user_id || $this->server->owner_user_id !== $this->user->user_id)
+        if (!$this->canPublish())
         {
             throw new PrintableException('Bu güncellemeyi silme yetkiniz yok.');
         }
@@ -68,6 +70,24 @@ class Writer extends AbstractService
             throw new PrintableException('Güncelleme bu sunucuya ait değil.');
         }
 
+        $this->repository('XF:UserAlert')
+            ->fastDeleteAlertsForContent('warext_mc_server_update', $update->update_id);
         $update->delete();
+    }
+
+    public function canPublish(): bool
+    {
+        return $this->repository('Warext\MinecraftVote:ServerTeam')
+            ->hasPermission($this->server, $this->user->user_id, 'publish_updates');
+    }
+
+    protected function enqueueAlerts(ServerUpdate $update): void
+    {
+        $this->app->jobManager()->enqueueUnique(
+            'warextMinecraftUpdateAlert' . $update->update_id,
+            'Warext\MinecraftVote:UpdateAlert',
+            ['update_id' => $update->update_id],
+            false
+        );
     }
 }
