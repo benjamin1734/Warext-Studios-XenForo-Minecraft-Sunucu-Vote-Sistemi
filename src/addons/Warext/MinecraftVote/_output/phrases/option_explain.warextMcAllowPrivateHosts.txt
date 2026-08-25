@@ -1,0 +1,1 @@
+Yalnızca lokal geliştirme ve güvenilen ağ testleri için açın. Açıldığında 127.0.0.1, localhost, 10.x.x.x, 172.16-31.x.x ve 192.168.x.x gibi özel adreslere Minecraft durum sorgusu yapılabilir. Canlı sistemde kapalı tutulması önerilir.
