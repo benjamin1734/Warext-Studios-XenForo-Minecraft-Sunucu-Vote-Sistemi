@@ -19,6 +19,7 @@ class Season extends Entity
             'end_date' => ['type' => self::UINT, 'required' => true],
             'status' => ['type' => self::STR, 'maxLength' => 10, 'default' => 'open'],
             'winner_server_id' => ['type' => self::UINT, 'default' => 0],
+            'winner_title' => ['type' => self::STR, 'maxLength' => 100, 'default' => ''],
             'total_votes' => ['type' => self::UINT, 'default' => 0],
             'unique_voters' => ['type' => self::UINT, 'default' => 0],
             'server_count' => ['type' => self::UINT, 'default' => 0],
