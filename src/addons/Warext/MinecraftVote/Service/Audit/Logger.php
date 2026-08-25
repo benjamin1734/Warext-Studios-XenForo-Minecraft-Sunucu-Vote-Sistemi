@@ -32,7 +32,9 @@ class Logger extends AbstractService
             'sponsor_updated',
             'sponsor_deleted',
             'achievement_updated',
-            'achievement_rebuild_requested'
+            'achievement_rebuild_requested',
+            'vote_rejected',
+            'vote_restored'
         ];
 
         if (!in_array($action, $allowed, true))
