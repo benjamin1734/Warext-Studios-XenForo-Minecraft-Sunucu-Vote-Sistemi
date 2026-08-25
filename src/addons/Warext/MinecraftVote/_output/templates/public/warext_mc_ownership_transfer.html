@@ -1,0 +1,20 @@
+<xf:title>{$server.title} - Sahipliği Devret</xf:title>
+<xf:description>Bu işlem geri alınamaz. Yeni kullanıcı sunucunun asıl sahibi olur.</xf:description>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<div class="blockMessage blockMessage--warning">
+    Sahiplik devrinden sonra mevcut hesabınızın sunucu yönetim erişimi otomatik olarak kaldırılır. Sunucu sahiplik doğrulaması güvenlik nedeniyle sıfırlanır ve yeni sahibin yeniden doğrulama yapması gerekir.
+</div>
+
+<xf:form action="{{ link('sunucular/sahiplik-devret', $server) }}" ajax="true" class="block">
+    <div class="block-container">
+        <div class="block-header">Sahiplik Devri</div>
+        <div class="block-body">
+            <xf:textboxrow name="target_username" label="Yeni sahibin XenForo kullanıcı adı" required="required" />
+            <xf:textboxrow name="confirm_title" label="Onay için sunucu adını yazın" required="required" explain="Birebir şu değeri yazın: {$server.title}" />
+        </div>
+        <xf:submitrow submit="Sahipliği Kalıcı Olarak Devret" />
+    </div>
+</xf:form>
