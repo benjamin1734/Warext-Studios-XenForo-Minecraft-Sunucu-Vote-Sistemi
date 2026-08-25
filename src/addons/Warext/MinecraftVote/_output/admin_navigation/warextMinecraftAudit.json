@@ -1,0 +1,10 @@
+{
+    "parent_navigation_id": "warextMinecraftVote",
+    "display_order": 30,
+    "link": "warext-minecraft/audit",
+    "icon": "fa-list-check",
+    "admin_permission_id": "warextMinecraftVote",
+    "debug_only": false,
+    "development_only": false,
+    "hide_no_children": false
+}
