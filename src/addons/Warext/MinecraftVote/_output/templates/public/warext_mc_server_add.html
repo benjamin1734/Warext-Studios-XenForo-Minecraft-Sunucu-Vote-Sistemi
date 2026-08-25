@@ -13,7 +13,7 @@
                 <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
             </xf:selectrow>
 
-            <xf:textboxrow name="host" label="Java adresi" explain="Örnek: play.sunucum.com veya 127.0.0.1" required="true" maxlength="255" />
+            <xf:textboxrow name="host" label="Java adresi" explain="Örnek: play.sunucum.com veya lokal testte 127.0.0.1" required="true" maxlength="255" />
             <xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Java portu" />
             <xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" />
             <xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" />
@@ -21,7 +21,7 @@
             <xf:textarearow name="description" label="Sunucu açıklaması" rows="8" />
         </div>
 
-        <h2 class="block-header">Kategori ve Sürüm</h2>
+        <h2 class="block-header">Kategori, Mod ve Sürüm</h2>
         <div class="block-body">
             <xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz.">
                 <xf:foreach loop="$categories" value="$category">
@@ -29,6 +29,12 @@
                 </xf:foreach>
             </xf:checkboxrow>
 
+            <xf:textboxrow
+                name="game_modes"
+                label="Oyun modları"
+                placeholder="Survival, SkyBlock, PvP"
+                maxlength="255"
+                explain="Virgül, noktalı virgül veya yeni satır ile ayırın. En fazla 12 mod kaydedilir." />
             <xf:textboxrow name="version_min" label="Minimum sürüm" placeholder="1.20" maxlength="30" />
             <xf:textboxrow name="version_max" label="Maksimum sürüm" placeholder="1.21.4" maxlength="30" />
             <xf:textboxrow name="country_code" label="Ülke kodu" placeholder="TR" maxlength="2" />
