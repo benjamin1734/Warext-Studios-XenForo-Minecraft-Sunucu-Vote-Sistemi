@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "sunucular",
+    "sub_name": "hesap-sil",
+    "format": ":int<account_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Server",
+    "context": "",
+    "action_prefix": "hesap-sil"
+}
