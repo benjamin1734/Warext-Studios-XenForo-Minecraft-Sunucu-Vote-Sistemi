@@ -98,11 +98,30 @@ class Server extends AbstractController
         $account = $this->assertOwnedMinecraftAccount((int)$params->account_id);
         $userId = $account->user_id;
         $wasPrimary = $account->is_primary;
+        $wasVerified = $account->verification_state === 'verified';
         $account->delete();
 
         if ($wasPrimary)
         {
             $this->repository('Warext\MinecraftVote:MinecraftAccount')->promotePrimaryIfNeeded($userId);
+        }
+
+        if ($wasVerified)
+        {
+            $hasVerifiedAccount = (bool)$this->finder('Warext\MinecraftVote:MinecraftAccount')
+                ->where('user_id', $userId)
+                ->where('verification_state', 'verified')
+                ->fetchOne();
+
+            if (!$hasVerifiedAccount)
+            {
+                $this->db()->update(
+                    'xf_warext_mc_review',
+                    ['is_verified_player' => 0],
+                    'user_id = ?',
+                    $userId
+                );
+            }
         }
 
         return $this->redirect(
