@@ -1,25 +1,77 @@
 name: Build Add-on
 
 on:
-  workflow_dispatch:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
+    paths:
+      - 'src/addons/Warext/MinecraftVote/**'
+      - '.github/build_xf_data.py'
+      - '.github/workflows/build-addon.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build ZIP
+
+      - name: Build XenForo release data
+        run: python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
+
+      - name: Validate XML
         run: |
-          mkdir -p build/upload/src/addons/Warext
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          files = sorted(Path('src/addons/Warext/MinecraftVote/_data').glob('*.xml'))
+          if not files:
+              raise SystemExit('No _data XML files generated')
+          for file in files:
+              ET.parse(file)
+              print(file)
+          PY
+
+      - name: Build direct-install ZIP
+        run: |
+          VERSION=$(python3 - <<'PY'
+          import json
+          with open('src/addons/Warext/MinecraftVote/addon.json', encoding='utf-8') as f:
+              data=json.load(f)
+          print(data['version_string'].replace(' ', '-'))
+          PY
+          )
+          rm -rf build
+          mkdir -p build/upload/src/addons/Warext build/releases
           cp -R src/addons/Warext/MinecraftVote build/upload/src/addons/Warext/MinecraftVote
           rm -rf build/upload/src/addons/Warext/MinecraftVote/_output
           cp README.md build/README.md
-          cd build
-          zip -r ../Warext-MinecraftVote-${GITHUB_REF_NAME:-dev}.zip upload README.md
+          (cd build && zip -qr "releases/Warext-MinecraftVote-${VERSION}.zip" upload README.md)
+          cp build/releases/Warext-MinecraftVote-*.zip releases/ 2>/dev/null || true
+
+      - name: Publish ZIP to repository
+        run: |
+          mkdir -p releases
+          cp build/releases/Warext-MinecraftVote-*.zip releases/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add releases/
+          if ! git diff --cached --quiet; then
+            VERSION=$(python3 - <<'PY'
+          import json
+          with open('src/addons/Warext/MinecraftVote/addon.json', encoding='utf-8') as f:
+              data=json.load(f)
+          print(data['version_string'].split()[0])
+          PY
+          )
+            git commit -m "v${VERSION}"
+            git push
+          fi
+
       - uses: actions/upload-artifact@v4
         with:
           name: Warext-MinecraftVote
-          path: Warext-MinecraftVote-*.zip
+          path: build/releases/Warext-MinecraftVote-*.zip
