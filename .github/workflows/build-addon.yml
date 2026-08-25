@@ -36,6 +36,7 @@ jobs:
           PY
 
       - name: Build direct-install ZIP
+        id: package
         run: |
           VERSION=$(python3 - <<'PY'
           import json
@@ -44,34 +45,38 @@ jobs:
           print(data['version_string'].replace(' ', '-'))
           PY
           )
-          rm -rf build
-          mkdir -p build/upload/src/addons/Warext build/releases
-          cp -R src/addons/Warext/MinecraftVote build/upload/src/addons/Warext/MinecraftVote
-          rm -rf build/upload/src/addons/Warext/MinecraftVote/_output
-          cp README.md build/README.md
-          (cd build && zip -qr "releases/Warext-MinecraftVote-${VERSION}.zip" upload README.md)
-          cp build/releases/Warext-MinecraftVote-*.zip releases/ 2>/dev/null || true
-
-      - name: Publish ZIP to repository
-        run: |
-          mkdir -p releases
-          cp build/releases/Warext-MinecraftVote-*.zip releases/
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add releases/
-          if ! git diff --cached --quiet; then
-            VERSION=$(python3 - <<'PY'
+          VERSION_NUMBER=$(python3 - <<'PY'
           import json
           with open('src/addons/Warext/MinecraftVote/addon.json', encoding='utf-8') as f:
               data=json.load(f)
           print(data['version_string'].split()[0])
           PY
           )
-            git commit -m "v${VERSION}"
-            git push
+          rm -rf build
+          mkdir -p build/upload/src/addons/Warext build/releases
+          cp -R src/addons/Warext/MinecraftVote build/upload/src/addons/Warext/MinecraftVote
+          rm -rf build/upload/src/addons/Warext/MinecraftVote/_output
+          cp README.md build/README.md
+          FILE="build/releases/Warext-MinecraftVote-${VERSION}.zip"
+          (cd build && zip -qr "releases/Warext-MinecraftVote-${VERSION}.zip" upload README.md)
+          echo "file=${FILE}" >> "$GITHUB_OUTPUT"
+          echo "tag=v${VERSION_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.package.outputs.tag }}
+          FILE: ${{ steps.package.outputs.file }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$FILE" --clobber
+          else
+            git tag "$TAG" "$GITHUB_SHA"
+            git push origin "$TAG"
+            gh release create "$TAG" "$FILE" --title "$TAG" --notes "$TAG"
           fi
 
       - uses: actions/upload-artifact@v4
         with:
           name: Warext-MinecraftVote
-          path: build/releases/Warext-MinecraftVote-*.zip
+          path: ${{ steps.package.outputs.file }}
