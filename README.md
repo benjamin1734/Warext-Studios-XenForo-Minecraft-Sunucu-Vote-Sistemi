@@ -2,13 +2,15 @@
 
 XenForo için Minecraft sunucu listeleme, keşif, oylama, NuVotifier entegrasyonu, sıralama ve sunucu yönetim sistemi.
 
-## Durum
+## Sürüm
 
-Geliştirme sürümü: 0.12.1 Beta
+0.12.2 Beta
 
-## Kurulum ZIP
+## Kurulum
 
-`releases/Warext-MinecraftVote-0.12.1-Beta.zip`
+Kurulum ZIP dosyaları yalnızca GitHub Releases bölümünde yayımlanır.
+
+Güncel paket: `v0.12.2`
 
 XenForo ACP üzerinden Add-ons bölümündeki arşiv yükleme alanından ZIP dosyasını seçerek kurabilirsiniz.
 
@@ -38,13 +40,11 @@ XenForo ACP üzerinden Add-ons bölümündeki arşiv yükleme alanından ZIP dos
 - XenForo 2.3+
 - PHP 8.2+
 - MySQL 8.0+ veya MariaDB eşdeğeri
-- NuVotifier (oyların Minecraft sunucusuna teslimi için)
+- NuVotifier
 - İsteğe bağlı VotingPlugin veya uyumlu başka bir vote listener
 
 ## Lokal geliştirme
 
-Windows/XenForo/Paper-NuVotifier lokal test akışı için:
-
 `docs/LOKAL_KURULUM.md`
 
-Kaynak geliştirme yapısı XenForo `_output` verilerini içerir. `releases/` altındaki paket ise `_data` master data üretilmiş doğrudan kurulum paketidir.
+Kaynak geliştirme yapısı XenForo `_output` verilerini içerir. Kurulum paketleri build sırasında `_data` master data ile oluşturulur ve yalnızca GitHub Releases bölümünde yayımlanır.
