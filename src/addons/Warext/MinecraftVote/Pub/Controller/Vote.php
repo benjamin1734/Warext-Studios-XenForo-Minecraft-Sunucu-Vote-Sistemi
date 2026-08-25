@@ -30,6 +30,20 @@ class Vote extends AbstractController
 
         if ($this->isPost())
         {
+            try
+            {
+                $this->service('Warext\MinecraftVote:RateLimit\Request')->assertIp(
+                    'warextMcVoteIp',
+                    (int)$server->server_id,
+                    (string)$this->request->getIp(),
+                    3
+                );
+            }
+            catch (\XF\PrintableException $e)
+            {
+                return $this->error($e->getMessage(), 429);
+            }
+
             $accountId = $this->filter('minecraft_account_id', 'uint');
             $username = $this->filter('minecraft_username', 'str');
             $uuid = $this->filter('minecraft_uuid', 'str');
