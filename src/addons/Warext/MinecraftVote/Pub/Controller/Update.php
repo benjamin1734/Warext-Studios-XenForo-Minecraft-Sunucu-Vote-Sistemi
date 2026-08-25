@@ -13,10 +13,12 @@ class Update extends AbstractController
     {
         $server = $this->assertViewableServer((int)$params->server_id);
         $visitor = \XF::visitor();
+        $canPublish = $visitor->user_id && $this->repository('Warext\MinecraftVote:ServerTeam')
+            ->hasPermission($server, $visitor->user_id, 'publish_updates');
 
         if ($this->isPost())
         {
-            if (!$visitor->user_id || $server->owner_user_id !== $visitor->user_id)
+            if (!$canPublish)
             {
                 return $this->noPermission();
             }
@@ -65,7 +67,7 @@ class Update extends AbstractController
             'page' => $page,
             'perPage' => $perPage,
             'total' => $total,
-            'canPublish' => $visitor->user_id && $server->owner_user_id === $visitor->user_id
+            'canPublish' => $canPublish
         ]);
     }
 
@@ -76,7 +78,7 @@ class Update extends AbstractController
         $server = $update->Server;
         $visitor = \XF::visitor();
 
-        if (!$visitor->user_id || !$server || $server->owner_user_id !== $visitor->user_id)
+        if (!$visitor->user_id || !$server)
         {
             return $this->noPermission();
         }
@@ -106,7 +108,10 @@ class Update extends AbstractController
         }
 
         $visitor = \XF::visitor();
-        if ($server->state !== 'active' && $server->owner_user_id !== $visitor->user_id)
+        $canManageUpdates = $visitor->user_id && $this->repository('Warext\MinecraftVote:ServerTeam')
+            ->hasPermission($server, $visitor->user_id, 'publish_updates');
+
+        if ($server->state !== 'active' && !$canManageUpdates)
         {
             throw $this->exception($this->notFound());
         }
