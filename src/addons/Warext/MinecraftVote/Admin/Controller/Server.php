@@ -4,10 +4,11 @@ namespace Warext\MinecraftVote\Admin\Controller;
 
 use Warext\MinecraftVote\Entity\Server as ServerEntity;
 use XF\Admin\Controller\AbstractController;
+use XF\Mvc\ParameterBag;
 
 class Server extends AbstractController
 {
-    protected function preDispatchController($action, $controller, \XF\Mvc\ParameterBag $params): void
+    protected function preDispatchController($action, ParameterBag $params): void
     {
         $this->assertAdminPermission('warextMinecraftVote');
     }
@@ -53,7 +54,9 @@ class Server extends AbstractController
         $server->state = $state;
         $server->save();
 
-        return $this->redirect($this->buildLink('warext-minecraft', null, ['state' => $state === 'pending' ? 'pending' : 'all']));
+        return $this->redirect($this->buildLink('warext-minecraft', null, [
+            'state' => $state === 'pending' ? 'pending' : 'all'
+        ]));
     }
 
     public function actionDelete()
@@ -62,11 +65,23 @@ class Server extends AbstractController
 
         $serverId = $this->filter('server_id', 'uint');
         $server = $this->assertServerExists($serverId);
+        $db = $this->db();
+        $db->beginTransaction();
 
-        $this->db()->delete('xf_warext_mc_server_category', 'server_id = ?', $server->server_id);
-        $this->db()->delete('xf_warext_mc_server_team', 'server_id = ?', $server->server_id);
-        $this->db()->delete('xf_warext_mc_ping_history', 'server_id = ?', $server->server_id);
-        $server->delete();
+        try
+        {
+            $db->delete('xf_warext_mc_server_category', 'server_id = ?', $server->server_id);
+            $db->delete('xf_warext_mc_server_team', 'server_id = ?', $server->server_id);
+            $db->delete('xf_warext_mc_ping_history', 'server_id = ?', $server->server_id);
+            $db->delete('xf_warext_mc_vote', 'server_id = ?', $server->server_id);
+            $server->delete();
+            $db->commit();
+        }
+        catch (\Throwable $e)
+        {
+            $db->rollback();
+            throw $e;
+        }
 
         return $this->redirect($this->buildLink('warext-minecraft'));
     }
