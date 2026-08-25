@@ -18,6 +18,8 @@ class Update extends AbstractController
             ->hasPermission($server, $visitor->user_id, 'publish_updates');
         $canManageVotifier = $visitor->user_id && $teamRepo
             ->hasPermission($server, $visitor->user_id, 'manage_votifier');
+        $canViewStats = $visitor->user_id && $teamRepo
+            ->hasPermission($server, $visitor->user_id, 'view_stats');
 
         if ($this->isPost())
         {
@@ -71,7 +73,8 @@ class Update extends AbstractController
             'perPage' => $perPage,
             'total' => $total,
             'canPublish' => $canPublish,
-            'canManageVotifier' => $canManageVotifier
+            'canManageVotifier' => $canManageVotifier,
+            'canViewStats' => $canViewStats
         ]);
     }
 
