@@ -9,6 +9,7 @@ use XF\App;
 use XF\Entity\User;
 use XF\PrintableException;
 use XF\Service\AbstractService;
+use XF\Service\FloodCheckService;
 
 class Creator extends AbstractService
 {
@@ -76,6 +77,8 @@ class Creator extends AbstractService
             throw new PrintableException('Oy verebilmek için giriş yapmanız gerekiyor.');
         }
 
+        $this->assertRequestRate();
+
         $db = $this->db();
         $db->beginTransaction();
 
@@ -119,6 +122,27 @@ class Creator extends AbstractService
         {
             $db->rollback();
             throw $e;
+        }
+    }
+
+    protected function assertRequestRate(): void
+    {
+        if (!$this->user->user_id || $this->user->hasPermission('general', 'bypassFloodCheck'))
+        {
+            return;
+        }
+
+        /** @var FloodCheckService $floodChecker */
+        $floodChecker = $this->service(FloodCheckService::class);
+        $remaining = (int)$floodChecker->checkFlooding(
+            'warextMinecraftVote',
+            $this->user->user_id,
+            5
+        );
+
+        if ($remaining > 0)
+        {
+            throw new PrintableException("Çok hızlı oy isteği gönderiyorsunuz. {$remaining} saniye sonra tekrar deneyin.");
         }
     }
 
