@@ -168,6 +168,11 @@ class Setup extends AbstractSetup
         $this->createVotifierTable();
     }
 
+    public function installStep8(): void
+    {
+        $this->createMinecraftAccountTable();
+    }
+
     public function upgrade1000020Step1(): void
     {
         if (!$this->schemaManager()->columnExists('xf_warext_mc_server', 'last_ping_error'))
@@ -182,6 +187,11 @@ class Setup extends AbstractSetup
     public function upgrade1000030Step1(): void
     {
         $this->createVotifierTable();
+    }
+
+    public function upgrade1000040Step1(): void
+    {
+        $this->createMinecraftAccountTable();
     }
 
     protected function createVotifierTable(): void
@@ -204,9 +214,31 @@ class Setup extends AbstractSetup
         });
     }
 
+    protected function createMinecraftAccountTable(): void
+    {
+        $this->schemaManager()->createTable('xf_warext_mc_account', function (Create $table)
+        {
+            $table->addColumn('account_id', 'bigint')->autoIncrement();
+            $table->addColumn('user_id', 'int')->setDefault(0);
+            $table->addColumn('minecraft_username', 'varchar', 16)->setDefault('');
+            $table->addColumn('minecraft_uuid', 'varchar', 36)->setDefault('');
+            $table->addColumn('verification_state', 'varchar', 20)->setDefault('unverified');
+            $table->addColumn('verification_method', 'varchar', 30)->setDefault('');
+            $table->addColumn('verification_code', 'varchar', 64)->setDefault('');
+            $table->addColumn('is_primary', 'tinyint')->setDefault(0);
+            $table->addColumn('created_date', 'int')->setDefault(0);
+            $table->addColumn('updated_date', 'int')->setDefault(0);
+            $table->addColumn('verified_date', 'int')->setDefault(0);
+            $table->addUniqueKey(['user_id', 'minecraft_username'], 'warext_mc_account_user_name');
+            $table->addKey(['user_id', 'is_primary'], 'warext_mc_account_user_primary');
+            $table->addKey(['minecraft_uuid', 'verification_state'], 'warext_mc_account_uuid_state');
+        });
+    }
+
     public function uninstallStep1(): void
     {
         $sm = $this->schemaManager();
+        $sm->dropTable('xf_warext_mc_account');
         $sm->dropTable('xf_warext_mc_votifier');
         $sm->dropTable('xf_warext_mc_ping_history');
         $sm->dropTable('xf_warext_mc_server_team');
