@@ -34,7 +34,18 @@ class VotifierV2Client
             throw new \InvalidArgumentException('NuVotifier portu geçersiz.');
         }
 
-        $endpoint = $this->resolver->resolveJava($host, $port);
+        if (!preg_match('/^[A-Za-z0-9_]{1,16}$/', $username))
+        {
+            throw new \InvalidArgumentException('NuVotifier kullanıcı adı geçersiz.');
+        }
+
+        $serviceName = trim($serviceName);
+        if ($serviceName === '' || mb_strlen($serviceName) > 64)
+        {
+            throw new \InvalidArgumentException('NuVotifier servis adı geçersiz.');
+        }
+
+        $endpoint = $this->resolver->resolveTcp($host, $port);
         $socketAddress = 'tcp://' . $endpoint['socket_host'] . ':' . $endpoint['port'];
         $errno = 0;
         $error = '';
