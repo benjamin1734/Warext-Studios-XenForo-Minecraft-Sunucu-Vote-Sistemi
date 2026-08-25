@@ -150,8 +150,24 @@ class Server extends AbstractController
         }
 
         $server = $this->assertServerExists($serverId);
+        $previousState = (string)$server->state;
         $server->state = $state;
         $server->save();
+
+        if ($previousState !== $state)
+        {
+            $this->service('Warext\MinecraftVote:Audit\Logger')->log(
+                'server_state_changed',
+                $server->server_id,
+                \XF::visitor()->user_id,
+                $server->owner_user_id,
+                [
+                    'previous_state' => $previousState,
+                    'new_state' => $state,
+                    'server_title' => $server->title
+                ]
+            );
+        }
 
         return $this->redirect($this->buildLink('warext-minecraft', null, [
             'state' => $state === 'pending' ? 'pending' : 'all'
@@ -213,10 +229,25 @@ class Server extends AbstractController
             );
         }
 
+        $serverTitle = (string)$server->title;
+        $ownerUserId = (int)$server->owner_user_id;
+        $this->service('Warext\MinecraftVote:Audit\Logger')->log(
+            'server_deleted',
+            $server->server_id,
+            \XF::visitor()->user_id,
+            $ownerUserId,
+            [
+                'server_title' => $serverTitle,
+                'owner_user_id' => $ownerUserId
+            ]
+        );
+
         $db->beginTransaction();
 
         try
         {
+            $db->delete('xf_warext_mc_sponsor', 'server_id = ?', $server->server_id);
+            $db->delete('xf_warext_mc_server_achievement', 'server_id = ?', $server->server_id);
             $db->delete('xf_warext_mc_server_update', 'server_id = ?', $server->server_id);
             $db->delete('xf_warext_mc_favorite', 'server_id = ?', $server->server_id);
             $db->delete('xf_warext_mc_review', 'server_id = ?', $server->server_id);
