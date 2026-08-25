@@ -6,8 +6,16 @@ class ServerStatus
 {
     public static function run(): void
     {
-        \XF::app()->jobManager()->enqueueUnique(
-            'warextMinecraftVoteServerPing',
+        $jobManager = \XF::app()->jobManager();
+        $uniqueId = 'warextMinecraftVoteServerPing';
+
+        if ($jobManager->getUniqueJob($uniqueId))
+        {
+            return;
+        }
+
+        $jobManager->enqueueUnique(
+            $uniqueId,
             'Warext\MinecraftVote:ServerPing',
             [],
             false
