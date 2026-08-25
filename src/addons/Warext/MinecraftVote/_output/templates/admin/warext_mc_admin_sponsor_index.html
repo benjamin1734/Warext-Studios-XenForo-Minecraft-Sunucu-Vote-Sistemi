@@ -1,0 +1,63 @@
+<xf:title>Sponsorlu Sunucular</xf:title>
+<xf:description>Sponsorlu gösterimler organik Popüler ve Yükselişte sıralama skorlarını değiştirmez.</xf:description>
+
+<xf:form action="{{ link('warext-minecraft/sponsors') }}" class="block" ajax="true">
+    <div class="block-container">
+        <div class="block-header">Yeni Sponsorlu Gösterim</div>
+        <div class="block-body">
+            <xf:selectrow name="server_id" label="Sunucu" required="required">
+                <xf:option value="0">Sunucu seçin</xf:option>
+                <xf:foreach loop="$servers" value="$server">
+                    <xf:option value="{$server.server_id}">{$server.title} · {$server.host}:{$server.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:textboxrow name="label" value="Sponsorlu" maxlength="50" label="Etiket" />
+            <xf:textboxrow name="start_date" placeholder="2026-09-01 18:00" label="Başlangıç" explain="Boş bırakırsanız hemen başlar." />
+            <xf:textboxrow name="end_date" placeholder="2026-09-08 18:00" label="Bitiş" explain="Boş bırakırsanız süresiz devam eder." />
+            <xf:numberboxrow name="display_order" value="10" min="1" max="10000" label="Gösterim sırası" />
+        </div>
+        <xf:submitrow submit="Sponsor Kaydı Oluştur" />
+    </div>
+</xf:form>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Sponsor Kayıtları</div>
+        <div class="block-body">
+            <xf:if is="$sponsors is not empty">
+                <xf:foreach loop="$sponsors" value="$sponsor">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong><xf:if is="$sponsor.Server">{$sponsor.Server.title}<xf:else />Silinmiş sunucu #{$sponsor.server_id}</xf:if></strong>
+                                    <span class="label label--orange">{$sponsor.label}</span>
+                                    <xf:if is="$sponsor.is_current"><span class="label label--green">Yayında</span><xf:elseif is="$sponsor.state == 'paused'" /><span class="label">Duraklatıldı</span><xf:else /><span class="label label--red">Süresi dışında</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">
+                                    Başlangıç: <xf:date time="$sponsor.start_date" /> ·
+                                    Bitiş: <xf:if is="$sponsor.end_date"><xf:date time="$sponsor.end_date" /><xf:else />Süresiz</xf:if> ·
+                                    Sıra: {$sponsor.display_order}
+                                </div>
+                                <div class="contentRow-minor">
+                                    Oluşturan: <xf:if is="$sponsor.Creator"><xf:username user="$sponsor.Creator" /><xf:else />Sistem</xf:if> ·
+                                    Son değişiklik: <xf:date time="$sponsor.updated_date" />
+                                </div>
+                                <div class="buttonGroup" style="margin-top:8px">
+                                    <xf:form action="{{ link('warext-minecraft/sponsor-toggle', $sponsor) }}" ajax="true">
+                                        <xf:button type="submit"><xf:if is="$sponsor.state == 'active'">Duraklat<xf:else />Etkinleştir</xf:if></xf:button>
+                                    </xf:form>
+                                    <xf:form action="{{ link('warext-minecraft/sponsor-delete', $sponsor) }}" ajax="true" data-xf-init="delete">
+                                        <xf:button type="submit" class="button--link">Sil</xf:button>
+                                    </xf:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Henüz sponsor kaydı bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
