@@ -11,6 +11,7 @@ class ServerUpdate extends Entity
     {
         $structure->table = 'xf_warext_mc_server_update';
         $structure->shortName = 'Warext\MinecraftVote:ServerUpdate';
+        $structure->contentType = 'warext_mc_server_update';
         $structure->primaryKey = 'update_id';
         $structure->columns = [
             'update_id' => ['type' => self::UINT, 'autoIncrement' => true, 'nullable' => true],
@@ -25,7 +26,7 @@ class ServerUpdate extends Entity
         ];
         $structure->relations = [
             'Server' => [
-                'entity' => 'Warext\\MinecraftVote:Server',
+                'entity' => 'Warext\MinecraftVote:Server',
                 'type' => self::TO_ONE,
                 'conditions' => 'server_id',
                 'primary' => true
