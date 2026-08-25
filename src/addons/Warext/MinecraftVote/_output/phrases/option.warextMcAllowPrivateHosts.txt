@@ -1,0 +1,1 @@
+Yerel ve özel IP adreslerine ping izni ver
