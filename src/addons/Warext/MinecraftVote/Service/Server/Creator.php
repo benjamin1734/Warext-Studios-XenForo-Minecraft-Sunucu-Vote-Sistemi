@@ -72,7 +72,7 @@ class Creator extends AbstractService
             $this->server->error('Ülke kodu iki harfli ISO kodu olmalıdır.', 'country_code');
         }
 
-        $this->server->bulkSet($data, [
+        $fields = [
             'title',
             'description',
             'server_type',
@@ -88,7 +88,9 @@ class Creator extends AbstractService
             'country_code',
             'is_premium',
             'allow_cracked'
-        ]);
+        ];
+        $allowedData = array_intersect_key($data, array_flip($fields));
+        $this->server->bulkSet($allowedData);
 
         $this->server->slug = $this->generateUniqueSlug($data['title']);
         $this->server->state = 'pending';
