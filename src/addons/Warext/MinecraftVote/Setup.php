@@ -192,7 +192,17 @@ class Setup extends AbstractSetup
 
     public function installStep10(): void
     {
-        $this->addSeasonSnapshotColumns();
+        $this->createReviewTable();
+    }
+
+    public function installStep11(): void
+    {
+        $this->createFavoriteTable();
+    }
+
+    public function installStep12(): void
+    {
+        $this->createServerUpdateTable();
     }
 
     public function upgrade1000020Step1(): void
@@ -251,10 +261,26 @@ class Setup extends AbstractSetup
         $this->addSeasonSnapshotColumns();
     }
 
+    public function upgrade1000080Step1(): void
+    {
+        $this->createReviewTable();
+    }
+
+    public function upgrade1000080Step2(): void
+    {
+        $this->createFavoriteTable();
+        $this->ensureFavoriteTrackingColumns();
+    }
+
+    public function upgrade1000080Step3(): void
+    {
+        $this->createServerUpdateTable();
+    }
+
     protected function addRankingColumns(): void
     {
         $sm = $this->schemaManager();
-        $columns = [
+        foreach ([
             'unique_voters_month',
             'votes_24h',
             'votes_72h',
@@ -263,9 +289,7 @@ class Setup extends AbstractSetup
             'rank_popular',
             'rank_trending',
             'ranking_updated_date'
-        ];
-
-        foreach ($columns as $column)
+        ] as $column)
         {
             if (!$sm->columnExists('xf_warext_mc_server', $column))
             {
@@ -300,7 +324,13 @@ class Setup extends AbstractSetup
 
     protected function createVotifierTable(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_votifier', function (Create $table)
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_votifier'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_votifier', function (Create $table)
         {
             $table->addColumn('server_id', 'int');
             $table->addColumn('enabled', 'tinyint')->setDefault(0);
@@ -320,7 +350,13 @@ class Setup extends AbstractSetup
 
     protected function createMinecraftAccountTable(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_account', function (Create $table)
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_account'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_account', function (Create $table)
         {
             $table->addColumn('account_id', 'bigint')->autoIncrement();
             $table->addColumn('user_id', 'int')->setDefault(0);
@@ -341,45 +377,156 @@ class Setup extends AbstractSetup
 
     protected function createSeasonTables(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_season', function (Create $table)
-        {
-            $table->addColumn('season_id', 'int')->autoIncrement();
-            $table->addColumn('season_key', 'char', 7)->setDefault('');
-            $table->addColumn('start_date', 'int')->setDefault(0);
-            $table->addColumn('end_date', 'int')->setDefault(0);
-            $table->addColumn('status', 'varchar', 10)->setDefault('open');
-            $table->addColumn('winner_server_id', 'int')->setDefault(0);
-            $table->addColumn('winner_title', 'varchar', 100)->setDefault('');
-            $table->addColumn('total_votes', 'int')->setDefault(0);
-            $table->addColumn('unique_voters', 'int')->setDefault(0);
-            $table->addColumn('server_count', 'int')->setDefault(0);
-            $table->addColumn('created_date', 'int')->setDefault(0);
-            $table->addColumn('finalized_date', 'int')->setDefault(0);
-            $table->addUniqueKey('season_key', 'warext_mc_season_key');
-            $table->addKey(['status', 'end_date'], 'warext_mc_season_status');
-        });
+        $sm = $this->schemaManager();
 
-        $this->schemaManager()->createTable('xf_warext_mc_season_rank', function (Create $table)
+        if (!$sm->tableExists('xf_warext_mc_season'))
         {
-            $table->addColumn('season_id', 'int')->setDefault(0);
+            $sm->createTable('xf_warext_mc_season', function (Create $table)
+            {
+                $table->addColumn('season_id', 'int')->autoIncrement();
+                $table->addColumn('season_key', 'char', 7)->setDefault('');
+                $table->addColumn('start_date', 'int')->setDefault(0);
+                $table->addColumn('end_date', 'int')->setDefault(0);
+                $table->addColumn('status', 'varchar', 10)->setDefault('open');
+                $table->addColumn('winner_server_id', 'int')->setDefault(0);
+                $table->addColumn('winner_title', 'varchar', 100)->setDefault('');
+                $table->addColumn('total_votes', 'int')->setDefault(0);
+                $table->addColumn('unique_voters', 'int')->setDefault(0);
+                $table->addColumn('server_count', 'int')->setDefault(0);
+                $table->addColumn('created_date', 'int')->setDefault(0);
+                $table->addColumn('finalized_date', 'int')->setDefault(0);
+                $table->addUniqueKey('season_key', 'warext_mc_season_key');
+                $table->addKey(['status', 'end_date'], 'warext_mc_season_status');
+            });
+        }
+
+        if (!$sm->tableExists('xf_warext_mc_season_rank'))
+        {
+            $sm->createTable('xf_warext_mc_season_rank', function (Create $table)
+            {
+                $table->addColumn('season_id', 'int')->setDefault(0);
+                $table->addColumn('server_id', 'int')->setDefault(0);
+                $table->addColumn('server_title', 'varchar', 100)->setDefault('');
+                $table->addColumn('rank', 'int')->setDefault(0);
+                $table->addColumn('vote_count', 'int')->setDefault(0);
+                $table->addColumn('unique_voters', 'int')->setDefault(0);
+                $table->addColumn('uptime_bp', 'int')->setDefault(0);
+                $table->addColumn('peak_players', 'int')->setDefault(0);
+                $table->addColumn('season_score_bp', 'int')->setDefault(0);
+                $table->addColumn('snapshot_date', 'int')->setDefault(0);
+                $table->addPrimaryKey(['season_id', 'server_id']);
+                $table->addKey(['season_id', 'rank'], 'warext_mc_season_rank_order');
+                $table->addKey('server_id', 'warext_mc_season_rank_server');
+            });
+        }
+    }
+
+    protected function createReviewTable(): void
+    {
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_review'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_review', function (Create $table)
+        {
+            $table->addColumn('review_id', 'bigint')->autoIncrement();
             $table->addColumn('server_id', 'int')->setDefault(0);
-            $table->addColumn('server_title', 'varchar', 100)->setDefault('');
-            $table->addColumn('rank', 'int')->setDefault(0);
-            $table->addColumn('vote_count', 'int')->setDefault(0);
-            $table->addColumn('unique_voters', 'int')->setDefault(0);
-            $table->addColumn('uptime_bp', 'int')->setDefault(0);
-            $table->addColumn('peak_players', 'int')->setDefault(0);
-            $table->addColumn('season_score_bp', 'int')->setDefault(0);
-            $table->addColumn('snapshot_date', 'int')->setDefault(0);
-            $table->addPrimaryKey(['season_id', 'server_id']);
-            $table->addKey(['season_id', 'rank'], 'warext_mc_season_rank_order');
-            $table->addKey('server_id', 'warext_mc_season_rank_server');
+            $table->addColumn('user_id', 'int')->setDefault(0);
+            $table->addColumn('rating', 'tinyint')->setDefault(0);
+            $table->addColumn('gameplay_rating', 'tinyint')->setDefault(0);
+            $table->addColumn('staff_rating', 'tinyint')->setDefault(0);
+            $table->addColumn('performance_rating', 'tinyint')->setDefault(0);
+            $table->addColumn('community_rating', 'tinyint')->setDefault(0);
+            $table->addColumn('originality_rating', 'tinyint')->setDefault(0);
+            $table->addColumn('message', 'text')->nullable(true);
+            $table->addColumn('is_verified_player', 'tinyint')->setDefault(0);
+            $table->addColumn('state', 'varchar', 20)->setDefault('visible');
+            $table->addColumn('created_date', 'int')->setDefault(0);
+            $table->addColumn('updated_date', 'int')->setDefault(0);
+            $table->addUniqueKey(['server_id', 'user_id'], 'warext_mc_review_server_user');
+            $table->addKey(['server_id', 'state', 'updated_date'], 'warext_mc_review_server_state');
+            $table->addKey(['user_id', 'updated_date'], 'warext_mc_review_user_date');
+        });
+    }
+
+    protected function createFavoriteTable(): void
+    {
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_favorite'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_favorite', function (Create $table)
+        {
+            $table->addColumn('server_id', 'int')->setDefault(0);
+            $table->addColumn('user_id', 'int')->setDefault(0);
+            $table->addColumn('notify_updates', 'tinyint')->setDefault(1);
+            $table->addColumn('last_seen_update_id', 'bigint')->setDefault(0);
+            $table->addColumn('created_date', 'int')->setDefault(0);
+            $table->addPrimaryKey(['server_id', 'user_id']);
+            $table->addKey(['user_id', 'created_date'], 'warext_mc_favorite_user_date');
+            $table->addKey(['notify_updates', 'user_id'], 'warext_mc_favorite_notify');
+        });
+    }
+
+    protected function ensureFavoriteTrackingColumns(): void
+    {
+        $sm = $this->schemaManager();
+        if (!$sm->tableExists('xf_warext_mc_favorite'))
+        {
+            return;
+        }
+
+        if (!$sm->columnExists('xf_warext_mc_favorite', 'notify_updates'))
+        {
+            $sm->alterTable('xf_warext_mc_favorite', function (Alter $table)
+            {
+                $table->addColumn('notify_updates', 'tinyint')->setDefault(1);
+            });
+        }
+
+        if (!$sm->columnExists('xf_warext_mc_favorite', 'last_seen_update_id'))
+        {
+            $sm->alterTable('xf_warext_mc_favorite', function (Alter $table)
+            {
+                $table->addColumn('last_seen_update_id', 'bigint')->setDefault(0);
+            });
+        }
+    }
+
+    protected function createServerUpdateTable(): void
+    {
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_server_update'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_server_update', function (Create $table)
+        {
+            $table->addColumn('update_id', 'bigint')->autoIncrement();
+            $table->addColumn('server_id', 'int')->setDefault(0);
+            $table->addColumn('user_id', 'int')->setDefault(0);
+            $table->addColumn('title', 'varchar', 100)->setDefault('');
+            $table->addColumn('version_label', 'varchar', 50)->setDefault('');
+            $table->addColumn('message', 'mediumtext');
+            $table->addColumn('state', 'varchar', 20)->setDefault('visible');
+            $table->addColumn('created_date', 'int')->setDefault(0);
+            $table->addColumn('updated_date', 'int')->setDefault(0);
+            $table->addKey(['server_id', 'state', 'created_date'], 'warext_mc_update_server_state');
+            $table->addKey(['user_id', 'created_date'], 'warext_mc_update_user_date');
         });
     }
 
     public function uninstallStep1(): void
     {
         $sm = $this->schemaManager();
+        $sm->dropTable('xf_warext_mc_server_update');
+        $sm->dropTable('xf_warext_mc_favorite');
+        $sm->dropTable('xf_warext_mc_review');
         $sm->dropTable('xf_warext_mc_season_rank');
         $sm->dropTable('xf_warext_mc_season');
         $sm->dropTable('xf_warext_mc_account');
