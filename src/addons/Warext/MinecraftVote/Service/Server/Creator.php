@@ -30,13 +30,22 @@ class Creator extends AbstractService
 
     public function setData(array $data): void
     {
-        $data['title'] = trim($data['title'] ?? '');
-        $data['host'] = $this->normalizeHost($data['host'] ?? '');
-        $data['bedrock_host'] = $this->normalizeHost($data['bedrock_host'] ?? '');
-        $data['country_code'] = strtoupper(trim($data['country_code'] ?? ''));
+        $data['title'] = trim((string)($data['title'] ?? ''));
+        $data['host'] = $this->normalizeHost((string)($data['host'] ?? ''));
+        $data['bedrock_host'] = $this->normalizeHost((string)($data['bedrock_host'] ?? ''));
+        $data['country_code'] = strtoupper(trim((string)($data['country_code'] ?? '')));
         $data['port'] = (int)($data['port'] ?? 0) ?: 25565;
         $data['bedrock_port'] = (int)($data['bedrock_port'] ?? 0) ?: 19132;
-        $serverType = $data['server_type'] ?? 'java';
+        $data['server_type'] = strtolower(trim((string)($data['server_type'] ?? 'java')));
+        $data['game_modes'] = $this->normalizeGameModes((string)($data['game_modes'] ?? ''));
+        $serverType = $data['server_type'];
+
+        if (!in_array($serverType, ['java', 'bedrock', 'crossplay'], true))
+        {
+            $this->server->error('Geçerli bir sunucu türü seçin.', 'server_type');
+            $serverType = 'java';
+            $data['server_type'] = 'java';
+        }
 
         if (in_array($serverType, ['bedrock', 'crossplay'], true) && $data['bedrock_host'] === '')
         {
@@ -45,7 +54,7 @@ class Creator extends AbstractService
 
         foreach (['website_url', 'discord_url', 'store_url'] as $urlField)
         {
-            $data[$urlField] = trim($data[$urlField] ?? '');
+            $data[$urlField] = trim((string)($data[$urlField] ?? ''));
             if ($data[$urlField] !== '' && !$this->isValidHttpUrl($data[$urlField]))
             {
                 $this->server->error('Yalnızca geçerli http veya https bağlantıları kullanılabilir.', $urlField);
@@ -83,6 +92,7 @@ class Creator extends AbstractService
             'website_url',
             'discord_url',
             'store_url',
+            'game_modes',
             'version_min',
             'version_max',
             'country_code',
@@ -153,6 +163,40 @@ class Creator extends AbstractService
         }
 
         return $this->server;
+    }
+
+    protected function normalizeGameModes(string $value): string
+    {
+        $parts = preg_split('/[,;\r\n]+/u', $value) ?: [];
+        $clean = [];
+        $seen = [];
+
+        foreach ($parts as $part)
+        {
+            $part = trim((string)$part);
+            if ($part === '')
+            {
+                continue;
+            }
+
+            $part = mb_substr($part, 0, 30);
+            $key = mb_strtolower($part);
+            if (isset($seen[$key]))
+            {
+                continue;
+            }
+
+            $seen[$key] = true;
+            $clean[] = $part;
+        }
+
+        if (count($clean) > 12)
+        {
+            $this->server->error('En fazla 12 oyun modu girebilirsiniz.', 'game_modes');
+            $clean = array_slice($clean, 0, 12);
+        }
+
+        return mb_substr(implode(', ', $clean), 0, 255);
     }
 
     protected function generateUniqueSlug(string $title): string
