@@ -23,17 +23,33 @@
             <div class="block-container">
                 <h3 class="block-header">
                     Rapor #{$report.report_id}
-                    <span class="u-muted">— {$report.Server ? $report.Server.title : 'Silinmiş sunucu'}</span>
+                    <span class="u-muted">— <xf:if is="$report.Server">{$report.Server.title}<xf:else />Silinmiş sunucu</xf:if></span>
                 </h3>
                 <div class="block-body">
                     <div class="block-row">
                         <dl class="pairs pairs--columns pairs--fixedSmall">
                             <dt>Durum</dt><dd>{$report.state}</dd>
                             <dt>Neden</dt><dd>{$report.reason}</dd>
-                            <dt>Raporlayan</dt><dd>{$report.Reporter ? $report.Reporter.username : 'Kullanıcı #' . $report.reporter_user_id}</dd>
+                            <dt>Raporlayan</dt>
+                            <dd>
+                                <xf:if is="$report.Reporter">
+                                    {$report.Reporter.username}
+                                <xf:else />
+                                    Kullanıcı #{$report.reporter_user_id}
+                                </xf:if>
+                            </dd>
                             <dt>Tarih</dt><dd><xf:date time="$report.created_date" /></dd>
+                            <xf:if is="$report.Moderator">
+                                <dt>Moderatör</dt><dd>{$report.Moderator.username}</dd>
+                            </xf:if>
+                            <xf:if is="$report.resolved_date">
+                                <dt>Sonuç tarihi</dt><dd><xf:date time="$report.resolved_date" /></dd>
+                            </xf:if>
                         </dl>
                         <div class="message-body">{{ nl2br($report.message) }}</div>
+                        <xf:if is="$report.resolution">
+                            <div class="blockMessage blockMessage--important" style="margin-top:10px">{$report.resolution}</div>
+                        </xf:if>
                     </div>
                     <xf:form action="{{ link('warext-minecraft/report-update', $report) }}" method="post" class="block">
                         <xf:selectrow name="state" value="{$report.state}" label="Yeni durum">
