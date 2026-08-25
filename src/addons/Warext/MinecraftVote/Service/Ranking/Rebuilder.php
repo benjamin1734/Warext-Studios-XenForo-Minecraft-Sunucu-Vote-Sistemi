@@ -17,7 +17,7 @@ class Rebuilder extends AbstractService
         $db = $this->db();
 
         $servers = $db->fetchAll(
-            "SELECT server_id, players_online, uptime_bp, view_count
+            "SELECT server_id, players_online, uptime_bp
              FROM xf_warext_mc_server
              WHERE state = 'active'"
         );
@@ -84,7 +84,6 @@ class Rebuilder extends AbstractService
         $maxUnique = 1;
         $maxPlayers = 1;
         $maxVotes24h = 1;
-        $maxLogViews = 1.0;
 
         foreach ($servers as $server)
         {
@@ -102,7 +101,6 @@ class Rebuilder extends AbstractService
                 'server_id' => $serverId,
                 'players_online' => max(0, (int)$server['players_online']),
                 'uptime_bp' => min(10000, max(0, (int)$server['uptime_bp'])),
-                'view_count' => max(0, (int)$server['view_count']),
                 ...$vote
             ];
 
@@ -110,7 +108,6 @@ class Rebuilder extends AbstractService
             $maxUnique = max($maxUnique, $vote['unique_voters_month']);
             $maxPlayers = max($maxPlayers, (int)$server['players_online']);
             $maxVotes24h = max($maxVotes24h, $vote['votes_24h']);
-            $maxLogViews = max($maxLogViews, log1p(max(0, (int)$server['view_count'])));
         }
 
         foreach ($metrics as &$metric)
@@ -119,14 +116,12 @@ class Rebuilder extends AbstractService
             $uniqueNorm = $metric['unique_voters_month'] / $maxUnique;
             $playersNorm = $metric['players_online'] / $maxPlayers;
             $uptimeNorm = $metric['uptime_bp'] / 10000;
-            $engagementNorm = log1p($metric['view_count']) / $maxLogViews;
 
             $metric['popular_score_bp'] = (int)round(
-                ($votesNorm * 4500)
-                + ($uniqueNorm * 2000)
+                ($votesNorm * 5000)
+                + ($uniqueNorm * 2500)
                 + ($playersNorm * 1500)
                 + ($uptimeNorm * 1000)
-                + ($engagementNorm * 1000)
             );
 
             $previous = $metric['votes_previous_72h'];
