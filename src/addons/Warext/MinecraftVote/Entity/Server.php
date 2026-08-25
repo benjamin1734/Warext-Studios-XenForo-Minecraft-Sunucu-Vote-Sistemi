@@ -49,6 +49,14 @@ class Server extends Entity
             'vote_count_total' => ['type' => self::UINT, 'default' => 0],
             'vote_count_month' => ['type' => self::UINT, 'default' => 0],
             'vote_count_today' => ['type' => self::UINT, 'default' => 0],
+            'unique_voters_month' => ['type' => self::UINT, 'default' => 0],
+            'votes_24h' => ['type' => self::UINT, 'default' => 0],
+            'votes_72h' => ['type' => self::UINT, 'default' => 0],
+            'popular_score_bp' => ['type' => self::UINT, 'default' => 0],
+            'trend_score_bp' => ['type' => self::UINT, 'default' => 0],
+            'rank_popular' => ['type' => self::UINT, 'default' => 0],
+            'rank_trending' => ['type' => self::UINT, 'default' => 0],
+            'ranking_updated_date' => ['type' => self::UINT, 'default' => 0],
             'view_count' => ['type' => self::UINT, 'default' => 0],
             'rating_count' => ['type' => self::UINT, 'default' => 0],
             'rating_sum' => ['type' => self::UINT, 'default' => 0],
@@ -58,7 +66,9 @@ class Server extends Entity
         ];
         $structure->getters = [
             'uptime_percent' => true,
-            'rating_average' => true
+            'rating_average' => true,
+            'popular_score' => true,
+            'trend_score' => true
         ];
         $structure->relations = [
             'Owner' => [
@@ -85,6 +95,16 @@ class Server extends Entity
         }
 
         return round($this->rating_sum / $this->rating_count, 2);
+    }
+
+    public function getPopularScore(): float
+    {
+        return min(100, max(0, $this->popular_score_bp / 100));
+    }
+
+    public function getTrendScore(): float
+    {
+        return min(100, max(0, $this->trend_score_bp / 100));
     }
 
     protected function _preSave(): void
