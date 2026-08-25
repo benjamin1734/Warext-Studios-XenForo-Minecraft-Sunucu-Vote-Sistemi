@@ -148,25 +148,37 @@ class Creator extends AbstractService
 
     protected function calculateFraudScore(VoteRepository $voteRepo): int
     {
+        $score = 0;
+
         if ($this->ipHash === null)
         {
-            return 10;
+            $score += 20;
+        }
+        else
+        {
+            $recentFromIp = $voteRepo->countRecentIpVotes(
+                $this->server->server_id,
+                $this->ipHash,
+                \XF::$time - 86400
+            );
+            $score += min(60, $recentFromIp * 20);
         }
 
-        $recentFromIp = $voteRepo->countRecentIpVotes(
-            $this->server->server_id,
-            $this->ipHash,
-            \XF::$time - 86400
-        );
-
-        $score = min(60, $recentFromIp * 15);
-
         if (!$this->user->user_id)
+        {
+            $score += 15;
+        }
+        elseif ($this->user->register_date && (int)$this->user->register_date >= \XF::$time - 86400)
         {
             $score += 10;
         }
 
         if ($this->minecraftUuid === '')
+        {
+            $score += 10;
+        }
+
+        if ($this->userAgentHash === null)
         {
             $score += 5;
         }
