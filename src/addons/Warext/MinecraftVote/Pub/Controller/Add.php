@@ -2,6 +2,7 @@
 
 namespace Warext\MinecraftVote\Pub\Controller;
 
+use Warext\MinecraftVote\Security\PublicPermissions;
 use XF\Pub\Controller\AbstractController;
 
 class Add extends AbstractController
@@ -9,7 +10,7 @@ class Add extends AbstractController
     public function actionIndex()
     {
         $visitor = \XF::visitor();
-        if (!$visitor->user_id)
+        if (!$visitor->user_id || !PublicPermissions::allows('addServer', false, true))
         {
             return $this->noPermission();
         }
