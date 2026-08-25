@@ -11,7 +11,7 @@
             <div class="block-row">
                 <div class="contentRow-minor">
                     {$season.total_votes} toplam oy · {$season.unique_voters} benzersiz seçmen · {$season.server_count} sıralanan sunucu
-                    <xf:if is="$season.Winner"> · Kazanan: {$season.Winner.title}</xf:if>
+                    <xf:if is="$season.winner_title"> · Kazanan: {$season.winner_title}</xf:if>
                 </div>
             </div>
         </div>
@@ -30,9 +30,9 @@
                                 <div class="contentRow-title">
                                     <strong>#{$rank.rank}</strong>
                                     <xf:if is="$rank.Server">
-                                        <a href="{{ link('sunucular/detay', $rank.Server) }}">{$rank.Server.title}</a>
+                                        <a href="{{ link('sunucular/detay', $rank.Server) }}">{$rank.server_title}</a>
                                     <xf:else />
-                                        Silinmiş sunucu #{$rank.server_id}
+                                        {$rank.server_title}
                                     </xf:if>
                                 </div>
                                 <div class="contentRow-minor">
