@@ -1,0 +1,51 @@
+<xf:title>Sunucu Ekle</xf:title>
+<xf:description>Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar yönetici onayından sonra listelenir.</xf:description>
+
+<xf:form action="{{ link('sunucular/ekle') }}" ajax="true" class="block">
+    <div class="block-container">
+        <h2 class="block-header">Temel Bilgiler</h2>
+        <div class="block-body">
+            <xf:textboxrow name="title" label="Sunucu adı" required="true" maxlength="100" />
+
+            <xf:selectrow name="server_type" label="Sunucu türü">
+                <xf:option value="java">Java</xf:option>
+                <xf:option value="bedrock">Bedrock</xf:option>
+                <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
+            </xf:selectrow>
+
+            <xf:textboxrow name="host" label="Java adresi" explain="Örnek: play.sunucum.com veya 127.0.0.1" required="true" maxlength="255" />
+            <xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Java portu" />
+            <xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" />
+            <xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" />
+
+            <xf:textarearow name="description" label="Sunucu açıklaması" rows="8" />
+        </div>
+
+        <h2 class="block-header">Kategori ve Sürüm</h2>
+        <div class="block-body">
+            <xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz.">
+                <xf:foreach loop="$categories" value="$category">
+                    <xf:option value="{$category.category_id}">{$category.title}</xf:option>
+                </xf:foreach>
+            </xf:checkboxrow>
+
+            <xf:textboxrow name="version_min" label="Minimum sürüm" placeholder="1.20" maxlength="30" />
+            <xf:textboxrow name="version_max" label="Maksimum sürüm" placeholder="1.21.4" maxlength="30" />
+            <xf:textboxrow name="country_code" label="Ülke kodu" placeholder="TR" maxlength="2" />
+
+            <xf:checkboxrow>
+                <xf:option name="is_premium" value="1">Premium hesap zorunlu</xf:option>
+                <xf:option name="allow_cracked" value="1">Crack giriş destekleniyor</xf:option>
+            </xf:checkboxrow>
+        </div>
+
+        <h2 class="block-header">Bağlantılar</h2>
+        <div class="block-body">
+            <xf:textboxrow name="website_url" label="Web sitesi" placeholder="https://" maxlength="255" />
+            <xf:textboxrow name="discord_url" label="Discord" placeholder="https://discord.gg/..." maxlength="255" />
+            <xf:textboxrow name="store_url" label="Mağaza" placeholder="https://" maxlength="255" />
+        </div>
+
+        <xf:submitrow submit="Sunucuyu Gönder" />
+    </div>
+</xf:form>
