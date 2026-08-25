@@ -2,7 +2,7 @@
 
 namespace Warext\MinecraftVote\Repository;
 
-use Warext\MinecraftVote\Entity\MinecraftAccount;
+use Warext\MinecraftVote\Entity\MinecraftAccount as MinecraftAccountEntity;
 use XF\Mvc\Entity\Repository;
 
 class MinecraftAccount extends Repository
@@ -15,7 +15,7 @@ class MinecraftAccount extends Repository
             ->order('created_date', 'ASC');
     }
 
-    public function getForUser(int $accountId, int $userId): ?MinecraftAccount
+    public function getForUser(int $accountId, int $userId): ?MinecraftAccountEntity
     {
         return $this->finder('Warext\MinecraftVote:MinecraftAccount')
             ->where('account_id', $accountId)
@@ -31,7 +31,7 @@ class MinecraftAccount extends Repository
             ->fetchOne();
     }
 
-    public function makePrimary(MinecraftAccount $account): void
+    public function makePrimary(MinecraftAccountEntity $account): void
     {
         $db = $this->db();
         $db->beginTransaction();
