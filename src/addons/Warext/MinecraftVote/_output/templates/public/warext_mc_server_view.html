@@ -2,11 +2,14 @@
 <xf:description>{$server.host}:{$server.port}</xf:description>
 <xf:css src="warext_mc_servers.less" />
 
-<xf:if is="$server.state == 'active'">
-    <xf:pageaction>
+<xf:pageaction>
+    <xf:if is="$server.state == 'active'">
         <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta">Oy Ver</xf:button>
-    </xf:pageaction>
-</xf:if>
+    </xf:if>
+    <xf:if is="$xf.visitor.user_id && $xf.visitor.user_id == $server.owner_user_id">
+        <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
+    </xf:if>
+</xf:pageaction>
 
 <div class="block warextMcServerHero">
     <div class="block-container">
