@@ -54,7 +54,7 @@ class Vote extends Entity
             $this->vote_date = \XF::$time;
         }
 
-        if (!in_array($this->status, ['pending', 'delivered', 'retry', 'failed', 'rejected', 'skipped'], true))
+        if (!in_array($this->status, ['pending', 'processing', 'delivered', 'retry', 'failed', 'rejected', 'skipped'], true))
         {
             $this->error(\XF::phrase('please_enter_valid_value'), 'status');
         }
