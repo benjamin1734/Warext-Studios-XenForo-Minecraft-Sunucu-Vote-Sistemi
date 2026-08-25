@@ -16,24 +16,27 @@ class EndpointResolver
 
     protected function resolve(string $host, int $port, string $transport, int $defaultPort): array
     {
-        $host = $this->normalizeHost($host);
+        $originalHost = $this->normalizeHost($host);
+        $resolvedHost = $originalHost;
 
-        if ($port === $defaultPort && !filter_var($host, FILTER_VALIDATE_IP))
+        if ($port === $defaultPort && !filter_var($resolvedHost, FILTER_VALIDATE_IP))
         {
-            $srv = $this->resolveSrv($host, $transport);
+            $srv = $this->resolveSrv($resolvedHost, $transport);
             if ($srv)
             {
-                $host = $srv['host'];
+                $resolvedHost = $srv['host'];
                 $port = $srv['port'];
             }
         }
 
-        $this->assertHostAllowed($host);
+        $connectHost = $this->resolveConnectHost($resolvedHost);
 
         return [
-            'host' => $host,
+            'host' => $resolvedHost,
+            'original_host' => $originalHost,
+            'connect_host' => $connectHost,
             'port' => $port,
-            'socket_host' => $this->formatSocketHost($host)
+            'socket_host' => $this->formatSocketHost($connectHost)
         ];
     }
 
@@ -49,9 +52,9 @@ class EndpointResolver
 
         if ($host === 'localhost')
         {
-            if (!\XF::$developmentMode)
+            if (!$this->privateHostsAllowed())
             {
-                throw new \RuntimeException('Yerel adresler yalnızca XenForo geliştirme modunda kullanılabilir.');
+                throw new \RuntimeException('Yerel adreslere bağlantı kapalı. ACP ayarlarından lokal test iznini açın.');
             }
 
             return $host;
@@ -111,11 +114,11 @@ class EndpointResolver
         ];
     }
 
-    protected function assertHostAllowed(string $host): void
+    protected function resolveConnectHost(string $host): string
     {
-        if (\XF::$developmentMode)
+        if ($this->privateHostsAllowed())
         {
-            return;
+            return $host;
         }
 
         $addresses = $this->resolveAddresses($host);
@@ -135,6 +138,18 @@ class EndpointResolver
                 throw new \RuntimeException('Özel veya ayrılmış ağ adreslerine bağlantı engellendi.');
             }
         }
+
+        return $addresses[0];
+    }
+
+    protected function privateHostsAllowed(): bool
+    {
+        if (\XF::$developmentMode)
+        {
+            return true;
+        }
+
+        return (bool)(\XF::options()->warextMcAllowPrivateHosts ?? false);
     }
 
     protected function resolveAddresses(string $host): array
