@@ -1,0 +1,50 @@
+<xf:title>Minecraft Sunucu Audit Kayıtları</xf:title>
+<xf:description>Kritik sahiplik, ekip, moderasyon, sponsor ve başarım yönetim işlemleri.</xf:description>
+
+<xf:form action="{{ link('warext-minecraft/audit') }}" class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:numberboxrow name="server_id" value="{$serverId}" min="0" label="Sunucu ID" explain="0 bırakırsanız tüm sunucular gösterilir." />
+            <xf:textboxrow name="action_key" value="{$actionKey}" label="İşlem anahtarı" placeholder="ownership_transferred" />
+        </div>
+        <xf:submitrow submit="Filtrele" />
+    </div>
+</xf:form>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Audit Geçmişi</div>
+        <div class="block-body">
+            <xf:if is="$logs is not empty">
+                <xf:foreach loop="$logs" value="$log">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{$log.action}</strong>
+                                    <xf:if is="$log.Server"><span class="label">{$log.Server.title}</span><xf:elseif is="$log.server_id" /><span class="label">Sunucu #{$log.server_id}</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">
+                                    İşlemi yapan: <xf:if is="$log.Actor"><xf:username user="$log.Actor" /><xf:else />Sistem / #{$log.actor_user_id}</xf:if>
+                                    <xf:if is="$log.target_user_id"> · Hedef: <xf:if is="$log.Target"><xf:username user="$log.Target" /><xf:else />#{$log.target_user_id}</xf:if></xf:if>
+                                    · <xf:date time="$log.log_date" />
+                                </div>
+                                <xf:if is="$log.details is not empty">
+                                    <div class="contentRow-minor" style="margin-top:6px">
+                                        <xf:foreach loop="$log.details" key="$detailKey" value="$detailValue">
+                                            <strong>{$detailKey}:</strong> {$detailValue}<xf:if is="!$xf.last"> · </xf:if>
+                                        </xf:foreach>
+                                    </div>
+                                </xf:if>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Bu filtrede audit kaydı bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
+
+<xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/audit" params="{{ {'server_id': $serverId, 'action_key': $actionKey} }}" />
