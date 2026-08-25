@@ -1,5 +1,5 @@
 <xf:title>Favori Minecraft Sunucularım</xf:title>
-<xf:description>Takip ettiğiniz Minecraft sunucularına hızlıca ulaşın.</xf:description>
+<xf:description>Takip ettiğiniz Minecraft sunucularına hızlıca ulaşın ve yeni güncellemelerini görün.</xf:description>
 
 <xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
 
@@ -17,13 +17,23 @@
                                         <a href="{{ link('sunucular/detay', $favorite.Server) }}"><strong>{$favorite.Server.title}</strong></a>
                                         <xf:if is="$favorite.Server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
                                         <xf:if is="$favorite.Server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
+                                        <xf:if is="$favorite.notify_updates && $unreadCounts[$favorite.server_id]">
+                                            <span class="label label--orange">{$unreadCounts[$favorite.server_id]} yeni güncelleme</span>
+                                        </xf:if>
                                     </div>
                                     <div class="contentRow-minor">
                                         {$favorite.Server.host}:{$favorite.Server.port} · Oyuncu: {$favorite.Server.players_online}/{$favorite.Server.players_max} · Bu ay oy: {$favorite.Server.vote_count_month} · Uptime: {$favorite.Server.uptime_percent}%
                                     </div>
-                                    <div class="contentRow-minor">Favoriye eklenme: <xf:date time="$favorite.created_date" /></div>
+                                    <div class="contentRow-minor">
+                                        Favoriye eklenme: <xf:date time="$favorite.created_date" /> · Güncelleme bildirimi: <xf:if is="$favorite.notify_updates">Açık<xf:else />Kapalı</xf:if>
+                                    </div>
                                     <div class="buttonGroup" style="margin-top:8px">
                                         <xf:button href="{{ link('sunucular/detay', $favorite.Server) }}" class="button--primary">Sunucuya Git</xf:button>
+                                        <xf:button href="{{ link('sunucular/guncellemeler', $favorite.Server) }}">Güncellemeler</xf:button>
+                                        <xf:form action="{{ link('sunucular/favori-bildirim', $favorite.Server) }}" ajax="true" class="buttonGroup">
+                                            <xf:hiddenval name="enabled" value="{{ $favorite.notify_updates ? 0 : 1 }}" />
+                                            <xf:button type="submit">{{ $favorite.notify_updates ? 'Bildirimleri Kapat' : 'Bildirimleri Aç' }}</xf:button>
+                                        </xf:form>
                                         <xf:form action="{{ link('sunucular/favori', $favorite.Server) }}" ajax="true" class="buttonGroup">
                                             <xf:button type="submit" class="button--link">Favoriden Çıkar</xf:button>
                                         </xf:form>
