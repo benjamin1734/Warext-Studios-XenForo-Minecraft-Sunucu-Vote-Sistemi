@@ -1,0 +1,89 @@
+<xf:title>Şüpheli Oylar</xf:title>
+<xf:description>Risk puanı yüksek oyları inceleyin. Sistem otomatik ban uygulamaz; karar yöneticiye aittir.</xf:description>
+
+<xf:pageaction>
+    <xf:button href="{{ link('warext-minecraft/votes') }}">Oy Kuyruğu</xf:button>
+    <xf:button href="{{ link('warext-minecraft') }}">Sunucular</xf:button>
+</xf:pageaction>
+
+<xf:form action="{{ link('warext-minecraft/suspect-votes') }}" class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:numberboxrow name="min_score" value="{$minScore}" min="1" max="100" label="Minimum risk puanı" />
+            <xf:numberboxrow name="server_id" value="{$serverId}" min="0" label="Sunucu ID" explain="0 bırakırsanız tüm sunucular incelenir." />
+        </div>
+        <xf:submitrow submit="Filtrele" />
+    </div>
+</xf:form>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Şüpheli Oy Kayıtları</div>
+        <div class="block-body">
+            <xf:if is="$votes is not empty">
+                <xf:foreach loop="$votes" value="$vote">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>#{$vote.vote_id} · {$vote.minecraft_username}</strong>
+                                    <xf:if is="$vote.fraud_score >= 70">
+                                        <span class="label label--red">Risk {$vote.fraud_score}</span>
+                                    <xf:elseif is="$vote.fraud_score >= 50" />
+                                        <span class="label label--orange">Risk {$vote.fraud_score}</span>
+                                    <xf:else />
+                                        <span class="label">Risk {$vote.fraud_score}</span>
+                                    </xf:if>
+                                    <span class="label">{$vote.status}</span>
+                                </div>
+
+                                <div class="contentRow-minor">
+                                    <xf:if is="$vote.Server">Sunucu: {$vote.Server.title}<xf:else />Sunucu silinmiş</xf:if>
+                                    <xf:if is="$vote.User"> · XenForo: {$vote.User.username}<xf:else /> · Misafir oy</xf:if>
+                                    · <xf:date time="$vote.vote_date" />
+                                </div>
+
+                                <div class="contentRow-minor">
+                                    UUID: <xf:if is="$vote.minecraft_uuid">{$vote.minecraft_uuid}<xf:else />Yok</xf:if>
+                                    · Deneme: {$vote.attempt_count}
+                                    <xf:if is="$vote.delivered_date"> · NuVotifier teslim edildi: <xf:date time="$vote.delivered_date" /></xf:if>
+                                </div>
+
+                                <xf:if is="$vote.last_error">
+                                    <div class="contentRow-minor">Durum notu: {$vote.last_error}</div>
+                                </xf:if>
+
+                                <div class="buttonGroup" style="margin-top:10px">
+                                    <xf:if is="$vote.status != 'rejected' && $vote.status != 'processing'">
+                                        <xf:form action="{{ link('warext-minecraft/vote-moderate') }}" ajax="true" class="buttonGroup">
+                                            <xf:hiddenval name="vote_id" value="{$vote.vote_id}" />
+                                            <xf:hiddenval name="operation" value="reject" />
+                                            <xf:button type="submit" class="button--link">Sıralamadan Çıkar</xf:button>
+                                        </xf:form>
+                                    <xf:elseif is="$vote.status == 'rejected'" />
+                                        <xf:form action="{{ link('warext-minecraft/vote-moderate') }}" ajax="true" class="buttonGroup">
+                                            <xf:hiddenval name="vote_id" value="{$vote.vote_id}" />
+                                            <xf:hiddenval name="operation" value="restore" />
+                                            <xf:button type="submit">Geri Al</xf:button>
+                                        </xf:form>
+                                    <xf:else />
+                                        <span class="contentRow-minor">Teslimat lease'i aktif; moderasyon için işlemin bitmesini bekleyin.</span>
+                                    </xf:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Bu filtrede şüpheli oy bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
+
+<xf:pagenav
+    page="$page"
+    perpage="$perPage"
+    total="$total"
+    link="warext-minecraft/suspect-votes"
+    params="{{ {'min_score': $minScore, 'server_id': $serverId} }}" />
