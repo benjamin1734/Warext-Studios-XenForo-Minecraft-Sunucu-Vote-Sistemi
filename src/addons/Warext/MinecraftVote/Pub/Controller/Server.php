@@ -324,6 +324,58 @@ class Server extends AbstractController
         ]);
     }
 
+    public function actionDogrula(ParameterBag $params)
+    {
+        $server = $this->assertOwnedServer((int)$params->server_id);
+        $verification = $this->service('Warext\MinecraftVote:Server\Verification', $server);
+
+        if ($this->isPost())
+        {
+            $operation = $this->filter('operation', 'str');
+
+            try
+            {
+                if ($operation === 'start')
+                {
+                    $method = $this->filter('method', 'str');
+                    $verification->start($method);
+
+                    return $this->redirect(
+                        $this->buildLink('sunucular/dogrula', $server),
+                        'Yeni sunucu doğrulama kodu oluşturuldu.'
+                    );
+                }
+
+                if ($operation === 'verify')
+                {
+                    $result = $verification->verify();
+
+                    return $this->redirect(
+                        $this->buildLink('sunucular/detay', $server),
+                        (string)$result['message']
+                    );
+                }
+            }
+            catch (\XF\PrintableException $e)
+            {
+                return $this->error($e->getMessage(), 400);
+            }
+
+            return $this->error('Geçersiz doğrulama işlemi.', 400);
+        }
+
+        return $this->view('Warext\MinecraftVote:Server\Verification', 'warext_mc_server_verification', [
+            'server' => $server,
+            'dnsRecordName' => $server->verification_method === 'dns_txt' && $server->verification_token
+                ? $verification->getDnsRecordName()
+                : '',
+            'dnsRecordValue' => $server->verification_method === 'dns_txt' && $server->verification_token
+                ? $verification->getDnsRecordValue()
+                : '',
+            'tokenLifetimeHours' => $verification->getTokenLifetimeHours()
+        ]);
+    }
+
     public function actionDetay(ParameterBag $params)
     {
         $server = $this->assertViewableServer((int)$params->server_id);
