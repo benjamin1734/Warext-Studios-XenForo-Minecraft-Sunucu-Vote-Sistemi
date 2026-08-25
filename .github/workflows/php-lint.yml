@@ -27,3 +27,24 @@ jobs:
           find src -type f -path '*/_output/*' -name '*.json' -print0 | while IFS= read -r -d '' file; do
             python -m json.tool "$file" >/dev/null
           done
+
+      - name: XenForo source validation
+        run: python .github/validate_xf_source.py src/addons/Warext/MinecraftVote
+
+      - name: Build XenForo release data
+        run: python .github/build_xf_data.py src/addons/Warext/MinecraftVote
+
+      - name: Validate generated XML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          root = Path('src/addons/Warext/MinecraftVote/_data')
+          files = sorted(root.glob('*.xml'))
+          if not files:
+              raise SystemExit('Üretilmiş _data XML bulunamadı')
+          for path in files:
+              ET.parse(path)
+          print(f'{len(files)} XML dosyası parse edildi.')
+          PY
