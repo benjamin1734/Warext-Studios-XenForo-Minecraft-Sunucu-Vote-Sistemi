@@ -4,13 +4,13 @@ XenForo için Minecraft sunucu listeleme, keşif, oylama, NuVotifier entegrasyon
 
 ## Sürüm
 
-0.12.5 Beta
+0.13.0 Beta
 
 ## Kurulum
 
 Kurulum ZIP dosyaları yalnızca GitHub Releases bölümünde yayımlanır.
 
-Güncel paket: `v0.12.5`
+Güncel paket: `v0.13.0`
 
 XenForo ACP üzerinden Add-ons bölümündeki arşiv yükleme alanından ZIP dosyasını seçerek kurabilirsiniz.
 
@@ -25,6 +25,7 @@ XenForo ACP üzerinden Add-ons bölümündeki arşiv yükleme alanından ZIP dos
 - Minecraft hesabı bağlantısı
 - Vote streak ve sunucu başarımları
 - Yorumlar, favoriler ve bildirimler
+- Kullanıcı sunucu raporlama ve ACP rapor moderasyonu
 - Organik sıralamadan bağımsız sponsorlu listelemeler
 - Şüpheli oy inceleme ve audit sistemi
 - Gelişmiş sunucu sahibi ve ekip paneli
