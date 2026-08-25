@@ -1,0 +1,42 @@
+<xf:title>{$server.title} - Oy Ver</xf:title>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{$server.title} sunucusuna oy ver</div>
+        <div class="block-body">
+            <div class="block-row">
+                <div class="contentRow">
+                    <div class="contentRow-main">
+                        <div class="contentRow-title">{$server.host}:{$server.port}</div>
+                        <div class="contentRow-minor">
+                            Bu sunucuya yeniden oy verebilmek için {$cooldownHours} saat beklemeniz gerekir.
+                            Oy başarıyla kaydedildiğinde sunucunun Votifier entegrasyonu aktifse oyun içi ödül teslimatı kuyruğa alınır.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <xf:form action="{{ link('sunucular/oy', $server) }}" class="block" ajax="true">
+                <div class="block-body">
+                    <xf:textboxrow
+                        name="minecraft_username"
+                        label="Minecraft kullanıcı adı"
+                        maxlength="16"
+                        required="required"
+                        explain="Java/Minecraft kullanıcı adınızı yazın. 3-16 karakter; harf, rakam ve alt çizgi kullanılabilir." />
+
+                    <xf:textboxrow
+                        name="minecraft_uuid"
+                        label="Minecraft UUID"
+                        maxlength="36"
+                        explain="İsteğe bağlıdır. Hesap bağlantı sistemi tamamlandığında doğrulanmış hesaplarda otomatik doldurulacaktır." />
+                </div>
+
+                <xf:submitrow submit="Oy Ver" />
+            </xf:form>
+        </div>
+    </div>
+</div>
