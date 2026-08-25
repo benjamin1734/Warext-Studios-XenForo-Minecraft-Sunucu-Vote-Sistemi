@@ -42,6 +42,7 @@ class Server extends Entity
             'players_max' => ['type' => self::UINT, 'default' => 0],
             'motd' => ['type' => self::STR, 'nullable' => true, 'default' => null],
             'detected_version' => ['type' => self::STR, 'maxLength' => 100, 'default' => ''],
+            'last_ping_error' => ['type' => self::STR, 'maxLength' => 500, 'default' => ''],
             'uptime_bp' => ['type' => self::UINT, 'default' => 0],
             'vote_count_total' => ['type' => self::UINT, 'default' => 0],
             'vote_count_month' => ['type' => self::UINT, 'default' => 0],
