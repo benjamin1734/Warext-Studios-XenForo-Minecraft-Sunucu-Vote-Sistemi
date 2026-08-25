@@ -1,0 +1,41 @@
+<xf:title>Favori Minecraft Sunucularım</xf:title>
+<xf:description>Takip ettiğiniz Minecraft sunucularına hızlıca ulaşın.</xf:description>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Favorilerim</div>
+        <div class="block-body">
+            <xf:if is="$favorites is not empty">
+                <xf:foreach loop="$favorites" value="$favorite">
+                    <xf:if is="$favorite.Server">
+                        <div class="block-row block-row--separated">
+                            <div class="contentRow">
+                                <div class="contentRow-main">
+                                    <div class="contentRow-title">
+                                        <a href="{{ link('sunucular/detay', $favorite.Server) }}"><strong>{$favorite.Server.title}</strong></a>
+                                        <xf:if is="$favorite.Server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
+                                        <xf:if is="$favorite.Server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
+                                    </div>
+                                    <div class="contentRow-minor">
+                                        {$favorite.Server.host}:{$favorite.Server.port} · Oyuncu: {$favorite.Server.players_online}/{$favorite.Server.players_max} · Bu ay oy: {$favorite.Server.vote_count_month} · Uptime: {$favorite.Server.uptime_percent}%
+                                    </div>
+                                    <div class="contentRow-minor">Favoriye eklenme: <xf:date time="$favorite.created_date" /></div>
+                                    <div class="buttonGroup" style="margin-top:8px">
+                                        <xf:button href="{{ link('sunucular/detay', $favorite.Server) }}" class="button--primary">Sunucuya Git</xf:button>
+                                        <xf:form action="{{ link('sunucular/favori', $favorite.Server) }}" ajax="true" class="buttonGroup">
+                                            <xf:button type="submit" class="button--link">Favoriden Çıkar</xf:button>
+                                        </xf:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </xf:if>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Henüz favoriye eklediğiniz bir Minecraft sunucusu bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
