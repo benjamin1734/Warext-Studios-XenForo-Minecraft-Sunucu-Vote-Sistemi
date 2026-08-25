@@ -12,6 +12,9 @@
         <xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true" class="buttonGroup">
             <xf:button type="submit">Favoriye Ekle / Çıkar</xf:button>
         </xf:form>
+        <xf:if is="!$server.is_owner">
+            <xf:button href="{{ link('sunucular/rapor', $server) }}">Raporla</xf:button>
+        </xf:if>
     </xf:if>
 
     <xf:if is="$server.can_edit">
