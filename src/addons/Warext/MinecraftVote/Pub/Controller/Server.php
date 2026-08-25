@@ -72,8 +72,14 @@ class Server extends AbstractController
             ->order('display_order')
             ->fetch();
 
+        $sponsors = $this->repository('Warext\MinecraftVote:Sponsor')
+            ->findActiveForPlacement('list_top')
+            ->limit(6)
+            ->fetch();
+
         return $this->view('Warext\MinecraftVote:Server\Index', 'warext_mc_server_index', [
             'servers' => $servers,
+            'sponsors' => $sponsors,
             'categories' => $categories,
             'page' => $page,
             'perPage' => $perPage,
@@ -435,8 +441,13 @@ class Server extends AbstractController
             $this->repository('Warext\MinecraftVote:Server')->incrementViewCount($server);
         }
 
+        $achievements = $this->repository('Warext\MinecraftVote:Achievement')
+            ->findForServer($server->server_id)
+            ->fetch();
+
         return $this->view('Warext\MinecraftVote:Server\View', 'warext_mc_server_view', [
-            'server' => $server
+            'server' => $server,
+            'achievements' => $achievements
         ]);
     }
 
