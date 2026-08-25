@@ -5,8 +5,16 @@
 <xf:pageaction>
     <xf:if is="$server.state == 'active'">
         <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta">Oy Ver</xf:button>
+        <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncellemeler</xf:button>
+        <xf:button href="{{ link('sunucular/degerlendir', $server) }}">Değerlendirmeler ({$server.rating_count})</xf:button>
+    </xf:if>
+    <xf:if is="$xf.visitor.user_id && $server.state == 'active'">
+        <xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true" class="buttonGroup">
+            <xf:button type="submit">Favoriye Ekle / Çıkar</xf:button>
+        </xf:form>
     </xf:if>
     <xf:if is="$xf.visitor.user_id && $xf.visitor.user_id == $server.owner_user_id">
+        <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncelleme Yayınla</xf:button>
         <xf:button href="{{ link('sunucular/dogrula', $server) }}">
             <xf:if is="$server.is_verified">Doğrulama Bilgisi<xf:else />Sahipliği Doğrula</xf:if>
         </xf:button>
@@ -43,7 +51,7 @@
                 <div><strong>{$server.vote_count_total}</strong><span>Toplam oy</span></div>
                 <div><strong>{$server.uptime_percent}%</strong><span>Uptime</span></div>
                 <div><strong>{$server.ping_ms} ms</strong><span>Ping</span></div>
-                <div><strong>{$server.view_count}</strong><span>Görüntülenme</span></div>
+                <div><strong>{$server.rating_average} / 5</strong><span>Değerlendirme</span></div>
             </div>
 
             <xf:if is="$server.last_ping_date">
