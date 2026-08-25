@@ -36,7 +36,7 @@
                                     </xf:if>
                                 </div>
                                 <div class="contentRow-minor">
-                                    {$rank.vote_count} oy · {$rank.unique_voters} benzersiz seçmen · Peak {$rank.peak_players} oyuncu · Uptime {{ number($rank.uptime_bp / 100, 2) }}% · Sezon puanı {{ number($rank.season_score_bp / 100, 2) }}
+                                    {$rank.vote_count} oy · {$rank.unique_voters} benzersiz seçmen · Peak {$rank.peak_players} oyuncu · Uptime {$rank.uptime_percent}% · Sezon puanı {$rank.season_score}
                                 </div>
                             </div>
                         </div>
