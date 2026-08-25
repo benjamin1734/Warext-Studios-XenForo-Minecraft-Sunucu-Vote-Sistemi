@@ -1,0 +1,56 @@
+<xf:title>Minecraft Sunucularını Karşılaştır</xf:title>
+<xf:description>En fazla 4 Minecraft sunucusunu temel performans ve topluluk metrikleriyle yan yana karşılaştır.</xf:description>
+<xf:css src="warext_mc_servers.less" />
+
+<xf:form action="{{ link('sunucular/karsilastir') }}" class="block">
+    <div class="block-container">
+        <h2 class="block-header">Karşılaştırılacak Sunucular</h2>
+        <div class="block-body">
+            <xf:foreach loop="{{ range(0, 3) }}" value="$slot">
+                <xf:selectrow name="server_ids[]" label="Sunucu {{ $slot + 1 }}">
+                    <xf:option value="0">Seçiniz</xf:option>
+                    <xf:foreach loop="$availableServers" value="$candidate">
+                        <xf:option value="{$candidate.server_id}" selected="{{ isset($selectedIds[$slot]) && $selectedIds[$slot] == $candidate.server_id }}">
+                            {$candidate.title} · {$candidate.host}:{$candidate.port}
+                        </xf:option>
+                    </xf:foreach>
+                </xf:selectrow>
+            </xf:foreach>
+        </div>
+        <xf:submitrow submit="Karşılaştır" />
+    </div>
+</xf:form>
+
+<xf:if is="$servers is not empty">
+    <div class="block">
+        <div class="block-container">
+            <h2 class="block-header">Karşılaştırma Sonuçları</h2>
+            <div class="block-body">
+                <div class="dataList">
+                    <div class="dataList-row dataList-row--header">
+                        <div class="dataList-cell">Özellik</div>
+                        <xf:foreach loop="$servers" value="$server">
+                            <div class="dataList-cell"><a href="{{ link('sunucular/detay', $server) }}">{$server.title}</a></div>
+                        </xf:foreach>
+                    </div>
+
+                    <div class="dataList-row"><div class="dataList-cell">Durum</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Oyuncu</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.players_online} / {$server.players_max}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Ping</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.ping_ms} ms</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Uptime</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.uptime_percent}%</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Bu ay oy</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.vote_count_month}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">24 saat oy</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.votes_24h}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">72 saat oy</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.votes_72h}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Aylık benzersiz oy veren</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.unique_voters_month}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Popülerlik sırası</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.rank_popular">#{$server.rank_popular}<xf:else />-</xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Trend sırası</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.rank_trending">#{$server.rank_trending}<xf:else />-</xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Puan</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.rating_average} / 5 ({$server.rating_count})</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Tür</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.server_type}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Sürüm</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.detected_version">{$server.detected_version}<xf:else />-</xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Doğrulama</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.is_verified"><span class="label label--primary">Doğrulanmış</span><xf:else />-</xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Eklenme</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:date time="$server.created_date" /></div></xf:foreach></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</xf:if>
