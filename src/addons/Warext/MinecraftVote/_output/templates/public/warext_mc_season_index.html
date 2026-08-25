@@ -49,7 +49,7 @@
                                     <a href="{{ link('sunucular/sezon', $season) }}">{$season.season_key} Sezonu</a>
                                 </div>
                                 <div class="contentRow-minor">
-                                    <xf:if is="$season.Winner">Kazanan: {$season.Winner.title} · </xf:if>
+                                    <xf:if is="$season.winner_title">Kazanan: {$season.winner_title} · </xf:if>
                                     {$season.total_votes} oy · {$season.unique_voters} benzersiz seçmen · {$season.server_count} sunucu
                                 </div>
                             </div>
