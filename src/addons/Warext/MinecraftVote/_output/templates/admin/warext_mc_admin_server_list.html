@@ -21,18 +21,42 @@
                                     <strong>{$server.title}</strong>
                                     <span class="label">{$server.state}</span>
                                     <xf:if is="$server.is_verified"><span class="label label--green">Doğrulanmış</span></xf:if>
+                                    <xf:if is="$server.is_online">
+                                        <span class="label label--green">Online</span>
+                                    <xf:else />
+                                        <span class="label label--red">Offline</span>
+                                    </xf:if>
                                 </div>
+
                                 <div class="contentRow-minor">
                                     {$server.host}:{$server.port}
                                     <xf:if is="$server.Owner"> · Sahip: {$server.Owner.username}</xf:if>
                                     · Tür: {$server.server_type}
                                     · Oy: {$server.vote_count_month}
                                 </div>
+
                                 <div class="contentRow-minor">
-                                    Eklenme: <xf:date time="$server.created_date" />
+                                    Oyuncu: {$server.players_online}/{$server.players_max}
+                                    · Ping: {$server.ping_ms} ms
+                                    · Uptime: {$server.uptime_percent}%
+                                    <xf:if is="$server.detected_version"> · Sürüm: {$server.detected_version}</xf:if>
                                 </div>
 
+                                <div class="contentRow-minor">
+                                    Eklenme: <xf:date time="$server.created_date" />
+                                    <xf:if is="$server.last_ping_date"> · Son kontrol: <xf:date time="$server.last_ping_date" /></xf:if>
+                                </div>
+
+                                <xf:if is="$server.motd">
+                                    <div class="contentRow-minor">MOTD: {$server.motd}</div>
+                                </xf:if>
+
                                 <div class="buttonGroup buttonGroup--alignOpposite" style="margin-top:10px">
+                                    <xf:form action="{{ link('warext-minecraft/ping') }}" class="buttonGroup">
+                                        <xf:hiddenval name="server_id" value="{$server.server_id}" />
+                                        <xf:button type="submit">Ping Testi</xf:button>
+                                    </xf:form>
+
                                     <xf:form action="{{ link('warext-minecraft/state') }}" ajax="true" class="buttonGroup">
                                         <xf:hiddenval name="server_id" value="{$server.server_id}" />
                                         <xf:button type="submit" name="state" value="active" class="button--primary">Onayla</xf:button>
