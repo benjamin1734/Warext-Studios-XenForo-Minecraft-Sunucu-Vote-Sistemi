@@ -27,6 +27,7 @@ class Logger extends AbstractService
             'review_hidden',
             'review_restored',
             'server_state_changed',
+            'server_deleted',
             'sponsor_created',
             'sponsor_updated',
             'sponsor_deleted',
