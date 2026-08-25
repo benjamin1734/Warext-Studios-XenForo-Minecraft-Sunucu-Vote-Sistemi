@@ -7,6 +7,7 @@ on:
     paths:
       - 'src/addons/Warext/MinecraftVote/**'
       - '.github/build_xf_data.py'
+      - '.github/build_xf_permissions.py'
       - '.github/validate_xf_source.py'
       - '.github/workflows/build-addon.yml'
   workflow_dispatch:
@@ -24,7 +25,9 @@ jobs:
         run: python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
 
       - name: Build XenForo release data
-        run: python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
+        run: |
+          python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_permissions.py src/addons/Warext/MinecraftVote
 
       - name: Validate XML
         run: |
@@ -34,6 +37,11 @@ jobs:
           files = sorted(Path('src/addons/Warext/MinecraftVote/_data').glob('*.xml'))
           if not files:
               raise SystemExit('No _data XML files generated')
+          names = {file.name for file in files}
+          required = {'permissions.xml', 'permission_interface_groups.xml'}
+          missing = required - names
+          if missing:
+              raise SystemExit('Missing permission master data: ' + ', '.join(sorted(missing)))
           for file in files:
               ET.parse(file)
               print(file)
