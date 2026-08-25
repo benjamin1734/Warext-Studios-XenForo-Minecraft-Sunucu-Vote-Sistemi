@@ -128,9 +128,25 @@ class Review extends AbstractController
             return $this->error('Geçersiz değerlendirme durumu.', 400);
         }
 
+        $previousState = (string)$review->state;
         $review->state = $state;
         $review->save();
         $this->repository('Warext\MinecraftVote:Review')->rebuildServerRating($review->Server);
+
+        if ($previousState !== $state)
+        {
+            $this->service('Warext\MinecraftVote:Audit\Logger')->log(
+                $state === 'visible' ? 'review_restored' : 'review_hidden',
+                $review->server_id,
+                $visitor->user_id,
+                $review->user_id,
+                [
+                    'review_id' => $review->review_id,
+                    'previous_state' => $previousState,
+                    'new_state' => $state
+                ]
+            );
+        }
 
         return $this->redirect(
             $this->buildLink('sunucular/degerlendir', $review->Server),
