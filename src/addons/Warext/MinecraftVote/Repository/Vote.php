@@ -117,24 +117,20 @@ class Vote extends Repository
     public function rebuildServerCounters(Server $server): void
     {
         [$dayStart, $monthStart] = $this->getCounterBoundaries();
-        $db = $this->db();
 
-        $total = (int)$db->fetchOne(
-            "SELECT COUNT(*) FROM xf_warext_mc_vote WHERE server_id = ? AND status <> 'rejected'",
-            $server->server_id
-        );
-        $month = (int)$db->fetchOne(
-            "SELECT COUNT(*) FROM xf_warext_mc_vote WHERE server_id = ? AND status <> 'rejected' AND vote_date >= ?",
-            [$server->server_id, $monthStart]
-        );
-        $today = (int)$db->fetchOne(
-            "SELECT COUNT(*) FROM xf_warext_mc_vote WHERE server_id = ? AND status <> 'rejected' AND vote_date >= ?",
-            [$server->server_id, $dayStart]
+        $row = $this->db()->fetchRow(
+            "SELECT
+                COUNT(*) AS vote_count_total,
+                SUM(vote_date >= ?) AS vote_count_month,
+                SUM(vote_date >= ?) AS vote_count_today
+             FROM xf_warext_mc_vote
+             WHERE server_id = ? AND status <> 'rejected'",
+            [$monthStart, $dayStart, $server->server_id]
         );
 
-        $server->vote_count_total = $total;
-        $server->vote_count_month = $month;
-        $server->vote_count_today = $today;
+        $server->vote_count_total = (int)($row['vote_count_total'] ?? 0);
+        $server->vote_count_month = (int)($row['vote_count_month'] ?? 0);
+        $server->vote_count_today = (int)($row['vote_count_today'] ?? 0);
         $server->save();
     }
 
