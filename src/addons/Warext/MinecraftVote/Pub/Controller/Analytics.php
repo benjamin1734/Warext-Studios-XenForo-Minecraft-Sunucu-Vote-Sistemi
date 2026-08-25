@@ -51,11 +51,11 @@ class Analytics extends AbstractController
 
         $favorites = $this->db()->fetchOne(
             'SELECT COUNT(*) FROM xf_warext_mc_favorite WHERE server_id = ?',
-            $server->server_id
+            [$server->server_id]
         );
         $reviews = $this->db()->fetchOne(
             "SELECT COUNT(*) FROM xf_warext_mc_review WHERE server_id = ? AND state = 'visible'",
-            $server->server_id
+            [$server->server_id]
         );
 
         $delivered = (int)($voteStats['delivered_30d'] ?? 0);
