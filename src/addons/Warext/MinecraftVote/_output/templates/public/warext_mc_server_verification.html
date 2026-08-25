@@ -1,0 +1,88 @@
+<xf:title>{$server.title} - Sunucu Sahipliğini Doğrula</xf:title>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<xf:if is="$server.is_verified">
+    <div class="blockMessage blockMessage--success">
+        Bu sunucunun sahipliği doğrulanmış durumda.
+        <xf:if is="$server.verified_date">
+            Doğrulama tarihi: <xf:date time="$server.verified_date" />.
+        </xf:if>
+        Yöntem: <xf:if is="$server.verification_method == 'dns_txt'">DNS TXT<xf:else />MOTD</xf:if>.
+    </div>
+</xf:if>
+
+<xf:if is="$server.verification_token">
+    <div class="block">
+        <div class="block-container">
+            <div class="block-header">Aktif Doğrulama</div>
+            <div class="block-body">
+                <div class="block-row">
+                    <div class="contentRow">
+                        <div class="contentRow-main">
+                            <div class="contentRow-title">Doğrulama Kodu</div>
+                            <div class="contentRow-minor">Kod {$tokenLifetimeHours} saat geçerlidir.</div>
+                            <div style="margin-top:8px"><code>{$server.verification_token}</code></div>
+                        </div>
+                    </div>
+                </div>
+
+                <xf:if is="$server.verification_method == 'motd'">
+                    <div class="block-row">
+                        <strong>MOTD doğrulaması</strong>
+                        <div class="contentRow-minor" style="margin-top:6px">
+                            Sunucunuzun MOTD metninin herhangi bir yerine <code>{$server.verification_token}</code> kodunu ekleyin.
+                            Değişiklik gerekiyorsa sunucuyu yeniden başlatın ve ardından aşağıdaki kontrol düğmesini kullanın.
+                        </div>
+                    </div>
+                <xf:elseif is="$server.verification_method == 'dns_txt'" />
+                    <div class="block-row">
+                        <strong>DNS TXT doğrulaması</strong>
+                        <dl class="pairs pairs--columns pairs--fixedSmall" style="margin-top:8px">
+                            <dt>Kayıt adı</dt>
+                            <dd><code>{$dnsRecordName}</code></dd>
+                        </dl>
+                        <dl class="pairs pairs--columns pairs--fixedSmall">
+                            <dt>TXT değeri</dt>
+                            <dd><code>{$dnsRecordValue}</code></dd>
+                        </dl>
+                        <div class="contentRow-minor">DNS yayılımına bağlı olarak yeni kayıtların görünmesi biraz gecikebilir.</div>
+                    </div>
+                </xf:if>
+            </div>
+
+            <xf:form action="{{ link('sunucular/dogrula', $server) }}">
+                <xf:hiddenval name="operation" value="verify" />
+                <xf:submitrow submit="Doğrulamayı Kontrol Et" />
+            </xf:form>
+        </div>
+    </div>
+</xf:if>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header"><xf:if is="$server.verification_token">Yeni Kod Oluştur<xf:else />Doğrulama Yöntemi Seç</xf:if></div>
+        <div class="block-body">
+            <div class="block-row">
+                <strong>MOTD ile doğrulama</strong>
+                <div class="contentRow-minor">Lokal sunucular ve alan adı yönetimi olmayan sunucular için en kolay yöntemdir.</div>
+                <xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px">
+                    <xf:hiddenval name="operation" value="start" />
+                    <xf:hiddenval name="method" value="motd" />
+                    <xf:button type="submit">MOTD Kodu Oluştur</xf:button>
+                </xf:form>
+            </div>
+
+            <div class="block-row block-row--separated">
+                <strong>DNS TXT ile doğrulama</strong>
+                <div class="contentRow-minor">Sunucu alan adının DNS yönetimine erişiminiz varsa MOTD'yi değiştirmeden doğrulama yapabilirsiniz.</div>
+                <xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px">
+                    <xf:hiddenval name="operation" value="start" />
+                    <xf:hiddenval name="method" value="dns_txt" />
+                    <xf:button type="submit">DNS TXT Kodu Oluştur</xf:button>
+                </xf:form>
+            </div>
+        </div>
+    </div>
+</div>
