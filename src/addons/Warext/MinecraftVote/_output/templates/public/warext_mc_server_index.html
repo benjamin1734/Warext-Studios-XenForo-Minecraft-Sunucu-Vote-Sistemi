@@ -6,6 +6,7 @@
     <xf:button href="{{ link('sunucular/karsilastir') }}">Karşılaştır</xf:button>
     <xf:button href="{{ link('sunucular/sezonlar') }}">Sezonlar</xf:button>
     <xf:if is="$xf.visitor.user_id">
+        <xf:button href="{{ link('sunucular/favoriler') }}">Favorilerim</xf:button>
         <xf:button href="{{ link('sunucular/hesaplar') }}">Minecraft Hesaplarım</xf:button>
     </xf:if>
     <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">Sunucu Ekle</xf:button>
@@ -58,7 +59,7 @@
                                 <div><strong>{$server.players_online}</strong><span>Oyuncu</span></div>
                                 <div><strong>{$server.vote_count_month}</strong><span>Bu ay oy</span></div>
                                 <div><strong>{$server.uptime_percent}%</strong><span>Uptime</span></div>
-                                <div><strong>{$server.ping_ms} ms</strong><span>Ping</span></div>
+                                <div><strong>{$server.rating_average}</strong><span>Puan</span></div>
                             </div>
 
                             <div class="contentRow-minor">
@@ -73,6 +74,7 @@
 
                             <div class="warextMcServerCard-actions">
                                 <xf:button href="{{ link('sunucular/detay', $server) }}" class="button--primary">Detaylar</xf:button>
+                                <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncellemeler</xf:button>
                             </div>
                         </div>
                     </div>
