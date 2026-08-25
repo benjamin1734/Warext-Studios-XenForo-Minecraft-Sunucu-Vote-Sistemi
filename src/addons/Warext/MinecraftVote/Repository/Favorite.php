@@ -20,6 +20,13 @@ class Favorite extends Repository
             ->fetchOne();
     }
 
+    public function countForServer(int $serverId): int
+    {
+        return $this->finder('Warext\MinecraftVote:Favorite')
+            ->where('server_id', $serverId)
+            ->total();
+    }
+
     public function toggle(Server $server, int $userId): bool
     {
         if ($userId <= 0)
@@ -50,13 +57,6 @@ class Favorite extends Repository
                 $favorite->save();
                 $active = true;
             }
-
-            $count = (int)$this->finder('Warext\MinecraftVote:Favorite')
-                ->where('server_id', $server->server_id)
-                ->total();
-
-            $server->favorite_count = $count;
-            $server->save();
 
             $db->commit();
             return $active;
