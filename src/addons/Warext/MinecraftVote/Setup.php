@@ -163,6 +163,11 @@ class Setup extends AbstractSetup
         });
     }
 
+    public function installStep7(): void
+    {
+        $this->createVotifierTable();
+    }
+
     public function upgrade1000020Step1(): void
     {
         if (!$this->schemaManager()->columnExists('xf_warext_mc_server', 'last_ping_error'))
@@ -174,9 +179,35 @@ class Setup extends AbstractSetup
         }
     }
 
+    public function upgrade1000030Step1(): void
+    {
+        $this->createVotifierTable();
+    }
+
+    protected function createVotifierTable(): void
+    {
+        $this->schemaManager()->createTable('xf_warext_mc_votifier', function (Create $table)
+        {
+            $table->addColumn('server_id', 'int');
+            $table->addColumn('enabled', 'tinyint')->setDefault(0);
+            $table->addColumn('host', 'varchar', 255)->setDefault('');
+            $table->addColumn('port', 'int')->setDefault(8192);
+            $table->addColumn('protocol', 'varchar', 10)->setDefault('v2');
+            $table->addColumn('service_name', 'varchar', 64)->setDefault('Warext');
+            $table->addColumn('token_encrypted', 'text')->nullable(true);
+            $table->addColumn('last_test_date', 'int')->setDefault(0);
+            $table->addColumn('last_success_date', 'int')->setDefault(0);
+            $table->addColumn('last_error', 'varchar', 500)->setDefault('');
+            $table->addColumn('updated_date', 'int')->setDefault(0);
+            $table->addPrimaryKey('server_id');
+            $table->addKey(['enabled', 'updated_date'], 'warext_mc_votifier_enabled');
+        });
+    }
+
     public function uninstallStep1(): void
     {
         $sm = $this->schemaManager();
+        $sm->dropTable('xf_warext_mc_votifier');
         $sm->dropTable('xf_warext_mc_ping_history');
         $sm->dropTable('xf_warext_mc_server_team');
         $sm->dropTable('xf_warext_mc_vote');
