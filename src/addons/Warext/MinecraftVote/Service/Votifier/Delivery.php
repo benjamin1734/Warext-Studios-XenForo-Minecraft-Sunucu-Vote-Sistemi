@@ -32,22 +32,22 @@ class Delivery extends AbstractService
             return $this->markFailed('Oy kaydına bağlı sunucu bulunamadı.');
         }
 
-        /** @var VotifierConfig|null $config */
         $config = $this->em()->find('Warext\MinecraftVote:VotifierConfig', $server->server_id);
         if (!$config || !$config->enabled)
         {
             $this->vote->status = 'skipped';
             $this->vote->last_error = '';
+            $this->vote->next_attempt_date = 0;
             $this->vote->save();
             return 'skipped';
         }
+
+        $this->vote->attempt_count++;
 
         if (!$config->token_encrypted)
         {
             return $this->handleFailure($config, 'NuVotifier token yapılandırılmamış.');
         }
-
-        $this->vote->attempt_count++;
 
         try
         {
