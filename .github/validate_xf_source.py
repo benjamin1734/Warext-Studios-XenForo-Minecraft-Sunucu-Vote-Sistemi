@@ -7,6 +7,7 @@ from pathlib import Path
 ADDON_ID = 'Warext/MinecraftVote'
 ADDON_NS = 'Warext\\MinecraftVote'
 MAX_XF_SHORT_ID = 25
+ID_RE = re.compile(r'^[A-Za-z0-9]+$')
 
 
 def load_json(path: Path):
@@ -132,6 +133,56 @@ def validate_admin_navigation(addon: Path):
     return errors
 
 
+def validate_permissions(addon: Path):
+    errors = []
+    output = addon / '_output'
+    phrase_root = output / 'phrases'
+    interface_root = output / 'permission_interface_groups'
+    permission_root = output / 'permissions'
+
+    interface_ids = set()
+    for path in sorted(interface_root.glob('*.json')):
+        interface_id = path.stem
+        if len(interface_id) > 50 or not ID_RE.fullmatch(interface_id):
+            errors.append(f'{path}: geçersiz permission interface ID')
+            continue
+        interface_ids.add(interface_id)
+        phrase = phrase_root / f'permission_interface.{interface_id}.txt'
+        if not phrase.is_file() or not phrase.read_text(encoding='utf-8-sig').strip():
+            errors.append(f'{path}: permission interface phrase bulunamadı veya boş: {phrase.name}')
+
+    if not interface_ids:
+        errors.append('permission interface tanımı bulunamadı')
+
+    permission_count = 0
+    for path in sorted(permission_root.glob('*.json')):
+        if '-' not in path.stem:
+            errors.append(f'{path}: permission dosya adı group-permission biçiminde değil')
+            continue
+        group_id, permission_id = path.stem.split('-', 1)
+        if len(group_id) > 25 or len(permission_id) > 25:
+            errors.append(f'{path}: permission group/id 25 karakter sınırını aşıyor')
+        if not ID_RE.fullmatch(group_id) or not ID_RE.fullmatch(permission_id):
+            errors.append(f'{path}: permission group/id yalnız alfanumerik olabilir')
+
+        obj = load_json(path)
+        interface_id = str(obj.get('interface_group_id', ''))
+        if interface_id not in interface_ids:
+            errors.append(f'{path}: permission interface bulunamadı: {interface_id}')
+        if str(obj.get('permission_type', '')) not in {'flag', 'integer'}:
+            errors.append(f'{path}: geçersiz permission_type')
+
+        phrase = phrase_root / f'permission.{group_id}_{permission_id}.txt'
+        if not phrase.is_file() or not phrase.read_text(encoding='utf-8-sig').strip():
+            errors.append(f'{path}: permission phrase bulunamadı veya boş: {phrase.name}')
+        permission_count += 1
+
+    if permission_count == 0:
+        errors.append('kullanıcı permission tanımı bulunamadı')
+
+    return errors
+
+
 def validate_cron(addon: Path):
     errors = []
     for path in sorted((addon / '_output' / 'cron_entries').glob('*.json')):
@@ -198,6 +249,7 @@ def validate_addon(addon: Path):
     errors += validate_short_ids(addon)
     errors += validate_routes(addon)
     errors += validate_admin_navigation(addon)
+    errors += validate_permissions(addon)
     errors += validate_cron(addon)
     errors += validate_content_types(addon)
     errors += validate_controller_templates(addon)
@@ -212,7 +264,7 @@ def main():
         for error in errors:
             print(f'- {error}', file=sys.stderr)
         raise SystemExit(1)
-    print('XenForo ID/route/action/navigation/cron/content-type/template doğrulaması başarılı.')
+    print('XenForo ID/route/action/navigation/permission/cron/content-type/template doğrulaması başarılı.')
 
 
 if __name__ == '__main__':
