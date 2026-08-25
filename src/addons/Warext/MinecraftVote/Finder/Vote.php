@@ -20,7 +20,7 @@ class Vote extends Finder
 
     public function pendingDelivery(int $now): self
     {
-        $this->where('status', ['pending', 'retry']);
+        $this->where('status', ['pending', 'retry', 'processing']);
         $this->where('next_attempt_date', '<=', $now);
         $this->order('vote_id', 'ASC');
         return $this;
