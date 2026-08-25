@@ -1,0 +1,54 @@
+<xf:title>{$server.title} - Güncellemeler</xf:title>
+<xf:description>Sunucu sahibinin yayınladığı sürüm notları ve değişiklikler.</xf:description>
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<xf:if is="$canPublish">
+    <xf:form action="{{ link('sunucular/guncellemeler', $server) }}" class="block" ajax="true">
+        <div class="block-container">
+            <div class="block-header">Yeni Güncelleme Yayınla</div>
+            <div class="block-body">
+                <xf:textboxrow name="title" maxlength="100" label="Başlık" required="required" />
+                <xf:textboxrow name="version_label" maxlength="50" label="Sürüm Etiketi" explain="İsteğe bağlı. Örnek: 1.4.2, Sezon 3 veya Ağustos Güncellemesi." />
+                <xf:textarearow name="message" rows="7" maxlength="10000" label="Değişiklikler" required="required" explain="En az 10, en fazla 10000 karakter." />
+            </div>
+            <xf:submitrow submit="Yayınla" />
+        </div>
+    </xf:form>
+</xf:if>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Güncelleme Geçmişi</div>
+        <div class="block-body">
+            <xf:if is="$updates is not empty">
+                <xf:foreach loop="$updates" value="$update">
+                    <article class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{$update.title}</strong>
+                                    <xf:if is="$update.version_label"><span class="label label--primary">{$update.version_label}</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">
+                                    <xf:if is="$update.User"><xf:username user="$update.User" /> · </xf:if><xf:date time="$update.created_date" />
+                                </div>
+                                <div class="contentRow-snippet" style="margin-top:10px; white-space:pre-wrap">{$update.message}</div>
+                                <xf:if is="$canPublish">
+                                    <xf:form action="{{ link('sunucular/guncelleme-sil', $update) }}" ajax="true" data-xf-init="delete" style="margin-top:10px">
+                                        <xf:button type="submit" class="button--link">Güncellemeyi Sil</xf:button>
+                                    </xf:form>
+                                </xf:if>
+                            </div>
+                        </div>
+                    </article>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Bu sunucu henüz bir güncelleme yayınlamamış.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
+
+<xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/guncellemeler" data="$server" />
