@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "sunucular",
+    "sub_name": "degerlendirme-yonet",
+    "format": ":int<review_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Review",
+    "context": "",
+    "action_prefix": "moderate"
+}
