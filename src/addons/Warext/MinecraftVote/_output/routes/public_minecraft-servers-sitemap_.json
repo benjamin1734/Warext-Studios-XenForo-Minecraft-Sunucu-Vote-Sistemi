@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "minecraft-servers-sitemap",
+    "sub_name": "",
+    "format": "",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Sitemap",
+    "context": "",
+    "action_prefix": ""
+}

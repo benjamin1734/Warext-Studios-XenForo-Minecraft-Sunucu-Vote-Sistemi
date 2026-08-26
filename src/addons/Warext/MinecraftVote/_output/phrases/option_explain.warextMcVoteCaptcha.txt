@@ -1,0 +1,1 @@
+Etkin olduğunda oy formu XenForo'da yapılandırılmış CAPTCHA sağlayıcısını kullanır. Lokal test ortamında gerekirse kapatılabilir.

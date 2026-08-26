@@ -24,9 +24,25 @@ class Detail extends AbstractController
         $visitor = \XF::visitor();
         $allowGuests = (bool)(\XF::options()->warextMcAllowGuestVotes ?? true);
 
+        $parts = [$server->title . ' Minecraft sunucusu'];
+        if ($server->game_modes !== '')
+        {
+            $parts[] = $server->game_modes;
+        }
+        if ($server->detected_version !== '')
+        {
+            $parts[] = 'Sürüm ' . $server->detected_version;
+        }
+        $parts[] = $server->is_online
+            ? sprintf('%d/%d oyuncu çevrimiçi', (int)$server->players_online, (int)$server->players_max)
+            : 'Sunucu şu anda çevrimdışı';
+        $parts[] = sprintf('%d aylık oy', (int)$server->vote_count_month);
+        $seoDescription = mb_substr(implode(' · ', $parts), 0, 220);
+
         return $this->view('Warext\MinecraftVote:Server\View', 'warext_mc_server_view', [
             'server' => $server,
             'achievements' => $achievements,
+            'seoDescription' => $seoDescription,
             'canVote' => $server->state === 'active' && PublicPermissions::allows('vote', $allowGuests, true),
             'canFavorite' => $server->state === 'active' && $visitor->user_id && PublicPermissions::allows('favorite', false, true),
             'canReport' => $server->state === 'active' && $visitor->user_id && !$server->is_owner && PublicPermissions::allows('report', false, true)

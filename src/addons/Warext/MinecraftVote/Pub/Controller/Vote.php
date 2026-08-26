@@ -14,12 +14,14 @@ class Vote extends AbstractController
         $server = $this->assertActiveServer((int)$params->server_id);
         $visitor = \XF::visitor();
         $allowGuests = (bool)(\XF::options()->warextMcAllowGuestVotes ?? true);
+        $requireVerifiedAccount = (bool)(\XF::options()->warextMcRequireVerifiedAccountForVotes ?? false);
+        $requireCaptcha = (bool)(\XF::options()->warextMcVoteCaptcha ?? true);
 
         if (!PublicPermissions::allows('vote', $allowGuests, true))
         {
             return $this->noPermission();
         }
-        if (!$visitor->user_id && !$allowGuests)
+        if (!$visitor->user_id && (!$allowGuests || $requireVerifiedAccount))
         {
             return $this->noPermission();
         }
@@ -30,6 +32,11 @@ class Vote extends AbstractController
 
         if ($this->isPost())
         {
+            if ($requireCaptcha && !$this->captchaIsValid())
+            {
+                return $this->error(\XF::phrase('did_not_complete_the_captcha_verification_properly'));
+            }
+
             try
             {
                 $this->service('Warext\MinecraftVote:RateLimit\Request')->assertIp(
@@ -48,6 +55,11 @@ class Vote extends AbstractController
             $username = $this->filter('minecraft_username', 'str');
             $uuid = $this->filter('minecraft_uuid', 'str');
 
+            if ($requireVerifiedAccount && !$accountId)
+            {
+                return $this->error('Oy verebilmek için doğrulanmış Minecraft hesabınızı seçmeniz gerekiyor.');
+            }
+
             if ($accountId)
             {
                 if (!$visitor->user_id)
@@ -60,6 +72,10 @@ class Vote extends AbstractController
                 if (!$linkedAccount)
                 {
                     return $this->error('Seçilen Minecraft hesabı bulunamadı.', 404);
+                }
+                if ($requireVerifiedAccount && $linkedAccount->verification_state !== 'verified')
+                {
+                    return $this->error('Bu Minecraft hesabı doğrulanmamış. Oy vermeden önce hesabı doğrulayın.');
                 }
 
                 $username = $linkedAccount->minecraft_username;
@@ -74,7 +90,7 @@ class Vote extends AbstractController
                     (string)$this->request->getIp(),
                     (string)$this->request->getServer('HTTP_USER_AGENT', '')
                 );
-                $creator->create();
+                $vote = $creator->create();
             }
             catch (\XF\PrintableException $e)
             {
@@ -82,6 +98,7 @@ class Vote extends AbstractController
             }
 
             $this->enqueueVoteDelivery();
+            $this->enqueueWebhookDelivery((int)$vote->vote_id);
 
             return $this->redirect(
                 $this->buildLink('sunucular/detay', $server),
@@ -93,7 +110,9 @@ class Vote extends AbstractController
             'server' => $server,
             'cooldownHours' => min(168, max(1, (int)(\XF::options()->warextMcVoteCooldownHours ?? 24))),
             'allowGuests' => $allowGuests,
-            'linkedAccounts' => $linkedAccounts
+            'linkedAccounts' => $linkedAccounts,
+            'requireVerifiedAccount' => $requireVerifiedAccount,
+            'requireCaptcha' => $requireCaptcha
         ]);
     }
 
@@ -122,5 +141,20 @@ class Vote extends AbstractController
                 false
             );
         }
+    }
+
+    protected function enqueueWebhookDelivery(int $voteId): void
+    {
+        if ($voteId <= 0 || !(bool)(\XF::options()->warextMcWebhookEnabled ?? false))
+        {
+            return;
+        }
+
+        $this->app->jobManager()->enqueueUnique(
+            'warextMinecraftVoteWebhook' . $voteId,
+            'Warext\MinecraftVote:WebhookDelivery',
+            ['vote_id' => $voteId, 'attempt' => 0],
+            false
+        );
     }
 }

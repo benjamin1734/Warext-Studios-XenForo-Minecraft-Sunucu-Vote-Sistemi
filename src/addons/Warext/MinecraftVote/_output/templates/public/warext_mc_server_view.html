@@ -1,5 +1,5 @@
 <xf:title>{$server.title}</xf:title>
-<xf:description>{$server.host}:{$server.port}</xf:description>
+<xf:description>{$seoDescription}</xf:description>
 <xf:css src="warext_mc_servers.less" />
 
 <xf:pageaction>
@@ -41,6 +41,9 @@
             <xf:if is="$server.is_verified">Doğrulama Bilgisi<xf:else />Sahipliği Doğrula</xf:if>
         </xf:button>
         <xf:button href="{{ link('sunucular/sahiplik-devret', $server) }}">Sahipliği Devret</xf:button>
+        <xf:if is="$server.state == 'active' && $xf.options.warextMcSponsorSalesEnabled">
+            <xf:button href="{{ link('sunucular/sponsor', $server) }}" class="button--cta">Sponsor Ol</xf:button>
+        </xf:if>
     </xf:if>
 </xf:pageaction>
 
@@ -111,45 +114,19 @@
     <div class="block-container">
         <h2 class="block-header">Sunucu Bilgileri</h2>
         <div class="block-body">
-            <dl class="pairs pairs--columns pairs--fixedSmall">
-                <dt>Tür</dt>
-                <dd>{$server.server_type}</dd>
-            </dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall">
-                <dt>Oyun modları</dt>
-                <dd><xf:if is="$server.game_modes">{$server.game_modes}<xf:else />Belirtilmedi</xf:if></dd>
-            </dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall">
-                <dt>Tespit edilen sürüm</dt>
-                <dd><xf:if is="$server.detected_version">{$server.detected_version}<xf:else />Henüz tespit edilmedi</xf:if></dd>
-            </dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall">
-                <dt>Desteklenen sürüm</dt>
-                <dd><xf:if is="$server.version_min">{$server.version_min}<xf:if is="$server.version_max"> - {$server.version_max}</xf:if><xf:else />Belirtilmedi</xf:if></dd>
-            </dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall">
-                <dt>Ülke</dt>
-                <dd><xf:if is="$server.country_code">{$server.country_code}<xf:else />Belirtilmedi</xf:if></dd>
-            </dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall">
-                <dt>Premium</dt>
-                <dd><xf:if is="$server.is_premium">Evet<xf:else />Hayır</xf:if></dd>
-            </dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall">
-                <dt>Crack desteği</dt>
-                <dd><xf:if is="$server.allow_cracked">Evet<xf:else />Hayır</xf:if></dd>
-            </dl>
+            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Tür</dt><dd>{$server.server_type}</dd></dl>
+            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Oyun modları</dt><dd><xf:if is="$server.game_modes">{$server.game_modes}<xf:else />Belirtilmedi</xf:if></dd></dl>
+            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Tespit edilen sürüm</dt><dd><xf:if is="$server.detected_version">{$server.detected_version}<xf:else />Henüz tespit edilmedi</xf:if></dd></dl>
+            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Desteklenen sürüm</dt><dd><xf:if is="$server.version_min">{$server.version_min}<xf:if is="$server.version_max"> - {$server.version_max}</xf:if><xf:else />Belirtilmedi</xf:if></dd></dl>
+            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Ülke</dt><dd><xf:if is="$server.country_code">{$server.country_code}<xf:else />Belirtilmedi</xf:if></dd></dl>
+            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Premium</dt><dd><xf:if is="$server.is_premium">Evet<xf:else />Hayır</xf:if></dd></dl>
+            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Crack desteği</dt><dd><xf:if is="$server.allow_cracked">Evet<xf:else />Hayır</xf:if></dd></dl>
         </div>
     </div>
 </div>
 
 <xf:if is="$server.description">
-    <div class="block">
-        <div class="block-container">
-            <h2 class="block-header">Açıklama</h2>
-            <div class="block-body block-row">{{ bb_code($server.description, 'warext_mc_server', $server) }}</div>
-        </div>
-    </div>
+    <div class="block"><div class="block-container"><h2 class="block-header">Açıklama</h2><div class="block-body block-row">{{ bb_code($server.description, 'warext_mc_server', $server) }}</div></div></div>
 </xf:if>
 
 <xf:if is="$server.website_url || $server.discord_url || $server.store_url">

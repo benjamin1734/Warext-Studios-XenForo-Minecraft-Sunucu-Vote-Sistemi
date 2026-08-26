@@ -1,0 +1,1 @@
+Etkin olduğunda misafirler ve elle kullanıcı adı girenler oy veremez. Kullanıcının XenForo hesabına bağlı ve doğrulanmış bir Minecraft hesabı seçmesi gerekir.

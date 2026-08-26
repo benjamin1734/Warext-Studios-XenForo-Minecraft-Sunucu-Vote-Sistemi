@@ -1,0 +1,51 @@
+<xf:title>{$server.title} - Sponsor Paketi</xf:title>
+<xf:description>Sunucunuzu Minecraft sunucu listesinde sponsorlu olarak öne çıkarın.</xf:description>
+<xf:js src="xf/payment.js" min="1" />
+
+<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+
+<xf:if is="$currentSponsor">
+    <div class="blockMessage blockMessage--important">
+        Bu sunucunun aktif sponsorluğu <xf:date time="$currentSponsor.end_date" /> tarihine kadar devam ediyor. Yeni satın alım mevcut sürenin sonuna eklenir.
+    </div>
+</xf:if>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Sponsor Paketi Satın Al</div>
+        <div class="block-body">
+            <div class="block-row">
+                Sponsorlu sunucular liste üstünde ayrı olarak gösterilir. Ödeme XenForo'nun yapılandırılmış Payment Profile sistemi üzerinden güvenli biçimde işlenir.
+            </div>
+
+            <xf:if is="$profiles is not empty && ($price7 > 0 || $price30 > 0)">
+                <xf:form action="{{ link('purchase', {'purchasable_type_id': 'warext_mc_sponsor'}) }}" ajax="true" data-xf-init="payment-provider-container" class="block">
+                    <xf:hiddenval name="server_id" value="{$server.server_id}" />
+
+                    <div class="block-body">
+                        <xf:selectrow name="package_days" label="Sponsor paketi" explain="Satın alınan süre aktif sponsorluğunuz varsa mevcut sürenin sonuna eklenir.">
+                            <xf:if is="$price7 > 0"><xf:option value="7">7 gün — {$price7} {$currency}</xf:option></xf:if>
+                            <xf:if is="$price30 > 0"><xf:option value="30">30 gün — {$price30} {$currency}</xf:option></xf:if>
+                        </xf:selectrow>
+
+                        <xf:formrow label="Ödeme yöntemi">
+                            <div class="buttonGroup">
+                                <xf:foreach loop="$profiles" key="$profileId" value="$profile">
+                                    <xf:button type="submit" name="payment_profile_id" value="{$profileId}" icon="purchase" class="button--primary">
+                                        {{ $profile.display_title ?: $profile.title }}
+                                    </xf:button>
+                                </xf:foreach>
+                            </div>
+                        </xf:formrow>
+                    </div>
+                </xf:form>
+                <div class="js-paymentProviderReply-warext_mc_sponsor"></div>
+            <xf:elseif is="$profiles is empty" />
+                <div class="blockMessage">Kullanılabilir XenForo ödeme profili bulunmuyor. Yönetici ACP &gt; Setup &gt; Payment profiles alanından bir ödeme profili eklemelidir.</div>
+            <xf:else />
+                <div class="blockMessage">Sponsor paket fiyatları henüz yönetici tarafından ayarlanmamış.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
