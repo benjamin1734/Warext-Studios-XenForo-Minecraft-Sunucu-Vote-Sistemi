@@ -82,20 +82,8 @@ class Sponsor extends AbstractPurchasable
             return;
         }
 
-        $requestKey = (string)$purchaseRequest->request_key;
-        if ($requestKey !== '')
-        {
-            $existing = $this->app->finder('Warext\\MinecraftVote:Sponsor')
-                ->where('purchase_request_key', $requestKey)
-                ->fetchOne();
-            if ($existing)
-            {
-                return;
-            }
-        }
-
         $server = $this->app->em()->find('Warext\\MinecraftVote:Server', $serverId);
-        if (!$server)
+        if (!$server || $server->state !== 'active')
         {
             return;
         }
@@ -109,7 +97,7 @@ class Sponsor extends AbstractPurchasable
             ->fetchOne();
 
         $start = \XF::$time;
-        if ($latest && $latest->end_date > $start)
+        if ($latest && $latest->end_date >= $start)
         {
             $start = (int)$latest->end_date + 1;
         }
@@ -123,7 +111,6 @@ class Sponsor extends AbstractPurchasable
         $sponsor->state = 'active';
         $sponsor->display_order = 10;
         $sponsor->created_by = (int)$purchaseRequest->user_id;
-        $sponsor->purchase_request_key = $requestKey;
         $sponsor->save();
 
         $this->app->service('Warext\\MinecraftVote:Audit\\Logger')->log(
@@ -134,7 +121,7 @@ class Sponsor extends AbstractPurchasable
             [
                 'sponsor_id' => (int)$sponsor->sponsor_id,
                 'days' => $days,
-                'request_key' => $requestKey
+                'request_key' => (string)$purchaseRequest->request_key
             ]
         );
     }
@@ -147,14 +134,17 @@ class Sponsor extends AbstractPurchasable
             return;
         }
 
-        $requestKey = (string)$purchaseRequest->request_key;
-        if ($requestKey === '')
+        [$serverId, $days] = $this->decodePurchasableId((int)$purchaseRequest->purchasable_id);
+        if (!$serverId || !in_array($days, [7, 30], true))
         {
             return;
         }
 
         $sponsor = $this->app->finder('Warext\\MinecraftVote:Sponsor')
-            ->where('purchase_request_key', $requestKey)
+            ->where('server_id', $serverId)
+            ->where('created_by', (int)$purchaseRequest->user_id)
+            ->where('state', 'active')
+            ->order('sponsor_id', 'DESC')
             ->fetchOne();
         if (!$sponsor)
         {
@@ -166,12 +156,13 @@ class Sponsor extends AbstractPurchasable
 
         $this->app->service('Warext\\MinecraftVote:Audit\\Logger')->log(
             'sponsor_purchase_reversed',
-            (int)$sponsor->server_id,
+            $serverId,
             (int)$purchaseRequest->user_id,
             (int)$purchaseRequest->user_id,
             [
                 'sponsor_id' => (int)$sponsor->sponsor_id,
-                'request_key' => $requestKey
+                'days' => $days,
+                'request_key' => (string)$purchaseRequest->request_key
             ]
         );
     }
@@ -194,8 +185,19 @@ class Sponsor extends AbstractPurchasable
             $error = 'Sponsor satın alma kaydı bulunamadı.';
             return null;
         }
+        if (!$purchaser->user_id || (int)$server->owner_user_id !== (int)$purchaser->user_id)
+        {
+            $error = 'Sponsor satın alma yetkiniz yok.';
+            return null;
+        }
 
         $price = $this->getPackagePrice($days);
+        if ($price <= 0)
+        {
+            $error = 'Sponsor paketi fiyatı geçersiz.';
+            return null;
+        }
+
         return $this->buildPurchase($paymentProfile, $server, $purchaser, $days, $price);
     }
 
@@ -227,9 +229,10 @@ class Sponsor extends AbstractPurchasable
         $purchase->purchasableTitle = $server->title . ' sponsorluğu';
 
         $router = $this->app->router('public');
-        $purchase->returnUrl = $router->buildLink('canonical:sunucular/sponsor', $server);
-        $purchase->updateUrl = $router->buildLink('canonical:sunucular/sponsor', $server);
-        $purchase->cancelUrl = $router->buildLink('canonical:sunucular/sponsor', $server);
+        $returnUrl = $router->buildLink('canonical:sunucular/sponsor', $server);
+        $purchase->returnUrl = $returnUrl;
+        $purchase->updateUrl = $returnUrl;
+        $purchase->cancelUrl = $returnUrl;
 
         return $purchase;
     }
