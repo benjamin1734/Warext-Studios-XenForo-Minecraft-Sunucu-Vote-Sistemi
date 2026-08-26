@@ -11,13 +11,6 @@ def require(path: str, needles: list[str]) -> None:
             raise SystemExit(f'{path}: gerekli güvenlik deseni bulunamadı: {needle}')
 
 
-def forbid(path: str, needles: list[str]) -> None:
-    text = (ROOT / path).read_text(encoding='utf-8')
-    for needle in needles:
-        if needle in text:
-            raise SystemExit(f'{path}: yasak/deseni riskli içerik bulundu: {needle}')
-
-
 require('Pub/Controller/Vote.php', ['captchaIsValid()', 'warextMcRequireVerifiedAccountForVotes', "verification_state !== 'verified'", 'setRequestFingerprint(', 'enqueueVoteDelivery()', 'enqueueWebhookDelivery('])
 require('_output/templates/public/warext_mc_server_vote.html', ['<xf:captcharow', 'force="true"', '$requireVerifiedAccount'])
 require('Service/Vote/Creator.php', ["hash_hmac('sha256', $ip", 'assertCooldown(', 'assertIpVelocity(', 'calculateFraudScore('])
@@ -27,8 +20,9 @@ require('Pub/Controller/Api.php', ['warextMcPublicApiEnabled', "->where('state',
 require('Cron/Maintenance.php', ['warextMcPingHistoryRetentionDays', "status = 'processing'", "'status' => 'retry'"])
 require('Pub/Controller/Sitemap.php', ["->where('state', 'active')", 'canonical:sunucular/detay', '->limit(50000)'])
 require('Pub/Controller/Sponsor.php', ['XF:Purchasable', 'findPaymentProfilesForList()', 'warextMcSponsorSalesEnabled'])
-require('Purchasable/Sponsor.php', ['completePurchase(', 'reversePurchase(', 'Warext\\\\MinecraftVote:Sponsor'])
+require('Purchasable/Sponsor.php', ['completePurchase(', 'reversePurchase(', "'Warext\\\\MinecraftVote:Sponsor'"])
 require('_output/templates/public/warext_mc_sponsor_purchase.html', ['payment-provider-container', 'js-paymentProviderReply-warext_mc_sponsor'])
+require('Security/SecretCipher.php', ['aes-256-gcm', 'OPENSSL_RAW_DATA', 'base64_decode($encoded, true)', 'hash_hkdf('])
 
 for option in [
     'warextMcVoteCaptcha.json',
@@ -51,7 +45,13 @@ if addon.get('version_string') != '1.0.0' or int(addon.get('version_id', 0)) < 1
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')
-    if 'eval(' in text or 'base64_decode(' in text or 'shell_exec(' in text or 'passthru(' in text:
-        raise SystemExit(f'{path}: yasak yürütme deseni bulundu')
+    for dangerous in ['eval(', 'shell_exec(', 'passthru(']:
+        if dangerous in text:
+            raise SystemExit(f'{path}: yasak yürütme deseni bulundu: {dangerous}')
+
+    if 'base64_decode(' in text:
+        is_cipher = path.as_posix().endswith('/Security/SecretCipher.php')
+        if not is_cipher or 'base64_decode($encoded, true)' not in text:
+            raise SystemExit(f'{path}: kontrolsüz base64_decode kullanımı bulundu')
 
 print('Warext MinecraftVote güvenlik regresyon kontrolleri başarılı.')
