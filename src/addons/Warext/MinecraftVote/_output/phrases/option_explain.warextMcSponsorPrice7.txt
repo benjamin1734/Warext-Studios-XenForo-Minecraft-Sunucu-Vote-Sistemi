@@ -1,0 +1,1 @@
+7 günlük sponsor paketinin fiyatı. 0 veya geçersiz değer paketi satıştan kaldırır.

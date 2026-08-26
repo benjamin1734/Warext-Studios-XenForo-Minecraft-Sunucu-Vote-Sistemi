@@ -1,0 +1,1 @@
+Sponsor paketleri için üç harfli ISO para birimi kodu. Örnek: TRY, EUR, USD.

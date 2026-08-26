@@ -1,57 +1,38 @@
 # Warext Studios | XenForo Minecraft Sunucu & Vote Sistemi
 
-XenForo için Minecraft sunucu listeleme, keşif, oylama, NuVotifier entegrasyonu, sıralama ve sunucu yönetim sistemi.
+XenForo 2.3 için Minecraft sunucu listeleme, keşif, güvenli oy verme, NuVotifier ödül teslimatı, sunucu sahipliği, ekip yönetimi, sıralama, analiz, sezon, başarım, değerlendirme, favori, karşılaştırma, sponsor ve moderasyon sistemi.
 
-## Sürüm
+## Hazır Kurulum ZIP
 
-0.15.0 Beta
+GitHub **Releases** bölümündeki `Warext-MinecraftVote-1.0.0.zip` dosyası doğrudan XenForo Admin CP içinden kurulabilir. ZIP'i açmayın ve GitHub **Code > Download ZIP** arşivini kurulum paketi olarak kullanmayın.
 
-## Kurulum
+Kurulum: **Admin CP > Add-ons > Install/upgrade from archive** > `Warext-MinecraftVote-1.0.0.zip`.
 
-Kurulum ZIP dosyaları yalnızca GitHub Releases bölümünde yayımlanır.
+## 1.0.0 Stable
 
-Güncel paket: `v0.15.0`
-
-XenForo ACP üzerinden Add-ons bölümündeki arşiv yükleme alanından ZIP dosyasını seçerek kurabilirsiniz.
-
-## Özellikler
-
-- Minecraft Java ve Bedrock sunucu listeleme
-- Sunucu durum ve oyuncu istatistikleri
-- Sunucu adı/adres/açıklama araması
-- Kategori, ülke, sürüm ve oyun modu filtreleri
-- Minimum online oyuncu, doğrulama, premium ve crack filtreleri
-- Popüler, yükselişte, oy, oyuncu, uptime ve yeni sunucu sıralamaları
-- Güvenli vote sistemi
-- NuVotifier entegrasyonu
-- Vote kuyruğu ve yeniden gönderim
-- Sunucu sahipliği, doğrulama ve güvenli sahiplik devri
-- Minecraft hesabı bağlantısı
-- Vote streak ve sunucu başarımları
-- Yorumlar, favoriler ve bildirimler
-- Kullanıcı sunucu raporlama ve ACP rapor moderasyonu
-- XenForo kullanıcı grubu izinleri
-- Ham IP saklamayan vote request rate-limit sistemi
-- Organik sıralamadan bağımsız sponsorlu listelemeler
-- Şüpheli oy inceleme ve audit sistemi
-- Gelişmiş sunucu sahibi ve ekip paneli
-- Kritik işlemler için audit kayıtları
-- XenForo ACP moderasyon araçları
-
-## XenForo Add-on ID
-
-`Warext/MinecraftVote`
+- Java, Bedrock ve Crossplay sunucu kayıt/listeme/detay sistemi
+- SRV destekli güvenli sunucu ping ve uptime takibi
+- Sunucu sahipliği doğrulama, ekip ve yetki yönetimi
+- Oy cooldown, IP/UA HMAC fingerprint, hız limiti ve fraud score
+- XenForo CAPTCHA entegrasyonu
+- İsteğe bağlı yalnız doğrulanmış Minecraft hesabıyla oy verme
+- NuVotifier v2 ve dayanıklı vote delivery queue/retry sistemi
+- ACP vote queue, şüpheli oy ve sistem sağlık ekranları
+- Minecraft/XenForo hesap bağlantısı
+- Sezon, streak, başarım, sıralama, trend ve analitik
+- Değerlendirme, favori, sunucu güncellemeleri ve karşılaştırma
+- Sponsorlu sıralama ve isteğe bağlı XenForo Payment Profile ile 7/30 günlük sponsor satışı
+- Audit ve raporlama/moderasyon araçları
+- Salt okunur, varsayılan kapalı JSON API
+- HTTPS/HMAC webhook, redirect ve private-network koruması
+- XML sitemap ve detay sayfası SEO açıklamaları
+- Eski ping kayıtlarını temizleyen ve takılı vote delivery kayıtlarını kurtaran bakım cron'u
+- PHP 8.2, 8.3 ve 8.4 CI doğrulaması
 
 ## Gereksinimler
 
-- XenForo 2.3+
+- XenForo 2.3.0+
 - PHP 8.2+
-- MySQL 8.0+ veya MariaDB eşdeğeri
-- NuVotifier
-- İsteğe bağlı VotingPlugin veya uyumlu başka bir vote listener
+- OpenSSL PHP extension
 
-## Lokal geliştirme
-
-`docs/LOKAL_KURULUM.md`
-
-Kaynak geliştirme yapısı XenForo `_output` verilerini içerir. Kurulum paketleri build sırasında `_data` master data ile oluşturulur ve yalnızca GitHub Releases bölümünde yayımlanır.
+Lokal Minecraft/NuVotifier testi için ACP'deki özel ağ bağlantısı seçeneği kontrollü olarak açılabilir. Canlı ortamda varsayılan kapalı bırakılması önerilir.
