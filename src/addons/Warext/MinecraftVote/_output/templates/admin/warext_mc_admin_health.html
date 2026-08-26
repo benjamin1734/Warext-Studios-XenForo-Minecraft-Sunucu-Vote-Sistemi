@@ -1,0 +1,61 @@
+<xf:title>Minecraft Vote Sistem Sağlığı</xf:title>
+<xf:description>Vote kuyruğu, NuVotifier entegrasyonları ve sunucu durum görevleri için operasyon ekranı.</xf:description>
+
+<xf:pageaction>
+    <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}">Vote Kuyruğu</xf:button>
+    <xf:button href="{{ link('warext-minecraft') }}">Sunucular</xf:button>
+</xf:pageaction>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">Genel Durum</div>
+        <div class="block-body">
+            <div class="block-row">
+                Bekleyen: {{ $voteCounts.pending ?: 0 }} · İşleniyor: {{ $voteCounts.processing ?: 0 }} · Tekrar: {{ $voteCounts.retry ?: 0 }} · Başarısız: {{ $voteCounts.failed ?: 0 }} · Teslim: {{ $voteCounts.delivered ?: 0 }}
+                <xf:if is="$oldestPending"> · En eski bekleyen: <xf:date time="$oldestPending" /></xf:if>
+            </div>
+            <div class="block-row">
+                Takılı processing kaydı: {$staleProcessing} · Çevrimdışı aktif sunucu: {$offlineServers} · 1 saattir kontrol edilmemiş aktif sunucu: {$staleServers}
+            </div>
+        </div>
+        <div class="block-footer">
+            <div class="buttonGroup">
+                <xf:form action="{{ link('warext-minecraft/health/retry-failed') }}" ajax="true">
+                    <xf:button type="submit" class="button--primary" icon="refresh">Başarısız Oyları Yeniden Dene</xf:button>
+                </xf:form>
+                <xf:form action="{{ link('warext-minecraft/health/recover-stale') }}" ajax="true">
+                    <xf:button type="submit" icon="refresh">Takılı Teslimatları Kurtar</xf:button>
+                </xf:form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">NuVotifier Sağlığı</div>
+        <div class="block-body">
+            <xf:if is="$votifier is not empty">
+                <xf:foreach loop="$votifier" value="$row">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{{ $row.title ?: 'Sunucu #' . $row.server_id }}</strong>
+                                    <xf:if is="$row.enabled"><span class="label label--green">Aktif</span><xf:else /><span class="label">Kapalı</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">
+                                    Hedef: {{ $row.host ?: 'Sunucu adresi' }}:{$row.port} · Servis: {{ $row.service_name ?: 'Warext' }}
+                                    <xf:if is="$row.last_success_date"> · Son başarı: <xf:date time="$row.last_success_date" /></xf:if>
+                                </div>
+                                <xf:if is="$row.last_error"><div class="blockMessage blockMessage--error" style="margin-top:8px">{$row.last_error}</div></xf:if>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Henüz NuVotifier yapılandırması bulunmuyor.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
