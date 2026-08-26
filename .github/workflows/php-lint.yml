@@ -1,4 +1,4 @@
-name: PHP Lint
+name: PHP Lint and Regression
 
 on:
   push:
@@ -7,16 +7,21 @@ on:
   pull_request:
 
 jobs:
-  php-lint:
+  validate:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.2', '8.3', '8.4']
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: PHP 8.4
+      - name: PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: ${{ matrix.php-version }}
           coverage: none
 
       - name: PHP syntax check
@@ -27,6 +32,9 @@ jobs:
           find src -type f -path '*/_output/*' -name '*.json' -print0 | while IFS= read -r -d '' file; do
             python -m json.tool "$file" >/dev/null
           done
+
+      - name: Security regression checks
+        run: python .github/security_regression.py
 
       - name: XenForo source validation
         run: python .github/validate_xf_source.py src/addons/Warext/MinecraftVote
