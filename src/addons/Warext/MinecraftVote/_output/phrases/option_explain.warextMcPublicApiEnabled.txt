@@ -1,0 +1,1 @@
+Etkin olduğunda /minecraft-vote-api/ adresi aktif sunucuların herkese açık durum, oyuncu, oy ve sıralama verilerini JSON olarak sunar. IP tabanlı istek limiti uygulanır.
