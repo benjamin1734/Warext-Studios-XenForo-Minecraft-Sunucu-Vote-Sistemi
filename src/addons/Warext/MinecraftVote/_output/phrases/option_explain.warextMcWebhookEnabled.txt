@@ -1,0 +1,1 @@
+Etkin olduğunda yeni oylar HTTPS webhook adresine arka plan işi ile gönderilir. Yönlendirmeler kapalıdır ve özel/ayrılmış ağ hedefleri lokal test izni kapalıyken engellenir.
