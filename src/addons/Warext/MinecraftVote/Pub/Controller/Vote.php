@@ -90,7 +90,7 @@ class Vote extends AbstractController
                     (string)$this->request->getIp(),
                     (string)$this->request->getServer('HTTP_USER_AGENT', '')
                 );
-                $creator->create();
+                $vote = $creator->create();
             }
             catch (\XF\PrintableException $e)
             {
@@ -98,6 +98,7 @@ class Vote extends AbstractController
             }
 
             $this->enqueueVoteDelivery();
+            $this->enqueueWebhookDelivery((int)$vote->vote_id);
 
             return $this->redirect(
                 $this->buildLink('sunucular/detay', $server),
@@ -140,5 +141,20 @@ class Vote extends AbstractController
                 false
             );
         }
+    }
+
+    protected function enqueueWebhookDelivery(int $voteId): void
+    {
+        if ($voteId <= 0 || !(bool)(\XF::options()->warextMcWebhookEnabled ?? false))
+        {
+            return;
+        }
+
+        $this->app->jobManager()->enqueueUnique(
+            'warextMinecraftVoteWebhook' . $voteId,
+            'Warext\MinecraftVote:WebhookDelivery',
+            ['vote_id' => $voteId, 'attempt' => 0],
+            false
+        );
     }
 }
