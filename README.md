@@ -1,38 +1,27 @@
 # Warext Studios | XenForo Minecraft Sunucu & Vote Sistemi
 
-XenForo 2.3 için Minecraft sunucu listeleme, keşif, güvenli oy verme, NuVotifier ödül teslimatı, sunucu sahipliği, ekip yönetimi, sıralama, analiz, sezon, başarım, değerlendirme, favori, karşılaştırma, sponsor ve moderasyon sistemi.
+XenForo 2.3 için Minecraft sunucu listeleme ve güvenli oy sistemi.
 
-## Hazır Kurulum ZIP
+## Kurulum
 
-GitHub **Releases** bölümündeki `Warext-MinecraftVote-1.0.0.zip` dosyası doğrudan XenForo Admin CP içinden kurulabilir. ZIP'i açmayın ve GitHub **Code > Download ZIP** arşivini kurulum paketi olarak kullanmayın.
+GitHub Releases içindeki `Warext-MinecraftVote-1.0.0.zip` dosyasını açmadan **Admin CP > Add-ons > Install/upgrade from archive** üzerinden yükleyin.
 
-Kurulum: **Admin CP > Add-ons > Install/upgrade from archive** > `Warext-MinecraftVote-1.0.0.zip`.
+## Özellikler
 
-## 1.0.0 Stable
-
-- Java, Bedrock ve Crossplay sunucu kayıt/listeme/detay sistemi
-- SRV destekli güvenli sunucu ping ve uptime takibi
-- Sunucu sahipliği doğrulama, ekip ve yetki yönetimi
-- Oy cooldown, IP/UA HMAC fingerprint, hız limiti ve fraud score
-- XenForo CAPTCHA entegrasyonu
-- İsteğe bağlı yalnız doğrulanmış Minecraft hesabıyla oy verme
-- NuVotifier v2 ve dayanıklı vote delivery queue/retry sistemi
-- ACP vote queue, şüpheli oy ve sistem sağlık ekranları
-- Minecraft/XenForo hesap bağlantısı
-- Sezon, streak, başarım, sıralama, trend ve analitik
-- Değerlendirme, favori, sunucu güncellemeleri ve karşılaştırma
-- Sponsorlu sıralama ve isteğe bağlı XenForo Payment Profile ile 7/30 günlük sponsor satışı
-- Audit ve raporlama/moderasyon araçları
-- Salt okunur, varsayılan kapalı JSON API
-- HTTPS/HMAC webhook, redirect ve private-network koruması
-- XML sitemap ve detay sayfası SEO açıklamaları
-- Eski ping kayıtlarını temizleyen ve takılı vote delivery kayıtlarını kurtaran bakım cron'u
-- PHP 8.2, 8.3 ve 8.4 CI doğrulaması
+- Java, Bedrock ve Crossplay sunucu listeleme
+- Ping, uptime, sıralama ve analitik
+- Güvenli oy, CAPTCHA ve Minecraft hesap doğrulama
+- NuVotifier v2, queue ve retry
+- Sunucu sahipliği ve ekip yönetimi
+- Sezon, streak, başarım, değerlendirme ve favoriler
+- Moderasyon, raporlama, audit ve sistem sağlığı
+- Sponsorlu listeleme
+- JSON API, HTTPS/HMAC webhook ve sitemap
 
 ## Gereksinimler
 
 - XenForo 2.3.0+
 - PHP 8.2+
-- OpenSSL PHP extension
+- OpenSSL
 
-Lokal Minecraft/NuVotifier testi için ACP'deki özel ağ bağlantısı seçeneği kontrollü olarak açılabilir. Canlı ortamda varsayılan kapalı bırakılması önerilir.
+[Lokal test rehberi](docs/LOKAL_KURULUM.md)
