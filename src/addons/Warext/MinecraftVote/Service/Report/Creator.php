@@ -4,7 +4,6 @@ namespace Warext\MinecraftVote\Service\Report;
 
 use Warext\MinecraftVote\Entity\Report;
 use Warext\MinecraftVote\Entity\Server;
-use Warext\MinecraftVote\Repository\Report as ReportRepository;
 use XF\App;
 use XF\Entity\User;
 use XF\PrintableException;
@@ -60,14 +59,12 @@ class Creator extends AbstractService
 
         $this->assertFloodRate();
 
-        /** @var ReportRepository $repo */
         $repo = $this->repository('Warext\MinecraftVote:Report');
         if ($repo->hasRecentReport($this->server->server_id, $this->user->user_id, \XF::$time - 86400))
         {
             throw new PrintableException('Bu sunucuyu son 24 saat içinde zaten raporladınız.');
         }
 
-        /** @var Report $report */
         $report = $this->em()->create('Warext\MinecraftVote:Report');
         $report->server_id = $this->server->server_id;
         $report->reporter_user_id = $this->user->user_id;
@@ -86,7 +83,6 @@ class Creator extends AbstractService
             return;
         }
 
-        /** @var FloodCheckService $flood */
         $flood = $this->service(FloodCheckService::class);
         $remaining = (int)$flood->checkFlooding('warextMinecraftReport', $this->user->user_id, 30);
         if ($remaining > 0)
