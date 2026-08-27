@@ -27,6 +27,24 @@ jobs:
       - name: PHP syntax check
         run: find src -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
+      - name: PHP comment check
+        run: |
+          php -r '
+          $bad = false;
+          $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("src/addons/Warext/MinecraftVote"));
+          foreach ($files as $file) {
+              if (!$file->isFile() || strtolower($file->getExtension()) !== "php") {
+                  continue;
+              }
+              foreach (token_get_all(file_get_contents($file->getPathname())) as $token) {
+                  if (is_array($token) && ($token[0] === T_COMMENT || $token[0] === T_DOC_COMMENT)) {
+                      fwrite(STDERR, $file->getPathname() . ":" . $token[2] . PHP_EOL);
+                      $bad = true;
+                  }
+              }
+          }
+          exit($bad ? 1 : 0);'
+
       - name: XenForo output JSON check
         run: |
           find src -type f -path '*/_output/*' -name '*.json' -print0 | while IFS= read -r -d '' file; do
