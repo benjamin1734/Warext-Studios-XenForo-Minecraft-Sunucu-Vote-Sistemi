@@ -2,7 +2,6 @@
 
 namespace Warext\MinecraftVote\Admin\Controller;
 
-use Warext\MinecraftVote\Entity\Report as ReportEntity;
 use XF\Admin\Controller\AbstractController;
 use XF\Mvc\ParameterBag;
 
@@ -38,7 +37,6 @@ class Report extends AbstractController
     {
         $this->assertPostOnly();
 
-        /** @var ReportEntity|null $report */
         $report = $this->em()->find('Warext\MinecraftVote:Report', (int)$params->report_id);
         if (!$report)
         {
