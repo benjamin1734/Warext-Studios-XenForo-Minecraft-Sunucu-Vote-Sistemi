@@ -44,7 +44,6 @@ class Request extends AbstractService
         $part = unpack('Nvalue', substr($digest, 0, 4));
         $syntheticId = ((int)($part['value'] ?? 0) & 0x7FFFFFFF) + 1;
 
-        /** @var FloodCheckService $flood */
         $flood = $this->service(FloodCheckService::class);
         $remaining = (int)$flood->checkFlooding($action, $syntheticId, $seconds);
         if ($remaining > 0)
