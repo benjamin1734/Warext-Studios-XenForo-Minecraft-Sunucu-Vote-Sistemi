@@ -92,14 +92,12 @@ class Creator extends AbstractService
             $cooldownHours = min(168, max(1, (int)(\XF::options()->warextMcVoteCooldownHours ?? 24)));
             $since = \XF::$time - ($cooldownHours * 3600);
 
-            /** @var VoteRepository $voteRepo */
             $voteRepo = $this->repository('Warext\MinecraftVote:Vote');
             $this->assertIpVelocity($voteRepo);
             $this->assertCooldown($voteRepo, $since, $cooldownHours);
 
             $fraudScore = $this->calculateFraudScore($voteRepo);
 
-            /** @var Vote $vote */
             $vote = $this->em()->create('Warext\MinecraftVote:Vote');
             $vote->server_id = $this->server->server_id;
             $vote->user_id = $this->user->user_id ?: 0;
@@ -133,7 +131,6 @@ class Creator extends AbstractService
             return;
         }
 
-        /** @var FloodCheckService $floodChecker */
         $floodChecker = $this->service(FloodCheckService::class);
         $remaining = (int)$floodChecker->checkFlooding(
             'warextMinecraftVote',
