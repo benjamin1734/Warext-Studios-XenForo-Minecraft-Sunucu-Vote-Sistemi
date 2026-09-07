@@ -1,0 +1,93 @@
+<xf:title>Kurulum ve Yapılandırma</xf:title>
+
+<div class="blockMessage blockMessage--important">
+    Bu sayfa eklentiyi ilk kez kuran yöneticiler için başlangıç merkezidir. Minecraft kategorileri XenForo forum kategorilerine bağlı değildir; sunucu listesindeki filtreleme ve sınıflandırma etiketleridir.
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">Sistem Durumu</h2>
+        <div class="block-body">
+            <div class="block-row">
+                <strong>Aktif kategori:</strong> {$counts.categories} ·
+                <strong>Onay bekleyen sunucu:</strong> {$counts.pending} ·
+                <strong>Aktif sunucu:</strong> {$counts.active}
+            </div>
+            <div class="block-row">
+                <strong>Oy CAPTCHA:</strong> <xf:if is="$captchaEnabled">Açık<xf:else />Kapalı</xf:if> ·
+                <strong>Doğrulanmış hesap zorunluluğu:</strong> <xf:if is="$requireVerified">Açık<xf:else />Kapalı</xf:if> ·
+                <strong>Misafir oy:</strong> <xf:if is="$allowGuests">Açık<xf:else />Kapalı</xf:if> ·
+                <strong>Sponsor satışları:</strong> <xf:if is="$sponsorEnabled">Açık<xf:else />Kapalı</xf:if>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">1. Genel Ayarlar</h2>
+        <div class="block-body">
+            <div class="block-row">
+                Admin CP → Setup → Options bölümünde <strong>Warext Minecraft Sunucu & Vote</strong> seçenek grubunu açın. Oy bekleme süresi, CAPTCHA, misafir oyları, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir.
+            </div>
+            <div class="block-row">
+                JSON API: <xf:if is="$publicApiEnabled">Açık<xf:else />Kapalı</xf:if> · HTTPS webhook: <xf:if is="$webhookEnabled">Açık<xf:else />Kapalı</xf:if>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">2. Kullanıcı Grubu İzinleri</h2>
+        <div class="block-body">
+            <div class="block-row">Admin CP → Groups & permissions → User group permissions bölümünde <strong>Minecraft Sunucu & Vote</strong> izin grubunu düzenleyin.</div>
+            <div class="block-row"><strong>Sunucu ekleyebilir:</strong> Kullanıcının yeni Minecraft sunucusu göndermesini sağlar.</div>
+            <div class="block-row"><strong>Oy verebilir:</strong> Aktif sunuculara oy verme yetkisidir.</div>
+            <div class="block-row"><strong>Değerlendirme yapabilir:</strong> Sunuculara puan ve yorum bırakma yetkisidir.</div>
+            <div class="block-row"><strong>Favorilere ekleyebilir:</strong> Favori ve güncelleme bildirimi özelliklerini açar.</div>
+            <div class="block-row"><strong>Raporlayabilir:</strong> Sunucu raporu göndermeyi açar.</div>
+            <div class="block-row block-rowMessage block-rowMessage--warning">Bir kullanıcıda ilgili izin kapalıysa buton görünmez veya işlem reddedilir. Eklentiyi test ederken test hesabının kullanıcı grubuna bu izinleri verdiğinizden emin olun.</div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">3. Kategoriler</h2>
+        <div class="block-body">
+            <div class="block-row">Survival, SkyBlock, BoxPvP gibi kategoriler sunucuyu sınıflandırır. <strong>Kategori seçimi ek form alanı oluşturmaz ve alan zorunluluğunu değiştirmez.</strong> Java/Bedrock alanları sunucu türüne göre anlam kazanır.</div>
+            <div class="block-row"><xf:button href="{{ link('warext-minecraft/categories') }}" class="button--primary">Kategorileri Yönet</xf:button></div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">4. Sunucu Ekleme Akışı</h2>
+        <div class="block-body">
+            <div class="block-row"><strong>Java:</strong> Ana adres ve Java portu kullanılır. Bedrock alanları boş bırakılabilir.</div>
+            <div class="block-row"><strong>Bedrock:</strong> Ana adres sunucunun temel adresidir; Bedrock adresi boş bırakılırsa ana adres kullanılır. Bedrock portunu gerçek portunuza göre ayarlayın.</div>
+            <div class="block-row"><strong>Crossplay:</strong> Java ana adresi ile Bedrock adresi/portu birlikte girilir.</div>
+            <div class="block-row">Yeni kayıt önce <strong>Onay bekliyor</strong> durumuna gelir. Yönetici onayından sonra genel listede görünür ve oy alabilir.</div>
+            <div class="block-row">
+                <xf:button href="{{ link('warext-minecraft', null, {'state': 'pending'}) }}" class="button--primary">Bekleyen Sunucular</xf:button>
+                <xf:button href="{{ link('warext-minecraft', null, {'state': 'all'}) }}">Tüm Sunucular</xf:button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">5. NuVotifier ve Oy Teslimatı</h2>
+        <div class="block-body">
+            <div class="block-row">Sunucu sahibi, kendi sunucu detay sayfasındaki <strong>NuVotifier Ayarları</strong> alanından bağlantıyı yapılandırır. Oy kaydı ile oyun içi ödül teslimatı birbirinden ayrıdır; oy önce kaydedilir, ardından teslimat kuyruğu çalışır.</div>
+            <div class="block-row">Teslimat sorunlarını Admin CP → Minecraft Sunucu & Vote → Sistem Sağlığı ve Oy Teslimat Kuyruğu ekranlarından takip edebilirsiniz.</div>
+            <div class="block-row">
+                <xf:button href="{{ link('warext-minecraft/health') }}">Sistem Sağlığı</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes') }}">Oy Teslimat Kuyruğu</xf:button>
+            </div>
+        </div>
+    </div>
+</div>
