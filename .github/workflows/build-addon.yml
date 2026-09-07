@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - 'src/addons/Warext/MinecraftVote/**'
+      - 'README.md'
+      - '.github/security_regression.py'
       - '.github/build_xf_data.py'
       - '.github/build_xf_permissions.py'
       - '.github/validate_xf_source.py'
@@ -23,6 +25,9 @@ jobs:
 
       - name: Validate XenForo source links
         run: python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
+
+      - name: Security regression checks
+        run: python3 .github/security_regression.py
 
       - name: Build XenForo release data
         run: |
