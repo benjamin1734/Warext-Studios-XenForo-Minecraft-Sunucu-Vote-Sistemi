@@ -1,0 +1,56 @@
+<xf:title>Minecraft Sunucu Kategorileri</xf:title>
+
+<div class="blockMessage blockMessage--important">
+    Bu kategoriler sunucu ekleme formunda sınıflandırma etiketi olarak kullanılır. Kategori seçimi ek alan oluşturmaz; form alanları sunucu türüne ve genel eklenti kurallarına göre çalışır.
+</div>
+
+<xf:form action="{{ link('warext-minecraft/categories') }}" class="block">
+    <div class="block-container">
+        <h2 class="block-header">Yeni Kategori</h2>
+        <div class="block-body">
+            <xf:textboxrow name="title" label="Kategori adı" required="true" maxlength="50" />
+            <xf:textboxrow name="slug" label="Kısa ad" maxlength="50" explain="Boş bırakırsanız kategori adından otomatik oluşturulur." />
+            <xf:textboxrow name="description" label="Açıklama" maxlength="255" />
+            <xf:numberboxrow name="display_order" value="10" min="1" label="Sıralama" />
+            <xf:checkboxrow>
+                <xf:option name="is_active" value="1" checked="true">Aktif</xf:option>
+            </xf:checkboxrow>
+        </div>
+        <xf:submitrow submit="Kategori Ekle" />
+    </div>
+</xf:form>
+
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">Mevcut Kategoriler</h2>
+        <div class="block-body">
+            <xf:if is="$categories is not empty">
+                <xf:foreach loop="$categories" value="$category">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{$category.title}</strong>
+                                    <xf:if is="$category.is_active"><span class="label label--green">Aktif</span><xf:else /><span class="label label--red">Pasif</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">Kısa ad: {$category.slug} · Sıra: {$category.display_order} · Kullanım: {{ $usageCounts[$category.category_id] ?: 0 }} sunucu</div>
+                                <xf:if is="$category.description"><div class="contentRow-minor">{$category.description}</div></xf:if>
+                                <div class="buttonGroup" style="margin-top:8px">
+                                    <xf:button href="{{ link('warext-minecraft/category-edit', $category) }}">Düzenle</xf:button>
+                                    <xf:form action="{{ link('warext-minecraft/category-toggle', $category) }}" ajax="true" class="buttonGroup">
+                                        <xf:button type="submit"><xf:if is="$category.is_active">Pasifleştir<xf:else />Aktifleştir</xf:if></xf:button>
+                                    </xf:form>
+                                    <xf:form action="{{ link('warext-minecraft/category-delete', $category) }}" ajax="true" data-xf-init="delete" class="buttonGroup">
+                                        <xf:button type="submit" class="button--link">Sil</xf:button>
+                                    </xf:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">Henüz kategori yok.</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
