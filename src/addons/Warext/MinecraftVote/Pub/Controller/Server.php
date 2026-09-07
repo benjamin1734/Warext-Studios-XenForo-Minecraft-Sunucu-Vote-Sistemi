@@ -93,7 +93,10 @@ class Server extends AbstractController
 
     public function actionHesapSil(ParameterBag $params)
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('sunucular/hesaplar'));
+        }
 
         $account = $this->assertOwnedMinecraftAccount((int)$params->account_id);
         $userId = $account->user_id;
@@ -113,7 +116,10 @@ class Server extends AbstractController
 
     public function actionHesapBirincil(ParameterBag $params)
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('sunucular/hesaplar'));
+        }
 
         $account = $this->assertOwnedMinecraftAccount((int)$params->account_id);
         $this->repository('Warext\MinecraftVote:MinecraftAccount')->makePrimary($account);
