@@ -26,8 +26,9 @@ require('_output/templates/public/warext_mc_sponsor_purchase.html', ['payment-pr
 require('Security/SecretCipher.php', ['aes-256-gcm', 'OPENSSL_RAW_DATA', 'base64_decode($encoded, true)', 'hash_hkdf('])
 require('_output/templates/public/warext_mc_server_compare.html', ['$selected0', '$selected1', '$selected2', '$selected3'])
 require('Admin/Controller/Setup.php', ["'categories'", "'pending'", "'active'", 'warextMcVoteCaptcha', 'warextMcSponsorSalesEnabled'])
-require('Admin/Controller/Category.php', ['actionEdit(', 'actionToggle(', 'actionDelete(', 'if (!$this->isPost())'])
+require('Admin/Controller/Category.php', ['actionEdit(', 'actionToggle(', 'actionDelete(', 'if (!$this->isPost())', "'categoryRows' => $categoryRows"])
 require('_output/templates/admin/warext_mc_admin_setup.html', ['Kurulum ve Yapılandırma', 'Kategoriler', 'Kullanıcı Grubu İzinleri', 'NuVotifier'])
+require('_output/templates/admin/warext_mc_admin_category_index.html', ['$categoryRows', '$row.usageCount'])
 require('_output/templates/public/warext_mc_server_add.html', ['kategori seçimi yeni form alanı açmaz', 'Ana sunucu adresi', 'Crossplay'])
 require('_output/admin_navigation/warextMinecraftVote.json', ['warext-minecraft/setup'])
 require('_output/admin_navigation/warextMinecraftSetup.json', ['warext-minecraft/setup'])
@@ -37,7 +38,6 @@ require('Pub/Controller/Server.php', ['actionHesapSil(', 'actionHesapBirincil(',
 require('Pub/Controller/Team.php', ['actionRemove(', 'if (!$this->isPost())'])
 require('Pub/Controller/Update.php', ['actionDelete(', 'if (!$this->isPost())'])
 require('Pub/Controller/Review.php', ['actionDelete(', 'actionModerate(', 'if (!$this->isPost())'])
-
 require('Admin/Controller/Server.php', ['actionVoteModerate(', 'actionVoteRetry(', 'actionRunVoteQueue(', 'actionRanking(', 'actionState(', 'actionPing(', 'actionDelete(', 'if (!$this->isPost())'])
 require('Admin/Controller/Achievement.php', ['actionToggle(', 'actionRebuild(', 'if (!$this->isPost())'])
 require('Admin/Controller/Health.php', ['actionRetryFailed(', 'actionRecoverStale(', 'if (!$this->isPost())'])
@@ -50,6 +50,9 @@ for template in (ROOT / '_output/templates').rglob('*.html'):
     text = template.read_text(encoding='utf-8')
     if 'isset(' in text:
         raise SystemExit(f'{template}: desteklenmeyen isset kullanımı bulundu')
+
+    if re.search(r'\$[A-Za-z_][A-Za-z0-9_]*\s*\[[^\]\n]+\]', text):
+        raise SystemExit(f'{template}: XenForo template dilinde desteklenmeyen PHP tarzı dizi indeksleme bulundu')
 
     for match in re.finditer(r'<xf:option\b[^>]*>(.*?)</xf:option>', text, flags=re.IGNORECASE | re.DOTALL):
         if re.search(r'<\s*/?\s*[A-Za-z]', match.group(1)):
@@ -71,8 +74,8 @@ for option in [
         raise SystemExit(f'{option}: seçenek grubu ilişkisi eksik')
 
 addon = json.loads((ROOT / 'addon.json').read_text(encoding='utf-8'))
-if addon.get('version_string') != '1.0.4' or int(addon.get('version_id', 0)) < 1010040:
-    raise SystemExit('Sürüm numarası 1.0.4 değil.')
+if addon.get('version_string') != '1.0.5' or int(addon.get('version_id', 0)) < 1010050:
+    raise SystemExit('Sürüm numarası 1.0.5 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')
