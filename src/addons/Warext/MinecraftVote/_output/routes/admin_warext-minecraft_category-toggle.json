@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "warext-minecraft",
+    "sub_name": "category-toggle",
+    "format": ":int<category_id>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Category",
+    "context": "",
+    "action_prefix": "toggle"
+}

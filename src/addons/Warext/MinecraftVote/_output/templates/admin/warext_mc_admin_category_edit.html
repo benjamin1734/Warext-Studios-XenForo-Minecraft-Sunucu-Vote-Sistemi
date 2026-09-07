@@ -1,0 +1,16 @@
+<xf:title>Kategori Düzenle: {$category.title}</xf:title>
+
+<xf:form action="{{ link('warext-minecraft/category-edit', $category) }}" class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:textboxrow name="title" value="{$category.title}" label="Kategori adı" required="true" maxlength="50" />
+            <xf:textboxrow name="slug" value="{$category.slug}" label="Kısa ad" required="true" maxlength="50" />
+            <xf:textboxrow name="description" value="{$category.description}" label="Açıklama" maxlength="255" />
+            <xf:numberboxrow name="display_order" value="{$category.display_order}" min="1" label="Sıralama" />
+            <xf:checkboxrow>
+                <xf:option name="is_active" value="1" selected="{$category.is_active}">Aktif</xf:option>
+            </xf:checkboxrow>
+        </div>
+        <xf:submitrow submit="Kaydet" />
+    </div>
+</xf:form>

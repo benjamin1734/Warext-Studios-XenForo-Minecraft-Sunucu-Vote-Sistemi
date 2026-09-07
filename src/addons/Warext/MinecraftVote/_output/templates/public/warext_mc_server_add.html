@@ -1,29 +1,33 @@
 <xf:title>Sunucu Ekle</xf:title>
 <xf:description>Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar yönetici onayından sonra listelenir.</xf:description>
 
+<div class="blockMessage blockMessage--important">
+    Kategoriler yalnızca sunucuyu sınıflandırır ve filtrelerde kullanılır; kategori seçimi yeni form alanı açmaz. Adres alanlarının anlamı seçtiğiniz Java, Bedrock veya Crossplay sunucu türüne göre değişir.
+</div>
+
 <xf:form action="{{ link('sunucular/ekle') }}" ajax="true" class="block">
     <div class="block-container">
         <h2 class="block-header">Temel Bilgiler</h2>
         <div class="block-body">
             <xf:textboxrow name="title" label="Sunucu adı" required="true" maxlength="100" />
 
-            <xf:selectrow name="server_type" label="Sunucu türü">
+            <xf:selectrow name="server_type" label="Sunucu türü" explain="Java için ana adres/port kullanılır. Bedrock için ana adresi girin; ayrı Bedrock adresi boşsa ana adres kullanılır. Crossplay için Java ve Bedrock bilgilerini birlikte doldurun.">
                 <xf:option value="java">Java</xf:option>
                 <xf:option value="bedrock">Bedrock</xf:option>
                 <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
             </xf:selectrow>
 
-            <xf:textboxrow name="host" label="Java adresi" explain="Örnek: play.sunucum.com veya lokal testte 127.0.0.1" required="true" maxlength="255" />
-            <xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Java portu" />
-            <xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" />
-            <xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" />
+            <xf:textboxrow name="host" label="Ana sunucu adresi" explain="Java/Crossplay için Java adresi; Bedrock için sunucunun ana adresi. Örnek: play.sunucum.com" required="true" maxlength="255" />
+            <xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Ana / Java portu" explain="Java için genellikle 25565. Bedrock sunucularında gerçek Bedrock portunu ayrıca aşağıdaki alana girin." />
+            <xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" explain="Bedrock veya Crossplay içindir. Bedrock sunucuda ana adres ile aynıysa boş bırakabilirsiniz." />
+            <xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" explain="Bedrock/Crossplay için gerçek Bedrock portu. Varsayılan 19132." />
 
             <xf:textarearow name="description" label="Sunucu açıklaması" rows="8" />
         </div>
 
         <h2 class="block-header">Kategori, Mod ve Sürüm</h2>
         <div class="block-body">
-            <xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz.">
+            <xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz. Bunlar Survival, SkyBlock gibi filtreleme etiketleridir; ek alan oluşturmaz.">
                 <xf:foreach loop="$categories" value="$category">
                     <xf:option value="{$category.category_id}">{$category.title}</xf:option>
                 </xf:foreach>

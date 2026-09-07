@@ -83,11 +83,18 @@ class Update extends AbstractController
 
     public function actionDelete(ParameterBag $params)
     {
-        $this->assertPostOnly();
         $update = $this->assertUpdateExists((int)$params->update_id);
         $server = $update->Server;
-        $visitor = \XF::visitor();
+        if (!$this->isPost())
+        {
+            if ($server)
+            {
+                return $this->redirect($this->buildLink('sunucular/guncellemeler', $server));
+            }
+            return $this->redirect($this->buildLink('sunucular'));
+        }
 
+        $visitor = \XF::visitor();
         if (!$visitor->user_id || !$server)
         {
             return $this->noPermission();
