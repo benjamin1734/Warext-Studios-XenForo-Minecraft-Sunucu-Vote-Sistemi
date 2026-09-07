@@ -2,17 +2,26 @@
     "legacy_addon_id": "",
     "title": "Warext Studios | XenForo Minecraft Sunucu & Vote Sistemi",
     "description": "Minecraft sunucu listeleme, keşif, güvenli oylama, NuVotifier ödül teslimatı, sıralama, analiz ve sunucu yönetim sistemi.",
-    "version_id": 1010030,
-    "version_string": "1.0.3",
+    "version_id": 1010040,
+    "version_string": "1.0.4",
     "dev": "Warext Studios",
     "dev_url": "",
     "faq_url": "",
     "support_url": "",
     "extra_urls": [],
     "require": {
-        "XF": [2030000, "XenForo 2.3.0+"],
-        "php": ["8.2.0", "PHP 8.2.0+"],
-        "php-ext/openssl": ["*", "OpenSSL PHP extension"]
+        "XF": [
+            2030000,
+            "XenForo 2.3.0+"
+        ],
+        "php": [
+            "8.2.0",
+            "PHP 8.2.0+"
+        ],
+        "php-ext/openssl": [
+            "*",
+            "OpenSSL PHP extension"
+        ]
     },
     "icon": "fa-server"
 }

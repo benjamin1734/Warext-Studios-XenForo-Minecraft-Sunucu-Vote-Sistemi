@@ -55,7 +55,10 @@ class Health extends AbstractController
 
     public function actionRetryFailed()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/health'));
+        }
         $count = $this->db()->update(
             'xf_warext_mc_vote',
             [
@@ -73,7 +76,10 @@ class Health extends AbstractController
 
     public function actionRecoverStale()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/health'));
+        }
         $count = $this->db()->update(
             'xf_warext_mc_vote',
             [

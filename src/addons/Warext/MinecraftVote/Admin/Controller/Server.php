@@ -129,7 +129,10 @@ class Server extends AbstractController
 
     public function actionVoteModerate()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/suspect-votes'));
+        }
 
         $voteId = $this->filter('vote_id', 'uint');
         $operation = $this->filter('operation', 'str');
@@ -232,7 +235,10 @@ class Server extends AbstractController
 
     public function actionVoteRetry()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/votes'));
+        }
 
         $voteId = $this->filter('vote_id', 'uint');
         $vote = $this->assertVoteExists($voteId);
@@ -259,7 +265,10 @@ class Server extends AbstractController
 
     public function actionRunVoteQueue()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/votes'));
+        }
         $this->enqueueVoteDelivery();
 
         return $this->redirect(
@@ -270,7 +279,10 @@ class Server extends AbstractController
 
     public function actionRanking()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft', null, ['state' => 'all']));
+        }
 
         $result = $this->service('Warext\MinecraftVote:Ranking\Rebuilder')->rebuild();
 
@@ -282,7 +294,10 @@ class Server extends AbstractController
 
     public function actionState()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft'));
+        }
 
         $serverId = $this->filter('server_id', 'uint');
         $state = $this->filter('state', 'str');
@@ -332,7 +347,10 @@ class Server extends AbstractController
 
     public function actionPing()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft', null, ['state' => 'all']));
+        }
 
         $serverId = $this->filter('server_id', 'uint');
         $server = $this->assertServerExists($serverId);
@@ -366,7 +384,10 @@ class Server extends AbstractController
 
     public function actionDelete()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft'));
+        }
 
         $serverId = $this->filter('server_id', 'uint');
         $server = $this->assertServerExists($serverId);
