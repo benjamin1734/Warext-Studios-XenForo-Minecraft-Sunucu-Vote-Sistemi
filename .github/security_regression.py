@@ -28,7 +28,7 @@ require('_output/templates/public/warext_mc_server_compare.html', ['$selected0',
 require('Admin/Controller/Setup.php', ["'categories'", "'pending'", "'active'", 'warextMcVoteCaptcha', 'warextMcSponsorSalesEnabled'])
 require('Admin/Controller/Category.php', ['actionEdit(', 'actionToggle(', 'actionDelete(', 'if (!$this->isPost())'])
 require('_output/templates/admin/warext_mc_admin_setup.html', ['Kurulum ve Yapılandırma', 'Kategoriler', 'Kullanıcı Grubu İzinleri', 'NuVotifier'])
-require('_output/templates/public/warext_mc_server_add.html', ['Kategori seçimi yeni form alanı açmaz', 'Ana sunucu adresi', 'Crossplay'])
+require('_output/templates/public/warext_mc_server_add.html', ['kategori seçimi yeni form alanı açmaz', 'Ana sunucu adresi', 'Crossplay'])
 require('_output/admin_navigation/warextMinecraftVote.json', ['warext-minecraft/setup'])
 require('_output/admin_navigation/warextMinecraftSetup.json', ['warext-minecraft/setup'])
 require('_output/admin_navigation/warextMinecraftCategories.json', ['warext-minecraft/categories'])
