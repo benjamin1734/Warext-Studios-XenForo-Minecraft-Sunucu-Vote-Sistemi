@@ -739,8 +739,8 @@ class Setup extends AbstractSetup
         $sm = $this->schemaManager();
         foreach ([
             'last_ping_error' => ['varchar', 500, 'detected_version'],
-            'verification_token_date' => ['int', None, 'verification_token'],
-            'verified_date' => ['int', None, 'verification_token_date']
+            'verification_token_date' => ['int', null, 'verification_token'],
+            'verified_date' => ['int', null, 'verification_token_date']
         ] as $column => $spec)
         {
             if (!$sm->columnExists('xf_warext_mc_server', $column))

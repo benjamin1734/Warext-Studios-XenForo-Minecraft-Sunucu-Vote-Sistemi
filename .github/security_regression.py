@@ -79,6 +79,9 @@ for path in ROOT.rglob('*.php'):
     if 'assertPostOnly()' in text:
         raise SystemExit(f'{path}: genel POST-only hata ekranı oluşturabilecek assertPostOnly kaldı')
 
+    if 'None' in text:
+        raise SystemExit(f'{path}: PHP içinde Python None sabiti bulundu')
+
     for dangerous in ['eval(', 'shell_exec(', 'passthru(']:
         if dangerous in text:
             raise SystemExit(f'{path}: yasak yürütme deseni bulundu: {dangerous}')
