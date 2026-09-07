@@ -16,14 +16,18 @@ class Favorite extends AbstractController
 
     public function actionToggle(ParameterBag $params)
     {
-        $this->assertPostOnly();
+        $server = $this->assertActiveServer((int)$params->server_id);
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('sunucular/detay', $server));
+        }
+
         if (!$this->canUseFavorites())
         {
             return $this->noPermission();
         }
 
         $visitor = \XF::visitor();
-        $server = $this->assertActiveServer((int)$params->server_id);
         $active = $this->repository('Warext\MinecraftVote:Favorite')
             ->toggle($server, $visitor->user_id);
 
@@ -35,7 +39,11 @@ class Favorite extends AbstractController
 
     public function actionNotify(ParameterBag $params)
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('sunucular/favoriler'));
+        }
+
         if (!$this->canUseFavorites())
         {
             return $this->noPermission();
