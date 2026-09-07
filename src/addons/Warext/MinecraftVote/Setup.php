@@ -17,7 +17,13 @@ class Setup extends AbstractSetup
 
     public function installStep1(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_server', function (Create $table)
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_server'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_server', function (Create $table)
         {
             $table->addColumn('server_id', 'int')->autoIncrement();
             $table->addColumn('owner_user_id', 'int')->setDefault(0);
@@ -80,8 +86,11 @@ class Setup extends AbstractSetup
 
     public function installStep2(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_category', function (Create $table)
+        $sm = $this->schemaManager();
+        if (!$sm->tableExists('xf_warext_mc_category'))
         {
+            $sm->createTable('xf_warext_mc_category', function (Create $table)
+            {
             $table->addColumn('category_id', 'int')->autoIncrement();
             $table->addColumn('title', 'varchar', 50)->setDefault('');
             $table->addColumn('slug', 'varchar', 50)->setDefault('');
@@ -90,27 +99,35 @@ class Setup extends AbstractSetup
             $table->addColumn('is_active', 'tinyint')->setDefault(1);
             $table->addUniqueKey('slug', 'warext_mc_category_slug');
             $table->addKey(['is_active', 'display_order'], 'warext_mc_category_order');
-        });
+            });
+        }
 
-        $this->db()->insertBulk('xf_warext_mc_category', [
-            ['title' => 'Survival', 'slug' => 'survival', 'description' => '', 'display_order' => 10, 'is_active' => 1],
-            ['title' => 'SkyBlock', 'slug' => 'skyblock', 'description' => '', 'display_order' => 20, 'is_active' => 1],
-            ['title' => 'BoxPvP', 'slug' => 'boxpvp', 'description' => '', 'display_order' => 30, 'is_active' => 1],
-            ['title' => 'OneBlock', 'slug' => 'oneblock', 'description' => '', 'display_order' => 40, 'is_active' => 1],
-            ['title' => 'Factions', 'slug' => 'factions', 'description' => '', 'display_order' => 50, 'is_active' => 1],
-            ['title' => 'Towny', 'slug' => 'towny', 'description' => '', 'display_order' => 60, 'is_active' => 1],
-            ['title' => 'Prison', 'slug' => 'prison', 'description' => '', 'display_order' => 70, 'is_active' => 1],
-            ['title' => 'SMP', 'slug' => 'smp', 'description' => '', 'display_order' => 80, 'is_active' => 1],
-            ['title' => 'Roleplay', 'slug' => 'roleplay', 'description' => '', 'display_order' => 90, 'is_active' => 1],
-            ['title' => 'Minigames', 'slug' => 'minigames', 'description' => '', 'display_order' => 100, 'is_active' => 1],
-            ['title' => 'Modlu', 'slug' => 'modlu', 'description' => '', 'display_order' => 110, 'is_active' => 1],
-            ['title' => 'Vanilla', 'slug' => 'vanilla', 'description' => '', 'display_order' => 120, 'is_active' => 1]
-        ]);
+        $defaults = [
+            ['Survival', 'survival', '', 10, 1], ['SkyBlock', 'skyblock', '', 20, 1],
+            ['BoxPvP', 'boxpvp', '', 30, 1], ['OneBlock', 'oneblock', '', 40, 1],
+            ['Factions', 'factions', '', 50, 1], ['Towny', 'towny', '', 60, 1],
+            ['Prison', 'prison', '', 70, 1], ['SMP', 'smp', '', 80, 1],
+            ['Roleplay', 'roleplay', '', 90, 1], ['Minigames', 'minigames', '', 100, 1],
+            ['Modlu', 'modlu', '', 110, 1], ['Vanilla', 'vanilla', '', 120, 1]
+        ];
+        foreach ($defaults as [$title, $slug, $description, $displayOrder, $isActive])
+        {
+            $this->db()->query(
+                'INSERT IGNORE INTO xf_warext_mc_category (title, slug, description, display_order, is_active) VALUES (?, ?, ?, ?, ?)',
+                [$title, $slug, $description, $displayOrder, $isActive]
+            );
+        }
     }
 
     public function installStep3(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_server_category', function (Create $table)
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_server_category'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_server_category', function (Create $table)
         {
             $table->addColumn('server_id', 'int')->setDefault(0);
             $table->addColumn('category_id', 'int')->setDefault(0);
@@ -121,7 +138,13 @@ class Setup extends AbstractSetup
 
     public function installStep4(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_vote', function (Create $table)
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_vote'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_vote', function (Create $table)
         {
             $table->addColumn('vote_id', 'bigint')->autoIncrement();
             $table->addColumn('server_id', 'int')->setDefault(0);
@@ -149,7 +172,13 @@ class Setup extends AbstractSetup
 
     public function installStep5(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_server_team', function (Create $table)
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_server_team'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_server_team', function (Create $table)
         {
             $table->addColumn('server_id', 'int')->setDefault(0);
             $table->addColumn('user_id', 'int')->setDefault(0);
@@ -163,7 +192,13 @@ class Setup extends AbstractSetup
 
     public function installStep6(): void
     {
-        $this->schemaManager()->createTable('xf_warext_mc_ping_history', function (Create $table)
+        $sm = $this->schemaManager();
+        if ($sm->tableExists('xf_warext_mc_ping_history'))
+        {
+            return;
+        }
+
+        $sm->createTable('xf_warext_mc_ping_history', function (Create $table)
         {
             $table->addColumn('ping_id', 'bigint')->autoIncrement();
             $table->addColumn('server_id', 'int')->setDefault(0);
@@ -225,6 +260,11 @@ class Setup extends AbstractSetup
     public function installStep16(): void
     {
         $this->createReportTable();
+    }
+
+    public function installStep17(): void
+    {
+        $this->ensureSponsorPurchaseSupport();
     }
 
     public function upgrade1000020Step1(): void
@@ -322,6 +362,16 @@ class Setup extends AbstractSetup
     public function upgrade1000130Step2(): void
     {
         $this->createReportTable();
+    }
+
+    public function upgrade1010040Step1(): void
+    {
+        $this->repairCurrentSchema();
+    }
+
+    public function upgrade1010040Step2(): void
+    {
+        $this->ensureSponsorPurchaseSupport();
     }
 
     protected function addRankingColumns(): void
@@ -660,12 +710,67 @@ class Setup extends AbstractSetup
             $table->addColumn('end_date', 'int')->setDefault(0);
             $table->addColumn('state', 'varchar', 20)->setDefault('active');
             $table->addColumn('display_order', 'int')->setDefault(10);
+            $table->addColumn('purchase_request_key', 'varchar', 32)->setDefault('');
             $table->addColumn('created_by', 'int')->setDefault(0);
             $table->addColumn('created_date', 'int')->setDefault(0);
             $table->addColumn('updated_date', 'int')->setDefault(0);
             $table->addKey(['state', 'placement', 'display_order'], 'warext_mc_sponsor_active');
             $table->addKey(['server_id', 'start_date', 'end_date'], 'warext_mc_sponsor_server_date');
+            $table->addKey('purchase_request_key', 'warext_mc_sponsor_purchase_request');
         });
+    }
+
+    protected function repairCurrentSchema(): void
+    {
+        $this->createVotifierTable();
+        $this->createMinecraftAccountTable();
+        $this->createSeasonTables();
+        $this->createReviewTable();
+        $this->createFavoriteTable();
+        $this->ensureFavoriteTrackingColumns();
+        $this->createServerUpdateTable();
+        $this->createAchievementTables();
+        $this->createSponsorTable();
+        $this->createAuditLogTable();
+        $this->createReportTable();
+        $this->addRankingColumns();
+        $this->addSeasonSnapshotColumns();
+
+        $sm = $this->schemaManager();
+        foreach ([
+            'last_ping_error' => ['varchar', 500, 'detected_version'],
+            'verification_token_date' => ['int', None, 'verification_token'],
+            'verified_date' => ['int', None, 'verification_token_date']
+        ] as $column => $spec)
+        {
+            if (!$sm->columnExists('xf_warext_mc_server', $column))
+            {
+                $sm->alterTable('xf_warext_mc_server', function (Alter $table) use ($column, $spec)
+                {
+                    $definition = $spec[1] ? $table->addColumn($column, $spec[0], $spec[1]) : $table->addColumn($column, $spec[0]);
+                    $definition->setDefault($spec[0] === 'int' ? 0 : '')->after($spec[2]);
+                });
+            }
+        }
+    }
+
+    protected function ensureSponsorPurchaseSupport(): void
+    {
+        $this->createSponsorTable();
+        $sm = $this->schemaManager();
+        if (!$sm->columnExists('xf_warext_mc_sponsor', 'purchase_request_key'))
+        {
+            $sm->alterTable('xf_warext_mc_sponsor', function (Alter $table)
+            {
+                $table->addColumn('purchase_request_key', 'varchar', 32)->setDefault('')->after('display_order');
+                $table->addKey('purchase_request_key', 'warext_mc_sponsor_purchase_request');
+            });
+        }
+        $this->db()->query(
+            'INSERT INTO xf_purchasable (purchasable_type_id, purchasable_class, addon_id) VALUES (?, ?, ?) '
+            . 'ON DUPLICATE KEY UPDATE purchasable_class = VALUES(purchasable_class), addon_id = VALUES(addon_id)',
+            ['warext_mc_sponsor', 'Warext\MinecraftVote:Sponsor', 'Warext/MinecraftVote']
+        );
     }
 
     protected function createAuditLogTable(): void
@@ -720,6 +825,7 @@ class Setup extends AbstractSetup
 
     public function uninstallStep1(): void
     {
+        $this->db()->delete('xf_purchasable', 'purchasable_type_id = ?', 'warext_mc_sponsor');
         $sm = $this->schemaManager();
         $sm->dropTable('xf_warext_mc_report');
         $sm->dropTable('xf_warext_mc_audit_log');

@@ -94,7 +94,10 @@ class Sponsor extends AbstractController
 
     public function actionToggle(ParameterBag $params)
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/sponsors'));
+        }
         $sponsor = $this->assertSponsorExists((int)$params->sponsor_id);
 
         if ($sponsor->state === 'paused')
@@ -130,7 +133,10 @@ class Sponsor extends AbstractController
 
     public function actionDelete(ParameterBag $params)
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/sponsors'));
+        }
         $sponsor = $this->assertSponsorExists((int)$params->sponsor_id);
         $serverId = $sponsor->server_id;
         $sponsorId = $sponsor->sponsor_id;

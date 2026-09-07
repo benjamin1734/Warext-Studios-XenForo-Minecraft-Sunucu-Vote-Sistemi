@@ -51,6 +51,12 @@ class Sponsor extends AbstractPurchasable
             return null;
         }
 
+        if ($this->hasIndefiniteSponsor((int)$server->server_id))
+        {
+            $error = 'Bu sunucunun süresiz sponsorluğu zaten aktif.';
+            return null;
+        }
+
         $paymentProfile = $this->app->em()->find('XF:PaymentProfile', $profileId);
         if (!$paymentProfile)
         {
@@ -88,6 +94,18 @@ class Sponsor extends AbstractPurchasable
             return;
         }
 
+        $requestKey = (string)$purchaseRequest->request_key;
+        if ($requestKey !== '')
+        {
+            $existing = $this->app->finder('Warext\\MinecraftVote:Sponsor')
+                ->where('purchase_request_key', $requestKey)
+                ->fetchOne();
+            if ($existing)
+            {
+                return;
+            }
+        }
+
         $latest = $this->app->finder('Warext\\MinecraftVote:Sponsor')
             ->where('server_id', $serverId)
             ->where('placement', 'list_top')
@@ -110,6 +128,7 @@ class Sponsor extends AbstractPurchasable
         $sponsor->end_date = $start + ($days * 86400);
         $sponsor->state = 'active';
         $sponsor->display_order = 10;
+        $sponsor->purchase_request_key = $requestKey;
         $sponsor->created_by = (int)$purchaseRequest->user_id;
         $sponsor->save();
 
@@ -140,12 +159,23 @@ class Sponsor extends AbstractPurchasable
             return;
         }
 
-        $sponsor = $this->app->finder('Warext\\MinecraftVote:Sponsor')
-            ->where('server_id', $serverId)
-            ->where('created_by', (int)$purchaseRequest->user_id)
-            ->where('state', 'active')
-            ->order('sponsor_id', 'DESC')
-            ->fetchOne();
+        $requestKey = (string)$purchaseRequest->request_key;
+        $sponsor = null;
+        if ($requestKey !== '')
+        {
+            $sponsor = $this->app->finder('Warext\\MinecraftVote:Sponsor')
+                ->where('purchase_request_key', $requestKey)
+                ->fetchOne();
+        }
+        if (!$sponsor)
+        {
+            $sponsor = $this->app->finder('Warext\\MinecraftVote:Sponsor')
+                ->where('server_id', $serverId)
+                ->where('created_by', (int)$purchaseRequest->user_id)
+                ->where('state', 'active')
+                ->order('sponsor_id', 'DESC')
+                ->fetchOne();
+        }
         if (!$sponsor)
         {
             return;
@@ -188,6 +218,12 @@ class Sponsor extends AbstractPurchasable
         if (!$purchaser->user_id || (int)$server->owner_user_id !== (int)$purchaser->user_id)
         {
             $error = 'Sponsor satın alma yetkiniz yok.';
+            return null;
+        }
+
+        if ($this->hasIndefiniteSponsor((int)$server->server_id))
+        {
+            $error = 'Bu sunucunun süresiz sponsorluğu zaten aktif.';
             return null;
         }
 
@@ -247,6 +283,16 @@ class Sponsor extends AbstractPurchasable
         }
 
         return max(0.0, round((float)$raw, 2));
+    }
+
+    protected function hasIndefiniteSponsor(int $serverId): bool
+    {
+        return (bool)$this->app->finder('Warext\\MinecraftVote:Sponsor')
+            ->where('server_id', $serverId)
+            ->where('placement', 'list_top')
+            ->where('state', 'active')
+            ->where('end_date', 0)
+            ->fetchOne();
     }
 
     protected function encodePurchasableId(int $serverId, int $days): int

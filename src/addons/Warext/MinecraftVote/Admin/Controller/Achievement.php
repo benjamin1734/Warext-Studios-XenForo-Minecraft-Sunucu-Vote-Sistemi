@@ -77,7 +77,10 @@ class Achievement extends AbstractController
 
     public function actionToggle(ParameterBag $params)
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/achievements'));
+        }
         $achievement = $this->assertAchievementExists((int)$params->achievement_id);
         $achievement->is_active = !$achievement->is_active;
         $achievement->save();
@@ -99,7 +102,10 @@ class Achievement extends AbstractController
 
     public function actionRebuild()
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/achievements'));
+        }
         $jobManager = $this->app->jobManager();
         $uniqueId = 'warextMinecraftAchievementRebuild';
 

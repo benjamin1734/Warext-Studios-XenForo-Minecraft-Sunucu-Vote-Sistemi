@@ -35,7 +35,10 @@ class Report extends AbstractController
 
     public function actionUpdate(ParameterBag $params)
     {
-        $this->assertPostOnly();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('warext-minecraft/reports'));
+        }
 
         $report = $this->em()->find('Warext\MinecraftVote:Report', (int)$params->report_id);
         if (!$report)

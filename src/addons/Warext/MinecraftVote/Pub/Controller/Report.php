@@ -29,7 +29,6 @@ class Report extends AbstractController
 
         if ($this->isPost())
         {
-            $this->assertPostOnly();
             $reason = $this->filter('reason', 'str');
             $message = $this->filter('message', 'str');
 

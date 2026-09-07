@@ -38,6 +38,14 @@ require('Pub/Controller/Team.php', ['actionRemove(', 'if (!$this->isPost())'])
 require('Pub/Controller/Update.php', ['actionDelete(', 'if (!$this->isPost())'])
 require('Pub/Controller/Review.php', ['actionDelete(', 'actionModerate(', 'if (!$this->isPost())'])
 
+require('Admin/Controller/Server.php', ['actionVoteModerate(', 'actionVoteRetry(', 'actionRunVoteQueue(', 'actionRanking(', 'actionState(', 'actionPing(', 'actionDelete(', 'if (!$this->isPost())'])
+require('Admin/Controller/Achievement.php', ['actionToggle(', 'actionRebuild(', 'if (!$this->isPost())'])
+require('Admin/Controller/Health.php', ['actionRetryFailed(', 'actionRecoverStale(', 'if (!$this->isPost())'])
+require('Admin/Controller/Sponsor.php', ['actionToggle(', 'actionDelete(', 'if (!$this->isPost())'])
+require('Admin/Controller/Report.php', ['actionUpdate(', 'if (!$this->isPost())'])
+require('Setup.php', ['installStep17', 'upgrade1010040Step1', 'upgrade1010040Step2', 'repairCurrentSchema', 'ensureSponsorPurchaseSupport', 'purchase_request_key', 'INSERT IGNORE INTO xf_warext_mc_category'])
+require('Entity/Sponsor.php', ['purchase_request_key'])
+
 for template in (ROOT / '_output/templates').rglob('*.html'):
     text = template.read_text(encoding='utf-8')
     if 'isset(' in text:
@@ -63,11 +71,14 @@ for option in [
         raise SystemExit(f'{option}: seçenek grubu ilişkisi eksik')
 
 addon = json.loads((ROOT / 'addon.json').read_text(encoding='utf-8'))
-if addon.get('version_string') != '1.0.3' or int(addon.get('version_id', 0)) < 1010030:
-    raise SystemExit('Sürüm numarası 1.0.3 değil.')
+if addon.get('version_string') != '1.0.4' or int(addon.get('version_id', 0)) < 1010040:
+    raise SystemExit('Sürüm numarası 1.0.4 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')
+    if 'assertPostOnly()' in text:
+        raise SystemExit(f'{path}: genel POST-only hata ekranı oluşturabilecek assertPostOnly kaldı')
+
     for dangerous in ['eval(', 'shell_exec(', 'passthru(']:
         if dangerous in text:
             raise SystemExit(f'{path}: yasak yürütme deseni bulundu: {dangerous}')

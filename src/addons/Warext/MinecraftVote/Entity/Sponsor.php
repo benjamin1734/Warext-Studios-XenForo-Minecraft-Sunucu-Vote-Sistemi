@@ -21,6 +21,7 @@ class Sponsor extends Entity
             'end_date' => ['type' => self::UINT, 'default' => 0],
             'state' => ['type' => self::STR, 'maxLength' => 20, 'default' => 'active'],
             'display_order' => ['type' => self::UINT, 'default' => 10],
+            'purchase_request_key' => ['type' => self::STR, 'maxLength' => 32, 'default' => ''],
             'created_by' => ['type' => self::UINT, 'default' => 0],
             'created_date' => ['type' => self::UINT, 'default' => 0],
             'updated_date' => ['type' => self::UINT, 'default' => 0]
