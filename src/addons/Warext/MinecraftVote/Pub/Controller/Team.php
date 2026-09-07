@@ -61,8 +61,12 @@ class Team extends AbstractController
 
     public function actionRemove(ParameterBag $params)
     {
-        $this->assertPostOnly();
         $server = $this->assertOwnedServer((int)$params->server_id);
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('sunucular/ekip', $server));
+        }
+
         $userId = $this->filter('user_id', 'uint');
 
         try
