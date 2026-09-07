@@ -24,29 +24,29 @@
     <div class="block-container">
         <h2 class="block-header">Mevcut Kategoriler</h2>
         <div class="block-body">
-            <xf:if is="$categories is not empty">
-                <xf:foreach loop="$categories" value="$category">
+            <xf:if is="$categoryRows is not empty">
+                <xf:foreach loop="$categoryRows" value="$row">
                     <div class="block-row block-row--separated">
                         <div class="contentRow">
                             <div class="contentRow-main">
                                 <div class="contentRow-title">
-                                    <strong>{$category.title}</strong>
-                                    <xf:if is="$category.is_active"><span class="label label--green">Aktif</span><xf:else /><span class="label label--red">Pasif</span></xf:if>
+                                    <strong>{$row.category.title}</strong>
+                                    <xf:if is="$row.category.is_active"><span class="label label--green">Aktif</span><xf:else /><span class="label label--red">Pasif</span></xf:if>
                                 </div>
-                                <div class="contentRow-minor">Kısa ad: {$category.slug} · Sıra: {$category.display_order} · Kullanım: {$usageCounts[$category.category_id]} sunucu</div>
-                                <xf:if is="$category.description"><div class="contentRow-minor">{$category.description}</div></xf:if>
+                                <div class="contentRow-minor">Kısa ad: {$row.category.slug} · Sıra: {$row.category.display_order} · Kullanım: {$row.usageCount} sunucu</div>
+                                <xf:if is="$row.category.description"><div class="contentRow-minor">{$row.category.description}</div></xf:if>
                                 <div class="buttonGroup" style="margin-top:8px">
-                                    <xf:button href="{{ link('warext-minecraft/category-edit', $category) }}">Düzenle</xf:button>
-                                    <xf:if is="$category.is_active">
-                                        <xf:form action="{{ link('warext-minecraft/category-toggle', $category) }}" ajax="true" class="buttonGroup">
+                                    <xf:button href="{{ link('warext-minecraft/category-edit', $row.category) }}">Düzenle</xf:button>
+                                    <xf:if is="$row.category.is_active">
+                                        <xf:form action="{{ link('warext-minecraft/category-toggle', $row.category) }}" ajax="true" class="buttonGroup">
                                             <xf:button type="submit">Pasifleştir</xf:button>
                                         </xf:form>
                                     <xf:else />
-                                        <xf:form action="{{ link('warext-minecraft/category-toggle', $category) }}" ajax="true" class="buttonGroup">
+                                        <xf:form action="{{ link('warext-minecraft/category-toggle', $row.category) }}" ajax="true" class="buttonGroup">
                                             <xf:button type="submit">Aktifleştir</xf:button>
                                         </xf:form>
                                     </xf:if>
-                                    <xf:form action="{{ link('warext-minecraft/category-delete', $category) }}" ajax="true" data-xf-init="delete" class="buttonGroup">
+                                    <xf:form action="{{ link('warext-minecraft/category-delete', $row.category) }}" ajax="true" data-xf-init="delete" class="buttonGroup">
                                         <xf:button type="submit" class="button--link">Sil</xf:button>
                                     </xf:form>
                                 </div>
