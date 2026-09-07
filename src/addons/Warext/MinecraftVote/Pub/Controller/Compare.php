@@ -32,10 +32,15 @@ class Compare extends AbstractController
             ->limit(200)
             ->fetch();
 
+        $selectedIds = array_pad($serverIds, 4, 0);
+
         return $this->view('Warext\MinecraftVote:Server\Compare', 'warext_mc_server_compare', [
             'servers' => $servers,
             'availableServers' => $availableServers,
-            'selectedIds' => $serverIds
+            'selected0' => $selectedIds[0],
+            'selected1' => $selectedIds[1],
+            'selected2' => $selectedIds[2],
+            'selected3' => $selectedIds[3]
         ]);
     }
 }
