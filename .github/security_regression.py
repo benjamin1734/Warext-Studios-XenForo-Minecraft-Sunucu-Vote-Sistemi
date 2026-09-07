@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import re
 
 ROOT = Path('src/addons/Warext/MinecraftVote')
 
@@ -25,9 +26,14 @@ require('_output/templates/public/warext_mc_sponsor_purchase.html', ['payment-pr
 require('Security/SecretCipher.php', ['aes-256-gcm', 'OPENSSL_RAW_DATA', 'base64_decode($encoded, true)', 'hash_hkdf('])
 require('_output/templates/public/warext_mc_server_compare.html', ['$selected0', '$selected1', '$selected2', '$selected3'])
 
-compare_template = (ROOT / '_output/templates/public/warext_mc_server_compare.html').read_text(encoding='utf-8')
-if 'isset(' in compare_template:
-    raise SystemExit('warext_mc_server_compare.html: desteklenmeyen isset kullanımı bulundu')
+for template in (ROOT / '_output/templates').rglob('*.html'):
+    text = template.read_text(encoding='utf-8')
+    if 'isset(' in text:
+        raise SystemExit(f'{template}: desteklenmeyen isset kullanımı bulundu')
+
+    for match in re.finditer(r'<xf:option\b[^>]*>(.*?)</xf:option>', text, flags=re.IGNORECASE | re.DOTALL):
+        if re.search(r'<\s*/?\s*[A-Za-z]', match.group(1)):
+            raise SystemExit(f'{template}: xf:option içinde child element bulundu')
 
 for option in [
     'warextMcVoteCaptcha.json',
@@ -45,8 +51,8 @@ for option in [
         raise SystemExit(f'{option}: seçenek grubu ilişkisi eksik')
 
 addon = json.loads((ROOT / 'addon.json').read_text(encoding='utf-8'))
-if addon.get('version_string') != '1.0.1' or int(addon.get('version_id', 0)) < 1010010:
-    raise SystemExit('Sürüm numarası 1.0.1 değil.')
+if addon.get('version_string') != '1.0.2' or int(addon.get('version_id', 0)) < 1010020:
+    raise SystemExit('Sürüm numarası 1.0.2 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')
