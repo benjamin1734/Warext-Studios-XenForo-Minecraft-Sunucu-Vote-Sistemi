@@ -90,10 +90,13 @@ class Review extends AbstractController
 
     public function actionDelete(ParameterBag $params)
     {
-        $this->assertPostOnly();
         $server = $this->assertActiveServer((int)$params->server_id);
-        $visitor = \XF::visitor();
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('sunucular/degerlendir', $server));
+        }
 
+        $visitor = \XF::visitor();
         if (!$visitor->user_id || !PublicPermissions::allows('review', false, true))
         {
             return $this->noPermission();
@@ -110,11 +113,15 @@ class Review extends AbstractController
 
     public function actionModerate(ParameterBag $params)
     {
-        $this->assertPostOnly();
         $review = $this->em()->find('Warext\MinecraftVote:Review', (int)$params->review_id, ['Server']);
         if (!$review || !$review->Server)
         {
             throw $this->exception($this->notFound());
+        }
+
+        if (!$this->isPost())
+        {
+            return $this->redirect($this->buildLink('sunucular/degerlendir', $review->Server));
         }
 
         $visitor = \XF::visitor();
