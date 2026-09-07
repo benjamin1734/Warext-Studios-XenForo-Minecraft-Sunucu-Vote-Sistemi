@@ -33,13 +33,19 @@
                                     <strong>{$category.title}</strong>
                                     <xf:if is="$category.is_active"><span class="label label--green">Aktif</span><xf:else /><span class="label label--red">Pasif</span></xf:if>
                                 </div>
-                                <div class="contentRow-minor">Kısa ad: {$category.slug} · Sıra: {$category.display_order} · Kullanım: {{ $usageCounts[$category.category_id] ?: 0 }} sunucu</div>
+                                <div class="contentRow-minor">Kısa ad: {$category.slug} · Sıra: {$category.display_order} · Kullanım: {$usageCounts[$category.category_id]} sunucu</div>
                                 <xf:if is="$category.description"><div class="contentRow-minor">{$category.description}</div></xf:if>
                                 <div class="buttonGroup" style="margin-top:8px">
                                     <xf:button href="{{ link('warext-minecraft/category-edit', $category) }}">Düzenle</xf:button>
-                                    <xf:form action="{{ link('warext-minecraft/category-toggle', $category) }}" ajax="true" class="buttonGroup">
-                                        <xf:button type="submit"><xf:if is="$category.is_active">Pasifleştir<xf:else />Aktifleştir</xf:if></xf:button>
-                                    </xf:form>
+                                    <xf:if is="$category.is_active">
+                                        <xf:form action="{{ link('warext-minecraft/category-toggle', $category) }}" ajax="true" class="buttonGroup">
+                                            <xf:button type="submit">Pasifleştir</xf:button>
+                                        </xf:form>
+                                    <xf:else />
+                                        <xf:form action="{{ link('warext-minecraft/category-toggle', $category) }}" ajax="true" class="buttonGroup">
+                                            <xf:button type="submit">Aktifleştir</xf:button>
+                                        </xf:form>
+                                    </xf:if>
                                     <xf:form action="{{ link('warext-minecraft/category-delete', $category) }}" ajax="true" data-xf-init="delete" class="buttonGroup">
                                         <xf:button type="submit" class="button--link">Sil</xf:button>
                                     </xf:form>
