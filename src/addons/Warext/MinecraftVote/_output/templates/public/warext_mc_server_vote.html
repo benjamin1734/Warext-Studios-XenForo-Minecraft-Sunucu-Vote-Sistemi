@@ -31,9 +31,11 @@
                             </xf:if>
                             <xf:foreach loop="$linkedAccounts" value="$account">
                                 <xf:if is="!$requireVerifiedAccount OR $account.verification_state == 'verified'">
-                                    <xf:option value="{$account.account_id}" selected="$account.is_primary">
-                                        {$account.minecraft_username}<xf:if is="$account.verification_state == 'verified'"> · Doğrulanmış</xf:if>
-                                    </xf:option>
+                                    <xf:if is="$account.verification_state == 'verified'">
+                                        <xf:option value="{$account.account_id}" selected="$account.is_primary">{$account.minecraft_username} · Doğrulanmış</xf:option>
+                                    <xf:else />
+                                        <xf:option value="{$account.account_id}" selected="$account.is_primary">{$account.minecraft_username}</xf:option>
+                                    </xf:if>
                                 </xf:if>
                             </xf:foreach>
                         </xf:selectrow>
