@@ -6,16 +6,30 @@
     <div class="block-container">
         <h2 class="block-header">Karşılaştırılacak Sunucular</h2>
         <div class="block-body">
-            <xf:foreach loop="{{ range(0, 3) }}" value="$slot">
-                <xf:selectrow name="server_ids[]" label="Sunucu {{ $slot + 1 }}">
-                    <xf:option value="0">Seçiniz</xf:option>
-                    <xf:foreach loop="$availableServers" value="$candidate">
-                        <xf:option value="{$candidate.server_id}" selected="{{ isset($selectedIds[$slot]) && $selectedIds[$slot] == $candidate.server_id }}">
-                            {$candidate.title} · {$candidate.host}:{$candidate.port}
-                        </xf:option>
-                    </xf:foreach>
-                </xf:selectrow>
-            </xf:foreach>
+            <xf:selectrow name="server_ids[]" label="Sunucu 1">
+                <xf:option value="0">Seçiniz</xf:option>
+                <xf:foreach loop="$availableServers" value="$candidate">
+                    <xf:option value="{$candidate.server_id}" selected="{{ $selected0 == $candidate.server_id }}">{$candidate.title} · {$candidate.host}:{$candidate.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:selectrow name="server_ids[]" label="Sunucu 2">
+                <xf:option value="0">Seçiniz</xf:option>
+                <xf:foreach loop="$availableServers" value="$candidate">
+                    <xf:option value="{$candidate.server_id}" selected="{{ $selected1 == $candidate.server_id }}">{$candidate.title} · {$candidate.host}:{$candidate.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:selectrow name="server_ids[]" label="Sunucu 3">
+                <xf:option value="0">Seçiniz</xf:option>
+                <xf:foreach loop="$availableServers" value="$candidate">
+                    <xf:option value="{$candidate.server_id}" selected="{{ $selected2 == $candidate.server_id }}">{$candidate.title} · {$candidate.host}:{$candidate.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:selectrow name="server_ids[]" label="Sunucu 4">
+                <xf:option value="0">Seçiniz</xf:option>
+                <xf:foreach loop="$availableServers" value="$candidate">
+                    <xf:option value="{$candidate.server_id}" selected="{{ $selected3 == $candidate.server_id }}">{$candidate.title} · {$candidate.host}:{$candidate.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
         </div>
         <xf:submitrow submit="Karşılaştır" />
     </div>
