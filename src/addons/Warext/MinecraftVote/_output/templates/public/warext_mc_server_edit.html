@@ -7,6 +7,9 @@
 <div class="blockMessage blockMessage--warning">
     Sunucu türü, IP/adres veya port bilgileri değiştirilirse sahiplik doğrulaması sıfırlanır ve sunucu yeniden yönetici onayına gönderilir.
 </div>
+<div class="blockMessage blockMessage--important">
+    Kategoriler yalnızca filtreleme ve sınıflandırma içindir; kategori değiştirmek form alanlarını değiştirmez. Java/Bedrock alanlarının kullanımı sunucu türüne göre belirlenir.
+</div>
 
 <xf:form action="{{ link('sunucular/duzenle', $server) }}" ajax="true" class="block">
     <div class="block-container">
@@ -14,15 +17,15 @@
         <div class="block-body">
             <xf:textboxrow name="title" value="{$server.title}" label="Sunucu adı" required="true" maxlength="100" />
 
-            <xf:selectrow name="server_type" value="{$server.server_type}" label="Sunucu türü">
+            <xf:selectrow name="server_type" value="{$server.server_type}" label="Sunucu türü" explain="Java için ana adres/port kullanılır. Bedrock için ana adres ile Bedrock portu kullanılır. Crossplay için Java ve Bedrock bilgileri birlikte tutulur.">
                 <xf:option value="java">Java</xf:option>
                 <xf:option value="bedrock">Bedrock</xf:option>
                 <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
             </xf:selectrow>
 
-            <xf:textboxrow name="host" value="{$server.host}" label="Java adresi" required="true" maxlength="255" />
-            <xf:numberboxrow name="port" value="{$server.port}" min="1" max="65535" label="Java portu" />
-            <xf:textboxrow name="bedrock_host" value="{$server.bedrock_host}" label="Bedrock adresi" maxlength="255" />
+            <xf:textboxrow name="host" value="{$server.host}" label="Ana sunucu adresi" required="true" maxlength="255" explain="Java/Crossplay için Java adresi; Bedrock için sunucunun ana adresi." />
+            <xf:numberboxrow name="port" value="{$server.port}" min="1" max="65535" label="Ana / Java portu" />
+            <xf:textboxrow name="bedrock_host" value="{$server.bedrock_host}" label="Bedrock adresi" maxlength="255" explain="Bedrock veya Crossplay içindir. Ana adres ile aynıysa boş bırakılabilir." />
             <xf:numberboxrow name="bedrock_port" value="{$server.bedrock_port}" min="1" max="65535" label="Bedrock portu" />
 
             <xf:textarearow name="description" value="{$server.description}" label="Sunucu açıklaması" rows="8" />
@@ -30,7 +33,7 @@
 
         <h2 class="block-header">Kategori, Mod ve Sürüm</h2>
         <div class="block-body">
-            <xf:checkboxrow label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz.">
+            <xf:checkboxrow label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz. Kategoriler ek alan oluşturmaz.">
                 <xf:foreach loop="$categories" value="$category">
                     <xf:option name="category_ids[]" value="{$category.category_id}" selected="{{ in_array($category.category_id, $selectedCategoryIds) }}">{$category.title}</xf:option>
                 </xf:foreach>
