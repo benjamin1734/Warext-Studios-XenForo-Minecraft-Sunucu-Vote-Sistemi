@@ -32,18 +32,21 @@ class Category extends AbstractController
             ->order('category_id', 'ASC')
             ->fetch();
 
-        $usageRows = $this->db()->fetchPairs(
+        $usageCounts = $this->db()->fetchPairs(
             'SELECT category_id, COUNT(*) FROM xf_warext_mc_server_category GROUP BY category_id'
         );
-        $usageCounts = [];
+
+        $categoryRows = [];
         foreach ($categories as $category)
         {
-            $usageCounts[$category->category_id] = (int)($usageRows[$category->category_id] ?? 0);
+            $categoryRows[] = [
+                'category' => $category,
+                'usageCount' => (int)($usageCounts[$category->category_id] ?? 0)
+            ];
         }
 
         return $this->view('Warext\MinecraftVote:Category\Index', 'warext_mc_admin_category_index', [
-            'categories' => $categories,
-            'usageCounts' => $usageCounts
+            'categoryRows' => $categoryRows
         ]);
     }
 
