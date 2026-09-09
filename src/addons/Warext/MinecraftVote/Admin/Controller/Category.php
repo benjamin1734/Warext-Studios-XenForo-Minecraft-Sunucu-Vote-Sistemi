@@ -32,7 +32,7 @@ class Category extends AbstractController
             ->order('category_id', 'ASC')
             ->fetch();
 
-        $usageCounts = $this->db()->fetchPairs(
+        $usageCounts = $this->app->db()->fetchPairs(
             'SELECT category_id, COUNT(*) FROM xf_warext_mc_server_category GROUP BY category_id'
         );
 
@@ -92,7 +92,7 @@ class Category extends AbstractController
         }
 
         $category = $this->assertCategoryExists((int)$params->category_id);
-        $this->db()->delete('xf_warext_mc_server_category', 'category_id = ?', $category->category_id);
+        $this->app->db()->delete('xf_warext_mc_server_category', 'category_id = ?', $category->category_id);
         $category->delete();
 
         return $this->redirect(

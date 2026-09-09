@@ -169,7 +169,7 @@ class Sponsor extends AbstractController
 
     protected function assertNoOverlap(int $serverId, int $startDate, int $endDate, int $ignoreSponsorId = 0): void
     {
-        $existingId = $this->db()->fetchOne(
+        $existingId = $this->app->db()->fetchOne(
             "SELECT sponsor_id
              FROM xf_warext_mc_sponsor
              WHERE server_id = ?

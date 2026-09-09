@@ -133,7 +133,8 @@ class Index extends AbstractController
             ->order('display_order')
             ->fetch();
 
-        $countryRows = $this->db()->fetchAll(
+        $db = $this->app->db();
+        $countryRows = $db->fetchAll(
             "SELECT DISTINCT country_code
              FROM xf_warext_mc_server
              WHERE state = 'active' AND country_code <> ''

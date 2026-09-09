@@ -67,7 +67,8 @@ class Edit extends AbstractController
             ->order('display_order')
             ->fetch();
 
-        $rows = $this->db()->fetchAll(
+        $db = $this->app->db();
+        $rows = $db->fetchAll(
             'SELECT category_id FROM xf_warext_mc_server_category WHERE server_id = ?',
             [$server->server_id]
         );

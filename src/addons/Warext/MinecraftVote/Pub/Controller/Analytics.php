@@ -13,8 +13,9 @@ class Analytics extends AbstractController
         $server = $this->assertCanView((int)$params->server_id);
         $now = \XF::$time;
         $day = 86400;
+        $db = $this->app->db();
 
-        $voteStats = $this->db()->fetchRow(
+        $voteStats = $db->fetchRow(
             "SELECT
                 COUNT(*) AS votes_30d,
                 COUNT(DISTINCT CASE WHEN minecraft_uuid <> '' THEN minecraft_uuid ELSE CONCAT('u:', user_id, ':', minecraft_username) END) AS unique_voters_30d,
@@ -28,7 +29,7 @@ class Analytics extends AbstractController
             [$now - 7 * $day, $now - $day, $server->server_id, $now - 30 * $day]
         );
 
-        $pingStats = $this->db()->fetchRow(
+        $pingStats = $db->fetchRow(
             'SELECT
                 COUNT(*) AS checks_7d,
                 SUM(is_online = 1) AS online_checks_7d,
@@ -40,7 +41,7 @@ class Analytics extends AbstractController
             [$server->server_id, $now - 7 * $day]
         );
 
-        $dailyVotes = $this->db()->fetchAll(
+        $dailyVotes = $db->fetchAll(
             "SELECT DATE(FROM_UNIXTIME(vote_date)) AS vote_day, COUNT(*) AS total
              FROM xf_warext_mc_vote
              WHERE server_id = ? AND vote_date >= ? AND status <> 'rejected'
@@ -49,11 +50,11 @@ class Analytics extends AbstractController
             [$server->server_id, $now - 14 * $day]
         );
 
-        $favorites = $this->db()->fetchOne(
+        $favorites = $db->fetchOne(
             'SELECT COUNT(*) FROM xf_warext_mc_favorite WHERE server_id = ?',
             [$server->server_id]
         );
-        $reviews = $this->db()->fetchOne(
+        $reviews = $db->fetchOne(
             "SELECT COUNT(*) FROM xf_warext_mc_review WHERE server_id = ? AND state = 'visible'",
             [$server->server_id]
         );

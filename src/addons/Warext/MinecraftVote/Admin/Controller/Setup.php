@@ -15,10 +15,11 @@ class Setup extends AbstractController
     public function actionIndex()
     {
         $options = \XF::options();
+        $db = $this->app->db();
         $counts = [
-            'categories' => (int)$this->db()->fetchOne('SELECT COUNT(*) FROM xf_warext_mc_category WHERE is_active = 1'),
-            'pending' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_warext_mc_server WHERE state = 'pending'"),
-            'active' => (int)$this->db()->fetchOne("SELECT COUNT(*) FROM xf_warext_mc_server WHERE state = 'active'")
+            'categories' => (int)$db->fetchOne('SELECT COUNT(*) FROM xf_warext_mc_category WHERE is_active = 1'),
+            'pending' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_warext_mc_server WHERE state = 'pending'"),
+            'active' => (int)$db->fetchOne("SELECT COUNT(*) FROM xf_warext_mc_server WHERE state = 'active'")
         ];
 
         return $this->view('Warext\MinecraftVote:Setup\Index', 'warext_mc_admin_setup', [
