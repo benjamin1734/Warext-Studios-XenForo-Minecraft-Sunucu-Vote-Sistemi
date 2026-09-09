@@ -2,7 +2,7 @@
     "route_type": "public",
     "route_prefix": "sunucular",
     "sub_name": "hesap-birincil",
-    "format": ":int<account_id>/",
+    "format": "hesap-birincil/:int<account_id>/",
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Server",

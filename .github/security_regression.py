@@ -30,18 +30,18 @@ require('Admin/Controller/Category.php', ['actionEdit(', 'actionToggle(', 'actio
 require('_output/templates/admin/warext_mc_admin_setup.html', ['Kurulum ve Yapılandırma', 'Kategoriler', 'Kullanıcı Grubu İzinleri', 'NuVotifier'])
 require('_output/templates/admin/warext_mc_admin_category_index.html', ['$categoryRows', '$row.usageCount'])
 require('_output/templates/public/warext_mc_server_add.html', ['kategori seçimi yeni form alanı açmaz', 'Ana sunucu adresi', 'Crossplay'])
-require('_output/admin_navigation/warextMinecraftVote.json', ['"parent_navigation_id": ""', '"link": "warext-minecraft/setup"', '"hide_no_children": true'])
+require('_output/admin_navigation/warextMinecraftVote.json', ['"parent_navigation_id": ""', '"link": "warext-minecraft"', '"hide_no_children": true'])
 require('_output/admin_navigation/warextMinecraftSetup.json', ['warext-minecraft/setup'])
 require('_output/admin_navigation/warextMinecraftServers.json', ['warext-minecraft/servers'])
-require('_output/routes/admin_warext-minecraft_.json', ['MinecraftVote:Server', 'warextMinecraftServers'])
-require('_output/routes/admin_warext-minecraft_servers.json', ['MinecraftVote:Server', 'warextMinecraftServers', '"action_prefix": "servers"'])
+require('_output/routes/admin_warext-minecraft_.json', ['MinecraftVote:Setup', 'warextMinecraftVote'])
+require('_output/routes/admin_warext-minecraft_servers.json', ['MinecraftVote:Server', 'warextMinecraftServers', '"format": "servers/"', '"action_prefix": "servers"'])
 require('_output/admin_navigation/warextMinecraftCategories.json', ['warext-minecraft/categories'])
 require('Pub/Controller/Favorite.php', ['if (!$this->isPost())', "buildLink('sunucular/detay'", "buildLink('sunucular/favoriler'"])
 require('Pub/Controller/Server.php', ['actionHesapSil(', 'actionHesapBirincil(', 'if (!$this->isPost())'])
 require('Pub/Controller/Team.php', ['actionRemove(', 'if (!$this->isPost())'])
 require('Pub/Controller/Update.php', ['actionDelete(', 'if (!$this->isPost())'])
 require('Pub/Controller/Review.php', ['actionDelete(', 'actionModerate(', 'if (!$this->isPost())'])
-require('Admin/Controller/Server.php', ['actionServers(', "buildLink('warext-minecraft/setup')", 'actionVoteModerate(', 'actionVoteRetry(', 'actionRunVoteQueue(', 'actionRanking(', 'actionState(', 'actionPing(', 'actionDelete(', 'if (!$this->isPost())'])
+require('Admin/Controller/Server.php', ['actionServers(', 'actionVoteModerate(', 'actionVoteRetry(', 'actionRunVoteQueue(', 'actionRanking(', 'actionState(', 'actionPing(', 'actionDelete(', 'if (!$this->isPost())'])
 require('Admin/Controller/Achievement.php', ['actionToggle(', 'actionRebuild(', 'if (!$this->isPost())'])
 require('Admin/Controller/Health.php', ['actionRetryFailed(', 'actionRecoverStale(', 'if (!$this->isPost())'])
 require('Admin/Controller/Sponsor.php', ['actionToggle(', 'actionDelete(', 'if (!$this->isPost())'])
@@ -58,6 +58,46 @@ for template in (ROOT / '_output/templates/admin').rglob('*.html'):
     text = template.read_text(encoding='utf-8')
     if re.search(r"link\('warext-minecraft'(?=[,)])", text):
         raise SystemExit(f'{template}: admin ana route sunucu listesine bağlanmış')
+
+
+route_seen = set()
+route_index = {}
+for route_path in sorted((ROOT / '_output/routes').glob('*.json')):
+    data = json.loads(route_path.read_text(encoding='utf-8'))
+    key = (data.get('route_type', ''), data.get('route_prefix', ''), data.get('sub_name', ''))
+    if key in route_seen:
+        raise SystemExit(f'{route_path}: yinelenen route anahtarı: {key}')
+    route_seen.add(key)
+    route_index[key] = data
+
+    sub_name = str(data.get('sub_name', '')).strip('/')
+    route_format = str(data.get('format', '')).lstrip('/')
+    if sub_name and not route_format.startswith(sub_name + '/'):
+        raise SystemExit(f'{route_path}: sub_name URL formatına dahil değil: sub_name={sub_name!r}, format={route_format!r}')
+
+for sub_name in [
+    'servers', 'votes', 'suspect-votes', 'vote-moderate', 'vote-retry',
+    'run-vote-queue', 'ranking', 'state', 'ping', 'delete'
+]:
+    key = ('admin', 'warext-minecraft', sub_name)
+    data = route_index.get(key)
+    if not data:
+        raise SystemExit(f'Eksik Server admin route: {sub_name}')
+    if data.get('controller') != 'Warext\\MinecraftVote:Server':
+        raise SystemExit(f'{sub_name}: yanlış controller')
+    if data.get('format') != sub_name + '/':
+        raise SystemExit(f'{sub_name}: yanlış format: {data.get("format")!r}')
+    if data.get('action_prefix') != sub_name:
+        raise SystemExit(f'{sub_name}: yanlış action_prefix: {data.get("action_prefix")!r}')
+
+root_admin = route_index.get(('admin', 'warext-minecraft', ''))
+if not root_admin or root_admin.get('controller') != 'Warext\\MinecraftVote:Setup':
+    raise SystemExit('warext-minecraft root route Setup controllerına bağlı değil')
+
+server_admin = (ROOT / 'Admin/Controller/Server.php').read_text(encoding='utf-8')
+index_match = re.search(r'public function actionIndex\(\)\s*\{(?P<body>.*?)\n\s*\}', server_admin, re.DOTALL)
+if not index_match or 'return $this->actionServers();' not in index_match.group('body'):
+    raise SystemExit('Server::actionIndex redirectsiz actionServers fallbackı değil')
 
 for template in (ROOT / '_output/templates').rglob('*.html'):
     text = template.read_text(encoding='utf-8')
@@ -87,8 +127,8 @@ for option in [
         raise SystemExit(f'{option}: seçenek grubu ilişkisi eksik')
 
 addon = json.loads((ROOT / 'addon.json').read_text(encoding='utf-8'))
-if addon.get('version_string') != '1.0.6' or int(addon.get('version_id', 0)) < 1010060:
-    raise SystemExit('Sürüm numarası 1.0.6 değil.')
+if addon.get('version_string') != '1.0.7' or int(addon.get('version_id', 0)) < 1010070:
+    raise SystemExit('Sürüm numarası 1.0.7 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')

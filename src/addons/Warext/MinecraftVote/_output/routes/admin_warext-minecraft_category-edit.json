@@ -2,7 +2,7 @@
     "route_type": "admin",
     "route_prefix": "warext-minecraft",
     "sub_name": "category-edit",
-    "format": ":int<category_id>/",
+    "format": "category-edit/:int<category_id>/",
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Category",

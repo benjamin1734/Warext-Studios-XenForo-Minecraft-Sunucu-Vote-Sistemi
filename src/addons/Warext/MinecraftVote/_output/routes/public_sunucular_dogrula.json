@@ -2,7 +2,7 @@
     "route_type": "public",
     "route_prefix": "sunucular",
     "sub_name": "dogrula",
-    "format": ":int<server_id>/",
+    "format": "dogrula/:int<server_id>/",
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Server",

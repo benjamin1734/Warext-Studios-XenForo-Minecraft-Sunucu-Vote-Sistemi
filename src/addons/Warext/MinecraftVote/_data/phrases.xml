@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<phrases>
+  <phrase title="admin_navigation.warextMcAchievements" version_id="1010070" version_string="1.0.7">Sunucu Başarımları</phrase>
+  <phrase title="admin_navigation.warextMcReports" version_id="1010070" version_string="1.0.7">Sunucu Raporları</phrase>
+  <phrase title="admin_navigation.warextMinecraftAudit" version_id="1010070" version_string="1.0.7">Audit Kayıtları</phrase>
+  <phrase title="admin_navigation.warextMinecraftCategories" version_id="1010070" version_string="1.0.7">Kategoriler</phrase>
+  <phrase title="admin_navigation.warextMinecraftHealth" version_id="1010070" version_string="1.0.7">Sistem Sağlığı</phrase>
+  <phrase title="admin_navigation.warextMinecraftServers" version_id="1010070" version_string="1.0.7">Sunucular</phrase>
+  <phrase title="admin_navigation.warextMinecraftSetup" version_id="1010070" version_string="1.0.7">Kurulum &amp; Yapılandırma</phrase>
+  <phrase title="admin_navigation.warextMinecraftSponsors" version_id="1010070" version_string="1.0.7">Sponsorlu Sunucular</phrase>
+  <phrase title="admin_navigation.warextMinecraftVote" version_id="1010070" version_string="1.0.7">Minecraft Sunucu &amp; Vote Sistemi</phrase>
+  <phrase title="admin_permission.warextMinecraftVote" version_id="1010070" version_string="1.0.7">Minecraft Sunucu &amp; Vote Sistemini Yönet</phrase>
+  <phrase title="alert_opt_out.warext_mc_server_update_publish" version_id="1010070" version_string="1.0.7">Takip ettiğim Minecraft sunucularının yeni güncellemeleri
+</phrase>
+  <phrase title="option.warextMcAllowGuestVotes" version_id="1010070" version_string="1.0.7">Misafir kullanıcıların oy vermesine izin ver</phrase>
+  <phrase title="option.warextMcAllowPrivateHosts" version_id="1010070" version_string="1.0.7">Yerel ve özel IP adreslerine ping izni ver</phrase>
+  <phrase title="option.warextMcPingHistoryRetentionDays" version_id="1010070" version_string="1.0.7">Ping geçmişini saklama süresi (gün)</phrase>
+  <phrase title="option.warextMcPublicApiEnabled" version_id="1010070" version_string="1.0.7">Salt okunur sunucu API'sini etkinleştir</phrase>
+  <phrase title="option.warextMcRequireVerifiedAccountForVotes" version_id="1010070" version_string="1.0.7">Oy için doğrulanmış Minecraft hesabı zorunlu olsun</phrase>
+  <phrase title="option.warextMcSponsorCurrency" version_id="1010070" version_string="1.0.7">Sponsor para birimi</phrase>
+  <phrase title="option.warextMcSponsorPrice30" version_id="1010070" version_string="1.0.7">30 günlük sponsor fiyatı</phrase>
+  <phrase title="option.warextMcSponsorPrice7" version_id="1010070" version_string="1.0.7">7 günlük sponsor fiyatı</phrase>
+  <phrase title="option.warextMcSponsorSalesEnabled" version_id="1010070" version_string="1.0.7">Sunucu sahiplerinin sponsor paketi satın almasına izin ver</phrase>
+  <phrase title="option.warextMcVoteCaptcha" version_id="1010070" version_string="1.0.7">Oy verirken CAPTCHA doğrulaması iste</phrase>
+  <phrase title="option.warextMcVoteCooldownHours" version_id="1010070" version_string="1.0.7">Oy verme bekleme süresi (saat)</phrase>
+  <phrase title="option.warextMcVotifierMaxAttempts" version_id="1010070" version_string="1.0.7">NuVotifier maksimum teslimat denemesi</phrase>
+  <phrase title="option.warextMcWebhookEnabled" version_id="1010070" version_string="1.0.7">Oy webhook bildirimlerini etkinleştir</phrase>
+  <phrase title="option_explain.warextMcAllowGuestVotes" version_id="1010070" version_string="1.0.7">Açıkken XenForo hesabı olmayan ziyaretçiler Minecraft kullanıcı adlarını girerek oy verebilir. Misafirlerde tekrar oy kontrolü güvenli IP hash ve Minecraft kullanıcı adı üzerinden yapılır.</phrase>
+  <phrase title="option_explain.warextMcAllowPrivateHosts" version_id="1010070" version_string="1.0.7">Yalnızca lokal geliştirme ve güvenilen ağ testleri için açın. Açıldığında 127.0.0.1, localhost, 10.x.x.x, 172.16-31.x.x ve 192.168.x.x gibi özel adreslere Minecraft durum sorgusu yapılabilir. Canlı sistemde kapalı tutulması önerilir.</phrase>
+  <phrase title="option_explain.warextMcPublicApiEnabled" version_id="1010070" version_string="1.0.7">Etkin olduğunda /minecraft-vote-api/ adresi aktif sunucuların herkese açık durum, oyuncu, oy ve sıralama verilerini JSON olarak sunar. IP tabanlı istek limiti uygulanır.</phrase>
+  <phrase title="option_explain.warextMcRequireVerifiedAccountForVotes" version_id="1010070" version_string="1.0.7">Etkin olduğunda misafirler ve elle kullanıcı adı girenler oy veremez. Kullanıcının XenForo hesabına bağlı ve doğrulanmış bir Minecraft hesabı seçmesi gerekir.</phrase>
+  <phrase title="option_explain.warextMcSponsorCurrency" version_id="1010070" version_string="1.0.7">Sponsor paketleri için üç harfli ISO para birimi kodu. Örnek: TRY, EUR, USD.</phrase>
+  <phrase title="option_explain.warextMcSponsorPrice30" version_id="1010070" version_string="1.0.7">30 günlük sponsor paketinin fiyatı. 0 veya geçersiz değer paketi satıştan kaldırır.</phrase>
+  <phrase title="option_explain.warextMcSponsorPrice7" version_id="1010070" version_string="1.0.7">7 günlük sponsor paketinin fiyatı. 0 veya geçersiz değer paketi satıştan kaldırır.</phrase>
+  <phrase title="option_explain.warextMcSponsorSalesEnabled" version_id="1010070" version_string="1.0.7">Açıldığında aktif sunucuların sahipleri XenForo ödeme profilleri üzerinden 7 veya 30 günlük sponsorlu listeleme satın alabilir.</phrase>
+  <phrase title="option_explain.warextMcVoteCaptcha" version_id="1010070" version_string="1.0.7">Etkin olduğunda oy formu XenForo'da yapılandırılmış CAPTCHA sağlayıcısını kullanır. Lokal test ortamında gerekirse kapatılabilir.</phrase>
+  <phrase title="option_explain.warextMcVoteCooldownHours" version_id="1010070" version_string="1.0.7">Bir oyuncunun aynı sunucuya yeniden oy verebilmesi için geçmesi gereken süredir. Varsayılan değer 24 saattir.</phrase>
+  <phrase title="option_explain.warextMcVotifierMaxAttempts" version_id="1010070" version_string="1.0.7">NuVotifier teslimatı başarısız olduğunda kuyruğun kaç kez yeniden deneyeceğini belirler. Denemeler artan bekleme süreleriyle yapılır.</phrase>
+  <phrase title="option_explain.warextMcWebhookEnabled" version_id="1010070" version_string="1.0.7">Etkin olduğunda yeni oylar HTTPS webhook adresine arka plan işi ile gönderilir. Yönlendirmeler kapalıdır ve özel/ayrılmış ağ hedefleri lokal test izni kapalıyken engellenir.</phrase>
+  <phrase title="option_group.warextMinecraftVote" version_id="1010070" version_string="1.0.7">Minecraft Sunucu &amp; Vote Sistemi</phrase>
+  <phrase title="permission.warextMcVote_addServer" version_id="1010070" version_string="1.0.7">Minecraft sunucusu ekleyebilir</phrase>
+  <phrase title="permission.warextMcVote_favorite" version_id="1010070" version_string="1.0.7">Sunucuları favorilere ekleyebilir</phrase>
+  <phrase title="permission.warextMcVote_report" version_id="1010070" version_string="1.0.7">Sunucuları raporlayabilir</phrase>
+  <phrase title="permission.warextMcVote_review" version_id="1010070" version_string="1.0.7">Sunucuları değerlendirebilir</phrase>
+  <phrase title="permission.warextMcVote_vote" version_id="1010070" version_string="1.0.7">Sunuculara oy verebilir</phrase>
+  <phrase title="permission_interface.warextMinecraftVote" version_id="1010070" version_string="1.0.7">Minecraft Sunucu &amp; Vote Sistemi</phrase>
+</phrases>

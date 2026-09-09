@@ -2,7 +2,7 @@
     "route_type": "admin",
     "route_prefix": "warext-minecraft",
     "sub_name": "health/recover-stale",
-    "format": "",
+    "format": "health/recover-stale/",
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Health",
