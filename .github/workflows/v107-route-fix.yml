@@ -1,0 +1,42 @@
+name: v1.0.7 Route Fix
+
+on:
+  push:
+    branches:
+      - v1.0.7-route-rebuild
+    paths:
+      - '.github/v107_route_fix.py'
+      - '.github/workflows/v107-route-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v1.0.7-route-rebuild
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - run: python3 .github/v107_route_fix.py
+      - run: find src -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - run: python3 .github/security_regression.py
+      - run: |
+          python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_permissions.py src/addons/Warext/MinecraftVote
+      - run: |
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+          for file in Path('src/addons/Warext/MinecraftVote/_data').glob('*.xml'):
+              ET.parse(file)
+          PY
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "v1.0.7 rebuild XenForo routes"
+          git push
