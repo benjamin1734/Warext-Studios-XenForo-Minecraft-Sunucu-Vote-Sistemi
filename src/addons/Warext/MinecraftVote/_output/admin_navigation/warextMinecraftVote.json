@@ -1,7 +1,7 @@
 {
     "parent_navigation_id": "",
     "display_order": 450,
-    "link": "warext-minecraft",
+    "link": "warext-minecraft/setup",
     "icon": "fa-server",
     "admin_permission_id": "warextMinecraftVote",
     "debug_only": false,

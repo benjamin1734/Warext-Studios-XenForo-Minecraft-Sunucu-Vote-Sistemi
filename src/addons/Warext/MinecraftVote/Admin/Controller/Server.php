@@ -16,6 +16,11 @@ class Server extends AbstractController
 
     public function actionIndex()
     {
+        return $this->redirect($this->buildLink('warext-minecraft/setup'));
+    }
+
+    public function actionServers()
+    {
         $state = $this->filter('state', 'str');
         if (!in_array($state, ['pending', 'active', 'rejected', 'suspended', 'all'], true))
         {
