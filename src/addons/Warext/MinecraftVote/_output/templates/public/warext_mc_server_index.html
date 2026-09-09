@@ -1,6 +1,7 @@
 <xf:title>Minecraft Sunucuları</xf:title>
 <xf:description>Güncel Minecraft sunucularını keşfet, canlı durumlarını karşılaştır ve favori sunucuna oy ver.</xf:description>
 <xf:css src="warext_mc_servers.less" />
+<xf:css src="warext_mc_server_directory.less" />
 
 <xf:pageaction>
     <xf:button href="{{ link('sunucular/karsilastir') }}">Karşılaştır</xf:button>
@@ -202,15 +203,16 @@
                 </div>
 
                 <div class="warextMcVoteRow-media">
-                                    <xf:if is="$server.animated_banner_path">
-                                        <img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" />
-                                    <xf:elseif is="$server.banner_path" />
-                                        <img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" />
-                                    <xf:else />
-                                        <div class="warextMcVoteRow-mediaFallback"><i class="fa--xf far fa-server" aria-hidden="true"></i></div>
-                                    </xf:if>
-                                </div>
-                                <div class="warextMcVoteRow-main">
+                    <xf:if is="$server.animated_banner_path">
+                        <img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" loading="lazy" decoding="async" />
+                    <xf:elseif is="$server.banner_path" />
+                        <img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" loading="lazy" decoding="async" />
+                    <xf:else />
+                        <div class="warextMcVoteRow-mediaFallback"><i class="fa--xf far fa-server" aria-hidden="true"></i></div>
+                    </xf:if>
+                </div>
+
+                <div class="warextMcVoteRow-main">
                     <div class="warextMcVoteRow-head">
                         <div class="warextMcVoteRow-titleWrap">
                             <a href="{{ link('sunucular/detay', $server) }}" class="warextMcVoteRow-title">{$server.title}</a>
