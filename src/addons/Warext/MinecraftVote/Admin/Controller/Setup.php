@@ -24,7 +24,6 @@ class Setup extends AbstractController
 
         return $this->view('Warext\MinecraftVote:Setup\Index', 'warext_mc_admin_setup', [
             'counts' => $counts,
-            'allowGuests' => (bool)$options->warextMcAllowGuestVotes,
             'requireVerified' => (bool)$options->warextMcRequireVerifiedAccountForVotes,
             'captchaEnabled' => (bool)$options->warextMcVoteCaptcha,
             'sponsorEnabled' => (bool)$options->warextMcSponsorSalesEnabled,
