@@ -1,0 +1,53 @@
+name: v1.1.1 Approval Backfill
+
+on:
+  push:
+    branches:
+      - v1.1.1-media-thread-moderation
+    paths:
+      - '.github/workflows/v111_backfill.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v1.1.1-media-thread-moderation
+
+      - name: Add approval queue backfill
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('src/addons/Warext/MinecraftVote/Setup.php')
+          text = path.read_text(encoding='utf-8')
+          marker = "        $this->app->repository('XF:ContentTypeField')->rebuildContentTypeCache();"
+          insert = """        $db->query(\n            \"INSERT INTO xf_approval_queue (content_type, content_id, content_date) \"\n            . \"SELECT 'warext_mc_server', server_id, IF(created_date > 0, created_date, ?) \"\n            . \"FROM xf_warext_mc_server WHERE state = 'pending' \"\n            . \"ON DUPLICATE KEY UPDATE content_date = VALUES(content_date)\",\n            [\\XF::$time]\n        );\n        $db->query(\n            \"DELETE aq FROM xf_approval_queue AS aq \"\n            . \"LEFT JOIN xf_warext_mc_server AS server ON server.server_id = aq.content_id \"\n            . \"WHERE aq.content_type = 'warext_mc_server' \"\n            . \"AND (server.server_id IS NULL OR server.state <> 'pending')\"\n        );\n"""
+          if insert.strip() not in text:
+              if marker not in text:
+                  raise SystemExit('cache rebuild marker missing')
+              text = text.replace(marker, insert + marker, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate
+        run: |
+          php -l src/addons/Warext/MinecraftVote/Setup.php
+          python3 .github/security_regression.py
+          python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_permissions.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_navigation.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_integrations.py src/addons/Warext/MinecraftVote
+
+      - name: Commit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/addons/Warext/MinecraftVote/Setup.php src/addons/Warext/MinecraftVote/_data
+          git diff --cached --quiet && exit 0
+          git commit -m "Backfill server approval queue"
+          git push origin HEAD:v1.1.1-media-thread-moderation
