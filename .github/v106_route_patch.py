@@ -37,7 +37,7 @@ if not match:
     raise SystemExit('Server actionIndex bloğu bulunamadı')
 body = match.group('body')
 replacement = "    public function actionIndex()\n    {\n        return $this->redirect($this->buildLink('warext-minecraft/setup'));\n    }\n\n    public function actionServers()\n    {\n" + body + "\n    }\n\n    public function actionVotes()"
-text = pattern.sub(replacement, text, count=1)
+text = pattern.sub(lambda _: replacement, text, count=1)
 server_path.write_text(text, encoding='utf-8')
 
 security_path = Path('.github/security_regression.py')
