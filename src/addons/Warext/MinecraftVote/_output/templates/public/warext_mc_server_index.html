@@ -1,5 +1,5 @@
 <xf:title>Minecraft Sunucuları</xf:title>
-<xf:description>Topluluk tarafından eklenen Minecraft sunucularını keşfet, durumlarını incele ve oy ver.</xf:description>
+<xf:description>Güncel Minecraft sunucularını keşfet, canlı durumlarını karşılaştır ve favori sunucuna oy ver.</xf:description>
 <xf:css src="warext_mc_servers.less" />
 
 <xf:pageaction>
@@ -9,40 +9,99 @@
         <xf:button href="{{ link('sunucular/favoriler') }}">Favorilerim</xf:button>
     </xf:if>
     <xf:if is="$xf.visitor.user_id">
-        <xf:button href="{{ link('sunucular/hesaplar') }}">Minecraft Hesaplarım</xf:button>
-    </xf:if>
-    <xf:if is="$canAddServer">
-        <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">Sunucu Ekle</xf:button>
+        <xf:button href="{{ link('sunucular/benim') }}">Sunucularım</xf:button>
     </xf:if>
 </xf:pageaction>
 
-<xf:form action="{{ link('sunucular') }}" method="get" class="block">
-    <div class="block-container">
-        <div class="block-header">Sunucu Ara ve Filtrele</div>
-        <div class="block-body">
-            <xf:textboxrow name="q" value="{$query}" maxlength="80" label="Arama" explain="Sunucu adı, adresi, oyun modu veya açıklama içinde ara." />
+<section class="warextMcDirectoryHero">
+    <div class="warextMcDirectoryHero-main">
+        <div class="warextMcDirectoryHero-copy">
+            <span class="warextMcDirectoryEyebrow">Minecraft Sunucu Dizini</span>
+            <h1>Oyna, keşfet ve oy ver.</h1>
+            <p>Sunucuları canlı oyuncu sayısı, oy performansı, uptime ve topluluk puanına göre tek ekranda karşılaştır.</p>
+        </div>
+        <xf:if is="$canAddServer">
+            <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta warextMcDirectoryHero-cta">Sunucunu Ekle</xf:button>
+        </xf:if>
+    </div>
 
-            <xf:selectrow name="sort" value="{$sort}" label="Sıralama">
+    <div class="warextMcDirectoryStats">
+        <div><strong>{$networkStats.server_count}</strong><span>Aktif sunucu</span></div>
+        <div><strong>{$networkStats.online_count}</strong><span>Şu an online</span></div>
+        <div><strong>{$networkStats.players_online}</strong><span>Oyuncu çevrimiçi</span></div>
+        <div><strong>{$networkStats.votes_month}</strong><span>Bu ay verilen oy</span></div>
+    </div>
+</section>
+
+<xf:form action="{{ link('sunucular') }}" method="get" class="warextMcDirectorySearch">
+    <input type="hidden" name="type" value="{$type}" />
+    <input type="hidden" name="online" value="{{ $online ? '1' : '0' }}" />
+    <input type="hidden" name="category" value="{$categoryId}" />
+    <input type="hidden" name="country" value="{$countryCode}" />
+    <input type="hidden" name="version" value="{$version}" />
+    <input type="hidden" name="game_mode" value="{$gameMode}" />
+    <input type="hidden" name="min_players" value="{$minPlayers}" />
+    <input type="hidden" name="premium" value="{$premium}" />
+    <input type="hidden" name="cracked" value="{$cracked}" />
+    <input type="hidden" name="verified" value="{{ $verified ? '1' : '0' }}" />
+
+    <div class="warextMcDirectorySearch-main">
+        <div class="warextMcDirectorySearch-input">
+            <xf:textbox name="q" value="{$query}" maxlength="80" placeholder="Sunucu adı, IP, oyun modu veya açıklama ara..." />
+        </div>
+        <div class="warextMcDirectorySearch-sort">
+            <xf:select name="sort" value="{$sort}">
                 <xf:option value="popular">Popüler</xf:option>
                 <xf:option value="trend">Yükselişte</xf:option>
                 <xf:option value="votes">En Çok Oy</xf:option>
                 <xf:option value="players">En Kalabalık</xf:option>
                 <xf:option value="uptime">En Yüksek Uptime</xf:option>
                 <xf:option value="new">Yeni Eklenenler</xf:option>
-            </xf:selectrow>
+            </xf:select>
+        </div>
+        <button type="submit" class="button button--primary warextMcDirectorySearch-submit"><span class="button-text">Sunucu Ara</span></button>
+    </div>
 
+    <div class="warextMcDirectorySearch-meta">
+        <span><strong>{$total}</strong> sunucu bulundu</span>
+        <a href="{{ link('sunucular') }}">Filtreleri temizle</a>
+    </div>
+</xf:form>
+
+<nav class="warextMcSortChips" aria-label="Sunucu sıralaması">
+    <a href="{$sortLinks.popular}" class="warextMcSortChip {{ $sort == 'popular' ? 'is-active' : '' }}">Popüler</a>
+    <a href="{$sortLinks.trend}" class="warextMcSortChip {{ $sort == 'trend' ? 'is-active' : '' }}">Yükselişte</a>
+    <a href="{$sortLinks.votes}" class="warextMcSortChip {{ $sort == 'votes' ? 'is-active' : '' }}">En Çok Oy</a>
+    <a href="{$sortLinks.players}" class="warextMcSortChip {{ $sort == 'players' ? 'is-active' : '' }}">En Kalabalık</a>
+    <a href="{$sortLinks.uptime}" class="warextMcSortChip {{ $sort == 'uptime' ? 'is-active' : '' }}">Uptime</a>
+    <a href="{$sortLinks.new}" class="warextMcSortChip {{ $sort == 'new' ? 'is-active' : '' }}">Yeni</a>
+</nav>
+
+<xf:if is="$categoryItems is not empty">
+    <div class="warextMcCategoryChips">
+        <span class="warextMcCategoryChips-label">Oyun türleri</span>
+        <a href="{$allCategoryUrl}" class="warextMcCategoryChip {{ !$categoryId ? 'is-active' : '' }}">Tümü</a>
+        <xf:foreach loop="$categoryItems" value="$item">
+            <a href="{$item.url}" class="warextMcCategoryChip {{ $categoryId == $item.category.category_id ? 'is-active' : '' }}">{$item.category.title}</a>
+        </xf:foreach>
+    </div>
+</xf:if>
+
+<details class="warextMcAdvancedFilters">
+    <summary>
+        <span>Gelişmiş filtreler</span>
+        <xf:if is="$hasAdvancedFilters"><span class="label label--primary">Aktif</span></xf:if>
+    </summary>
+    <xf:form action="{{ link('sunucular') }}" method="get">
+        <input type="hidden" name="q" value="{$query}" />
+        <input type="hidden" name="sort" value="{$sort}" />
+        <input type="hidden" name="category" value="{$categoryId}" />
+        <div class="block-body">
             <xf:selectrow name="type" value="{$type}" label="Sunucu Türü">
                 <xf:option value="">Tümü</xf:option>
                 <xf:option value="java">Java</xf:option>
                 <xf:option value="bedrock">Bedrock</xf:option>
                 <xf:option value="crossplay">Crossplay</xf:option>
-            </xf:selectrow>
-
-            <xf:selectrow name="category" value="{$categoryId}" label="Kategori">
-                <xf:option value="0">Tüm kategoriler</xf:option>
-                <xf:foreach loop="$categories" value="$category">
-                    <xf:option value="{$category.category_id}">{$category.title}</xf:option>
-                </xf:foreach>
             </xf:selectrow>
 
             <xf:selectrow name="country" value="{$countryCode}" label="Ülke">
@@ -79,93 +138,121 @@
             </xf:selectrow>
         </div>
         <xf:submitrow submit="Filtreleri Uygula" />
-        <div class="block-footer"><a href="{{ link('sunucular') }}">Filtreleri temizle</a> · {$total} sonuç</div>
-    </div>
-</xf:form>
+    </xf:form>
+</details>
 
 <xf:if is="$sponsors is not empty">
-    <div class="block">
-        <div class="block-container">
-            <div class="block-header">Sponsorlu Sunucular</div>
-            <div class="block-body">
-                <div class="warextMcServerGrid">
-                    <xf:foreach loop="$sponsors" value="$sponsor">
-                        <div class="block-row block-row--separated warextMcServerCard">
-                            <div class="contentRow">
-                                <div class="contentRow-main">
-                                    <div class="contentRow-title">
-                                        <a href="{{ link('sunucular/detay', $sponsor.Server) }}"><strong>{$sponsor.Server.title}</strong></a>
-                                        <span class="label label--orange">{$sponsor.label}</span>
-                                        <xf:if is="$sponsor.Server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
-                                    </div>
-                                    <div class="contentRow-minor">{$sponsor.Server.host}:{$sponsor.Server.port}</div>
-                                    <div class="contentRow-minor">{$sponsor.Server.players_online} oyuncu · {$sponsor.Server.vote_count_month} bu ay oy · {$sponsor.Server.uptime_percent}% uptime</div>
-                                </div>
-                            </div>
-                        </div>
-                    </xf:foreach>
-                </div>
+    <section class="warextMcFeaturedSection">
+        <div class="warextMcSectionHeading">
+            <div>
+                <span class="warextMcSectionEyebrow">Sponsorlu</span>
+                <h2>Öne Çıkan Sunucular</h2>
             </div>
-            <div class="block-footer">Bu bölüm ücretli/sponsorlu gösterimdir ve organik sıralama puanlarını değiştirmez.</div>
+            <span>Ücretli gösterim organik sıralamayı değiştirmez.</span>
         </div>
-    </div>
+
+        <div class="warextMcFeaturedGrid">
+            <xf:foreach loop="$sponsors" value="$sponsor">
+                <article class="warextMcFeaturedCard">
+                    <div class="warextMcFeaturedCard-head">
+                        <div>
+                            <a href="{{ link('sunucular/detay', $sponsor.Server) }}" class="warextMcFeaturedCard-title">{$sponsor.Server.title}</a>
+                            <div class="warextMcFeaturedCard-address">{$sponsor.Server.host}:{$sponsor.Server.port}</div>
+                        </div>
+                        <span class="label label--orange">{$sponsor.label}</span>
+                    </div>
+                    <div class="warextMcFeaturedCard-meta">
+                        <xf:if is="$sponsor.Server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
+                        <span>{$sponsor.Server.players_online}/{$sponsor.Server.players_max} oyuncu</span>
+                        <span>{$sponsor.Server.vote_count_month} oy</span>
+                    </div>
+                    <div class="warextMcFeaturedCard-actions">
+                        <xf:button href="{{ link('sunucular/oy', $sponsor.Server) }}" class="button--cta">Oy Ver</xf:button>
+                        <xf:button href="{{ link('sunucular/detay', $sponsor.Server) }}">İncele</xf:button>
+                    </div>
+                </article>
+            </xf:foreach>
+        </div>
+    </section>
 </xf:if>
 
+<div class="warextMcSectionHeading warextMcSectionHeading--list">
+    <div>
+        <span class="warextMcSectionEyebrow">Sunucu sıralaması</span>
+        <h2>Minecraft Sunucuları</h2>
+    </div>
+    <span>{$total} sonuç</span>
+</div>
+
 <xf:if is="$servers is not empty">
-    <div class="warextMcServerGrid">
-        <xf:foreach loop="$servers" value="$server">
-            <div class="block warextMcServerCard">
-                <div class="block-container">
-                    <div class="block-body">
-                        <div class="warextMcServerCard-main">
-                            <div class="warextMcServerCard-titleRow">
-                                <h3 class="warextMcServerCard-title">
-                                    <a href="{{ link('sunucular/detay', $server) }}">{$server.title}</a>
-                                </h3>
-                                <div>
-                                    <xf:if is="$sort == 'popular' && $server.rank_popular">
-                                        <span class="label label--primary">#{$server.rank_popular} Popüler</span>
-                                    <xf:elseif is="$sort == 'trend' && $server.rank_trending" />
-                                        <span class="label label--orange">#{$server.rank_trending} Yükselişte</span>
-                                    </xf:if>
-                                    <xf:if is="$server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
-                                    <xf:if is="$server.is_online">
-                                        <span class="label label--green">Online</span>
-                                    <xf:else />
-                                        <span class="label label--red">Offline</span>
-                                    </xf:if>
-                                </div>
-                            </div>
+    <div class="warextMcVoteList">
+        <xf:foreach loop="$servers" value="$server" i="$i">
+            <article class="warextMcVoteRow">
+                <div class="warextMcVoteRow-rank">
+                    <span>Sıra</span>
+                    <strong>
+                        <xf:if is="$sort == 'popular' && $server.rank_popular">
+                            #{$server.rank_popular}
+                        <xf:elseif is="$sort == 'trend' && $server.rank_trending" />
+                            #{$server.rank_trending}
+                        <xf:else />
+                            #{{ (($page - 1) * $perPage) + $i }}
+                        </xf:if>
+                    </strong>
+                </div>
 
-                            <div class="warextMcServerCard-address">{$server.host}:{$server.port}</div>
-
-                            <div class="warextMcServerStats">
-                                <div><strong>{$server.players_online}</strong><span>Oyuncu</span></div>
-                                <div><strong>{$server.vote_count_month}</strong><span>Bu ay oy</span></div>
-                                <div><strong>{$server.uptime_percent}%</strong><span>Uptime</span></div>
-                                <div><strong>{$server.rating_average}</strong><span>Puan</span></div>
+                <div class="warextMcVoteRow-main">
+                    <div class="warextMcVoteRow-head">
+                        <div class="warextMcVoteRow-titleWrap">
+                            <a href="{{ link('sunucular/detay', $server) }}" class="warextMcVoteRow-title">{$server.title}</a>
+                            <div class="warextMcVoteRow-badges">
+                                <xf:if is="$server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
+                                <xf:if is="$server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
+                                <span class="label">{{ $server.server_type == 'crossplay' ? 'CROSSPLAY' : ($server.server_type == 'bedrock' ? 'BEDROCK' : 'JAVA') }}</span>
                             </div>
+                        </div>
+                        <xf:if is="$server.is_online && $server.ping_ms">
+                            <span class="warextMcVoteRow-ping">{$server.ping_ms} ms</span>
+                        </xf:if>
+                    </div>
 
-                            <div class="contentRow-minor">
-                                Son 24 saat: {$server.votes_24h} oy · Benzersiz seçmen: {$server.unique_voters_month}
-                                <xf:if is="$sort == 'popular'"> · Popülerlik: {$server.popular_score}</xf:if>
-                                <xf:if is="$sort == 'trend'"> · Trend: {$server.trend_score}</xf:if>
-                            </div>
+                    <xf:if is="$server.motd">
+                        <div class="warextMcVoteRow-motd">{$server.motd}</div>
+                    </xf:if>
 
-                            <div class="contentRow-minor">
-                                <xf:if is="$server.detected_version">Sürüm: {$server.detected_version}</xf:if>
-                                <xf:if is="$server.game_modes"> · Modlar: {$server.game_modes}</xf:if>
-                                <xf:if is="$server.country_code"> · Ülke: {$server.country_code}</xf:if>
-                            </div>
+                    <div class="warextMcVoteRow-tags">
+                        <xf:if is="$server.detected_version"><span>{$server.detected_version}</span></xf:if>
+                        <xf:if is="$server.game_modes"><span>{$server.game_modes}</span></xf:if>
+                        <xf:if is="$server.country_code"><span>{$server.country_code}</span></xf:if>
+                        <xf:if is="$server.is_premium"><span>Premium</span></xf:if>
+                        <xf:if is="$server.allow_cracked"><span>Crack</span></xf:if>
+                    </div>
 
-                            <div class="warextMcServerCard-actions">
-                                <xf:button href="{{ link('sunucular/detay', $server) }}" class="button--primary">Detaylar</xf:button>
-                                <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncellemeler</xf:button>
-                            </div>
+                    <div class="warextMcVoteRow-bottom">
+                        <div class="warextMcVoteRow-address">
+                            <span>Sunucu adresi</span>
+                            <strong>{$server.host}:{$server.port}</strong>
+                            <xf:button type="button" data-xf-init="copy-to-clipboard" data-copy-text="{$server.host}:{$server.port}" class="button--link">IP Kopyala</xf:button>
+                        </div>
+
+                        <div class="warextMcVoteRow-metrics">
+                            <div><strong>{$server.players_online}<small>/{$server.players_max}</small></strong><span>Oyuncu</span></div>
+                            <div><strong>{$server.vote_count_month}</strong><span>Bu ay oy</span></div>
+                            <div><strong>{$server.rating_average}</strong><span>Puan</span></div>
+                            <div><strong>{$server.uptime_percent}%</strong><span>Uptime</span></div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="warextMcVoteRow-actions">
+                    <div class="warextMcVoteRow-votes">
+                        <strong>{$server.vote_count_month}</strong>
+                        <span>aylık oy</span>
+                    </div>
+                    <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta warextMcVoteRow-voteButton">Oy Ver</xf:button>
+                    <a href="{{ link('sunucular/detay', $server) }}" class="warextMcVoteRow-detailLink">Sunucuyu incele</a>
+                </div>
+            </article>
         </xf:foreach>
     </div>
 
