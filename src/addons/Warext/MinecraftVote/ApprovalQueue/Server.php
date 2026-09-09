@@ -8,9 +8,19 @@ use XF\Mvc\Entity\Entity;
 
 class Server extends AbstractHandler
 {
+    protected function canViewContent(Entity $content, &$error = null)
+    {
+        return $content instanceof ServerEntity && $content->canApproveUnapprove($error);
+    }
+
     protected function canActionContent(Entity $content, &$error = null)
     {
         return $content instanceof ServerEntity && $content->canApproveUnapprove($error);
+    }
+
+    public function getEntityWith()
+    {
+        return ['Owner', 'DiscussionThread'];
     }
 
     public function actionApprove(ServerEntity $server): void
