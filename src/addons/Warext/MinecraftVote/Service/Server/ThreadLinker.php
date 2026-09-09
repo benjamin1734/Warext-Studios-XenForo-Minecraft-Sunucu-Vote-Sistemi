@@ -32,7 +32,7 @@ class ThreadLinker extends AbstractService
             throw new PrintableException('Tanıtım konusu bu XenForo sitesine ait olmalıdır.');
         }
 
-        if (!preg_match('~(?:^|/)threads/(?:[^/?#]*\.)?(\d+)(?:/|$|[?#])~i', $url, $match))
+        if (!preg_match('~(?:^|[/?&])threads/(?:[^/?#]*\.)?(\d+)(?:/|$|[?#&])~i', $url, $match))
         {
             throw new PrintableException('Geçerli bir XenForo tanıtım konusu bağlantısı girin.');
         }
