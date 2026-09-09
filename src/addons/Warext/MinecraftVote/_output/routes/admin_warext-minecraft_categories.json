@@ -6,6 +6,6 @@
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Category",
-    "context": "",
+    "context": "warextMinecraftCategories",
     "action_prefix": ""
 }

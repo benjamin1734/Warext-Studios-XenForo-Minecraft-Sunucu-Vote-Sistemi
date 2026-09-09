@@ -1,7 +1,7 @@
 {
     "parent_navigation_id": "warextMinecraftVote",
     "display_order": 10,
-    "link": "warext-minecraft",
+    "link": "warext-minecraft/servers",
     "icon": "fa-list",
     "admin_permission_id": "warextMinecraftVote",
     "debug_only": false,

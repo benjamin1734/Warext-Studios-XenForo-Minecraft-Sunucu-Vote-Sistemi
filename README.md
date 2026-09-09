@@ -4,7 +4,7 @@ XenForo 2.3 için Minecraft sunucu listeleme ve güvenli oy sistemi.
 
 ## Kurulum
 
-`Warext-MinecraftVote-1.0.5.zip` dosyasını açmadan **Admin CP > Add-ons > Install/upgrade from archive** üzerinden yükleyin. Mevcut sürümün üzerine doğrudan yükseltilebilir.
+`Warext-MinecraftVote-1.0.6.zip` dosyasını açmadan **Admin CP > Add-ons > Install/upgrade from archive** üzerinden yükleyin. Mevcut sürümün üzerine doğrudan yükseltilebilir.
 
 Kurulumdan sonra **Admin CP > Minecraft Sunucuları > Kurulum & Yapılandırma** ekranını takip edin.
 
