@@ -53,18 +53,26 @@ class Add extends AbstractController
                     $media->validateUpload($upload, $type);
                 }
 
-                $thread = $this->service('Warext\MinecraftVote:Server\ThreadLinker')
-                    ->resolve($input['discussion_thread_url'], $visitor);
+                $threadLinker = $this->service('Warext\MinecraftVote:Server\ThreadLinker');
+                $thread = $threadLinker->resolve($input['discussion_thread_url'], $visitor);
+                $categoryIds = $input['category_ids'];
+                if ($thread)
+                {
+                    $mappedCategory = $threadLinker->getMappedCategory($thread);
+                    if ($mappedCategory)
+                    {
+                        $categoryIds[] = (int)$mappedCategory->category_id;
+                    }
+                }
 
                 $creator = $this->service('Warext\MinecraftVote:Server\Creator');
                 $creator->setOwner($visitor);
                 $creator->setData($input);
-                $creator->setCategoryIds($input['category_ids']);
+                $creator->setCategoryIds($categoryIds);
                 $server = $creator->save();
                 if ($thread)
                 {
-                    $server->discussion_thread_id = (int)$thread->thread_id;
-                    $server->save();
+                    $threadLinker->link($server, $thread);
                 }
 
                 foreach ($uploads as $type => $upload)
