@@ -447,6 +447,19 @@ class Setup extends AbstractSetup
                 ['warext_mc_server', $fieldName, $fieldValue, 'Warext/MinecraftVote']
             );
         }
+        $db->query(
+            "INSERT INTO xf_approval_queue (content_type, content_id, content_date) "
+            . "SELECT 'warext_mc_server', server_id, IF(created_date > 0, created_date, ?) "
+            . "FROM xf_warext_mc_server WHERE state = 'pending' "
+            . "ON DUPLICATE KEY UPDATE content_date = VALUES(content_date)",
+            [\XF::$time]
+        );
+        $db->query(
+            "DELETE aq FROM xf_approval_queue AS aq "
+            . "LEFT JOIN xf_warext_mc_server AS server ON server.server_id = aq.content_id "
+            . "WHERE aq.content_type = 'warext_mc_server' "
+            . "AND (server.server_id IS NULL OR server.state <> 'pending')"
+        );
         $this->app->repository('XF:ContentTypeField')->rebuildContentTypeCache();
     }
 
