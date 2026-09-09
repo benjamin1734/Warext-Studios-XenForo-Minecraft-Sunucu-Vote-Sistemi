@@ -22,10 +22,10 @@
 
         <h2 class="block-header">Görsel Kimlik</h2>
         <div class="block-body">
-            <div class="blockMessage">Liste bannerı klasik vote standardı olan 468×60 kullanır. Hareketli GIF yüklerseniz listede statik bannerın yerine o gösterilir. Kapak görseli yalnız sunucu detay sayfasının geniş üst alanında kullanılır.</div>
-            <xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="468×60 JPG, PNG veya WebP · en fazla 10 MB" />
-            <xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="468×60 GIF · en fazla 15 MB · varsa statik bannerı geçersiz kılar" />
-            <xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="Detay kapağı" explain="En az 800×300 · JPG, PNG veya WebP · en fazla 12 MB" />
+            <div class="blockMessage">Görselleri istediğiniz oranda yükleyebilirsiniz. Sistem liste bannerlarını merkezden kırparak otomatik 300×100 piksele küçültür ve optimize eder. Statik görseller destekleniyorsa WebP olarak saklanır. Hareketli GIF 300×100 olarak yeniden işlenir. Detay kapağı 1200×400 hazırlanır.</div>
+            <xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="JPG, PNG veya WebP · otomatik 300×100 · yükleme en fazla 12 MB" />
+            <xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="GIF · otomatik 300×100 ve optimize · yükleme en fazla 20 MB · varsa statik bannerı geçersiz kılar" />
+            <xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="Detay kapağı" explain="JPG, PNG veya WebP · otomatik 1200×400 · yükleme en fazla 15 MB" />
             <xf:textboxrow name="trailer_url" label="Tanıtım videosu" placeholder="https://" maxlength="255" explain="İsteğe bağlı video/trailer bağlantısı." />
         </div>
 
