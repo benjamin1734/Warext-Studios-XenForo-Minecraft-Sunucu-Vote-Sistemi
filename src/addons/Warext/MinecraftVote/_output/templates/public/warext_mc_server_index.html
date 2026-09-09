@@ -186,10 +186,10 @@
 </div>
 
 <xf:if is="$servers is not empty">
-    <div class="warextMcVoteList">
+    <div class="warextMcDirectoryList">
         <xf:foreach loop="$servers" value="$server" i="$i">
-            <article class="warextMcVoteRow">
-                <div class="warextMcVoteRow-rank">
+            <article class="warextMcDirectoryRow">
+                <div class="warextMcDirectoryRow-rank">
                     <span>Sıra</span>
                     <strong>
                         <xf:if is="$sort == 'popular' && $server.rank_popular">
@@ -202,36 +202,36 @@
                     </strong>
                 </div>
 
-                <div class="warextMcVoteRow-media">
+                <div class="warextMcDirectoryRow-media">
                     <xf:if is="$server.animated_banner_path">
                         <img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" loading="lazy" decoding="async" />
                     <xf:elseif is="$server.banner_path" />
                         <img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" loading="lazy" decoding="async" />
                     <xf:else />
-                        <div class="warextMcVoteRow-mediaFallback"><i class="fa--xf far fa-server" aria-hidden="true"></i></div>
+                        <div class="warextMcDirectoryRow-mediaFallback"><i class="fa--xf far fa-server" aria-hidden="true"></i></div>
                     </xf:if>
                 </div>
 
-                <div class="warextMcVoteRow-main">
-                    <div class="warextMcVoteRow-head">
-                        <div class="warextMcVoteRow-titleWrap">
-                            <a href="{{ link('sunucular/detay', $server) }}" class="warextMcVoteRow-title">{$server.title}</a>
-                            <div class="warextMcVoteRow-badges">
+                <div class="warextMcDirectoryRow-main">
+                    <div class="warextMcDirectoryRow-head">
+                        <div class="warextMcDirectoryRow-titleWrap">
+                            <a href="{{ link('sunucular/detay', $server) }}" class="warextMcDirectoryRow-title">{$server.title}</a>
+                            <div class="warextMcDirectoryRow-badges">
                                 <xf:if is="$server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
                                 <xf:if is="$server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
                                 <span class="label">{{ $server.server_type == 'crossplay' ? 'CROSSPLAY' : ($server.server_type == 'bedrock' ? 'BEDROCK' : 'JAVA') }}</span>
                             </div>
                         </div>
                         <xf:if is="$server.is_online && $server.ping_ms">
-                            <span class="warextMcVoteRow-ping">{$server.ping_ms} ms</span>
+                            <span class="warextMcDirectoryRow-ping">{$server.ping_ms} ms</span>
                         </xf:if>
                     </div>
 
                     <xf:if is="$server.motd">
-                        <div class="warextMcVoteRow-motd">{$server.motd}</div>
+                        <div class="warextMcDirectoryRow-motd">{$server.motd}</div>
                     </xf:if>
 
-                    <div class="warextMcVoteRow-tags">
+                    <div class="warextMcDirectoryRow-tags">
                         <xf:if is="$server.detected_version"><span>{$server.detected_version}</span></xf:if>
                         <xf:if is="$server.game_modes"><span>{$server.game_modes}</span></xf:if>
                         <xf:if is="$server.country_code"><span>{$server.country_code}</span></xf:if>
@@ -239,14 +239,14 @@
                         <xf:if is="$server.allow_cracked"><span>Crack</span></xf:if>
                     </div>
 
-                    <div class="warextMcVoteRow-bottom">
-                        <div class="warextMcVoteRow-address">
+                    <div class="warextMcDirectoryRow-bottom">
+                        <div class="warextMcDirectoryRow-address">
                             <span>Sunucu adresi</span>
                             <strong>{$server.host}:{$server.port}</strong>
                             <xf:button type="button" data-xf-init="copy-to-clipboard" data-copy-text="{$server.host}:{$server.port}" class="button--link">IP Kopyala</xf:button>
                         </div>
 
-                        <div class="warextMcVoteRow-metrics">
+                        <div class="warextMcDirectoryRow-metrics">
                             <div><strong>{$server.players_online}<small>/{$server.players_max}</small></strong><span>Oyuncu</span></div>
                             <div><strong>{$server.vote_count_month}</strong><span>Bu ay oy</span></div>
                             <div><strong>{$server.rating_average}</strong><span>Puan</span></div>
@@ -255,13 +255,13 @@
                     </div>
                 </div>
 
-                <div class="warextMcVoteRow-actions">
-                    <div class="warextMcVoteRow-votes">
+                <div class="warextMcDirectoryRow-actions">
+                    <div class="warextMcDirectoryRow-votes">
                         <strong>{$server.vote_count_month}</strong>
                         <span>aylık oy</span>
                     </div>
-                    <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta warextMcVoteRow-voteButton">Oy Ver</xf:button>
-                    <a href="{{ link('sunucular/detay', $server) }}" class="warextMcVoteRow-detailLink">Sunucuyu incele</a>
+                    <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta warextMcDirectoryRow-voteButton">Oy Ver</xf:button>
+                    <a href="{{ link('sunucular/detay', $server) }}" class="warextMcDirectoryRow-detailLink">Sunucuyu incele</a>
                 </div>
             </article>
         </xf:foreach>
