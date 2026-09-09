@@ -72,9 +72,9 @@ class Creator extends AbstractService
             throw new PrintableException('Minecraft kullanıcı adı gereklidir.');
         }
 
-        if (!$this->user->user_id && !(bool)(\XF::options()->warextMcAllowGuestVotes ?? true))
+        if (!$this->user->user_id)
         {
-            throw new PrintableException('Oy verebilmek için giriş yapmanız gerekiyor.');
+            throw new PrintableException('Oy verebilmek için forum hesabınızla giriş yapmanız gerekiyor.');
         }
 
         $this->assertRequestRate();
@@ -89,8 +89,8 @@ class Creator extends AbstractService
                 $this->server->server_id
             );
 
-            $cooldownHours = min(168, max(1, (int)(\XF::options()->warextMcVoteCooldownHours ?? 24)));
-            $since = \XF::$time - ($cooldownHours * 3600);
+            $cooldownHours = 24;
+            $since = \XF::$time - 86400;
 
             $voteRepo = $this->repository('Warext\MinecraftVote:Vote');
             $this->assertIpVelocity($voteRepo);
@@ -169,7 +169,7 @@ class Creator extends AbstractService
     {
         if ($this->user->user_id && $voteRepo->hasRecentUserVote($this->server->server_id, $this->user->user_id, $since))
         {
-            throw new PrintableException("Bu sunucuya son {$cooldownHours} saat içinde zaten oy verdiniz.");
+            throw new PrintableException('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.');
         }
 
         if ($voteRepo->hasRecentMinecraftUsernameVote($this->server->server_id, $this->minecraftUsername, $since))

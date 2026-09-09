@@ -358,24 +358,24 @@ class Media extends AbstractService
                 'max_upload' => 12 * 1024 * 1024,
                 'max_output' => 512 * 1024,
                 'extensions' => ['jpg', 'png', 'webp'],
-                'width' => 300,
-                'height' => 100,
-                'min_width' => 150,
-                'min_height' => 50,
+                'width' => 360,
+                'height' => 120,
+                'min_width' => 180,
+                'min_height' => 60,
                 'format_error' => 'Statik banner JPG, PNG veya WebP olmalıdır.',
-                'size_error' => 'Liste bannerı en az 150×50 piksel olmalıdır.'
+                'size_error' => 'Liste bannerı en az 180×60 piksel olmalıdır.'
             ],
             'animated_banner' => [
                 'field' => 'animated_banner_path',
                 'max_upload' => 20 * 1024 * 1024,
                 'max_output' => 6 * 1024 * 1024,
                 'extensions' => ['gif'],
-                'width' => 300,
-                'height' => 100,
-                'min_width' => 150,
-                'min_height' => 50,
+                'width' => 360,
+                'height' => 120,
+                'min_width' => 180,
+                'min_height' => 60,
                 'format_error' => 'Hareketli banner GIF olmalıdır.',
-                'size_error' => 'Hareketli banner en az 150×50 piksel olmalıdır.'
+                'size_error' => 'Hareketli banner en az 180×60 piksel olmalıdır.'
             ],
             'cover' => [
                 'field' => 'cover_path',

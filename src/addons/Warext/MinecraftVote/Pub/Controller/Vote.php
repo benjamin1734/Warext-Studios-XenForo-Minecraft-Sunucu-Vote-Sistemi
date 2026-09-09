@@ -13,25 +13,36 @@ class Vote extends AbstractController
     {
         $server = $this->assertActiveServer((int)$params->server_id);
         $visitor = \XF::visitor();
-        $allowGuests = (bool)(\XF::options()->warextMcAllowGuestVotes ?? true);
         $requireVerifiedAccount = (bool)(\XF::options()->warextMcRequireVerifiedAccountForVotes ?? false);
         $requireCaptcha = (bool)(\XF::options()->warextMcVoteCaptcha ?? true);
 
-        if (!PublicPermissions::allows('vote', $allowGuests, true))
+        if (!PublicPermissions::allows('vote', false, true))
         {
             return $this->noPermission();
         }
-        if (!$visitor->user_id && (!$allowGuests || $requireVerifiedAccount))
+        if (!$visitor->user_id)
         {
             return $this->noPermission();
         }
 
-        $linkedAccounts = $visitor->user_id
-            ? $this->repository('Warext\MinecraftVote:MinecraftAccount')->findForUser($visitor->user_id)->fetch()
-            : [];
+        $voteRepo = $this->repository('Warext\MinecraftVote:Vote');
+        $voteBlocked = $voteRepo->hasRecentUserVote(
+            (int)$server->server_id,
+            (int)$visitor->user_id,
+            \XF::$time - 86400
+        );
+
+        $linkedAccounts = $this->repository('Warext\MinecraftVote:MinecraftAccount')
+            ->findForUser($visitor->user_id)
+            ->fetch();
 
         if ($this->isPost())
         {
+            if ($voteBlocked)
+            {
+                return $this->error('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.', 429);
+            }
+
             if ($requireCaptcha && !$this->captchaIsValid())
             {
                 return $this->error(\XF::phrase('did_not_complete_the_captcha_verification_properly'));
@@ -108,8 +119,9 @@ class Vote extends AbstractController
 
         return $this->view('Warext\MinecraftVote:Server\Vote', 'warext_mc_server_vote', [
             'server' => $server,
-            'cooldownHours' => min(168, max(1, (int)(\XF::options()->warextMcVoteCooldownHours ?? 24))),
-            'allowGuests' => $allowGuests,
+            'cooldownHours' => 24,
+            'allowGuests' => false,
+            'voteBlocked' => $voteBlocked,
             'linkedAccounts' => $linkedAccounts,
             'requireVerifiedAccount' => $requireVerifiedAccount,
             'requireCaptcha' => $requireCaptcha

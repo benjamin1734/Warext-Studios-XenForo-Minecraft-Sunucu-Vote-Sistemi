@@ -1,1 +1,0 @@
-Bir oyuncunun aynı sunucuya yeniden oy verebilmesi için geçmesi gereken süredir. Varsayılan değer 24 saattir.

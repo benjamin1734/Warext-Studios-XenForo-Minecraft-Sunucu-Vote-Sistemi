@@ -19,6 +19,9 @@
                 </div>
             </div>
 
+            <xf:if is="$voteBlocked">
+                <div class="block-rowMessage block-rowMessage--warning">Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.</div>
+            <xf:else />
             <xf:form action="{{ link('sunucular/oy', $server) }}" class="block" ajax="true">
                 <div class="block-body">
                     <xf:if is="$linkedAccounts is not empty">
@@ -66,6 +69,7 @@
 
                 <xf:submitrow submit="Oy Ver" />
             </xf:form>
+            </xf:if>
         </div>
     </div>
 </div>
