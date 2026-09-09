@@ -23,27 +23,20 @@ class Media extends AbstractService
         }
 
         $config = $this->getConfig($type);
-        $tempFile = $upload->getTempFile();
-        $fileSize = @filesize($tempFile);
-        if ($fileSize === false || $fileSize < 1 || $fileSize > $config['max'])
+        $upload->requireImage()->setMaxFileSize($config['max']);
+        if (!$upload->isValid($errors))
         {
-            throw new PrintableException($config['size_error']);
+            throw new PrintableException('Yüklenen dosya güvenli ve geçerli bir görsel olmalıdır.');
         }
 
-        $imageInfo = @getimagesize($tempFile);
-        if (!$imageInfo || empty($imageInfo[0]) || empty($imageInfo[1]) || empty($imageInfo[2]))
-        {
-            throw new PrintableException('Yüklenen dosya geçerli bir görsel değil.');
-        }
-
-        $extension = $this->extensionFromImageType((int)$imageInfo[2]);
+        $extension = $this->extensionFromImageType((int)$upload->getImageType());
         if (!in_array($extension, $config['extensions'], true))
         {
             throw new PrintableException($config['format_error']);
         }
 
-        $width = (int)$imageInfo[0];
-        $height = (int)$imageInfo[1];
+        $width = (int)$upload->getImageWidth();
+        $height = (int)$upload->getImageHeight();
         if ($type === 'banner' || $type === 'animated_banner')
         {
             if ($width !== 468 || $height !== 60)
@@ -61,8 +54,7 @@ class Media extends AbstractService
     {
         $this->validateUpload($upload, $type);
         $config = $this->getConfig($type);
-        $imageInfo = getimagesize($upload->getTempFile());
-        $extension = $this->extensionFromImageType((int)$imageInfo[2]);
+        $extension = $this->extensionFromImageType((int)$upload->getImageType());
         $field = $config['field'];
         $oldPath = (string)$server->{$field};
         $relativePath = 'warext-minecraft/server/' . $server->server_id . '/' . $type . '.' . $extension;
@@ -101,21 +93,18 @@ class Media extends AbstractService
                 'field' => 'banner_path',
                 'max' => 10 * 1024 * 1024,
                 'extensions' => ['jpg', 'png', 'webp'],
-                'size_error' => 'Statik banner en fazla 10 MB olabilir.',
                 'format_error' => 'Statik banner JPG, PNG veya WebP olmalıdır.'
             ],
             'animated_banner' => [
                 'field' => 'animated_banner_path',
                 'max' => 15 * 1024 * 1024,
                 'extensions' => ['gif'],
-                'size_error' => 'Hareketli banner en fazla 15 MB olabilir.',
                 'format_error' => 'Hareketli banner GIF olmalıdır.'
             ],
             'cover' => [
                 'field' => 'cover_path',
                 'max' => 12 * 1024 * 1024,
                 'extensions' => ['jpg', 'png', 'webp'],
-                'size_error' => 'Kapak görseli en fazla 12 MB olabilir.',
                 'format_error' => 'Kapak görseli JPG, PNG veya WebP olmalıdır.'
             ]
         ];
