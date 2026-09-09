@@ -1,0 +1,9 @@
+{
+    "event_id": "entity_post_save",
+    "execute_order": 10,
+    "callback_class": "Warext\\MinecraftVote\\Listener",
+    "callback_method": "postEntityPostSave",
+    "active": true,
+    "hint": "XF\\Entity\\Post",
+    "description": "Create linked Minecraft server from configured promotion forums."
+}

@@ -65,7 +65,7 @@ class Editor extends AbstractService
             throw new PrintableException('Ülke kodu iki harfli ISO kodu olmalıdır.');
         }
 
-        foreach (['website_url', 'discord_url', 'store_url'] as $field)
+        foreach (['website_url', 'discord_url', 'store_url', 'trailer_url'] as $field)
         {
             $data[$field] = trim((string)($data[$field] ?? ''));
             if ($data[$field] !== '' && !$this->isValidHttpUrl($data[$field]))
@@ -84,7 +84,7 @@ class Editor extends AbstractService
 
         $fields = [
             'title', 'description', 'server_type', 'host', 'port', 'bedrock_host', 'bedrock_port',
-            'website_url', 'discord_url', 'store_url', 'game_modes', 'version_min', 'version_max', 'country_code',
+            'website_url', 'discord_url', 'store_url', 'trailer_url', 'game_modes', 'version_min', 'version_max', 'country_code',
             'is_premium', 'allow_cracked'
         ];
         $allowedData = array_intersect_key($data, array_flip($fields));

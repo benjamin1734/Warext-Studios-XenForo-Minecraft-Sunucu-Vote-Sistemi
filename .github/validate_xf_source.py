@@ -202,7 +202,7 @@ def validate_cron(addon: Path):
 
 def validate_content_types(addon: Path):
     errors = []
-    class_fields = {'entity', 'alert_handler_class', 'attachment_handler_class'}
+    class_fields = {'entity', 'alert_handler_class', 'attachment_handler_class', 'approval_queue_handler_class'}
     for path in sorted((addon / '_output' / 'content_type_fields').glob('*.json')):
         obj = load_json(path)
         field_name = str(obj.get('field_name', ''))

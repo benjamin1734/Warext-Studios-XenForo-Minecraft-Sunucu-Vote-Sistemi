@@ -1,0 +1,9 @@
+{
+    "event_id": "templater_template_pre_render",
+    "execute_order": 10,
+    "callback_class": "Warext\\MinecraftVote\\Listener",
+    "callback_method": "threadFormPreRender",
+    "active": true,
+    "hint": "public:forum_post_thread",
+    "description": "Expose Minecraft server fields in configured promotion forums."
+}

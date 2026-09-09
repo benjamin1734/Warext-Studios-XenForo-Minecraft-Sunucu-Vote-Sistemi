@@ -47,6 +47,10 @@
     </xf:if>
 </xf:pageaction>
 
+<xf:if is="$server.cover_path">
+    <div class="warextMcServerCover"><img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" alt="{$server.title}" /></div>
+</xf:if>
+
 <div class="block warextMcServerHero">
     <div class="block-container">
         <div class="block-body">
@@ -129,7 +133,7 @@
     <div class="block"><div class="block-container"><h2 class="block-header">Açıklama</h2><div class="block-body block-row">{{ bb_code($server.description, 'warext_mc_server', $server) }}</div></div></div>
 </xf:if>
 
-<xf:if is="$server.website_url || $server.discord_url || $server.store_url">
+<xf:if is="$server.website_url || $server.discord_url || $server.store_url || $server.trailer_url || $server.DiscussionThread">
     <div class="block">
         <div class="block-container">
             <h2 class="block-header">Bağlantılar</h2>
@@ -137,6 +141,8 @@
                 <xf:if is="$server.website_url"><a class="button" href="{$server.website_url}" target="_blank" rel="nofollow noopener">Web Sitesi</a></xf:if>
                 <xf:if is="$server.discord_url"><a class="button" href="{$server.discord_url}" target="_blank" rel="nofollow noopener">Discord</a></xf:if>
                 <xf:if is="$server.store_url"><a class="button" href="{$server.store_url}" target="_blank" rel="nofollow noopener">Mağaza</a></xf:if>
+                <xf:if is="$server.trailer_url"><a class="button" href="{$server.trailer_url}" target="_blank" rel="nofollow noopener">Tanıtım Videosu</a></xf:if>
+                <xf:if is="$server.DiscussionThread"><a class="button" href="{{ link('threads', $server.DiscussionThread) }}">Tanıtım Konusu</a></xf:if>
             </div>
         </div>
     </div>

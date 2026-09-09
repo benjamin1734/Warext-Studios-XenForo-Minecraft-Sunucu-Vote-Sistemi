@@ -62,6 +62,7 @@ jobs:
           python .github/build_xf_data.py src/addons/Warext/MinecraftVote
           python .github/build_xf_permissions.py src/addons/Warext/MinecraftVote
           python .github/build_xf_navigation.py src/addons/Warext/MinecraftVote
+          python .github/build_xf_integrations.py src/addons/Warext/MinecraftVote
 
       - name: Validate generated XML
         run: |
@@ -71,7 +72,14 @@ jobs:
 
           root = Path('src/addons/Warext/MinecraftVote/_data')
           files = sorted(root.glob('*.xml'))
-          required = {'permissions.xml', 'permission_interface_groups.xml', 'navigation.xml'}
+          required = {
+              'permissions.xml',
+              'permission_interface_groups.xml',
+              'navigation.xml',
+              'content_type_fields.xml',
+              'code_event_listeners.xml',
+              'template_modifications.xml'
+          }
           names = {p.name for p in files}
           missing = required - names
           if missing:

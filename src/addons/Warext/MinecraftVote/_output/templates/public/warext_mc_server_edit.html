@@ -1,68 +1,61 @@
 <xf:title>{$server.title} - Sunucuyu Düzenle</xf:title>
-<xf:description>Sunucu bilgilerini, kategorilerini ve bağlantılarını güncelleyin.</xf:description>
-
+<xf:description>Sunucu bilgilerini, görsellerini, kategorilerini ve forum bağlantısını güncelleyin.</xf:description>
 <xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
 <xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
 
-<div class="blockMessage blockMessage--warning">
-    Sunucu türü, IP/adres veya port bilgileri değiştirilirse sahiplik doğrulaması sıfırlanır ve sunucu yeniden yönetici onayına gönderilir.
-</div>
-<div class="blockMessage blockMessage--important">
-    Kategoriler yalnızca filtreleme ve sınıflandırma içindir; kategori değiştirmek form alanlarını değiştirmez. Java/Bedrock alanlarının kullanımı sunucu türüne göre belirlenir.
-</div>
+<div class="blockMessage blockMessage--warning">Sunucu türü, IP/adres veya port bilgileri değiştirilirse sahiplik doğrulaması sıfırlanır ve sunucu yeniden moderasyon onayına gönderilir.</div>
 
-<xf:form action="{{ link('sunucular/duzenle', $server) }}" ajax="true" class="block">
+<xf:form action="{{ link('sunucular/duzenle', $server) }}" ajax="true" upload="true" class="block">
     <div class="block-container">
         <h2 class="block-header">Temel Bilgiler</h2>
         <div class="block-body">
             <xf:textboxrow name="title" value="{$server.title}" label="Sunucu adı" required="true" maxlength="100" />
-
-            <xf:selectrow name="server_type" value="{$server.server_type}" label="Sunucu türü" explain="Java için ana adres/port kullanılır. Bedrock için ana adres ile Bedrock portu kullanılır. Crossplay için Java ve Bedrock bilgileri birlikte tutulur.">
-                <xf:option value="java">Java</xf:option>
-                <xf:option value="bedrock">Bedrock</xf:option>
-                <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
+            <xf:selectrow name="server_type" value="{$server.server_type}" label="Sunucu türü">
+                <xf:option value="java">Java</xf:option><xf:option value="bedrock">Bedrock</xf:option><xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
             </xf:selectrow>
-
-            <xf:textboxrow name="host" value="{$server.host}" label="Ana sunucu adresi" required="true" maxlength="255" explain="Java/Crossplay için Java adresi; Bedrock için sunucunun ana adresi." />
+            <xf:textboxrow name="host" value="{$server.host}" label="Ana sunucu adresi" required="true" maxlength="255" />
             <xf:numberboxrow name="port" value="{$server.port}" min="1" max="65535" label="Ana / Java portu" />
-            <xf:textboxrow name="bedrock_host" value="{$server.bedrock_host}" label="Bedrock adresi" maxlength="255" explain="Bedrock veya Crossplay içindir. Ana adres ile aynıysa boş bırakılabilir." />
+            <xf:textboxrow name="bedrock_host" value="{$server.bedrock_host}" label="Bedrock adresi" maxlength="255" />
             <xf:numberboxrow name="bedrock_port" value="{$server.bedrock_port}" min="1" max="65535" label="Bedrock portu" />
-
             <xf:textarearow name="description" value="{$server.description}" label="Sunucu açıklaması" rows="8" />
+        </div>
+
+        <h2 class="block-header">Görsel Kimlik</h2>
+        <div class="block-body">
+            <xf:if is="$server.banner_path"><div class="formRow"><div class="formRow-labelWrapper"><label class="formRow-label">Mevcut statik banner</label></div><div class="formRow-main"><img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" style="max-width:468px;width:100%;height:auto" alt="" /></div></div></xf:if>
+            <xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="468×60 · yeni dosya mevcut olanın yerine geçer" />
+            <xf:if is="$server.banner_path"><xf:checkboxrow><xf:option name="remove_banner" value="1">Statik bannerı kaldır</xf:option></xf:checkboxrow></xf:if>
+            <xf:if is="$server.animated_banner_path"><div class="formRow"><div class="formRow-labelWrapper"><label class="formRow-label">Mevcut hareketli banner</label></div><div class="formRow-main"><img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" style="max-width:468px;width:100%;height:auto" alt="" /></div></div></xf:if>
+            <xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="468×60 GIF · listede statik bannerı geçersiz kılar" />
+            <xf:if is="$server.animated_banner_path"><xf:checkboxrow><xf:option name="remove_animated_banner" value="1">Hareketli bannerı kaldır</xf:option></xf:checkboxrow></xf:if>
+            <xf:if is="$server.cover_path"><div class="formRow"><div class="formRow-labelWrapper"><label class="formRow-label">Mevcut kapak</label></div><div class="formRow-main"><img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" style="max-width:640px;width:100%;height:auto" alt="" /></div></div></xf:if>
+            <xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="Detay kapağı" explain="En az 800×300" />
+            <xf:if is="$server.cover_path"><xf:checkboxrow><xf:option name="remove_cover" value="1">Kapak görselini kaldır</xf:option></xf:checkboxrow></xf:if>
+            <xf:textboxrow name="trailer_url" value="{$server.trailer_url}" label="Tanıtım videosu" maxlength="255" />
         </div>
 
         <h2 class="block-header">Kategori, Mod ve Sürüm</h2>
         <div class="block-body">
-            <xf:checkboxrow label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz. Kategoriler ek alan oluşturmaz.">
-                <xf:foreach loop="$categories" value="$category">
-                    <xf:option name="category_ids[]" value="{$category.category_id}" selected="{{ in_array($category.category_id, $selectedCategoryIds) }}">{$category.title}</xf:option>
-                </xf:foreach>
+            <xf:checkboxrow label="Kategoriler">
+                <xf:foreach loop="$categories" value="$category"><xf:option name="category_ids[]" value="{$category.category_id}" selected="{{ in_array($category.category_id, $selectedCategoryIds) }}">{$category.title}</xf:option></xf:foreach>
             </xf:checkboxrow>
-
-            <xf:textboxrow
-                name="game_modes"
-                value="{$server.game_modes}"
-                label="Oyun modları"
-                placeholder="Survival, SkyBlock, PvP"
-                maxlength="255"
-                explain="Virgül, noktalı virgül veya yeni satır ile ayırın. En fazla 12 mod kaydedilir." />
+            <xf:textboxrow name="game_modes" value="{$server.game_modes}" label="Oyun modları" maxlength="255" />
             <xf:textboxrow name="version_min" value="{$server.version_min}" label="Minimum sürüm" maxlength="30" />
             <xf:textboxrow name="version_max" value="{$server.version_max}" label="Maksimum sürüm" maxlength="30" />
             <xf:textboxrow name="country_code" value="{$server.country_code}" label="Ülke kodu" maxlength="2" />
-
             <xf:checkboxrow>
                 <xf:option name="is_premium" value="1" selected="$server.is_premium">Premium hesap zorunlu</xf:option>
                 <xf:option name="allow_cracked" value="1" selected="$server.allow_cracked">Crack giriş destekleniyor</xf:option>
             </xf:checkboxrow>
         </div>
 
-        <h2 class="block-header">Bağlantılar</h2>
+        <h2 class="block-header">Bağlantılar ve Forum</h2>
         <div class="block-body">
             <xf:textboxrow name="website_url" value="{$server.website_url}" label="Web sitesi" maxlength="255" />
             <xf:textboxrow name="discord_url" value="{$server.discord_url}" label="Discord" maxlength="255" />
             <xf:textboxrow name="store_url" value="{$server.store_url}" label="Mağaza" maxlength="255" />
+            <xf:textboxrow name="discussion_thread_url" value="{{ $server.DiscussionThread ? link('canonical:threads', $server.DiscussionThread) : '' }}" label="Sunucu tanıtım konusu" maxlength="500" explain="Boş bırakırsanız mevcut konu bağlantısı kaldırılır." />
         </div>
-
         <xf:submitrow submit="Değişiklikleri Kaydet" />
     </div>
 </xf:form>

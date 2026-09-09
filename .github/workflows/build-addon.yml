@@ -11,6 +11,7 @@ on:
       - '.github/build_xf_data.py'
       - '.github/build_xf_permissions.py'
       - '.github/build_xf_navigation.py'
+      - '.github/build_xf_integrations.py'
       - '.github/validate_xf_source.py'
       - '.github/workflows/build-addon.yml'
   workflow_dispatch:
@@ -35,6 +36,7 @@ jobs:
           python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
           python3 .github/build_xf_permissions.py src/addons/Warext/MinecraftVote
           python3 .github/build_xf_navigation.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_integrations.py src/addons/Warext/MinecraftVote
 
       - name: Validate XML
         run: |
@@ -45,7 +47,14 @@ jobs:
           if not files:
               raise SystemExit('No _data XML files generated')
           names = {file.name for file in files}
-          required = {'permissions.xml', 'permission_interface_groups.xml', 'navigation.xml'}
+          required = {
+              'permissions.xml',
+              'permission_interface_groups.xml',
+              'navigation.xml',
+              'content_type_fields.xml',
+              'code_event_listeners.xml',
+              'template_modifications.xml'
+          }
           missing = required - names
           if missing:
               raise SystemExit('Missing master data: ' + ', '.join(sorted(missing)))

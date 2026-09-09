@@ -17,8 +17,6 @@ class Add extends AbstractController
 
         if ($this->isPost())
         {
-            $this->assertNotFlooding('warext_mc_server_add', 15);
-
             $input = $this->filter([
                 'title' => 'str',
                 'description' => 'str',
@@ -30,6 +28,8 @@ class Add extends AbstractController
                 'website_url' => 'str',
                 'discord_url' => 'str',
                 'store_url' => 'str',
+                'trailer_url' => 'str',
+                'discussion_thread_url' => 'str',
                 'game_modes' => 'str',
                 'version_min' => 'str',
                 'version_max' => 'str',
@@ -39,13 +39,49 @@ class Add extends AbstractController
                 'category_ids' => 'array-uint'
             ]);
 
+            $media = $this->service('Warext\MinecraftVote:Server\Media');
+            $uploads = [
+                'banner' => $this->request->getFile('banner'),
+                'animated_banner' => $this->request->getFile('animated_banner'),
+                'cover' => $this->request->getFile('cover')
+            ];
+
             try
             {
+                foreach ($uploads as $type => $upload)
+                {
+                    $media->validateUpload($upload, $type);
+                }
+
+                $threadLinker = $this->service('Warext\MinecraftVote:Server\ThreadLinker');
+                $thread = $threadLinker->resolve($input['discussion_thread_url'], $visitor);
+                $categoryIds = $input['category_ids'];
+                if ($thread)
+                {
+                    $mappedCategory = $threadLinker->getMappedCategory($thread);
+                    if ($mappedCategory)
+                    {
+                        $categoryIds[] = (int)$mappedCategory->category_id;
+                    }
+                }
+
                 $creator = $this->service('Warext\MinecraftVote:Server\Creator');
                 $creator->setOwner($visitor);
                 $creator->setData($input);
-                $creator->setCategoryIds($input['category_ids']);
+                $creator->setCategoryIds($categoryIds);
                 $server = $creator->save();
+                if ($thread)
+                {
+                    $threadLinker->link($server, $thread);
+                }
+
+                foreach ($uploads as $type => $upload)
+                {
+                    if ($upload)
+                    {
+                        $media->store($server, $upload, $type);
+                    }
+                }
             }
             catch (\XF\PrintableException $e)
             {
@@ -54,7 +90,7 @@ class Add extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/detay', $server),
-                'Sunucu kaydınız oluşturuldu ve yönetici onayına gönderildi.'
+                'Sunucu kaydınız onay için gönderildi.'
             );
         }
 

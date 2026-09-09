@@ -1,0 +1,22 @@
+<xf:if is="$warextMcThreadCategory">
+    <h2 class="block-formSectionHeader"><span class="block-formSectionHeader-aligner">Sunucu dizininde de yayınla</span></h2>
+    <div class="block-body">
+        <div class="blockMessage blockMessage--important">Sunucu adresini boş bırakırsanız yalnızca normal tanıtım konusu oluşturulur. Adres girerseniz konu başlığı ve ilk mesaj kullanılarak {$warextMcThreadCategory.title} kategorisinde onay bekleyen bir vote kaydı oluşturulur.</div>
+        <xf:textboxrow name="warext_mc_host" label="Sunucu adresi" placeholder="play.sunucum.com" maxlength="255" />
+        <xf:selectrow name="warext_mc_server_type" value="{$warextMcThreadCategory.thread_default_server_type}" label="Sunucu türü">
+            <xf:option value="java">Java</xf:option>
+            <xf:option value="bedrock">Bedrock</xf:option>
+            <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
+        </xf:selectrow>
+        <xf:numberboxrow name="warext_mc_port" value="25565" min="1" max="65535" label="Java / ana port" />
+        <xf:textboxrow name="warext_mc_bedrock_host" label="Bedrock adresi" maxlength="255" explain="Yalnız Bedrock/Crossplay kullanıyorsanız doldurun. Ana adres ile aynıysa boş bırakabilirsiniz." />
+        <xf:numberboxrow name="warext_mc_bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" />
+        <xf:textboxrow name="warext_mc_website_url" label="Web sitesi" maxlength="255" />
+        <xf:textboxrow name="warext_mc_discord_url" label="Discord" maxlength="255" />
+        <xf:checkboxrow>
+            <xf:option name="warext_mc_is_premium" value="1">Premium hesap zorunlu</xf:option>
+            <xf:option name="warext_mc_allow_cracked" value="1">Crack giriş destekleniyor</xf:option>
+        </xf:checkboxrow>
+        <div class="formRow"><div class="formRow-labelWrapper"><label class="formRow-label">Görseller</label></div><div class="formRow-main"><div class="formRow-explain">Tanıtım konusundan otomatik oluşan sunucunun banner, hareketli GIF banner ve kapak görselini daha sonra Sunucularım → Düzenle bölümünden ekleyebilirsiniz. Konu formuna ikinci bir görsel yükleme sistemi eklenmez.</div></div></div>
+    </div>
+</xf:if>

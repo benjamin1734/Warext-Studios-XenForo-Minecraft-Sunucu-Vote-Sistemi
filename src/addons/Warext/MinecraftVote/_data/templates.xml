@@ -1,8 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
 <templates>
-  <template type="public" title="alert_warext_mc_server_update_publish" version_id="1010070" version_string="1.0.7">&lt;xf:username user="$user" /&gt; takip ettiğiniz &lt;a href="{{ link('sunucular/guncellemeler', $content.Server) }}"&gt;&lt;strong&gt;{$content.Server.title}&lt;/strong&gt;&lt;/a&gt; sunucusu için yeni bir güncelleme yayınladı: &lt;strong&gt;{$content.title}&lt;/strong&gt;
+  <template type="public" title="alert_warext_mc_server_update_publish" version_id="1011010" version_string="1.1.1">&lt;xf:username user="$user" /&gt; takip ettiğiniz &lt;a href="{{ link('sunucular/guncellemeler', $content.Server) }}"&gt;&lt;strong&gt;{$content.Server.title}&lt;/strong&gt;&lt;/a&gt; sunucusu için yeni bir güncelleme yayınladı: &lt;strong&gt;{$content.title}&lt;/strong&gt;
 </template>
-  <template type="public" title="warext_mc_account_list" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Minecraft Hesaplarım&lt;/xf:title&gt;
+  <template type="public" title="approval_item_warext_mc_server" version_id="1011010" version_string="1.1.1">&lt;xf:set var="$messageHtml"&gt;
+    &lt;h4 class="message-title"&gt;&lt;a href="{{ link('sunucular/detay', $content) }}"&gt;{$content.title}&lt;/a&gt;&lt;/h4&gt;
+    &lt;xf:if is="$content.description"&gt;&lt;div&gt;{$content.description}&lt;/div&gt;&lt;/xf:if&gt;
+    &lt;div class="contentRow-minor"&gt;{$content.host}:{$content.port}&lt;/div&gt;
+&lt;/xf:set&gt;
+
+&lt;xf:macro template="approval_queue_macros" name="item_message_type"
+    arg-content="{$content}"
+    arg-contentDate="{$content.created_date}"
+    arg-user="{$content.Owner}"
+    arg-messageHtml="{{ $messageHtml }}"
+    arg-typePhraseHtml="{{ phrase('content_type.warext_mc_server') }}"
+    arg-spamDetails="{$spamDetails}"
+    arg-unapprovedItem="{$unapprovedItem}"
+    arg-handler="{$handler}"
+    arg-headerPhraseHtml="{$content.title}" /&gt;
+</template>
+  <template type="public" title="warext_mc_account_list" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Hesaplarım&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 
@@ -76,7 +93,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_analytics_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Sunucu İstatistikleri&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_analytics_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucu İstatistikleri&lt;/xf:title&gt;
 &lt;xf:description&gt;Oy, teslimat, oyuncu ve topluluk performansını inceleyin.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -133,7 +150,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_favorite_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Favori Minecraft Sunucularım&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_favorite_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Favori Minecraft Sunucularım&lt;/xf:title&gt;
 &lt;xf:description&gt;Takip ettiğiniz Minecraft sunucularına hızlıca ulaşın ve yeni güncellemelerini görün.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -186,7 +203,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_ownership_transfer" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Sahipliği Devret&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_ownership_transfer" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sahipliği Devret&lt;/xf:title&gt;
 &lt;xf:description&gt;Bu işlem geri alınamaz. Yeni kullanıcı sunucunun asıl sahibi olur.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -207,7 +224,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_report_create" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Sunucuyu Raporla&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_report_create" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucuyu Raporla&lt;/xf:title&gt;
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
@@ -235,7 +252,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_review_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Değerlendirmeler&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_review_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Değerlendirmeler&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -298,7 +315,7 @@
 
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/degerlendir" data="{$server}" /&gt;
 </template>
-  <template type="public" title="warext_mc_season_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Minecraft Sunucu Sezonları&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_season_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucu Sezonları&lt;/xf:title&gt;
 &lt;xf:description&gt;Aylık oy sezonlarını, mevcut yarışmayı ve önceki sezon kazananlarını görüntüle.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -363,7 +380,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_season_view" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$season.season_key} Minecraft Sunucu Sezonu&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_season_view" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$season.season_key} Minecraft Sunucu Sezonu&lt;/xf:title&gt;
 &lt;xf:description&gt;Tamamlanan sezonun kalıcı sunucu sıralaması ve istatistikleri.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -414,51 +431,46 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_server_add" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Sunucu Ekle&lt;/xf:title&gt;
-&lt;xf:description&gt;Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar yönetici onayından sonra listelenir.&lt;/xf:description&gt;
+  <template type="public" title="warext_mc_server_add" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sunucu Ekle&lt;/xf:title&gt;
+&lt;xf:description&gt;Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar moderasyon onayından sonra listelenir.&lt;/xf:description&gt;
 
-&lt;div class="blockMessage blockMessage--important"&gt;
-    Kategoriler yalnızca sunucuyu sınıflandırır ve filtrelerde kullanılır; kategori seçimi yeni form alanı açmaz. Adres alanlarının anlamı seçtiğiniz Java, Bedrock veya Crossplay sunucu türüne göre değişir.
-&lt;/div&gt;
+&lt;div class="blockMessage blockMessage--important"&gt;Kategoriler sınıflandırma içindir. Tanıtım konusu bağlantısı ve tüm görseller isteğe bağlıdır; yalnızca sunucu adresi temel kayıt için zorunludur.&lt;/div&gt;
 
-&lt;xf:form action="{{ link('sunucular/ekle') }}" ajax="true" class="block"&gt;
+&lt;xf:form action="{{ link('sunucular/ekle') }}" ajax="true" upload="true" class="block"&gt;
     &lt;div class="block-container"&gt;
         &lt;h2 class="block-header"&gt;Temel Bilgiler&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:textboxrow name="title" label="Sunucu adı" required="true" maxlength="100" /&gt;
-
-            &lt;xf:selectrow name="server_type" label="Sunucu türü" explain="Java için ana adres/port kullanılır. Bedrock için ana adresi girin; ayrı Bedrock adresi boşsa ana adres kullanılır. Crossplay için Java ve Bedrock bilgilerini birlikte doldurun."&gt;
+            &lt;xf:selectrow name="server_type" label="Sunucu türü"&gt;
                 &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
                 &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;
                 &lt;xf:option value="crossplay"&gt;Java + Bedrock / Crossplay&lt;/xf:option&gt;
             &lt;/xf:selectrow&gt;
-
-            &lt;xf:textboxrow name="host" label="Ana sunucu adresi" explain="Java/Crossplay için Java adresi; Bedrock için sunucunun ana adresi. Örnek: play.sunucum.com" required="true" maxlength="255" /&gt;
-            &lt;xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Ana / Java portu" explain="Java için genellikle 25565. Bedrock sunucularında gerçek Bedrock portunu ayrıca aşağıdaki alana girin." /&gt;
-            &lt;xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" explain="Bedrock veya Crossplay içindir. Bedrock sunucuda ana adres ile aynıysa boş bırakabilirsiniz." /&gt;
-            &lt;xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" explain="Bedrock/Crossplay için gerçek Bedrock portu. Varsayılan 19132." /&gt;
-
+            &lt;xf:textboxrow name="host" label="Ana sunucu adresi" required="true" maxlength="255" placeholder="play.sunucum.com" /&gt;
+            &lt;xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Ana / Java portu" /&gt;
+            &lt;xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" explain="Bedrock/Crossplay içindir. Ana adres ile aynıysa boş bırakabilirsiniz." /&gt;
+            &lt;xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" /&gt;
             &lt;xf:textarearow name="description" label="Sunucu açıklaması" rows="8" /&gt;
+        &lt;/div&gt;
+
+        &lt;h2 class="block-header"&gt;Görsel Kimlik&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="blockMessage"&gt;Liste bannerı klasik vote standardı olan 468×60 kullanır. Hareketli GIF yüklerseniz listede statik bannerın yerine o gösterilir. Kapak görseli yalnız sunucu detay sayfasının geniş üst alanında kullanılır.&lt;/div&gt;
+            &lt;xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="468×60 JPG, PNG veya WebP · en fazla 10 MB" /&gt;
+            &lt;xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="468×60 GIF · en fazla 15 MB · varsa statik bannerı geçersiz kılar" /&gt;
+            &lt;xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="Detay kapağı" explain="En az 800×300 · JPG, PNG veya WebP · en fazla 12 MB" /&gt;
+            &lt;xf:textboxrow name="trailer_url" label="Tanıtım videosu" placeholder="https://" maxlength="255" explain="İsteğe bağlı video/trailer bağlantısı." /&gt;
         &lt;/div&gt;
 
         &lt;h2 class="block-header"&gt;Kategori, Mod ve Sürüm&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz. Bunlar Survival, SkyBlock gibi filtreleme etiketleridir; ek alan oluşturmaz."&gt;
-                &lt;xf:foreach loop="$categories" value="$category"&gt;
-                    &lt;xf:option value="{$category.category_id}"&gt;{$category.title}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
+            &lt;xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz."&gt;
+                &lt;xf:foreach loop="$categories" value="$category"&gt;&lt;xf:option value="{$category.category_id}"&gt;{$category.title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
             &lt;/xf:checkboxrow&gt;
-
-            &lt;xf:textboxrow
-                name="game_modes"
-                label="Oyun modları"
-                placeholder="Survival, SkyBlock, PvP"
-                maxlength="255"
-                explain="Virgül, noktalı virgül veya yeni satır ile ayırın. En fazla 12 mod kaydedilir." /&gt;
-            &lt;xf:textboxrow name="version_min" label="Minimum sürüm" placeholder="1.20" maxlength="30" /&gt;
-            &lt;xf:textboxrow name="version_max" label="Maksimum sürüm" placeholder="1.21.4" maxlength="30" /&gt;
-            &lt;xf:textboxrow name="country_code" label="Ülke kodu" placeholder="TR" maxlength="2" /&gt;
-
+            &lt;xf:textboxrow name="game_modes" label="Oyun modları" placeholder="Survival, SkyBlock, PvP" maxlength="255" /&gt;
+            &lt;xf:textboxrow name="version_min" label="Minimum sürüm" maxlength="30" /&gt;
+            &lt;xf:textboxrow name="version_max" label="Maksimum sürüm" maxlength="30" /&gt;
+            &lt;xf:textboxrow name="country_code" label="Ülke kodu" value="TR" maxlength="2" /&gt;
             &lt;xf:checkboxrow&gt;
                 &lt;xf:option name="is_premium" value="1"&gt;Premium hesap zorunlu&lt;/xf:option&gt;
                 &lt;xf:option name="allow_cracked" value="1"&gt;Crack giriş destekleniyor&lt;/xf:option&gt;
@@ -470,13 +482,14 @@
             &lt;xf:textboxrow name="website_url" label="Web sitesi" placeholder="https://" maxlength="255" /&gt;
             &lt;xf:textboxrow name="discord_url" label="Discord" placeholder="https://discord.gg/..." maxlength="255" /&gt;
             &lt;xf:textboxrow name="store_url" label="Mağaza" placeholder="https://" maxlength="255" /&gt;
+            &lt;xf:textboxrow name="discussion_thread_url" label="Sunucu tanıtım konusu" placeholder="https://forum.site.com/threads/..." maxlength="500" explain="İsteğe bağlı. Kendi XenForo tanıtım konunuzun bağlantısını girerseniz vote kaydı ile konu çift yönlü bağlanır." /&gt;
         &lt;/div&gt;
 
         &lt;xf:submitrow submit="Sunucuyu Gönder" /&gt;
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_server_compare" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Minecraft Sunucularını Karşılaştır&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_compare" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucularını Karşılaştır&lt;/xf:title&gt;
 &lt;xf:description&gt;En fazla 4 Minecraft sunucusunu temel performans ve topluluk metrikleriyle yan yana karşılaştır.&lt;/xf:description&gt;
 &lt;xf:css src="warext_mc_servers.less" /&gt;
 
@@ -547,77 +560,70 @@
     &lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_edit" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Sunucuyu Düzenle&lt;/xf:title&gt;
-&lt;xf:description&gt;Sunucu bilgilerini, kategorilerini ve bağlantılarını güncelleyin.&lt;/xf:description&gt;
-
+  <template type="public" title="warext_mc_server_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucuyu Düzenle&lt;/xf:title&gt;
+&lt;xf:description&gt;Sunucu bilgilerini, görsellerini, kategorilerini ve forum bağlantısını güncelleyin.&lt;/xf:description&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
-&lt;div class="blockMessage blockMessage--warning"&gt;
-    Sunucu türü, IP/adres veya port bilgileri değiştirilirse sahiplik doğrulaması sıfırlanır ve sunucu yeniden yönetici onayına gönderilir.
-&lt;/div&gt;
-&lt;div class="blockMessage blockMessage--important"&gt;
-    Kategoriler yalnızca filtreleme ve sınıflandırma içindir; kategori değiştirmek form alanlarını değiştirmez. Java/Bedrock alanlarının kullanımı sunucu türüne göre belirlenir.
-&lt;/div&gt;
+&lt;div class="blockMessage blockMessage--warning"&gt;Sunucu türü, IP/adres veya port bilgileri değiştirilirse sahiplik doğrulaması sıfırlanır ve sunucu yeniden moderasyon onayına gönderilir.&lt;/div&gt;
 
-&lt;xf:form action="{{ link('sunucular/duzenle', $server) }}" ajax="true" class="block"&gt;
+&lt;xf:form action="{{ link('sunucular/duzenle', $server) }}" ajax="true" upload="true" class="block"&gt;
     &lt;div class="block-container"&gt;
         &lt;h2 class="block-header"&gt;Temel Bilgiler&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:textboxrow name="title" value="{$server.title}" label="Sunucu adı" required="true" maxlength="100" /&gt;
-
-            &lt;xf:selectrow name="server_type" value="{$server.server_type}" label="Sunucu türü" explain="Java için ana adres/port kullanılır. Bedrock için ana adres ile Bedrock portu kullanılır. Crossplay için Java ve Bedrock bilgileri birlikte tutulur."&gt;
-                &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
-                &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;
-                &lt;xf:option value="crossplay"&gt;Java + Bedrock / Crossplay&lt;/xf:option&gt;
+            &lt;xf:selectrow name="server_type" value="{$server.server_type}" label="Sunucu türü"&gt;
+                &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;&lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;&lt;xf:option value="crossplay"&gt;Java + Bedrock / Crossplay&lt;/xf:option&gt;
             &lt;/xf:selectrow&gt;
-
-            &lt;xf:textboxrow name="host" value="{$server.host}" label="Ana sunucu adresi" required="true" maxlength="255" explain="Java/Crossplay için Java adresi; Bedrock için sunucunun ana adresi." /&gt;
+            &lt;xf:textboxrow name="host" value="{$server.host}" label="Ana sunucu adresi" required="true" maxlength="255" /&gt;
             &lt;xf:numberboxrow name="port" value="{$server.port}" min="1" max="65535" label="Ana / Java portu" /&gt;
-            &lt;xf:textboxrow name="bedrock_host" value="{$server.bedrock_host}" label="Bedrock adresi" maxlength="255" explain="Bedrock veya Crossplay içindir. Ana adres ile aynıysa boş bırakılabilir." /&gt;
+            &lt;xf:textboxrow name="bedrock_host" value="{$server.bedrock_host}" label="Bedrock adresi" maxlength="255" /&gt;
             &lt;xf:numberboxrow name="bedrock_port" value="{$server.bedrock_port}" min="1" max="65535" label="Bedrock portu" /&gt;
-
             &lt;xf:textarearow name="description" value="{$server.description}" label="Sunucu açıklaması" rows="8" /&gt;
+        &lt;/div&gt;
+
+        &lt;h2 class="block-header"&gt;Görsel Kimlik&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$server.banner_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;Mevcut statik banner&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" style="max-width:468px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+            &lt;xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="468×60 · yeni dosya mevcut olanın yerine geçer" /&gt;
+            &lt;xf:if is="$server.banner_path"&gt;&lt;xf:checkboxrow&gt;&lt;xf:option name="remove_banner" value="1"&gt;Statik bannerı kaldır&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;&lt;/xf:if&gt;
+            &lt;xf:if is="$server.animated_banner_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;Mevcut hareketli banner&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" style="max-width:468px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+            &lt;xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="468×60 GIF · listede statik bannerı geçersiz kılar" /&gt;
+            &lt;xf:if is="$server.animated_banner_path"&gt;&lt;xf:checkboxrow&gt;&lt;xf:option name="remove_animated_banner" value="1"&gt;Hareketli bannerı kaldır&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;&lt;/xf:if&gt;
+            &lt;xf:if is="$server.cover_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;Mevcut kapak&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" style="max-width:640px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+            &lt;xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="Detay kapağı" explain="En az 800×300" /&gt;
+            &lt;xf:if is="$server.cover_path"&gt;&lt;xf:checkboxrow&gt;&lt;xf:option name="remove_cover" value="1"&gt;Kapak görselini kaldır&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;&lt;/xf:if&gt;
+            &lt;xf:textboxrow name="trailer_url" value="{$server.trailer_url}" label="Tanıtım videosu" maxlength="255" /&gt;
         &lt;/div&gt;
 
         &lt;h2 class="block-header"&gt;Kategori, Mod ve Sürüm&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;xf:checkboxrow label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz. Kategoriler ek alan oluşturmaz."&gt;
-                &lt;xf:foreach loop="$categories" value="$category"&gt;
-                    &lt;xf:option name="category_ids[]" value="{$category.category_id}" selected="{{ in_array($category.category_id, $selectedCategoryIds) }}"&gt;{$category.title}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
+            &lt;xf:checkboxrow label="Kategoriler"&gt;
+                &lt;xf:foreach loop="$categories" value="$category"&gt;&lt;xf:option name="category_ids[]" value="{$category.category_id}" selected="{{ in_array($category.category_id, $selectedCategoryIds) }}"&gt;{$category.title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
             &lt;/xf:checkboxrow&gt;
-
-            &lt;xf:textboxrow
-                name="game_modes"
-                value="{$server.game_modes}"
-                label="Oyun modları"
-                placeholder="Survival, SkyBlock, PvP"
-                maxlength="255"
-                explain="Virgül, noktalı virgül veya yeni satır ile ayırın. En fazla 12 mod kaydedilir." /&gt;
+            &lt;xf:textboxrow name="game_modes" value="{$server.game_modes}" label="Oyun modları" maxlength="255" /&gt;
             &lt;xf:textboxrow name="version_min" value="{$server.version_min}" label="Minimum sürüm" maxlength="30" /&gt;
             &lt;xf:textboxrow name="version_max" value="{$server.version_max}" label="Maksimum sürüm" maxlength="30" /&gt;
             &lt;xf:textboxrow name="country_code" value="{$server.country_code}" label="Ülke kodu" maxlength="2" /&gt;
-
             &lt;xf:checkboxrow&gt;
                 &lt;xf:option name="is_premium" value="1" selected="$server.is_premium"&gt;Premium hesap zorunlu&lt;/xf:option&gt;
                 &lt;xf:option name="allow_cracked" value="1" selected="$server.allow_cracked"&gt;Crack giriş destekleniyor&lt;/xf:option&gt;
             &lt;/xf:checkboxrow&gt;
         &lt;/div&gt;
 
-        &lt;h2 class="block-header"&gt;Bağlantılar&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;Bağlantılar ve Forum&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:textboxrow name="website_url" value="{$server.website_url}" label="Web sitesi" maxlength="255" /&gt;
             &lt;xf:textboxrow name="discord_url" value="{$server.discord_url}" label="Discord" maxlength="255" /&gt;
             &lt;xf:textboxrow name="store_url" value="{$server.store_url}" label="Mağaza" maxlength="255" /&gt;
+            &lt;xf:textboxrow name="discussion_thread_url" value="{{ $server.DiscussionThread ? link('canonical:threads', $server.DiscussionThread) : '' }}" label="Sunucu tanıtım konusu" maxlength="500" explain="Boş bırakırsanız mevcut konu bağlantısı kaldırılır." /&gt;
         &lt;/div&gt;
-
         &lt;xf:submitrow submit="Değişiklikleri Kaydet" /&gt;
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_server_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Minecraft Sunucuları&lt;/xf:title&gt;
-&lt;xf:description&gt;Topluluk tarafından eklenen Minecraft sunucularını keşfet, durumlarını incele ve oy ver.&lt;/xf:description&gt;
+  <template type="public" title="warext_mc_server_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucuları&lt;/xf:title&gt;
+&lt;xf:description&gt;Güncel Minecraft sunucularını keşfet, canlı durumlarını karşılaştır ve favori sunucuna oy ver.&lt;/xf:description&gt;
 &lt;xf:css src="warext_mc_servers.less" /&gt;
 
 &lt;xf:pageaction&gt;
@@ -627,40 +633,99 @@
         &lt;xf:button href="{{ link('sunucular/favoriler') }}"&gt;Favorilerim&lt;/xf:button&gt;
     &lt;/xf:if&gt;
     &lt;xf:if is="$xf.visitor.user_id"&gt;
-        &lt;xf:button href="{{ link('sunucular/hesaplar') }}"&gt;Minecraft Hesaplarım&lt;/xf:button&gt;
-    &lt;/xf:if&gt;
-    &lt;xf:if is="$canAddServer"&gt;
-        &lt;xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta"&gt;Sunucu Ekle&lt;/xf:button&gt;
+        &lt;xf:button href="{{ link('sunucular/benim') }}"&gt;Sunucularım&lt;/xf:button&gt;
     &lt;/xf:if&gt;
 &lt;/xf:pageaction&gt;
 
-&lt;xf:form action="{{ link('sunucular') }}" method="get" class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;Sunucu Ara ve Filtrele&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:textboxrow name="q" value="{$query}" maxlength="80" label="Arama" explain="Sunucu adı, adresi, oyun modu veya açıklama içinde ara." /&gt;
+&lt;section class="warextMcDirectoryHero"&gt;
+    &lt;div class="warextMcDirectoryHero-main"&gt;
+        &lt;div class="warextMcDirectoryHero-copy"&gt;
+            &lt;span class="warextMcDirectoryEyebrow"&gt;Minecraft Sunucu Dizini&lt;/span&gt;
+            &lt;h1&gt;Oyna, keşfet ve oy ver.&lt;/h1&gt;
+            &lt;p&gt;Sunucuları canlı oyuncu sayısı, oy performansı, uptime ve topluluk puanına göre tek ekranda karşılaştır.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;xf:if is="$canAddServer"&gt;
+            &lt;xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta warextMcDirectoryHero-cta"&gt;Sunucunu Ekle&lt;/xf:button&gt;
+        &lt;/xf:if&gt;
+    &lt;/div&gt;
 
-            &lt;xf:selectrow name="sort" value="{$sort}" label="Sıralama"&gt;
+    &lt;div class="warextMcDirectoryStats"&gt;
+        &lt;div&gt;&lt;strong&gt;{$networkStats.server_count}&lt;/strong&gt;&lt;span&gt;Aktif sunucu&lt;/span&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;strong&gt;{$networkStats.online_count}&lt;/strong&gt;&lt;span&gt;Şu an online&lt;/span&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;strong&gt;{$networkStats.players_online}&lt;/strong&gt;&lt;span&gt;Oyuncu çevrimiçi&lt;/span&gt;&lt;/div&gt;
+        &lt;div&gt;&lt;strong&gt;{$networkStats.votes_month}&lt;/strong&gt;&lt;span&gt;Bu ay verilen oy&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;xf:form action="{{ link('sunucular') }}" method="get" class="warextMcDirectorySearch"&gt;
+    &lt;input type="hidden" name="type" value="{$type}" /&gt;
+    &lt;input type="hidden" name="online" value="{{ $online ? '1' : '0' }}" /&gt;
+    &lt;input type="hidden" name="category" value="{$categoryId}" /&gt;
+    &lt;input type="hidden" name="country" value="{$countryCode}" /&gt;
+    &lt;input type="hidden" name="version" value="{$version}" /&gt;
+    &lt;input type="hidden" name="game_mode" value="{$gameMode}" /&gt;
+    &lt;input type="hidden" name="min_players" value="{$minPlayers}" /&gt;
+    &lt;input type="hidden" name="premium" value="{$premium}" /&gt;
+    &lt;input type="hidden" name="cracked" value="{$cracked}" /&gt;
+    &lt;input type="hidden" name="verified" value="{{ $verified ? '1' : '0' }}" /&gt;
+
+    &lt;div class="warextMcDirectorySearch-main"&gt;
+        &lt;div class="warextMcDirectorySearch-input"&gt;
+            &lt;xf:textbox name="q" value="{$query}" maxlength="80" placeholder="Sunucu adı, IP, oyun modu veya açıklama ara..." /&gt;
+        &lt;/div&gt;
+        &lt;div class="warextMcDirectorySearch-sort"&gt;
+            &lt;xf:select name="sort" value="{$sort}"&gt;
                 &lt;xf:option value="popular"&gt;Popüler&lt;/xf:option&gt;
                 &lt;xf:option value="trend"&gt;Yükselişte&lt;/xf:option&gt;
                 &lt;xf:option value="votes"&gt;En Çok Oy&lt;/xf:option&gt;
                 &lt;xf:option value="players"&gt;En Kalabalık&lt;/xf:option&gt;
                 &lt;xf:option value="uptime"&gt;En Yüksek Uptime&lt;/xf:option&gt;
                 &lt;xf:option value="new"&gt;Yeni Eklenenler&lt;/xf:option&gt;
-            &lt;/xf:selectrow&gt;
+            &lt;/xf:select&gt;
+        &lt;/div&gt;
+        &lt;button type="submit" class="button button--primary warextMcDirectorySearch-submit"&gt;&lt;span class="button-text"&gt;Sunucu Ara&lt;/span&gt;&lt;/button&gt;
+    &lt;/div&gt;
 
+    &lt;div class="warextMcDirectorySearch-meta"&gt;
+        &lt;span&gt;&lt;strong&gt;{$total}&lt;/strong&gt; sunucu bulundu&lt;/span&gt;
+        &lt;a href="{{ link('sunucular') }}"&gt;Filtreleri temizle&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;
+
+&lt;nav class="warextMcSortChips" aria-label="Sunucu sıralaması"&gt;
+    &lt;a href="{$sortLinks.popular}" class="warextMcSortChip {{ $sort == 'popular' ? 'is-active' : '' }}"&gt;Popüler&lt;/a&gt;
+    &lt;a href="{$sortLinks.trend}" class="warextMcSortChip {{ $sort == 'trend' ? 'is-active' : '' }}"&gt;Yükselişte&lt;/a&gt;
+    &lt;a href="{$sortLinks.votes}" class="warextMcSortChip {{ $sort == 'votes' ? 'is-active' : '' }}"&gt;En Çok Oy&lt;/a&gt;
+    &lt;a href="{$sortLinks.players}" class="warextMcSortChip {{ $sort == 'players' ? 'is-active' : '' }}"&gt;En Kalabalık&lt;/a&gt;
+    &lt;a href="{$sortLinks.uptime}" class="warextMcSortChip {{ $sort == 'uptime' ? 'is-active' : '' }}"&gt;Uptime&lt;/a&gt;
+    &lt;a href="{$sortLinks.new}" class="warextMcSortChip {{ $sort == 'new' ? 'is-active' : '' }}"&gt;Yeni&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;xf:if is="$categoryItems is not empty"&gt;
+    &lt;div class="warextMcCategoryChips"&gt;
+        &lt;span class="warextMcCategoryChips-label"&gt;Oyun türleri&lt;/span&gt;
+        &lt;a href="{$allCategoryUrl}" class="warextMcCategoryChip {{ !$categoryId ? 'is-active' : '' }}"&gt;Tümü&lt;/a&gt;
+        &lt;xf:foreach loop="$categoryItems" value="$item"&gt;
+            &lt;a href="{$item.url}" class="warextMcCategoryChip {{ $categoryId == $item.category.category_id ? 'is-active' : '' }}"&gt;{$item.category.title}&lt;/a&gt;
+        &lt;/xf:foreach&gt;
+    &lt;/div&gt;
+&lt;/xf:if&gt;
+
+&lt;details class="warextMcAdvancedFilters"&gt;
+    &lt;summary&gt;
+        &lt;span&gt;Gelişmiş filtreler&lt;/span&gt;
+        &lt;xf:if is="$hasAdvancedFilters"&gt;&lt;span class="label label--primary"&gt;Aktif&lt;/span&gt;&lt;/xf:if&gt;
+    &lt;/summary&gt;
+    &lt;xf:form action="{{ link('sunucular') }}" method="get"&gt;
+        &lt;input type="hidden" name="q" value="{$query}" /&gt;
+        &lt;input type="hidden" name="sort" value="{$sort}" /&gt;
+        &lt;input type="hidden" name="category" value="{$categoryId}" /&gt;
+        &lt;div class="block-body"&gt;
             &lt;xf:selectrow name="type" value="{$type}" label="Sunucu Türü"&gt;
                 &lt;xf:option value=""&gt;Tümü&lt;/xf:option&gt;
                 &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
                 &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;
                 &lt;xf:option value="crossplay"&gt;Crossplay&lt;/xf:option&gt;
-            &lt;/xf:selectrow&gt;
-
-            &lt;xf:selectrow name="category" value="{$categoryId}" label="Kategori"&gt;
-                &lt;xf:option value="0"&gt;Tüm kategoriler&lt;/xf:option&gt;
-                &lt;xf:foreach loop="$categories" value="$category"&gt;
-                    &lt;xf:option value="{$category.category_id}"&gt;{$category.title}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
             &lt;/xf:selectrow&gt;
 
             &lt;xf:selectrow name="country" value="{$countryCode}" label="Ülke"&gt;
@@ -697,93 +762,130 @@
             &lt;/xf:selectrow&gt;
         &lt;/div&gt;
         &lt;xf:submitrow submit="Filtreleri Uygula" /&gt;
-        &lt;div class="block-footer"&gt;&lt;a href="{{ link('sunucular') }}"&gt;Filtreleri temizle&lt;/a&gt; · {$total} sonuç&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/xf:form&gt;
+    &lt;/xf:form&gt;
+&lt;/details&gt;
 
 &lt;xf:if is="$sponsors is not empty"&gt;
-    &lt;div class="block"&gt;
-        &lt;div class="block-container"&gt;
-            &lt;div class="block-header"&gt;Sponsorlu Sunucular&lt;/div&gt;
-            &lt;div class="block-body"&gt;
-                &lt;div class="warextMcServerGrid"&gt;
-                    &lt;xf:foreach loop="$sponsors" value="$sponsor"&gt;
-                        &lt;div class="block-row block-row--separated warextMcServerCard"&gt;
-                            &lt;div class="contentRow"&gt;
-                                &lt;div class="contentRow-main"&gt;
-                                    &lt;div class="contentRow-title"&gt;
-                                        &lt;a href="{{ link('sunucular/detay', $sponsor.Server) }}"&gt;&lt;strong&gt;{$sponsor.Server.title}&lt;/strong&gt;&lt;/a&gt;
-                                        &lt;span class="label label--orange"&gt;{$sponsor.label}&lt;/span&gt;
-                                        &lt;xf:if is="$sponsor.Server.is_online"&gt;&lt;span class="label label--green"&gt;Online&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Offline&lt;/span&gt;&lt;/xf:if&gt;
-                                    &lt;/div&gt;
-                                    &lt;div class="contentRow-minor"&gt;{$sponsor.Server.host}:{$sponsor.Server.port}&lt;/div&gt;
-                                    &lt;div class="contentRow-minor"&gt;{$sponsor.Server.players_online} oyuncu · {$sponsor.Server.vote_count_month} bu ay oy · {$sponsor.Server.uptime_percent}% uptime&lt;/div&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/xf:foreach&gt;
-                &lt;/div&gt;
+    &lt;section class="warextMcFeaturedSection"&gt;
+        &lt;div class="warextMcSectionHeading"&gt;
+            &lt;div&gt;
+                &lt;span class="warextMcSectionEyebrow"&gt;Sponsorlu&lt;/span&gt;
+                &lt;h2&gt;Öne Çıkan Sunucular&lt;/h2&gt;
             &lt;/div&gt;
-            &lt;div class="block-footer"&gt;Bu bölüm ücretli/sponsorlu gösterimdir ve organik sıralama puanlarını değiştirmez.&lt;/div&gt;
+            &lt;span&gt;Ücretli gösterim organik sıralamayı değiştirmez.&lt;/span&gt;
         &lt;/div&gt;
-    &lt;/div&gt;
+
+        &lt;div class="warextMcFeaturedGrid"&gt;
+            &lt;xf:foreach loop="$sponsors" value="$sponsor"&gt;
+                &lt;article class="warextMcFeaturedCard"&gt;
+                    &lt;div class="warextMcFeaturedCard-head"&gt;
+                        &lt;div&gt;
+                            &lt;a href="{{ link('sunucular/detay', $sponsor.Server) }}" class="warextMcFeaturedCard-title"&gt;{$sponsor.Server.title}&lt;/a&gt;
+                            &lt;div class="warextMcFeaturedCard-address"&gt;{$sponsor.Server.host}:{$sponsor.Server.port}&lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;span class="label label--orange"&gt;{$sponsor.label}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class="warextMcFeaturedCard-meta"&gt;
+                        &lt;xf:if is="$sponsor.Server.is_online"&gt;&lt;span class="label label--green"&gt;Online&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Offline&lt;/span&gt;&lt;/xf:if&gt;
+                        &lt;span&gt;{$sponsor.Server.players_online}/{$sponsor.Server.players_max} oyuncu&lt;/span&gt;
+                        &lt;span&gt;{$sponsor.Server.vote_count_month} oy&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class="warextMcFeaturedCard-actions"&gt;
+                        &lt;xf:button href="{{ link('sunucular/oy', $sponsor.Server) }}" class="button--cta"&gt;Oy Ver&lt;/xf:button&gt;
+                        &lt;xf:button href="{{ link('sunucular/detay', $sponsor.Server) }}"&gt;İncele&lt;/xf:button&gt;
+                    &lt;/div&gt;
+                &lt;/article&gt;
+            &lt;/xf:foreach&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
 &lt;/xf:if&gt;
 
+&lt;div class="warextMcSectionHeading warextMcSectionHeading--list"&gt;
+    &lt;div&gt;
+        &lt;span class="warextMcSectionEyebrow"&gt;Sunucu sıralaması&lt;/span&gt;
+        &lt;h2&gt;Minecraft Sunucuları&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;span&gt;{$total} sonuç&lt;/span&gt;
+&lt;/div&gt;
+
 &lt;xf:if is="$servers is not empty"&gt;
-    &lt;div class="warextMcServerGrid"&gt;
-        &lt;xf:foreach loop="$servers" value="$server"&gt;
-            &lt;div class="block warextMcServerCard"&gt;
-                &lt;div class="block-container"&gt;
-                    &lt;div class="block-body"&gt;
-                        &lt;div class="warextMcServerCard-main"&gt;
-                            &lt;div class="warextMcServerCard-titleRow"&gt;
-                                &lt;h3 class="warextMcServerCard-title"&gt;
-                                    &lt;a href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/a&gt;
-                                &lt;/h3&gt;
-                                &lt;div&gt;
-                                    &lt;xf:if is="$sort == 'popular' &amp;&amp; $server.rank_popular"&gt;
-                                        &lt;span class="label label--primary"&gt;#{$server.rank_popular} Popüler&lt;/span&gt;
-                                    &lt;xf:elseif is="$sort == 'trend' &amp;&amp; $server.rank_trending" /&gt;
-                                        &lt;span class="label label--orange"&gt;#{$server.rank_trending} Yükselişte&lt;/span&gt;
-                                    &lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.is_verified"&gt;&lt;span class="label label--primary"&gt;Doğrulanmış&lt;/span&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.is_online"&gt;
-                                        &lt;span class="label label--green"&gt;Online&lt;/span&gt;
+    &lt;div class="warextMcVoteList"&gt;
+        &lt;xf:foreach loop="$servers" value="$server" i="$i"&gt;
+            &lt;article class="warextMcVoteRow"&gt;
+                &lt;div class="warextMcVoteRow-rank"&gt;
+                    &lt;span&gt;Sıra&lt;/span&gt;
+                    &lt;strong&gt;
+                        &lt;xf:if is="$sort == 'popular' &amp;&amp; $server.rank_popular"&gt;
+                            #{$server.rank_popular}
+                        &lt;xf:elseif is="$sort == 'trend' &amp;&amp; $server.rank_trending" /&gt;
+                            #{$server.rank_trending}
+                        &lt;xf:else /&gt;
+                            #{{ (($page - 1) * $perPage) + $i }}
+                        &lt;/xf:if&gt;
+                    &lt;/strong&gt;
+                &lt;/div&gt;
+
+                &lt;div class="warextMcVoteRow-media"&gt;
+                                    &lt;xf:if is="$server.animated_banner_path"&gt;
+                                        &lt;img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" /&gt;
+                                    &lt;xf:elseif is="$server.banner_path" /&gt;
+                                        &lt;img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" /&gt;
                                     &lt;xf:else /&gt;
-                                        &lt;span class="label label--red"&gt;Offline&lt;/span&gt;
+                                        &lt;div class="warextMcVoteRow-mediaFallback"&gt;&lt;i class="fa--xf far fa-server" aria-hidden="true"&gt;&lt;/i&gt;&lt;/div&gt;
                                     &lt;/xf:if&gt;
                                 &lt;/div&gt;
+                                &lt;div class="warextMcVoteRow-main"&gt;
+                    &lt;div class="warextMcVoteRow-head"&gt;
+                        &lt;div class="warextMcVoteRow-titleWrap"&gt;
+                            &lt;a href="{{ link('sunucular/detay', $server) }}" class="warextMcVoteRow-title"&gt;{$server.title}&lt;/a&gt;
+                            &lt;div class="warextMcVoteRow-badges"&gt;
+                                &lt;xf:if is="$server.is_online"&gt;&lt;span class="label label--green"&gt;Online&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Offline&lt;/span&gt;&lt;/xf:if&gt;
+                                &lt;xf:if is="$server.is_verified"&gt;&lt;span class="label label--primary"&gt;Doğrulanmış&lt;/span&gt;&lt;/xf:if&gt;
+                                &lt;span class="label"&gt;{{ $server.server_type == 'crossplay' ? 'CROSSPLAY' : ($server.server_type == 'bedrock' ? 'BEDROCK' : 'JAVA') }}&lt;/span&gt;
                             &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;xf:if is="$server.is_online &amp;&amp; $server.ping_ms"&gt;
+                            &lt;span class="warextMcVoteRow-ping"&gt;{$server.ping_ms} ms&lt;/span&gt;
+                        &lt;/xf:if&gt;
+                    &lt;/div&gt;
 
-                            &lt;div class="warextMcServerCard-address"&gt;{$server.host}:{$server.port}&lt;/div&gt;
+                    &lt;xf:if is="$server.motd"&gt;
+                        &lt;div class="warextMcVoteRow-motd"&gt;{$server.motd}&lt;/div&gt;
+                    &lt;/xf:if&gt;
 
-                            &lt;div class="warextMcServerStats"&gt;
-                                &lt;div&gt;&lt;strong&gt;{$server.players_online}&lt;/strong&gt;&lt;span&gt;Oyuncu&lt;/span&gt;&lt;/div&gt;
-                                &lt;div&gt;&lt;strong&gt;{$server.vote_count_month}&lt;/strong&gt;&lt;span&gt;Bu ay oy&lt;/span&gt;&lt;/div&gt;
-                                &lt;div&gt;&lt;strong&gt;{$server.uptime_percent}%&lt;/strong&gt;&lt;span&gt;Uptime&lt;/span&gt;&lt;/div&gt;
-                                &lt;div&gt;&lt;strong&gt;{$server.rating_average}&lt;/strong&gt;&lt;span&gt;Puan&lt;/span&gt;&lt;/div&gt;
-                            &lt;/div&gt;
+                    &lt;div class="warextMcVoteRow-tags"&gt;
+                        &lt;xf:if is="$server.detected_version"&gt;&lt;span&gt;{$server.detected_version}&lt;/span&gt;&lt;/xf:if&gt;
+                        &lt;xf:if is="$server.game_modes"&gt;&lt;span&gt;{$server.game_modes}&lt;/span&gt;&lt;/xf:if&gt;
+                        &lt;xf:if is="$server.country_code"&gt;&lt;span&gt;{$server.country_code}&lt;/span&gt;&lt;/xf:if&gt;
+                        &lt;xf:if is="$server.is_premium"&gt;&lt;span&gt;Premium&lt;/span&gt;&lt;/xf:if&gt;
+                        &lt;xf:if is="$server.allow_cracked"&gt;&lt;span&gt;Crack&lt;/span&gt;&lt;/xf:if&gt;
+                    &lt;/div&gt;
 
-                            &lt;div class="contentRow-minor"&gt;
-                                Son 24 saat: {$server.votes_24h} oy · Benzersiz seçmen: {$server.unique_voters_month}
-                                &lt;xf:if is="$sort == 'popular'"&gt; · Popülerlik: {$server.popular_score}&lt;/xf:if&gt;
-                                &lt;xf:if is="$sort == 'trend'"&gt; · Trend: {$server.trend_score}&lt;/xf:if&gt;
-                            &lt;/div&gt;
+                    &lt;div class="warextMcVoteRow-bottom"&gt;
+                        &lt;div class="warextMcVoteRow-address"&gt;
+                            &lt;span&gt;Sunucu adresi&lt;/span&gt;
+                            &lt;strong&gt;{$server.host}:{$server.port}&lt;/strong&gt;
+                            &lt;xf:button type="button" data-xf-init="copy-to-clipboard" data-copy-text="{$server.host}:{$server.port}" class="button--link"&gt;IP Kopyala&lt;/xf:button&gt;
+                        &lt;/div&gt;
 
-                            &lt;div class="contentRow-minor"&gt;
-                                &lt;xf:if is="$server.detected_version"&gt;Sürüm: {$server.detected_version}&lt;/xf:if&gt;
-                                &lt;xf:if is="$server.game_modes"&gt; · Modlar: {$server.game_modes}&lt;/xf:if&gt;
-                                &lt;xf:if is="$server.country_code"&gt; · Ülke: {$server.country_code}&lt;/xf:if&gt;
-                            &lt;/div&gt;
-
-                            &lt;div class="warextMcServerCard-actions"&gt;
-                                &lt;xf:button href="{{ link('sunucular/detay', $server) }}" class="button--primary"&gt;Detaylar&lt;/xf:button&gt;
-                                &lt;xf:button href="{{ link('sunucular/guncellemeler', $server) }}"&gt;Güncellemeler&lt;/xf:button&gt;
-                            &lt;/div&gt;
+                        &lt;div class="warextMcVoteRow-metrics"&gt;
+                            &lt;div&gt;&lt;strong&gt;{$server.players_online}&lt;small&gt;/{$server.players_max}&lt;/small&gt;&lt;/strong&gt;&lt;span&gt;Oyuncu&lt;/span&gt;&lt;/div&gt;
+                            &lt;div&gt;&lt;strong&gt;{$server.vote_count_month}&lt;/strong&gt;&lt;span&gt;Bu ay oy&lt;/span&gt;&lt;/div&gt;
+                            &lt;div&gt;&lt;strong&gt;{$server.rating_average}&lt;/strong&gt;&lt;span&gt;Puan&lt;/span&gt;&lt;/div&gt;
+                            &lt;div&gt;&lt;strong&gt;{$server.uptime_percent}%&lt;/strong&gt;&lt;span&gt;Uptime&lt;/span&gt;&lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
-            &lt;/div&gt;
+
+                &lt;div class="warextMcVoteRow-actions"&gt;
+                    &lt;div class="warextMcVoteRow-votes"&gt;
+                        &lt;strong&gt;{$server.vote_count_month}&lt;/strong&gt;
+                        &lt;span&gt;aylık oy&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta warextMcVoteRow-voteButton"&gt;Oy Ver&lt;/xf:button&gt;
+                    &lt;a href="{{ link('sunucular/detay', $server) }}" class="warextMcVoteRow-detailLink"&gt;Sunucuyu incele&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/article&gt;
         &lt;/xf:foreach&gt;
     &lt;/div&gt;
 
@@ -792,7 +894,55 @@
     &lt;div class="blockMessage"&gt;Filtrelerinize uyan aktif bir Minecraft sunucusu bulunamadı.&lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_verification" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Sunucu Sahipliğini Doğrula&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_mine" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sunucularım&lt;/xf:title&gt;
+&lt;xf:description&gt;Eklediğiniz ve ekip yetkisiyle yönettiğiniz Minecraft sunucuları.&lt;/xf:description&gt;
+&lt;xf:css src="warext_mc_servers.less" /&gt;
+
+&lt;xf:pageaction&gt;
+    &lt;xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta"&gt;Sunucu Ekle&lt;/xf:button&gt;
+&lt;/xf:pageaction&gt;
+
+&lt;xf:if is="$servers is not empty"&gt;
+    &lt;div class="block"&gt;
+        &lt;div class="block-container"&gt;
+            &lt;div class="block-body"&gt;
+                &lt;xf:foreach loop="$servers" value="$server"&gt;
+                    &lt;div class="block-row block-row--separated"&gt;
+                        &lt;div class="contentRow"&gt;
+                            &lt;div class="contentRow-main"&gt;
+                                &lt;div class="contentRow-title"&gt;
+                                    &lt;a href="{{ link('sunucular/detay', $server) }}"&gt;&lt;strong&gt;{$server.title}&lt;/strong&gt;&lt;/a&gt;
+                                    &lt;xf:if is="$server.state == 'active'"&gt;
+                                        &lt;span class="label label--green"&gt;Aktif&lt;/span&gt;
+                                    &lt;xf:elseif is="$server.state == 'pending'" /&gt;
+                                        &lt;span class="label label--orange"&gt;Onay Bekliyor&lt;/span&gt;
+                                    &lt;xf:elseif is="$server.state == 'rejected'" /&gt;
+                                        &lt;span class="label label--red"&gt;Reddedildi&lt;/span&gt;
+                                    &lt;xf:else /&gt;
+                                        &lt;span class="label label--red"&gt;Askıya Alındı&lt;/span&gt;
+                                    &lt;/xf:if&gt;
+                                    &lt;xf:if is="$server.is_owner"&gt;&lt;span class="label label--primary"&gt;Sahibi&lt;/span&gt;&lt;/xf:if&gt;
+                                &lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;{$server.host}:{$server.port}&lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;Son güncelleme: &lt;xf:date time="$server.last_update_date" /&gt;&lt;/div&gt;
+                                &lt;div class="buttonGroup buttonGroup--alignLeft"&gt;
+                                    &lt;xf:button href="{{ link('sunucular/detay', $server) }}"&gt;Detay&lt;/xf:button&gt;
+                                    &lt;xf:if is="$server.can_edit"&gt;&lt;xf:button href="{{ link('sunucular/duzenle', $server) }}"&gt;Düzenle&lt;/xf:button&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$server.can_view_stats"&gt;&lt;xf:button href="{{ link('sunucular/istatistik', $server) }}"&gt;İstatistik&lt;/xf:button&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$server.can_manage_votifier"&gt;&lt;xf:button href="{{ link('sunucular/votifier', $server) }}"&gt;NuVotifier&lt;/xf:button&gt;&lt;/xf:if&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/xf:foreach&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;xf:else /&gt;
+    &lt;div class="blockMessage"&gt;Henüz eklediğiniz veya ekip yetkisiyle yönettiğiniz bir sunucu yok. &lt;a href="{{ link('sunucular/ekle') }}"&gt;İlk sunucunuzu ekleyin.&lt;/a&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
+</template>
+  <template type="public" title="warext_mc_server_verification" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucu Sahipliğini Doğrula&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -881,7 +1031,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_server_view" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title}&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_view" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title}&lt;/xf:title&gt;
 &lt;xf:description&gt;{$seoDescription}&lt;/xf:description&gt;
 &lt;xf:css src="warext_mc_servers.less" /&gt;
 
@@ -929,6 +1079,10 @@
         &lt;/xf:if&gt;
     &lt;/xf:if&gt;
 &lt;/xf:pageaction&gt;
+
+&lt;xf:if is="$server.cover_path"&gt;
+    &lt;div class="warextMcServerCover"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" alt="{$server.title}" /&gt;&lt;/div&gt;
+&lt;/xf:if&gt;
 
 &lt;div class="block warextMcServerHero"&gt;
     &lt;div class="block-container"&gt;
@@ -1012,7 +1166,7 @@
     &lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h2 class="block-header"&gt;Açıklama&lt;/h2&gt;&lt;div class="block-body block-row"&gt;{{ bb_code($server.description, 'warext_mc_server', $server) }}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;/xf:if&gt;
 
-&lt;xf:if is="$server.website_url || $server.discord_url || $server.store_url"&gt;
+&lt;xf:if is="$server.website_url || $server.discord_url || $server.store_url || $server.trailer_url || $server.DiscussionThread"&gt;
     &lt;div class="block"&gt;
         &lt;div class="block-container"&gt;
             &lt;h2 class="block-header"&gt;Bağlantılar&lt;/h2&gt;
@@ -1020,12 +1174,14 @@
                 &lt;xf:if is="$server.website_url"&gt;&lt;a class="button" href="{$server.website_url}" target="_blank" rel="nofollow noopener"&gt;Web Sitesi&lt;/a&gt;&lt;/xf:if&gt;
                 &lt;xf:if is="$server.discord_url"&gt;&lt;a class="button" href="{$server.discord_url}" target="_blank" rel="nofollow noopener"&gt;Discord&lt;/a&gt;&lt;/xf:if&gt;
                 &lt;xf:if is="$server.store_url"&gt;&lt;a class="button" href="{$server.store_url}" target="_blank" rel="nofollow noopener"&gt;Mağaza&lt;/a&gt;&lt;/xf:if&gt;
+                &lt;xf:if is="$server.trailer_url"&gt;&lt;a class="button" href="{$server.trailer_url}" target="_blank" rel="nofollow noopener"&gt;Tanıtım Videosu&lt;/a&gt;&lt;/xf:if&gt;
+                &lt;xf:if is="$server.DiscussionThread"&gt;&lt;a class="button" href="{{ link('threads', $server.DiscussionThread) }}"&gt;Tanıtım Konusu&lt;/a&gt;&lt;/xf:if&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_vote" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Oy Ver&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_vote" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Oy Ver&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -1097,7 +1253,527 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_servers.less" version_id="1010070" version_string="1.0.7">.warextMcFilterBar
+  <template type="public" title="warext_mc_servers.less" version_id="1011010" version_string="1.1.1">.warextMcDirectoryHero
+{
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcDirectoryHero-main
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.warextMcDirectoryHero-copy
+{
+    max-width: 720px;
+}
+
+.warextMcDirectoryEyebrow,
+.warextMcSectionEyebrow
+{
+    display: block;
+    margin-bottom: 5px;
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: @xf-textColorMuted;
+}
+
+.warextMcDirectoryHero h1
+{
+    margin: 0 0 8px;
+    font-size: 28px;
+    line-height: 1.15;
+}
+
+.warextMcDirectoryHero p
+{
+    margin: 0;
+    color: @xf-textColorMuted;
+    line-height: 1.55;
+}
+
+.warextMcDirectoryHero-cta
+{
+    flex: 0 0 auto;
+}
+
+.warextMcDirectoryStats
+{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.warextMcDirectoryStats &gt; div
+{
+    padding: 12px 14px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcDirectoryStats strong,
+.warextMcDirectoryStats span
+{
+    display: block;
+}
+
+.warextMcDirectoryStats strong
+{
+    font-size: 20px;
+    line-height: 1.15;
+}
+
+.warextMcDirectoryStats span
+{
+    margin-top: 4px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcDirectorySearch
+{
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+}
+
+.warextMcDirectorySearch-main
+{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(160px, 210px) auto;
+    gap: 8px;
+    align-items: center;
+}
+
+.warextMcDirectorySearch-input .input,
+.warextMcDirectorySearch-sort .input
+{
+    width: 100%;
+}
+
+.warextMcDirectorySearch-submit
+{
+    white-space: nowrap;
+}
+
+.warextMcDirectorySearch-meta
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 9px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcSortChips,
+.warextMcCategoryChips
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 12px;
+}
+
+.warextMcSortChip,
+.warextMcCategoryChip
+{
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 5px 11px;
+    border: 1px solid @xf-borderColor;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    text-decoration: none;
+}
+
+.warextMcSortChip:hover,
+.warextMcCategoryChip:hover,
+.warextMcSortChip.is-active,
+.warextMcCategoryChip.is-active
+{
+    text-decoration: none;
+    border-color: currentColor;
+}
+
+.warextMcSortChip.is-active,
+.warextMcCategoryChip.is-active
+{
+    font-weight: 700;
+}
+
+.warextMcCategoryChips-label
+{
+    margin-right: 4px;
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 700;
+    color: @xf-textColorMuted;
+}
+
+.warextMcAdvancedFilters
+{
+    margin-bottom: 20px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    overflow: hidden;
+}
+
+.warextMcAdvancedFilters &gt; summary
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 14px;
+    cursor: pointer;
+    background: @xf-contentAltBg;
+    font-weight: 600;
+}
+
+.warextMcAdvancedFilters[open] &gt; summary
+{
+    border-bottom: 1px solid @xf-borderColor;
+}
+
+.warextMcFeaturedSection
+{
+    margin: 24px 0;
+}
+
+.warextMcSectionHeading
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.warextMcSectionHeading h2
+{
+    margin: 0;
+    font-size: 20px;
+}
+
+.warextMcSectionHeading &gt; span
+{
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcSectionHeading--list
+{
+    margin-top: 22px;
+}
+
+.warextMcFeaturedGrid
+{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.warextMcFeaturedCard
+{
+    padding: 14px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcFeaturedCard-head
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.warextMcFeaturedCard-title
+{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.warextMcFeaturedCard-address
+{
+    margin-top: 4px;
+    font-family: monospace;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+    word-break: break-all;
+}
+
+.warextMcFeaturedCard-meta
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    margin: 12px 0;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcFeaturedCard-actions
+{
+    display: flex;
+    gap: 7px;
+}
+
+.warextMcVoteList
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.warextMcVoteRow
+{
+    display: grid;
+    grid-template-columns: 74px minmax(0, 1fr) 138px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    overflow: hidden;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.warextMcVoteRow:hover
+{
+    transform: translateY(-1px);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, .06);
+}
+
+.warextMcVoteRow-rank
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 8px;
+    border-right: 1px solid @xf-borderColor;
+    background: @xf-contentAltBg;
+}
+
+.warextMcVoteRow-rank span
+{
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+    text-transform: uppercase;
+}
+
+.warextMcVoteRow-rank strong
+{
+    margin-top: 3px;
+    font-size: 20px;
+}
+
+.warextMcVoteRow-main
+{
+    min-width: 0;
+    padding: 14px 16px;
+}
+
+.warextMcVoteRow-head,
+.warextMcVoteRow-titleWrap,
+.warextMcVoteRow-bottom,
+.warextMcVoteRow-address,
+.warextMcVoteRow-metrics
+{
+    display: flex;
+}
+
+.warextMcVoteRow-head
+{
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.warextMcVoteRow-titleWrap
+{
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    min-width: 0;
+}
+
+.warextMcVoteRow-title
+{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.warextMcVoteRow-badges
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.warextMcVoteRow-ping
+{
+    flex: 0 0 auto;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-motd
+{
+    margin-top: 7px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-tags
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 9px;
+}
+
+.warextMcVoteRow-tags &gt; span
+{
+    padding: 3px 7px;
+    border: 1px solid @xf-borderColor;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    font-size: @xf-fontSizeSmallest;
+}
+
+.warextMcVoteRow-bottom
+{
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 18px;
+    margin-top: 13px;
+}
+
+.warextMcVoteRow-address
+{
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+}
+
+.warextMcVoteRow-address &gt; span
+{
+    width: 100%;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-address strong
+{
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.warextMcVoteRow-metrics
+{
+    flex: 0 0 auto;
+    gap: 6px;
+}
+
+.warextMcVoteRow-metrics &gt; div
+{
+    min-width: 68px;
+    padding: 6px 8px;
+    text-align: center;
+    border-left: 1px solid @xf-borderColor;
+}
+
+.warextMcVoteRow-metrics strong,
+.warextMcVoteRow-metrics span
+{
+    display: block;
+}
+
+.warextMcVoteRow-metrics strong
+{
+    line-height: 1.15;
+}
+
+.warextMcVoteRow-metrics small
+{
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 400;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-metrics span
+{
+    margin-top: 3px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-actions
+{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border-left: 1px solid @xf-borderColor;
+    background: @xf-contentAltBg;
+    text-align: center;
+}
+
+.warextMcVoteRow-votes strong,
+.warextMcVoteRow-votes span
+{
+    display: block;
+}
+
+.warextMcVoteRow-votes strong
+{
+    font-size: 21px;
+    line-height: 1.1;
+}
+
+.warextMcVoteRow-votes span
+{
+    margin-top: 2px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-voteButton
+{
+    width: 100%;
+}
+
+.warextMcVoteRow-detailLink
+{
+    font-size: @xf-fontSizeSmallest;
+}
+
+.warextMcFilterBar
 {
     display: flex;
     flex-wrap: wrap;
@@ -1191,6 +1867,85 @@
 
 @media (max-width: @xf-responsiveMedium)
 {
+    .warextMcDirectoryHero-main,
+    .warextMcSectionHeading
+    {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .warextMcDirectoryStats
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .warextMcDirectorySearch-main
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .warextMcDirectorySearch-meta
+    {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .warextMcFeaturedGrid
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .warextMcVoteRow
+    {
+        grid-template-columns: 58px minmax(0, 1fr);
+    }
+
+    .warextMcVoteRow-main
+    {
+        padding: 12px;
+    }
+
+    .warextMcVoteRow-bottom
+    {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .warextMcVoteRow-metrics
+    {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .warextMcVoteRow-metrics &gt; div
+    {
+        min-width: 0;
+        border-left: 0;
+        border: 1px solid @xf-borderColor;
+        border-radius: @xf-borderRadiusMedium;
+    }
+
+    .warextMcVoteRow-actions
+    {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        border-left: 0;
+        border-top: 1px solid @xf-borderColor;
+    }
+
+    .warextMcVoteRow-votes
+    {
+        min-width: 72px;
+    }
+
+    .warextMcVoteRow-voteButton
+    {
+        flex: 1 1 auto;
+        width: auto;
+    }
+
     .warextMcServerStats,
     .warextMcServerStats--large
     {
@@ -1203,8 +1958,103 @@
         flex-direction: column;
     }
 }
+
+@media (max-width: 480px)
+{
+    .warextMcDirectoryHero
+    {
+        padding: 16px;
+    }
+
+    .warextMcDirectoryHero h1
+    {
+        font-size: 23px;
+    }
+
+    .warextMcVoteRow
+    {
+        display: block;
+    }
+
+    .warextMcVoteRow-rank
+    {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 5px;
+        padding: 8px 12px;
+        border-right: 0;
+        border-bottom: 1px solid @xf-borderColor;
+    }
+
+    .warextMcVoteRow-rank strong
+    {
+        margin-top: 0;
+        font-size: 15px;
+    }
+
+    .warextMcVoteRow-actions
+    {
+        flex-wrap: wrap;
+    }
+
+    .warextMcVoteRow-detailLink
+    {
+        width: 100%;
+    }
+}
+
+
+.warextMcVoteRow-media {
+    flex: 0 0 234px;
+    display: flex;
+    align-items: center;
+}
+.warextMcVoteRow-media img {
+    display: block;
+    width: 234px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.warextMcVoteRow-mediaFallback {
+    width: 234px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid @xf-borderColor;
+    border-radius: 4px;
+    color: @xf-textColorMuted;
+    background: @xf-contentAltBg;
+}
+.warextMcServerCover {
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: @xf-borderRadiusLarge;
+    background: @xf-contentAltBg;
+}
+.warextMcServerCover img {
+    display: block;
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+}
+.warextMcThreadServerCard {
+    margin-bottom: 12px;
+}
+@media (max-width: @xf-responsiveNarrow) {
+    .warextMcVoteRow-media {
+        flex-basis: 100%;
+    }
+    .warextMcVoteRow-media img,
+    .warextMcVoteRow-mediaFallback {
+        width: 100%;
+        height: auto;
+        min-height: 38px;
+    }
+}
 </template>
-  <template type="public" title="warext_mc_sponsor_purchase" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Sponsor Paketi&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_sponsor_purchase" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sponsor Paketi&lt;/xf:title&gt;
 &lt;xf:description&gt;Sunucunuzu Minecraft sunucu listesinde sponsorlu olarak öne çıkarın.&lt;/xf:description&gt;
 &lt;xf:js src="xf/payment.js" min="1" /&gt;
 
@@ -1256,7 +2106,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_team_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Sunucu Ekibi&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_team_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucu Ekibi&lt;/xf:title&gt;
 &lt;xf:description&gt;Sunucuyu yönetecek XenForo kullanıcılarını ve yetkilerini belirleyin.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -1322,7 +2172,50 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_update_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - Güncellemeler&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_thread_integration_fields" version_id="1011010" version_string="1.1.1">&lt;xf:if is="$warextMcThreadCategory"&gt;
+    &lt;h2 class="block-formSectionHeader"&gt;&lt;span class="block-formSectionHeader-aligner"&gt;Sunucu dizininde de yayınla&lt;/span&gt;&lt;/h2&gt;
+    &lt;div class="block-body"&gt;
+        &lt;div class="blockMessage blockMessage--important"&gt;Sunucu adresini boş bırakırsanız yalnızca normal tanıtım konusu oluşturulur. Adres girerseniz konu başlığı ve ilk mesaj kullanılarak {$warextMcThreadCategory.title} kategorisinde onay bekleyen bir vote kaydı oluşturulur.&lt;/div&gt;
+        &lt;xf:textboxrow name="warext_mc_host" label="Sunucu adresi" placeholder="play.sunucum.com" maxlength="255" /&gt;
+        &lt;xf:selectrow name="warext_mc_server_type" value="{$warextMcThreadCategory.thread_default_server_type}" label="Sunucu türü"&gt;
+            &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
+            &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;
+            &lt;xf:option value="crossplay"&gt;Java + Bedrock / Crossplay&lt;/xf:option&gt;
+        &lt;/xf:selectrow&gt;
+        &lt;xf:numberboxrow name="warext_mc_port" value="25565" min="1" max="65535" label="Java / ana port" /&gt;
+        &lt;xf:textboxrow name="warext_mc_bedrock_host" label="Bedrock adresi" maxlength="255" explain="Yalnız Bedrock/Crossplay kullanıyorsanız doldurun. Ana adres ile aynıysa boş bırakabilirsiniz." /&gt;
+        &lt;xf:numberboxrow name="warext_mc_bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" /&gt;
+        &lt;xf:textboxrow name="warext_mc_website_url" label="Web sitesi" maxlength="255" /&gt;
+        &lt;xf:textboxrow name="warext_mc_discord_url" label="Discord" maxlength="255" /&gt;
+        &lt;xf:checkboxrow&gt;
+            &lt;xf:option name="warext_mc_is_premium" value="1"&gt;Premium hesap zorunlu&lt;/xf:option&gt;
+            &lt;xf:option name="warext_mc_allow_cracked" value="1"&gt;Crack giriş destekleniyor&lt;/xf:option&gt;
+        &lt;/xf:checkboxrow&gt;
+        &lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;Görseller&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;div class="formRow-explain"&gt;Tanıtım konusundan otomatik oluşan sunucunun banner, hareketli GIF banner ve kapak görselini daha sonra Sunucularım → Düzenle bölümünden ekleyebilirsiniz. Konu formuna ikinci bir görsel yükleme sistemi eklenmez.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/xf:if&gt;
+</template>
+  <template type="public" title="warext_mc_thread_server_card" version_id="1011010" version_string="1.1.1">&lt;xf:if is="$warextMcLinkedServer"&gt;
+    &lt;xf:css src="warext_mc_servers.less" /&gt;
+    &lt;div class="block warextMcThreadServerCard"&gt;
+        &lt;div class="block-container"&gt;
+            &lt;div class="block-row"&gt;
+                &lt;div class="contentRow"&gt;
+                    &lt;div class="contentRow-main"&gt;
+                        &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$warextMcLinkedServer.title}&lt;/strong&gt; &lt;span class="label label--primary"&gt;Minecraft Sunucusu&lt;/span&gt;&lt;/div&gt;
+                        &lt;div class="contentRow-minor"&gt;{$warextMcLinkedServer.host}:{$warextMcLinkedServer.port} · {$warextMcLinkedServer.players_online}/{$warextMcLinkedServer.players_max} oyuncu · {$warextMcLinkedServer.vote_count_month} aylık oy&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="contentRow-extra"&gt;
+                        &lt;xf:button href="{{ link('sunucular/detay', $warextMcLinkedServer) }}"&gt;Sunucu Sayfası&lt;/xf:button&gt;
+                        &lt;xf:if is="$warextMcLinkedServer.state == 'active'"&gt;&lt;xf:button href="{{ link('sunucular/oy', $warextMcLinkedServer) }}" class="button--cta"&gt;Oy Ver&lt;/xf:button&gt;&lt;/xf:if&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/xf:if&gt;
+</template>
+  <template type="public" title="warext_mc_update_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Güncellemeler&lt;/xf:title&gt;
 &lt;xf:description&gt;Sunucu sahibinin ve yetkili ekip üyelerinin yayınladığı sürüm notları ve değişiklikler.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -1380,7 +2273,7 @@
 
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/guncellemeler" data="{$server}" /&gt;
 </template>
-  <template type="public" title="warext_mc_votifier_config" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;{$server.title} - NuVotifier Ayarları&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_votifier_config" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - NuVotifier Ayarları&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -1444,7 +2337,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_achievement_edit" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Başarımı Düzenle: {$achievement.title}&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_achievement_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Başarımı Düzenle: {$achievement.title}&lt;/xf:title&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/achievement-edit', $achievement) }}" class="block" ajax="true"&gt;
     &lt;div class="block-container"&gt;
@@ -1466,7 +2359,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_achievement_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Sunucu Başarımları&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_achievement_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sunucu Başarımları&lt;/xf:title&gt;
 
 &lt;xf:pageaction&gt;
     &lt;xf:form action="{{ link('warext-minecraft/achievement-rebuild') }}" class="buttonGroup"&gt;
@@ -1528,7 +2421,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_audit_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Minecraft Sunucu Audit Kayıtları&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_audit_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucu Audit Kayıtları&lt;/xf:title&gt;
 &lt;xf:description&gt;Kritik sahiplik, ekip, moderasyon, sponsor ve başarım yönetim işlemleri.&lt;/xf:description&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/audit') }}" class="block"&gt;
@@ -1579,87 +2472,62 @@
 
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/audit" params="{{ {'server_id': $serverId, 'action_key': $actionKey} }}" /&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_category_edit" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Kategori Düzenle: {$category.title}&lt;/xf:title&gt;
-
+  <template type="admin" title="warext_mc_admin_category_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Kategori Düzenle: {$category.title}&lt;/xf:title&gt;
 &lt;xf:form action="{{ link('warext-minecraft/category-edit', $category) }}" class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:textboxrow name="title" value="{$category.title}" label="Kategori adı" required="true" maxlength="50" /&gt;
-            &lt;xf:textboxrow name="slug" value="{$category.slug}" label="Kısa ad" required="true" maxlength="50" /&gt;
-            &lt;xf:textboxrow name="description" value="{$category.description}" label="Açıklama" maxlength="255" /&gt;
-            &lt;xf:numberboxrow name="display_order" value="{$category.display_order}" min="1" label="Sıralama" /&gt;
-            &lt;xf:checkboxrow&gt;
-                &lt;xf:option name="is_active" value="1" selected="{$category.is_active}"&gt;Aktif&lt;/xf:option&gt;
-            &lt;/xf:checkboxrow&gt;
-        &lt;/div&gt;
-        &lt;xf:submitrow submit="Kaydet" /&gt;
-    &lt;/div&gt;
+    &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
+        &lt;xf:textboxrow name="title" value="{$category.title}" label="Kategori adı" required="true" maxlength="50" /&gt;
+        &lt;xf:textboxrow name="slug" value="{$category.slug}" label="Kısa ad" required="true" maxlength="50" /&gt;
+        &lt;xf:textboxrow name="description" value="{$category.description}" label="Açıklama" maxlength="255" /&gt;
+        &lt;xf:numberboxrow name="display_order" value="{$category.display_order}" min="1" label="Sıralama" /&gt;
+        &lt;xf:selectrow name="forum_node_id" value="{$category.forum_node_id}" label="Bağlı tanıtım forumu"&gt;
+            &lt;xf:foreach loop="$forumOptions" key="$forumId" value="$forumTitle"&gt;&lt;xf:option value="{$forumId}"&gt;{$forumTitle}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
+        &lt;/xf:selectrow&gt;
+        &lt;xf:selectrow name="thread_default_server_type" value="{$category.thread_default_server_type}" label="Konu formu varsayılan türü"&gt;&lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;&lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;&lt;xf:option value="crossplay"&gt;Crossplay&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+        &lt;xf:checkboxrow&gt;
+            &lt;xf:option name="is_active" value="1" selected="{$category.is_active}"&gt;Aktif&lt;/xf:option&gt;
+            &lt;xf:option name="thread_integration_enabled" value="1" selected="{$category.thread_integration_enabled}"&gt;Bu forumda konu → vote entegrasyonunu aç&lt;/xf:option&gt;
+        &lt;/xf:checkboxrow&gt;
+    &lt;/div&gt;&lt;xf:submitrow submit="Kaydet" /&gt;&lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_category_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Minecraft Sunucu Kategorileri&lt;/xf:title&gt;
-
-&lt;div class="blockMessage blockMessage--important"&gt;
-    Bu kategoriler sunucu ekleme formunda sınıflandırma etiketi olarak kullanılır. Kategori seçimi ek alan oluşturmaz; form alanları sunucu türüne ve genel eklenti kurallarına göre çalışır.
-&lt;/div&gt;
-
+  <template type="admin" title="warext_mc_admin_category_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucu Kategorileri&lt;/xf:title&gt;
+&lt;div class="blockMessage blockMessage--important"&gt;Kategori bir XenForo forumuna bağlanırsa o forumda yeni konu açarken isteğe bağlı sunucu dizini alanları görünür. Sunucu adresi boşsa konu normal şekilde açılır ve vote kaydı oluşturulmaz.&lt;/div&gt;
 &lt;xf:form action="{{ link('warext-minecraft/categories') }}" class="block"&gt;
     &lt;div class="block-container"&gt;
         &lt;h2 class="block-header"&gt;Yeni Kategori&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:textboxrow name="title" label="Kategori adı" required="true" maxlength="50" /&gt;
-            &lt;xf:textboxrow name="slug" label="Kısa ad" maxlength="50" explain="Boş bırakırsanız kategori adından otomatik oluşturulur." /&gt;
+            &lt;xf:textboxrow name="slug" label="Kısa ad" maxlength="50" /&gt;
             &lt;xf:textboxrow name="description" label="Açıklama" maxlength="255" /&gt;
             &lt;xf:numberboxrow name="display_order" value="10" min="1" label="Sıralama" /&gt;
+            &lt;xf:selectrow name="forum_node_id" label="Bağlı tanıtım forumu"&gt;
+                &lt;xf:foreach loop="$forumOptions" key="$forumId" value="$forumTitle"&gt;&lt;xf:option value="{$forumId}"&gt;{$forumTitle}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
+            &lt;/xf:selectrow&gt;
+            &lt;xf:selectrow name="thread_default_server_type" label="Konu formu varsayılan türü"&gt;&lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;&lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;&lt;xf:option value="crossplay"&gt;Crossplay&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
             &lt;xf:checkboxrow&gt;
                 &lt;xf:option name="is_active" value="1" selected="true"&gt;Aktif&lt;/xf:option&gt;
+                &lt;xf:option name="thread_integration_enabled" value="1"&gt;Bu forumda konu → vote entegrasyonunu aç&lt;/xf:option&gt;
             &lt;/xf:checkboxrow&gt;
         &lt;/div&gt;
         &lt;xf:submitrow submit="Kategori Ekle" /&gt;
     &lt;/div&gt;
 &lt;/xf:form&gt;
-
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;Mevcut Kategoriler&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$categoryRows is not empty"&gt;
-                &lt;xf:foreach loop="$categoryRows" value="$row"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;{$row.category.title}&lt;/strong&gt;
-                                    &lt;xf:if is="$row.category.is_active"&gt;&lt;span class="label label--green"&gt;Aktif&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Pasif&lt;/span&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;Kısa ad: {$row.category.slug} · Sıra: {$row.category.display_order} · Kullanım: {$row.usageCount} sunucu&lt;/div&gt;
-                                &lt;xf:if is="$row.category.description"&gt;&lt;div class="contentRow-minor"&gt;{$row.category.description}&lt;/div&gt;&lt;/xf:if&gt;
-                                &lt;div class="buttonGroup" style="margin-top:8px"&gt;
-                                    &lt;xf:button href="{{ link('warext-minecraft/category-edit', $row.category) }}"&gt;Düzenle&lt;/xf:button&gt;
-                                    &lt;xf:if is="$row.category.is_active"&gt;
-                                        &lt;xf:form action="{{ link('warext-minecraft/category-toggle', $row.category) }}" ajax="true" class="buttonGroup"&gt;
-                                            &lt;xf:button type="submit"&gt;Pasifleştir&lt;/xf:button&gt;
-                                        &lt;/xf:form&gt;
-                                    &lt;xf:else /&gt;
-                                        &lt;xf:form action="{{ link('warext-minecraft/category-toggle', $row.category) }}" ajax="true" class="buttonGroup"&gt;
-                                            &lt;xf:button type="submit"&gt;Aktifleştir&lt;/xf:button&gt;
-                                        &lt;/xf:form&gt;
-                                    &lt;/xf:if&gt;
-                                    &lt;xf:form action="{{ link('warext-minecraft/category-delete', $row.category) }}" ajax="true" data-xf-init="delete" class="buttonGroup"&gt;
-                                        &lt;xf:button type="submit" class="button--link"&gt;Sil&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;Henüz kategori yok.&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+&lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h2 class="block-header"&gt;Mevcut Kategoriler&lt;/h2&gt;&lt;div class="block-body"&gt;
+    &lt;xf:if is="$categoryRows is not empty"&gt;
+        &lt;xf:foreach loop="$categoryRows" value="$row"&gt;
+            &lt;div class="block-row block-row--separated"&gt;&lt;div class="contentRow"&gt;&lt;div class="contentRow-main"&gt;
+                &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$row.category.title}&lt;/strong&gt; &lt;xf:if is="$row.category.is_active"&gt;&lt;span class="label label--green"&gt;Aktif&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Pasif&lt;/span&gt;&lt;/xf:if&gt; &lt;xf:if is="$row.category.thread_integration_enabled"&gt;&lt;span class="label label--primary"&gt;Konu entegrasyonu&lt;/span&gt;&lt;/xf:if&gt;&lt;/div&gt;
+                &lt;div class="contentRow-minor"&gt;Kısa ad: {$row.category.slug} · Kullanım: {$row.usageCount} sunucu&lt;xf:if is="$row.category.Forum"&gt; · Forum: {$row.category.Forum.title}&lt;/xf:if&gt;&lt;/div&gt;
+                &lt;div class="buttonGroup" style="margin-top:8px"&gt;&lt;xf:button href="{{ link('warext-minecraft/category-edit', $row.category) }}"&gt;Düzenle&lt;/xf:button&gt;
+                    &lt;xf:form action="{{ link('warext-minecraft/category-toggle', $row.category) }}" ajax="true" class="buttonGroup"&gt;&lt;xf:button type="submit"&gt;&lt;xf:if is="$row.category.is_active"&gt;Pasifleştir&lt;xf:else /&gt;Aktifleştir&lt;/xf:if&gt;&lt;/xf:button&gt;&lt;/xf:form&gt;
+                    &lt;xf:form action="{{ link('warext-minecraft/category-delete', $row.category) }}" ajax="true" data-xf-init="delete" class="buttonGroup"&gt;&lt;xf:button type="submit" class="button--link"&gt;Sil&lt;/xf:button&gt;&lt;/xf:form&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/xf:foreach&gt;
+    &lt;xf:else /&gt;&lt;div class="blockMessage"&gt;Henüz kategori yok.&lt;/div&gt;&lt;/xf:if&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_health" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Minecraft Vote Sistem Sağlığı&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_health" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Vote Sistem Sağlığı&lt;/xf:title&gt;
 &lt;xf:description&gt;Vote kuyruğu, NuVotifier entegrasyonları ve sunucu durum görevleri için operasyon ekranı.&lt;/xf:description&gt;
 
 &lt;xf:pageaction&gt;
@@ -1721,7 +2589,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_report_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Sunucu Raporları&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_report_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sunucu Raporları&lt;/xf:title&gt;
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
@@ -1793,7 +2661,7 @@
     &lt;div class="blockMessage"&gt;Bu filtreye uygun rapor bulunamadı.&lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_server_list" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Minecraft Sunucuları&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_server_list" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucuları&lt;/xf:title&gt;
 
 &lt;xf:pageaction&gt;
     &lt;xf:form action="{{ link('warext-minecraft/ranking') }}" class="buttonGroup"&gt;
@@ -1894,7 +2762,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_setup" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Kurulum ve Yapılandırma&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_setup" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Kurulum ve Yapılandırma&lt;/xf:title&gt;
 
 &lt;div class="blockMessage blockMessage--important"&gt;
     Bu sayfa eklentiyi ilk kez kuran yöneticiler için başlangıç merkezidir. Minecraft kategorileri XenForo forum kategorilerine bağlı değildir; sunucu listesindeki filtreleme ve sınıflandırma etiketleridir.
@@ -1988,7 +2856,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_sponsor_index" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Sponsorlu Sunucular&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_sponsor_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sponsorlu Sunucular&lt;/xf:title&gt;
 &lt;xf:description&gt;Sponsorlu gösterimler organik Popüler ve Yükselişte sıralama skorlarını değiştirmez.&lt;/xf:description&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/sponsors') }}" class="block" ajax="true"&gt;
@@ -2052,7 +2920,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_suspect_votes" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Şüpheli Oylar&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_suspect_votes" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Şüpheli Oylar&lt;/xf:title&gt;
 &lt;xf:description&gt;Risk puanı yüksek oyları inceleyin. Sistem otomatik ban uygulamaz; karar yöneticiye aittir.&lt;/xf:description&gt;
 
 &lt;xf:pageaction&gt;
@@ -2142,7 +3010,7 @@
     link="warext-minecraft/suspect-votes"
     params="{{ {'min_score': $minScore, 'server_id': $serverId} }}" /&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_vote_queue" version_id="1010070" version_string="1.0.7">&lt;xf:title&gt;Oy Teslimat Kuyruğu&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_vote_queue" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Oy Teslimat Kuyruğu&lt;/xf:title&gt;
 
 &lt;xf:pageaction&gt;
     &lt;xf:button href="{{ link('warext-minecraft/suspect-votes') }}"&gt;Şüpheli Oylar&lt;/xf:button&gt;

@@ -1,0 +1,9 @@
+{
+    "template": "thread_view",
+    "description": "Linked Minecraft server card",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "#^#",
+    "replace": "<xf:include template=\"warext_mc_thread_server_card\" />\\n"
+}

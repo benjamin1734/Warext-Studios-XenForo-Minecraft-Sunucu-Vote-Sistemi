@@ -1,0 +1,16 @@
+<xf:set var="$messageHtml">
+    <h4 class="message-title"><a href="{{ link('sunucular/detay', $content) }}">{$content.title}</a></h4>
+    <xf:if is="$content.description"><div>{$content.description}</div></xf:if>
+    <div class="contentRow-minor">{$content.host}:{$content.port}</div>
+</xf:set>
+
+<xf:macro template="approval_queue_macros" name="item_message_type"
+    arg-content="{$content}"
+    arg-contentDate="{$content.created_date}"
+    arg-user="{$content.Owner}"
+    arg-messageHtml="{{ $messageHtml }}"
+    arg-typePhraseHtml="{{ phrase('content_type.warext_mc_server') }}"
+    arg-spamDetails="{$spamDetails}"
+    arg-unapprovedItem="{$unapprovedItem}"
+    arg-handler="{$handler}"
+    arg-headerPhraseHtml="{$content.title}" />

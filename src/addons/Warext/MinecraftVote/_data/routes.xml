@@ -31,31 +31,32 @@
   <route route_type="admin" route_prefix="warext-minecraft" sub_name="votes" format="votes/" controller="Warext\MinecraftVote:Server" context="warextMinecraftServers" action_prefix="votes" />
   <route route_type="public" route_prefix="minecraft-servers-sitemap" controller="Warext\MinecraftVote:Sitemap" />
   <route route_type="public" route_prefix="minecraft-vote-api" controller="Warext\MinecraftVote:Api" />
-  <route route_type="public" route_prefix="sunucular" controller="Warext\MinecraftVote:Index" />
-  <route route_type="public" route_prefix="sunucular" sub_name="degerlendir" format="degerlendir/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Review" />
-  <route route_type="public" route_prefix="sunucular" sub_name="degerlendirme-sil" format="degerlendirme-sil/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Review" action_prefix="delete" />
-  <route route_type="public" route_prefix="sunucular" sub_name="degerlendirme-yonet" format="degerlendirme-yonet/:int&lt;review_id&gt;/" controller="Warext\MinecraftVote:Review" action_prefix="moderate" />
-  <route route_type="public" route_prefix="sunucular" sub_name="detay" format="detay/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Detail" />
-  <route route_type="public" route_prefix="sunucular" sub_name="dogrula" format="dogrula/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Server" action_prefix="dogrula" />
-  <route route_type="public" route_prefix="sunucular" sub_name="duzenle" format="duzenle/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Edit" />
-  <route route_type="public" route_prefix="sunucular" sub_name="ekip-sil" format="ekip-sil/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Team" action_prefix="remove" />
-  <route route_type="public" route_prefix="sunucular" sub_name="ekip" format="ekip/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Team" />
-  <route route_type="public" route_prefix="sunucular" sub_name="ekle" format="ekle/" controller="Warext\MinecraftVote:Add" />
-  <route route_type="public" route_prefix="sunucular" sub_name="favori-bildirim" format="favori-bildirim/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Favorite" action_prefix="notify" />
-  <route route_type="public" route_prefix="sunucular" sub_name="favori" format="favori/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Favorite" action_prefix="toggle" />
-  <route route_type="public" route_prefix="sunucular" sub_name="favoriler" format="favoriler/" controller="Warext\MinecraftVote:Favorite" />
-  <route route_type="public" route_prefix="sunucular" sub_name="guncelleme-sil" format="guncelleme-sil/:int&lt;update_id&gt;/" controller="Warext\MinecraftVote:Update" action_prefix="delete" />
-  <route route_type="public" route_prefix="sunucular" sub_name="guncellemeler" format="guncellemeler/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Update" />
-  <route route_type="public" route_prefix="sunucular" sub_name="hesap-birincil" format="hesap-birincil/:int&lt;account_id&gt;/" controller="Warext\MinecraftVote:Server" action_prefix="hesap-birincil" />
-  <route route_type="public" route_prefix="sunucular" sub_name="hesap-sil" format="hesap-sil/:int&lt;account_id&gt;/" controller="Warext\MinecraftVote:Server" action_prefix="hesap-sil" />
-  <route route_type="public" route_prefix="sunucular" sub_name="hesaplar" format="hesaplar/" controller="Warext\MinecraftVote:Server" action_prefix="hesaplar" />
-  <route route_type="public" route_prefix="sunucular" sub_name="istatistik" format="istatistik/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Analytics" />
-  <route route_type="public" route_prefix="sunucular" sub_name="karsilastir" format="karsilastir/" controller="Warext\MinecraftVote:Compare" />
-  <route route_type="public" route_prefix="sunucular" sub_name="oy" format="oy/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Vote" />
-  <route route_type="public" route_prefix="sunucular" sub_name="rapor" format="rapor/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Report" />
-  <route route_type="public" route_prefix="sunucular" sub_name="sahiplik-devret" format="sahiplik-devret/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Ownership" />
-  <route route_type="public" route_prefix="sunucular" sub_name="sezon" format="sezon/:int&lt;season_id&gt;/" controller="Warext\MinecraftVote:Server" action_prefix="sezon" />
-  <route route_type="public" route_prefix="sunucular" sub_name="sezonlar" format="sezonlar/" controller="Warext\MinecraftVote:Server" action_prefix="sezonlar" />
-  <route route_type="public" route_prefix="sunucular" sub_name="sponsor" format="sponsor/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Sponsor" />
-  <route route_type="public" route_prefix="sunucular" sub_name="votifier" format="votifier/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Votifier" />
+  <route route_type="public" route_prefix="sunucular" controller="Warext\MinecraftVote:Index" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="benim" format="benim/" controller="Warext\MinecraftVote:MyServers" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="degerlendir" format="degerlendir/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Review" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="degerlendirme-sil" format="degerlendirme-sil/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Review" action_prefix="delete" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="degerlendirme-yonet" format="degerlendirme-yonet/:int&lt;review_id&gt;/" controller="Warext\MinecraftVote:Review" action_prefix="moderate" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="detay" format="detay/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Detail" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="dogrula" format="dogrula/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Server" action_prefix="dogrula" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="duzenle" format="duzenle/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Edit" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="ekip-sil" format="ekip-sil/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Team" action_prefix="remove" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="ekip" format="ekip/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Team" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="ekle" format="ekle/" controller="Warext\MinecraftVote:Add" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="favori-bildirim" format="favori-bildirim/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Favorite" action_prefix="notify" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="favori" format="favori/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Favorite" action_prefix="toggle" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="favoriler" format="favoriler/" controller="Warext\MinecraftVote:Favorite" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="guncelleme-sil" format="guncelleme-sil/:int&lt;update_id&gt;/" controller="Warext\MinecraftVote:Update" action_prefix="delete" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="guncellemeler" format="guncellemeler/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Update" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="hesap-birincil" format="hesap-birincil/:int&lt;account_id&gt;/" controller="Warext\MinecraftVote:Server" action_prefix="hesap-birincil" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="hesap-sil" format="hesap-sil/:int&lt;account_id&gt;/" controller="Warext\MinecraftVote:Server" action_prefix="hesap-sil" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="hesaplar" format="hesaplar/" controller="Warext\MinecraftVote:Server" action_prefix="hesaplar" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="istatistik" format="istatistik/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Analytics" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="karsilastir" format="karsilastir/" controller="Warext\MinecraftVote:Compare" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="oy" format="oy/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Vote" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="rapor" format="rapor/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Report" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="sahiplik-devret" format="sahiplik-devret/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Ownership" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="sezon" format="sezon/:int&lt;season_id&gt;/" controller="Warext\MinecraftVote:Server" action_prefix="sezon" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="sezonlar" format="sezonlar/" controller="Warext\MinecraftVote:Server" action_prefix="sezonlar" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="sponsor" format="sponsor/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Sponsor" context="warextMcServers" />
+  <route route_type="public" route_prefix="sunucular" sub_name="votifier" format="votifier/:int&lt;server_id&gt;/" controller="Warext\MinecraftVote:Votifier" context="warextMcServers" />
 </routes>

@@ -1,16 +1,17 @@
 <xf:title>Kategori Düzenle: {$category.title}</xf:title>
-
 <xf:form action="{{ link('warext-minecraft/category-edit', $category) }}" class="block">
-    <div class="block-container">
-        <div class="block-body">
-            <xf:textboxrow name="title" value="{$category.title}" label="Kategori adı" required="true" maxlength="50" />
-            <xf:textboxrow name="slug" value="{$category.slug}" label="Kısa ad" required="true" maxlength="50" />
-            <xf:textboxrow name="description" value="{$category.description}" label="Açıklama" maxlength="255" />
-            <xf:numberboxrow name="display_order" value="{$category.display_order}" min="1" label="Sıralama" />
-            <xf:checkboxrow>
-                <xf:option name="is_active" value="1" selected="{$category.is_active}">Aktif</xf:option>
-            </xf:checkboxrow>
-        </div>
-        <xf:submitrow submit="Kaydet" />
-    </div>
+    <div class="block-container"><div class="block-body">
+        <xf:textboxrow name="title" value="{$category.title}" label="Kategori adı" required="true" maxlength="50" />
+        <xf:textboxrow name="slug" value="{$category.slug}" label="Kısa ad" required="true" maxlength="50" />
+        <xf:textboxrow name="description" value="{$category.description}" label="Açıklama" maxlength="255" />
+        <xf:numberboxrow name="display_order" value="{$category.display_order}" min="1" label="Sıralama" />
+        <xf:selectrow name="forum_node_id" value="{$category.forum_node_id}" label="Bağlı tanıtım forumu">
+            <xf:foreach loop="$forumOptions" key="$forumId" value="$forumTitle"><xf:option value="{$forumId}">{$forumTitle}</xf:option></xf:foreach>
+        </xf:selectrow>
+        <xf:selectrow name="thread_default_server_type" value="{$category.thread_default_server_type}" label="Konu formu varsayılan türü"><xf:option value="java">Java</xf:option><xf:option value="bedrock">Bedrock</xf:option><xf:option value="crossplay">Crossplay</xf:option></xf:selectrow>
+        <xf:checkboxrow>
+            <xf:option name="is_active" value="1" selected="{$category.is_active}">Aktif</xf:option>
+            <xf:option name="thread_integration_enabled" value="1" selected="{$category.thread_integration_enabled}">Bu forumda konu → vote entegrasyonunu aç</xf:option>
+        </xf:checkboxrow>
+    </div><xf:submitrow submit="Kaydet" /></div>
 </xf:form>

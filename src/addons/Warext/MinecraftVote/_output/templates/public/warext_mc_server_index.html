@@ -201,7 +201,16 @@
                     </strong>
                 </div>
 
-                <div class="warextMcVoteRow-main">
+                <div class="warextMcVoteRow-media">
+                                    <xf:if is="$server.animated_banner_path">
+                                        <img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" />
+                                    <xf:elseif is="$server.banner_path" />
+                                        <img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" />
+                                    <xf:else />
+                                        <div class="warextMcVoteRow-mediaFallback"><i class="fa--xf far fa-server" aria-hidden="true"></i></div>
+                                    </xf:if>
+                                </div>
+                                <div class="warextMcVoteRow-main">
                     <div class="warextMcVoteRow-head">
                         <div class="warextMcVoteRow-titleWrap">
                             <a href="{{ link('sunucular/detay', $server) }}" class="warextMcVoteRow-title">{$server.title}</a>

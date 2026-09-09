@@ -12,6 +12,7 @@ class Server extends Entity
         $structure->table = 'xf_warext_mc_server';
         $structure->shortName = 'Warext\MinecraftVote:Server';
         $structure->primaryKey = 'server_id';
+        $structure->contentType = 'warext_mc_server';
         $structure->columns = [
             'server_id' => ['type' => self::UINT, 'autoIncrement' => true, 'nullable' => true],
             'owner_user_id' => ['type' => self::UINT, 'default' => 0],
@@ -26,6 +27,12 @@ class Server extends Entity
             'website_url' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],
             'discord_url' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],
             'store_url' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],
+            'trailer_url' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],
+            'banner_path' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],
+            'animated_banner_path' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],
+            'cover_path' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],
+            'discussion_thread_id' => ['type' => self::UINT, 'default' => 0],
+            'source_type' => ['type' => self::STR, 'maxLength' => 20, 'default' => 'manual'],
             'game_modes' => ['type' => self::STR, 'maxLength' => 255, 'default' => ''],
             'version_min' => ['type' => self::STR, 'maxLength' => 30, 'default' => ''],
             'version_max' => ['type' => self::STR, 'maxLength' => 30, 'default' => ''],
@@ -81,6 +88,21 @@ class Server extends Entity
                 'entity' => 'XF:User',
                 'type' => self::TO_ONE,
                 'conditions' => [['user_id', '=', '$owner_user_id']],
+                'primary' => true
+            ],
+            'DiscussionThread' => [
+                'entity' => 'XF:Thread',
+                'type' => self::TO_ONE,
+                'conditions' => [['thread_id', '=', '$discussion_thread_id']],
+                'primary' => true
+            ],
+            'ApprovalQueue' => [
+                'entity' => 'XF:ApprovalQueue',
+                'type' => self::TO_ONE,
+                'conditions' => [
+                    ['content_type', '=', 'warext_mc_server'],
+                    ['content_id', '=', '$server_id']
+                ],
                 'primary' => true
             ]
         ];
@@ -144,6 +166,12 @@ class Server extends Entity
         return $this->hasTeamPermission('manage_reviews');
     }
 
+    public function canApproveUnapprove(&$error = null): bool
+    {
+        $visitor = \XF::visitor();
+        return (bool)($visitor->is_moderator || $visitor->is_admin);
+    }
+
     protected function hasTeamPermission(string $permission): bool
     {
         $visitor = \XF::visitor();
@@ -187,6 +215,11 @@ class Server extends Entity
             $this->error(\XF::phrase('please_enter_valid_value'), 'server_type');
         }
 
+        if (!in_array($this->source_type, ['manual', 'thread'], true))
+        {
+            $this->error(\XF::phrase('please_enter_valid_value'), 'source_type');
+        }
+
         if (!in_array($this->state, ['pending', 'active', 'rejected', 'suspended'], true))
         {
             $this->error(\XF::phrase('please_enter_valid_value'), 'state');
@@ -208,8 +241,35 @@ class Server extends Entity
         }
     }
 
+    protected function _postSave(): void
+    {
+        if ($this->state === 'pending')
+        {
+            $approvalQueue = $this->getRelationOrDefault('ApprovalQueue', false);
+            $approvalQueue->content_date = $this->created_date ?: \XF::$time;
+            $approvalQueue->save();
+        }
+        elseif ($this->ApprovalQueue)
+        {
+            $this->ApprovalQueue->delete();
+        }
+    }
+
     protected function _postDelete(): void
     {
+        if ($this->ApprovalQueue)
+        {
+            $this->ApprovalQueue->delete();
+        }
+
+        foreach ([$this->banner_path, $this->animated_banner_path, $this->cover_path] as $path)
+        {
+            if ($path !== '')
+            {
+                \XF\Util\File::deleteFromAbstractedPath('data://' . ltrim($path, '/'));
+            }
+        }
+
         $db = $this->db();
         $serverId = (int)$this->server_id;
 
@@ -258,10 +318,11 @@ class Server extends Entity
     {
         foreach ([
             'owner_user_id', 'title', 'slug', 'description', 'server_type', 'host', 'port',
-            'bedrock_host', 'bedrock_port', 'website_url', 'discord_url', 'store_url',
-            'game_modes', 'version_min', 'version_max', 'country_code', 'is_premium',
-            'allow_cracked', 'state', 'is_verified', 'verification_method', 'verification_token',
-            'verification_token_date', 'verified_date'
+            'bedrock_host', 'bedrock_port', 'website_url', 'discord_url', 'store_url', 'trailer_url',
+            'banner_path', 'animated_banner_path', 'cover_path', 'discussion_thread_id', 'source_type',
+            'game_modes', 'version_min', 'version_max', 'country_code', 'is_premium', 'allow_cracked',
+            'state', 'is_verified', 'verification_method', 'verification_token', 'verification_token_date',
+            'verified_date'
         ] as $field)
         {
             if ($this->isChanged($field))

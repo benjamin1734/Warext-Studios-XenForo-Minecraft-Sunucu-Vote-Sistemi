@@ -1,48 +1,43 @@
 <xf:title>Sunucu Ekle</xf:title>
-<xf:description>Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar yönetici onayından sonra listelenir.</xf:description>
+<xf:description>Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar moderasyon onayından sonra listelenir.</xf:description>
 
-<div class="blockMessage blockMessage--important">
-    Kategoriler yalnızca sunucuyu sınıflandırır ve filtrelerde kullanılır; kategori seçimi yeni form alanı açmaz. Adres alanlarının anlamı seçtiğiniz Java, Bedrock veya Crossplay sunucu türüne göre değişir.
-</div>
+<div class="blockMessage blockMessage--important">Kategoriler sınıflandırma içindir. Tanıtım konusu bağlantısı ve tüm görseller isteğe bağlıdır; yalnızca sunucu adresi temel kayıt için zorunludur.</div>
 
-<xf:form action="{{ link('sunucular/ekle') }}" ajax="true" class="block">
+<xf:form action="{{ link('sunucular/ekle') }}" ajax="true" upload="true" class="block">
     <div class="block-container">
         <h2 class="block-header">Temel Bilgiler</h2>
         <div class="block-body">
             <xf:textboxrow name="title" label="Sunucu adı" required="true" maxlength="100" />
-
-            <xf:selectrow name="server_type" label="Sunucu türü" explain="Java için ana adres/port kullanılır. Bedrock için ana adresi girin; ayrı Bedrock adresi boşsa ana adres kullanılır. Crossplay için Java ve Bedrock bilgilerini birlikte doldurun.">
+            <xf:selectrow name="server_type" label="Sunucu türü">
                 <xf:option value="java">Java</xf:option>
                 <xf:option value="bedrock">Bedrock</xf:option>
                 <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
             </xf:selectrow>
-
-            <xf:textboxrow name="host" label="Ana sunucu adresi" explain="Java/Crossplay için Java adresi; Bedrock için sunucunun ana adresi. Örnek: play.sunucum.com" required="true" maxlength="255" />
-            <xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Ana / Java portu" explain="Java için genellikle 25565. Bedrock sunucularında gerçek Bedrock portunu ayrıca aşağıdaki alana girin." />
-            <xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" explain="Bedrock veya Crossplay içindir. Bedrock sunucuda ana adres ile aynıysa boş bırakabilirsiniz." />
-            <xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" explain="Bedrock/Crossplay için gerçek Bedrock portu. Varsayılan 19132." />
-
+            <xf:textboxrow name="host" label="Ana sunucu adresi" required="true" maxlength="255" placeholder="play.sunucum.com" />
+            <xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Ana / Java portu" />
+            <xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" explain="Bedrock/Crossplay içindir. Ana adres ile aynıysa boş bırakabilirsiniz." />
+            <xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" />
             <xf:textarearow name="description" label="Sunucu açıklaması" rows="8" />
+        </div>
+
+        <h2 class="block-header">Görsel Kimlik</h2>
+        <div class="block-body">
+            <div class="blockMessage">Liste bannerı klasik vote standardı olan 468×60 kullanır. Hareketli GIF yüklerseniz listede statik bannerın yerine o gösterilir. Kapak görseli yalnız sunucu detay sayfasının geniş üst alanında kullanılır.</div>
+            <xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="468×60 JPG, PNG veya WebP · en fazla 10 MB" />
+            <xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="468×60 GIF · en fazla 15 MB · varsa statik bannerı geçersiz kılar" />
+            <xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="Detay kapağı" explain="En az 800×300 · JPG, PNG veya WebP · en fazla 12 MB" />
+            <xf:textboxrow name="trailer_url" label="Tanıtım videosu" placeholder="https://" maxlength="255" explain="İsteğe bağlı video/trailer bağlantısı." />
         </div>
 
         <h2 class="block-header">Kategori, Mod ve Sürüm</h2>
         <div class="block-body">
-            <xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz. Bunlar Survival, SkyBlock gibi filtreleme etiketleridir; ek alan oluşturmaz.">
-                <xf:foreach loop="$categories" value="$category">
-                    <xf:option value="{$category.category_id}">{$category.title}</xf:option>
-                </xf:foreach>
+            <xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz.">
+                <xf:foreach loop="$categories" value="$category"><xf:option value="{$category.category_id}">{$category.title}</xf:option></xf:foreach>
             </xf:checkboxrow>
-
-            <xf:textboxrow
-                name="game_modes"
-                label="Oyun modları"
-                placeholder="Survival, SkyBlock, PvP"
-                maxlength="255"
-                explain="Virgül, noktalı virgül veya yeni satır ile ayırın. En fazla 12 mod kaydedilir." />
-            <xf:textboxrow name="version_min" label="Minimum sürüm" placeholder="1.20" maxlength="30" />
-            <xf:textboxrow name="version_max" label="Maksimum sürüm" placeholder="1.21.4" maxlength="30" />
-            <xf:textboxrow name="country_code" label="Ülke kodu" placeholder="TR" maxlength="2" />
-
+            <xf:textboxrow name="game_modes" label="Oyun modları" placeholder="Survival, SkyBlock, PvP" maxlength="255" />
+            <xf:textboxrow name="version_min" label="Minimum sürüm" maxlength="30" />
+            <xf:textboxrow name="version_max" label="Maksimum sürüm" maxlength="30" />
+            <xf:textboxrow name="country_code" label="Ülke kodu" value="TR" maxlength="2" />
             <xf:checkboxrow>
                 <xf:option name="is_premium" value="1">Premium hesap zorunlu</xf:option>
                 <xf:option name="allow_cracked" value="1">Crack giriş destekleniyor</xf:option>
@@ -54,6 +49,7 @@
             <xf:textboxrow name="website_url" label="Web sitesi" placeholder="https://" maxlength="255" />
             <xf:textboxrow name="discord_url" label="Discord" placeholder="https://discord.gg/..." maxlength="255" />
             <xf:textboxrow name="store_url" label="Mağaza" placeholder="https://" maxlength="255" />
+            <xf:textboxrow name="discussion_thread_url" label="Sunucu tanıtım konusu" placeholder="https://forum.site.com/threads/..." maxlength="500" explain="İsteğe bağlı. Kendi XenForo tanıtım konunuzun bağlantısını girerseniz vote kaydı ile konu çift yönlü bağlanır." />
         </div>
 
         <xf:submitrow submit="Sunucuyu Gönder" />
