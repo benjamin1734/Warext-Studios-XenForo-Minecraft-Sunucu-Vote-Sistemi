@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 
 root = Path('src/addons/Warext/MinecraftVote')
 
@@ -26,42 +27,75 @@ for name in ['warext_mc_server_add.html', 'warext_mc_server_edit.html']:
 
 vote_controller = root / 'Pub/Controller/Vote.php'
 text = vote_controller.read_text(encoding='utf-8')
-text = text.replace("        $allowGuests = (bool)(\\XF::options()->warextMcAllowGuestVotes ?? true);\n", '')
-text = text.replace("        if (!PublicPermissions::allows('vote', $allowGuests, true))", "        if (!PublicPermissions::allows('vote', false, true))")
-text = text.replace("        if (!$visitor->user_id && (!$allowGuests || $requireVerifiedAccount))\n        {\n            return $this->noPermission();\n        }\n", "        if (!$visitor->user_id)\n        {\n            return $this->noPermission();\n        }\n")
-old_accounts = "        $linkedAccounts = $visitor->user_id\n            ? $this->repository('Warext\\\\MinecraftVote:MinecraftAccount')->findForUser($visitor->user_id)->fetch()\n            : [];\n"
-new_accounts = "        $voteRepo = $this->repository('Warext\\\\MinecraftVote:Vote');\n        $voteBlocked = $voteRepo->hasRecentUserVote(\n            (int)$server->server_id,\n            (int)$visitor->user_id,\n            \\XF::$time - 86400\n        );\n\n        $linkedAccounts = $this->repository('Warext\\\\MinecraftVote:MinecraftAccount')\n            ->findForUser($visitor->user_id)\n            ->fetch();\n"
-if old_accounts not in text:
-    raise SystemExit('Vote controller account block not found')
-text = text.replace(old_accounts, new_accounts)
-text = text.replace("        if ($this->isPost())\n        {\n", "        if ($this->isPost())\n        {\n            if ($voteBlocked)\n            {\n                return $this->error('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.', 429);\n            }\n\n", 1)
-text = text.replace("            'cooldownHours' => min(168, max(1, (int)(\\XF::options()->warextMcVoteCooldownHours ?? 24))),\n            'allowGuests' => $allowGuests,\n", "            'cooldownHours' => 24,\n            'allowGuests' => false,\n            'voteBlocked' => $voteBlocked,\n")
+text = re.sub(r"\s*\$allowGuests = \(bool\)\(\\XF::options\(\)->warextMcAllowGuestVotes \?\? true\);\n", '\n', text, count=1)
+text = text.replace("PublicPermissions::allows('vote', $allowGuests, true)", "PublicPermissions::allows('vote', false, true)")
+text = re.sub(
+    r"if \(!\$visitor->user_id && \(!\$allowGuests \|\| \$requireVerifiedAccount\)\)\s*\{\s*return \$this->noPermission\(\);\s*\}",
+    "if (!$visitor->user_id)\n        {\n            return $this->noPermission();\n        }",
+    text,
+    count=1
+)
+text, replaced = re.subn(
+    r"\$linkedAccounts = \$visitor->user_id\s*\? \$this->repository\('Warext\\\\MinecraftVote:MinecraftAccount'\)->findForUser\(\$visitor->user_id\)->fetch\(\)\s*:\s*\[\];",
+    "$voteRepo = $this->repository('Warext\\\\MinecraftVote:Vote');\n        $voteBlocked = $voteRepo->hasRecentUserVote(\n            (int)$server->server_id,\n            (int)$visitor->user_id,\n            \\XF::$time - 86400\n        );\n\n        $linkedAccounts = $this->repository('Warext\\\\MinecraftVote:MinecraftAccount')\n            ->findForUser($visitor->user_id)\n            ->fetch();",
+    text,
+    count=1
+)
+if replaced != 1:
+    raise SystemExit('Vote controller linked accounts block not replaced')
+text = text.replace(
+    "        if ($this->isPost())\n        {\n",
+    "        if ($this->isPost())\n        {\n            if ($voteBlocked)\n            {\n                return $this->error('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.', 429);\n            }\n\n",
+    1
+)
+text = re.sub(
+    r"'cooldownHours' => min\(168, max\(1, \(int\)\(\\XF::options\(\)->warextMcVoteCooldownHours \?\? 24\)\)\),\s*'allowGuests' => \$allowGuests,",
+    "'cooldownHours' => 24,\n            'allowGuests' => false,\n            'voteBlocked' => $voteBlocked,",
+    text,
+    count=1
+)
+for needle in ["!$visitor->user_id", "'voteBlocked' => $voteBlocked", "\\XF::$time - 86400", '24 saat sonra tekrar deneyin']:
+    if needle not in text:
+        raise SystemExit(f'Vote controller missing: {needle}')
 vote_controller.write_text(text, encoding='utf-8')
 
 creator = root / 'Service/Vote/Creator.php'
 text = creator.read_text(encoding='utf-8')
-old_guest = "        if (!$this->user->user_id && !(bool)(\\XF::options()->warextMcAllowGuestVotes ?? true))\n        {\n            throw new PrintableException('Oy verebilmek için giriş yapmanız gerekiyor.');\n        }\n"
-new_guest = "        if (!$this->user->user_id)\n        {\n            throw new PrintableException('Oy verebilmek için forum hesabınızla giriş yapmanız gerekiyor.');\n        }\n"
-if old_guest not in text:
-    raise SystemExit('Vote creator guest block not found')
-text = text.replace(old_guest, new_guest)
-text = text.replace("            $cooldownHours = min(168, max(1, (int)(\\XF::options()->warextMcVoteCooldownHours ?? 24)));\n            $since = \\XF::$time - ($cooldownHours * 3600);\n", "            $cooldownHours = 24;\n            $since = \\XF::$time - 86400;\n")
-text = text.replace("            throw new PrintableException(\"Bu sunucuya son {$cooldownHours} saat içinde zaten oy verdiniz.\");", "            throw new PrintableException('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.');")
+text, replaced = re.subn(
+    r"if \(!\$this->user->user_id && !\(bool\)\(\\XF::options\(\)->warextMcAllowGuestVotes \?\? true\)\)\s*\{\s*throw new PrintableException\('Oy verebilmek için giriş yapmanız gerekiyor\.'\);\s*\}",
+    "if (!$this->user->user_id)\n        {\n            throw new PrintableException('Oy verebilmek için forum hesabınızla giriş yapmanız gerekiyor.');\n        }",
+    text,
+    count=1
+)
+if replaced != 1:
+    raise SystemExit('Vote creator guest block not replaced')
+text = re.sub(
+    r"\$cooldownHours = min\(168, max\(1, \(int\)\(\\XF::options\(\)->warextMcVoteCooldownHours \?\? 24\)\)\);\s*\$since = \\XF::\$time - \(\$cooldownHours \* 3600\);",
+    "$cooldownHours = 24;\n            $since = \\XF::$time - 86400;",
+    text,
+    count=1
+)
+text = text.replace('throw new PrintableException("Bu sunucuya son {$cooldownHours} saat içinde zaten oy verdiniz.");', "throw new PrintableException('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.');")
+for needle in ["if (!$this->user->user_id)", '$since = \\XF::$time - 86400', '24 saat sonra tekrar deneyin']:
+    if needle not in text:
+        raise SystemExit(f'Vote creator missing: {needle}')
 creator.write_text(text, encoding='utf-8')
 
 vote_template = root / '_output/templates/public/warext_mc_server_vote.html'
 text = vote_template.read_text(encoding='utf-8')
-form_marker = '<xf:form action="{{ link(\'sunucular/oy\', $server) }}" method="post" class="block">'
+form_marker = '<xf:form action="{{ link(\'sunucular/oy\', $server) }}" class="block" ajax="true">'
 if form_marker not in text:
     raise SystemExit('Vote form marker not found')
-text = text.replace(form_marker, "<xf:if is=\"$voteBlocked\">\n    <div class=\"blockMessage blockMessage--important\">Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.</div>\n<xf:else />\n" + form_marker, 1)
-text = text.rstrip() + '\n</xf:if>\n'
+text = text.replace(
+    form_marker,
+    '<xf:if is="$voteBlocked">\n                <div class="block-rowMessage block-rowMessage--warning">Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.</div>\n            <xf:else />\n            ' + form_marker,
+    1
+)
+text = text.replace('            </xf:form>\n        </div>', '            </xf:form>\n            </xf:if>\n        </div>', 1)
 vote_template.write_text(text, encoding='utf-8')
 
 addon = root / 'addon.json'
-text = addon.read_text(encoding='utf-8')
-text = text.replace('"version_id": 1011050', '"version_id": 1011060')
-text = text.replace('"version_string": "1.1.5"', '"version_string": "1.1.6"')
+text = addon.read_text(encoding='utf-8').replace('"version_id": 1011050', '"version_id": 1011060').replace('"version_string": "1.1.5"', '"version_string": "1.1.6"')
 addon.write_text(text, encoding='utf-8')
 
 reg = Path('.github/security_regression.py')
@@ -76,5 +110,4 @@ text = text.replace("if version_string != '1.1.5' or int(addon.get('version_id',
 reg.write_text(text, encoding='utf-8')
 
 readme = Path('README.md')
-text = readme.read_text(encoding='utf-8').replace('Warext-MinecraftVote-1.1.5.zip', 'Warext-MinecraftVote-1.1.6.zip')
-readme.write_text(text, encoding='utf-8')
+readme.write_text(readme.read_text(encoding='utf-8').replace('Warext-MinecraftVote-1.1.5.zip', 'Warext-MinecraftVote-1.1.6.zip'), encoding='utf-8')
