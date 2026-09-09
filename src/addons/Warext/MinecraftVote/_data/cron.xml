@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<cron>
+  <entry entry_id="warextMcAchievements" cron_class="Warext\MinecraftVote\Cron\Achievement" cron_method="run" active="1">{"day_type":"dom","dom":[-1],"hours":[4],"minutes":[20]}</entry>
+  <entry entry_id="warextMcMaintenance" cron_class="Warext\MinecraftVote\Cron\Maintenance" cron_method="run" active="1">{"day_type":"dom","dom":[-1],"hours":[4],"minutes":[20]}</entry>
+  <entry entry_id="warextMcServerStatus" cron_class="Warext\MinecraftVote\Cron\ServerStatus" cron_method="run" active="1">{"day_type":"dom","dom":[-1],"hours":[-1],"minutes":[0,5,10,15,20,25,30,35,40,45,50,55]}</entry>
+  <entry entry_id="warextMcVoteCounters" cron_class="Warext\MinecraftVote\Cron\VoteCounters" cron_method="run" active="1">{"day_type":"dom","dom":[-1],"hours":[0],"minutes":[10]}</entry>
+  <entry entry_id="warextMcVoteDelivery" cron_class="Warext\MinecraftVote\Cron\VoteDelivery" cron_method="run" active="1">{"day_type":"dom","dom":[-1],"hours":[-1],"minutes":[-1]}</entry>
+  <entry entry_id="warextMcVoteRanking" cron_class="Warext\MinecraftVote\Cron\Ranking" cron_method="run" active="1">{"day_type":"dom","dom":[-1],"hours":[-1],"minutes":[0,10,20,30,40,50]}</entry>
+</cron>

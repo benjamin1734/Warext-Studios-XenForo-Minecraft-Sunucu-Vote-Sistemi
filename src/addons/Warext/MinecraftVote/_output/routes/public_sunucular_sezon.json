@@ -2,7 +2,7 @@
     "route_type": "public",
     "route_prefix": "sunucular",
     "sub_name": "sezon",
-    "format": ":int<season_id>/",
+    "format": "sezon/:int<season_id>/",
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Server",

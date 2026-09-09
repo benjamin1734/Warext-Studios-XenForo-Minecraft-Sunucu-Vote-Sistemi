@@ -16,7 +16,7 @@ class Server extends AbstractController
 
     public function actionIndex()
     {
-        return $this->redirect($this->buildLink('warext-minecraft/setup'));
+        return $this->actionServers();
     }
 
     public function actionServers()

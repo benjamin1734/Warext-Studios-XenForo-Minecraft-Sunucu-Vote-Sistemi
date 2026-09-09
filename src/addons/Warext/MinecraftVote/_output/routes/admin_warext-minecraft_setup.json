@@ -2,7 +2,7 @@
     "route_type": "admin",
     "route_prefix": "warext-minecraft",
     "sub_name": "setup",
-    "format": "",
+    "format": "setup/",
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Setup",

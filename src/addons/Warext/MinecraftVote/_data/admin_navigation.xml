@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<admin_navigation>
+  <admin_navigation_entry navigation_id="warextMcAchievements" parent_navigation_id="warextMinecraftVote" display_order="20" link="warext-minecraft/achievements" icon="fa-trophy" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="warextMcReports" parent_navigation_id="warextMinecraftVote" display_order="25" link="warext-minecraft/reports" icon="fa-flag" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="warextMinecraftAudit" parent_navigation_id="warextMinecraftVote" display_order="30" link="warext-minecraft/audit" icon="fa-list-check" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="warextMinecraftCategories" parent_navigation_id="warextMinecraftVote" display_order="15" link="warext-minecraft/categories" icon="fa-tags" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="warextMinecraftHealth" parent_navigation_id="warextMinecraftVote" display_order="35" link="warext-minecraft/health" icon="fa-heart-pulse" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="warextMinecraftServers" parent_navigation_id="warextMinecraftVote" display_order="10" link="warext-minecraft/servers" icon="fa-list" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="warextMinecraftSetup" parent_navigation_id="warextMinecraftVote" display_order="5" link="warext-minecraft/setup" icon="fa-sliders" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="warextMinecraftSponsors" parent_navigation_id="warextMinecraftVote" display_order="10" link="warext-minecraft/sponsors" icon="fa-bullhorn" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="0" />
+  <admin_navigation_entry navigation_id="warextMinecraftVote" display_order="450" link="warext-minecraft" icon="fa-server" admin_permission_id="warextMinecraftVote" debug_only="0" development_only="0" hide_no_children="1" />
+</admin_navigation>

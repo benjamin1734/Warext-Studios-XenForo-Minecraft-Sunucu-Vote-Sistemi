@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "warext-minecraft",
+    "sub_name": "vote-retry",
+    "format": "vote-retry/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:Server",
+    "context": "warextMinecraftServers",
+    "action_prefix": "vote-retry"
+}

@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='utf-8'?>
+<options>
+  <option option_id="warextMcAllowGuestVotes" edit_format="onoff" data_type="boolean" advanced="0">
+    <default_value>1</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="210" />
+  </option>
+  <option option_id="warextMcAllowPrivateHosts" edit_format="onoff" data_type="boolean" advanced="0">
+    <default_value>0</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="100" />
+  </option>
+  <option option_id="warextMcPingHistoryRetentionDays" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
+    <default_value>30</default_value>
+    <edit_format_params>min=7
+max=365
+step=1</edit_format_params>
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="240" />
+  </option>
+  <option option_id="warextMcPublicApiEnabled" edit_format="onoff" data_type="boolean" advanced="0">
+    <default_value>0</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="250" />
+  </option>
+  <option option_id="warextMcRequireVerifiedAccountForVotes" edit_format="onoff" data_type="boolean" advanced="0">
+    <default_value>0</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="220" />
+  </option>
+  <option option_id="warextMcSponsorCurrency" edit_format="textbox" data_type="string" advanced="0">
+    <default_value>TRY</default_value>
+    <edit_format_params>maxlength=3</edit_format_params>
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="243" />
+  </option>
+  <option option_id="warextMcSponsorPrice30" edit_format="textbox" data_type="string" advanced="0">
+    <default_value>0.00</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="242" />
+  </option>
+  <option option_id="warextMcSponsorPrice7" edit_format="textbox" data_type="string" advanced="0">
+    <default_value>0.00</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="241" />
+  </option>
+  <option option_id="warextMcSponsorSalesEnabled" edit_format="onoff" data_type="boolean" advanced="0">
+    <default_value>0</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="240" />
+  </option>
+  <option option_id="warextMcVoteCaptcha" edit_format="onoff" data_type="boolean" advanced="0">
+    <default_value>1</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="215" />
+  </option>
+  <option option_id="warextMcVoteCooldownHours" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
+    <default_value>24</default_value>
+    <edit_format_params>min=1
+max=168
+step=1</edit_format_params>
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="200" />
+  </option>
+  <option option_id="warextMcVotifierMaxAttempts" edit_format="spinbox" data_type="unsigned_integer" advanced="0">
+    <default_value>5</default_value>
+    <edit_format_params>min=1
+max=10
+step=1</edit_format_params>
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="300" />
+  </option>
+  <option option_id="warextMcWebhookEnabled" edit_format="onoff" data_type="boolean" advanced="0">
+    <default_value>0</default_value>
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="260" />
+  </option>
+  <option option_id="warextMcWebhookSecret" edit_format="textbox" data_type="string" advanced="0">
+    <default_value />
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="262" />
+  </option>
+  <option option_id="warextMcWebhookUrl" edit_format="textbox" data_type="string" advanced="0">
+    <default_value />
+    <edit_format_params />
+    <sub_options />
+    <relation group_id="warextMinecraftVote" display_order="261" />
+  </option>
+</options>
