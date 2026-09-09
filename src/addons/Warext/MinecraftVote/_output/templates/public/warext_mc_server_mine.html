@@ -1,0 +1,47 @@
+<xf:title>Sunucularım</xf:title>
+<xf:description>Eklediğiniz ve ekip yetkisiyle yönettiğiniz Minecraft sunucuları.</xf:description>
+<xf:css src="warext_mc_servers.less" />
+
+<xf:pageaction>
+    <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">Sunucu Ekle</xf:button>
+</xf:pageaction>
+
+<xf:if is="$servers is not empty">
+    <div class="block">
+        <div class="block-container">
+            <div class="block-body">
+                <xf:foreach loop="$servers" value="$server">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <a href="{{ link('sunucular/detay', $server) }}"><strong>{$server.title}</strong></a>
+                                    <xf:if is="$server.state == 'active'">
+                                        <span class="label label--green">Aktif</span>
+                                    <xf:elseif is="$server.state == 'pending'" />
+                                        <span class="label label--orange">Onay Bekliyor</span>
+                                    <xf:elseif is="$server.state == 'rejected'" />
+                                        <span class="label label--red">Reddedildi</span>
+                                    <xf:else />
+                                        <span class="label label--red">Askıya Alındı</span>
+                                    </xf:if>
+                                    <xf:if is="$server.is_owner"><span class="label label--primary">Sahibi</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">{$server.host}:{$server.port}</div>
+                                <div class="contentRow-minor">Son güncelleme: <xf:date time="$server.last_update_date" /></div>
+                                <div class="buttonGroup buttonGroup--alignLeft">
+                                    <xf:button href="{{ link('sunucular/detay', $server) }}">Detay</xf:button>
+                                    <xf:if is="$server.can_edit"><xf:button href="{{ link('sunucular/duzenle', $server) }}">Düzenle</xf:button></xf:if>
+                                    <xf:if is="$server.can_view_stats"><xf:button href="{{ link('sunucular/istatistik', $server) }}">İstatistik</xf:button></xf:if>
+                                    <xf:if is="$server.can_manage_votifier"><xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier</xf:button></xf:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            </div>
+        </div>
+    </div>
+<xf:else />
+    <div class="blockMessage">Henüz eklediğiniz veya ekip yetkisiyle yönettiğiniz bir sunucu yok. <a href="{{ link('sunucular/ekle') }}">İlk sunucunuzu ekleyin.</a></div>
+</xf:if>
