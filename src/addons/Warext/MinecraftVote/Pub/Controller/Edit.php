@@ -54,8 +54,17 @@ class Edit extends AbstractController
                     $media->validateUpload($upload, $type);
                 }
 
-                $thread = $this->service('Warext\MinecraftVote:Server\ThreadLinker')
-                    ->resolve($input['discussion_thread_url'], \XF::visitor(), $server);
+                $threadLinker = $this->service('Warext\MinecraftVote:Server\ThreadLinker');
+                $thread = $threadLinker->resolve($input['discussion_thread_url'], \XF::visitor(), $server);
+                $categoryIds = $input['category_ids'];
+                if ($thread)
+                {
+                    $mappedCategory = $threadLinker->getMappedCategory($thread);
+                    if ($mappedCategory)
+                    {
+                        $categoryIds[] = (int)$mappedCategory->category_id;
+                    }
+                }
 
                 $editor = $this->service(
                     'Warext\MinecraftVote:Server\Editor',
@@ -63,11 +72,9 @@ class Edit extends AbstractController
                     (int)\XF::visitor()->user_id
                 );
                 $editor->setData($input);
-                $editor->setCategoryIds($input['category_ids']);
+                $editor->setCategoryIds($categoryIds);
                 $editor->save();
-
-                $server->discussion_thread_id = $thread ? (int)$thread->thread_id : 0;
-                $server->save();
+                $threadLinker->link($server, $thread);
 
                 foreach (['banner', 'animated_banner', 'cover'] as $type)
                 {
