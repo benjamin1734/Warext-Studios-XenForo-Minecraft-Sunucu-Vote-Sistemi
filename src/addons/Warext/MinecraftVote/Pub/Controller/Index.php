@@ -150,6 +150,55 @@ class Index extends AbstractController
             }
         }
 
+        $networkStatsRow = $db->fetchRow(
+            "SELECT
+                COUNT(*) AS server_count,
+                SUM(is_online = 1) AS online_count,
+                COALESCE(SUM(players_online), 0) AS players_online,
+                COALESCE(SUM(vote_count_month), 0) AS votes_month
+             FROM xf_warext_mc_server
+             WHERE state = 'active'"
+        );
+        $networkStats = [
+            'server_count' => (int)($networkStatsRow['server_count'] ?? 0),
+            'online_count' => (int)($networkStatsRow['online_count'] ?? 0),
+            'players_online' => (int)($networkStatsRow['players_online'] ?? 0),
+            'votes_month' => (int)($networkStatsRow['votes_month'] ?? 0)
+        ];
+
+        $sortLinks = [];
+        foreach (['popular', 'trend', 'votes', 'players', 'uptime', 'new'] as $sortKey)
+        {
+            $params = $filterParams;
+            $params['sort'] = $sortKey;
+            unset($params['page']);
+            $sortLinks[$sortKey] = $this->buildLink('sunucular', null, $params);
+        }
+
+        $categoryItems = [];
+        $allCategoryParams = $filterParams;
+        unset($allCategoryParams['category'], $allCategoryParams['page']);
+        $allCategoryUrl = $this->buildLink('sunucular', null, $allCategoryParams);
+        foreach ($categories as $category)
+        {
+            $params = $allCategoryParams;
+            $params['category'] = (int)$category->category_id;
+            $categoryItems[] = [
+                'category' => $category,
+                'url' => $this->buildLink('sunucular', null, $params)
+            ];
+        }
+
+        $hasAdvancedFilters = $type !== ''
+            || $online
+            || $countryCode !== ''
+            || $version !== ''
+            || $gameMode !== ''
+            || $minPlayers > 0
+            || $premium !== ''
+            || $cracked !== ''
+            || $verified;
+
         $sponsors = $this->repository('Warext\MinecraftVote:Sponsor')
             ->findActiveForPlacement('list_top')
             ->limit(6)
@@ -161,7 +210,12 @@ class Index extends AbstractController
             'servers' => $servers,
             'sponsors' => $sponsors,
             'categories' => $categories,
+            'categoryItems' => $categoryItems,
+            'allCategoryUrl' => $allCategoryUrl,
             'countryOptions' => $countryOptions,
+            'networkStats' => $networkStats,
+            'sortLinks' => $sortLinks,
+            'hasAdvancedFilters' => $hasAdvancedFilters,
             'page' => $page,
             'perPage' => $perPage,
             'total' => $total,
