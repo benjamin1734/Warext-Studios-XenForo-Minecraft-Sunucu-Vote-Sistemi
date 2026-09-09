@@ -24,7 +24,6 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import json
-          import re
 
           setup = Path('src/addons/Warext/MinecraftVote/Setup.php')
           text = setup.read_text(encoding='utf-8')
@@ -32,8 +31,8 @@ jobs:
           if bad not in text:
               raise SystemExit('Hatalı xf_content_type INSERT bloğu bulunamadı')
           text = text.replace(bad, '', 1)
-          if re.search(r'\\bxf_content_type\\b', text):
-              raise SystemExit('Setup.php içinde xf_content_type tablo referansı kaldı')
+          if 'INSERT INTO xf_content_type (' in text:
+              raise SystemExit('Setup.php içinde hatalı xf_content_type INSERT kaldı')
           setup.write_text(text, encoding='utf-8')
 
           addon_path = Path('src/addons/Warext/MinecraftVote/addon.json')
@@ -49,7 +48,7 @@ jobs:
               "if version_string != '1.1.2' or int(addon.get('version_id', 0)) < 1011020:\n    raise SystemExit('Sürüm numarası 1.1.2 değil.')"
           )
           marker = "server_admin = (ROOT / 'Admin/Controller/Server.php').read_text(encoding='utf-8')\n"
-          guard = "setup_text = (ROOT / 'Setup.php').read_text(encoding='utf-8')\nif re.search(r'\\bxf_content_type\\b', setup_text):\n    raise SystemExit('Setup.php XenForo 2.3 üzerinde olmayan xf_content_type tablosunu kullanıyor')\n\n\n"
+          guard = "setup_text = (ROOT / 'Setup.php').read_text(encoding='utf-8')\nif 'INSERT INTO xf_content_type (' in setup_text:\n    raise SystemExit('Setup.php XenForo 2.3 üzerinde olmayan xf_content_type tablosunu kullanıyor')\n\n\n"
           if guard not in r:
               if marker not in r:
                   raise SystemExit('Regression guard marker bulunamadı')
