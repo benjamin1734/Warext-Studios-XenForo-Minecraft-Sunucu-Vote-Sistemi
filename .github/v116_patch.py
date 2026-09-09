@@ -1,5 +1,4 @@
 from pathlib import Path
-import re
 
 root = Path('src/addons/Warext/MinecraftVote')
 
@@ -22,58 +21,88 @@ less.write_text(text, encoding='utf-8')
 
 for name in ['warext_mc_server_add.html', 'warext_mc_server_edit.html']:
     path = root / '_output/templates/public' / name
-    text = path.read_text(encoding='utf-8').replace('300×100', '360×120')
-    path.write_text(text, encoding='utf-8')
+    path.write_text(path.read_text(encoding='utf-8').replace('300×100', '360×120'), encoding='utf-8')
 
 vote_controller = root / 'Pub/Controller/Vote.php'
 text = vote_controller.read_text(encoding='utf-8')
-text = re.sub(r"\s*\$allowGuests = \(bool\)\(\\XF::options\(\)->warextMcAllowGuestVotes \?\? true\);\n", '\n', text, count=1)
+text = text.replace("        $allowGuests = (bool)(\\XF::options()->warextMcAllowGuestVotes ?? true);\n", '')
 text = text.replace("PublicPermissions::allows('vote', $allowGuests, true)", "PublicPermissions::allows('vote', false, true)")
-text = re.sub(
-    r"if \(!\$visitor->user_id && \(!\$allowGuests \|\| \$requireVerifiedAccount\)\)\s*\{\s*return \$this->noPermission\(\);\s*\}",
-    "if (!$visitor->user_id)\n        {\n            return $this->noPermission();\n        }",
-    text,
-    count=1
-)
-text, replaced = re.subn(
-    r"\$linkedAccounts = \$visitor->user_id\s*\? \$this->repository\('Warext\\\\MinecraftVote:MinecraftAccount'\)->findForUser\(\$visitor->user_id\)->fetch\(\)\s*:\s*\[\];",
-    "$voteRepo = $this->repository('Warext\\\\MinecraftVote:Vote');\n        $voteBlocked = $voteRepo->hasRecentUserVote(\n            (int)$server->server_id,\n            (int)$visitor->user_id,\n            \\XF::$time - 86400\n        );\n\n        $linkedAccounts = $this->repository('Warext\\\\MinecraftVote:MinecraftAccount')\n            ->findForUser($visitor->user_id)\n            ->fetch();",
-    text,
-    count=1
-)
-if replaced != 1:
-    raise SystemExit('Vote controller linked accounts block not replaced')
 text = text.replace(
-    "        if ($this->isPost())\n        {\n",
-    "        if ($this->isPost())\n        {\n            if ($voteBlocked)\n            {\n                return $this->error('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.', 429);\n            }\n\n",
-    1
+"""        if (!$visitor->user_id && (!$allowGuests || $requireVerifiedAccount))
+        {
+            return $this->noPermission();
+        }
+
+        $linkedAccounts = $visitor->user_id
+            ? $this->repository('Warext\\MinecraftVote:MinecraftAccount')->findForUser($visitor->user_id)->fetch()
+            : [];
+""",
+"""        if (!$visitor->user_id)
+        {
+            return $this->noPermission();
+        }
+
+        $voteRepo = $this->repository('Warext\\MinecraftVote:Vote');
+        $voteBlocked = $voteRepo->hasRecentUserVote(
+            (int)$server->server_id,
+            (int)$visitor->user_id,
+            \\XF::$time - 86400
+        );
+
+        $linkedAccounts = $this->repository('Warext\\MinecraftVote:MinecraftAccount')
+            ->findForUser($visitor->user_id)
+            ->fetch();
+"""
 )
-text = re.sub(
-    r"'cooldownHours' => min\(168, max\(1, \(int\)\(\\XF::options\(\)->warextMcVoteCooldownHours \?\? 24\)\)\),\s*'allowGuests' => \$allowGuests,",
-    "'cooldownHours' => 24,\n            'allowGuests' => false,\n            'voteBlocked' => $voteBlocked,",
-    text,
-    count=1
+text = text.replace(
+"""        if ($this->isPost())
+        {
+""",
+"""        if ($this->isPost())
+        {
+            if ($voteBlocked)
+            {
+                return $this->error('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.', 429);
+            }
+
+""",
+1
 )
-for needle in ["!$visitor->user_id", "'voteBlocked' => $voteBlocked", "\\XF::$time - 86400", '24 saat sonra tekrar deneyin']:
+text = text.replace(
+"""            'cooldownHours' => min(168, max(1, (int)(\\XF::options()->warextMcVoteCooldownHours ?? 24))),
+            'allowGuests' => $allowGuests,
+""",
+"""            'cooldownHours' => 24,
+            'allowGuests' => false,
+            'voteBlocked' => $voteBlocked,
+"""
+)
+for needle in ["PublicPermissions::allows('vote', false, true)", "if (!$visitor->user_id)", "'voteBlocked' => $voteBlocked", "\\XF::$time - 86400", '24 saat sonra tekrar deneyin']:
     if needle not in text:
         raise SystemExit(f'Vote controller missing: {needle}')
 vote_controller.write_text(text, encoding='utf-8')
 
 creator = root / 'Service/Vote/Creator.php'
 text = creator.read_text(encoding='utf-8')
-text, replaced = re.subn(
-    r"if \(!\$this->user->user_id && !\(bool\)\(\\XF::options\(\)->warextMcAllowGuestVotes \?\? true\)\)\s*\{\s*throw new PrintableException\('Oy verebilmek için giriş yapmanız gerekiyor\.'\);\s*\}",
-    "if (!$this->user->user_id)\n        {\n            throw new PrintableException('Oy verebilmek için forum hesabınızla giriş yapmanız gerekiyor.');\n        }",
-    text,
-    count=1
+text = text.replace(
+"""        if (!$this->user->user_id && !(bool)(\\XF::options()->warextMcAllowGuestVotes ?? true))
+        {
+            throw new PrintableException('Oy verebilmek için giriş yapmanız gerekiyor.');
+        }
+""",
+"""        if (!$this->user->user_id)
+        {
+            throw new PrintableException('Oy verebilmek için forum hesabınızla giriş yapmanız gerekiyor.');
+        }
+"""
 )
-if replaced != 1:
-    raise SystemExit('Vote creator guest block not replaced')
-text = re.sub(
-    r"\$cooldownHours = min\(168, max\(1, \(int\)\(\\XF::options\(\)->warextMcVoteCooldownHours \?\? 24\)\)\);\s*\$since = \\XF::\$time - \(\$cooldownHours \* 3600\);",
-    "$cooldownHours = 24;\n            $since = \\XF::$time - 86400;",
-    text,
-    count=1
+text = text.replace(
+"""            $cooldownHours = min(168, max(1, (int)(\\XF::options()->warextMcVoteCooldownHours ?? 24)));
+            $since = \\XF::$time - ($cooldownHours * 3600);
+""",
+"""            $cooldownHours = 24;
+            $since = \\XF::$time - 86400;
+"""
 )
 text = text.replace('throw new PrintableException("Bu sunucuya son {$cooldownHours} saat içinde zaten oy verdiniz.");', "throw new PrintableException('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.');")
 for needle in ["if (!$this->user->user_id)", '$since = \\XF::$time - 86400', '24 saat sonra tekrar deneyin']:
@@ -92,6 +121,8 @@ text = text.replace(
     1
 )
 text = text.replace('            </xf:form>\n        </div>', '            </xf:form>\n            </xf:if>\n        </div>', 1)
+if '$voteBlocked' not in text or '24 saat sonra tekrar deneyin' not in text:
+    raise SystemExit('Vote template cooldown message missing')
 vote_template.write_text(text, encoding='utf-8')
 
 addon = root / 'addon.json'
