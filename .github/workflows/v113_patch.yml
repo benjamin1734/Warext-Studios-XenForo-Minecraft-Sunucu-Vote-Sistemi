@@ -1,0 +1,312 @@
+name: Apply v1.1.3 List and Media Patch
+
+on:
+  push:
+    branches:
+      - fix-v1.1.3-list-media
+    paths:
+      - '.github/workflows/v113_patch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-v1.1.3-list-media
+
+      - name: Apply patch
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          css_path = Path('src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_servers.less')
+          css = css_path.read_text(encoding='utf-8')
+          css = css.replace(
+              'grid-template-columns: 74px minmax(0, 1fr) 138px;',
+              'grid-template-columns: 64px 300px minmax(280px, 1fr) 128px;',
+              1
+          )
+          css = css.replace(
+              'grid-template-columns: 58px minmax(0, 1fr);',
+              'grid-template-columns: 58px 220px minmax(0, 1fr);',
+              1
+          )
+          css = css.replace(
+              '    word-break: break-all;\n}\n\n.warextMcVoteRow-metrics',
+              '    word-break: normal;\n    overflow-wrap: anywhere;\n}\n\n.warextMcVoteRow-metrics',
+              1
+          )
+          old_media = '''.warextMcVoteRow-media {
+    flex: 0 0 234px;
+    display: flex;
+    align-items: center;
+}
+.warextMcVoteRow-media img {
+    display: block;
+    width: 234px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.warextMcVoteRow-mediaFallback {
+    width: 234px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid @xf-borderColor;
+    border-radius: 4px;
+    color: @xf-textColorMuted;
+    background: @xf-contentAltBg;
+}
+.warextMcServerCover {
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: @xf-borderRadiusLarge;
+    background: @xf-contentAltBg;
+}
+.warextMcServerCover img {
+    display: block;
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+}
+.warextMcThreadServerCard {
+    margin-bottom: 12px;
+}
+@media (max-width: @xf-responsiveNarrow) {
+    .warextMcVoteRow-media {
+        flex-basis: 100%;
+    }
+    .warextMcVoteRow-media img,
+    .warextMcVoteRow-mediaFallback {
+        width: 100%;
+        height: auto;
+        min-height: 38px;
+    }
+}'''
+          new_media = '''.warextMcVoteRow-media
+{
+    width: 300px;
+    height: 100px;
+    min-width: 0;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-right: 1px solid @xf-borderColor;
+    background: @xf-contentAltBg;
+}
+
+.warextMcVoteRow-media img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.warextMcVoteRow-mediaFallback
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: @xf-textColorMuted;
+    background: @xf-contentAltBg;
+    font-size: 24px;
+}
+
+.warextMcServerCover
+{
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: @xf-borderRadiusLarge;
+    background: @xf-contentAltBg;
+}
+
+.warextMcServerCover img
+{
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    object-fit: cover;
+}
+
+.warextMcThreadServerCard
+{
+    margin-bottom: 12px;
+}
+
+@media (max-width: @xf-responsiveMedium)
+{
+    .warextMcVoteRow-media
+    {
+        width: 220px;
+        height: 74px;
+    }
+}
+
+@media (max-width: @xf-responsiveNarrow)
+{
+    .warextMcVoteRow
+    {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .warextMcVoteRow-rank
+    {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 5px;
+        padding: 8px 12px;
+        border-right: 0;
+        border-bottom: 1px solid @xf-borderColor;
+    }
+
+    .warextMcVoteRow-rank strong
+    {
+        margin-top: 0;
+        font-size: 15px;
+    }
+
+    .warextMcVoteRow-media
+    {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 1;
+        border-right: 0;
+        border-bottom: 1px solid @xf-borderColor;
+    }
+
+    .warextMcVoteRow-main
+    {
+        min-width: 0;
+    }
+
+    .warextMcVoteRow-actions
+    {
+        grid-column: 1;
+    }
+}'''
+          if old_media not in css:
+              raise SystemExit('Eski vote row medya bloğu bulunamadı')
+          css = css.replace(old_media, new_media, 1)
+          if 'grid-template-columns: 64px 300px minmax(280px, 1fr) 128px;' not in css:
+              raise SystemExit('Dört kolonlu vote row düzeni uygulanamadı')
+          css_path.write_text(css, encoding='utf-8')
+
+          index_path = Path('src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_index.html')
+          index = index_path.read_text(encoding='utf-8')
+          index = index.replace(
+              '<img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" />',
+              '<img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" loading="lazy" decoding="async" />'
+          )
+          index = index.replace(
+              '<img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" />',
+              '<img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" loading="lazy" decoding="async" />'
+          )
+          index_path.write_text(index, encoding='utf-8')
+
+          add_path = Path('src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_add.html')
+          add = add_path.read_text(encoding='utf-8')
+          add = add.replace(
+              'Liste bannerı klasik vote standardı olan 468×60 kullanır. Hareketli GIF yüklerseniz listede statik bannerın yerine o gösterilir. Kapak görseli yalnız sunucu detay sayfasının geniş üst alanında kullanılır.',
+              'Görselleri istediğiniz oranda yükleyebilirsiniz. Sistem liste bannerlarını otomatik merkezden kırpar, 300×100 piksele küçültür ve optimize eder. Statik görseller uygun olduğunda WebP olarak saklanır. Hareketli GIF 300×100 olarak yeniden işlenir. Detay kapağı 1200×400 hazırlanır.'
+          )
+          add = add.replace('468×60 JPG, PNG veya WebP · en fazla 10 MB', 'JPG, PNG veya WebP · otomatik 300×100 · yükleme en fazla 12 MB')
+          add = add.replace('468×60 GIF · en fazla 15 MB · varsa statik bannerı geçersiz kılar', 'GIF · otomatik 300×100 ve optimize · yükleme en fazla 20 MB · varsa statik bannerı geçersiz kılar')
+          add = add.replace('En az 800×300 · JPG, PNG veya WebP · en fazla 12 MB', 'JPG, PNG veya WebP · otomatik 1200×400 · yükleme en fazla 15 MB')
+          add_path.write_text(add, encoding='utf-8')
+
+          edit_path = Path('src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_edit.html')
+          edit = edit_path.read_text(encoding='utf-8')
+          edit = edit.replace('style="max-width:468px;width:100%;height:auto"', 'style="max-width:300px;width:100%;aspect-ratio:3/1;object-fit:cover"')
+          edit = edit.replace('468×60 · yeni dosya mevcut olanın yerine geçer', 'Otomatik 300×100 ve optimize · yeni dosya mevcut olanın yerine geçer')
+          edit = edit.replace('468×60 GIF · listede statik bannerı geçersiz kılar', 'GIF · otomatik 300×100 ve optimize · listede statik bannerı geçersiz kılar')
+          edit = edit.replace('style="max-width:640px;width:100%;height:auto"', 'style="max-width:720px;width:100%;aspect-ratio:3/1;object-fit:cover"')
+          edit = edit.replace('explain="En az 800×300"', 'explain="Otomatik 1200×400 ve optimize"')
+          edit_path.write_text(edit, encoding='utf-8')
+
+          addon_path = Path('src/addons/Warext/MinecraftVote/addon.json')
+          addon = json.loads(addon_path.read_text(encoding='utf-8'))
+          addon['version_id'] = 1011030
+          addon['version_string'] = '1.1.3'
+          addon_path.write_text(json.dumps(addon, ensure_ascii=False, indent=4) + '\n', encoding='utf-8')
+
+          regression_path = Path('.github/security_regression.py')
+          regression = regression_path.read_text(encoding='utf-8')
+          regression = regression.replace(
+              "if version_string != '1.1.2' or int(addon.get('version_id', 0)) < 1011020:\n    raise SystemExit('Sürüm numarası 1.1.2 değil.')",
+              "if version_string != '1.1.3' or int(addon.get('version_id', 0)) < 1011030:\n    raise SystemExit('Sürüm numarası 1.1.3 değil.')"
+          )
+          regression = regression.replace(
+              "require('Service/Server/Media.php', ['468', 'animated_banner', 'copyFileToAbstractedPath', 'IMAGETYPE_GIF'])",
+              "require('Service/Server/Media.php', [\"'width' => 300\", \"'height' => 100\", \"'width' => 1200\", 'processAnimatedGif', 'cropThumbnailImage', 'imagewebp', 'max_output'])"
+          )
+          marker = "require('_output/templates/public/warext_mc_servers.less', ['.warextMcDirectoryHero', '.warextMcVoteRow', '.warextMcFeaturedGrid', '.warextMcAdvancedFilters'])"
+          replacement = "require('_output/templates/public/warext_mc_servers.less', ['.warextMcDirectoryHero', '.warextMcVoteRow', '.warextMcFeaturedGrid', '.warextMcAdvancedFilters', 'grid-template-columns: 64px 300px minmax(280px, 1fr) 128px;', 'width: 300px;', 'height: 100px;'])"
+          if marker not in regression:
+              raise SystemExit('CSS regresyon marker bulunamadı')
+          regression = regression.replace(marker, replacement, 1)
+          regression_path.write_text(regression, encoding='utf-8')
+
+          readme = Path('README.md')
+          rd = readme.read_text(encoding='utf-8')
+          rd = rd.replace('Warext-MinecraftVote-1.1.2.zip', 'Warext-MinecraftVote-1.1.3.zip')
+          rd = rd.replace('v1.1.2', 'v1.1.3')
+          readme.write_text(rd, encoding='utf-8')
+          PY
+
+      - name: PHP syntax
+        run: find src/addons/Warext/MinecraftVote -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: PHP comment check
+        run: |
+          php -r '
+          $bad = false;
+          $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("src/addons/Warext/MinecraftVote"));
+          foreach ($files as $file) {
+              if (!$file->isFile() || strtolower($file->getExtension()) !== "php") { continue; }
+              foreach (token_get_all(file_get_contents($file->getPathname())) as $token) {
+                  if (is_array($token) && ($token[0] === T_COMMENT || $token[0] === T_DOC_COMMENT)) { $bad = true; }
+              }
+          }
+          exit($bad ? 1 : 0);'
+
+      - name: Validate source
+        run: |
+          find src/addons/Warext/MinecraftVote/_output -type f -name '*.json' -print0 | while IFS= read -r -d '' file; do python3 -m json.tool "$file" >/dev/null; done
+          python3 .github/security_regression.py
+          python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
+
+      - name: Build release data
+        run: |
+          python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_permissions.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_navigation.py src/addons/Warext/MinecraftVote
+          python3 .github/build_xf_integrations.py src/addons/Warext/MinecraftVote
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          for path in Path('src/addons/Warext/MinecraftVote/_data').glob('*.xml'):
+              ET.parse(path)
+          PY
+
+      - name: Commit patch
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/addons/Warext/MinecraftVote/Service/Server/Media.php src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_servers.less src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_index.html src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_add.html src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_edit.html src/addons/Warext/MinecraftVote/addon.json .github/security_regression.py README.md
+          git diff --cached --quiet && exit 0
+          git commit -m "Fix server list layout and optimize media for v1.1.3"
+          git push origin HEAD:fix-v1.1.3-list-media
