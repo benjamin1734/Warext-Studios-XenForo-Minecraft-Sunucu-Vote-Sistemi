@@ -5,7 +5,6 @@ on:
     branches:
       - v1.1.1-media-thread-moderation
     paths:
-      - '.github/v111_apply.py'
       - '.github/workflows/v111_apply.yml'
   workflow_dispatch:
 
@@ -20,28 +19,58 @@ jobs:
         with:
           ref: v1.1.1-media-thread-moderation
 
-      - name: Apply patch
-        run: python3 .github/v111_apply.py
-
-      - name: Align regression expectations
+      - name: Harden setup and regression rules
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          path = Path('.github/security_regression.py')
-          text = path.read_text(encoding='utf-8')
+
+          setup = Path('src/addons/Warext/MinecraftVote/Setup.php')
+          text = setup.read_text(encoding='utf-8')
+          old = "$db->delete('xf_data_registry', 'data_key = ?', 'contentTypes');"
+          new = "$this->app->repository('XF:ContentTypeField')->rebuildContentTypeCache();"
+          if old not in text and new not in text:
+              raise SystemExit('Setup content type cache pattern not found')
+          text = text.replace(old, new)
+          setup.write_text(text, encoding='utf-8')
+
+          regression = Path('.github/security_regression.py')
+          text = regression.read_text(encoding='utf-8')
           text = text.replace(
-              "require('_output/templates/public/warext_mc_server_add.html', ['kategori seçimi yeni form alanı açmaz', 'Ana sunucu adresi', 'Crossplay'])",
-              "require('_output/templates/public/warext_mc_server_add.html', ['Sunucu tanıtım konusu', 'Görsel Kimlik', 'Ana sunucu adresi', 'Crossplay'])"
+              "require('Service/Server/ThreadLinker.php', ['discussion_thread_id', 'threads/', 'boardUrl'])",
+              "require('Service/Server/ThreadLinker.php', ['discussion_thread_id', 'threads/', 'boardUrl', 'getMappedCategory', 'canView'])"
           )
           text = text.replace(
-              "if version_string != '1.1.0' or int(addon.get('version_id', 0)) < 1011000:\n    raise SystemExit('Sürüm numarası 1.1.0 değil.')",
-              "if version_string != '1.1.1' or int(addon.get('version_id', 0)) < 1011010:\n    raise SystemExit('Sürüm numarası 1.1.1 değil.')"
+              "require('ApprovalQueue/Server.php', ['XF\\\\ApprovalQueue\\\\AbstractHandler', 'actionApprove', 'actionDelete'])",
+              "require('ApprovalQueue/Server.php', ['XF\\\\ApprovalQueue\\\\AbstractHandler', 'canViewContent', 'actionApprove', 'actionDelete'])"
           )
-          path.write_text(text, encoding='utf-8')
+          text = text.replace(
+              "require('Setup.php', ['installStep18', 'upgrade1011010Step1', 'ensureThreadMediaIntegration', 'warext_mc_server', 'contentTypes'])",
+              "require('Setup.php', ['installStep18', 'upgrade1011010Step1', 'ensureThreadMediaIntegration', 'warext_mc_server', 'rebuildContentTypeCache'])"
+          )
+          if "require('Service/Server/Creator.php', ['trailer_url'])" not in text:
+              marker = "require('Service/Server/Media.php', ['468', 'animated_banner', 'copyFileToAbstractedPath', 'IMAGETYPE_GIF'])"
+              text = text.replace(marker, marker + "\nrequire('Service/Server/Creator.php', ['trailer_url'])")
+          regression.write_text(text, encoding='utf-8')
           PY
 
       - name: PHP syntax
         run: find src/addons/Warext/MinecraftVote -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: PHP comment check
+        run: |
+          php -r '
+          $bad = false;
+          $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("src/addons/Warext/MinecraftVote"));
+          foreach ($files as $file) {
+              if (!$file->isFile() || strtolower($file->getExtension()) !== "php") { continue; }
+              foreach (token_get_all(file_get_contents($file->getPathname())) as $token) {
+                  if (is_array($token) && ($token[0] === T_COMMENT || $token[0] === T_DOC_COMMENT)) {
+                      fwrite(STDERR, $file->getPathname() . ":" . $token[2] . PHP_EOL);
+                      $bad = true;
+                  }
+              }
+          }
+          exit($bad ? 1 : 0);'
 
       - name: JSON validation
         run: |
@@ -67,7 +96,10 @@ jobs:
           from pathlib import Path
           import xml.etree.ElementTree as ET
           root = Path('src/addons/Warext/MinecraftVote/_data')
-          required = {'routes.xml','templates.xml','content_type_fields.xml','code_event_listeners.xml','template_modifications.xml'}
+          required = {
+              'routes.xml', 'templates.xml', 'content_type_fields.xml',
+              'code_event_listeners.xml', 'template_modifications.xml', 'navigation.xml'
+          }
           names = {p.name for p in root.glob('*.xml')}
           missing = required - names
           if missing:
@@ -76,12 +108,11 @@ jobs:
               ET.parse(path)
           PY
 
-      - name: Commit applied patch
+      - name: Commit hardening changes
         run: |
-          git checkout -- .github/workflows/php-lint.yml .github/workflows/build-addon.yml
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add -A
+          git add src/addons/Warext/MinecraftVote/Setup.php .github/security_regression.py src/addons/Warext/MinecraftVote/_data
           git diff --cached --quiet && exit 0
-          git commit -m "v1.1.1 media thread moderation integration"
+          git commit -m "Harden v1.1.1 integration runtime"
           git push origin HEAD:v1.1.1-media-thread-moderation
