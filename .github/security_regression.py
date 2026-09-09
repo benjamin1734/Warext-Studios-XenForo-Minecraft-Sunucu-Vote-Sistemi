@@ -59,6 +59,15 @@ for template in (ROOT / '_output/templates/admin').rglob('*.html'):
     if re.search(r"link\('warext-minecraft'(?=[,)])", text):
         raise SystemExit(f'{template}: admin ana route sunucu listesine bağlanmış')
 
+for controller_root in [ROOT / 'Admin/Controller', ROOT / 'Pub/Controller']:
+    for controller_path in controller_root.rglob('*.php'):
+        text = controller_path.read_text(encoding='utf-8')
+        if '$this->db()' in text:
+            raise SystemExit(
+                f'{controller_path}: AbstractController içinde bulunmayan $this->db() kullanımı var; '
+                '$this->app->db() kullanılmalı'
+            )
+
 
 route_seen = set()
 route_index = {}
@@ -127,8 +136,8 @@ for option in [
         raise SystemExit(f'{option}: seçenek grubu ilişkisi eksik')
 
 addon = json.loads((ROOT / 'addon.json').read_text(encoding='utf-8'))
-if addon.get('version_string') != '1.0.7' or int(addon.get('version_id', 0)) < 1010070:
-    raise SystemExit('Sürüm numarası 1.0.7 değil.')
+if addon.get('version_string') != '1.0.8' or int(addon.get('version_id', 0)) < 1010080:
+    raise SystemExit('Sürüm numarası 1.0.8 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')
