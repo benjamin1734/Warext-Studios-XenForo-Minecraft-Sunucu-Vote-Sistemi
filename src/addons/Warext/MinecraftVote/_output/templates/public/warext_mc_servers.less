@@ -1,3 +1,523 @@
+.warextMcDirectoryHero
+{
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcDirectoryHero-main
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.warextMcDirectoryHero-copy
+{
+    max-width: 720px;
+}
+
+.warextMcDirectoryEyebrow,
+.warextMcSectionEyebrow
+{
+    display: block;
+    margin-bottom: 5px;
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: @xf-textColorMuted;
+}
+
+.warextMcDirectoryHero h1
+{
+    margin: 0 0 8px;
+    font-size: 28px;
+    line-height: 1.15;
+}
+
+.warextMcDirectoryHero p
+{
+    margin: 0;
+    color: @xf-textColorMuted;
+    line-height: 1.55;
+}
+
+.warextMcDirectoryHero-cta
+{
+    flex: 0 0 auto;
+}
+
+.warextMcDirectoryStats
+{
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.warextMcDirectoryStats > div
+{
+    padding: 12px 14px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcDirectoryStats strong,
+.warextMcDirectoryStats span
+{
+    display: block;
+}
+
+.warextMcDirectoryStats strong
+{
+    font-size: 20px;
+    line-height: 1.15;
+}
+
+.warextMcDirectoryStats span
+{
+    margin-top: 4px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcDirectorySearch
+{
+    padding: 14px;
+    margin-bottom: 12px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+}
+
+.warextMcDirectorySearch-main
+{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(160px, 210px) auto;
+    gap: 8px;
+    align-items: center;
+}
+
+.warextMcDirectorySearch-input .input,
+.warextMcDirectorySearch-sort .input
+{
+    width: 100%;
+}
+
+.warextMcDirectorySearch-submit
+{
+    white-space: nowrap;
+}
+
+.warextMcDirectorySearch-meta
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 9px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcSortChips,
+.warextMcCategoryChips
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 12px;
+}
+
+.warextMcSortChip,
+.warextMcCategoryChip
+{
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 5px 11px;
+    border: 1px solid @xf-borderColor;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    text-decoration: none;
+}
+
+.warextMcSortChip:hover,
+.warextMcCategoryChip:hover,
+.warextMcSortChip.is-active,
+.warextMcCategoryChip.is-active
+{
+    text-decoration: none;
+    border-color: currentColor;
+}
+
+.warextMcSortChip.is-active,
+.warextMcCategoryChip.is-active
+{
+    font-weight: 700;
+}
+
+.warextMcCategoryChips-label
+{
+    margin-right: 4px;
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 700;
+    color: @xf-textColorMuted;
+}
+
+.warextMcAdvancedFilters
+{
+    margin-bottom: 20px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    overflow: hidden;
+}
+
+.warextMcAdvancedFilters > summary
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 14px;
+    cursor: pointer;
+    background: @xf-contentAltBg;
+    font-weight: 600;
+}
+
+.warextMcAdvancedFilters[open] > summary
+{
+    border-bottom: 1px solid @xf-borderColor;
+}
+
+.warextMcFeaturedSection
+{
+    margin: 24px 0;
+}
+
+.warextMcSectionHeading
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.warextMcSectionHeading h2
+{
+    margin: 0;
+    font-size: 20px;
+}
+
+.warextMcSectionHeading > span
+{
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcSectionHeading--list
+{
+    margin-top: 22px;
+}
+
+.warextMcFeaturedGrid
+{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.warextMcFeaturedCard
+{
+    padding: 14px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcFeaturedCard-head
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.warextMcFeaturedCard-title
+{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.warextMcFeaturedCard-address
+{
+    margin-top: 4px;
+    font-family: monospace;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+    word-break: break-all;
+}
+
+.warextMcFeaturedCard-meta
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    margin: 12px 0;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcFeaturedCard-actions
+{
+    display: flex;
+    gap: 7px;
+}
+
+.warextMcVoteList
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.warextMcVoteRow
+{
+    display: grid;
+    grid-template-columns: 74px minmax(0, 1fr) 138px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    overflow: hidden;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.warextMcVoteRow:hover
+{
+    transform: translateY(-1px);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, .06);
+}
+
+.warextMcVoteRow-rank
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 8px;
+    border-right: 1px solid @xf-borderColor;
+    background: @xf-contentAltBg;
+}
+
+.warextMcVoteRow-rank span
+{
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+    text-transform: uppercase;
+}
+
+.warextMcVoteRow-rank strong
+{
+    margin-top: 3px;
+    font-size: 20px;
+}
+
+.warextMcVoteRow-main
+{
+    min-width: 0;
+    padding: 14px 16px;
+}
+
+.warextMcVoteRow-head,
+.warextMcVoteRow-titleWrap,
+.warextMcVoteRow-bottom,
+.warextMcVoteRow-address,
+.warextMcVoteRow-metrics
+{
+    display: flex;
+}
+
+.warextMcVoteRow-head
+{
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.warextMcVoteRow-titleWrap
+{
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    min-width: 0;
+}
+
+.warextMcVoteRow-title
+{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.warextMcVoteRow-badges
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.warextMcVoteRow-ping
+{
+    flex: 0 0 auto;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-motd
+{
+    margin-top: 7px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-tags
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 9px;
+}
+
+.warextMcVoteRow-tags > span
+{
+    padding: 3px 7px;
+    border: 1px solid @xf-borderColor;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    font-size: @xf-fontSizeSmallest;
+}
+
+.warextMcVoteRow-bottom
+{
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 18px;
+    margin-top: 13px;
+}
+
+.warextMcVoteRow-address
+{
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+}
+
+.warextMcVoteRow-address > span
+{
+    width: 100%;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-address strong
+{
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.warextMcVoteRow-metrics
+{
+    flex: 0 0 auto;
+    gap: 6px;
+}
+
+.warextMcVoteRow-metrics > div
+{
+    min-width: 68px;
+    padding: 6px 8px;
+    text-align: center;
+    border-left: 1px solid @xf-borderColor;
+}
+
+.warextMcVoteRow-metrics strong,
+.warextMcVoteRow-metrics span
+{
+    display: block;
+}
+
+.warextMcVoteRow-metrics strong
+{
+    line-height: 1.15;
+}
+
+.warextMcVoteRow-metrics small
+{
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 400;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-metrics span
+{
+    margin-top: 3px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-actions
+{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border-left: 1px solid @xf-borderColor;
+    background: @xf-contentAltBg;
+    text-align: center;
+}
+
+.warextMcVoteRow-votes strong,
+.warextMcVoteRow-votes span
+{
+    display: block;
+}
+
+.warextMcVoteRow-votes strong
+{
+    font-size: 21px;
+    line-height: 1.1;
+}
+
+.warextMcVoteRow-votes span
+{
+    margin-top: 2px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-voteButton
+{
+    width: 100%;
+}
+
+.warextMcVoteRow-detailLink
+{
+    font-size: @xf-fontSizeSmallest;
+}
+
 .warextMcFilterBar
 {
     display: flex;
@@ -92,6 +612,85 @@
 
 @media (max-width: @xf-responsiveMedium)
 {
+    .warextMcDirectoryHero-main,
+    .warextMcSectionHeading
+    {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .warextMcDirectoryStats
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .warextMcDirectorySearch-main
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .warextMcDirectorySearch-meta
+    {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .warextMcFeaturedGrid
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .warextMcVoteRow
+    {
+        grid-template-columns: 58px minmax(0, 1fr);
+    }
+
+    .warextMcVoteRow-main
+    {
+        padding: 12px;
+    }
+
+    .warextMcVoteRow-bottom
+    {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .warextMcVoteRow-metrics
+    {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .warextMcVoteRow-metrics > div
+    {
+        min-width: 0;
+        border-left: 0;
+        border: 1px solid @xf-borderColor;
+        border-radius: @xf-borderRadiusMedium;
+    }
+
+    .warextMcVoteRow-actions
+    {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        border-left: 0;
+        border-top: 1px solid @xf-borderColor;
+    }
+
+    .warextMcVoteRow-votes
+    {
+        min-width: 72px;
+    }
+
+    .warextMcVoteRow-voteButton
+    {
+        flex: 1 1 auto;
+        width: auto;
+    }
+
     .warextMcServerStats,
     .warextMcServerStats--large
     {
@@ -102,5 +701,49 @@
     .warextMcServerHero-head
     {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 480px)
+{
+    .warextMcDirectoryHero
+    {
+        padding: 16px;
+    }
+
+    .warextMcDirectoryHero h1
+    {
+        font-size: 23px;
+    }
+
+    .warextMcVoteRow
+    {
+        display: block;
+    }
+
+    .warextMcVoteRow-rank
+    {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 5px;
+        padding: 8px 12px;
+        border-right: 0;
+        border-bottom: 1px solid @xf-borderColor;
+    }
+
+    .warextMcVoteRow-rank strong
+    {
+        margin-top: 0;
+        font-size: 15px;
+    }
+
+    .warextMcVoteRow-actions
+    {
+        flex-wrap: wrap;
+    }
+
+    .warextMcVoteRow-detailLink
+    {
+        width: 100%;
     }
 }
