@@ -61,6 +61,7 @@ jobs:
         run: |
           python .github/build_xf_data.py src/addons/Warext/MinecraftVote
           python .github/build_xf_permissions.py src/addons/Warext/MinecraftVote
+          python .github/build_xf_navigation.py src/addons/Warext/MinecraftVote
 
       - name: Validate generated XML
         run: |
@@ -70,11 +71,11 @@ jobs:
 
           root = Path('src/addons/Warext/MinecraftVote/_data')
           files = sorted(root.glob('*.xml'))
-          required = {'permissions.xml', 'permission_interface_groups.xml'}
+          required = {'permissions.xml', 'permission_interface_groups.xml', 'navigation.xml'}
           names = {p.name for p in files}
           missing = required - names
           if missing:
-              raise SystemExit('Eksik permission master data: ' + ', '.join(sorted(missing)))
+              raise SystemExit('Eksik master data: ' + ', '.join(sorted(missing)))
           for path in files:
               ET.parse(path)
           print(f'{len(files)} XML dosyası parse edildi.')
