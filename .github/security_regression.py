@@ -69,6 +69,11 @@ require('_output/template_modifications/public/warext_mc_thread_fields.json', ['
 require('Setup.php', ['installStep18', 'upgrade1011010Step1', 'ensureThreadMediaIntegration', 'warext_mc_server', 'rebuildContentTypeCache'])
 
 
+setup_text = (ROOT / 'Setup.php').read_text(encoding='utf-8')
+if 'INSERT INTO xf_content_type (' in setup_text:
+    raise SystemExit('Setup.php XenForo 2.3 üzerinde olmayan xf_content_type tablosunu kullanıyor')
+
+
 server_admin = (ROOT / 'Admin/Controller/Server.php').read_text(encoding='utf-8')
 if re.search(r"buildLink\('warext-minecraft'(?=[,)])", server_admin):
     raise SystemExit('Server controller hala ana admin routeunu sunucu listesi olarak kullanıyor')
@@ -192,8 +197,8 @@ if not version_match:
 major, minor, patch = (int(part) for part in version_match.groups())
 if patch > 9:
     raise SystemExit('Yama sürümü 9 üzerinde olamaz; sonraki orta sürüme geçilmeli.')
-if version_string != '1.1.1' or int(addon.get('version_id', 0)) < 1011010:
-    raise SystemExit('Sürüm numarası 1.1.1 değil.')
+if version_string != '1.1.2' or int(addon.get('version_id', 0)) < 1011020:
+    raise SystemExit('Sürüm numarası 1.1.2 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <templates>
-  <template type="public" title="alert_warext_mc_server_update_publish" version_id="1011010" version_string="1.1.1">&lt;xf:username user="$user" /&gt; takip ettiğiniz &lt;a href="{{ link('sunucular/guncellemeler', $content.Server) }}"&gt;&lt;strong&gt;{$content.Server.title}&lt;/strong&gt;&lt;/a&gt; sunucusu için yeni bir güncelleme yayınladı: &lt;strong&gt;{$content.title}&lt;/strong&gt;
+  <template type="public" title="alert_warext_mc_server_update_publish" version_id="1011020" version_string="1.1.2">&lt;xf:username user="$user" /&gt; takip ettiğiniz &lt;a href="{{ link('sunucular/guncellemeler', $content.Server) }}"&gt;&lt;strong&gt;{$content.Server.title}&lt;/strong&gt;&lt;/a&gt; sunucusu için yeni bir güncelleme yayınladı: &lt;strong&gt;{$content.title}&lt;/strong&gt;
 </template>
-  <template type="public" title="approval_item_warext_mc_server" version_id="1011010" version_string="1.1.1">&lt;xf:set var="$messageHtml"&gt;
+  <template type="public" title="approval_item_warext_mc_server" version_id="1011020" version_string="1.1.2">&lt;xf:set var="$messageHtml"&gt;
     &lt;h4 class="message-title"&gt;&lt;a href="{{ link('sunucular/detay', $content) }}"&gt;{$content.title}&lt;/a&gt;&lt;/h4&gt;
     &lt;xf:if is="$content.description"&gt;&lt;div&gt;{$content.description}&lt;/div&gt;&lt;/xf:if&gt;
     &lt;div class="contentRow-minor"&gt;{$content.host}:{$content.port}&lt;/div&gt;
@@ -19,7 +19,7 @@
     arg-handler="{$handler}"
     arg-headerPhraseHtml="{$content.title}" /&gt;
 </template>
-  <template type="public" title="warext_mc_account_list" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Hesaplarım&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_account_list" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Minecraft Hesaplarım&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 
@@ -93,7 +93,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_analytics_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucu İstatistikleri&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_analytics_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Sunucu İstatistikleri&lt;/xf:title&gt;
 &lt;xf:description&gt;Oy, teslimat, oyuncu ve topluluk performansını inceleyin.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -150,7 +150,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_favorite_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Favori Minecraft Sunucularım&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_favorite_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Favori Minecraft Sunucularım&lt;/xf:title&gt;
 &lt;xf:description&gt;Takip ettiğiniz Minecraft sunucularına hızlıca ulaşın ve yeni güncellemelerini görün.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -203,7 +203,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_ownership_transfer" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sahipliği Devret&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_ownership_transfer" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Sahipliği Devret&lt;/xf:title&gt;
 &lt;xf:description&gt;Bu işlem geri alınamaz. Yeni kullanıcı sunucunun asıl sahibi olur.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -224,7 +224,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_report_create" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucuyu Raporla&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_report_create" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Sunucuyu Raporla&lt;/xf:title&gt;
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
@@ -252,7 +252,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_review_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Değerlendirmeler&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_review_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Değerlendirmeler&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -315,7 +315,7 @@
 
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/degerlendir" data="{$server}" /&gt;
 </template>
-  <template type="public" title="warext_mc_season_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucu Sezonları&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_season_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Minecraft Sunucu Sezonları&lt;/xf:title&gt;
 &lt;xf:description&gt;Aylık oy sezonlarını, mevcut yarışmayı ve önceki sezon kazananlarını görüntüle.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -380,7 +380,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_season_view" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$season.season_key} Minecraft Sunucu Sezonu&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_season_view" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$season.season_key} Minecraft Sunucu Sezonu&lt;/xf:title&gt;
 &lt;xf:description&gt;Tamamlanan sezonun kalıcı sunucu sıralaması ve istatistikleri.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -431,7 +431,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_server_add" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sunucu Ekle&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_add" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Sunucu Ekle&lt;/xf:title&gt;
 &lt;xf:description&gt;Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar moderasyon onayından sonra listelenir.&lt;/xf:description&gt;
 
 &lt;div class="blockMessage blockMessage--important"&gt;Kategoriler sınıflandırma içindir. Tanıtım konusu bağlantısı ve tüm görseller isteğe bağlıdır; yalnızca sunucu adresi temel kayıt için zorunludur.&lt;/div&gt;
@@ -489,7 +489,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_server_compare" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucularını Karşılaştır&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_compare" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Minecraft Sunucularını Karşılaştır&lt;/xf:title&gt;
 &lt;xf:description&gt;En fazla 4 Minecraft sunucusunu temel performans ve topluluk metrikleriyle yan yana karşılaştır.&lt;/xf:description&gt;
 &lt;xf:css src="warext_mc_servers.less" /&gt;
 
@@ -560,7 +560,7 @@
     &lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucuyu Düzenle&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_edit" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Sunucuyu Düzenle&lt;/xf:title&gt;
 &lt;xf:description&gt;Sunucu bilgilerini, görsellerini, kategorilerini ve forum bağlantısını güncelleyin.&lt;/xf:description&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -622,7 +622,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_server_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucuları&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Minecraft Sunucuları&lt;/xf:title&gt;
 &lt;xf:description&gt;Güncel Minecraft sunucularını keşfet, canlı durumlarını karşılaştır ve favori sunucuna oy ver.&lt;/xf:description&gt;
 &lt;xf:css src="warext_mc_servers.less" /&gt;
 
@@ -894,7 +894,7 @@
     &lt;div class="blockMessage"&gt;Filtrelerinize uyan aktif bir Minecraft sunucusu bulunamadı.&lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_mine" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sunucularım&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_mine" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Sunucularım&lt;/xf:title&gt;
 &lt;xf:description&gt;Eklediğiniz ve ekip yetkisiyle yönettiğiniz Minecraft sunucuları.&lt;/xf:description&gt;
 &lt;xf:css src="warext_mc_servers.less" /&gt;
 
@@ -942,7 +942,7 @@
     &lt;div class="blockMessage"&gt;Henüz eklediğiniz veya ekip yetkisiyle yönettiğiniz bir sunucu yok. &lt;a href="{{ link('sunucular/ekle') }}"&gt;İlk sunucunuzu ekleyin.&lt;/a&gt;&lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_verification" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucu Sahipliğini Doğrula&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_verification" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Sunucu Sahipliğini Doğrula&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -1031,7 +1031,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_server_view" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title}&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_view" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title}&lt;/xf:title&gt;
 &lt;xf:description&gt;{$seoDescription}&lt;/xf:description&gt;
 &lt;xf:css src="warext_mc_servers.less" /&gt;
 
@@ -1181,7 +1181,7 @@
     &lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_vote" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Oy Ver&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_vote" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Oy Ver&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -1253,7 +1253,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_servers.less" version_id="1011010" version_string="1.1.1">.warextMcDirectoryHero
+  <template type="public" title="warext_mc_servers.less" version_id="1011020" version_string="1.1.2">.warextMcDirectoryHero
 {
     padding: 24px;
     margin-bottom: 16px;
@@ -2054,7 +2054,7 @@
     }
 }
 </template>
-  <template type="public" title="warext_mc_sponsor_purchase" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sponsor Paketi&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_sponsor_purchase" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Sponsor Paketi&lt;/xf:title&gt;
 &lt;xf:description&gt;Sunucunuzu Minecraft sunucu listesinde sponsorlu olarak öne çıkarın.&lt;/xf:description&gt;
 &lt;xf:js src="xf/payment.js" min="1" /&gt;
 
@@ -2106,7 +2106,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_team_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucu Ekibi&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_team_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Sunucu Ekibi&lt;/xf:title&gt;
 &lt;xf:description&gt;Sunucuyu yönetecek XenForo kullanıcılarını ve yetkilerini belirleyin.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -2172,7 +2172,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_thread_integration_fields" version_id="1011010" version_string="1.1.1">&lt;xf:if is="$warextMcThreadCategory"&gt;
+  <template type="public" title="warext_mc_thread_integration_fields" version_id="1011020" version_string="1.1.2">&lt;xf:if is="$warextMcThreadCategory"&gt;
     &lt;h2 class="block-formSectionHeader"&gt;&lt;span class="block-formSectionHeader-aligner"&gt;Sunucu dizininde de yayınla&lt;/span&gt;&lt;/h2&gt;
     &lt;div class="block-body"&gt;
         &lt;div class="blockMessage blockMessage--important"&gt;Sunucu adresini boş bırakırsanız yalnızca normal tanıtım konusu oluşturulur. Adres girerseniz konu başlığı ve ilk mesaj kullanılarak {$warextMcThreadCategory.title} kategorisinde onay bekleyen bir vote kaydı oluşturulur.&lt;/div&gt;
@@ -2195,7 +2195,7 @@
     &lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_thread_server_card" version_id="1011010" version_string="1.1.1">&lt;xf:if is="$warextMcLinkedServer"&gt;
+  <template type="public" title="warext_mc_thread_server_card" version_id="1011020" version_string="1.1.2">&lt;xf:if is="$warextMcLinkedServer"&gt;
     &lt;xf:css src="warext_mc_servers.less" /&gt;
     &lt;div class="block warextMcThreadServerCard"&gt;
         &lt;div class="block-container"&gt;
@@ -2215,7 +2215,7 @@
     &lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_update_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Güncellemeler&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_update_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - Güncellemeler&lt;/xf:title&gt;
 &lt;xf:description&gt;Sunucu sahibinin ve yetkili ekip üyelerinin yayınladığı sürüm notları ve değişiklikler.&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
@@ -2273,7 +2273,7 @@
 
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/guncellemeler" data="{$server}" /&gt;
 </template>
-  <template type="public" title="warext_mc_votifier_config" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - NuVotifier Ayarları&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_votifier_config" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;{$server.title} - NuVotifier Ayarları&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;Minecraft Sunucuları&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -2337,7 +2337,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_achievement_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Başarımı Düzenle: {$achievement.title}&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_achievement_edit" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Başarımı Düzenle: {$achievement.title}&lt;/xf:title&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/achievement-edit', $achievement) }}" class="block" ajax="true"&gt;
     &lt;div class="block-container"&gt;
@@ -2359,7 +2359,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_achievement_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sunucu Başarımları&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_achievement_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Sunucu Başarımları&lt;/xf:title&gt;
 
 &lt;xf:pageaction&gt;
     &lt;xf:form action="{{ link('warext-minecraft/achievement-rebuild') }}" class="buttonGroup"&gt;
@@ -2421,7 +2421,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_audit_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucu Audit Kayıtları&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_audit_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Minecraft Sunucu Audit Kayıtları&lt;/xf:title&gt;
 &lt;xf:description&gt;Kritik sahiplik, ekip, moderasyon, sponsor ve başarım yönetim işlemleri.&lt;/xf:description&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/audit') }}" class="block"&gt;
@@ -2472,7 +2472,7 @@
 
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/audit" params="{{ {'server_id': $serverId, 'action_key': $actionKey} }}" /&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_category_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Kategori Düzenle: {$category.title}&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_category_edit" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Kategori Düzenle: {$category.title}&lt;/xf:title&gt;
 &lt;xf:form action="{{ link('warext-minecraft/category-edit', $category) }}" class="block"&gt;
     &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
         &lt;xf:textboxrow name="title" value="{$category.title}" label="Kategori adı" required="true" maxlength="50" /&gt;
@@ -2490,7 +2490,7 @@
     &lt;/div&gt;&lt;xf:submitrow submit="Kaydet" /&gt;&lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_category_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucu Kategorileri&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_category_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Minecraft Sunucu Kategorileri&lt;/xf:title&gt;
 &lt;div class="blockMessage blockMessage--important"&gt;Kategori bir XenForo forumuna bağlanırsa o forumda yeni konu açarken isteğe bağlı sunucu dizini alanları görünür. Sunucu adresi boşsa konu normal şekilde açılır ve vote kaydı oluşturulmaz.&lt;/div&gt;
 &lt;xf:form action="{{ link('warext-minecraft/categories') }}" class="block"&gt;
     &lt;div class="block-container"&gt;
@@ -2527,7 +2527,7 @@
     &lt;xf:else /&gt;&lt;div class="blockMessage"&gt;Henüz kategori yok.&lt;/div&gt;&lt;/xf:if&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_health" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Vote Sistem Sağlığı&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_health" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Minecraft Vote Sistem Sağlığı&lt;/xf:title&gt;
 &lt;xf:description&gt;Vote kuyruğu, NuVotifier entegrasyonları ve sunucu durum görevleri için operasyon ekranı.&lt;/xf:description&gt;
 
 &lt;xf:pageaction&gt;
@@ -2589,7 +2589,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_report_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sunucu Raporları&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_report_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Sunucu Raporları&lt;/xf:title&gt;
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
@@ -2661,7 +2661,7 @@
     &lt;div class="blockMessage"&gt;Bu filtreye uygun rapor bulunamadı.&lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_server_list" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Minecraft Sunucuları&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_server_list" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Minecraft Sunucuları&lt;/xf:title&gt;
 
 &lt;xf:pageaction&gt;
     &lt;xf:form action="{{ link('warext-minecraft/ranking') }}" class="buttonGroup"&gt;
@@ -2762,7 +2762,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_setup" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Kurulum ve Yapılandırma&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_setup" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Kurulum ve Yapılandırma&lt;/xf:title&gt;
 
 &lt;div class="blockMessage blockMessage--important"&gt;
     Bu sayfa eklentiyi ilk kez kuran yöneticiler için başlangıç merkezidir. Minecraft kategorileri XenForo forum kategorilerine bağlı değildir; sunucu listesindeki filtreleme ve sınıflandırma etiketleridir.
@@ -2856,7 +2856,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_sponsor_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Sponsorlu Sunucular&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_sponsor_index" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Sponsorlu Sunucular&lt;/xf:title&gt;
 &lt;xf:description&gt;Sponsorlu gösterimler organik Popüler ve Yükselişte sıralama skorlarını değiştirmez.&lt;/xf:description&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/sponsors') }}" class="block" ajax="true"&gt;
@@ -2920,7 +2920,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_suspect_votes" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Şüpheli Oylar&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_suspect_votes" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Şüpheli Oylar&lt;/xf:title&gt;
 &lt;xf:description&gt;Risk puanı yüksek oyları inceleyin. Sistem otomatik ban uygulamaz; karar yöneticiye aittir.&lt;/xf:description&gt;
 
 &lt;xf:pageaction&gt;
@@ -3010,7 +3010,7 @@
     link="warext-minecraft/suspect-votes"
     params="{{ {'min_score': $minScore, 'server_id': $serverId} }}" /&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_vote_queue" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Oy Teslimat Kuyruğu&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_vote_queue" version_id="1011020" version_string="1.1.2">&lt;xf:title&gt;Oy Teslimat Kuyruğu&lt;/xf:title&gt;
 
 &lt;xf:pageaction&gt;
     &lt;xf:button href="{{ link('warext-minecraft/suspect-votes') }}"&gt;Şüpheli Oylar&lt;/xf:button&gt;

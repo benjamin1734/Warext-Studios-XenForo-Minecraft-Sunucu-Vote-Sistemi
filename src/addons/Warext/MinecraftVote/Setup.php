@@ -431,11 +431,6 @@ class Setup extends AbstractSetup
         }
 
         $db = $this->db();
-        $db->query(
-            'INSERT INTO xf_content_type (content_type, addon_id, fields) VALUES (?, ?, ?) '
-            . 'ON DUPLICATE KEY UPDATE addon_id = VALUES(addon_id)',
-            ['warext_mc_server', 'Warext/MinecraftVote', '']
-        );
         foreach ([
             'entity' => 'Warext\\MinecraftVote:Server',
             'approval_queue_handler_class' => 'Warext\\MinecraftVote\\ApprovalQueue\\Server'
