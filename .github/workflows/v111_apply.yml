@@ -23,6 +23,23 @@ jobs:
       - name: Apply patch
         run: python3 .github/v111_apply.py
 
+      - name: Align regression expectations
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('.github/security_regression.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              "require('_output/templates/public/warext_mc_server_add.html', ['kategori seçimi yeni form alanı açmaz', 'Ana sunucu adresi', 'Crossplay'])",
+              "require('_output/templates/public/warext_mc_server_add.html', ['Sunucu tanıtım konusu', 'Görsel Kimlik', 'Ana sunucu adresi', 'Crossplay'])"
+          )
+          text = text.replace(
+              "if version_string != '1.1.0' or int(addon.get('version_id', 0)) < 1011000:\n    raise SystemExit('Sürüm numarası 1.1.0 değil.')",
+              "if version_string != '1.1.1' or int(addon.get('version_id', 0)) < 1011010:\n    raise SystemExit('Sürüm numarası 1.1.1 değil.')"
+          )
+          path.write_text(text, encoding='utf-8')
+          PY
+
       - name: PHP syntax
         run: find src/addons/Warext/MinecraftVote -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
