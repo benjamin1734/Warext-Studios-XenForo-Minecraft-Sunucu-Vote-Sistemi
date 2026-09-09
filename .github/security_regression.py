@@ -29,10 +29,11 @@ require('Admin/Controller/Setup.php', ["'categories'", "'pending'", "'active'", 
 require('Admin/Controller/Category.php', ['actionEdit(', 'actionToggle(', 'actionDelete(', 'if (!$this->isPost())', "'categoryRows' => $categoryRows"])
 require('_output/templates/admin/warext_mc_admin_setup.html', ['Kurulum ve Yapılandırma', 'Kategoriler', 'Kullanıcı Grubu İzinleri', 'NuVotifier'])
 require('_output/templates/admin/warext_mc_admin_category_index.html', ['$categoryRows', '$row.usageCount'])
-require('_output/templates/public/warext_mc_server_add.html', ['Sunucu tanıtım konusu', 'Görsel Kimlik', 'Ana sunucu adresi', 'Crossplay'])
+require('_output/templates/public/warext_mc_server_add.html', ['Sunucu tanıtım konusu', 'Görsel Kimlik', 'Ana sunucu adresi', 'Crossplay', '300×100', '1200×400'])
 require('Pub/Controller/Index.php', ['networkStatsRow', "'votes_month'", 'sortLinks', 'categoryItems', 'hasAdvancedFilters'])
-require('_output/templates/public/warext_mc_server_index.html', ['warextMcVoteList', "link('sunucular/oy'", 'copy-to-clipboard', 'data-copy-text', 'Gelişmiş filtreler', '$networkStats.server_count'])
+require('_output/templates/public/warext_mc_server_index.html', ['warextMcVoteList', "link('sunucular/oy'", 'copy-to-clipboard', 'data-copy-text', 'Gelişmiş filtreler', '$networkStats.server_count', 'warext_mc_server_directory.less'])
 require('_output/templates/public/warext_mc_servers.less', ['.warextMcDirectoryHero', '.warextMcVoteRow', '.warextMcFeaturedGrid', '.warextMcAdvancedFilters'])
+require('_output/templates/public/warext_mc_server_directory.less', ['grid-template-columns: 64px 300px minmax(280px, 1fr) 128px;', 'width: 300px;', 'height: 100px;', 'aspect-ratio: 3 / 1'])
 require('_output/admin_navigation/warextMinecraftVote.json', ['"parent_navigation_id": ""', '"link": "warext-minecraft"', '"hide_no_children": true'])
 require('_output/admin_navigation/warextMinecraftSetup.json', ['warext-minecraft/setup'])
 require('_output/admin_navigation/warextMinecraftServers.json', ['warext-minecraft/servers'])
@@ -55,12 +56,12 @@ require('Admin/Controller/Report.php', ['actionUpdate(', 'if (!$this->isPost())'
 require('Setup.php', ['installStep17', 'upgrade1010040Step1', 'upgrade1010040Step2', 'repairCurrentSchema', 'ensureSponsorPurchaseSupport', 'purchase_request_key', 'INSERT IGNORE INTO xf_warext_mc_category'])
 require('Entity/Sponsor.php', ['purchase_request_key'])
 require('Entity/Server.php', ["$structure->contentType = 'warext_mc_server'", 'ApprovalQueue', 'discussion_thread_id', 'animated_banner_path', 'cover_path'])
-require('Service/Server/Media.php', ['468', 'animated_banner', 'copyFileToAbstractedPath', 'IMAGETYPE_GIF'])
+require('Service/Server/Media.php', ["'width' => 300", "'height' => 100", "'width' => 1200", "'height' => 400", 'processAnimatedGif', 'cropThumbnailImage', 'imagewebp', 'max_output', 'copyFileToAbstractedPath'])
 require('Service/Server/Creator.php', ['trailer_url'])
 require('Service/Server/ThreadLinker.php', ['discussion_thread_id', 'threads/', 'boardUrl', 'getMappedCategory', 'canView'])
 require('ApprovalQueue/Server.php', ['XF\\ApprovalQueue\\AbstractHandler', 'canViewContent', 'actionApprove', 'actionDelete'])
 require('Listener.php', ['threadFormPreRender', 'postEntityPostSave', 'threadViewPreRender', 'threadEntityPostDelete'])
-require('_output/templates/public/warext_mc_server_add.html', ['upload="true"', 'animated_banner', 'discussion_thread_url', '468×60'])
+require('_output/templates/public/warext_mc_server_add.html', ['upload="true"', 'animated_banner', 'discussion_thread_url', '300×100'])
 require('_output/templates/public/warext_mc_thread_integration_fields.html', ['Sunucu dizininde de yayınla', 'warext_mc_host'])
 require('_output/templates/public/approval_item_warext_mc_server.html', ['approval_queue_macros'])
 require('_output/content_type_fields/warext_mc_server-approval_queue_handler_class.json', ['approval_queue_handler_class'])
@@ -197,8 +198,8 @@ if not version_match:
 major, minor, patch = (int(part) for part in version_match.groups())
 if patch > 9:
     raise SystemExit('Yama sürümü 9 üzerinde olamaz; sonraki orta sürüme geçilmeli.')
-if version_string != '1.1.2' or int(addon.get('version_id', 0)) < 1011020:
-    raise SystemExit('Sürüm numarası 1.1.2 değil.')
+if version_string != '1.1.3' or int(addon.get('version_id', 0)) < 1011030:
+    raise SystemExit('Sürüm numarası 1.1.3 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')

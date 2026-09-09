@@ -4,7 +4,7 @@ XenForo 2.3 için Minecraft sunucu listeleme ve güvenli oy sistemi.
 
 ## Kurulum
 
-`Warext-MinecraftVote-1.1.2.zip` dosyasını açmadan **Admin CP > Add-ons > Install/upgrade from archive** üzerinden yükleyin. Mevcut sürümün üzerine doğrudan yükseltilebilir.
+`Warext-MinecraftVote-1.1.3.zip` dosyasını açmadan **Admin CP > Add-ons > Install/upgrade from archive** üzerinden yükleyin. Mevcut sürümün üzerine doğrudan yükseltilebilir.
 
 Kurulumdan sonra **Admin CP > Minecraft Sunucu & Vote Sistemi > Kurulum & Yapılandırma** ekranını takip edin.
 
@@ -22,7 +22,8 @@ Kurulumdan sonra **Admin CP > Minecraft Sunucu & Vote Sistemi > Kurulum & Yapıl
 - Sunucu sahipliği ve ekip yönetimi
 - Sezon, streak, başarım, değerlendirme ve favoriler
 - Moderasyon, raporlama, audit ve sistem sağlığı
-- Statik 468×60 banner, hareketli GIF banner, detay kapağı ve trailer
+- Otomatik 300×100 statik banner, 300×100 optimize GIF banner, 1200×400 detay kapağı ve trailer
+- Statik görsellerde otomatik kırpma, küçültme, sıkıştırma ve uygun olduğunda WebP dönüşümü
 - Forum tanıtım konusu ↔ vote kaydı çift yönlü bağlantı
 - Belirlenen forum kategorilerinde konu açarken isteğe bağlı otomatik vote kaydı
 - XenForo yerleşik Approval Queue ile moderatör onayı
