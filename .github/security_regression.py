@@ -12,9 +12,9 @@ def require(path: str, needles: list[str]) -> None:
             raise SystemExit(f'{path}: gerekli güvenlik deseni bulunamadı: {needle}')
 
 
-require('Pub/Controller/Vote.php', ['captchaIsValid()', 'warextMcRequireVerifiedAccountForVotes', "verification_state !== 'verified'", 'setRequestFingerprint(', 'enqueueVoteDelivery()', 'enqueueWebhookDelivery('])
+require('Pub/Controller/Vote.php', ['captchaIsValid()', 'warextMcRequireVerifiedAccountForVotes', "verification_state !== 'verified'", 'setRequestFingerprint(', 'enqueueVoteDelivery()', 'enqueueWebhookDelivery(', '!$visitor->user_id', 'voteBlocked', '86400', '24 saat sonra tekrar deneyin'])
 require('_output/templates/public/warext_mc_server_vote.html', ['<xf:captcharow', 'force="true"', '$requireVerifiedAccount'])
-require('Service/Vote/Creator.php', ["hash_hmac('sha256', $ip", 'assertCooldown(', 'assertIpVelocity(', 'calculateFraudScore('])
+require('Service/Vote/Creator.php', ["hash_hmac('sha256', $ip", 'assertCooldown(', 'assertIpVelocity(', 'calculateFraudScore(', '!$this->user->user_id', '$since = \XF::$time - 86400', '24 saat sonra tekrar deneyin'])
 require('Network/EndpointResolver.php', ['FILTER_FLAG_NO_PRIV_RANGE', 'FILTER_FLAG_NO_RES_RANGE'])
 require('Service/Webhook/Dispatcher.php', ["$scheme !== 'https'", "'allow_redirects' => false", 'X-Warext-Signature', 'resolveTcp('])
 require('Pub/Controller/Api.php', ['warextMcPublicApiEnabled', "->where('state', 'active')", "'warextMcApi'"])
@@ -29,11 +29,11 @@ require('Admin/Controller/Setup.php', ["'categories'", "'pending'", "'active'", 
 require('Admin/Controller/Category.php', ['actionEdit(', 'actionToggle(', 'actionDelete(', 'if (!$this->isPost())', "'categoryRows' => $categoryRows"])
 require('_output/templates/admin/warext_mc_admin_setup.html', ['Kurulum ve Yapılandırma', 'Kategoriler', 'Kullanıcı Grubu İzinleri', 'NuVotifier'])
 require('_output/templates/admin/warext_mc_admin_category_index.html', ['$categoryRows', '$row.usageCount'])
-require('_output/templates/public/warext_mc_server_add.html', ['Sunucu tanıtım konusu', 'Görsel Kimlik', 'Ana sunucu adresi', 'Crossplay', '300×100', '1200×400'])
+require('_output/templates/public/warext_mc_server_add.html', ['Sunucu tanıtım konusu', 'Görsel Kimlik', 'Ana sunucu adresi', 'Crossplay', '360×120', '1200×400'])
 require('Pub/Controller/Index.php', ['networkStatsRow', "'votes_month'", 'sortLinks', 'categoryItems', 'hasAdvancedFilters'])
 require('_output/templates/public/warext_mc_server_index.html', ['warextMcDirectoryList', "link('sunucular/oy'", 'copy-to-clipboard', 'data-copy-text', 'Gelişmiş filtreler', '$networkStats.server_count', 'warext_mc_server_directory.less'])
 require('_output/templates/public/warext_mc_servers.less', ['.warextMcDirectoryHero', '.warextMcVoteRow', '.warextMcFeaturedGrid', '.warextMcAdvancedFilters'])
-require('_output/templates/public/warext_mc_server_directory.less', ['.warextMcDirectoryRow', 'flex: 0 0 316px;', 'width: 300px;', 'height: 100px;', 'flex: 1 1 auto;', 'flex: 0 0 138px;', 'aspect-ratio: 3 / 1'])
+require('_output/templates/public/warext_mc_server_directory.less', ['.warextMcDirectoryRow', 'flex: 0 0 376px;', 'width: 360px;', 'height: 120px;', 'flex: 1 1 auto;', 'flex: 0 0 138px;', 'aspect-ratio: 3 / 1'])
 require('_output/admin_navigation/warextMinecraftVote.json', ['"parent_navigation_id": ""', '"link": "warext-minecraft"', '"hide_no_children": true'])
 require('_output/admin_navigation/warextMinecraftSetup.json', ['warext-minecraft/setup'])
 require('_output/admin_navigation/warextMinecraftServers.json', ['warext-minecraft/servers'])
@@ -56,12 +56,12 @@ require('Admin/Controller/Report.php', ['actionUpdate(', 'if (!$this->isPost())'
 require('Setup.php', ['installStep17', 'upgrade1010040Step1', 'upgrade1010040Step2', 'repairCurrentSchema', 'ensureSponsorPurchaseSupport', 'purchase_request_key', 'INSERT IGNORE INTO xf_warext_mc_category'])
 require('Entity/Sponsor.php', ['purchase_request_key'])
 require('Entity/Server.php', ["$structure->contentType = 'warext_mc_server'", 'ApprovalQueue', 'discussion_thread_id', 'animated_banner_path', 'cover_path'])
-require('Service/Server/Media.php', ["'width' => 300", "'height' => 100", "'width' => 1200", "'height' => 400", 'processAnimatedGif', 'cropThumbnailImage', 'imagewebp', 'max_output', 'copyFileToAbstractedPath'])
+require('Service/Server/Media.php', ["'width' => 360", "'height' => 120", "'width' => 1200", "'height' => 400", 'processAnimatedGif', 'cropThumbnailImage', 'imagewebp', 'max_output', 'copyFileToAbstractedPath'])
 require('Service/Server/Creator.php', ['trailer_url'])
 require('Service/Server/ThreadLinker.php', ['discussion_thread_id', 'threads/', 'boardUrl', 'getMappedCategory', 'canView'])
 require('ApprovalQueue/Server.php', ['XF\\ApprovalQueue\\AbstractHandler', 'canViewContent', 'actionApprove', 'actionDelete'])
 require('Listener.php', ['threadFormPreRender', 'postEntityPostSave', 'threadViewPreRender', 'threadEntityPostDelete'])
-require('_output/templates/public/warext_mc_server_add.html', ['upload="true"', 'animated_banner', 'discussion_thread_url', '300×100'])
+require('_output/templates/public/warext_mc_server_add.html', ['upload="true"', 'animated_banner', 'discussion_thread_url', '360×120'])
 require('_output/templates/public/warext_mc_thread_integration_fields.html', ['Sunucu dizininde de yayınla', 'warext_mc_host'])
 require('_output/templates/public/approval_item_warext_mc_server.html', ['approval_queue_macros'])
 require('_output/content_type_fields/warext_mc_server-approval_queue_handler_class.json', ['approval_queue_handler_class'])
@@ -198,8 +198,8 @@ if not version_match:
 major, minor, patch = (int(part) for part in version_match.groups())
 if patch > 9:
     raise SystemExit('Yama sürümü 9 üzerinde olamaz; sonraki orta sürüme geçilmeli.')
-if version_string != '1.1.5' or int(addon.get('version_id', 0)) < 1011050:
-    raise SystemExit('Sürüm numarası 1.1.5 değil.')
+if version_string != '1.1.6' or int(addon.get('version_id', 0)) < 1011060:
+    raise SystemExit('Sürüm numarası 1.1.6 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')

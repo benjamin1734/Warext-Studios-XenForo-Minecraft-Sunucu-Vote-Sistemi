@@ -24,10 +24,10 @@
         <div class="block-body">
             <div class="blockMessage">Yeni yüklenen görseller otomatik olarak merkezden kırpılır, hedef ölçüye küçültülür ve dosya boyutu optimize edilir.</div>
             <xf:if is="$server.banner_path"><div class="formRow"><div class="formRow-labelWrapper"><label class="formRow-label">Mevcut statik banner</label></div><div class="formRow-main"><img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" style="max-width:300px;width:100%;aspect-ratio:3/1;object-fit:cover" alt="" /></div></div></xf:if>
-            <xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="Otomatik 300×100 ve optimize · yeni dosya mevcut olanın yerine geçer" />
+            <xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="Otomatik 360×120 ve optimize · yeni dosya mevcut olanın yerine geçer" />
             <xf:if is="$server.banner_path"><xf:checkboxrow><xf:option name="remove_banner" value="1">Statik bannerı kaldır</xf:option></xf:checkboxrow></xf:if>
             <xf:if is="$server.animated_banner_path"><div class="formRow"><div class="formRow-labelWrapper"><label class="formRow-label">Mevcut hareketli banner</label></div><div class="formRow-main"><img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" style="max-width:300px;width:100%;aspect-ratio:3/1;object-fit:cover" alt="" /></div></div></xf:if>
-            <xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="GIF · otomatik 300×100 ve optimize · listede statik bannerı geçersiz kılar" />
+            <xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="GIF · otomatik 360×120 ve optimize · listede statik bannerı geçersiz kılar" />
             <xf:if is="$server.animated_banner_path"><xf:checkboxrow><xf:option name="remove_animated_banner" value="1">Hareketli bannerı kaldır</xf:option></xf:checkboxrow></xf:if>
             <xf:if is="$server.cover_path"><div class="formRow"><div class="formRow-labelWrapper"><label class="formRow-label">Mevcut kapak</label></div><div class="formRow-main"><img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" style="max-width:720px;width:100%;aspect-ratio:3/1;object-fit:cover" alt="" /></div></div></xf:if>
             <xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="Detay kapağı" explain="Otomatik 1200×400 ve optimize" />
