@@ -15,29 +15,30 @@ class Health extends AbstractController
     public function actionIndex()
     {
         $now = \XF::$time;
-        $statusRows = $this->db()->fetchAll('SELECT status, COUNT(*) AS total FROM xf_warext_mc_vote GROUP BY status');
+        $db = $this->app->db();
+        $statusRows = $db->fetchAll('SELECT status, COUNT(*) AS total FROM xf_warext_mc_vote GROUP BY status');
         $voteCounts = [];
         foreach ($statusRows as $row)
         {
             $voteCounts[(string)$row['status']] = (int)$row['total'];
         }
 
-        $oldestPending = (int)$this->db()->fetchOne(
+        $oldestPending = (int)$db->fetchOne(
             "SELECT MIN(vote_date) FROM xf_warext_mc_vote WHERE status IN ('pending','processing','retry')"
         );
-        $staleProcessing = (int)$this->db()->fetchOne(
+        $staleProcessing = (int)$db->fetchOne(
             "SELECT COUNT(*) FROM xf_warext_mc_vote WHERE status = 'processing' AND next_attempt_date > 0 AND next_attempt_date <= ?",
             [$now]
         );
-        $offlineServers = (int)$this->db()->fetchOne(
+        $offlineServers = (int)$db->fetchOne(
             "SELECT COUNT(*) FROM xf_warext_mc_server WHERE state = 'active' AND is_online = 0"
         );
-        $staleServers = (int)$this->db()->fetchOne(
+        $staleServers = (int)$db->fetchOne(
             "SELECT COUNT(*) FROM xf_warext_mc_server WHERE state = 'active' AND (last_ping_date = 0 OR last_ping_date < ?)",
             [$now - 3600]
         );
 
-        $votifier = $this->db()->fetchAll(
+        $votifier = $db->fetchAll(
             'SELECT v.server_id, v.enabled, v.host, v.port, v.service_name, v.last_success_date, v.last_error, s.title '
             . 'FROM xf_warext_mc_votifier AS v LEFT JOIN xf_warext_mc_server AS s ON (s.server_id = v.server_id) '
             . 'ORDER BY v.enabled DESC, v.last_success_date DESC LIMIT 100'
@@ -59,7 +60,7 @@ class Health extends AbstractController
         {
             return $this->redirect($this->buildLink('warext-minecraft/health'));
         }
-        $count = $this->db()->update(
+        $count = $this->app->db()->update(
             'xf_warext_mc_vote',
             [
                 'status' => 'retry',
@@ -80,7 +81,7 @@ class Health extends AbstractController
         {
             return $this->redirect($this->buildLink('warext-minecraft/health'));
         }
-        $count = $this->db()->update(
+        $count = $this->app->db()->update(
             'xf_warext_mc_vote',
             [
                 'status' => 'retry',
