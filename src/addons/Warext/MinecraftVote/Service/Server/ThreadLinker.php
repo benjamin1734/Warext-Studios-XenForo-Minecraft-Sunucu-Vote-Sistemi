@@ -2,6 +2,7 @@
 
 namespace Warext\MinecraftVote\Service\Server;
 
+use Warext\MinecraftVote\Entity\Category;
 use Warext\MinecraftVote\Entity\Server;
 use XF\App;
 use XF\Entity\Thread;
@@ -36,16 +37,26 @@ class ThreadLinker extends AbstractService
             throw new PrintableException('Geçerli bir XenForo tanıtım konusu bağlantısı girin.');
         }
 
-        $thread = $this->em()->find('XF:Thread', (int)$match[1]);
+        $thread = $this->em()->find('XF:Thread', (int)$match[1], ['Forum', 'User']);
         if (!$thread)
         {
             throw new PrintableException('Tanıtım konusu bulunamadı.');
+        }
+
+        if (!$thread->canView($error))
+        {
+            throw new PrintableException('Bu tanıtım konusunu görüntüleme yetkiniz yok.');
         }
 
         $visitor = \XF::visitor();
         if ((int)$thread->user_id !== (int)$actor->user_id && !$visitor->is_moderator && !$visitor->is_admin)
         {
             throw new PrintableException('Yalnızca kendi tanıtım konunuzu sunucuya bağlayabilirsiniz.');
+        }
+
+        if (!$this->getMappedCategory($thread))
+        {
+            throw new PrintableException('Bu konu, sunucu tanıtım entegrasyonu açık bir foruma ait değil.');
         }
 
         $linked = $this->finder('Warext\MinecraftVote:Server')
@@ -57,6 +68,17 @@ class ThreadLinker extends AbstractService
         }
 
         return $thread;
+    }
+
+    public function getMappedCategory(Thread $thread): ?Category
+    {
+        $category = $this->finder('Warext\MinecraftVote:Category')
+            ->where('forum_node_id', (int)$thread->node_id)
+            ->where('thread_integration_enabled', 1)
+            ->where('is_active', 1)
+            ->fetchOne();
+
+        return $category instanceof Category ? $category : null;
     }
 
     public function link(Server $server, ?Thread $thread): void
