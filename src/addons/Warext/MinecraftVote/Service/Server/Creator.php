@@ -137,10 +137,13 @@ class Creator extends AbstractService
         }
     }
 
-    public function save(): Server
+    public function save(bool $manageTransaction = true): Server
     {
         $db = $this->db();
-        $db->beginTransaction();
+        if ($manageTransaction)
+        {
+            $db->beginTransaction();
+        }
 
         try
         {
@@ -154,11 +157,17 @@ class Creator extends AbstractService
                 $link->save();
             }
 
-            $db->commit();
+            if ($manageTransaction)
+            {
+                $db->commit();
+            }
         }
         catch (\Throwable $e)
         {
-            $db->rollback();
+            if ($manageTransaction)
+            {
+                $db->rollback();
+            }
             throw $e;
         }
 

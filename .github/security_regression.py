@@ -29,7 +29,7 @@ require('Admin/Controller/Setup.php', ["'categories'", "'pending'", "'active'", 
 require('Admin/Controller/Category.php', ['actionEdit(', 'actionToggle(', 'actionDelete(', 'if (!$this->isPost())', "'categoryRows' => $categoryRows"])
 require('_output/templates/admin/warext_mc_admin_setup.html', ['Kurulum ve Yapılandırma', 'Kategoriler', 'Kullanıcı Grubu İzinleri', 'NuVotifier'])
 require('_output/templates/admin/warext_mc_admin_category_index.html', ['$categoryRows', '$row.usageCount'])
-require('_output/templates/public/warext_mc_server_add.html', ['kategori seçimi yeni form alanı açmaz', 'Ana sunucu adresi', 'Crossplay'])
+require('_output/templates/public/warext_mc_server_add.html', ['Sunucu tanıtım konusu', 'Görsel Kimlik', 'Ana sunucu adresi', 'Crossplay'])
 require('Pub/Controller/Index.php', ['networkStatsRow', "'votes_month'", 'sortLinks', 'categoryItems', 'hasAdvancedFilters'])
 require('_output/templates/public/warext_mc_server_index.html', ['warextMcVoteList', "link('sunucular/oy'", 'copy-to-clipboard', 'data-copy-text', 'Gelişmiş filtreler', '$networkStats.server_count'])
 require('_output/templates/public/warext_mc_servers.less', ['.warextMcDirectoryHero', '.warextMcVoteRow', '.warextMcFeaturedGrid', '.warextMcAdvancedFilters'])
@@ -54,6 +54,18 @@ require('Admin/Controller/Sponsor.php', ['actionToggle(', 'actionDelete(', 'if (
 require('Admin/Controller/Report.php', ['actionUpdate(', 'if (!$this->isPost())'])
 require('Setup.php', ['installStep17', 'upgrade1010040Step1', 'upgrade1010040Step2', 'repairCurrentSchema', 'ensureSponsorPurchaseSupport', 'purchase_request_key', 'INSERT IGNORE INTO xf_warext_mc_category'])
 require('Entity/Sponsor.php', ['purchase_request_key'])
+require('Entity/Server.php', ["$structure->contentType = 'warext_mc_server'", 'ApprovalQueue', 'discussion_thread_id', 'animated_banner_path', 'cover_path'])
+require('Service/Server/Media.php', ['468', 'animated_banner', 'copyFileToAbstractedPath', 'IMAGETYPE_GIF'])
+require('Service/Server/ThreadLinker.php', ['discussion_thread_id', 'threads/', 'boardUrl'])
+require('ApprovalQueue/Server.php', ['XF\\ApprovalQueue\\AbstractHandler', 'actionApprove', 'actionDelete'])
+require('Listener.php', ['threadFormPreRender', 'postEntityPostSave', 'threadViewPreRender', 'threadEntityPostDelete'])
+require('_output/templates/public/warext_mc_server_add.html', ['upload="true"', 'animated_banner', 'discussion_thread_url', '468×60'])
+require('_output/templates/public/warext_mc_thread_integration_fields.html', ['Sunucu dizininde de yayınla', 'warext_mc_host'])
+require('_output/templates/public/approval_item_warext_mc_server.html', ['approval_queue_macros'])
+require('_output/content_type_fields/warext_mc_server-approval_queue_handler_class.json', ['approval_queue_handler_class'])
+require('_output/code_event_listeners/entity_post_save_Warext-MinecraftVote-Listener_postEntityPostSave_XF-Entity-Post.json', ['entity_post_save', 'XF\\\\Entity\\\\Post'])
+require('_output/template_modifications/public/warext_mc_thread_fields.json', ['forum_post_thread', 'preg_replace'])
+require('Setup.php', ['installStep18', 'upgrade1011010Step1', 'ensureThreadMediaIntegration', 'warext_mc_server', 'contentTypes'])
 
 
 server_admin = (ROOT / 'Admin/Controller/Server.php').read_text(encoding='utf-8')
@@ -179,8 +191,8 @@ if not version_match:
 major, minor, patch = (int(part) for part in version_match.groups())
 if patch > 9:
     raise SystemExit('Yama sürümü 9 üzerinde olamaz; sonraki orta sürüme geçilmeli.')
-if version_string != '1.1.0' or int(addon.get('version_id', 0)) < 1011000:
-    raise SystemExit('Sürüm numarası 1.1.0 değil.')
+if version_string != '1.1.1' or int(addon.get('version_id', 0)) < 1011010:
+    raise SystemExit('Sürüm numarası 1.1.1 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')

@@ -267,6 +267,11 @@ class Setup extends AbstractSetup
         $this->ensureSponsorPurchaseSupport();
     }
 
+    public function installStep18(): void
+    {
+        $this->ensureThreadMediaIntegration();
+    }
+
     public function upgrade1000020Step1(): void
     {
         if (!$this->schemaManager()->columnExists('xf_warext_mc_server', 'last_ping_error'))
@@ -372,6 +377,77 @@ class Setup extends AbstractSetup
     public function upgrade1010040Step2(): void
     {
         $this->ensureSponsorPurchaseSupport();
+    }
+
+    public function upgrade1011010Step1(): void
+    {
+        $this->ensureThreadMediaIntegration();
+    }
+
+    protected function ensureThreadMediaIntegration(): void
+    {
+        $sm = $this->schemaManager();
+        foreach ([
+            'trailer_url' => ['varchar', 255, 'store_url'],
+            'banner_path' => ['varchar', 255, 'trailer_url'],
+            'animated_banner_path' => ['varchar', 255, 'banner_path'],
+            'cover_path' => ['varchar', 255, 'animated_banner_path'],
+            'discussion_thread_id' => ['int', null, 'cover_path'],
+            'source_type' => ['varchar', 20, 'discussion_thread_id']
+        ] as $column => $spec)
+        {
+            if (!$sm->columnExists('xf_warext_mc_server', $column))
+            {
+                $sm->alterTable('xf_warext_mc_server', function (Alter $table) use ($column, $spec)
+                {
+                    $definition = $spec[1] ? $table->addColumn($column, $spec[0], $spec[1]) : $table->addColumn($column, $spec[0]);
+                    $definition->setDefault($column === 'discussion_thread_id' ? 0 : ($column === 'source_type' ? 'manual' : ''))->after($spec[2]);
+                    if ($column === 'discussion_thread_id')
+                    {
+                        $table->addKey('discussion_thread_id', 'warext_mc_server_thread');
+                    }
+                });
+            }
+        }
+
+        foreach ([
+            'forum_node_id' => ['int', null, 'is_active'],
+            'thread_integration_enabled' => ['tinyint', null, 'forum_node_id'],
+            'thread_default_server_type' => ['varchar', 20, 'thread_integration_enabled']
+        ] as $column => $spec)
+        {
+            if (!$sm->columnExists('xf_warext_mc_category', $column))
+            {
+                $sm->alterTable('xf_warext_mc_category', function (Alter $table) use ($column, $spec)
+                {
+                    $definition = $spec[1] ? $table->addColumn($column, $spec[0], $spec[1]) : $table->addColumn($column, $spec[0]);
+                    $definition->setDefault($column === 'thread_default_server_type' ? 'java' : 0)->after($spec[2]);
+                    if ($column === 'forum_node_id')
+                    {
+                        $table->addKey('forum_node_id', 'warext_mc_category_forum');
+                    }
+                });
+            }
+        }
+
+        $db = $this->db();
+        $db->query(
+            'INSERT INTO xf_content_type (content_type, addon_id, fields) VALUES (?, ?, ?) '
+            . 'ON DUPLICATE KEY UPDATE addon_id = VALUES(addon_id)',
+            ['warext_mc_server', 'Warext/MinecraftVote', '']
+        );
+        foreach ([
+            'entity' => 'Warext\\MinecraftVote:Server',
+            'approval_queue_handler_class' => 'Warext\\MinecraftVote\\ApprovalQueue\\Server'
+        ] as $fieldName => $fieldValue)
+        {
+            $db->query(
+                'INSERT INTO xf_content_type_field (content_type, field_name, field_value, addon_id) VALUES (?, ?, ?, ?) '
+                . 'ON DUPLICATE KEY UPDATE field_value = VALUES(field_value), addon_id = VALUES(addon_id)',
+                ['warext_mc_server', $fieldName, $fieldValue, 'Warext/MinecraftVote']
+            );
+        }
+        $db->delete('xf_data_registry', 'data_key = ?', 'contentTypes');
     }
 
     protected function addRankingColumns(): void
@@ -826,6 +902,10 @@ class Setup extends AbstractSetup
     public function uninstallStep1(): void
     {
         $this->db()->delete('xf_purchasable', 'purchasable_type_id = ?', 'warext_mc_sponsor');
+        $this->db()->delete('xf_approval_queue', 'content_type = ?', 'warext_mc_server');
+        $this->db()->delete('xf_content_type_field', 'content_type = ?', 'warext_mc_server');
+        $this->db()->delete('xf_content_type', 'content_type = ?', 'warext_mc_server');
+        $this->db()->delete('xf_data_registry', 'data_key = ?', 'contentTypes');
         $sm = $this->schemaManager();
         $sm->dropTable('xf_warext_mc_report');
         $sm->dropTable('xf_warext_mc_audit_log');

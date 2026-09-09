@@ -25,19 +25,38 @@ class Edit extends AbstractController
                 'website_url' => 'str',
                 'discord_url' => 'str',
                 'store_url' => 'str',
+                'trailer_url' => 'str',
+                'discussion_thread_url' => 'str',
                 'game_modes' => 'str',
                 'version_min' => 'str',
                 'version_max' => 'str',
                 'country_code' => 'str',
                 'is_premium' => 'bool',
                 'allow_cracked' => 'bool',
-                'category_ids' => 'array-uint'
+                'category_ids' => 'array-uint',
+                'remove_banner' => 'bool',
+                'remove_animated_banner' => 'bool',
+                'remove_cover' => 'bool'
             ]);
 
             $wasActive = $server->state === 'active';
+            $media = $this->service('Warext\MinecraftVote:Server\Media');
+            $uploads = [
+                'banner' => $this->request->getFile('banner'),
+                'animated_banner' => $this->request->getFile('animated_banner'),
+                'cover' => $this->request->getFile('cover')
+            ];
 
             try
             {
+                foreach ($uploads as $type => $upload)
+                {
+                    $media->validateUpload($upload, $type);
+                }
+
+                $thread = $this->service('Warext\MinecraftVote:Server\ThreadLinker')
+                    ->resolve($input['discussion_thread_url'], \XF::visitor(), $server);
+
                 $editor = $this->service(
                     'Warext\MinecraftVote:Server\Editor',
                     $server,
@@ -46,6 +65,22 @@ class Edit extends AbstractController
                 $editor->setData($input);
                 $editor->setCategoryIds($input['category_ids']);
                 $editor->save();
+
+                $server->discussion_thread_id = $thread ? (int)$thread->thread_id : 0;
+                $server->save();
+
+                foreach (['banner', 'animated_banner', 'cover'] as $type)
+                {
+                    $removeKey = 'remove_' . $type;
+                    if (!empty($input[$removeKey]))
+                    {
+                        $media->remove($server, $type);
+                    }
+                    if ($uploads[$type])
+                    {
+                        $media->store($server, $uploads[$type], $type);
+                    }
+                }
             }
             catch (\XF\PrintableException $e)
             {
@@ -67,8 +102,7 @@ class Edit extends AbstractController
             ->order('display_order')
             ->fetch();
 
-        $db = $this->app->db();
-        $rows = $db->fetchAll(
+        $rows = $this->app->db()->fetchAll(
             'SELECT category_id FROM xf_warext_mc_server_category WHERE server_id = ?',
             [$server->server_id]
         );
@@ -89,7 +123,7 @@ class Edit extends AbstractController
             throw $this->exception($this->noPermission());
         }
 
-        $server = $this->em()->find('Warext\MinecraftVote:Server', $serverId);
+        $server = $this->em()->find('Warext\MinecraftVote:Server', $serverId, ['DiscussionThread']);
         if (!$server)
         {
             throw $this->exception($this->notFound());

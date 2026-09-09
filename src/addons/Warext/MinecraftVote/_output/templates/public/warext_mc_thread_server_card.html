@@ -1,0 +1,19 @@
+<xf:if is="$warextMcLinkedServer">
+    <xf:css src="warext_mc_servers.less" />
+    <div class="block warextMcThreadServerCard">
+        <div class="block-container">
+            <div class="block-row">
+                <div class="contentRow">
+                    <div class="contentRow-main">
+                        <div class="contentRow-title"><strong>{$warextMcLinkedServer.title}</strong> <span class="label label--primary">Minecraft Sunucusu</span></div>
+                        <div class="contentRow-minor">{$warextMcLinkedServer.host}:{$warextMcLinkedServer.port} · {$warextMcLinkedServer.players_online}/{$warextMcLinkedServer.players_max} oyuncu · {$warextMcLinkedServer.vote_count_month} aylık oy</div>
+                    </div>
+                    <div class="contentRow-extra">
+                        <xf:button href="{{ link('sunucular/detay', $warextMcLinkedServer) }}">Sunucu Sayfası</xf:button>
+                        <xf:if is="$warextMcLinkedServer.state == 'active'"><xf:button href="{{ link('sunucular/oy', $warextMcLinkedServer) }}" class="button--cta">Oy Ver</xf:button></xf:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</xf:if>

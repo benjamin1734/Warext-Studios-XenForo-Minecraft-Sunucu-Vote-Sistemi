@@ -28,6 +28,7 @@ class Category extends AbstractController
         }
 
         $categories = $this->finder('Warext\MinecraftVote:Category')
+            ->with('Forum')
             ->order('display_order', 'ASC')
             ->order('category_id', 'ASC')
             ->fetch();
@@ -46,7 +47,8 @@ class Category extends AbstractController
         }
 
         return $this->view('Warext\MinecraftVote:Category\Index', 'warext_mc_admin_category_index', [
-            'categoryRows' => $categoryRows
+            'categoryRows' => $categoryRows,
+            'forumOptions' => $this->getForumOptions()
         ]);
     }
 
@@ -66,7 +68,8 @@ class Category extends AbstractController
         }
 
         return $this->view('Warext\MinecraftVote:Category\Edit', 'warext_mc_admin_category_edit', [
-            'category' => $category
+            'category' => $category,
+            'forumOptions' => $this->getForumOptions()
         ]);
     }
 
@@ -108,7 +111,10 @@ class Category extends AbstractController
             'slug' => 'str',
             'description' => 'str',
             'display_order' => 'uint',
-            'is_active' => 'bool'
+            'is_active' => 'bool',
+            'forum_node_id' => 'uint',
+            'thread_integration_enabled' => 'bool',
+            'thread_default_server_type' => 'str'
         ]);
 
         $title = trim($input['title']);
@@ -118,15 +124,7 @@ class Category extends AbstractController
         }
 
         $slug = trim($input['slug']);
-        if ($slug === '')
-        {
-            $slug = $this->slugify($title);
-        }
-        else
-        {
-            $slug = $this->slugify($slug);
-        }
-
+        $slug = $this->slugify($slug === '' ? $title : $slug);
         $existing = $this->finder('Warext\MinecraftVote:Category')
             ->where('slug', $slug)
             ->fetchOne();
@@ -135,11 +133,54 @@ class Category extends AbstractController
             $category->error('Bu kategori kısa adı zaten kullanılıyor.', 'slug');
         }
 
+        $serverType = strtolower(trim($input['thread_default_server_type']));
+        if (!in_array($serverType, ['java', 'bedrock', 'crossplay'], true))
+        {
+            $serverType = 'java';
+        }
+
+        if ($input['thread_integration_enabled'] && !$input['forum_node_id'])
+        {
+            $category->error('Konu entegrasyonu için bir XenForo forumu seçin.', 'forum_node_id');
+        }
+
+        if ($input['forum_node_id'])
+        {
+            $forum = $this->em()->find('XF:Forum', (int)$input['forum_node_id']);
+            if (!$forum)
+            {
+                $category->error('Seçilen XenForo forumu bulunamadı.', 'forum_node_id');
+            }
+
+            $mapped = $this->finder('Warext\MinecraftVote:Category')
+                ->where('forum_node_id', (int)$input['forum_node_id'])
+                ->fetchOne();
+            if ($mapped && (int)$mapped->category_id !== (int)$category->category_id)
+            {
+                $category->error('Bu XenForo forumu başka bir Minecraft kategorisine bağlı.', 'forum_node_id');
+            }
+        }
+
         $category->title = mb_substr($title, 0, 50);
         $category->slug = $slug;
         $category->description = mb_substr(trim($input['description']), 0, 255);
         $category->display_order = max(1, (int)$input['display_order']);
         $category->is_active = (bool)$input['is_active'];
+        $category->forum_node_id = (int)$input['forum_node_id'];
+        $category->thread_integration_enabled = (bool)$input['thread_integration_enabled'];
+        $category->thread_default_server_type = $serverType;
+    }
+
+    protected function getForumOptions(): array
+    {
+        $options = [0 => 'Bağlantı yok'];
+        $forums = $this->finder('XF:Forum')->order('title')->fetch();
+        foreach ($forums as $forum)
+        {
+            $options[(int)$forum->node_id] = (string)$forum->title;
+        }
+
+        return $options;
     }
 
     protected function slugify(string $value): string
