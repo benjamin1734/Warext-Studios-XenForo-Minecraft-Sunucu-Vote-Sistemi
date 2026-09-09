@@ -1,22 +1,69 @@
+.warextMcVoteList
+{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .warextMcVoteRow
 {
-    grid-template-columns: 64px 300px minmax(280px, 1fr) 128px;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
     min-width: 0;
+    min-height: 128px;
+    overflow: hidden;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
     background: @xf-contentBg;
+    box-sizing: border-box;
+}
+
+.warextMcVoteRow-rank
+{
+    flex: 0 0 64px;
+    width: 64px;
+    min-width: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 6px;
+    border-right: 1px solid @xf-borderColor;
+    background: @xf-contentAltBg;
+    box-sizing: border-box;
+}
+
+.warextMcVoteRow-rank span
+{
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+    text-transform: uppercase;
+}
+
+.warextMcVoteRow-rank strong
+{
+    margin-top: 4px;
+    font-size: 20px;
+    line-height: 1;
 }
 
 .warextMcVoteRow-media
 {
+    flex: 0 0 300px;
     width: 300px;
+    min-width: 300px;
     height: 100px;
-    min-width: 0;
+    margin: 14px 0 14px 14px;
     align-self: center;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-right: 1px solid @xf-borderColor;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
     background: @xf-contentAltBg;
+    box-sizing: border-box;
 }
 
 .warextMcVoteRow-media img
@@ -35,61 +82,201 @@
     align-items: center;
     justify-content: center;
     color: @xf-textColorMuted;
-    background: @xf-contentAltBg;
     font-size: 24px;
 }
 
 .warextMcVoteRow-main
 {
+    flex: 1 1 0;
+    width: 0;
     min-width: 0;
+    padding: 14px 16px;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
-.warextMcVoteRow-titleWrap,
-.warextMcVoteRow-head,
-.warextMcVoteRow-bottom,
-.warextMcVoteRow-address
+.warextMcVoteRow-head
 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+}
+
+.warextMcVoteRow-titleWrap
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
     min-width: 0;
 }
 
 .warextMcVoteRow-title
 {
+    max-width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
     overflow-wrap: anywhere;
+}
+
+.warextMcVoteRow-badges
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.warextMcVoteRow-ping
+{
+    flex: 0 0 auto;
 }
 
 .warextMcVoteRow-motd
 {
     max-width: 100%;
+    margin-top: 7px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVoteRow-tags
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 9px;
+}
+
+.warextMcVoteRow-bottom
+{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 12px;
+    min-width: 0;
+}
+
+.warextMcVoteRow-address
+{
+    flex: 1 1 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.warextMcVoteRow-address > span
+{
+    flex: 0 0 100%;
 }
 
 .warextMcVoteRow-address strong
 {
+    min-width: 0;
+    font-family: monospace;
     word-break: normal;
     overflow-wrap: anywhere;
 }
 
+.warextMcVoteRow-metrics
+{
+    flex: 0 0 auto;
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+}
+
+.warextMcVoteRow-metrics > div
+{
+    min-width: 62px;
+    padding: 5px 7px;
+    text-align: center;
+    border-left: 1px solid @xf-borderColor;
+    box-sizing: border-box;
+}
+
 .warextMcVoteRow-actions
 {
-    min-width: 0;
+    flex: 0 0 128px;
+    width: 128px;
+    min-width: 128px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border-left: 1px solid @xf-borderColor;
+    background: @xf-contentAltBg;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.warextMcVoteRow-voteButton
+{
+    width: 100%;
+}
+
+.warextMcVoteRow-detailLink
+{
+    overflow-wrap: anywhere;
 }
 
 @media (max-width: @xf-responsiveMedium)
 {
     .warextMcVoteRow
     {
-        grid-template-columns: 58px 220px minmax(0, 1fr);
+        flex-wrap: wrap;
+    }
+
+    .warextMcVoteRow-rank
+    {
+        flex-basis: 58px;
+        width: 58px;
+        min-width: 58px;
     }
 
     .warextMcVoteRow-media
     {
+        flex-basis: 220px;
         width: 220px;
+        min-width: 220px;
         height: 74px;
+    }
+
+    .warextMcVoteRow-main
+    {
+        flex: 1 1 calc(100% - 306px);
+        width: auto;
     }
 
     .warextMcVoteRow-actions
     {
-        grid-column: 1 / -1;
+        flex: 1 0 100%;
+        width: 100%;
+        min-width: 0;
+        flex-direction: row;
+        align-items: center;
+        border-left: 0;
+        border-top: 1px solid @xf-borderColor;
+    }
+
+    .warextMcVoteRow-votes
+    {
+        flex: 0 0 72px;
+    }
+
+    .warextMcVoteRow-voteButton
+    {
+        flex: 1 1 auto;
+        width: auto;
     }
 }
 
@@ -97,12 +284,14 @@
 {
     .warextMcVoteRow
     {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: block;
+        min-height: 0;
     }
 
     .warextMcVoteRow-rank
     {
+        width: 100%;
+        min-width: 0;
         flex-direction: row;
         justify-content: flex-start;
         gap: 5px;
@@ -119,13 +308,20 @@
 
     .warextMcVoteRow-media
     {
-        width: 100%;
+        width: calc(100% - 24px);
+        min-width: 0;
         height: auto;
         aspect-ratio: 3 / 1;
-        border-right: 0;
-        border-bottom: 1px solid @xf-borderColor;
+        margin: 12px;
     }
 
+    .warextMcVoteRow-main
+    {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .warextMcVoteRow-head,
     .warextMcVoteRow-bottom
     {
         align-items: stretch;
@@ -149,17 +345,12 @@
 
     .warextMcVoteRow-actions
     {
-        grid-column: 1;
+        width: 100%;
+        min-width: 0;
         flex-direction: row;
         align-items: center;
         border-left: 0;
         border-top: 1px solid @xf-borderColor;
-    }
-
-    .warextMcVoteRow-voteButton
-    {
-        flex: 1 1 auto;
-        width: auto;
     }
 }
 
@@ -168,6 +359,11 @@
     .warextMcVoteRow-actions
     {
         flex-wrap: wrap;
+    }
+
+    .warextMcVoteRow-votes
+    {
+        flex: 0 0 100%;
     }
 
     .warextMcVoteRow-detailLink
