@@ -1,110 +1,111 @@
-.warextMcVoteList
+.warextMcDirectoryList
 {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    margin-bottom: 16px;
 }
 
-.warextMcVoteRow
+.warextMcDirectoryRow
 {
     display: flex;
     align-items: stretch;
     width: 100%;
     min-width: 0;
-    min-height: 128px;
-    overflow: hidden;
+    min-height: 132px;
     border: 1px solid @xf-borderColor;
     border-radius: @xf-borderRadiusMedium;
+    overflow: hidden;
     background: @xf-contentBg;
     box-sizing: border-box;
 }
 
-.warextMcVoteRow-rank
+.warextMcDirectoryRow-rank
 {
-    flex: 0 0 64px;
-    width: 64px;
-    min-width: 64px;
+    flex: 0 0 72px;
+    min-width: 72px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 12px 6px;
+    align-items: center;
+    gap: 3px;
+    padding: 12px 8px;
     border-right: 1px solid @xf-borderColor;
     background: @xf-contentAltBg;
     box-sizing: border-box;
 }
 
-.warextMcVoteRow-rank span
+.warextMcDirectoryRow-rank span
 {
     font-size: @xf-fontSizeSmallest;
     color: @xf-textColorMuted;
     text-transform: uppercase;
 }
 
-.warextMcVoteRow-rank strong
+.warextMcDirectoryRow-rank strong
 {
-    margin-top: 4px;
     font-size: 20px;
     line-height: 1;
 }
 
-.warextMcVoteRow-media
+.warextMcDirectoryRow-media
 {
-    flex: 0 0 300px;
-    width: 300px;
-    min-width: 300px;
-    height: 100px;
-    margin: 14px 0 14px 14px;
-    align-self: center;
+    flex: 0 0 316px;
+    width: 316px;
+    min-width: 316px;
+    padding: 16px 0 16px 16px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border: 1px solid @xf-borderColor;
-    border-radius: @xf-borderRadiusMedium;
-    background: @xf-contentAltBg;
     box-sizing: border-box;
 }
 
-.warextMcVoteRow-media img
+.warextMcDirectoryRow-media img,
+.warextMcDirectoryRow-mediaFallback
 {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 100px;
+    max-width: 100%;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    box-sizing: border-box;
+}
+
+.warextMcDirectoryRow-media img
+{
     object-fit: cover;
 }
 
-.warextMcVoteRow-mediaFallback
+.warextMcDirectoryRow-mediaFallback
 {
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: @xf-contentAltBg;
     color: @xf-textColorMuted;
-    font-size: 24px;
+    font-size: 26px;
 }
 
-.warextMcVoteRow-main
+.warextMcDirectoryRow-main
 {
-    flex: 1 1 0;
-    width: 0;
+    flex: 1 1 auto;
+    width: auto;
     min-width: 0;
-    padding: 14px 16px;
-    overflow: hidden;
+    padding: 16px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
-.warextMcVoteRow-head
+.warextMcDirectoryRow-head
 {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
-    gap: 12px;
+    align-items: flex-start;
+    gap: 10px;
     min-width: 0;
 }
 
-.warextMcVoteRow-titleWrap
+.warextMcDirectoryRow-titleWrap
 {
     display: flex;
     flex-wrap: wrap;
@@ -113,30 +114,36 @@
     min-width: 0;
 }
 
-.warextMcVoteRow-title
+.warextMcDirectoryRow-title
 {
-    max-width: 100%;
+    min-width: 0;
     font-size: 18px;
     font-weight: 700;
     line-height: 1.25;
     overflow-wrap: anywhere;
 }
 
-.warextMcVoteRow-badges
+.warextMcDirectoryRow-badges,
+.warextMcDirectoryRow-tags
 {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    align-items: center;
+    gap: 5px;
 }
 
-.warextMcVoteRow-ping
+.warextMcDirectoryRow-ping
 {
     flex: 0 0 auto;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    color: @xf-textColorMuted;
+    font-size: @xf-fontSizeSmallest;
 }
 
-.warextMcVoteRow-motd
+.warextMcDirectoryRow-motd
 {
-    max-width: 100%;
     margin-top: 7px;
     overflow: hidden;
     white-space: nowrap;
@@ -144,73 +151,102 @@
     color: @xf-textColorMuted;
 }
 
-.warextMcVoteRow-tags
+.warextMcDirectoryRow-tags
 {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
     margin-top: 9px;
 }
 
-.warextMcVoteRow-bottom
+.warextMcDirectoryRow-tags > span
 {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 14px;
-    margin-top: 12px;
-    min-width: 0;
+    padding: 3px 7px;
+    border: 1px solid @xf-borderColor;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    font-size: @xf-fontSizeSmallest;
 }
 
-.warextMcVoteRow-address
+.warextMcDirectoryRow-bottom
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 14px;
+    min-width: 0;
+    margin-top: 12px;
+}
+
+.warextMcDirectoryRow-address
 {
     flex: 1 1 auto;
+    min-width: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
-    min-width: 0;
+    gap: 7px;
 }
 
-.warextMcVoteRow-address > span
+.warextMcDirectoryRow-address > span
 {
     flex: 0 0 100%;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
 }
 
-.warextMcVoteRow-address strong
+.warextMcDirectoryRow-address strong
 {
     min-width: 0;
     font-family: monospace;
-    word-break: normal;
     overflow-wrap: anywhere;
 }
 
-.warextMcVoteRow-metrics
+.warextMcDirectoryRow-metrics
 {
     flex: 0 0 auto;
     display: flex;
     align-items: stretch;
-    gap: 4px;
+    gap: 5px;
 }
 
-.warextMcVoteRow-metrics > div
+.warextMcDirectoryRow-metrics > div
 {
-    min-width: 62px;
-    padding: 5px 7px;
+    min-width: 64px;
+    padding: 6px 7px;
     text-align: center;
-    border-left: 1px solid @xf-borderColor;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
     box-sizing: border-box;
 }
 
-.warextMcVoteRow-actions
+.warextMcDirectoryRow-metrics strong,
+.warextMcDirectoryRow-metrics span
 {
-    flex: 0 0 128px;
-    width: 128px;
-    min-width: 128px;
+    display: block;
+}
+
+.warextMcDirectoryRow-metrics small
+{
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 400;
+    color: @xf-textColorMuted;
+}
+
+.warextMcDirectoryRow-metrics span
+{
+    margin-top: 3px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcDirectoryRow-actions
+{
+    flex: 0 0 138px;
+    width: 138px;
+    min-width: 138px;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     justify-content: center;
+    align-items: stretch;
     gap: 8px;
     padding: 14px;
     border-left: 1px solid @xf-borderColor;
@@ -219,47 +255,71 @@
     box-sizing: border-box;
 }
 
-.warextMcVoteRow-voteButton
+.warextMcDirectoryRow-votes strong,
+.warextMcDirectoryRow-votes span
+{
+    display: block;
+}
+
+.warextMcDirectoryRow-votes strong
+{
+    font-size: 21px;
+    line-height: 1.1;
+}
+
+.warextMcDirectoryRow-votes span,
+.warextMcDirectoryRow-detailLink
+{
+    font-size: @xf-fontSizeSmallest;
+}
+
+.warextMcDirectoryRow-votes span
+{
+    margin-top: 2px;
+    color: @xf-textColorMuted;
+}
+
+.warextMcDirectoryRow-voteButton
 {
     width: 100%;
 }
 
-.warextMcVoteRow-detailLink
+@media (max-width: 1100px)
 {
-    overflow-wrap: anywhere;
-}
-
-@media (max-width: @xf-responsiveMedium)
-{
-    .warextMcVoteRow
+    .warextMcDirectoryRow
     {
         flex-wrap: wrap;
     }
 
-    .warextMcVoteRow-rank
+    .warextMcDirectoryRow-rank
     {
-        flex-basis: 58px;
-        width: 58px;
-        min-width: 58px;
+        flex-basis: 64px;
+        min-width: 64px;
     }
 
-    .warextMcVoteRow-media
+    .warextMcDirectoryRow-media
     {
-        flex-basis: 220px;
-        width: 220px;
-        min-width: 220px;
-        height: 74px;
+        flex: 0 0 256px;
+        width: 256px;
+        min-width: 256px;
+        padding: 12px 0 12px 12px;
     }
 
-    .warextMcVoteRow-main
+    .warextMcDirectoryRow-media img,
+    .warextMcDirectoryRow-mediaFallback
     {
-        flex: 1 1 calc(100% - 306px);
-        width: auto;
+        width: 240px;
+        height: 80px;
     }
 
-    .warextMcVoteRow-actions
+    .warextMcDirectoryRow-main
     {
-        flex: 1 0 100%;
+        flex: 1 1 calc(100% - 320px);
+    }
+
+    .warextMcDirectoryRow-actions
+    {
+        flex: 0 0 100%;
         width: 100%;
         min-width: 0;
         flex-direction: row;
@@ -268,12 +328,12 @@
         border-top: 1px solid @xf-borderColor;
     }
 
-    .warextMcVoteRow-votes
+    .warextMcDirectoryRow-votes
     {
-        flex: 0 0 72px;
+        flex: 0 0 76px;
     }
 
-    .warextMcVoteRow-voteButton
+    .warextMcDirectoryRow-voteButton
     {
         flex: 1 1 auto;
         width: auto;
@@ -282,68 +342,69 @@
 
 @media (max-width: @xf-responsiveNarrow)
 {
-    .warextMcVoteRow
+    .warextMcDirectoryRow
     {
         display: block;
         min-height: 0;
     }
 
-    .warextMcVoteRow-rank
+    .warextMcDirectoryRow-rank
     {
         width: 100%;
         min-width: 0;
         flex-direction: row;
         justify-content: flex-start;
-        gap: 5px;
-        padding: 8px 12px;
+        padding: 9px 12px;
         border-right: 0;
         border-bottom: 1px solid @xf-borderColor;
     }
 
-    .warextMcVoteRow-rank strong
+    .warextMcDirectoryRow-rank strong
     {
-        margin-top: 0;
         font-size: 15px;
     }
 
-    .warextMcVoteRow-media
+    .warextMcDirectoryRow-media
     {
-        width: calc(100% - 24px);
+        width: 100%;
         min-width: 0;
-        height: auto;
-        aspect-ratio: 3 / 1;
-        margin: 12px;
+        padding: 12px;
     }
 
-    .warextMcVoteRow-main
+    .warextMcDirectoryRow-media img,
+    .warextMcDirectoryRow-mediaFallback
+    {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 1;
+    }
+
+    .warextMcDirectoryRow-main
     {
         width: 100%;
         padding: 12px;
     }
 
-    .warextMcVoteRow-head,
-    .warextMcVoteRow-bottom
+    .warextMcDirectoryRow-head,
+    .warextMcDirectoryRow-bottom
     {
         align-items: stretch;
         flex-direction: column;
     }
 
-    .warextMcVoteRow-metrics
+    .warextMcDirectoryRow-metrics
     {
+        width: 100%;
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        width: 100%;
     }
 
-    .warextMcVoteRow-metrics > div
+    .warextMcDirectoryRow-metrics > div
     {
         min-width: 0;
-        border-left: 0;
-        border: 1px solid @xf-borderColor;
-        border-radius: @xf-borderRadiusMedium;
     }
 
-    .warextMcVoteRow-actions
+    .warextMcDirectoryRow-actions
     {
         width: 100%;
         min-width: 0;
@@ -352,21 +413,22 @@
         border-left: 0;
         border-top: 1px solid @xf-borderColor;
     }
+
+    .warextMcDirectoryRow-voteButton
+    {
+        flex: 1 1 auto;
+        width: auto;
+    }
 }
 
 @media (max-width: 480px)
 {
-    .warextMcVoteRow-actions
+    .warextMcDirectoryRow-actions
     {
         flex-wrap: wrap;
     }
 
-    .warextMcVoteRow-votes
-    {
-        flex: 0 0 100%;
-    }
-
-    .warextMcVoteRow-detailLink
+    .warextMcDirectoryRow-detailLink
     {
         width: 100%;
     }

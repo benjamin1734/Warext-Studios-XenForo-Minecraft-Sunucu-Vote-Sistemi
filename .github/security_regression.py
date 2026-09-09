@@ -31,9 +31,9 @@ require('_output/templates/admin/warext_mc_admin_setup.html', ['Kurulum ve Yapı
 require('_output/templates/admin/warext_mc_admin_category_index.html', ['$categoryRows', '$row.usageCount'])
 require('_output/templates/public/warext_mc_server_add.html', ['Sunucu tanıtım konusu', 'Görsel Kimlik', 'Ana sunucu adresi', 'Crossplay', '300×100', '1200×400'])
 require('Pub/Controller/Index.php', ['networkStatsRow', "'votes_month'", 'sortLinks', 'categoryItems', 'hasAdvancedFilters'])
-require('_output/templates/public/warext_mc_server_index.html', ['warextMcVoteList', "link('sunucular/oy'", 'copy-to-clipboard', 'data-copy-text', 'Gelişmiş filtreler', '$networkStats.server_count', 'warext_mc_server_directory.less'])
+require('_output/templates/public/warext_mc_server_index.html', ['warextMcDirectoryList', "link('sunucular/oy'", 'copy-to-clipboard', 'data-copy-text', 'Gelişmiş filtreler', '$networkStats.server_count', 'warext_mc_server_directory.less'])
 require('_output/templates/public/warext_mc_servers.less', ['.warextMcDirectoryHero', '.warextMcVoteRow', '.warextMcFeaturedGrid', '.warextMcAdvancedFilters'])
-require('_output/templates/public/warext_mc_server_directory.less', ['display: flex;', 'flex: 0 0 300px;', 'width: 300px;', 'height: 100px;', 'flex: 1 1 0;', 'flex: 0 0 128px;', 'aspect-ratio: 3 / 1'])
+require('_output/templates/public/warext_mc_server_directory.less', ['.warextMcDirectoryRow', 'flex: 0 0 316px;', 'width: 300px;', 'height: 100px;', 'flex: 1 1 auto;', 'flex: 0 0 138px;', 'aspect-ratio: 3 / 1'])
 require('_output/admin_navigation/warextMinecraftVote.json', ['"parent_navigation_id": ""', '"link": "warext-minecraft"', '"hide_no_children": true'])
 require('_output/admin_navigation/warextMinecraftSetup.json', ['warext-minecraft/setup'])
 require('_output/admin_navigation/warextMinecraftServers.json', ['warext-minecraft/servers'])
@@ -198,8 +198,8 @@ if not version_match:
 major, minor, patch = (int(part) for part in version_match.groups())
 if patch > 9:
     raise SystemExit('Yama sürümü 9 üzerinde olamaz; sonraki orta sürüme geçilmeli.')
-if version_string != '1.1.4' or int(addon.get('version_id', 0)) < 1011040:
-    raise SystemExit('Sürüm numarası 1.1.4 değil.')
+if version_string != '1.1.5' or int(addon.get('version_id', 0)) < 1011050:
+    raise SystemExit('Sürüm numarası 1.1.5 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')
