@@ -1,0 +1,29 @@
+name: Clean v1.1.2 Generated XML
+
+on:
+  push:
+    branches:
+      - fix-v1.1.2-content-type
+    paths:
+      - '.github/workflows/v112_clean.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-v1.1.2-content-type
+          fetch-depth: 0
+      - name: Restore unchanged master data
+        run: |
+          git checkout origin/main -- src/addons/Warext/MinecraftVote/_data/phrases.xml src/addons/Warext/MinecraftVote/_data/templates.xml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/addons/Warext/MinecraftVote/_data/phrases.xml src/addons/Warext/MinecraftVote/_data/templates.xml
+          git diff --cached --quiet && exit 0
+          git commit -m "Restore unchanged XenForo master data"
+          git push origin HEAD:fix-v1.1.2-content-type
