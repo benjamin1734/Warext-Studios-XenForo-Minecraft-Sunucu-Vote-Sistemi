@@ -1,0 +1,35 @@
+name: Apply v1.1.6 patch
+
+on:
+  push:
+    branches:
+      - v1.1.6-vote-policy-banner
+    paths:
+      - '.github/workflows/v116_patch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v1.1.6-vote-policy-banner
+      - name: Apply helper
+        run: python3 .github/v116_patch.py
+      - name: Validate
+        run: |
+          find src/addons/Warext/MinecraftVote -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          python3 .github/security_regression.py
+          python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
+      - name: Commit changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/addons/Warext/MinecraftVote/Service/Server/Media.php src/addons/Warext/MinecraftVote/Pub/Controller/Vote.php src/addons/Warext/MinecraftVote/Service/Vote/Creator.php src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_directory.less src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_add.html src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_edit.html src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_vote.html src/addons/Warext/MinecraftVote/addon.json .github/security_regression.py README.md
+          git diff --cached --quiet && exit 0
+          git commit -m "Enforce 24 hour member voting and 360x120 banners"
+          git push origin HEAD:v1.1.6-vote-policy-banner
