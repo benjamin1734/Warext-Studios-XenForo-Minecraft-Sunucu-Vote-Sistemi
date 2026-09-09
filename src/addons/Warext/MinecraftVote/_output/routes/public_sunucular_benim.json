@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "sunucular",
+    "sub_name": "benim",
+    "format": "benim/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "Warext\\MinecraftVote:MyServers",
+    "context": "",
+    "action_prefix": ""
+}

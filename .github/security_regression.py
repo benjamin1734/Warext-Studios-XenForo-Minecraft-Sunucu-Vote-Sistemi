@@ -41,6 +41,9 @@ require('Pub/Controller/Server.php', ['actionHesapSil(', 'actionHesapBirincil(',
 require('Pub/Controller/Team.php', ['actionRemove(', 'if (!$this->isPost())'])
 require('Pub/Controller/Update.php', ['actionDelete(', 'if (!$this->isPost())'])
 require('Pub/Controller/Review.php', ['actionDelete(', 'actionModerate(', 'if (!$this->isPost())'])
+require('Pub/Controller/MyServers.php', ['$this->app->db()', 'xf_warext_mc_server_team', 'owner_user_id'])
+require('_output/templates/public/warext_mc_server_mine.html', ['Sunucularım', "link('sunucular/ekle')", "link('sunucular/duzenle'"])
+require('_output/routes/public_sunucular_benim.json', ['MinecraftVote:MyServers', '"format": "benim/"'])
 require('Admin/Controller/Server.php', ['actionServers(', 'actionVoteModerate(', 'actionVoteRetry(', 'actionRunVoteQueue(', 'actionRanking(', 'actionState(', 'actionPing(', 'actionDelete(', 'if (!$this->isPost())'])
 require('Admin/Controller/Achievement.php', ['actionToggle(', 'actionRebuild(', 'if (!$this->isPost())'])
 require('Admin/Controller/Health.php', ['actionRetryFailed(', 'actionRecoverStale(', 'if (!$this->isPost())'])
@@ -67,6 +70,36 @@ for controller_root in [ROOT / 'Admin/Controller', ROOT / 'Pub/Controller']:
                 f'{controller_path}: AbstractController içinde bulunmayan $this->db() kullanımı var; '
                 '$this->app->db() kullanılmalı'
             )
+
+
+navigation_root = ROOT / '_output/navigation'
+expected_navigation = {
+    'warextMcServers': ('', "{{ link('sunucular') }}", ''),
+    'warextMcServerList': ('warextMcServers', "{{ link('sunucular') }}", ''),
+    'warextMcMyServers': ('warextMcServers', "{{ link('sunucular/benim') }}", '$xf.visitor.user_id'),
+    'warextMcServerAdd': ('warextMcServers', "{{ link('sunucular/ekle') }}", '$xf.visitor.user_id'),
+    'warextMcCompare': ('warextMcServers', "{{ link('sunucular/karsilastir') }}", ''),
+    'warextMcSeasons': ('warextMcServers', "{{ link('sunucular/sezonlar') }}", ''),
+    'warextMcFavorites': ('warextMcServers', "{{ link('sunucular/favoriler') }}", '$xf.visitor.user_id'),
+    'warextMcAccounts': ('warextMcServers', "{{ link('sunucular/hesaplar') }}", '$xf.visitor.user_id')
+}
+for navigation_id, (parent, link, condition) in expected_navigation.items():
+    path = navigation_root / f'{navigation_id}.json'
+    if not path.exists():
+        raise SystemExit(f'Eksik public navigation: {navigation_id}')
+    data = json.loads(path.read_text(encoding='utf-8'))
+    if data.get('parent_navigation_id', '') != parent:
+        raise SystemExit(f'{navigation_id}: yanlış parent navigation')
+    type_config = data.get('type_config', {})
+    if type_config.get('link') != link or type_config.get('display_condition', '') != condition:
+        raise SystemExit(f'{navigation_id}: yanlış navigation link/condition')
+    if not data.get('enabled', False):
+        raise SystemExit(f'{navigation_id}: navigation devre dışı')
+
+navigation_builder = Path('.github/build_xf_navigation.py').read_text(encoding='utf-8')
+for needle in ["data / 'navigation.xml'", "route.get('route_prefix') == 'sunucular'", "route.set('context', 'warextMcServers')"]:
+    if needle not in navigation_builder:
+        raise SystemExit(f'Navigation build koruması eksik: {needle}')
 
 
 route_seen = set()
@@ -136,8 +169,8 @@ for option in [
         raise SystemExit(f'{option}: seçenek grubu ilişkisi eksik')
 
 addon = json.loads((ROOT / 'addon.json').read_text(encoding='utf-8'))
-if addon.get('version_string') != '1.0.8' or int(addon.get('version_id', 0)) < 1010080:
-    raise SystemExit('Sürüm numarası 1.0.8 değil.')
+if addon.get('version_string') != '1.0.9' or int(addon.get('version_id', 0)) < 1010090:
+    raise SystemExit('Sürüm numarası 1.0.9 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')
