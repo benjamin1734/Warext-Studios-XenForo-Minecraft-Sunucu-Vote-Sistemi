@@ -2,11 +2,18 @@
 <templates>
   <template type="public" title="alert_warext_mc_server_update_publish" version_id="1011010" version_string="1.1.1">&lt;xf:username user="$user" /&gt; takip ettiğiniz &lt;a href="{{ link('sunucular/guncellemeler', $content.Server) }}"&gt;&lt;strong&gt;{$content.Server.title}&lt;/strong&gt;&lt;/a&gt; sunucusu için yeni bir güncelleme yayınladı: &lt;strong&gt;{$content.title}&lt;/strong&gt;
 </template>
-  <template type="public" title="approval_item_warext_mc_server" version_id="1011010" version_string="1.1.1">&lt;xf:macro template="approval_queue_macros" name="item_message_type"
+  <template type="public" title="approval_item_warext_mc_server" version_id="1011010" version_string="1.1.1">&lt;xf:set var="$messageHtml"&gt;
+    &lt;h4 class="message-title"&gt;&lt;a href="{{ link('sunucular/detay', $content) }}"&gt;{$content.title}&lt;/a&gt;&lt;/h4&gt;
+    &lt;xf:if is="$content.description"&gt;&lt;div&gt;{$content.description}&lt;/div&gt;&lt;/xf:if&gt;
+    &lt;div class="contentRow-minor"&gt;{$content.host}:{$content.port}&lt;/div&gt;
+&lt;/xf:set&gt;
+
+&lt;xf:macro template="approval_queue_macros" name="item_message_type"
     arg-content="{$content}"
+    arg-contentDate="{$content.created_date}"
     arg-user="{$content.Owner}"
-    arg-messageHtml="{$content.description}"
-    arg-typePhraseHtml="Minecraft Sunucusu"
+    arg-messageHtml="{{ $messageHtml }}"
+    arg-typePhraseHtml="{{ phrase('content_type.warext_mc_server') }}"
     arg-spamDetails="{$spamDetails}"
     arg-unapprovedItem="{$unapprovedItem}"
     arg-handler="{$handler}"

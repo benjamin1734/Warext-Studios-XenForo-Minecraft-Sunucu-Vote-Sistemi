@@ -56,8 +56,9 @@ require('Setup.php', ['installStep17', 'upgrade1010040Step1', 'upgrade1010040Ste
 require('Entity/Sponsor.php', ['purchase_request_key'])
 require('Entity/Server.php', ["$structure->contentType = 'warext_mc_server'", 'ApprovalQueue', 'discussion_thread_id', 'animated_banner_path', 'cover_path'])
 require('Service/Server/Media.php', ['468', 'animated_banner', 'copyFileToAbstractedPath', 'IMAGETYPE_GIF'])
-require('Service/Server/ThreadLinker.php', ['discussion_thread_id', 'threads/', 'boardUrl'])
-require('ApprovalQueue/Server.php', ['XF\\ApprovalQueue\\AbstractHandler', 'actionApprove', 'actionDelete'])
+require('Service/Server/Creator.php', ['trailer_url'])
+require('Service/Server/ThreadLinker.php', ['discussion_thread_id', 'threads/', 'boardUrl', 'getMappedCategory', 'canView'])
+require('ApprovalQueue/Server.php', ['XF\\ApprovalQueue\\AbstractHandler', 'canViewContent', 'actionApprove', 'actionDelete'])
 require('Listener.php', ['threadFormPreRender', 'postEntityPostSave', 'threadViewPreRender', 'threadEntityPostDelete'])
 require('_output/templates/public/warext_mc_server_add.html', ['upload="true"', 'animated_banner', 'discussion_thread_url', '468×60'])
 require('_output/templates/public/warext_mc_thread_integration_fields.html', ['Sunucu dizininde de yayınla', 'warext_mc_host'])
@@ -65,7 +66,7 @@ require('_output/templates/public/approval_item_warext_mc_server.html', ['approv
 require('_output/content_type_fields/warext_mc_server-approval_queue_handler_class.json', ['approval_queue_handler_class'])
 require('_output/code_event_listeners/entity_post_save_Warext-MinecraftVote-Listener_postEntityPostSave_XF-Entity-Post.json', ['entity_post_save', 'XF\\\\Entity\\\\Post'])
 require('_output/template_modifications/public/warext_mc_thread_fields.json', ['forum_post_thread', 'preg_replace'])
-require('Setup.php', ['installStep18', 'upgrade1011010Step1', 'ensureThreadMediaIntegration', 'warext_mc_server', 'contentTypes'])
+require('Setup.php', ['installStep18', 'upgrade1011010Step1', 'ensureThreadMediaIntegration', 'warext_mc_server', 'rebuildContentTypeCache'])
 
 
 server_admin = (ROOT / 'Admin/Controller/Server.php').read_text(encoding='utf-8')

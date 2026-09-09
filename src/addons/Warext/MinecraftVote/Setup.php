@@ -447,7 +447,7 @@ class Setup extends AbstractSetup
                 ['warext_mc_server', $fieldName, $fieldValue, 'Warext/MinecraftVote']
             );
         }
-        $db->delete('xf_data_registry', 'data_key = ?', 'contentTypes');
+        $this->app->repository('XF:ContentTypeField')->rebuildContentTypeCache();
     }
 
     protected function addRankingColumns(): void
