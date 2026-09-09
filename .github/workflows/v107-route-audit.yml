@@ -1,0 +1,35 @@
+name: v1.0.7 Route Audit
+
+on:
+  push:
+    branches:
+      - v1.0.7-route-rebuild
+    paths:
+      - '.github/workflows/v107-route-audit.yml'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v1.0.7-route-rebuild
+      - name: Print route table
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          root = Path('src/addons/Warext/MinecraftVote/_output/routes')
+          for p in sorted(root.glob('*.json')):
+              d = json.loads(p.read_text(encoding='utf-8'))
+              print('|'.join([
+                  p.name,
+                  str(d.get('route_type','')),
+                  str(d.get('route_prefix','')),
+                  str(d.get('sub_name','')),
+                  str(d.get('format','')),
+                  str(d.get('controller','')),
+                  str(d.get('action_prefix','')),
+                  str(d.get('context',''))
+              ]))
+          PY
