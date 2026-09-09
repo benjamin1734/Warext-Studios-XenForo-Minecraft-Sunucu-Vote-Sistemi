@@ -1,0 +1,35 @@
+name: Apply v1.1.5 patch
+
+on:
+  push:
+    branches:
+      - fix-v1.1.5-isolated-directory-layout
+    paths:
+      - '.github/workflows/v115_patch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix-v1.1.5-isolated-directory-layout
+      - name: Apply helper
+        run: python3 .github/v115_patch.py
+      - name: Validate
+        run: |
+          find src/addons/Warext/MinecraftVote -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          python3 .github/security_regression.py
+          python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
+      - name: Commit changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_index.html src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_directory.less src/addons/Warext/MinecraftVote/addon.json .github/security_regression.py README.md
+          git diff --cached --quiet && exit 0
+          git commit -m "Isolate server directory layout"
+          git push origin HEAD:fix-v1.1.5-isolated-directory-layout
