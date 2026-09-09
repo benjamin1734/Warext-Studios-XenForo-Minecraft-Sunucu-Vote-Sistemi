@@ -30,21 +30,34 @@ require('Admin/Controller/Category.php', ['actionEdit(', 'actionToggle(', 'actio
 require('_output/templates/admin/warext_mc_admin_setup.html', ['Kurulum ve Yapılandırma', 'Kategoriler', 'Kullanıcı Grubu İzinleri', 'NuVotifier'])
 require('_output/templates/admin/warext_mc_admin_category_index.html', ['$categoryRows', '$row.usageCount'])
 require('_output/templates/public/warext_mc_server_add.html', ['kategori seçimi yeni form alanı açmaz', 'Ana sunucu adresi', 'Crossplay'])
-require('_output/admin_navigation/warextMinecraftVote.json', ['warext-minecraft/setup'])
+require('_output/admin_navigation/warextMinecraftVote.json', ['"parent_navigation_id": ""', '"link": "warext-minecraft/setup"', '"hide_no_children": true'])
 require('_output/admin_navigation/warextMinecraftSetup.json', ['warext-minecraft/setup'])
+require('_output/admin_navigation/warextMinecraftServers.json', ['warext-minecraft/servers'])
+require('_output/routes/admin_warext-minecraft_.json', ['MinecraftVote:Server', 'warextMinecraftServers'])
+require('_output/routes/admin_warext-minecraft_servers.json', ['MinecraftVote:Server', 'warextMinecraftServers', '"action_prefix": "servers"'])
 require('_output/admin_navigation/warextMinecraftCategories.json', ['warext-minecraft/categories'])
 require('Pub/Controller/Favorite.php', ['if (!$this->isPost())', "buildLink('sunucular/detay'", "buildLink('sunucular/favoriler'"])
 require('Pub/Controller/Server.php', ['actionHesapSil(', 'actionHesapBirincil(', 'if (!$this->isPost())'])
 require('Pub/Controller/Team.php', ['actionRemove(', 'if (!$this->isPost())'])
 require('Pub/Controller/Update.php', ['actionDelete(', 'if (!$this->isPost())'])
 require('Pub/Controller/Review.php', ['actionDelete(', 'actionModerate(', 'if (!$this->isPost())'])
-require('Admin/Controller/Server.php', ['actionVoteModerate(', 'actionVoteRetry(', 'actionRunVoteQueue(', 'actionRanking(', 'actionState(', 'actionPing(', 'actionDelete(', 'if (!$this->isPost())'])
+require('Admin/Controller/Server.php', ['actionServers(', "buildLink('warext-minecraft/setup')", 'actionVoteModerate(', 'actionVoteRetry(', 'actionRunVoteQueue(', 'actionRanking(', 'actionState(', 'actionPing(', 'actionDelete(', 'if (!$this->isPost())'])
 require('Admin/Controller/Achievement.php', ['actionToggle(', 'actionRebuild(', 'if (!$this->isPost())'])
 require('Admin/Controller/Health.php', ['actionRetryFailed(', 'actionRecoverStale(', 'if (!$this->isPost())'])
 require('Admin/Controller/Sponsor.php', ['actionToggle(', 'actionDelete(', 'if (!$this->isPost())'])
 require('Admin/Controller/Report.php', ['actionUpdate(', 'if (!$this->isPost())'])
 require('Setup.php', ['installStep17', 'upgrade1010040Step1', 'upgrade1010040Step2', 'repairCurrentSchema', 'ensureSponsorPurchaseSupport', 'purchase_request_key', 'INSERT IGNORE INTO xf_warext_mc_category'])
 require('Entity/Sponsor.php', ['purchase_request_key'])
+
+
+server_admin = (ROOT / 'Admin/Controller/Server.php').read_text(encoding='utf-8')
+if re.search(r"buildLink\('warext-minecraft'(?=[,)])", server_admin):
+    raise SystemExit('Server controller hala ana admin routeunu sunucu listesi olarak kullanıyor')
+
+for template in (ROOT / '_output/templates/admin').rglob('*.html'):
+    text = template.read_text(encoding='utf-8')
+    if re.search(r"link\('warext-minecraft'(?=[,)])", text):
+        raise SystemExit(f'{template}: admin ana route sunucu listesine bağlanmış')
 
 for template in (ROOT / '_output/templates').rglob('*.html'):
     text = template.read_text(encoding='utf-8')
@@ -74,8 +87,8 @@ for option in [
         raise SystemExit(f'{option}: seçenek grubu ilişkisi eksik')
 
 addon = json.loads((ROOT / 'addon.json').read_text(encoding='utf-8'))
-if addon.get('version_string') != '1.0.5' or int(addon.get('version_id', 0)) < 1010050:
-    raise SystemExit('Sürüm numarası 1.0.5 değil.')
+if addon.get('version_string') != '1.0.6' or int(addon.get('version_id', 0)) < 1010060:
+    raise SystemExit('Sürüm numarası 1.0.6 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')

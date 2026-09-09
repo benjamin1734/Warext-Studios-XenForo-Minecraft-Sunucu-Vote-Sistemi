@@ -16,6 +16,11 @@ class Server extends AbstractController
 
     public function actionIndex()
     {
+        return $this->redirect($this->buildLink('warext-minecraft/setup'));
+    }
+
+    public function actionServers()
+    {
         $state = $this->filter('state', 'str');
         if (!in_array($state, ['pending', 'active', 'rejected', 'suspended', 'all'], true))
         {
@@ -281,13 +286,13 @@ class Server extends AbstractController
     {
         if (!$this->isPost())
         {
-            return $this->redirect($this->buildLink('warext-minecraft', null, ['state' => 'all']));
+            return $this->redirect($this->buildLink('warext-minecraft/servers', null, ['state' => 'all']));
         }
 
         $result = $this->service('Warext\MinecraftVote:Ranking\Rebuilder')->rebuild();
 
         return $this->redirect(
-            $this->buildLink('warext-minecraft', null, ['state' => 'all']),
+            $this->buildLink('warext-minecraft/servers', null, ['state' => 'all']),
             sprintf('%d aktif sunucu için Popüler ve Trend sıralamaları yeniden hesaplandı.', (int)$result['updated'])
         );
     }
@@ -296,7 +301,7 @@ class Server extends AbstractController
     {
         if (!$this->isPost())
         {
-            return $this->redirect($this->buildLink('warext-minecraft'));
+            return $this->redirect($this->buildLink('warext-minecraft/servers'));
         }
 
         $serverId = $this->filter('server_id', 'uint');
@@ -340,7 +345,7 @@ class Server extends AbstractController
             throw $e;
         }
 
-        return $this->redirect($this->buildLink('warext-minecraft', null, [
+        return $this->redirect($this->buildLink('warext-minecraft/servers', null, [
             'state' => $state === 'pending' ? 'pending' : 'all'
         ]));
     }
@@ -349,7 +354,7 @@ class Server extends AbstractController
     {
         if (!$this->isPost())
         {
-            return $this->redirect($this->buildLink('warext-minecraft', null, ['state' => 'all']));
+            return $this->redirect($this->buildLink('warext-minecraft/servers', null, ['state' => 'all']));
         }
 
         $serverId = $this->filter('server_id', 'uint');
@@ -377,7 +382,7 @@ class Server extends AbstractController
         }
 
         return $this->redirect(
-            $this->buildLink('warext-minecraft', null, ['state' => 'all']),
+            $this->buildLink('warext-minecraft/servers', null, ['state' => 'all']),
             $message
         );
     }
@@ -386,7 +391,7 @@ class Server extends AbstractController
     {
         if (!$this->isPost())
         {
-            return $this->redirect($this->buildLink('warext-minecraft'));
+            return $this->redirect($this->buildLink('warext-minecraft/servers'));
         }
 
         $serverId = $this->filter('server_id', 'uint');
@@ -442,7 +447,7 @@ class Server extends AbstractController
             throw $e;
         }
 
-        return $this->redirect($this->buildLink('warext-minecraft'));
+        return $this->redirect($this->buildLink('warext-minecraft/servers'));
     }
 
     protected function enqueueVoteDelivery(): void

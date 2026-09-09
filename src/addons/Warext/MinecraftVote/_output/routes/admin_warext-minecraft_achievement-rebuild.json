@@ -6,6 +6,6 @@
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Achievement",
-    "context": "",
+    "context": "warextMcAchievements",
     "action_prefix": "rebuild"
 }

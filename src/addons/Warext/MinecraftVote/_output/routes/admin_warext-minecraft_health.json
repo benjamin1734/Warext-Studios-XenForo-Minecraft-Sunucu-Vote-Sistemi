@@ -6,6 +6,6 @@
     "build_class": "",
     "build_method": "",
     "controller": "Warext\\MinecraftVote:Health",
-    "context": "",
+    "context": "warextMinecraftHealth",
     "action_prefix": ""
 }
