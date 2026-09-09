@@ -52,7 +52,7 @@ class Creator extends AbstractService
             $data['bedrock_host'] = $data['host'];
         }
 
-        foreach (['website_url', 'discord_url', 'store_url'] as $urlField)
+        foreach (['website_url', 'discord_url', 'store_url', 'trailer_url'] as $urlField)
         {
             $data[$urlField] = trim((string)($data[$urlField] ?? ''));
             if ($data[$urlField] !== '' && !$this->isValidHttpUrl($data[$urlField]))
@@ -92,6 +92,7 @@ class Creator extends AbstractService
             'website_url',
             'discord_url',
             'store_url',
+            'trailer_url',
             'game_modes',
             'version_min',
             'version_max',
