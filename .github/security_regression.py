@@ -172,8 +172,15 @@ for option in [
         raise SystemExit(f'{option}: seçenek grubu ilişkisi eksik')
 
 addon = json.loads((ROOT / 'addon.json').read_text(encoding='utf-8'))
-if addon.get('version_string') != '1.0.10' or int(addon.get('version_id', 0)) < 1010100:
-    raise SystemExit('Sürüm numarası 1.0.10 değil.')
+version_string = str(addon.get('version_string', ''))
+version_match = re.fullmatch(r'(\d+)\.(\d+)\.(\d+)', version_string)
+if not version_match:
+    raise SystemExit('Sürüm numarası x.y.z biçiminde değil.')
+major, minor, patch = (int(part) for part in version_match.groups())
+if patch > 9:
+    raise SystemExit('Yama sürümü 9 üzerinde olamaz; sonraki orta sürüme geçilmeli.')
+if version_string != '1.1.0' or int(addon.get('version_id', 0)) < 1011000:
+    raise SystemExit('Sürüm numarası 1.1.0 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')
