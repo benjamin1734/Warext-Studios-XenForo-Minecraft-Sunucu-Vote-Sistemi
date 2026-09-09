@@ -14,9 +14,9 @@
                 <strong>Aktif sunucu:</strong> {$counts.active}
             </div>
             <div class="block-row">
+                <strong>Oy politikası:</strong> Yalnız kayıtlı üyeler · 24 saatte 1 oy / sunucu ·
                 <strong>Oy CAPTCHA:</strong> <xf:if is="$captchaEnabled">Açık<xf:else />Kapalı</xf:if> ·
                 <strong>Doğrulanmış hesap zorunluluğu:</strong> <xf:if is="$requireVerified">Açık<xf:else />Kapalı</xf:if> ·
-                <strong>Misafir oy:</strong> <xf:if is="$allowGuests">Açık<xf:else />Kapalı</xf:if> ·
                 <strong>Sponsor satışları:</strong> <xf:if is="$sponsorEnabled">Açık<xf:else />Kapalı</xf:if>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <h2 class="block-header">1. Genel Ayarlar</h2>
         <div class="block-body">
             <div class="block-row">
-                Admin CP → Setup → Options bölümünde <strong>Warext Minecraft Sunucu & Vote</strong> seçenek grubunu açın. Oy bekleme süresi, CAPTCHA, misafir oyları, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir.
+                Admin CP → Setup → Options bölümünde <strong>Warext Minecraft Sunucu & Vote</strong> seçenek grubunu açın. CAPTCHA, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir. Oy verme süresi sabit 24 saattir ve yalnız forum üyeleri oy kullanabilir.
             </div>
             <div class="block-row">
                 JSON API: <xf:if is="$publicApiEnabled">Açık<xf:else />Kapalı</xf:if> · HTTPS webhook: <xf:if is="$webhookEnabled">Açık<xf:else />Kapalı</xf:if>
@@ -43,7 +43,7 @@
         <div class="block-body">
             <div class="block-row">Admin CP → Groups & permissions → User group permissions bölümünde <strong>Minecraft Sunucu & Vote</strong> izin grubunu düzenleyin.</div>
             <div class="block-row"><strong>Sunucu ekleyebilir:</strong> Kullanıcının yeni Minecraft sunucusu göndermesini sağlar.</div>
-            <div class="block-row"><strong>Oy verebilir:</strong> Aktif sunuculara oy verme yetkisidir.</div>
+            <div class="block-row"><strong>Oy verebilir:</strong> Aktif sunuculara oy verme yetkisidir. Kayıtlı üye aynı sunucuya 24 saatte yalnız bir kez oy verebilir.</div>
             <div class="block-row"><strong>Değerlendirme yapabilir:</strong> Sunuculara puan ve yorum bırakma yetkisidir.</div>
             <div class="block-row"><strong>Favorilere ekleyebilir:</strong> Favori ve güncelleme bildirimi özelliklerini açar.</div>
             <div class="block-row"><strong>Raporlayabilir:</strong> Sunucu raporu göndermeyi açar.</div>
