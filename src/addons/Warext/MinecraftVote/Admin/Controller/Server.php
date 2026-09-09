@@ -72,7 +72,7 @@ class Server extends AbstractController
             ->limitByPage($page, $perPage)
             ->fetch();
 
-        $statusRows = $this->db()->fetchAll(
+        $statusRows = $this->app->db()->fetchAll(
             'SELECT status, COUNT(*) AS total FROM xf_warext_mc_vote GROUP BY status'
         );
         $statusCounts = array_fill_keys($allowedStatuses, 0);
@@ -153,7 +153,7 @@ class Server extends AbstractController
             return $this->error('Bu oy şu anda NuVotifier teslimatı tarafından işleniyor. İşlem tamamlandıktan veya lease süresi dolduktan sonra tekrar deneyin.');
         }
 
-        $db = $this->db();
+        $db = $this->app->db();
         $db->beginTransaction();
 
         try
@@ -314,7 +314,7 @@ class Server extends AbstractController
 
         $server = $this->assertServerExists($serverId);
         $previousState = (string)$server->state;
-        $db = $this->db();
+        $db = $this->app->db();
         $db->beginTransaction();
 
         try
@@ -396,7 +396,7 @@ class Server extends AbstractController
 
         $serverId = $this->filter('server_id', 'uint');
         $server = $this->assertServerExists($serverId);
-        $db = $this->db();
+        $db = $this->app->db();
 
         $updateRows = $db->fetchAll(
             'SELECT update_id FROM xf_warext_mc_server_update WHERE server_id = ?',
