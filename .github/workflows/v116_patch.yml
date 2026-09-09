@@ -1,4 +1,4 @@
-name: Apply v1.1.6 patch
+name: Apply v1.1.6 patch retry
 
 on:
   push:
