@@ -35,6 +35,15 @@ class Vote extends AbstractController
         $linkedAccounts = $this->repository('Warext\MinecraftVote:MinecraftAccount')
             ->findForUser($visitor->user_id)
             ->fetch();
+        $hasEligibleAccount = !$requireVerifiedAccount;
+        foreach ($linkedAccounts as $linkedAccount)
+        {
+            if ($linkedAccount->verification_state === 'verified')
+            {
+                $hasEligibleAccount = true;
+                break;
+            }
+        }
 
         if ($this->isPost())
         {
@@ -73,11 +82,6 @@ class Vote extends AbstractController
 
             if ($accountId)
             {
-                if (!$visitor->user_id)
-                {
-                    return $this->noPermission();
-                }
-
                 $linkedAccount = $this->repository('Warext\MinecraftVote:MinecraftAccount')
                     ->getForUser($accountId, $visitor->user_id);
                 if (!$linkedAccount)
@@ -123,6 +127,7 @@ class Vote extends AbstractController
             'allowGuests' => false,
             'voteBlocked' => $voteBlocked,
             'linkedAccounts' => $linkedAccounts,
+            'hasEligibleAccount' => $hasEligibleAccount,
             'requireVerifiedAccount' => $requireVerifiedAccount,
             'requireCaptcha' => $requireCaptcha
         ]);
@@ -130,7 +135,7 @@ class Vote extends AbstractController
 
     protected function assertActiveServer(int $serverId): Server
     {
-        $server = $this->em()->find('Warext\MinecraftVote:Server', $serverId);
+        $server = $this->em()->find('Warext\MinecraftVote:Server', $serverId, ['Owner', 'DiscussionThread']);
         if (!$server || $server->state !== 'active')
         {
             throw $this->exception($this->notFound());

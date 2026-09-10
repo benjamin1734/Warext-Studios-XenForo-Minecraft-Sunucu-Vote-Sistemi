@@ -1,0 +1,403 @@
+.warextMcVotePage-cover
+{
+    margin-bottom: 14px;
+    overflow: hidden;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcVotePage-cover img
+{
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    object-fit: cover;
+}
+
+.warextMcVotePage-hero
+{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentBg;
+    box-sizing: border-box;
+}
+
+.warextMcVotePage-banner
+{
+    flex: 0 0 468px;
+    width: 468px;
+    min-width: 468px;
+}
+
+.warextMcVotePage-banner img,
+.warextMcVotePage-bannerFallback
+{
+    display: block;
+    width: 468px;
+    height: 60px;
+    max-width: 100%;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    box-sizing: border-box;
+}
+
+.warextMcVotePage-banner img
+{
+    object-fit: cover;
+}
+
+.warextMcVotePage-bannerFallback
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: @xf-contentAltBg;
+    color: @xf-textColorMuted;
+    font-size: 20px;
+}
+
+.warextMcVotePage-identity
+{
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.warextMcVotePage-titleLine
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+}
+
+.warextMcVotePage-titleLine h1
+{
+    margin: 0 4px 0 0;
+    font-size: 24px;
+    line-height: 1.15;
+}
+
+.warextMcVotePage-motd
+{
+    margin-top: 6px;
+    color: @xf-textColorMuted;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.warextMcVotePage-address
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.warextMcVotePage-address > div
+{
+    min-width: 0;
+}
+
+.warextMcVotePage-address span,
+.warextMcVotePage-address strong
+{
+    display: block;
+}
+
+.warextMcVotePage-address span
+{
+    margin-bottom: 2px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVotePage-address strong
+{
+    font-family: monospace;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.warextMcVotePage-links
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: @xf-fontSizeSmall;
+}
+
+.warextMcVotePage-metrics
+{
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+    margin: 12px 0 16px;
+}
+
+.warextMcVotePage-metrics > div
+{
+    padding: 11px 8px;
+    text-align: center;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentBg;
+    box-sizing: border-box;
+}
+
+.warextMcVotePage-metrics strong,
+.warextMcVotePage-metrics span
+{
+    display: block;
+}
+
+.warextMcVotePage-metrics strong
+{
+    font-size: 17px;
+    line-height: 1.15;
+}
+
+.warextMcVotePage-metrics small
+{
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 400;
+}
+
+.warextMcVotePage-metrics span
+{
+    margin-top: 4px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVotePage-layout
+{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
+    gap: 16px;
+    align-items: start;
+}
+
+.warextMcVotePage-content,
+.warextMcVotePage-voteColumn
+{
+    min-width: 0;
+}
+
+.warextMcVotePage-voteColumn
+{
+    position: sticky;
+    top: 12px;
+}
+
+.warextMcVotePage-infoGrid
+{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+}
+
+.warextMcVotePage-infoGrid > div
+{
+    min-width: 0;
+    padding: 12px 14px;
+    border-bottom: 1px solid @xf-borderColor;
+    box-sizing: border-box;
+}
+
+.warextMcVotePage-infoGrid > div:nth-child(odd)
+{
+    border-right: 1px solid @xf-borderColor;
+}
+
+.warextMcVotePage-infoGrid span,
+.warextMcVotePage-infoGrid strong
+{
+    display: block;
+}
+
+.warextMcVotePage-infoGrid span
+{
+    margin-bottom: 4px;
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcVotePage-infoGrid strong
+{
+    overflow-wrap: anywhere;
+}
+
+.warextMcVotePage-voteCard
+{
+    margin-bottom: 0;
+}
+
+.warextMcVotePage-voteHeading
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.warextMcVotePage-voteHeading strong,
+.warextMcVotePage-voteHeading span
+{
+    display: block;
+}
+
+.warextMcVotePage-voteHeading > div > span
+{
+    margin-top: 2px;
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 400;
+    opacity: .75;
+}
+
+.warextMcVotePage-voteCount
+{
+    font-size: 23px;
+    line-height: 1;
+}
+
+.warextMcVotePage-voteIntro
+{
+    padding: 14px;
+    color: @xf-textColorMuted;
+    line-height: 1.5;
+}
+
+.warextMcVotePage-blocked
+{
+    margin: 0 14px 14px;
+}
+
+.warextMcVotePage-blocked strong,
+.warextMcVotePage-blocked span
+{
+    display: block;
+}
+
+.warextMcVotePage-blocked span
+{
+    margin-top: 4px;
+}
+
+.warextMcVotePage-voteActions
+{
+    padding: 0 14px 14px;
+}
+
+.warextMcVotePage-voteActions .button
+{
+    width: 100%;
+}
+
+.warextMcVotePage-form
+{
+    border-top: 1px solid @xf-borderColor;
+}
+
+.warextMcVotePage-extraLinks
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+@media (max-width: 1100px)
+{
+    .warextMcVotePage-hero
+    {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .warextMcVotePage-banner
+    {
+        width: 100%;
+        min-width: 0;
+        flex-basis: auto;
+    }
+
+    .warextMcVotePage-banner img,
+    .warextMcVotePage-bannerFallback
+    {
+        width: 468px;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 39 / 5;
+    }
+
+    .warextMcVotePage-metrics
+    {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .warextMcVotePage-layout
+    {
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
+    }
+}
+
+@media (max-width: 820px)
+{
+    .warextMcVotePage-layout
+    {
+        display: block;
+    }
+
+    .warextMcVotePage-voteColumn
+    {
+        position: static;
+        margin-bottom: 16px;
+    }
+
+    .warextMcVotePage-metrics
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: @xf-responsiveNarrow)
+{
+    .warextMcVotePage-hero
+    {
+        padding: 12px;
+    }
+
+    .warextMcVotePage-titleLine h1
+    {
+        flex: 0 0 100%;
+        font-size: 21px;
+    }
+
+    .warextMcVotePage-address
+    {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .warextMcVotePage-address .button
+    {
+        width: 100%;
+    }
+
+    .warextMcVotePage-infoGrid
+    {
+        display: block;
+    }
+
+    .warextMcVotePage-infoGrid > div:nth-child(odd)
+    {
+        border-right: 0;
+    }
+}
