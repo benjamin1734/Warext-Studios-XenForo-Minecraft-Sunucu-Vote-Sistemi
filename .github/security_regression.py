@@ -17,7 +17,7 @@ require('_output/templates/public/warext_mc_server_vote.html', ['<xf:captcharow'
 require('_output/templates/public/warext_mc_server_vote.less', ['.warextMcVotePage-hero', '.warextMcVotePage-banner', 'width: 468px;', 'height: 60px;', '.warextMcVotePage-metrics', '.warextMcVotePage-layout', '.warextMcVotePage-voteCard'])
 require('Pub/Controller/Detail.php', ['findRecentPublicVotes(', 'getTopVotersThisMonth(', "findVisibleForServer", "PublicPermissions::allows('vote', false, true)", "['Owner', 'DiscussionThread']"])
 require('Repository/Vote.php', ['findRecentPublicVotes(', 'getTopVotersThisMonth(', 'INNER JOIN xf_user', "status <> 'rejected'"])
-require('_output/templates/public/warext_mc_server_view.html', ['warext_mc_server_profile.less', 'warextMcProfileHero', 'Hızlı Erişim', 'Son Oy Verenler', 'Bu Ay Top Voter', 'Sunucuyu Yönet', 'Şimdi Oy Ver'])
+require('_output/templates/public/warext_mc_server_view.html', ['warext_mc_server_profile.less', '<xf:h1 hidden="true" />', 'warextMcProfileHero', 'Hızlı Erişim', 'Son Oy Verenler', 'Bu Ay Top Voter', 'Sunucuyu Yönet', 'Şimdi Oy Ver'])
 require('_output/templates/public/warext_mc_server_profile.less', ['.warextMcProfileHero', 'width: 468px;', 'height: 60px;', '.warextMcProfileGrid', 'grid-template-columns: 250px minmax(0, 1fr) 280px;', '.warextMcProfileSupport', '.warextMcProfileLeaderboard'])
 require('Service/Vote/Creator.php', ["hash_hmac('sha256', $ip", 'assertCooldown(', 'assertIpVelocity(', 'calculateFraudScore(', '!$this->user->user_id', '$since = \XF::$time - 86400', '24 saat sonra tekrar deneyin'])
 require('Network/EndpointResolver.php', ['FILTER_FLAG_NO_PRIV_RANGE', 'FILTER_FLAG_NO_RES_RANGE'])
