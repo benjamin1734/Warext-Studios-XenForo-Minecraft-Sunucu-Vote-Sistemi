@@ -22,6 +22,37 @@ class Vote extends Repository
             ->order('vote_date', 'DESC');
     }
 
+    public function findRecentPublicVotes(int $serverId, int $limit = 6): VoteFinder
+    {
+        return $this->finder('Warext\MinecraftVote:Vote')
+            ->forServer($serverId)
+            ->where('user_id', '>', 0)
+            ->where('status', '<>', 'rejected')
+            ->with('User')
+            ->order('vote_date', 'DESC')
+            ->limit(max(1, min(12, $limit)));
+    }
+
+    public function getTopVotersThisMonth(int $serverId, int $limit = 5): array
+    {
+        [, $monthStart] = $this->getCounterBoundaries();
+        $limit = max(1, min(10, $limit));
+
+        return $this->db()->fetchAll(
+            "SELECT v.user_id, u.username, COUNT(*) AS vote_count, MAX(v.vote_date) AS last_vote_date
+             FROM xf_warext_mc_vote AS v
+             INNER JOIN xf_user AS u ON u.user_id = v.user_id
+             WHERE v.server_id = ?
+               AND v.user_id > 0
+               AND v.status <> 'rejected'
+               AND v.vote_date >= ?
+             GROUP BY v.user_id, u.username
+             ORDER BY vote_count DESC, last_vote_date DESC
+             LIMIT {$limit}",
+            [$serverId, $monthStart]
+        );
+    }
+
     public function findPendingDelivery(int $limit = 100): VoteFinder
     {
         return $this->finder('Warext\MinecraftVote:Vote')
