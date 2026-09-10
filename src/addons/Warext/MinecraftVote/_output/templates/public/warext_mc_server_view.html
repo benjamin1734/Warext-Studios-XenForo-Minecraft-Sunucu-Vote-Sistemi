@@ -1,149 +1,237 @@
 <xf:title>{$server.title}</xf:title>
 <xf:description>{$seoDescription}</xf:description>
-<xf:css src="warext_mc_servers.less" />
+<xf:h1 hidden="true" />
+<xf:css src="warext_mc_server_profile.less" />
 
-<xf:pageaction>
-    <xf:if is="$server.state == 'active'">
-        <xf:if is="$canVote">
-            <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta">Oy Ver</xf:button>
-        </xf:if>
-        <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncellemeler</xf:button>
-        <xf:button href="{{ link('sunucular/degerlendir', $server) }}">Değerlendirmeler ({$server.rating_count})</xf:button>
-    </xf:if>
-    <xf:if is="$canFavorite">
-        <xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true" class="buttonGroup">
-            <xf:button type="submit">Favoriye Ekle / Çıkar</xf:button>
-        </xf:form>
-    </xf:if>
-    <xf:if is="$canReport">
-        <xf:button href="{{ link('sunucular/rapor', $server) }}">Raporla</xf:button>
+<section class="warextMcProfileHero">
+    <xf:if is="$server.cover_path">
+        <img class="warextMcProfileHero-cover" src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" alt="" />
     </xf:if>
 
-    <xf:if is="$server.can_edit">
-        <xf:button href="{{ link('sunucular/duzenle', $server) }}">Sunucuyu Düzenle</xf:button>
-    </xf:if>
-    <xf:if is="$server.can_publish_updates">
-        <xf:button href="{{ link('sunucular/guncellemeler', $server) }}">Güncelleme Yayınla</xf:button>
-    </xf:if>
-    <xf:if is="$server.can_view_stats">
-        <xf:button href="{{ link('sunucular/istatistik', $server) }}">İstatistikler</xf:button>
-    </xf:if>
-    <xf:if is="$server.can_manage_votifier">
-        <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
-    </xf:if>
-    <xf:if is="$server.can_manage_reviews">
-        <xf:button href="{{ link('sunucular/degerlendirme-yonet', $server) }}">Değerlendirmeleri Yönet</xf:button>
-    </xf:if>
-
-    <xf:if is="$server.is_owner">
-        <xf:button href="{{ link('sunucular/ekip', $server) }}">Sunucu Ekibi</xf:button>
-        <xf:button href="{{ link('sunucular/dogrula', $server) }}">
-            <xf:if is="$server.is_verified">Doğrulama Bilgisi<xf:else />Sahipliği Doğrula</xf:if>
-        </xf:button>
-        <xf:button href="{{ link('sunucular/sahiplik-devret', $server) }}">Sahipliği Devret</xf:button>
-        <xf:if is="$server.state == 'active' && $xf.options.warextMcSponsorSalesEnabled">
-            <xf:button href="{{ link('sunucular/sponsor', $server) }}" class="button--cta">Sponsor Ol</xf:button>
-        </xf:if>
-    </xf:if>
-</xf:pageaction>
-
-<xf:if is="$server.cover_path">
-    <div class="warextMcServerCover"><img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" alt="{$server.title}" /></div>
-</xf:if>
-
-<div class="block warextMcServerHero">
-    <div class="block-container">
-        <div class="block-body">
-            <div class="warextMcServerHero-head">
-                <div>
-                    <h1>{$server.title}</h1>
-                    <div class="warextMcServerHero-address">{$server.host}:{$server.port}</div>
-                    <xf:if is="$server.motd"><div class="contentRow-minor">{$server.motd}</div></xf:if>
-                </div>
-                <div>
-                    <xf:if is="$server.state != 'active'">
-                        <span class="label label--orange">Onay bekliyor</span>
-                    <xf:elseif is="$server.is_online" />
-                        <span class="label label--green">Online</span>
-                    <xf:else />
-                        <span class="label label--red">Offline</span>
-                    </xf:if>
-                    <xf:if is="$server.is_verified">
-                        <span class="label label--primary">Doğrulanmış</span>
-                    </xf:if>
-                </div>
-            </div>
-
-            <div class="warextMcServerStats warextMcServerStats--large">
-                <div><strong>{$server.players_online} / {$server.players_max}</strong><span>Oyuncu</span></div>
-                <div><strong>{$server.vote_count_month}</strong><span>Bu ay oy</span></div>
-                <div><strong>{$server.vote_count_total}</strong><span>Toplam oy</span></div>
-                <div><strong>{$server.uptime_percent}%</strong><span>Uptime</span></div>
-                <div><strong>{$server.ping_ms} ms</strong><span>Ping</span></div>
-                <div><strong>{$server.rating_average} / 5</strong><span>Değerlendirme</span></div>
-            </div>
-
-            <xf:if is="$server.last_ping_date">
-                <div class="contentRow-minor" style="margin-top:10px">Son durum kontrolü: <xf:date time="$server.last_ping_date" /></div>
-            </xf:if>
-            <xf:if is="$server.is_verified && $server.verified_date">
-                <div class="contentRow-minor">Sahiplik doğrulaması: <xf:date time="$server.verified_date" /></div>
+    <div class="warextMcProfileHero-inner">
+        <div class="warextMcProfileHero-banner">
+            <xf:if is="$server.animated_banner_path">
+                <img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" />
+            <xf:elseif is="$server.banner_path" />
+                <img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" />
+            <xf:else />
+                <div class="warextMcProfileHero-bannerFallback"><i class="fa--xf far fa-server" aria-hidden="true"></i><span>468 × 60 sunucu bannerı</span></div>
             </xf:if>
         </div>
-    </div>
-</div>
 
-<xf:if is="$achievements is not empty">
-    <div class="block">
-        <div class="block-container">
-            <h2 class="block-header">Başarımlar</h2>
-            <div class="block-body">
-                <xf:foreach loop="$achievements" value="$award">
-                    <div class="block-row block-row--separated">
-                        <div class="contentRow">
-                            <div class="contentRow-main">
-                                <div class="contentRow-title"><strong>{$award.Achievement.title}</strong></div>
-                                <div class="contentRow-snippet">{$award.Achievement.description}</div>
-                                <div class="contentRow-minor">Kazanılma: <xf:date time="$award.awarded_date" /> · Ölçüm değeri: {$award.metric_value}</div>
-                            </div>
-                        </div>
+        <div class="warextMcProfileHero-main">
+            <div class="warextMcProfileIdentity">
+                <div class="warextMcProfileIdentity-icon"><i class="fa--xf far fa-server" aria-hidden="true"></i></div>
+                <div class="warextMcProfileIdentity-copy">
+                    <div class="warextMcProfileIdentity-titleLine">
+                        <h1>{$server.title}</h1>
+                        <xf:if is="$server.state != 'active'">
+                            <span class="label label--orange">Onay bekliyor</span>
+                        <xf:elseif is="$server.is_online" />
+                            <span class="label label--green">Online</span>
+                        <xf:else />
+                            <span class="label label--red">Offline</span>
+                        </xf:if>
+                        <xf:if is="$server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
                     </div>
-                </xf:foreach>
+                    <div class="warextMcProfileIdentity-sub">Minecraft sunucusu<xf:if is="$server.game_modes"> · {$server.game_modes}</xf:if></div>
+                    <xf:if is="$server.motd"><div class="warextMcProfileIdentity-motd">{$server.motd}</div></xf:if>
+                    <div class="warextMcProfileIp">
+                        <strong>{$server.host}:{$server.port}</strong>
+                        <xf:button type="button" data-xf-init="copy-to-clipboard" data-copy-text="{$server.host}:{$server.port}" class="button--link">IP Kopyala</xf:button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warextMcProfileHero-stats">
+                <div><span>Sıralama</span><strong><xf:if is="$server.rank_popular">#{$server.rank_popular}<xf:else />—</xf:if></strong></div>
+                <div><span>Bugün</span><strong>{$server.vote_count_today}</strong></div>
+                <div><span>Bu ay</span><strong>{$server.vote_count_month}</strong></div>
+                <div><span>Toplam oy</span><strong>{$server.vote_count_total}</strong></div>
+                <div><span>Görüntülenme</span><strong>{$server.view_count}</strong></div>
             </div>
         </div>
     </div>
-</xf:if>
+</section>
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">Sunucu Bilgileri</h2>
-        <div class="block-body">
-            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Tür</dt><dd>{$server.server_type}</dd></dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Oyun modları</dt><dd><xf:if is="$server.game_modes">{$server.game_modes}<xf:else />Belirtilmedi</xf:if></dd></dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Tespit edilen sürüm</dt><dd><xf:if is="$server.detected_version">{$server.detected_version}<xf:else />Henüz tespit edilmedi</xf:if></dd></dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Desteklenen sürüm</dt><dd><xf:if is="$server.version_min">{$server.version_min}<xf:if is="$server.version_max"> - {$server.version_max}</xf:if><xf:else />Belirtilmedi</xf:if></dd></dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Ülke</dt><dd><xf:if is="$server.country_code">{$server.country_code}<xf:else />Belirtilmedi</xf:if></dd></dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Premium</dt><dd><xf:if is="$server.is_premium">Evet<xf:else />Hayır</xf:if></dd></dl>
-            <dl class="pairs pairs--columns pairs--fixedSmall"><dt>Crack desteği</dt><dd><xf:if is="$server.allow_cracked">Evet<xf:else />Hayır</xf:if></dd></dl>
-        </div>
-    </div>
+<div class="warextMcProfileGrid">
+    <aside class="warextMcProfileColumn warextMcProfileColumn--left">
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-link" aria-hidden="true"></i> Hızlı Erişim</div>
+            <div class="warextMcProfileQuickLinks">
+                <xf:if is="$server.website_url"><a href="{$server.website_url}" target="_blank" rel="nofollow noopener"><span>Web sitesi</span><i class="fa--xf far fa-arrow-up-right-from-square" aria-hidden="true"></i></a></xf:if>
+                <xf:if is="$server.store_url"><a href="{$server.store_url}" target="_blank" rel="nofollow noopener"><span>Mağaza</span><i class="fa--xf far fa-cart-shopping" aria-hidden="true"></i></a></xf:if>
+                <xf:if is="$server.DiscussionThread"><a href="{{ link('threads', $server.DiscussionThread) }}"><span>Tanıtım konusu</span><i class="fa--xf far fa-messages" aria-hidden="true"></i></a></xf:if>
+                <xf:if is="$server.trailer_url"><a href="{$server.trailer_url}" target="_blank" rel="nofollow noopener"><span>Tanıtım videosu</span><i class="fa--xf far fa-play" aria-hidden="true"></i></a></xf:if>
+                <a href="{{ link('sunucular/guncellemeler', $server) }}"><span>Güncellemeler</span><i class="fa--xf far fa-clock-rotate-left" aria-hidden="true"></i></a>
+                <a href="{{ link('sunucular/degerlendir', $server) }}"><span>Değerlendirmeler</span><strong>{$server.rating_count}</strong></a>
+            </div>
+            <xf:if is="$canFavorite || $canReport">
+                <div class="warextMcProfileSecondaryActions">
+                    <xf:if is="$canFavorite">
+                        <xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true">
+                            <xf:button type="submit" class="button--fullWidth">Favoriye Ekle / Çıkar</xf:button>
+                        </xf:form>
+                    </xf:if>
+                    <xf:if is="$canReport"><xf:button href="{{ link('sunucular/rapor', $server) }}" class="button--link button--fullWidth">Raporla</xf:button></xf:if>
+                </div>
+            </xf:if>
+        </section>
+
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-circle-info" aria-hidden="true"></i> Detaylar</div>
+            <dl class="warextMcProfileDetails">
+                <div><dt>Çevrimiçi oyuncu</dt><dd><strong>{$server.players_online}</strong> / {$server.players_max}</dd></div>
+                <div><dt>Sürüm</dt><dd><xf:if is="$server.detected_version">{$server.detected_version}<xf:elseif is="$server.version_min" />{$server.version_min}<xf:if is="$server.version_max"> - {$server.version_max}</xf:if><xf:else />Belirtilmedi</xf:if></dd></div>
+                <div><dt>Tür</dt><dd>{{ $server.server_type == 'crossplay' ? 'Crossplay' : ($server.server_type == 'bedrock' ? 'Bedrock' : 'Java') }}</dd></div>
+                <div><dt>Mod</dt><dd><xf:if is="$server.game_modes">{$server.game_modes}<xf:else />Belirtilmedi</xf:if></dd></div>
+                <div><dt>Premium</dt><dd><xf:if is="$server.is_premium">Evet<xf:else />Hayır</xf:if></dd></div>
+                <div><dt>Crack</dt><dd><xf:if is="$server.allow_cracked">Destekliyor<xf:else />Desteklemiyor</xf:if></dd></div>
+                <div><dt>Uptime</dt><dd>{$server.uptime_percent}%</dd></div>
+                <div><dt>Ping</dt><dd>{$server.ping_ms} ms</dd></div>
+                <xf:if is="$server.country_code"><div><dt>Ülke</dt><dd>{$server.country_code}</dd></div></xf:if>
+            </dl>
+        </section>
+
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-clock" aria-hidden="true"></i> Son Oy Verenler</div>
+            <xf:if is="$recentVotes is not empty">
+                <div class="warextMcProfilePeople">
+                    <xf:foreach loop="$recentVotes" value="$vote">
+                        <div class="warextMcProfilePerson">
+                            <xf:if is="$vote.User"><xf:avatar user="$vote.User" size="xxs" /><xf:else /><span class="warextMcProfilePerson-fallback"><i class="fa--xf far fa-user" aria-hidden="true"></i></span></xf:if>
+                            <div><strong><xf:if is="$vote.User">{$vote.User.username}<xf:else />{$vote.minecraft_username}</xf:if></strong><span>{$vote.minecraft_username}</span></div>
+                            <time><xf:date time="$vote.vote_date" /></time>
+                        </div>
+                    </xf:foreach>
+                </div>
+            <xf:else />
+                <div class="warextMcProfileEmpty">Henüz oy kullanan olmadı.</div>
+            </xf:if>
+        </section>
+    </aside>
+
+    <main class="warextMcProfileColumn warextMcProfileColumn--main">
+        <section class="warextMcProfileCard warextMcProfileSupport">
+            <div class="warextMcProfileSupport-icon"><i class="fa--xf far fa-heart" aria-hidden="true"></i></div>
+            <div class="warextMcProfileSupport-copy">
+                <span>Sunucuyu destekle</span>
+                <h2>{$server.title} için oyunu kullan</h2>
+                <p>Oy vererek sunucunun sıralamadaki görünürlüğünü artırabilirsin. Aynı sunucuya 24 saatte bir oy verilebilir.</p>
+            </div>
+            <div class="warextMcProfileSupport-action">
+                <xf:if is="$server.state != 'active'">
+                    <span class="label label--orange">Sunucu onay bekliyor</span>
+                <xf:elseif is="$canVote" />
+                    <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta button--fullWidth">Şimdi Oy Ver</xf:button>
+                <xf:elseif is="!$xf.visitor.user_id" />
+                    <xf:button href="{{ link('login') }}" class="button--cta button--fullWidth">Giriş Yap ve Oy Ver</xf:button>
+                <xf:else />
+                    <span class="contentRow-minor">Bu hesap için oy verme izni bulunmuyor.</span>
+                </xf:if>
+            </div>
+        </section>
+
+        <section class="warextMcProfileCard warextMcProfileAbout">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-bars-staggered" aria-hidden="true"></i> Sunucu Hakkında</div>
+            <div class="warextMcProfileAbout-body">
+                <xf:if is="$server.description">
+                    {{ bb_code($server.description, 'warext_mc_server', $server) }}
+                <xf:elseif is="$server.motd" />
+                    <p>{$server.motd}</p>
+                <xf:else />
+                    <p class="contentRow-minor">Sunucu sahibi henüz ayrıntılı bir tanıtım eklemedi.</p>
+                </xf:if>
+            </div>
+            <xf:if is="$server.website_url || $server.discord_url || $server.store_url || $server.DiscussionThread">
+                <div class="warextMcProfileAbout-links">
+                    <xf:if is="$server.website_url"><a href="{$server.website_url}" target="_blank" rel="nofollow noopener">Web Sitesi</a></xf:if>
+                    <xf:if is="$server.discord_url"><a href="{$server.discord_url}" target="_blank" rel="nofollow noopener">Discord</a></xf:if>
+                    <xf:if is="$server.store_url"><a href="{$server.store_url}" target="_blank" rel="nofollow noopener">Mağaza</a></xf:if>
+                    <xf:if is="$server.DiscussionThread"><a href="{{ link('threads', $server.DiscussionThread) }}">Tanıtım Konusu</a></xf:if>
+                </div>
+            </xf:if>
+        </section>
+
+        <xf:if is="$achievements is not empty">
+            <section class="warextMcProfileCard">
+                <div class="warextMcProfileCard-title"><i class="fa--xf far fa-award" aria-hidden="true"></i> Başarımlar</div>
+                <div class="warextMcProfileAchievements">
+                    <xf:foreach loop="$achievements" value="$award">
+                        <div><i class="fa--xf far fa-medal" aria-hidden="true"></i><span><strong>{$award.Achievement.title}</strong><small>{$award.Achievement.description}</small></span></div>
+                    </xf:foreach>
+                </div>
+            </section>
+        </xf:if>
+
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-headingRow">
+                <div class="warextMcProfileCard-title"><i class="fa--xf far fa-comments" aria-hidden="true"></i> Değerlendirmeler</div>
+                <a href="{{ link('sunucular/degerlendir', $server) }}">Tümünü gör ({$server.rating_count})</a>
+            </div>
+            <xf:if is="$reviews is not empty">
+                <div class="warextMcProfileReviews">
+                    <xf:foreach loop="$reviews" value="$review">
+                        <article>
+                            <div class="warextMcProfileReview-head">
+                                <div class="warextMcProfileReview-user"><xf:avatar user="$review.User" size="xxs" /><strong>{$review.User.username}</strong></div>
+                                <span class="warextMcProfileReview-score">{$review.rating} / 5</span>
+                            </div>
+                            <xf:if is="$review.message"><p>{$review.message}</p></xf:if>
+                            <time><xf:date time="$review.updated_date" /></time>
+                        </article>
+                    </xf:foreach>
+                </div>
+            <xf:else />
+                <div class="warextMcProfileEmpty">Henüz onaylı değerlendirme yok. İlk değerlendirmeyi sen yapabilirsin.</div>
+            </xf:if>
+        </section>
+    </main>
+
+    <aside class="warextMcProfileColumn warextMcProfileColumn--right">
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-trophy" aria-hidden="true"></i> Bu Ay Top Voter</div>
+            <xf:if is="$topVoters is not empty">
+                <div class="warextMcProfileLeaderboard">
+                    <xf:foreach loop="$topVoters" value="$row" i="$i">
+                        <div><span class="warextMcProfileLeaderboard-rank">#{$i}</span><strong>{$row.username}</strong><em>{$row.vote_count}</em></div>
+                    </xf:foreach>
+                </div>
+            <xf:else />
+                <div class="warextMcProfileEmpty">Bu ay henüz sıralama oluşmadı.</div>
+            </xf:if>
+        </section>
+
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-users" aria-hidden="true"></i> Topluluk</div>
+            <div class="warextMcProfileCommunity">
+                <div class="warextMcProfileCommunity-owner">
+                    <xf:avatar user="$server.Owner" size="s" />
+                    <div><span>Sunucu sahibi</span><strong>{$server.Owner.username}</strong></div>
+                </div>
+                <xf:if is="$server.discord_url"><a class="button button--fullWidth" href="{$server.discord_url}" target="_blank" rel="nofollow noopener">Discord'a Katıl</a></xf:if>
+                <div class="warextMcProfileCommunity-meta"><span>Değerlendirme</span><strong>{$server.rating_average} / 5</strong></div>
+                <div class="warextMcProfileCommunity-meta"><span>Son kontrol</span><strong><xf:if is="$server.last_ping_date"><xf:date time="$server.last_ping_date" /><xf:else />Henüz yok</xf:if></strong></div>
+            </div>
+        </section>
+
+        <xf:if is="$canManage">
+            <section class="warextMcProfileCard warextMcProfileManage">
+                <div class="warextMcProfileCard-title"><i class="fa--xf far fa-gear" aria-hidden="true"></i> Sunucuyu Yönet</div>
+                <div class="warextMcProfileManage-links">
+                    <xf:if is="$server.can_edit"><a href="{{ link('sunucular/duzenle', $server) }}">Sunucuyu Düzenle</a></xf:if>
+                    <xf:if is="$server.can_publish_updates"><a href="{{ link('sunucular/guncellemeler', $server) }}">Güncelleme Yayınla</a></xf:if>
+                    <xf:if is="$server.can_view_stats"><a href="{{ link('sunucular/istatistik', $server) }}">İstatistikler</a></xf:if>
+                    <xf:if is="$server.can_manage_votifier"><a href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</a></xf:if>
+                    <xf:if is="$server.can_manage_reviews"><a href="{{ link('sunucular/degerlendirme-yonet', $server) }}">Değerlendirmeleri Yönet</a></xf:if>
+                    <xf:if is="$server.is_owner">
+                        <a href="{{ link('sunucular/ekip', $server) }}">Sunucu Ekibi</a>
+                        <a href="{{ link('sunucular/dogrula', $server) }}"><xf:if is="$server.is_verified">Doğrulama Bilgisi<xf:else />Sahipliği Doğrula</xf:if></a>
+                        <a href="{{ link('sunucular/sahiplik-devret', $server) }}">Sahipliği Devret</a>
+                        <xf:if is="$server.state == 'active' && $xf.options.warextMcSponsorSalesEnabled"><a href="{{ link('sunucular/sponsor', $server) }}">Sponsor Ol</a></xf:if>
+                    </xf:if>
+                </div>
+            </section>
+        </xf:if>
+    </aside>
 </div>
-
-<xf:if is="$server.description">
-    <div class="block"><div class="block-container"><h2 class="block-header">Açıklama</h2><div class="block-body block-row">{{ bb_code($server.description, 'warext_mc_server', $server) }}</div></div></div>
-</xf:if>
-
-<xf:if is="$server.website_url || $server.discord_url || $server.store_url || $server.trailer_url || $server.DiscussionThread">
-    <div class="block">
-        <div class="block-container">
-            <h2 class="block-header">Bağlantılar</h2>
-            <div class="block-body block-row warextMcServerLinks">
-                <xf:if is="$server.website_url"><a class="button" href="{$server.website_url}" target="_blank" rel="nofollow noopener">Web Sitesi</a></xf:if>
-                <xf:if is="$server.discord_url"><a class="button" href="{$server.discord_url}" target="_blank" rel="nofollow noopener">Discord</a></xf:if>
-                <xf:if is="$server.store_url"><a class="button" href="{$server.store_url}" target="_blank" rel="nofollow noopener">Mağaza</a></xf:if>
-                <xf:if is="$server.trailer_url"><a class="button" href="{$server.trailer_url}" target="_blank" rel="nofollow noopener">Tanıtım Videosu</a></xf:if>
-                <xf:if is="$server.DiscussionThread"><a class="button" href="{{ link('threads', $server.DiscussionThread) }}">Tanıtım Konusu</a></xf:if>
-            </div>
-        </div>
-    </div>
-</xf:if>

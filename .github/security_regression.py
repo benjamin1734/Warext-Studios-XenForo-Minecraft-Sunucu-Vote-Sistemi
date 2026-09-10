@@ -15,6 +15,10 @@ def require(path: str, needles: list[str]) -> None:
 require('Pub/Controller/Vote.php', ['captchaIsValid()', 'warextMcRequireVerifiedAccountForVotes', "verification_state !== 'verified'", 'setRequestFingerprint(', 'enqueueVoteDelivery()', 'enqueueWebhookDelivery(', '!$visitor->user_id', 'voteBlocked', '86400', '24 saat sonra tekrar deneyin'])
 require('_output/templates/public/warext_mc_server_vote.html', ['<xf:captcharow', 'force="true"', '$requireVerifiedAccount', 'warext_mc_server_vote.less', 'Sunucu Bilgileri', 'Sunucu Hakkında', 'IP Kopyala', 'Sıralama', '24 saat sonra tekrar deneyin', '$hasEligibleAccount'])
 require('_output/templates/public/warext_mc_server_vote.less', ['.warextMcVotePage-hero', '.warextMcVotePage-banner', 'width: 468px;', 'height: 60px;', '.warextMcVotePage-metrics', '.warextMcVotePage-layout', '.warextMcVotePage-voteCard'])
+require('Pub/Controller/Detail.php', ['findRecentPublicVotes(', 'getTopVotersThisMonth(', "findVisibleForServer", "PublicPermissions::allows('vote', false, true)", "['Owner', 'DiscussionThread']"])
+require('Repository/Vote.php', ['findRecentPublicVotes(', 'getTopVotersThisMonth(', 'INNER JOIN xf_user', "status <> 'rejected'"])
+require('_output/templates/public/warext_mc_server_view.html', ['warext_mc_server_profile.less', '<xf:h1 hidden="true" />', 'warextMcProfileHero', 'Hızlı Erişim', 'Son Oy Verenler', 'Bu Ay Top Voter', 'Sunucuyu Yönet', 'Şimdi Oy Ver'])
+require('_output/templates/public/warext_mc_server_profile.less', ['.warextMcProfileHero', 'width: 468px;', 'height: 60px;', '.warextMcProfileGrid', 'grid-template-columns: 250px minmax(0, 1fr) 280px;', '.warextMcProfileSupport', '.warextMcProfileLeaderboard'])
 require('Service/Vote/Creator.php', ["hash_hmac('sha256', $ip", 'assertCooldown(', 'assertIpVelocity(', 'calculateFraudScore(', '!$this->user->user_id', '$since = \XF::$time - 86400', '24 saat sonra tekrar deneyin'])
 require('Network/EndpointResolver.php', ['FILTER_FLAG_NO_PRIV_RANGE', 'FILTER_FLAG_NO_RES_RANGE'])
 require('Service/Webhook/Dispatcher.php', ["$scheme !== 'https'", "'allow_redirects' => false", 'X-Warext-Signature', 'resolveTcp('])
@@ -199,8 +203,8 @@ if not version_match:
 major, minor, patch = (int(part) for part in version_match.groups())
 if patch > 9:
     raise SystemExit('Yama sürümü 9 üzerinde olamaz; sonraki orta sürüme geçilmeli.')
-if version_string != '1.1.8' or int(addon.get('version_id', 0)) < 1011080:
-    raise SystemExit('Sürüm numarası 1.1.8 değil.')
+if version_string != '1.1.9' or int(addon.get('version_id', 0)) < 1011090:
+    raise SystemExit('Sürüm numarası 1.1.9 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')

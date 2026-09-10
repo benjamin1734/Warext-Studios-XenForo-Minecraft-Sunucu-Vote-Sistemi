@@ -1,0 +1,772 @@
+.warextMcProfileHero,
+.warextMcProfileCard
+{
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentBg;
+    box-sizing: border-box;
+}
+
+.warextMcProfileHero
+{
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.warextMcProfileHero-cover
+{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .18;
+    filter: saturate(.75);
+}
+
+.warextMcProfileHero::after
+{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, @xf-contentBg 92%);
+    pointer-events: none;
+}
+
+.warextMcProfileHero-inner
+{
+    position: relative;
+    z-index: 1;
+    padding: 22px;
+}
+
+.warextMcProfileHero-banner
+{
+    width: 468px;
+    max-width: 100%;
+    margin: 0 auto 28px;
+}
+
+.warextMcProfileHero-banner img,
+.warextMcProfileHero-bannerFallback
+{
+    display: block;
+    width: 468px;
+    height: 60px;
+    max-width: 100%;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    box-sizing: border-box;
+}
+
+.warextMcProfileHero-banner img
+{
+    object-fit: cover;
+}
+
+.warextMcProfileHero-bannerFallback
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: @xf-textColorMuted;
+    background: @xf-contentAltBg;
+}
+
+.warextMcProfileHero-main
+{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+}
+
+.warextMcProfileIdentity
+{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.warextMcProfileIdentity-icon
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+    color: @xf-linkColor;
+    font-size: 24px;
+}
+
+.warextMcProfileIdentity-copy
+{
+    min-width: 0;
+}
+
+.warextMcProfileIdentity-titleLine
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+}
+
+.warextMcProfileIdentity-titleLine h1
+{
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.08;
+}
+
+.warextMcProfileIdentity-sub,
+.warextMcProfileIdentity-motd
+{
+    margin-top: 4px;
+    color: @xf-textColorMuted;
+}
+
+.warextMcProfileIdentity-motd
+{
+    max-width: 640px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.warextMcProfileIp
+{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 7px 9px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcProfileIp strong
+{
+    overflow-wrap: anywhere;
+}
+
+.warextMcProfileHero-stats
+{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(104px, 1fr));
+    gap: 7px;
+    flex: 0 0 370px;
+}
+
+.warextMcProfileHero-stats > div
+{
+    padding: 8px 10px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: fade(@xf-contentBg, 92%);
+}
+
+.warextMcProfileHero-stats span,
+.warextMcProfileHero-stats strong
+{
+    display: block;
+}
+
+.warextMcProfileHero-stats span
+{
+    font-size: @xf-fontSizeSmallest;
+    color: @xf-textColorMuted;
+}
+
+.warextMcProfileHero-stats strong
+{
+    margin-top: 2px;
+    font-size: 18px;
+}
+
+.warextMcProfileGrid
+{
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr) 280px;
+    gap: 16px;
+    align-items: start;
+}
+
+.warextMcProfileColumn
+{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+.warextMcProfileCard
+{
+    overflow: hidden;
+}
+
+.warextMcProfileCard-title,
+.warextMcProfileCard-headingRow
+{
+    min-height: 44px;
+    box-sizing: border-box;
+    border-bottom: 1px solid @xf-borderColor;
+    background: @xf-contentAltBg;
+}
+
+.warextMcProfileCard-title
+{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 13px;
+    font-weight: 700;
+}
+
+.warextMcProfileCard-title i
+{
+    color: @xf-linkColor;
+}
+
+.warextMcProfileCard-headingRow
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-right: 13px;
+}
+
+.warextMcProfileCard-headingRow .warextMcProfileCard-title
+{
+    border: 0;
+    background: transparent;
+}
+
+.warextMcProfileQuickLinks,
+.warextMcProfileManage-links
+{
+    padding: 8px;
+}
+
+.warextMcProfileQuickLinks a,
+.warextMcProfileManage-links a
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 38px;
+    padding: 7px 9px;
+    border-radius: @xf-borderRadiusMedium;
+    color: @xf-textColor;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.warextMcProfileQuickLinks a:hover,
+.warextMcProfileManage-links a:hover
+{
+    background: @xf-contentAltBg;
+    color: @xf-linkColor;
+}
+
+.warextMcProfileQuickLinks a + a,
+.warextMcProfileManage-links a + a
+{
+    border-top: 1px solid @xf-borderColor;
+    border-radius: 0;
+}
+
+.warextMcProfileSecondaryActions
+{
+    display: grid;
+    gap: 7px;
+    padding: 0 8px 8px;
+}
+
+.warextMcProfileSecondaryActions form
+{
+    margin: 0;
+}
+
+.warextMcProfileSecondaryActions .button--fullWidth,
+.warextMcProfileCommunity .button--fullWidth,
+.warextMcProfileSupport .button--fullWidth
+{
+    width: 100%;
+}
+
+.warextMcProfileDetails
+{
+    margin: 0;
+    padding: 5px 12px 9px;
+}
+
+.warextMcProfileDetails > div
+{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid @xf-borderColor;
+}
+
+.warextMcProfileDetails > div:last-child
+{
+    border-bottom: 0;
+}
+
+.warextMcProfileDetails dt
+{
+    color: @xf-textColorMuted;
+}
+
+.warextMcProfileDetails dd
+{
+    margin: 0;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.warextMcProfilePeople
+{
+    padding: 5px 12px 9px;
+}
+
+.warextMcProfilePerson
+{
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 8px;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid @xf-borderColor;
+}
+
+.warextMcProfilePerson:last-child
+{
+    border-bottom: 0;
+}
+
+.warextMcProfilePerson > div
+{
+    min-width: 0;
+}
+
+.warextMcProfilePerson strong,
+.warextMcProfilePerson span,
+.warextMcProfilePerson time
+{
+    display: block;
+}
+
+.warextMcProfilePerson span,
+.warextMcProfilePerson time
+{
+    color: @xf-textColorMuted;
+    font-size: @xf-fontSizeSmallest;
+}
+
+.warextMcProfilePerson time
+{
+    grid-column: 2;
+}
+
+.warextMcProfilePerson-fallback
+{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: @xf-contentAltBg;
+}
+
+.warextMcProfileSupport
+{
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) 190px;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    border-color: @xf-borderColor;
+}
+
+.warextMcProfileSupport-icon
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: @xf-contentAltBg;
+    color: @xf-linkColor;
+    font-size: 20px;
+}
+
+.warextMcProfileSupport-copy span
+{
+    color: @xf-linkColor;
+    font-size: @xf-fontSizeSmallest;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.warextMcProfileSupport-copy h2
+{
+    margin: 3px 0 5px;
+    font-size: 20px;
+}
+
+.warextMcProfileSupport-copy p
+{
+    margin: 0;
+    color: @xf-textColorMuted;
+}
+
+.warextMcProfileSupport-action
+{
+    text-align: center;
+}
+
+.warextMcProfileAbout-body
+{
+    padding: 16px;
+    line-height: 1.55;
+}
+
+.warextMcProfileAbout-body > :first-child
+{
+    margin-top: 0;
+}
+
+.warextMcProfileAbout-body > :last-child
+{
+    margin-bottom: 0;
+}
+
+.warextMcProfileAbout-links
+{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 0 16px 16px;
+}
+
+.warextMcProfileAbout-links a
+{
+    padding: 6px 9px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+    text-decoration: none;
+}
+
+.warextMcProfileAchievements
+{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
+}
+
+.warextMcProfileAchievements > div
+{
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 10px;
+    border: 1px solid @xf-borderColor;
+    border-radius: @xf-borderRadiusMedium;
+    background: @xf-contentAltBg;
+}
+
+.warextMcProfileAchievements i
+{
+    margin-top: 2px;
+    color: @xf-linkColor;
+}
+
+.warextMcProfileAchievements strong,
+.warextMcProfileAchievements small
+{
+    display: block;
+}
+
+.warextMcProfileAchievements small
+{
+    margin-top: 2px;
+    color: @xf-textColorMuted;
+}
+
+.warextMcProfileReviews
+{
+    padding: 0 13px;
+}
+
+.warextMcProfileReviews article
+{
+    padding: 13px 0;
+    border-bottom: 1px solid @xf-borderColor;
+}
+
+.warextMcProfileReviews article:last-child
+{
+    border-bottom: 0;
+}
+
+.warextMcProfileReview-head,
+.warextMcProfileReview-user
+{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.warextMcProfileReview-head
+{
+    justify-content: space-between;
+}
+
+.warextMcProfileReview-score
+{
+    font-weight: 700;
+    color: @xf-linkColor;
+}
+
+.warextMcProfileReviews p
+{
+    margin: 8px 0 4px;
+}
+
+.warextMcProfileReviews time
+{
+    color: @xf-textColorMuted;
+    font-size: @xf-fontSizeSmallest;
+}
+
+.warextMcProfileLeaderboard
+{
+    padding: 5px 12px 9px;
+}
+
+.warextMcProfileLeaderboard > div
+{
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid @xf-borderColor;
+}
+
+.warextMcProfileLeaderboard > div:last-child
+{
+    border-bottom: 0;
+}
+
+.warextMcProfileLeaderboard-rank
+{
+    color: @xf-textColorMuted;
+    font-weight: 700;
+}
+
+.warextMcProfileLeaderboard em
+{
+    min-width: 28px;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: @xf-contentAltBg;
+    color: @xf-linkColor;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+}
+
+.warextMcProfileCommunity
+{
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+}
+
+.warextMcProfileCommunity-owner
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.warextMcProfileCommunity-owner span,
+.warextMcProfileCommunity-owner strong
+{
+    display: block;
+}
+
+.warextMcProfileCommunity-owner span
+{
+    color: @xf-textColorMuted;
+    font-size: @xf-fontSizeSmallest;
+}
+
+.warextMcProfileCommunity-meta
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 9px;
+    border-top: 1px solid @xf-borderColor;
+}
+
+.warextMcProfileCommunity-meta span
+{
+    color: @xf-textColorMuted;
+}
+
+.warextMcProfileManage-links a
+{
+    color: @xf-linkColor;
+}
+
+.warextMcProfileEmpty
+{
+    padding: 14px;
+    color: @xf-textColorMuted;
+}
+
+@media (max-width: 1100px)
+{
+    .warextMcProfileHero-main
+    {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .warextMcProfileHero-stats
+    {
+        width: 100%;
+        flex-basis: auto;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .warextMcProfileGrid
+    {
+        grid-template-columns: 240px minmax(0, 1fr);
+    }
+
+    .warextMcProfileColumn--right
+    {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .warextMcProfileManage
+    {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 760px)
+{
+    .warextMcProfileHero-inner
+    {
+        padding: 14px;
+    }
+
+    .warextMcProfileHero-banner
+    {
+        margin-bottom: 18px;
+    }
+
+    .warextMcProfileIdentity
+    {
+        align-items: flex-start;
+    }
+
+    .warextMcProfileIdentity-icon
+    {
+        flex-basis: 48px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .warextMcProfileIdentity-titleLine h1
+    {
+        font-size: 24px;
+    }
+
+    .warextMcProfileHero-stats
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .warextMcProfileGrid,
+    .warextMcProfileColumn--right
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .warextMcProfileSupport
+    {
+        grid-template-columns: 40px minmax(0, 1fr);
+    }
+
+    .warextMcProfileSupport-action
+    {
+        grid-column: 1 / -1;
+    }
+
+    .warextMcProfileAchievements
+    {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px)
+{
+    .warextMcProfileIdentity-icon
+    {
+        display: none;
+    }
+
+    .warextMcProfileIp
+    {
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .warextMcProfileHero-stats
+    {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .warextMcProfileCard-headingRow
+    {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0 12px 10px;
+    }
+
+    .warextMcProfileCard-headingRow .warextMcProfileCard-title
+    {
+        padding-left: 0;
+    }
+}
