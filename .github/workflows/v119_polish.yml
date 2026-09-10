@@ -1,0 +1,35 @@
+name: Apply v1.1.9 profile polish
+
+on:
+  push:
+    branches:
+      - v1.1.9-server-profile
+    paths:
+      - '.github/workflows/v119_polish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v1.1.9-server-profile
+      - name: Apply helper
+        run: python3 .github/v119_polish.py
+      - name: Validate
+        run: |
+          find src/addons/Warext/MinecraftVote -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          python3 .github/security_regression.py
+          python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
+      - name: Commit changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .github/security_regression.py src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_view.html src/addons/Warext/MinecraftVote/_output/templates/public/warext_mc_server_profile.less
+          git diff --cached --quiet && exit 0
+          git commit -m "Polish v1.1.9 server profile"
+          git push origin HEAD:v1.1.9-server-profile
