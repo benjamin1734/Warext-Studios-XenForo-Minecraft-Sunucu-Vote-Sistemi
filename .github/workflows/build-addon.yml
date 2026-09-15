@@ -24,20 +24,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Validate XenForo source links
         run: python3 .github/validate_xf_source.py src/addons/Warext/MinecraftVote
-
       - name: Security regression checks
         run: python3 .github/security_regression.py
-
       - name: Build XenForo release data
         run: |
           python3 .github/build_xf_data.py src/addons/Warext/MinecraftVote
           python3 .github/build_xf_permissions.py src/addons/Warext/MinecraftVote
           python3 .github/build_xf_navigation.py src/addons/Warext/MinecraftVote
           python3 .github/build_xf_integrations.py src/addons/Warext/MinecraftVote
-
       - name: Validate XML
         run: |
           python3 - <<'PY'
@@ -47,14 +43,7 @@ jobs:
           if not files:
               raise SystemExit('No _data XML files generated')
           names = {file.name for file in files}
-          required = {
-              'permissions.xml',
-              'permission_interface_groups.xml',
-              'navigation.xml',
-              'content_type_fields.xml',
-              'code_event_listeners.xml',
-              'template_modifications.xml'
-          }
+          required = {'permissions.xml','permission_interface_groups.xml','navigation.xml','content_type_fields.xml','code_event_listeners.xml','template_modifications.xml'}
           missing = required - names
           if missing:
               raise SystemExit('Missing master data: ' + ', '.join(sorted(missing)))
@@ -62,7 +51,6 @@ jobs:
               ET.parse(file)
               print(file)
           PY
-
       - name: Build direct-install ZIP
         id: package
         run: |
@@ -89,7 +77,6 @@ jobs:
           (cd build && zip -qr "releases/Warext-MinecraftVote-${VERSION}.zip" upload README.md)
           echo "file=${FILE}" >> "$GITHUB_OUTPUT"
           echo "tag=v${VERSION_NUMBER}" >> "$GITHUB_OUTPUT"
-
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -101,55 +88,7 @@ jobs:
               gh release delete "$OLD_TAG" --cleanup-tag -y || true
             fi
           done
-
-          if [ "$TAG" = "v1.1.9" ]; then
-            cat > /tmp/release-notes.md <<'EOF'
-# Warext Studios | XenForo Minecraft Sunucu & Vote Sistemi v1.1.9
-
-1.1.9 sürümü sunucu detay sayfasını daha zengin ve XenForo ile doğal biçimde bütünleşen bir sunucu profiline dönüştürür.
-
-- Hero ve banner tabanlı modern profil düzeni
-- Sıralama ve hızlı erişim alanları
-- Sunucu detaylarının daha okunabilir sunumu
-- Son oy verenler ve top voter alanları
-- Değerlendirmelerin profil sayfasında daha güçlü sunumu
-- Mevcut oy, NuVotifier, analitik ve sunucu yönetim altyapısıyla uyumluluk
-
-Kurulum paketini XenForo Admin CP > Add-ons > Install/upgrade from archive alanından doğrudan yükleyebilirsiniz.
-
----
-
-## English
-
-# Warext Studios | XenForo Minecraft Server & Vote System v1.1.9
-
-Version 1.1.9 redesigns the server-detail page into a richer server profile that integrates naturally with XenForo.
-
-- Modern hero- and banner-based profile layout
-- Ranking and quick-access areas
-- More readable presentation of server details
-- Recent-voter and top-voter sections
-- Stronger presentation of reviews on the server profile
-- Compatibility with the existing voting, NuVotifier, analytics and server-management infrastructure
-
-The installation package can be uploaded directly through XenForo Admin CP > Add-ons > Install/upgrade from archive.
-EOF
-          else
-            cat > /tmp/release-notes.md <<EOF
-# Warext Studios | XenForo Minecraft Sunucu & Vote Sistemi ${TAG}
-
-Güncel XenForo kurulum paketi.
-
----
-
-## English
-
-# Warext Studios | XenForo Minecraft Server & Vote System ${TAG}
-
-Current XenForo installation package. See the bilingual README for complete feature and technical documentation.
-EOF
-          fi
-
+          echo 'IyBXYXJleHQgU3R1ZGlvcyB8IFhlbkZvcm8gTWluZWNyYWZ0IFN1bnVjdSAmIFZvdGUgU2lzdGVtaSB2MS4xLjkKCjEuMS45IHPDvHLDvG3DvCBzdW51Y3UgZGV0YXkgc2F5ZmFzxLFuxLEgZGFoYSB6ZW5naW4gdmUgWGVuRm9ybyBpbGUgZG/En2FsIGJpw6dpbWRlIGLDvHTDvG5sZcWfZW4gYmlyIHN1bnVjdSBwcm9maWxpbmUgZMO2bsO8xZ90w7xyw7xyLgoKLSBIZXJvIHZlIGJhbm5lciB0YWJhbmzEsSBtb2Rlcm4gcHJvZmlsIGTDvHplbmkKLSBTxLFyYWxhbWEgdmUgaMSxemzEsSBlcmnFn2ltIGFsYW5sYXLEsQotIFN1bnVjdSBkZXRheWxhcsSxbsSxbiBkYWhhIG9rdW5hYmlsaXIgc3VudW11Ci0gU29uIG95IHZlcmVubGVyIHZlIHRvcCB2b3RlciBhbGFubGFyxLEKLSBEZcSfZXJsZW5kaXJtZWxlcmluIHByb2ZpbCBzYXlmYXPEsW5kYSBkYWhhIGfDvMOnbMO8IHN1bnVtdQotIE1ldmN1dCBveSwgTnVWb3RpZmllciwgYW5hbGl0aWsgdmUgc3VudWN1IHnDtm5ldGltIGFsdHlhcMSxc8SxeWxhIHV5dW1sdWx1awoKS3VydWx1bSBwYWtldGluaSBYZW5Gb3JvIEFkbWluIENQID4gQWRkLW9ucyA+IEluc3RhbGwvdXBncmFkZSBmcm9tIGFyY2hpdmUgYWxhbsSxbmRhbiBkb8SfcnVkYW4gecO8a2xleWViaWxpcnNpbml6LgoKLS0tCgojIyBFbmdsaXNoCgojIFdhcmV4dCBTdHVkaW9zIHwgWGVuRm9ybyBNaW5lY3JhZnQgU2VydmVyICYgVm90ZSBTeXN0ZW0gdjEuMS45CgpWZXJzaW9uIDEuMS45IHJlZGVzaWducyB0aGUgc2VydmVyLWRldGFpbCBwYWdlIGludG8gYSByaWNoZXIgc2VydmVyIHByb2ZpbGUgdGhhdCBpbnRlZ3JhdGVzIG5hdHVyYWxseSB3aXRoIFhlbkZvcm8uCgotIE1vZGVybiBoZXJvLSBhbmQgYmFubmVyLWJhc2VkIHByb2ZpbGUgbGF5b3V0Ci0gUmFua2luZyBhbmQgcXVpY2stYWNjZXNzIGFyZWFzCi0gTW9yZSByZWFkYWJsZSBwcmVzZW50YXRpb24gb2Ygc2VydmVyIGRldGFpbHMKLSBSZWNlbnQtdm90ZXIgYW5kIHRvcC12b3RlciBzZWN0aW9ucwotIFN0cm9uZ2VyIHByZXNlbnRhdGlvbiBvZiByZXZpZXdzIG9uIHRoZSBzZXJ2ZXIgcHJvZmlsZQotIENvbXBhdGliaWxpdHkgd2l0aCB0aGUgZXhpc3Rpbmcgdm90aW5nLCBOdVZvdGlmaWVyLCBhbmFseXRpY3MgYW5kIHNlcnZlci1tYW5hZ2VtZW50IGluZnJhc3RydWN0dXJlCgpUaGUgaW5zdGFsbGF0aW9uIHBhY2thZ2UgY2FuIGJlIHVwbG9hZGVkIGRpcmVjdGx5IHRocm91Z2ggWGVuRm9ybyBBZG1pbiBDUCA+IEFkZC1vbnMgPiBJbnN0YWxsL3VwZ3JhZGUgZnJvbSBhcmNoaXZlLgo=' | base64 --decode > /tmp/release-notes.md
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release edit "$TAG" --title "$TAG" --notes-file /tmp/release-notes.md
             gh release upload "$TAG" "$FILE" --clobber
@@ -158,7 +97,6 @@ EOF
             git push origin "$TAG"
             gh release create "$TAG" "$FILE" --title "$TAG" --notes-file /tmp/release-notes.md
           fi
-
       - uses: actions/upload-artifact@v4
         with:
           name: Warext-MinecraftVote
