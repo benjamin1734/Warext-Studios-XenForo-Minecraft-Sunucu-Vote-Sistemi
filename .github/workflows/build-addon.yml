@@ -102,12 +102,61 @@ jobs:
             fi
           done
 
+          if [ "$TAG" = "v1.1.9" ]; then
+            cat > /tmp/release-notes.md <<'EOF'
+# Warext Studios | XenForo Minecraft Sunucu & Vote Sistemi v1.1.9
+
+1.1.9 sürümü sunucu detay sayfasını daha zengin ve XenForo ile doğal biçimde bütünleşen bir sunucu profiline dönüştürür.
+
+- Hero ve banner tabanlı modern profil düzeni
+- Sıralama ve hızlı erişim alanları
+- Sunucu detaylarının daha okunabilir sunumu
+- Son oy verenler ve top voter alanları
+- Değerlendirmelerin profil sayfasında daha güçlü sunumu
+- Mevcut oy, NuVotifier, analitik ve sunucu yönetim altyapısıyla uyumluluk
+
+Kurulum paketini XenForo Admin CP > Add-ons > Install/upgrade from archive alanından doğrudan yükleyebilirsiniz.
+
+---
+
+## English
+
+# Warext Studios | XenForo Minecraft Server & Vote System v1.1.9
+
+Version 1.1.9 redesigns the server-detail page into a richer server profile that integrates naturally with XenForo.
+
+- Modern hero- and banner-based profile layout
+- Ranking and quick-access areas
+- More readable presentation of server details
+- Recent-voter and top-voter sections
+- Stronger presentation of reviews on the server profile
+- Compatibility with the existing voting, NuVotifier, analytics and server-management infrastructure
+
+The installation package can be uploaded directly through XenForo Admin CP > Add-ons > Install/upgrade from archive.
+EOF
+          else
+            cat > /tmp/release-notes.md <<EOF
+# Warext Studios | XenForo Minecraft Sunucu & Vote Sistemi ${TAG}
+
+Güncel XenForo kurulum paketi.
+
+---
+
+## English
+
+# Warext Studios | XenForo Minecraft Server & Vote System ${TAG}
+
+Current XenForo installation package. See the bilingual README for complete feature and technical documentation.
+EOF
+          fi
+
           if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "$TAG" --notes-file /tmp/release-notes.md
             gh release upload "$TAG" "$FILE" --clobber
           else
             git tag "$TAG" "$GITHUB_SHA"
             git push origin "$TAG"
-            gh release create "$TAG" "$FILE" --title "$TAG" --notes "$TAG"
+            gh release create "$TAG" "$FILE" --title "$TAG" --notes-file /tmp/release-notes.md
           fi
 
       - uses: actions/upload-artifact@v4
