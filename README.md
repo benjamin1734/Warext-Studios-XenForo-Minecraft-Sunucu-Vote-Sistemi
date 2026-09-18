@@ -1,4 +1,6 @@
-# Warext Studios | XenForo Minecraft Sunucu & Vote Sistemi
+# Warext Studios | XenForo Minecraft Server & Vote System
+
+## Türkçe
 
 XenForo 2.3 için Minecraft sunucu listeleme ve güvenli oy sistemi.
 
@@ -45,9 +47,15 @@ Yama hanesi 9'dan sonra orta hane artırılır: `1.0.9 → 1.1.0`, ardından `1.
 
 [Lokal test rehberi](docs/LOKAL_KURULUM.md)
 
+## Destek
+
+Sorularınız, hata bildirimleriniz, kurulum desteği ve Warext Studios XenForo eklentileriyle ilgili yardım için destek Discord sunucumuza katılabilirsiniz:
+
+**Discord:** https://discord.gg/tgsV5XMcFS
+
 ---
 
-# English
+## English
 
 Warext Studios Minecraft Server & Vote System is a XenForo 2.3 add-on for Minecraft server discovery, listings, secure voting, and server-owner management.
 
@@ -93,3 +101,9 @@ After patch version 9, the minor version is incremented: `1.0.9 → 1.1.0`, foll
 - OpenSSL
 
 [Local testing guide](docs/LOKAL_KURULUM.md)
+
+## Support
+
+For questions, bug reports, installation support, and help with Warext Studios XenForo add-ons, you can join our support Discord server:
+
+**Discord:** https://discord.gg/tgsV5XMcFS
