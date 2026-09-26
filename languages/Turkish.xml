@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language title="Warext Minecraft Vote Türkçe (TR)" date_format="j F Y" time_format="H:i" decimal_point="," thousands_separator="." language_code="tr-TR" text_direction="LTR">
+  <phrase title="admin_navigation.warextMcAchievements" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucu Başarımları]]></phrase>
+  <phrase title="admin_navigation.warextMcReports" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucu Raporları]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftAudit" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Audit Kayıtları]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftCategories" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Kategoriler]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftHealth" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sistem Sağlığı]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftServers" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucular]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftSetup" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Kurulum &amp; Yapılandırma]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftSponsors" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sponsorlu Sunucular]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucu &amp; Vote Sistemi]]></phrase>
+  <phrase title="admin_permission.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucu &amp; Vote Sistemini Yönet]]></phrase>
+  <phrase title="alert_opt_out.warext_mc_server_update_publish" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Takip ettiğim Minecraft sunucularının yeni güncellemeleri]]></phrase>
+  <phrase title="content_type.warext_mc_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft sunucusu]]></phrase>
+  <phrase title="nav.warextMcAccounts" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Hesaplarım]]></phrase>
+  <phrase title="nav.warextMcCompare" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Karşılaştır]]></phrase>
+  <phrase title="nav.warextMcFavorites" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Favorilerim]]></phrase>
+  <phrase title="nav.warextMcMyServers" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucularım]]></phrase>
+  <phrase title="nav.warextMcSeasons" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sezonlar]]></phrase>
+  <phrase title="nav.warextMcServerAdd" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucu Ekle]]></phrase>
+  <phrase title="nav.warextMcServerList" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucular]]></phrase>
+  <phrase title="nav.warextMcServers" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucuları]]></phrase>
+  <phrase title="option.warextMcAllowGuestVotes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Misafir kullanıcıların oy vermesine izin ver]]></phrase>
+  <phrase title="option.warextMcAllowPrivateHosts" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Yerel ve özel IP adreslerine ping izni ver]]></phrase>
+  <phrase title="option.warextMcPingHistoryRetentionDays" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Ping geçmişini saklama süresi (gün)]]></phrase>
+  <phrase title="option.warextMcPublicApiEnabled" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Salt okunur sunucu API'sini etkinleştir]]></phrase>
+  <phrase title="option.warextMcRequireVerifiedAccountForVotes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Oy için doğrulanmış Minecraft hesabı zorunlu olsun]]></phrase>
+  <phrase title="option.warextMcSponsorCurrency" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sponsor para birimi]]></phrase>
+  <phrase title="option.warextMcSponsorPrice30" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[30 günlük sponsor fiyatı]]></phrase>
+  <phrase title="option.warextMcSponsorPrice7" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[7 günlük sponsor fiyatı]]></phrase>
+  <phrase title="option.warextMcSponsorSalesEnabled" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucu sahiplerinin sponsor paketi satın almasına izin ver]]></phrase>
+  <phrase title="option.warextMcVoteCaptcha" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Oy verirken CAPTCHA doğrulaması iste]]></phrase>
+  <phrase title="option.warextMcVoteCooldownHours" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Oy verme bekleme süresi (saat)]]></phrase>
+  <phrase title="option.warextMcVotifierMaxAttempts" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[NuVotifier maksimum teslimat denemesi]]></phrase>
+  <phrase title="option.warextMcWebhookEnabled" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Oy webhook bildirimlerini etkinleştir]]></phrase>
+  <phrase title="option_explain.warextMcAllowGuestVotes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Açıkken XenForo hesabı olmayan ziyaretçiler Minecraft kullanıcı adlarını girerek oy verebilir. Misafirlerde tekrar oy kontrolü güvenli IP hash ve Minecraft kullanıcı adı üzerinden yapılır.]]></phrase>
+  <phrase title="option_explain.warextMcAllowPrivateHosts" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Yalnızca lokal geliştirme ve güvenilen ağ testleri için açın. Açıldığında 127.0.0.1, localhost, 10.x.x.x, 172.16-31.x.x ve 192.168.x.x gibi özel adreslere Minecraft durum sorgusu yapılabilir. Canlı sistemde kapalı tutulması önerilir.]]></phrase>
+  <phrase title="option_explain.warextMcPublicApiEnabled" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Etkin olduğunda /minecraft-vote-api/ adresi aktif sunucuların herkese açık durum, oyuncu, oy ve sıralama verilerini JSON olarak sunar. IP tabanlı istek limiti uygulanır.]]></phrase>
+  <phrase title="option_explain.warextMcRequireVerifiedAccountForVotes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Etkin olduğunda misafirler ve elle kullanıcı adı girenler oy veremez. Kullanıcının XenForo hesabına bağlı ve doğrulanmış bir Minecraft hesabı seçmesi gerekir.]]></phrase>
+  <phrase title="option_explain.warextMcSponsorCurrency" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sponsor paketleri için üç harfli ISO para birimi kodu. Örnek: TRY, EUR, USD.]]></phrase>
+  <phrase title="option_explain.warextMcSponsorPrice30" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[30 günlük sponsor paketinin fiyatı. 0 veya geçersiz değer paketi satıştan kaldırır.]]></phrase>
+  <phrase title="option_explain.warextMcSponsorPrice7" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[7 günlük sponsor paketinin fiyatı. 0 veya geçersiz değer paketi satıştan kaldırır.]]></phrase>
+  <phrase title="option_explain.warextMcSponsorSalesEnabled" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Açıldığında aktif sunucuların sahipleri XenForo ödeme profilleri üzerinden 7 veya 30 günlük sponsorlu listeleme satın alabilir.]]></phrase>
+  <phrase title="option_explain.warextMcVoteCaptcha" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Etkin olduğunda oy formu XenForo'da yapılandırılmış CAPTCHA sağlayıcısını kullanır. Lokal test ortamında gerekirse kapatılabilir.]]></phrase>
+  <phrase title="option_explain.warextMcVoteCooldownHours" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Bir oyuncunun aynı sunucuya yeniden oy verebilmesi için geçmesi gereken süredir. Varsayılan değer 24 saattir.]]></phrase>
+  <phrase title="option_explain.warextMcVotifierMaxAttempts" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[NuVotifier teslimatı başarısız olduğunda kuyruğun kaç kez yeniden deneyeceğini belirler. Denemeler artan bekleme süreleriyle yapılır.]]></phrase>
+  <phrase title="option_explain.warextMcWebhookEnabled" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Etkin olduğunda yeni oylar HTTPS webhook adresine arka plan işi ile gönderilir. Yönlendirmeler kapalıdır ve özel/ayrılmış ağ hedefleri lokal test izni kapalıyken engellenir.]]></phrase>
+  <phrase title="option_group.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucu &amp; Vote Sistemi]]></phrase>
+  <phrase title="permission.warextMcVote_addServer" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft sunucusu ekleyebilir]]></phrase>
+  <phrase title="permission.warextMcVote_favorite" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucuları favorilere ekleyebilir]]></phrase>
+  <phrase title="permission.warextMcVote_report" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucuları raporlayabilir]]></phrase>
+  <phrase title="permission.warextMcVote_review" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunucuları değerlendirebilir]]></phrase>
+  <phrase title="permission.warextMcVote_vote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sunuculara oy verebilir]]></phrase>
+  <phrase title="permission_interface.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucu &amp; Vote Sistemi]]></phrase>
+  <phrase title="warext_mc_i18n_0001" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft kullanıcı adı]]></phrase>
+  <phrase title="warext_mc_i18n_0002" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Java Edition kullanıcı adınızı girin. Hesap ilk aşamada doğrulanmamış olarak eklenir.]]></phrase>
+  <phrase title="warext_mc_i18n_0003" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft UUID]]></phrase>
+  <phrase title="warext_mc_i18n_0004" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İsteğe bağlıdır. UUID biliyorsanız tireli veya tiresiz biçimde girebilirsiniz.]]></phrase>
+  <phrase title="warext_mc_i18n_0005" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Hesabı Ekle]]></phrase>
+  <phrase title="warext_mc_i18n_0006" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni sahibin XenForo kullanıcı adı]]></phrase>
+  <phrase title="warext_mc_i18n_0007" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Onay için sunucu adını yazın]]></phrase>
+  <phrase title="warext_mc_i18n_0008" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sahipliği Kalıcı Olarak Devret]]></phrase>
+  <phrase title="warext_mc_i18n_0009" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Rapor nedeni]]></phrase>
+  <phrase title="warext_mc_i18n_0010" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Açıklama]]></phrase>
+  <phrase title="warext_mc_i18n_0011" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sorunu açıkça belirtin. 10-1000 karakter.]]></phrase>
+  <phrase title="warext_mc_i18n_0012" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Raporu gönder]]></phrase>
+  <phrase title="warext_mc_i18n_0013" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Genel Puan]]></phrase>
+  <phrase title="warext_mc_i18n_0014" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oynanış]]></phrase>
+  <phrase title="warext_mc_i18n_0015" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yetkili Ekibi]]></phrase>
+  <phrase title="warext_mc_i18n_0016" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Performans]]></phrase>
+  <phrase title="warext_mc_i18n_0017" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Topluluk]]></phrase>
+  <phrase title="warext_mc_i18n_0018" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Özgünlük]]></phrase>
+  <phrase title="warext_mc_i18n_0019" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yorum]]></phrase>
+  <phrase title="warext_mc_i18n_0020" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İsteğe bağlıdır. Yorum yazarsanız en az 10, en fazla 2000 karakter olmalıdır.]]></phrase>
+  <phrase title="warext_mc_i18n_0021" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kaydet]]></phrase>
+  <phrase title="warext_mc_i18n_0022" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu adı]]></phrase>
+  <phrase title="warext_mc_i18n_0023" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu türü]]></phrase>
+  <phrase title="warext_mc_i18n_0024" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ana sunucu adresi]]></phrase>
+  <phrase title="warext_mc_i18n_0025" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ana / Java portu]]></phrase>
+  <phrase title="warext_mc_i18n_0026" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bedrock adresi]]></phrase>
+  <phrase title="warext_mc_i18n_0027" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bedrock/Crossplay içindir. Ana adres ile aynıysa boş bırakabilirsiniz.]]></phrase>
+  <phrase title="warext_mc_i18n_0028" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bedrock portu]]></phrase>
+  <phrase title="warext_mc_i18n_0029" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu açıklaması]]></phrase>
+  <phrase title="warext_mc_i18n_0030" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Liste bannerı]]></phrase>
+  <phrase title="warext_mc_i18n_0031" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[468×60 JPG, PNG veya WebP · en fazla 10 MB]]></phrase>
+  <phrase title="warext_mc_i18n_0032" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Hareketli banner]]></phrase>
+  <phrase title="warext_mc_i18n_0033" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[468×60 GIF · en fazla 15 MB · varsa statik bannerı geçersiz kılar]]></phrase>
+  <phrase title="warext_mc_i18n_0034" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Detay kapağı]]></phrase>
+  <phrase title="warext_mc_i18n_0035" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[En az 800×300 · JPG, PNG veya WebP · en fazla 12 MB]]></phrase>
+  <phrase title="warext_mc_i18n_0036" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tanıtım videosu]]></phrase>
+  <phrase title="warext_mc_i18n_0037" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İsteğe bağlı video/trailer bağlantısı.]]></phrase>
+  <phrase title="warext_mc_i18n_0038" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[En fazla 5 kategori seçebilirsiniz.]]></phrase>
+  <phrase title="warext_mc_i18n_0039" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oyun modları]]></phrase>
+  <phrase title="warext_mc_i18n_0040" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minimum sürüm]]></phrase>
+  <phrase title="warext_mc_i18n_0041" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Maksimum sürüm]]></phrase>
+  <phrase title="warext_mc_i18n_0042" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ülke kodu]]></phrase>
+  <phrase title="warext_mc_i18n_0043" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Web sitesi]]></phrase>
+  <phrase title="warext_mc_i18n_0044" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Discord]]></phrase>
+  <phrase title="warext_mc_i18n_0045" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Mağaza]]></phrase>
+  <phrase title="warext_mc_i18n_0046" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu tanıtım konusu]]></phrase>
+  <phrase title="warext_mc_i18n_0047" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İsteğe bağlı. Kendi XenForo tanıtım konunuzun bağlantısını girerseniz vote kaydı ile konu çift yönlü bağlanır.]]></phrase>
+  <phrase title="warext_mc_i18n_0048" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucuyu Gönder]]></phrase>
+  <phrase title="warext_mc_i18n_0049" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu 1]]></phrase>
+  <phrase title="warext_mc_i18n_0050" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu 2]]></phrase>
+  <phrase title="warext_mc_i18n_0051" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu 3]]></phrase>
+  <phrase title="warext_mc_i18n_0052" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu 4]]></phrase>
+  <phrase title="warext_mc_i18n_0053" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[468×60 · yeni dosya mevcut olanın yerine geçer]]></phrase>
+  <phrase title="warext_mc_i18n_0054" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[468×60 GIF · listede statik bannerı geçersiz kılar]]></phrase>
+  <phrase title="warext_mc_i18n_0055" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[En az 800×300]]></phrase>
+  <phrase title="warext_mc_i18n_0056" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Boş bırakırsanız mevcut konu bağlantısı kaldırılır.]]></phrase>
+  <phrase title="warext_mc_i18n_0057" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değişiklikleri Kaydet]]></phrase>
+  <phrase title="warext_mc_i18n_0058" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu adı, IP, oyun modu veya açıklama ara...]]></phrase>
+  <phrase title="warext_mc_i18n_0059" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu sıralaması]]></phrase>
+  <phrase title="warext_mc_i18n_0060" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu Türü]]></phrase>
+  <phrase title="warext_mc_i18n_0061" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ülke]]></phrase>
+  <phrase title="warext_mc_i18n_0062" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sürümü]]></phrase>
+  <phrase title="warext_mc_i18n_0063" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Örn. 1.21.4]]></phrase>
+  <phrase title="warext_mc_i18n_0064" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oyun Modu]]></phrase>
+  <phrase title="warext_mc_i18n_0065" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Örn. SkyBlock, Survival, Factions]]></phrase>
+  <phrase title="warext_mc_i18n_0066" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minimum Online Oyuncu]]></phrase>
+  <phrase title="warext_mc_i18n_0067" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Çevrim İçi Durumu]]></phrase>
+  <phrase title="warext_mc_i18n_0068" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulama]]></phrase>
+  <phrase title="warext_mc_i18n_0069" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Premium Durumu]]></phrase>
+  <phrase title="warext_mc_i18n_0070" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Crack Desteği]]></phrase>
+  <phrase title="warext_mc_i18n_0071" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Filtreleri Uygula]]></phrase>
+  <phrase title="warext_mc_i18n_0072" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulamayı Kontrol Et]]></phrase>
+  <phrase title="warext_mc_i18n_0073" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bağlı Minecraft hesabı]]></phrase>
+  <phrase title="warext_mc_i18n_0074" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bağlı hesap seçmediyseniz Java/Minecraft kullanıcı adınızı yazın. 3-16 karakter; harf, rakam ve alt çizgi kullanılabilir.]]></phrase>
+  <phrase title="warext_mc_i18n_0075" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bağlı hesap seçmediyseniz isteğe bağlı olarak UUID girebilirsiniz.]]></phrase>
+  <phrase title="warext_mc_i18n_0076" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oy Ver]]></phrase>
+  <phrase title="warext_mc_i18n_0077" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsor paketi]]></phrase>
+  <phrase title="warext_mc_i18n_0078" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Satın alınan süre aktif sponsorluğunuz varsa mevcut sürenin sonuna eklenir.]]></phrase>
+  <phrase title="warext_mc_i18n_0079" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ödeme yöntemi]]></phrase>
+  <phrase title="warext_mc_i18n_0080" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[XenForo Kullanıcı Adı]]></phrase>
+  <phrase title="warext_mc_i18n_0081" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Rol]]></phrase>
+  <phrase title="warext_mc_i18n_0082" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yetkiler]]></phrase>
+  <phrase title="warext_mc_i18n_0083" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu adresi]]></phrase>
+  <phrase title="warext_mc_i18n_0084" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Java / ana port]]></phrase>
+  <phrase title="warext_mc_i18n_0085" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yalnız Bedrock/Crossplay kullanıyorsanız doldurun. Ana adres ile aynıysa boş bırakabilirsiniz.]]></phrase>
+  <phrase title="warext_mc_i18n_0086" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başlık]]></phrase>
+  <phrase title="warext_mc_i18n_0087" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sürüm Etiketi]]></phrase>
+  <phrase title="warext_mc_i18n_0088" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İsteğe bağlı. Örnek: 1.4.2, Sezon 3 veya Ağustos Güncellemesi.]]></phrase>
+  <phrase title="warext_mc_i18n_0089" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değişiklikler]]></phrase>
+  <phrase title="warext_mc_i18n_0090" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[En az 10, en fazla 10000 karakter.]]></phrase>
+  <phrase title="warext_mc_i18n_0091" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yayınla]]></phrase>
+  <phrase title="warext_mc_i18n_0092" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[NuVotifier Host]]></phrase>
+  <phrase title="warext_mc_i18n_0093" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aynı bilgisayarda test ediyorsanız lokal test izni açıkken 127.0.0.1 veya localhost kullanabilirsiniz.]]></phrase>
+  <phrase title="warext_mc_i18n_0094" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[NuVotifier Port]]></phrase>
+  <phrase title="warext_mc_i18n_0095" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Varsayılan NuVotifier portu 8192'dir.]]></phrase>
+  <phrase title="warext_mc_i18n_0096" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Servis Adı]]></phrase>
+  <phrase title="warext_mc_i18n_0097" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[NuVotifier tarafında vote serviceName olarak gönderilir. Örnek: Warext.]]></phrase>
+  <phrase title="warext_mc_i18n_0098" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[NuVotifier V2 Token]]></phrase>
+  <phrase title="warext_mc_i18n_0099" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Anahtar]]></phrase>
+  <phrase title="warext_mc_i18n_0100" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Font Awesome ikonu]]></phrase>
+  <phrase title="warext_mc_i18n_0101" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Metrik]]></phrase>
+  <phrase title="warext_mc_i18n_0102" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Eşik]]></phrase>
+  <phrase title="warext_mc_i18n_0103" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Gösterim sırası]]></phrase>
+  <phrase title="warext_mc_i18n_0104" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başarım Oluştur]]></phrase>
+  <phrase title="warext_mc_i18n_0105" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu ID]]></phrase>
+  <phrase title="warext_mc_i18n_0106" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[0 bırakırsanız tüm sunucular gösterilir.]]></phrase>
+  <phrase title="warext_mc_i18n_0107" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İşlem anahtarı]]></phrase>
+  <phrase title="warext_mc_i18n_0108" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Filtrele]]></phrase>
+  <phrase title="warext_mc_i18n_0109" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kategori adı]]></phrase>
+  <phrase title="warext_mc_i18n_0110" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kısa ad]]></phrase>
+  <phrase title="warext_mc_i18n_0111" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sıralama]]></phrase>
+  <phrase title="warext_mc_i18n_0112" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bağlı tanıtım forumu]]></phrase>
+  <phrase title="warext_mc_i18n_0113" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Konu formu varsayılan türü]]></phrase>
+  <phrase title="warext_mc_i18n_0114" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kategori Ekle]]></phrase>
+  <phrase title="warext_mc_i18n_0115" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Durum]]></phrase>
+  <phrase title="warext_mc_i18n_0116" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni durum]]></phrase>
+  <phrase title="warext_mc_i18n_0117" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Moderasyon notu]]></phrase>
+  <phrase title="warext_mc_i18n_0118" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu]]></phrase>
+  <phrase title="warext_mc_i18n_0119" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Etiket]]></phrase>
+  <phrase title="warext_mc_i18n_0120" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başlangıç]]></phrase>
+  <phrase title="warext_mc_i18n_0121" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Boş bırakırsanız hemen başlar.]]></phrase>
+  <phrase title="warext_mc_i18n_0122" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bitiş]]></phrase>
+  <phrase title="warext_mc_i18n_0123" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Boş bırakırsanız süresiz devam eder.]]></phrase>
+  <phrase title="warext_mc_i18n_0124" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsor Kaydı Oluştur]]></phrase>
+  <phrase title="warext_mc_i18n_0125" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minimum risk puanı]]></phrase>
+  <phrase title="warext_mc_i18n_0126" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[0 bırakırsanız tüm sunucular incelenir.]]></phrase>
+  <phrase title="warext_mc_i18n_0127" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[takip ettiğiniz]]></phrase>
+  <phrase title="warext_mc_i18n_0128" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[sunucusu için yeni bir güncelleme yayınladı:]]></phrase>
+  <phrase title="warext_mc_i18n_0129" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bağlı Minecraft Hesapları]]></phrase>
+  <phrase title="warext_mc_i18n_0130" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulanmış]]></phrase>
+  <phrase title="warext_mc_i18n_0131" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulama Bekliyor]]></phrase>
+  <phrase title="warext_mc_i18n_0132" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulanmamış]]></phrase>
+  <phrase title="warext_mc_i18n_0133" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bağlantıyı Kaldır]]></phrase>
+  <phrase title="warext_mc_i18n_0134" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz profilinize bağlı Minecraft hesabı bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0135" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Hesabı Ekle]]></phrase>
+  <phrase title="warext_mc_i18n_0136" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oy, teslimat, oyuncu ve topluluk performansını inceleyin.]]></phrase>
+  <phrase title="warext_mc_i18n_0137" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Son 30 Gün Oy Performansı]]></phrase>
+  <phrase title="warext_mc_i18n_0138" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[7 Gün]]></phrase>
+  <phrase title="warext_mc_i18n_0139" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[30 Gün]]></phrase>
+  <phrase title="warext_mc_i18n_0140" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Benzersiz Seçmen]]></phrase>
+  <phrase title="warext_mc_i18n_0141" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Teslimat Başarısı]]></phrase>
+  <phrase title="warext_mc_i18n_0142" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başarılı Teslimat]]></phrase>
+  <phrase title="warext_mc_i18n_0143" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başarısız]]></phrase>
+  <phrase title="warext_mc_i18n_0144" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tekrar Kuyruğunda]]></phrase>
+  <phrase title="warext_mc_i18n_0145" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Son 7 Gün Sunucu Sağlığı]]></phrase>
+  <phrase title="warext_mc_i18n_0146" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Zirve Oyuncu]]></phrase>
+  <phrase title="warext_mc_i18n_0147" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ortalama Oyuncu]]></phrase>
+  <phrase title="warext_mc_i18n_0148" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Favori]]></phrase>
+  <phrase title="warext_mc_i18n_0149" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirme]]></phrase>
+  <phrase title="warext_mc_i18n_0150" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Son 14 Gün Oy Hareketi]]></phrase>
+  <phrase title="warext_mc_i18n_0151" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu dönem için oy verisi bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0152" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Favori Minecraft Sunucularım]]></phrase>
+  <phrase title="warext_mc_i18n_0153" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Takip ettiğiniz Minecraft sunucularına hızlıca ulaşın ve yeni güncellemelerini görün.]]></phrase>
+  <phrase title="warext_mc_i18n_0154" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[· Güncelleme bildirimi:]]></phrase>
+  <phrase title="warext_mc_i18n_0155" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Açık]]></phrase>
+  <phrase title="warext_mc_i18n_0156" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kapalı]]></phrase>
+  <phrase title="warext_mc_i18n_0157" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Güncellemeler]]></phrase>
+  <phrase title="warext_mc_i18n_0158" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Favoriden Çıkar]]></phrase>
+  <phrase title="warext_mc_i18n_0159" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz favoriye eklediğiniz bir Minecraft sunucusu bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0160" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu işlem geri alınamaz. Yeni kullanıcı sunucunun asıl sahibi olur.]]></phrase>
+  <phrase title="warext_mc_i18n_0161" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sahte / yanıltıcı sunucu bilgisi]]></phrase>
+  <phrase title="warext_mc_i18n_0162" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Zararlı içerik veya güvenlik riski]]></phrase>
+  <phrase title="warext_mc_i18n_0163" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Dolandırıcılık / yanıltıcı satış]]></phrase>
+  <phrase title="warext_mc_i18n_0164" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Uzun süredir kapalı / erişilemiyor]]></phrase>
+  <phrase title="warext_mc_i18n_0165" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Uygunsuz içerik]]></phrase>
+  <phrase title="warext_mc_i18n_0166" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Diğer]]></phrase>
+  <phrase title="warext_mc_i18n_0167" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu Değerlendirmeleri]]></phrase>
+  <phrase title="warext_mc_i18n_0168" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirmeni Güncelle]]></phrase>
+  <phrase title="warext_mc_i18n_0169" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirme Yap]]></phrase>
+  <phrase title="warext_mc_i18n_0170" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[5 - Mükemmel]]></phrase>
+  <phrase title="warext_mc_i18n_0171" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[4 - İyi]]></phrase>
+  <phrase title="warext_mc_i18n_0172" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[2 - Zayıf]]></phrase>
+  <phrase title="warext_mc_i18n_0173" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[1 - Kötü]]></phrase>
+  <phrase title="warext_mc_i18n_0174" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Puan verme]]></phrase>
+  <phrase title="warext_mc_i18n_0175" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirmemi Sil]]></phrase>
+  <phrase title="warext_mc_i18n_0176" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Topluluk Yorumları]]></phrase>
+  <phrase title="warext_mc_i18n_0177" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulanmış Oyuncu]]></phrase>
+  <phrase title="warext_mc_i18n_0178" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz değerlendirme yapılmamış.]]></phrase>
+  <phrase title="warext_mc_i18n_0179" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sunucu Sezonları]]></phrase>
+  <phrase title="warext_mc_i18n_0180" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aylık oy sezonlarını, mevcut yarışmayı ve önceki sezon kazananlarını görüntüle.]]></phrase>
+  <phrase title="warext_mc_i18n_0181" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[· Bitiş:]]></phrase>
+  <phrase title="warext_mc_i18n_0182" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu sezon için henüz oy bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0183" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Geçmiş Sezonlar]]></phrase>
+  <phrase title="warext_mc_i18n_0184" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz tamamlanmış bir sezon bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0185" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tamamlanan sezonun kalıcı sunucu sıralaması ve istatistikleri.]]></phrase>
+  <phrase title="warext_mc_i18n_0186" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sezon Sıralaması]]></phrase>
+  <phrase title="warext_mc_i18n_0187" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu sezon için sıralama kaydı bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0188" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar moderasyon onayından sonra listelenir.]]></phrase>
+  <phrase title="warext_mc_i18n_0189" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kategoriler sınıflandırma içindir. Tanıtım konusu bağlantısı ve tüm görseller isteğe bağlıdır; yalnızca sunucu adresi temel kayıt için zorunludur.]]></phrase>
+  <phrase title="warext_mc_i18n_0190" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Görsel Kimlik]]></phrase>
+  <phrase title="warext_mc_i18n_0191" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Liste bannerı klasik vote standardı olan 468×60 kullanır. Hareketli GIF yüklerseniz listede statik bannerın yerine o gösterilir. Kapak görseli yalnız sunucu detay sayfasının geniş üst alanında kullanılır.]]></phrase>
+  <phrase title="warext_mc_i18n_0192" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kategori, Mod ve Sürüm]]></phrase>
+  <phrase title="warext_mc_i18n_0193" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Crack giriş destekleniyor]]></phrase>
+  <phrase title="warext_mc_i18n_0194" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bağlantılar]]></phrase>
+  <phrase title="warext_mc_i18n_0195" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sunucularını Karşılaştır]]></phrase>
+  <phrase title="warext_mc_i18n_0196" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[En fazla 4 Minecraft sunucusunu temel performans ve topluluk metrikleriyle yan yana karşılaştır.]]></phrase>
+  <phrase title="warext_mc_i18n_0197" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Karşılaştırılacak Sunucular]]></phrase>
+  <phrase title="warext_mc_i18n_0198" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Seçiniz]]></phrase>
+  <phrase title="warext_mc_i18n_0199" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Karşılaştırma Sonuçları]]></phrase>
+  <phrase title="warext_mc_i18n_0200" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Özellik]]></phrase>
+  <phrase title="warext_mc_i18n_0201" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oyuncu]]></phrase>
+  <phrase title="warext_mc_i18n_0202" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu ay oy]]></phrase>
+  <phrase title="warext_mc_i18n_0203" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aylık benzersiz oy veren]]></phrase>
+  <phrase title="warext_mc_i18n_0204" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Popülerlik sırası]]></phrase>
+  <phrase title="warext_mc_i18n_0205" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Trend sırası]]></phrase>
+  <phrase title="warext_mc_i18n_0206" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Puan]]></phrase>
+  <phrase title="warext_mc_i18n_0207" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tür]]></phrase>
+  <phrase title="warext_mc_i18n_0208" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sürüm]]></phrase>
+  <phrase title="warext_mc_i18n_0209" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu bilgilerini, görsellerini, kategorilerini ve forum bağlantısını güncelleyin.]]></phrase>
+  <phrase title="warext_mc_i18n_0210" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu türü, IP/adres veya port bilgileri değiştirilirse sahiplik doğrulaması sıfırlanır ve sunucu yeniden moderasyon onayına gönderilir.]]></phrase>
+  <phrase title="warext_mc_i18n_0211" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Statik bannerı kaldır]]></phrase>
+  <phrase title="warext_mc_i18n_0212" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Hareketli bannerı kaldır]]></phrase>
+  <phrase title="warext_mc_i18n_0213" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kapak görselini kaldır]]></phrase>
+  <phrase title="warext_mc_i18n_0214" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bağlantılar ve Forum]]></phrase>
+  <phrase title="warext_mc_i18n_0215" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Güncel Minecraft sunucularını keşfet, canlı durumlarını karşılaştır ve favori sunucuna oy ver.]]></phrase>
+  <phrase title="warext_mc_i18n_0216" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sunucu Dizini]]></phrase>
+  <phrase title="warext_mc_i18n_0217" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oyna, keşfet ve oy ver.]]></phrase>
+  <phrase title="warext_mc_i18n_0218" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucuları canlı oyuncu sayısı, oy performansı, uptime ve topluluk puanına göre tek ekranda karşılaştır.]]></phrase>
+  <phrase title="warext_mc_i18n_0219" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucunu Ekle]]></phrase>
+  <phrase title="warext_mc_i18n_0220" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aktif sunucu]]></phrase>
+  <phrase title="warext_mc_i18n_0221" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Şu an online]]></phrase>
+  <phrase title="warext_mc_i18n_0222" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oyuncu çevrimiçi]]></phrase>
+  <phrase title="warext_mc_i18n_0223" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu ay verilen oy]]></phrase>
+  <phrase title="warext_mc_i18n_0224" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Popüler]]></phrase>
+  <phrase title="warext_mc_i18n_0225" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yükselişte]]></phrase>
+  <phrase title="warext_mc_i18n_0226" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[En Çok Oy]]></phrase>
+  <phrase title="warext_mc_i18n_0227" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[En Kalabalık]]></phrase>
+  <phrase title="warext_mc_i18n_0228" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[En Yüksek Uptime]]></phrase>
+  <phrase title="warext_mc_i18n_0229" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni Eklenenler]]></phrase>
+  <phrase title="warext_mc_i18n_0230" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu Ara]]></phrase>
+  <phrase title="warext_mc_i18n_0231" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni]]></phrase>
+  <phrase title="warext_mc_i18n_0232" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oyun türleri]]></phrase>
+  <phrase title="warext_mc_i18n_0233" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tümü]]></phrase>
+  <phrase title="warext_mc_i18n_0234" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Gelişmiş filtreler]]></phrase>
+  <phrase title="warext_mc_i18n_0235" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aktif]]></phrase>
+  <phrase title="warext_mc_i18n_0236" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tüm ülkeler]]></phrase>
+  <phrase title="warext_mc_i18n_0237" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sadece doğrulanmış]]></phrase>
+  <phrase title="warext_mc_i18n_0238" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Premium değil]]></phrase>
+  <phrase title="warext_mc_i18n_0239" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Öne Çıkan Sunucular]]></phrase>
+  <phrase title="warext_mc_i18n_0240" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ücretli gösterim organik sıralamayı değiştirmez.]]></phrase>
+  <phrase title="warext_mc_i18n_0241" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İncele]]></phrase>
+  <phrase title="warext_mc_i18n_0242" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sıra]]></phrase>
+  <phrase title="warext_mc_i18n_0243" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[aylık oy]]></phrase>
+  <phrase title="warext_mc_i18n_0244" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Filtrelerinize uyan aktif bir Minecraft sunucusu bulunamadı.]]></phrase>
+  <phrase title="warext_mc_i18n_0245" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Eklediğiniz ve ekip yetkisiyle yönettiğiniz Minecraft sunucuları.]]></phrase>
+  <phrase title="warext_mc_i18n_0246" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Onay Bekliyor]]></phrase>
+  <phrase title="warext_mc_i18n_0247" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Askıya Alındı]]></phrase>
+  <phrase title="warext_mc_i18n_0248" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Son güncelleme:]]></phrase>
+  <phrase title="warext_mc_i18n_0249" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Düzenle]]></phrase>
+  <phrase title="warext_mc_i18n_0250" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İstatistik]]></phrase>
+  <phrase title="warext_mc_i18n_0251" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz eklediğiniz veya ekip yetkisiyle yönettiğiniz bir sunucu yok.]]></phrase>
+  <phrase title="warext_mc_i18n_0252" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İlk sunucunuzu ekleyin.]]></phrase>
+  <phrase title="warext_mc_i18n_0253" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aktif Doğrulama]]></phrase>
+  <phrase title="warext_mc_i18n_0254" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulama Kodu]]></phrase>
+  <phrase title="warext_mc_i18n_0255" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[MOTD doğrulaması]]></phrase>
+  <phrase title="warext_mc_i18n_0256" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[DNS TXT doğrulaması]]></phrase>
+  <phrase title="warext_mc_i18n_0257" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kayıt adı]]></phrase>
+  <phrase title="warext_mc_i18n_0258" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[TXT değeri]]></phrase>
+  <phrase title="warext_mc_i18n_0259" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[DNS yayılımına bağlı olarak yeni kayıtların görünmesi biraz gecikebilir.]]></phrase>
+  <phrase title="warext_mc_i18n_0260" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni Kod Oluştur]]></phrase>
+  <phrase title="warext_mc_i18n_0261" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulama Yöntemi Seç]]></phrase>
+  <phrase title="warext_mc_i18n_0262" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[MOTD ile doğrulama]]></phrase>
+  <phrase title="warext_mc_i18n_0263" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Lokal sunucular ve alan adı yönetimi olmayan sunucular için en kolay yöntemdir.]]></phrase>
+  <phrase title="warext_mc_i18n_0264" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[MOTD Kodu Oluştur]]></phrase>
+  <phrase title="warext_mc_i18n_0265" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[DNS TXT ile doğrulama]]></phrase>
+  <phrase title="warext_mc_i18n_0266" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu alan adının DNS yönetimine erişiminiz varsa MOTD'yi değiştirmeden doğrulama yapabilirsiniz.]]></phrase>
+  <phrase title="warext_mc_i18n_0267" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[DNS TXT Kodu Oluştur]]></phrase>
+  <phrase title="warext_mc_i18n_0268" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Favoriye Ekle / Çıkar]]></phrase>
+  <phrase title="warext_mc_i18n_0269" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucuyu Düzenle]]></phrase>
+  <phrase title="warext_mc_i18n_0270" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Güncelleme Yayınla]]></phrase>
+  <phrase title="warext_mc_i18n_0271" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İstatistikler]]></phrase>
+  <phrase title="warext_mc_i18n_0272" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[NuVotifier Ayarları]]></phrase>
+  <phrase title="warext_mc_i18n_0273" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirmeleri Yönet]]></phrase>
+  <phrase title="warext_mc_i18n_0274" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu Ekibi]]></phrase>
+  <phrase title="warext_mc_i18n_0275" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulama Bilgisi]]></phrase>
+  <phrase title="warext_mc_i18n_0276" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sahipliği Doğrula]]></phrase>
+  <phrase title="warext_mc_i18n_0277" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sahipliği Devret]]></phrase>
+  <phrase title="warext_mc_i18n_0278" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsor Ol]]></phrase>
+  <phrase title="warext_mc_i18n_0279" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Onay bekliyor]]></phrase>
+  <phrase title="warext_mc_i18n_0280" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Son durum kontrolü:]]></phrase>
+  <phrase title="warext_mc_i18n_0281" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sahiplik doğrulaması:]]></phrase>
+  <phrase title="warext_mc_i18n_0282" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başarımlar]]></phrase>
+  <phrase title="warext_mc_i18n_0283" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kazanılma:]]></phrase>
+  <phrase title="warext_mc_i18n_0284" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu Bilgileri]]></phrase>
+  <phrase title="warext_mc_i18n_0285" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tespit edilen sürüm]]></phrase>
+  <phrase title="warext_mc_i18n_0286" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz tespit edilmedi]]></phrase>
+  <phrase title="warext_mc_i18n_0287" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Desteklenen sürüm]]></phrase>
+  <phrase title="warext_mc_i18n_0288" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Hayır]]></phrase>
+  <phrase title="warext_mc_i18n_0289" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Crack desteği]]></phrase>
+  <phrase title="warext_mc_i18n_0290" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Web Sitesi]]></phrase>
+  <phrase title="warext_mc_i18n_0291" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tanıtım Videosu]]></phrase>
+  <phrase title="warext_mc_i18n_0292" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tanıtım Konusu]]></phrase>
+  <phrase title="warext_mc_i18n_0293" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucunuzu Minecraft sunucu listesinde sponsorlu olarak öne çıkarın.]]></phrase>
+  <phrase title="warext_mc_i18n_0294" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsor Paketi Satın Al]]></phrase>
+  <phrase title="warext_mc_i18n_0295" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kullanılabilir XenForo ödeme profili bulunmuyor. Yönetici ACP &gt; Setup &gt; Payment profiles alanından bir ödeme profili eklemelidir.]]></phrase>
+  <phrase title="warext_mc_i18n_0296" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsor paket fiyatları henüz yönetici tarafından ayarlanmamış.]]></phrase>
+  <phrase title="warext_mc_i18n_0297" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucuyu yönetecek XenForo kullanıcılarını ve yetkilerini belirleyin.]]></phrase>
+  <phrase title="warext_mc_i18n_0298" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ekip Üyesi Ekle / Güncelle]]></phrase>
+  <phrase title="warext_mc_i18n_0299" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yönetici]]></phrase>
+  <phrase title="warext_mc_i18n_0300" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Editör]]></phrase>
+  <phrase title="warext_mc_i18n_0301" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ekip Üyesi]]></phrase>
+  <phrase title="warext_mc_i18n_0302" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu içeriğini düzenleyebilir]]></phrase>
+  <phrase title="warext_mc_i18n_0303" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Güncelleme yayınlayabilir]]></phrase>
+  <phrase title="warext_mc_i18n_0304" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu istatistiklerini görebilir]]></phrase>
+  <phrase title="warext_mc_i18n_0305" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[NuVotifier ayarlarını yönetebilir]]></phrase>
+  <phrase title="warext_mc_i18n_0306" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirme yönetimine erişebilir]]></phrase>
+  <phrase title="warext_mc_i18n_0307" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İçerik düzenleme ·]]></phrase>
+  <phrase title="warext_mc_i18n_0308" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Güncelleme yayınlama ·]]></phrase>
+  <phrase title="warext_mc_i18n_0309" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İstatistik ·]]></phrase>
+  <phrase title="warext_mc_i18n_0310" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirme yönetimi]]></phrase>
+  <phrase title="warext_mc_i18n_0311" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ekipten Çıkar]]></phrase>
+  <phrase title="warext_mc_i18n_0312" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu sunucuya henüz ekip üyesi eklenmemiş.]]></phrase>
+  <phrase title="warext_mc_i18n_0313" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu dizininde de yayınla]]></phrase>
+  <phrase title="warext_mc_i18n_0314" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Görseller]]></phrase>
+  <phrase title="warext_mc_i18n_0315" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tanıtım konusundan otomatik oluşan sunucunun banner, hareketli GIF banner ve kapak görselini daha sonra Sunucularım → Düzenle bölümünden ekleyebilirsiniz. Konu formuna ikinci bir görsel yükleme sistemi eklenmez.]]></phrase>
+  <phrase title="warext_mc_i18n_0316" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sunucusu]]></phrase>
+  <phrase title="warext_mc_i18n_0317" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu Sayfası]]></phrase>
+  <phrase title="warext_mc_i18n_0318" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu sahibinin ve yetkili ekip üyelerinin yayınladığı sürüm notları ve değişiklikler.]]></phrase>
+  <phrase title="warext_mc_i18n_0319" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni Güncelleme Yayınla]]></phrase>
+  <phrase title="warext_mc_i18n_0320" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Güncelleme Geçmişi]]></phrase>
+  <phrase title="warext_mc_i18n_0321" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Güncellemeyi Sil]]></phrase>
+  <phrase title="warext_mc_i18n_0322" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu sunucu henüz bir güncelleme yayınlamamış.]]></phrase>
+  <phrase title="warext_mc_i18n_0323" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Son başarılı bağlantı:]]></phrase>
+  <phrase title="warext_mc_i18n_0324" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[NuVotifier ödül teslimatını etkinleştir]]></phrase>
+  <phrase title="warext_mc_i18n_0325" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kaydet ve Test Oyu Gönder]]></phrase>
+  <phrase title="warext_mc_i18n_0326" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başarımları Şimdi Hesapla]]></phrase>
+  <phrase title="warext_mc_i18n_0327" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni Başarım Tanımı]]></phrase>
+  <phrase title="warext_mc_i18n_0328" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tanımlı Başarımlar]]></phrase>
+  <phrase title="warext_mc_i18n_0329" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Devre Dışı Bırak]]></phrase>
+  <phrase title="warext_mc_i18n_0330" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Etkinleştir]]></phrase>
+  <phrase title="warext_mc_i18n_0331" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başarım tanımı bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0332" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sunucu Audit Kayıtları]]></phrase>
+  <phrase title="warext_mc_i18n_0333" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kritik sahiplik, ekip, moderasyon, sponsor ve başarım yönetim işlemleri.]]></phrase>
+  <phrase title="warext_mc_i18n_0334" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Audit Geçmişi]]></phrase>
+  <phrase title="warext_mc_i18n_0335" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu filtrede audit kaydı bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0336" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu forumda konu → vote entegrasyonunu aç]]></phrase>
+  <phrase title="warext_mc_i18n_0337" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sunucu Kategorileri]]></phrase>
+  <phrase title="warext_mc_i18n_0338" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kategori bir XenForo forumuna bağlanırsa o forumda yeni konu açarken isteğe bağlı sunucu dizini alanları görünür. Sunucu adresi boşsa konu normal şekilde açılır ve vote kaydı oluşturulmaz.]]></phrase>
+  <phrase title="warext_mc_i18n_0339" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni Kategori]]></phrase>
+  <phrase title="warext_mc_i18n_0340" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Pasif]]></phrase>
+  <phrase title="warext_mc_i18n_0341" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Pasifleştir]]></phrase>
+  <phrase title="warext_mc_i18n_0342" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aktifleştir]]></phrase>
+  <phrase title="warext_mc_i18n_0343" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sil]]></phrase>
+  <phrase title="warext_mc_i18n_0344" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz kategori yok.]]></phrase>
+  <phrase title="warext_mc_i18n_0345" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Vote Sistem Sağlığı]]></phrase>
+  <phrase title="warext_mc_i18n_0346" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Vote kuyruğu, NuVotifier entegrasyonları ve sunucu durum görevleri için operasyon ekranı.]]></phrase>
+  <phrase title="warext_mc_i18n_0347" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Vote Kuyruğu]]></phrase>
+  <phrase title="warext_mc_i18n_0348" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Genel Durum]]></phrase>
+  <phrase title="warext_mc_i18n_0349" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[· En eski bekleyen:]]></phrase>
+  <phrase title="warext_mc_i18n_0350" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Başarısız Oyları Yeniden Dene]]></phrase>
+  <phrase title="warext_mc_i18n_0351" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Takılı Teslimatları Kurtar]]></phrase>
+  <phrase title="warext_mc_i18n_0352" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[NuVotifier Sağlığı]]></phrase>
+  <phrase title="warext_mc_i18n_0353" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[· Son başarı:]]></phrase>
+  <phrase title="warext_mc_i18n_0354" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz NuVotifier yapılandırması bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0355" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Çözüldü]]></phrase>
+  <phrase title="warext_mc_i18n_0356" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Silinmiş sunucu]]></phrase>
+  <phrase title="warext_mc_i18n_0357" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Moderatör]]></phrase>
+  <phrase title="warext_mc_i18n_0358" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sonuç tarihi]]></phrase>
+  <phrase title="warext_mc_i18n_0359" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu filtreye uygun rapor bulunamadı.]]></phrase>
+  <phrase title="warext_mc_i18n_0360" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sıralamayı Şimdi Hesapla]]></phrase>
+  <phrase title="warext_mc_i18n_0361" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Şüpheli Oylar]]></phrase>
+  <phrase title="warext_mc_i18n_0362" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oy Teslimat Kuyruğu]]></phrase>
+  <phrase title="warext_mc_i18n_0363" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Askıya Alınanlar]]></phrase>
+  <phrase title="warext_mc_i18n_0364" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu Kayıtları]]></phrase>
+  <phrase title="warext_mc_i18n_0365" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[· Son sıralama:]]></phrase>
+  <phrase title="warext_mc_i18n_0366" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Askıya Al]]></phrase>
+  <phrase title="warext_mc_i18n_0367" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Reddet]]></phrase>
+  <phrase title="warext_mc_i18n_0368" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu filtrede sunucu bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0369" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kurulum ve Yapılandırma]]></phrase>
+  <phrase title="warext_mc_i18n_0370" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aktif kategori:]]></phrase>
+  <phrase title="warext_mc_i18n_0371" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Onay bekleyen sunucu:]]></phrase>
+  <phrase title="warext_mc_i18n_0372" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aktif sunucu:]]></phrase>
+  <phrase title="warext_mc_i18n_0373" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oy CAPTCHA:]]></phrase>
+  <phrase title="warext_mc_i18n_0374" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Doğrulanmış hesap zorunluluğu:]]></phrase>
+  <phrase title="warext_mc_i18n_0375" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsor satışları:]]></phrase>
+  <phrase title="warext_mc_i18n_0376" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Warext Minecraft Sunucu & Vote]]></phrase>
+  <phrase title="warext_mc_i18n_0377" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[2. Kullanıcı Grubu İzinleri]]></phrase>
+  <phrase title="warext_mc_i18n_0378" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Admin CP → Groups & permissions → User group permissions bölümünde]]></phrase>
+  <phrase title="warext_mc_i18n_0379" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sunucu & Vote]]></phrase>
+  <phrase title="warext_mc_i18n_0380" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[izin grubunu düzenleyin.]]></phrase>
+  <phrase title="warext_mc_i18n_0381" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu ekleyebilir:]]></phrase>
+  <phrase title="warext_mc_i18n_0382" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kullanıcının yeni Minecraft sunucusu göndermesini sağlar.]]></phrase>
+  <phrase title="warext_mc_i18n_0383" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oy verebilir:]]></phrase>
+  <phrase title="warext_mc_i18n_0384" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Aktif sunuculara oy verme yetkisidir.]]></phrase>
+  <phrase title="warext_mc_i18n_0385" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirme yapabilir:]]></phrase>
+  <phrase title="warext_mc_i18n_0386" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunuculara puan ve yorum bırakma yetkisidir.]]></phrase>
+  <phrase title="warext_mc_i18n_0387" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Favori ve güncelleme bildirimi özelliklerini açar.]]></phrase>
+  <phrase title="warext_mc_i18n_0388" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu raporu göndermeyi açar.]]></phrase>
+  <phrase title="warext_mc_i18n_0389" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bir kullanıcıda ilgili izin kapalıysa buton görünmez veya işlem reddedilir. Eklentiyi test ederken test hesabının kullanıcı grubuna bu izinleri verdiğinizden emin olun.]]></phrase>
+  <phrase title="warext_mc_i18n_0390" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Survival, SkyBlock, BoxPvP gibi kategoriler sunucuyu sınıflandırır.]]></phrase>
+  <phrase title="warext_mc_i18n_0391" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kategori seçimi ek form alanı oluşturmaz ve alan zorunluluğunu değiştirmez.]]></phrase>
+  <phrase title="warext_mc_i18n_0392" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Java/Bedrock alanları sunucu türüne göre anlam kazanır.]]></phrase>
+  <phrase title="warext_mc_i18n_0393" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kategorileri Yönet]]></phrase>
+  <phrase title="warext_mc_i18n_0394" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[4. Sunucu Ekleme Akışı]]></phrase>
+  <phrase title="warext_mc_i18n_0395" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ana adres ve Java portu kullanılır. Bedrock alanları boş bırakılabilir.]]></phrase>
+  <phrase title="warext_mc_i18n_0396" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Ana adres sunucunun temel adresidir; Bedrock adresi boş bırakılırsa ana adres kullanılır. Bedrock portunu gerçek portunuza göre ayarlayın.]]></phrase>
+  <phrase title="warext_mc_i18n_0397" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni kayıt önce]]></phrase>
+  <phrase title="warext_mc_i18n_0398" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[durumuna gelir. Yönetici onayından sonra genel listede görünür ve oy alabilir.]]></phrase>
+  <phrase title="warext_mc_i18n_0399" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tüm Sunucular]]></phrase>
+  <phrase title="warext_mc_i18n_0400" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[5. NuVotifier ve Oy Teslimatı]]></phrase>
+  <phrase title="warext_mc_i18n_0401" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu sahibi, kendi sunucu detay sayfasındaki]]></phrase>
+  <phrase title="warext_mc_i18n_0402" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[alanından bağlantıyı yapılandırır. Oy kaydı ile oyun içi ödül teslimatı birbirinden ayrıdır; oy önce kaydedilir, ardından teslimat kuyruğu çalışır.]]></phrase>
+  <phrase title="warext_mc_i18n_0403" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Teslimat sorunlarını Admin CP → Minecraft Sunucu & Vote → Sistem Sağlığı ve Oy Teslimat Kuyruğu ekranlarından takip edebilirsiniz.]]></phrase>
+  <phrase title="warext_mc_i18n_0404" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsorlu gösterimler organik Popüler ve Yükselişte sıralama skorlarını değiştirmez.]]></phrase>
+  <phrase title="warext_mc_i18n_0405" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeni Sponsorlu Gösterim]]></phrase>
+  <phrase title="warext_mc_i18n_0406" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu seçin]]></phrase>
+  <phrase title="warext_mc_i18n_0407" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsor Kayıtları]]></phrase>
+  <phrase title="warext_mc_i18n_0408" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yayında]]></phrase>
+  <phrase title="warext_mc_i18n_0409" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Duraklatıldı]]></phrase>
+  <phrase title="warext_mc_i18n_0410" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Süresi dışında]]></phrase>
+  <phrase title="warext_mc_i18n_0411" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Süresiz]]></phrase>
+  <phrase title="warext_mc_i18n_0412" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Henüz sponsor kaydı bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0413" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Risk puanı yüksek oyları inceleyin. Sistem otomatik ban uygulamaz; karar yöneticiye aittir.]]></phrase>
+  <phrase title="warext_mc_i18n_0414" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oy Kuyruğu]]></phrase>
+  <phrase title="warext_mc_i18n_0415" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Şüpheli Oy Kayıtları]]></phrase>
+  <phrase title="warext_mc_i18n_0416" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sunucu silinmiş]]></phrase>
+  <phrase title="warext_mc_i18n_0417" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sıralamadan Çıkar]]></phrase>
+  <phrase title="warext_mc_i18n_0418" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Geri Al]]></phrase>
+  <phrase title="warext_mc_i18n_0419" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Teslimat lease'i aktif; moderasyon için işlemin bitmesini bekleyin.]]></phrase>
+  <phrase title="warext_mc_i18n_0420" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu filtrede şüpheli oy bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0421" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kuyruğu Çalıştır]]></phrase>
+  <phrase title="warext_mc_i18n_0422" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Teslimat Durumları]]></phrase>
+  <phrase title="warext_mc_i18n_0423" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Oy Kayıtları]]></phrase>
+  <phrase title="warext_mc_i18n_0424" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[İşleniyor]]></phrase>
+  <phrase title="warext_mc_i18n_0425" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Tekrar Kuyruğa Al]]></phrase>
+  <phrase title="warext_mc_i18n_0426" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bu durumda oy kaydı bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_i18n_0427" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bildirimleri Aç]]></phrase>
+  <phrase title="warext_mc_i18n_0428" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Değerlendirmeyi Gizle]]></phrase>
+  <phrase title="warext_mc_i18n_0429" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yeniden Görünür Yap]]></phrase>
+  <phrase title="warext_mc_i18n_0430" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Yalnızca doğrulanmış Minecraft hesaplarıyla oy verilebilir.]]></phrase>
+  <phrase title="warext_mc_i18n_0431" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Bir hesap seçerseniz aşağıdaki elle girilen kullanıcı adı ve UUID alanları yok sayılır.]]></phrase>
+</language>
