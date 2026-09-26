@@ -6,10 +6,10 @@
   <phrase title="admin_navigation.warextMinecraftCategories" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Categories]]></phrase>
   <phrase title="admin_navigation.warextMinecraftHealth" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[System Health]]></phrase>
   <phrase title="admin_navigation.warextMinecraftServers" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Servers]]></phrase>
-  <phrase title="admin_navigation.warextMinecraftSetup" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Kurulum &amp; Yapılandırma]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftSetup" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Setup &amp; Configuration]]></phrase>
   <phrase title="admin_navigation.warextMinecraftSponsors" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Sponsored Servers]]></phrase>
-  <phrase title="admin_navigation.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucu &amp; Vote Sistemi]]></phrase>
-  <phrase title="admin_permission.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucu &amp; Vote Sistemini Yönet]]></phrase>
+  <phrase title="admin_navigation.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Server &amp; Vote System]]></phrase>
+  <phrase title="admin_permission.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Manage Minecraft Server &amp; Vote System]]></phrase>
   <phrase title="alert_opt_out.warext_mc_server_update_publish" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[New updates from Minecraft servers I follow]]></phrase>
   <phrase title="content_type.warext_mc_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft server]]></phrase>
   <phrase title="nav.warextMcAccounts" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[My Minecraft Accounts]]></phrase>
@@ -45,13 +45,13 @@
   <phrase title="option_explain.warextMcVoteCooldownHours" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Time that must pass before a player can vote for the same server again. The default is 24 hours.]]></phrase>
   <phrase title="option_explain.warextMcVotifierMaxAttempts" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Determines how many times the queue retries a failed NuVotifier delivery. Retries use increasing delays.]]></phrase>
   <phrase title="option_explain.warextMcWebhookEnabled" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[When enabled, new votes are sent to an HTTPS webhook address by a background job. Redirects are disabled and private/reserved network targets are blocked unless local-test access is enabled.]]></phrase>
-  <phrase title="option_group.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucu &amp; Vote Sistemi]]></phrase>
+  <phrase title="option_group.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Server &amp; Vote System]]></phrase>
   <phrase title="permission.warextMcVote_addServer" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Can add Minecraft servers]]></phrase>
   <phrase title="permission.warextMcVote_favorite" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Can add servers to favorites]]></phrase>
   <phrase title="permission.warextMcVote_report" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Can report servers]]></phrase>
   <phrase title="permission.warextMcVote_review" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Can review servers]]></phrase>
   <phrase title="permission.warextMcVote_vote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Can vote for servers]]></phrase>
-  <phrase title="permission_interface.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Sunucu &amp; Vote Sistemi]]></phrase>
+  <phrase title="permission_interface.warextMinecraftVote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1011010" version_string="1.1.1"><![CDATA[Minecraft Server &amp; Vote System]]></phrase>
   <phrase title="warext_mc_i18n_0001" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft username]]></phrase>
   <phrase title="warext_mc_i18n_0002" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Enter your Java Edition username. The account is initially added as unverified.]]></phrase>
   <phrase title="warext_mc_i18n_0003" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft UUID]]></phrase>
@@ -346,7 +346,7 @@
   <phrase title="warext_mc_i18n_0292" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Promotional Thread]]></phrase>
   <phrase title="warext_mc_i18n_0293" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Feature your server as sponsored in the Minecraft server list.]]></phrase>
   <phrase title="warext_mc_i18n_0294" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Purchase Sponsor Package]]></phrase>
-  <phrase title="warext_mc_i18n_0295" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Kullanılabilir XenForo ödeme profili bulunmuyor. Yönetici ACP &gt; Setup &gt; Payment profiles alanından bir ödeme profili eklemelidir.]]></phrase>
+  <phrase title="warext_mc_i18n_0295" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[No usable XenForo payment profile is available. An administrator must add a payment profile under ACP &gt; Setup &gt; Payment profiles.]]></phrase>
   <phrase title="warext_mc_i18n_0296" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Sponsor package prices have not yet been configured by an administrator.]]></phrase>
   <phrase title="warext_mc_i18n_0297" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Define the XenForo users who will manage the server and their permissions.]]></phrase>
   <phrase title="warext_mc_i18n_0298" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Add / Update Team Member]]></phrase>
@@ -430,7 +430,7 @@
   <phrase title="warext_mc_i18n_0376" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Warext Minecraft Server & Vote]]></phrase>
   <phrase title="warext_mc_i18n_0377" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[2. User Group Permissions]]></phrase>
   <phrase title="warext_mc_i18n_0378" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Under Admin CP → Groups & permissions → User group permissions]]></phrase>
-  <phrase title="warext_mc_i18n_0379" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Sunucu & Vote]]></phrase>
+  <phrase title="warext_mc_i18n_0379" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Minecraft Server & Vote]]></phrase>
   <phrase title="warext_mc_i18n_0380" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[edit the permission group.]]></phrase>
   <phrase title="warext_mc_i18n_0381" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Can add servers:]]></phrase>
   <phrase title="warext_mc_i18n_0382" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020000" version_string="1.2.0"><![CDATA[Allows the user to submit a new Minecraft server.]]></phrase>
