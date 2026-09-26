@@ -107,3 +107,8 @@ Yama hanesi 9'dan sonra orta hane artırılır: `1.0.9 → 1.1.0`, ardından `1.
 Sorularınız, hata bildirimleriniz, kurulum desteği ve Warext Studios XenForo eklentileriyle ilgili yardım için destek Discord sunucumuza katılabilirsiniz:
 
 **Discord:** https://discord.gg/tgsV5XMcFS
+
+
+## Language support / Dil desteği
+
+Version 1.2.0 adds native Turkish/English XenForo language support. Import the XML packs under `languages/`; the add-on then follows XenForo's normal user language selector. See `LANGUAGE.md`.
