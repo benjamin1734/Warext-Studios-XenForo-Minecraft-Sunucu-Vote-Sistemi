@@ -82,7 +82,7 @@
         &lt;span class="warextMcCategoryChips-label"&gt;{{ phrase('warext_mc_i18n_0232') }}&lt;/span&gt;
         &lt;a href="{$allCategoryUrl}" class="warextMcCategoryChip {{ !$categoryId ? 'is-active' : '' }}"&gt;{{ phrase('warext_mc_i18n_0233') }}&lt;/a&gt;
         &lt;xf:foreach loop="$categoryItems" value="$item"&gt;
-            &lt;a href="{$item.url}" class="warextMcCategoryChip {{ $categoryId == $item.category.category_id ? 'is-active' : '' }}"&gt;{$item.category.title}&lt;/a&gt;
+            &lt;a href="{$item.url}" class="warextMcCategoryChip {{ $categoryId == $item.category.category_id ? 'is-active' : '' }}"&gt;{$item.category.display_title}&lt;/a&gt;
         &lt;/xf:foreach&gt;
     &lt;/div&gt;
 &lt;/xf:if&gt;
