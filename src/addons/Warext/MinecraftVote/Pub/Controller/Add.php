@@ -90,7 +90,7 @@ class Add extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/detay', $server),
-                'Sunucu kaydınız onay için gönderildi.'
+                \XF::phrase('warext_mc_dyn_server_submitted')
             );
         }
 
