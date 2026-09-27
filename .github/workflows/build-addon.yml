@@ -92,7 +92,21 @@ jobs:
               gh release delete "$OLD_TAG" --cleanup-tag -y || true
             fi
           done
-          echo 'IyBXYXJleHQgU3R1ZGlvcyB8IFhlbkZvcm8gTWluZWNyYWZ0IFN1bnVjdSAmIFZvdGUgU2lzdGVtaSB2MS4xLjkKCjEuMS45IHPDvHLDvG3DvCBzdW51Y3UgZGV0YXkgc2F5ZmFzxLFuxLEgZGFoYSB6ZW5naW4gdmUgWGVuRm9ybyBpbGUgZG/En2FsIGJpw6dpbWRlIGLDvHTDvG5sZcWfZW4gYmlyIHN1bnVjdSBwcm9maWxpbmUgZMO2bsO8xZ90w7xyw7xyLgoKLSBIZXJvIHZlIGJhbm5lciB0YWJhbmzEsSBtb2Rlcm4gcHJvZmlsIGTDvHplbmkKLSBTxLFyYWxhbWEgdmUgaMSxemzEsSBlcmnFn2ltIGFsYW5sYXLEsQotIFN1bnVjdSBkZXRheWxhcsSxbsSxbiBkYWhhIG9rdW5hYmlsaXIgc3VudW11Ci0gU29uIG95IHZlcmVubGVyIHZlIHRvcCB2b3RlciBhbGFubGFyxLEKLSBEZcSfZXJsZW5kaXJtZWxlcmluIHByb2ZpbCBzYXlmYXPEsW5kYSBkYWhhIGfDvMOnbMO8IHN1bnVtdQotIE1ldmN1dCBveSwgTnVWb3RpZmllciwgYW5hbGl0aWsgdmUgc3VudWN1IHnDtm5ldGltIGFsdHlhcMSxc8SxeWxhIHV5dW1sdWx1awoKS3VydWx1bSBwYWtldGluaSBYZW5Gb3JvIEFkbWluIENQID4gQWRkLW9ucyA+IEluc3RhbGwvdXBncmFkZSBmcm9tIGFyY2hpdmUgYWxhbsSxbmRhbiBkb8SfcnVkYW4gecO8a2xleWViaWxpcnNpbml6LgoKLS0tCgojIyBFbmdsaXNoCgojIFdhcmV4dCBTdHVkaW9zIHwgWGVuRm9ybyBNaW5lY3JhZnQgU2VydmVyICYgVm90ZSBTeXN0ZW0gdjEuMS45CgpWZXJzaW9uIDEuMS45IHJlZGVzaWducyB0aGUgc2VydmVyLWRldGFpbCBwYWdlIGludG8gYSByaWNoZXIgc2VydmVyIHByb2ZpbGUgdGhhdCBpbnRlZ3JhdGVzIG5hdHVyYWxseSB3aXRoIFhlbkZvcm8uCgotIE1vZGVybiBoZXJvLSBhbmQgYmFubmVyLWJhc2VkIHByb2ZpbGUgbGF5b3V0Ci0gUmFua2luZyBhbmQgcXVpY2stYWNjZXNzIGFyZWFzCi0gTW9yZSByZWFkYWJsZSBwcmVzZW50YXRpb24gb2Ygc2VydmVyIGRldGFpbHMKLSBSZWNlbnQtdm90ZXIgYW5kIHRvcC12b3RlciBzZWN0aW9ucwotIFN0cm9uZ2VyIHByZXNlbnRhdGlvbiBvZiByZXZpZXdzIG9uIHRoZSBzZXJ2ZXIgcHJvZmlsZQotIENvbXBhdGliaWxpdHkgd2l0aCB0aGUgZXhpc3Rpbmcgdm90aW5nLCBOdVZvdGlmaWVyLCBhbmFseXRpY3MgYW5kIHNlcnZlci1tYW5hZ2VtZW50IGluZnJhc3RydWN0dXJlCgpUaGUgaW5zdGFsbGF0aW9uIHBhY2thZ2UgY2FuIGJlIHVwbG9hZGVkIGRpcmVjdGx5IHRocm91Z2ggWGVuRm9ybyBBZG1pbiBDUCA+IEFkZC1vbnMgPiBJbnN0YWxsL3VwZ3JhZGUgZnJvbSBhcmNoaXZlLgo=' | base64 --decode > /tmp/release-notes.md
+          cat > /tmp/release-notes.md <<EOF
+          ## Türkçe
+
+          Warext Minecraft Sunucu & Vote Sistemi $TAG sürümü; kullanıcı, sunucu, oy, değerlendirme, sezon, sponsor, ekip, NuVotifier ve ACP arayüzlerinde native XenForo Türkçe/İngilizce phrase desteğini tamamlar.
+
+          Release assetleri: doğrudan kurulum ZIP'i, Turkish.xml ve English.xml.
+
+          ---
+
+          ## English
+
+          Warext Minecraft Server & Vote System $TAG completes native XenForo Turkish/English phrase support across user, server, vote, review, season, sponsor, team, NuVotifier and ACP interfaces.
+
+          Release assets: direct-install ZIP, Turkish.xml and English.xml.
+          EOF
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release edit "$TAG" --title "$TAG" --notes-file /tmp/release-notes.md
             gh release upload "$TAG" "$FILE" "$LANG_TR" "$LANG_EN" --clobber
