@@ -22,10 +22,10 @@
                             &lt;div class="contentRow-main"&gt;
                                 &lt;div class="contentRow-title"&gt;
                                     &lt;strong&gt;{$log.action}&lt;/strong&gt;
-                                    &lt;xf:if is="$log.Server"&gt;&lt;span class="label"&gt;{$log.Server.title}&lt;/span&gt;&lt;xf:elseif is="$log.server_id" /&gt;&lt;span class="label"&gt;Sunucu #{$log.server_id}&lt;/span&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$log.Server"&gt;&lt;span class="label"&gt;{$log.Server.title}&lt;/span&gt;&lt;xf:elseif is="$log.server_id" /&gt;&lt;span class="label"&gt;{{ phrase('warext_mc_dyn_server_number', {'id': $log.server_id}) }}&lt;/span&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    {{ phrase('warext_mc_i18n_actor') }} &lt;xf:if is="$log.Actor"&gt;&lt;xf:username user="$log.Actor" /&gt;&lt;xf:else /&gt;Sistem / #{$log.actor_user_id}&lt;/xf:if&gt;
+                                    {{ phrase('warext_mc_i18n_actor') }} &lt;xf:if is="$log.Actor"&gt;&lt;xf:username user="$log.Actor" /&gt;&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_system_actor', {'id': $log.actor_user_id}) }}&lt;/xf:if&gt;
                                     &lt;xf:if is="$log.target_user_id"&gt; {{ phrase('warext_mc_i18n_target_prefix') }} &lt;xf:if is="$log.Target"&gt;&lt;xf:username user="$log.Target" /&gt;&lt;xf:else /&gt;#{$log.target_user_id}&lt;/xf:if&gt;&lt;/xf:if&gt;
                                     · &lt;xf:date time="$log.log_date" /&gt;
                                 &lt;/div&gt;
