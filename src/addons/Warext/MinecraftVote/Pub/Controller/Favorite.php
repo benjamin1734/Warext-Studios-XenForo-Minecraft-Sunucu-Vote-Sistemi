@@ -33,7 +33,7 @@ class Favorite extends AbstractController
 
         return $this->redirect(
             $this->buildLink('sunucular/detay', $server),
-            $active ? 'Sunucu favorilerinize eklendi.' : 'Sunucu favorilerinizden çıkarıldı.'
+            $active ? \XF::phrase('warext_mc_dyn_favorite_added') : \XF::phrase('warext_mc_dyn_favorite_removed')
         );
     }
 
@@ -57,12 +57,12 @@ class Favorite extends AbstractController
 
         if (!$updated)
         {
-            return $this->error('Bildirim ayarını değiştirmek için sunucu favorilerinizde olmalıdır.', 400);
+            return $this->error(\XF::phrase('warext_mc_dyn_favorite_required_for_notifications'), 400);
         }
 
         return $this->redirect(
             $this->buildLink('sunucular/favoriler'),
-            $enabled ? 'Sunucu güncelleme bildirimleri açıldı.' : 'Sunucu güncelleme bildirimleri kapatıldı.'
+            $enabled ? \XF::phrase('warext_mc_dyn_notifications_enabled') : \XF::phrase('warext_mc_dyn_notifications_disabled')
         );
     }
 
