@@ -926,4 +926,34 @@
   <phrase title="warext_mc_category_minigames_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minigames]]></phrase>
   <phrase title="warext_mc_category_modlu_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Modded]]></phrase>
   <phrase title="warext_mc_category_vanilla_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Vanilla]]></phrase>
+  <phrase title="warext_mc_vote_page_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[{server} - Vote]]></phrase>
+  <phrase title="warext_mc_vote_server_address" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Server address]]></phrase>
+  <phrase title="warext_mc_vote_discussion_thread" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Promotional thread]]></phrase>
+  <phrase title="warext_mc_vote_players" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Players]]></phrase>
+  <phrase title="warext_mc_vote_votes_this_month" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Votes this month]]></phrase>
+  <phrase title="warext_mc_vote_total_votes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Total votes]]></phrase>
+  <phrase title="warext_mc_vote_rank" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ranking]]></phrase>
+  <phrase title="warext_mc_vote_rating" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Rating]]></phrase>
+  <phrase title="warext_mc_vote_server_owner" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Server owner]]></phrase>
+  <phrase title="warext_mc_vote_last_check" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Last check]]></phrase>
+  <phrase title="warext_mc_vote_created_date" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Created date]]></phrase>
+  <phrase title="warext_mc_vote_about_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[About server]]></phrase>
+  <phrase title="warext_mc_vote_additional_links" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Additional Links]]></phrase>
+  <phrase title="warext_mc_vote_cast_vote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Cast Your Vote]]></phrase>
+  <phrase title="warext_mc_vote_once_24h" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[1 vote every 24 hours]]></phrase>
+  <phrase title="warext_mc_vote_intro" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Your vote affects the monthly ranking. If NuVotifier is enabled, in-game reward delivery is queued after the vote is recorded.]]></phrase>
+  <phrase title="warext_mc_vote_already_voted" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[You already voted for this server within the last 24 hours.]]></phrase>
+  <phrase title="warext_mc_vote_try_again_24h" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Try again after 24 hours.]]></phrase>
+  <phrase title="warext_mc_vote_view_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[View Server]]></phrase>
+  <phrase title="warext_mc_vote_verified_required_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Verified Minecraft account required.]]></phrase>
+  <phrase title="warext_mc_vote_verified_required_explain" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Link and verify your Minecraft account before voting.]]></phrase>
+  <phrase title="warext_mc_vote_link_minecraft_account" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Link Minecraft Account]]></phrase>
+  <phrase title="warext_mc_vote_required" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Required]]></phrase>
+  <phrase title="warext_mc_vote_not_checked" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Not checked yet]]></phrase>
+  <phrase title="warext_mc_vote_server_type" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Server type]]></phrase>
+  <phrase title="warext_mc_vote_version" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Version]]></phrase>
+  <phrase title="warext_mc_vote_game_modes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Game modes]]></phrase>
+  <phrase title="warext_mc_vote_country" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Country]]></phrase>
+  <phrase title="warext_mc_vote_login_type" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Login type]]></phrase>
+  <phrase title="warext_mc_vote_promotional_video" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Promotional Video]]></phrase>
 </language>

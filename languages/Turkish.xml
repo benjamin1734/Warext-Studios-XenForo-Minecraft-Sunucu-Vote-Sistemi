@@ -926,4 +926,34 @@
   <phrase title="warext_mc_category_minigames_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Mini Oyunlar]]></phrase>
   <phrase title="warext_mc_category_modlu_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Modlu]]></phrase>
   <phrase title="warext_mc_category_vanilla_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Vanilla]]></phrase>
+  <phrase title="warext_mc_vote_page_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[{server} - Oy Ver]]></phrase>
+  <phrase title="warext_mc_vote_server_address" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu adresi]]></phrase>
+  <phrase title="warext_mc_vote_discussion_thread" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Tanıtım konusu]]></phrase>
+  <phrase title="warext_mc_vote_players" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Oyuncu]]></phrase>
+  <phrase title="warext_mc_vote_votes_this_month" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bu ay oy]]></phrase>
+  <phrase title="warext_mc_vote_total_votes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Toplam oy]]></phrase>
+  <phrase title="warext_mc_vote_rank" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sıralama]]></phrase>
+  <phrase title="warext_mc_vote_rating" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Puan]]></phrase>
+  <phrase title="warext_mc_vote_server_owner" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu sahibi]]></phrase>
+  <phrase title="warext_mc_vote_last_check" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Son kontrol]]></phrase>
+  <phrase title="warext_mc_vote_created_date" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Kayıt tarihi]]></phrase>
+  <phrase title="warext_mc_vote_about_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu Hakkında]]></phrase>
+  <phrase title="warext_mc_vote_additional_links" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ek Bağlantılar]]></phrase>
+  <phrase title="warext_mc_vote_cast_vote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Oyunu Kullan]]></phrase>
+  <phrase title="warext_mc_vote_once_24h" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[24 saatte 1 oy]]></phrase>
+  <phrase title="warext_mc_vote_intro" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bu sunucuya verdiğiniz oy aylık sıralamayı etkiler. NuVotifier aktifse oy kaydedildikten sonra oyun içi ödül teslimatı kuyruğa alınır.]]></phrase>
+  <phrase title="warext_mc_vote_already_voted" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bu sunucuya son 24 saat içinde zaten oy verdiniz.]]></phrase>
+  <phrase title="warext_mc_vote_try_again_24h" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[24 saat sonra tekrar deneyin.]]></phrase>
+  <phrase title="warext_mc_vote_view_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucuyu İncele]]></phrase>
+  <phrase title="warext_mc_vote_verified_required_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Doğrulanmış Minecraft hesabı gerekiyor.]]></phrase>
+  <phrase title="warext_mc_vote_verified_required_explain" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Oy vermeden önce Minecraft hesabınızı bağlayıp doğrulayın.]]></phrase>
+  <phrase title="warext_mc_vote_link_minecraft_account" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft Hesabını Bağla]]></phrase>
+  <phrase title="warext_mc_vote_required" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Gerekli]]></phrase>
+  <phrase title="warext_mc_vote_not_checked" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Henüz kontrol edilmedi]]></phrase>
+  <phrase title="warext_mc_vote_server_type" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu türü]]></phrase>
+  <phrase title="warext_mc_vote_version" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sürüm]]></phrase>
+  <phrase title="warext_mc_vote_game_modes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Oyun modları]]></phrase>
+  <phrase title="warext_mc_vote_country" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ülke]]></phrase>
+  <phrase title="warext_mc_vote_login_type" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Giriş tipi]]></phrase>
+  <phrase title="warext_mc_vote_promotional_video" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Tanıtım Videosu]]></phrase>
 </language>

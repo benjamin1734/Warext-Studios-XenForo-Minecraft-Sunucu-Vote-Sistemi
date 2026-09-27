@@ -203,8 +203,8 @@ if not version_match:
 major, minor, patch = (int(part) for part in version_match.groups())
 if patch > 9:
     raise SystemExit('Yama sürümü 9 üzerinde olamaz; sonraki orta sürüme geçilmeli.')
-if version_string != '1.2.1' or int(addon.get('version_id', 0)) < 1020010:
-    raise SystemExit('Sürüm numarası 1.2.1 değil.')
+if version_string != '1.2.2' or int(addon.get('version_id', 0)) < 1020020:
+    raise SystemExit('Sürüm numarası 1.2.2 değil.')
 
 for path in ROOT.rglob('*.php'):
     text = path.read_text(encoding='utf-8')

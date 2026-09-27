@@ -1,0 +1,1 @@
+Your vote affects the monthly ranking. If NuVotifier is enabled, in-game reward delivery is queued after the vote is recorded.
