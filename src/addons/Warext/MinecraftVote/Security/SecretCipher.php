@@ -16,7 +16,7 @@ class SecretCipher
 
         if (!function_exists('openssl_encrypt'))
         {
-            throw new \RuntimeException('OpenSSL PHP uzantısı NuVotifier token şifrelemesi için gereklidir.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_openssl_encrypt_required'));
         }
 
         $iv = random_bytes(12);
@@ -34,7 +34,7 @@ class SecretCipher
 
         if ($encrypted === false || strlen($tag) !== 16)
         {
-            throw new \RuntimeException('NuVotifier token şifrelenemedi.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_token_encrypt_failed'));
         }
 
         return base64_encode("\x01" . $iv . $tag . $encrypted);
@@ -49,13 +49,13 @@ class SecretCipher
 
         if (!function_exists('openssl_decrypt'))
         {
-            throw new \RuntimeException('OpenSSL PHP uzantısı NuVotifier token çözümlemesi için gereklidir.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_openssl_decrypt_required'));
         }
 
         $raw = base64_decode($encoded, true);
         if ($raw === false || strlen($raw) < 30 || ord($raw[0]) !== 1)
         {
-            throw new \RuntimeException('NuVotifier token verisi geçersiz.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_token_data_invalid'));
         }
 
         $iv = substr($raw, 1, 12);
@@ -74,7 +74,7 @@ class SecretCipher
 
         if ($plaintext === false)
         {
-            throw new \RuntimeException('NuVotifier token çözümlenemedi. globalSalt değişmiş olabilir.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_token_decrypt_failed'));
         }
 
         return $plaintext;
@@ -85,7 +85,7 @@ class SecretCipher
         $salt = (string)\XF::config('globalSalt');
         if ($salt === '')
         {
-            throw new \RuntimeException('XenForo globalSalt yapılandırması bulunamadı.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_globalsalt_missing'));
         }
 
         return hash_hkdf('sha256', $salt, 32, self::AAD, '');
