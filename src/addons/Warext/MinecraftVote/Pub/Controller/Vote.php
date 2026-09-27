@@ -49,7 +49,7 @@ class Vote extends AbstractController
         {
             if ($voteBlocked)
             {
-                return $this->error('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.', 429);
+                return $this->error(\XF::phrase('warext_mc_vote_cooldown_24h_error'), 429);
             }
 
             if ($requireCaptcha && !$this->captchaIsValid())
