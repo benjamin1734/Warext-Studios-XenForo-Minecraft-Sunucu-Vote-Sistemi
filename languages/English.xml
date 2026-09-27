@@ -914,4 +914,16 @@
   <phrase title="warext_mc_dyn_current_season" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Current Season: {season}]]></phrase>
   <phrase title="warext_mc_dyn_winner_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Winner: {title}]]></phrase>
   <phrase title="warext_mc_dyn_last_error" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Last error: {error}]]></phrase>
+  <phrase title="warext_mc_category_survival_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Survival]]></phrase>
+  <phrase title="warext_mc_category_skyblock_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[SkyBlock]]></phrase>
+  <phrase title="warext_mc_category_boxpvp_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[BoxPvP]]></phrase>
+  <phrase title="warext_mc_category_oneblock_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[OneBlock]]></phrase>
+  <phrase title="warext_mc_category_factions_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Factions]]></phrase>
+  <phrase title="warext_mc_category_towny_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Towny]]></phrase>
+  <phrase title="warext_mc_category_prison_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Prison]]></phrase>
+  <phrase title="warext_mc_category_smp_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[SMP]]></phrase>
+  <phrase title="warext_mc_category_roleplay_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Roleplay]]></phrase>
+  <phrase title="warext_mc_category_minigames_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minigames]]></phrase>
+  <phrase title="warext_mc_category_modlu_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Modded]]></phrase>
+  <phrase title="warext_mc_category_vanilla_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Vanilla]]></phrase>
 </language>
