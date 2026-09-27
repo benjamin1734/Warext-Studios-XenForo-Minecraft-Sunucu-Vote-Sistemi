@@ -38,19 +38,19 @@ class Detail extends AbstractController
             || $server->can_manage_reviews
             || $server->is_owner;
 
-        $parts = [$server->title . ' Minecraft sunucusu'];
+        $parts = [(string)\XF::phrase('warext_mc_dyn_detail_server_title', ['server' => $server->title])];
         if ($server->game_modes !== '')
         {
             $parts[] = $server->game_modes;
         }
         if ($server->detected_version !== '')
         {
-            $parts[] = 'Sürüm ' . $server->detected_version;
+            $parts[] = (string)\XF::phrase('warext_mc_dyn_detail_version', ['version' => $server->detected_version]);
         }
         $parts[] = $server->is_online
-            ? sprintf('%d/%d oyuncu çevrimiçi', (int)$server->players_online, (int)$server->players_max)
-            : 'Sunucu şu anda çevrimdışı';
-        $parts[] = sprintf('%d aylık oy', (int)$server->vote_count_month);
+            ? (string)\XF::phrase('warext_mc_dyn_detail_players', ['online' => (int)$server->players_online, 'max' => (int)$server->players_max])
+            : (string)\XF::phrase('warext_mc_dyn_detail_offline');
+        $parts[] = (string)\XF::phrase('warext_mc_dyn_detail_monthly_votes', ['votes' => (int)$server->vote_count_month]);
         $seoDescription = mb_substr(implode(' · ', $parts), 0, 220);
 
         return $this->view('Warext\MinecraftVote:Server\View', 'warext_mc_server_view', [
