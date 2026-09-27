@@ -25,19 +25,19 @@ class Request extends AbstractService
         $action = preg_replace('/[^A-Za-z0-9_]/', '', $action) ?? '';
         if ($action === '' || strlen($action) > 25)
         {
-            throw new \InvalidArgumentException('Geçersiz rate-limit action.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_invalid_rate_action'));
         }
 
         $ip = trim($ip);
         if ($ip === '' || $seconds <= 0)
         {
-            throw new PrintableException('İstek doğrulaması yapılamadı. Lütfen tekrar deneyin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_request_validation_failed'));
         }
 
         $salt = (string)\XF::config('globalSalt');
         if ($salt === '')
         {
-            throw new \RuntimeException('XenForo globalSalt yapılandırması bulunamadı.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_globalsalt_missing'));
         }
 
         $digest = hash_hmac('sha256', $action . '|' . max(0, $scopeId) . '|' . $ip, $salt, true);
@@ -48,7 +48,7 @@ class Request extends AbstractService
         $remaining = (int)$flood->checkFlooding($action, $syntheticId, $seconds);
         if ($remaining > 0)
         {
-            throw new PrintableException("Çok hızlı istek gönderiyorsunuz. {$remaining} saniye sonra tekrar deneyin.");
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_too_fast_seconds', ['seconds' => $remaining]));
         }
     }
 }
