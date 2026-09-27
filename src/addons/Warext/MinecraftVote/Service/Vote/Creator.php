@@ -169,7 +169,7 @@ class Creator extends AbstractService
     {
         if ($this->user->user_id && $voteRepo->hasRecentUserVote($this->server->server_id, $this->user->user_id, $since))
         {
-            throw new PrintableException('Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.');
+            throw new PrintableException(\XF::phrase('warext_mc_vote_cooldown_24h_error'));
         }
 
         if ($voteRepo->hasRecentMinecraftUsernameVote($this->server->server_id, $this->minecraftUsername, $since))
