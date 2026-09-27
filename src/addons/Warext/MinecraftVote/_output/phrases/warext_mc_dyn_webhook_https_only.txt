@@ -1,0 +1,1 @@
+Webhook yalnızca geçerli HTTPS adreslerine gönderilebilir.

@@ -1,0 +1,1 @@
+NuVotifier entegrasyonunu açmak için token girmeniz gerekiyor.

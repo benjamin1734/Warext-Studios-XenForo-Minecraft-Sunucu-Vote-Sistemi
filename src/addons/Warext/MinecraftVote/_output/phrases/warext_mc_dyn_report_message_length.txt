@@ -1,0 +1,1 @@
+Rapor açıklaması 10 ile 1000 karakter arasında olmalıdır.

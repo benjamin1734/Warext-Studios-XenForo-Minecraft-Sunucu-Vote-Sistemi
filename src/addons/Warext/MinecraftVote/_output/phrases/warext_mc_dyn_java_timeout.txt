@@ -1,0 +1,1 @@
+Java sunucu durum sorgusu zaman aşımına uğradı.

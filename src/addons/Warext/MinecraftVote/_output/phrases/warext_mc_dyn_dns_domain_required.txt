@@ -1,0 +1,1 @@
+DNS TXT doğrulaması için sunucu adresi geçerli bir alan adı olmalıdır.

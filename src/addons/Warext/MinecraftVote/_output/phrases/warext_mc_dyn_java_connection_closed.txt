@@ -1,0 +1,1 @@
+Java sunucu durum bağlantısı beklenmedik şekilde kapandı.

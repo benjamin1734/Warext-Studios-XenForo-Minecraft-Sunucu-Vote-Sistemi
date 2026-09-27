@@ -1,0 +1,1 @@
+Java durum yanıtı güvenli boyut sınırını aşıyor.

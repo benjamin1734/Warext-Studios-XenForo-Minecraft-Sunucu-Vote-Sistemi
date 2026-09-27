@@ -1,0 +1,1 @@
+Yalnızca geçerli http veya https bağlantıları kullanılabilir.

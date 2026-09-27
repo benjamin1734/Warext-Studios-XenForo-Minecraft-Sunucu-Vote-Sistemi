@@ -1,0 +1,1 @@
+DNS TXT kaydı bulundu ancak doğrulama değeri eşleşmedi.

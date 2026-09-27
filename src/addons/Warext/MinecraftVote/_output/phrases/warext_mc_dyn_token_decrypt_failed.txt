@@ -1,0 +1,1 @@
+NuVotifier token çözümlenemedi. globalSalt değişmiş olabilir.

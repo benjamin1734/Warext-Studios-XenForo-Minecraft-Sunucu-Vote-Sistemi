@@ -1,0 +1,1 @@
+Yerel adreslere bağlantı kapalı. ACP ayarlarından lokal test iznini açın.

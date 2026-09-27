@@ -1,0 +1,1 @@
+Sunucu sahipliği DNS TXT kaydı üzerinden doğrulandı.

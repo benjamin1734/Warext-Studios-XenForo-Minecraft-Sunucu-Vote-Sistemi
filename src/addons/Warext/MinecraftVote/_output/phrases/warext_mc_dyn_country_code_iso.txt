@@ -1,0 +1,1 @@
+Ülke kodu iki harfli ISO kodu olmalıdır.

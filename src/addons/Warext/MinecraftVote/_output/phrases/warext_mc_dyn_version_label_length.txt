@@ -1,0 +1,1 @@
+Sürüm etiketi en fazla 50 karakter olabilir.

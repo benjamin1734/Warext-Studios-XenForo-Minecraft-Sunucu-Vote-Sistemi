@@ -1,0 +1,1 @@
+Çok hızlı istek gönderiyorsunuz. {seconds} saniye sonra tekrar deneyin.

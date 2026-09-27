@@ -1,0 +1,1 @@
+Başarım anahtarı yalnızca küçük harf, sayı ve alt çizgi içerebilir.

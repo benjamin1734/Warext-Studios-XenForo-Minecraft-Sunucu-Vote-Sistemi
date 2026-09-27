@@ -1,0 +1,1 @@
+Doğrulama kodu sunucunun MOTD alanında bulunamadı. MOTD değişikliğini kaydedip sunucuyu yeniden başlattığınızdan emin olun.

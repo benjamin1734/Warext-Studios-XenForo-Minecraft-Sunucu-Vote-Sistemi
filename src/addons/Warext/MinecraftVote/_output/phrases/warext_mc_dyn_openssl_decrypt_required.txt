@@ -1,0 +1,1 @@
+OpenSSL PHP uzantısı NuVotifier token çözümlemesi için gereklidir.

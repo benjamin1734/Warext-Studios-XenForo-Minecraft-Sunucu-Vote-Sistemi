@@ -1,0 +1,1 @@
+Görsel optimize edildikten sonra izin verilen dosya boyutunu aşıyor.

@@ -1,0 +1,1 @@
+Sunucu sahipliğini yalnızca mevcut sunucu sahibi devredebilir.

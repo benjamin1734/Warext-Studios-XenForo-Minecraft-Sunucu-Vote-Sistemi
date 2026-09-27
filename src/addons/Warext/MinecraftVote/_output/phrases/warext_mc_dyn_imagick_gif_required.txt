@@ -1,0 +1,1 @@
+Hareketli GIF otomatik boyutlandırması için sunucuda Imagick PHP eklentisi etkin olmalıdır.

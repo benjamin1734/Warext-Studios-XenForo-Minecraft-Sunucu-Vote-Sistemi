@@ -1,0 +1,1 @@
+Sunucu ekibini yalnızca sunucu sahibi yönetebilir.

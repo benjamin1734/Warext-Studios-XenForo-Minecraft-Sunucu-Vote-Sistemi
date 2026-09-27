@@ -1,0 +1,1 @@
+Bu bağlantı üzerinden son {hours} saat içinde zaten oy verilmiş.

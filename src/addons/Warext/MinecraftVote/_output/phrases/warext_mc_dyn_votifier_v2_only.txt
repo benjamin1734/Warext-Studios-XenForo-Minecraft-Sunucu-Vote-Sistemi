@@ -1,0 +1,1 @@
+Şu anda yalnızca güvenli NuVotifier V2 protokolü desteklenmektedir.

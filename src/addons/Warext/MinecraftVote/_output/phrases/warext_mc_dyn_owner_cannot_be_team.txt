@@ -1,0 +1,1 @@
+Sunucu sahibi ekip üyesi olarak eklenemez.

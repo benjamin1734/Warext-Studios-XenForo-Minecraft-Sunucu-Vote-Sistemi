@@ -1,0 +1,1 @@
+Çok hızlı rapor gönderiyorsunuz. {seconds} saniye sonra tekrar deneyin.

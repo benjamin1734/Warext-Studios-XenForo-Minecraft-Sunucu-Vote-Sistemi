@@ -1,0 +1,1 @@
+Sunucuda DNS sorgulama desteği bulunmuyor.
