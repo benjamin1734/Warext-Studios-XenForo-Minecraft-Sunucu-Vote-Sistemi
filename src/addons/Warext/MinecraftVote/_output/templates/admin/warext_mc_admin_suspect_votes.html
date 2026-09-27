@@ -28,18 +28,18 @@
                                 &lt;div class="contentRow-title"&gt;
                                     &lt;strong&gt;#{$vote.vote_id} · {$vote.minecraft_username}&lt;/strong&gt;
                                     &lt;xf:if is="$vote.fraud_score &gt;= 70"&gt;
-                                        &lt;span class="label label--red"&gt;Risk {$vote.fraud_score}&lt;/span&gt;
+                                        &lt;span class="label label--red"&gt;{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}&lt;/span&gt;
                                     &lt;xf:elseif is="$vote.fraud_score &gt;= 50" /&gt;
-                                        &lt;span class="label label--orange"&gt;Risk {$vote.fraud_score}&lt;/span&gt;
+                                        &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}&lt;/span&gt;
                                     &lt;xf:else /&gt;
-                                        &lt;span class="label"&gt;Risk {$vote.fraud_score}&lt;/span&gt;
+                                        &lt;span class="label"&gt;{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}&lt;/span&gt;
                                     &lt;/xf:if&gt;
                                     &lt;span class="label"&gt;{$vote.status}&lt;/span&gt;
                                 &lt;/div&gt;
 
                                 &lt;div class="contentRow-minor"&gt;
-                                    &lt;xf:if is="$vote.Server"&gt;Sunucu: {$vote.Server.title}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0416') }}&lt;/xf:if&gt;
-                                    &lt;xf:if is="$vote.User"&gt; · XenForo: {$vote.User.username}&lt;xf:else /&gt; {{ phrase('warext_mc_i18n_guest_vote_bullet') }}&lt;/xf:if&gt;
+                                    &lt;xf:if is="$vote.Server"&gt;{{ phrase('warext_mc_dyn_server_label', {'title': $vote.Server.title}) }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0416') }}&lt;/xf:if&gt;
+                                    &lt;xf:if is="$vote.User"&gt; · {{ phrase('warext_mc_dyn_xenforo_user_label', {'username': $vote.User.username}) }}&lt;xf:else /&gt; {{ phrase('warext_mc_i18n_guest_vote_bullet') }}&lt;/xf:if&gt;
                                     · &lt;xf:date time="$vote.vote_date" /&gt;
                                 &lt;/div&gt;
 
@@ -50,7 +50,7 @@
                                 &lt;/div&gt;
 
                                 &lt;xf:if is="$vote.last_error"&gt;
-                                    &lt;div class="contentRow-minor"&gt;Durum notu: {$vote.last_error}&lt;/div&gt;
+                                    &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_status_note', {'note': $vote.last_error}) }}&lt;/div&gt;
                                 &lt;/xf:if&gt;
 
                                 &lt;div class="buttonGroup" style="margin-top:10px"&gt;
