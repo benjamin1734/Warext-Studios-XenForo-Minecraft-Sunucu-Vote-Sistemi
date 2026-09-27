@@ -13,7 +13,7 @@
         &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_ownership_transfer_label') }}&lt;/div&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:textboxrow name="target_username" label="{{ phrase('warext_mc_i18n_0006') }}" required="required" /&gt;
-            &lt;xf:textboxrow name="confirm_title" label="{{ phrase('warext_mc_i18n_0007') }}" required="required" explain="Birebir şu değeri yazın: {$server.title}" /&gt;
+            &lt;xf:textboxrow name="confirm_title" label="{{ phrase('warext_mc_i18n_0007') }}" required="required" explain="{{ phrase('warext_mc_dyn_transfer_confirm_explain', {'server': $server.title}) }}" /&gt;
         &lt;/div&gt;
         &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0008') }}" /&gt;
     &lt;/div&gt;
