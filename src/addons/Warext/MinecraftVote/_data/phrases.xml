@@ -598,4 +598,10 @@
   <phrase title="warext_mc_i18n_vote_time" version_id="1020010" version_string="1.2.1"><![CDATA[Oy zamanı:]]></phrase>
   <phrase title="warext_mc_i18n_notifications_off" version_id="1020010" version_string="1.2.1"><![CDATA[Bildirimleri Kapat]]></phrase>
   <phrase title="warext_mc_i18n_skipped" version_id="1020010" version_string="1.2.1"><![CDATA[Atlandı]]></phrase>
+  <phrase title="warext_mc_i18n_permissions_path" version_id="1020010" version_string="1.2.1"><![CDATA[Admin CP → Groups & permissions → User group permissions bölümünde]]></phrase>
+  <phrase title="warext_mc_i18n_permission_group_name" version_id="1020010" version_string="1.2.1"><![CDATA[Minecraft Sunucu & Vote]]></phrase>
+  <phrase title="warext_mc_i18n_can_report" version_id="1020010" version_string="1.2.1"><![CDATA[Raporlayabilir:]]></phrase>
+  <phrase title="warext_mc_i18n_java_label" version_id="1020010" version_string="1.2.1"><![CDATA[Java:]]></phrase>
+  <phrase title="warext_mc_i18n_bedrock_label" version_id="1020010" version_string="1.2.1"><![CDATA[Bedrock:]]></phrase>
+  <phrase title="warext_mc_i18n_crossplay_label" version_id="1020010" version_string="1.2.1"><![CDATA[Crossplay:]]></phrase>
 </phrases>
