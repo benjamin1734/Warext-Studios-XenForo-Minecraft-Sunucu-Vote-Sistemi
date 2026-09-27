@@ -25,33 +25,33 @@ class Writer extends AbstractService
     {
         if (!$this->user->user_id)
         {
-            throw new PrintableException('Değerlendirme yapabilmek için giriş yapmanız gerekiyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_review_login_required'));
         }
 
         if ($this->server->state !== 'active')
         {
-            throw new PrintableException('Bu sunucu şu anda değerlendirme kabul etmiyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_server_reviews_disabled'));
         }
 
         if ($this->server->owner_user_id === $this->user->user_id)
         {
-            throw new PrintableException('Kendi sunucunuzu değerlendiremezsiniz.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_own_server_review'));
         }
 
         $rating = (int)($input['rating'] ?? 0);
         if ($rating < 1 || $rating > 5)
         {
-            throw new PrintableException('Genel puan 1-5 arasında olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_review_rating_range'));
         }
 
         $message = trim((string)($input['message'] ?? ''));
         if ($message !== '' && mb_strlen($message) < 10)
         {
-            throw new PrintableException('Yorum yazacaksanız en az 10 karakter olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_review_comment_min'));
         }
         if (mb_strlen($message) > 2000)
         {
-            throw new PrintableException('Değerlendirme yorumu en fazla 2000 karakter olabilir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_review_comment_max'));
         }
 
         $repo = $this->repository('Warext\MinecraftVote:Review');
