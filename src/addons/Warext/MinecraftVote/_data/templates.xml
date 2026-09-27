@@ -93,7 +93,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="public" title="warext_mc_analytics_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucu İstatistikleri&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_analytics_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_server_statistics_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 &lt;xf:description&gt;{{ phrase('warext_mc_i18n_0136') }}&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
@@ -171,7 +171,7 @@
                                         &lt;xf:if is="$favorite.Server.is_online"&gt;&lt;span class="label label--green"&gt;Online&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Offline&lt;/span&gt;&lt;/xf:if&gt;
                                         &lt;xf:if is="$favorite.Server.is_verified"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;/xf:if&gt;
                                         &lt;xf:if is="$favorite.notify_updates &amp;&amp; $entry.unread_count"&gt;
-                                            &lt;span class="label label--orange"&gt;{$entry.unread_count} yeni güncelleme&lt;/span&gt;
+                                            &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_dyn_new_updates_x', {'count': $entry.unread_count}) }}&lt;/span&gt;
                                         &lt;/xf:if&gt;
                                     &lt;/div&gt;
                                     &lt;div class="contentRow-minor"&gt;
@@ -185,7 +185,7 @@
                                         &lt;xf:button href="{{ link('sunucular/guncellemeler', $favorite.Server) }}"&gt;{{ phrase('warext_mc_i18n_0157') }}&lt;/xf:button&gt;
                                         &lt;xf:form action="{{ link('sunucular/favori-bildirim', $favorite.Server) }}" ajax="true" class="buttonGroup"&gt;
                                             &lt;xf:hiddenval name="enabled" value="{{ $favorite.notify_updates ? 0 : 1 }}" /&gt;
-                                            &lt;xf:button type="submit"&gt;{{ $favorite.notify_updates ? 'Bildirimleri Kapat' : 'Bildirimleri Aç' }}&lt;/xf:button&gt;
+                                            &lt;xf:button type="submit"&gt;{{ $favorite.notify_updates ? phrase('warext_mc_i18n_notifications_off') : phrase('warext_mc_i18n_0427') }}&lt;/xf:button&gt;
                                         &lt;/xf:form&gt;
                                         &lt;xf:form action="{{ link('sunucular/favori', $favorite.Server) }}" ajax="true" class="buttonGroup"&gt;
                                             &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0158') }}&lt;/xf:button&gt;
@@ -203,14 +203,14 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_ownership_transfer" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sahipliği Devret&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_ownership_transfer" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_transfer_ownership_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 &lt;xf:description&gt;{{ phrase('warext_mc_i18n_0160') }}&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
 &lt;div class="blockMessage blockMessage--warning"&gt;
-    Sahiplik devrinden sonra mevcut hesabınızın sunucu yönetim erişimi otomatik olarak kaldırılır. Sunucu sahiplik doğrulaması güvenlik nedeniyle sıfırlanır ve yeni sahibin yeniden doğrulama yapması gerekir.
+    {{ phrase('warext_mc_dyn_transfer_warning') }}
 &lt;/div&gt;
 
 &lt;xf:form action="{{ link('sunucular/sahiplik-devret', $server) }}" ajax="true" class="block"&gt;
@@ -252,7 +252,7 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </template>
-  <template type="public" title="warext_mc_review_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Değerlendirmeler&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_review_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_reviews_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -260,7 +260,7 @@
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
         &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0167') }}&lt;/div&gt;
-        &lt;div class="block-body block-row"&gt;&lt;strong&gt;{$server.rating_average} / 5&lt;/strong&gt; · {$server.rating_count} değerlendirme&lt;/div&gt;
+        &lt;div class="block-body block-row"&gt;&lt;strong&gt;{$server.rating_average} / 5&lt;/strong&gt; · {{ phrase('warext_mc_dyn_review_count_x', {'count': $server.rating_count}) }}&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -298,11 +298,11 @@
                             &lt;div class="contentRow-title"&gt;&lt;xf:username user="$review.User" rich="true" /&gt; · &lt;strong&gt;{$review.rating}/5&lt;/strong&gt; &lt;xf:if is="$review.is_verified_player"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0177') }}&lt;/span&gt;&lt;/xf:if&gt; &lt;xf:if is="$review.state == 'moderated'"&gt;&lt;span class="label label--orange"&gt;Gizli&lt;/span&gt;&lt;/xf:if&gt;&lt;/div&gt;
                             &lt;div class="contentRow-minor"&gt;&lt;xf:date time="$review.updated_date" /&gt;&lt;/div&gt;
                             &lt;xf:if is="$review.message"&gt;&lt;div class="contentRow-snippet" style="margin-top:8px"&gt;{$review.message}&lt;/div&gt;&lt;/xf:if&gt;
-                            &lt;div class="contentRow-minor" style="margin-top:8px"&gt;Oynanış: {{ $review.gameplay_rating ?: '-' }} · Yetkili: {{ $review.staff_rating ?: '-' }} · Performans: {{ $review.performance_rating ?: '-' }} · Topluluk: {{ $review.community_rating ?: '-' }} · Özgünlük: {{ $review.originality_rating ?: '-' }}&lt;/div&gt;
+                            &lt;div class="contentRow-minor" style="margin-top:8px"&gt;{{ phrase('warext_mc_dyn_review_scores', {'gameplay': ($review.gameplay_rating ?: '-'), 'staff': ($review.staff_rating ?: '-'), 'performance': ($review.performance_rating ?: '-'), 'community': ($review.community_rating ?: '-'), 'originality': ($review.originality_rating ?: '-')}) }}&lt;/div&gt;
                             &lt;xf:if is="$canModerate"&gt;
                                 &lt;xf:form action="{{ link('sunucular/degerlendirme-yonet', $review) }}" ajax="true" style="margin-top:8px"&gt;
                                     &lt;xf:hiddenval name="state" value="{{ $review.state == 'visible' ? 'moderated' : 'visible' }}" /&gt;
-                                    &lt;xf:button type="submit" class="button--link"&gt;{{ $review.state == 'visible' ? 'Değerlendirmeyi Gizle' : 'Yeniden Görünür Yap' }}&lt;/xf:button&gt;
+                                    &lt;xf:button type="submit" class="button--link"&gt;{{ $review.state == 'visible' ? phrase('warext_mc_i18n_0428') : phrase('warext_mc_i18n_0429') }}&lt;/xf:button&gt;
                                 &lt;/xf:form&gt;
                             &lt;/xf:if&gt;
                         &lt;/div&gt;&lt;/div&gt;
@@ -326,7 +326,7 @@
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
                 &lt;div class="contentRow-minor"&gt;
-                    Başlangıç: &lt;xf:date time="$currentSeason.start_date" /&gt; {{ phrase('warext_mc_i18n_0181') }} &lt;xf:date time="$currentSeason.end_date" /&gt;
+                    {{ phrase('warext_mc_i18n_start_prefix') }} &lt;xf:date time="$currentSeason.start_date" /&gt; {{ phrase('warext_mc_i18n_0181') }} &lt;xf:date time="$currentSeason.end_date" /&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
 
@@ -340,7 +340,7 @@
                                     &lt;xf:if is="$server.is_verified"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    Bu ay {$server.vote_count_month} oy · {$server.unique_voters_month} benzersiz seçmen · {$server.players_online} online oyuncu
+                                    {{ phrase('warext_mc_dyn_server_month_summary', {'votes': $server.vote_count_month, 'unique': $server.unique_voters_month, 'players': $server.players_online}) }}
                                 &lt;/div&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
@@ -367,7 +367,7 @@
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
                                     &lt;xf:if is="$season.winner_title"&gt;Kazanan: {$season.winner_title} · &lt;/xf:if&gt;
-                                    {$season.total_votes} oy · {$season.unique_voters} benzersiz seçmen · {$season.server_count} sunucu
+                                    {{ phrase('warext_mc_dyn_season_totals', {'votes': $season.total_votes, 'unique': $season.unique_voters, 'servers': $season.server_count}) }}
                                 &lt;/div&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
@@ -388,11 +388,11 @@
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{$season.season_key} Sezon Özeti&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_dyn_season_summary_title', {'season': $season.season_key}) }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
                 &lt;div class="contentRow-minor"&gt;
-                    {$season.total_votes} toplam oy · {$season.unique_voters} benzersiz seçmen · {$season.server_count} sıralanan sunucu
+                    {{ phrase('warext_mc_dyn_season_ranked_totals', {'votes': $season.total_votes, 'unique': $season.unique_voters, 'servers': $season.server_count}) }}
                     &lt;xf:if is="$season.winner_title"&gt; · Kazanan: {$season.winner_title}&lt;/xf:if&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -418,7 +418,7 @@
                                     &lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    {$rank.vote_count} oy · {$rank.unique_voters} benzersiz seçmen · Peak {$rank.peak_players} oyuncu · Uptime {$rank.uptime_percent}% · Sezon puanı {$rank.season_score}
+                                    {{ phrase('warext_mc_dyn_rank_summary', {'votes': $rank.vote_count, 'unique': $rank.unique_voters, 'peak': $rank.peak_players, 'uptime': $rank.uptime_percent, 'score': $rank.season_score}) }}
                                 &lt;/div&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
@@ -560,7 +560,7 @@
     &lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucuyu Düzenle&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_edit_server_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 &lt;xf:description&gt;{{ phrase('warext_mc_i18n_0209') }}&lt;/xf:description&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -805,7 +805,7 @@
         &lt;span class="warextMcSectionEyebrow"&gt;{{ phrase('warext_mc_i18n_0059') }}&lt;/span&gt;
         &lt;h2&gt;{{ phrase('nav.warextMcServers') }}&lt;/h2&gt;
     &lt;/div&gt;
-    &lt;span&gt;{$total} sonuç&lt;/span&gt;
+    &lt;span&gt;{{ phrase('warext_mc_dyn_results_x', {'count': $total}) }}&lt;/span&gt;
 &lt;/div&gt;
 
 &lt;xf:if is="$servers is not empty"&gt;
@@ -942,16 +942,16 @@
     &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0251') }} &lt;a href="{{ link('sunucular/ekle') }}"&gt;{{ phrase('warext_mc_i18n_0252') }}&lt;/a&gt;&lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_server_verification" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Sunucu Sahipliğini Doğrula&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_server_verification" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_verify_ownership_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
 &lt;xf:if is="$server.is_verified"&gt;
     &lt;div class="blockMessage blockMessage--success"&gt;
-        Bu sunucunun sahipliği doğrulanmış durumda.
+        {{ phrase('warext_mc_dyn_ownership_verified') }}
         &lt;xf:if is="$server.verified_date"&gt;
-            Doğrulama tarihi: &lt;xf:date time="$server.verified_date" /&gt;.
+            {{ phrase('warext_mc_i18n_verification_date') }} &lt;xf:date time="$server.verified_date" /&gt;.
         &lt;/xf:if&gt;
         Yöntem: &lt;xf:if is="$server.verification_method == 'dns_txt'"&gt;{{ phrase('warext_mc_i18n_dns_txt') }}&lt;xf:else /&gt;MOTD&lt;/xf:if&gt;.
     &lt;/div&gt;
@@ -966,7 +966,7 @@
                     &lt;div class="contentRow"&gt;
                         &lt;div class="contentRow-main"&gt;
                             &lt;div class="contentRow-title"&gt;{{ phrase('warext_mc_i18n_0254') }}&lt;/div&gt;
-                            &lt;div class="contentRow-minor"&gt;Kod {$tokenLifetimeHours} saat geçerlidir.&lt;/div&gt;
+                            &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_code_valid_hours', {'hours': $tokenLifetimeHours}) }}&lt;/div&gt;
                             &lt;div style="margin-top:8px"&gt;&lt;code&gt;{$server.verification_token}&lt;/code&gt;&lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
@@ -977,7 +977,7 @@
                         &lt;strong&gt;{{ phrase('warext_mc_i18n_0255') }}&lt;/strong&gt;
                         &lt;div class="contentRow-minor" style="margin-top:6px"&gt;
                             Sunucunuzun MOTD metninin herhangi bir yerine &lt;code&gt;{$server.verification_token}&lt;/code&gt; kodunu ekleyin.
-                            Değişiklik gerekiyorsa sunucuyu yeniden başlatın ve ardından aşağıdaki kontrol düğmesini kullanın.
+                            {{ phrase('warext_mc_dyn_restart_verify') }}
                         &lt;/div&gt;
                     &lt;/div&gt;
                 &lt;xf:elseif is="$server.verification_method == 'dns_txt'" /&gt;
@@ -1041,7 +1041,7 @@
             &lt;xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta"&gt;{{ phrase('warext_mc_i18n_0076') }}&lt;/xf:button&gt;
         &lt;/xf:if&gt;
         &lt;xf:button href="{{ link('sunucular/guncellemeler', $server) }}"&gt;{{ phrase('warext_mc_i18n_0157') }}&lt;/xf:button&gt;
-        &lt;xf:button href="{{ link('sunucular/degerlendir', $server) }}"&gt;Değerlendirmeler ({$server.rating_count})&lt;/xf:button&gt;
+        &lt;xf:button href="{{ link('sunucular/degerlendir', $server) }}"&gt;{{ phrase('warext_mc_dyn_reviews_x', {'count': $server.rating_count}) }}&lt;/xf:button&gt;
     &lt;/xf:if&gt;
     &lt;xf:if is="$canFavorite"&gt;
         &lt;xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true" class="buttonGroup"&gt;
@@ -1195,8 +1195,8 @@
                     &lt;div class="contentRow-main"&gt;
                         &lt;div class="contentRow-title"&gt;{$server.host}:{$server.port}&lt;/div&gt;
                         &lt;div class="contentRow-minor"&gt;
-                            Bu sunucuya yeniden oy verebilmek için {$cooldownHours} saat beklemeniz gerekir.
-                            Oy başarıyla kaydedildiğinde sunucunun Votifier entegrasyonu aktifse oyun içi ödül teslimatı kuyruğa alınır.
+                            {{ phrase('warext_mc_dyn_vote_cooldown', {'hours': $cooldownHours}) }}
+                            {{ phrase('warext_mc_dyn_vote_delivery_info') }}
                         &lt;/div&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
@@ -1208,14 +1208,14 @@
                         &lt;xf:selectrow
                             name="minecraft_account_id"
                             label="{{ phrase('warext_mc_i18n_0073') }}"
-                            explain="{{ $requireVerifiedAccount ? 'Yalnızca doğrulanmış Minecraft hesaplarıyla oy verilebilir.' : 'Bir hesap seçerseniz aşağıdaki elle girilen kullanıcı adı ve UUID alanları yok sayılır.' }}"&gt;
+                            explain="{{ $requireVerifiedAccount ? phrase('warext_mc_i18n_0430') : phrase('warext_mc_i18n_0431') }}"&gt;
                             &lt;xf:if is="!$requireVerifiedAccount"&gt;
                                 &lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_manual_entry') }}&lt;/xf:option&gt;
                             &lt;/xf:if&gt;
                             &lt;xf:foreach loop="$linkedAccounts" value="$account"&gt;
                                 &lt;xf:if is="!$requireVerifiedAccount OR $account.verification_state == 'verified'"&gt;
                                     &lt;xf:if is="$account.verification_state == 'verified'"&gt;
-                                        &lt;xf:option value="{$account.account_id}" selected="$account.is_primary"&gt;{$account.minecraft_username} · Doğrulanmış&lt;/xf:option&gt;
+                                        &lt;xf:option value="{$account.account_id}" selected="$account.is_primary"&gt;{$account.minecraft_username} · {{ phrase('warext_mc_i18n_0130') }}&lt;/xf:option&gt;
                                     &lt;xf:else /&gt;
                                         &lt;xf:option value="{$account.account_id}" selected="$account.is_primary"&gt;{$account.minecraft_username}&lt;/xf:option&gt;
                                     &lt;/xf:if&gt;
@@ -1238,7 +1238,7 @@
                             explain="{{ phrase('warext_mc_i18n_0075') }}" /&gt;
                     &lt;xf:elseif is="$linkedAccounts is empty" /&gt;
                         &lt;div class="block-rowMessage block-rowMessage--warning"&gt;
-                            Oy verebilmek için önce hesabınıza bir Minecraft hesabı bağlayıp doğrulamanız gerekiyor.
+                            {{ phrase('warext_mc_dyn_link_account_required') }}
                         &lt;/div&gt;
                     &lt;/xf:if&gt;
 
@@ -2063,7 +2063,7 @@
 
 &lt;xf:if is="$currentSponsor"&gt;
     &lt;div class="blockMessage blockMessage--important"&gt;
-        Bu sunucunun aktif sponsorluğu &lt;xf:date time="$currentSponsor.end_date" /&gt; tarihine kadar devam ediyor. Yeni satın alım mevcut sürenin sonuna eklenir.
+        {{ phrase('warext_mc_dyn_sponsor_active_until', {'date': date_time($currentSponsor.end_date)}) }}
     &lt;/div&gt;
 &lt;/xf:if&gt;
 
@@ -2072,7 +2072,7 @@
         &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0294') }}&lt;/div&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
-                Sponsorlu sunucular liste üstünde ayrı olarak gösterilir. Ödeme XenForo'nun yapılandırılmış Payment Profile sistemi üzerinden güvenli biçimde işlenir.
+                {{ phrase('warext_mc_dyn_sponsor_payment_info') }}
             &lt;/div&gt;
 
             &lt;xf:if is="$profiles is not empty &amp;&amp; ($price7 &gt; 0 || $price30 &gt; 0)"&gt;
@@ -2081,8 +2081,8 @@
 
                     &lt;div class="block-body"&gt;
                         &lt;xf:selectrow name="package_days" label="{{ phrase('warext_mc_i18n_0077') }}" explain="{{ phrase('warext_mc_i18n_0078') }}"&gt;
-                            &lt;xf:if is="$price7 &gt; 0"&gt;&lt;xf:option value="7"&gt;7 gün — {$price7} {$currency}&lt;/xf:option&gt;&lt;/xf:if&gt;
-                            &lt;xf:if is="$price30 &gt; 0"&gt;&lt;xf:option value="30"&gt;30 gün — {$price30} {$currency}&lt;/xf:option&gt;&lt;/xf:if&gt;
+                            &lt;xf:if is="$price7 &gt; 0"&gt;&lt;xf:option value="7"&gt;{{ phrase('warext_mc_dyn_sponsor_price', {'days': 7, 'price': $price7, 'currency': $currency}) }}&lt;/xf:option&gt;&lt;/xf:if&gt;
+                            &lt;xf:if is="$price30 &gt; 0"&gt;&lt;xf:option value="30"&gt;{{ phrase('warext_mc_dyn_sponsor_price', {'days': 30, 'price': $price30, 'currency': $currency}) }}&lt;/xf:option&gt;&lt;/xf:if&gt;
                         &lt;/xf:selectrow&gt;
 
                         &lt;xf:formrow label="{{ phrase('warext_mc_i18n_0079') }}"&gt;
@@ -2098,7 +2098,7 @@
                 &lt;/xf:form&gt;
                 &lt;div class="js-paymentProviderReply-warext_mc_sponsor"&gt;&lt;/div&gt;
             &lt;xf:elseif is="$profiles is empty" /&gt;
-                &lt;div class="blockMessage"&gt;Kullanılabilir XenForo ödeme profili bulunmuyor. Yönetici ACP &amp;gt; Setup &amp;gt; Payment profiles alanından bir ödeme profili eklemelidir.&lt;/div&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0295') }}&lt;/div&gt;
             &lt;xf:else /&gt;
                 &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0296') }}&lt;/div&gt;
             &lt;/xf:if&gt;
@@ -2175,7 +2175,7 @@
   <template type="public" title="warext_mc_thread_integration_fields" version_id="1011010" version_string="1.1.1">&lt;xf:if is="$warextMcThreadCategory"&gt;
     &lt;h2 class="block-formSectionHeader"&gt;&lt;span class="block-formSectionHeader-aligner"&gt;{{ phrase('warext_mc_i18n_0313') }}&lt;/span&gt;&lt;/h2&gt;
     &lt;div class="block-body"&gt;
-        &lt;div class="blockMessage blockMessage--important"&gt;Sunucu adresini boş bırakırsanız yalnızca normal tanıtım konusu oluşturulur. Adres girerseniz konu başlığı ve ilk mesaj kullanılarak {$warextMcThreadCategory.title} kategorisinde onay bekleyen bir vote kaydı oluşturulur.&lt;/div&gt;
+        &lt;div class="blockMessage blockMessage--important"&gt;{{ phrase('warext_mc_dyn_thread_server_notice', {'category': $warextMcThreadCategory.title}) }}&lt;/div&gt;
         &lt;xf:textboxrow name="warext_mc_host" label="{{ phrase('warext_mc_i18n_0083') }}" placeholder="play.sunucum.com" maxlength="255" /&gt;
         &lt;xf:selectrow name="warext_mc_server_type" value="{$warextMcThreadCategory.thread_default_server_type}" label="{{ phrase('warext_mc_i18n_0023') }}"&gt;
             &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
@@ -2203,7 +2203,7 @@
                 &lt;div class="contentRow"&gt;
                     &lt;div class="contentRow-main"&gt;
                         &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$warextMcLinkedServer.title}&lt;/strong&gt; &lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0316') }}&lt;/span&gt;&lt;/div&gt;
-                        &lt;div class="contentRow-minor"&gt;{$warextMcLinkedServer.host}:{$warextMcLinkedServer.port} · {$warextMcLinkedServer.players_online}/{$warextMcLinkedServer.players_max} oyuncu · {$warextMcLinkedServer.vote_count_month} aylık oy&lt;/div&gt;
+                        &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_linked_server_summary', {'host': $warextMcLinkedServer.host, 'port': $warextMcLinkedServer.port, 'online': $warextMcLinkedServer.players_online, 'max': $warextMcLinkedServer.players_max, 'votes': $warextMcLinkedServer.vote_count_month}) }}&lt;/div&gt;
                     &lt;/div&gt;
                     &lt;div class="contentRow-extra"&gt;
                         &lt;xf:button href="{{ link('sunucular/detay', $warextMcLinkedServer) }}"&gt;{{ phrase('warext_mc_i18n_0317') }}&lt;/xf:button&gt;
@@ -2215,7 +2215,7 @@
     &lt;/div&gt;
 &lt;/xf:if&gt;
 </template>
-  <template type="public" title="warext_mc_update_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - Güncellemeler&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_update_index" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_updates_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 &lt;xf:description&gt;{{ phrase('warext_mc_i18n_0318') }}&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
@@ -2273,7 +2273,7 @@
 
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/guncellemeler" data="{$server}" /&gt;
 </template>
-  <template type="public" title="warext_mc_votifier_config" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{$server.title} - NuVotifier Ayarları&lt;/xf:title&gt;
+  <template type="public" title="warext_mc_votifier_config" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_votifier_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -2282,7 +2282,7 @@
     &lt;div class="block-container"&gt;
         &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_nuvotifier_v2_integration') }}&lt;/div&gt;
         &lt;div class="block-body block-row"&gt;
-            Oylar platformda kaydedildikten sonra bu bağlantı üzerinden Minecraft sunucunuza gönderilir. Token şifreli saklanır ve kaydedildikten sonra arayüzde tekrar gösterilmez.
+            {{ phrase('warext_mc_dyn_votifier_info') }}
             &lt;xf:if is="$config.last_success_date"&gt;
                 &lt;div class="contentRow-minor" style="margin-top:8px"&gt;{{ phrase('warext_mc_i18n_0323') }} &lt;xf:date time="$config.last_success_date" /&gt;&lt;/div&gt;
             &lt;/xf:if&gt;
@@ -2337,7 +2337,7 @@
     &lt;/div&gt;
 &lt;/xf:form&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_achievement_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Başarımı Düzenle: {$achievement.title}&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_achievement_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_edit_achievement', {'title': $achievement.title}) }}&lt;/xf:title&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/achievement-edit', $achievement) }}" class="block" ajax="true"&gt;
     &lt;div class="block-container"&gt;
@@ -2403,7 +2403,7 @@
                                     &lt;xf:if is="$achievement.is_active"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0235') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/span&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-snippet"&gt;{$achievement.description}&lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;Metrik: {$achievement.metric} · Eşik: {$achievement.threshold} · Sıra: {$achievement.display_order}&lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_achievement_meta', {'metric': $achievement.metric, 'threshold': $achievement.threshold, 'order': $achievement.display_order}) }}&lt;/div&gt;
                                 &lt;div class="buttonGroup" style="margin-top:8px"&gt;
                                     &lt;xf:button href="{{ link('warext-minecraft/achievement-edit', $achievement) }}"&gt;{{ phrase('warext_mc_i18n_0249') }}&lt;/xf:button&gt;
                                     &lt;xf:form action="{{ link('warext-minecraft/achievement-toggle', $achievement) }}" ajax="true"&gt;
@@ -2448,7 +2448,7 @@
                                     &lt;xf:if is="$log.Server"&gt;&lt;span class="label"&gt;{$log.Server.title}&lt;/span&gt;&lt;xf:elseif is="$log.server_id" /&gt;&lt;span class="label"&gt;Sunucu #{$log.server_id}&lt;/span&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    İşlemi yapan: &lt;xf:if is="$log.Actor"&gt;&lt;xf:username user="$log.Actor" /&gt;&lt;xf:else /&gt;Sistem / #{$log.actor_user_id}&lt;/xf:if&gt;
+                                    {{ phrase('warext_mc_i18n_actor') }} &lt;xf:if is="$log.Actor"&gt;&lt;xf:username user="$log.Actor" /&gt;&lt;xf:else /&gt;Sistem / #{$log.actor_user_id}&lt;/xf:if&gt;
                                     &lt;xf:if is="$log.target_user_id"&gt; {{ phrase('warext_mc_i18n_target_prefix') }} &lt;xf:if is="$log.Target"&gt;&lt;xf:username user="$log.Target" /&gt;&lt;xf:else /&gt;#{$log.target_user_id}&lt;/xf:if&gt;&lt;/xf:if&gt;
                                     · &lt;xf:date time="$log.log_date" /&gt;
                                 &lt;/div&gt;
@@ -2472,7 +2472,7 @@
 
 &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/audit" params="{{ {'server_id': $serverId, 'action_key': $actionKey} }}" /&gt;
 </template>
-  <template type="admin" title="warext_mc_admin_category_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;Kategori Düzenle: {$category.title}&lt;/xf:title&gt;
+  <template type="admin" title="warext_mc_admin_category_edit" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_dyn_edit_category', {'title': $category.title}) }}&lt;/xf:title&gt;
 &lt;xf:form action="{{ link('warext-minecraft/category-edit', $category) }}" class="block"&gt;
     &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
         &lt;xf:textboxrow name="title" value="{$category.title}" label="{{ phrase('warext_mc_i18n_0109') }}" required="true" maxlength="50" /&gt;
@@ -2517,7 +2517,7 @@
         &lt;xf:foreach loop="$categoryRows" value="$row"&gt;
             &lt;div class="block-row block-row--separated"&gt;&lt;div class="contentRow"&gt;&lt;div class="contentRow-main"&gt;
                 &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$row.category.title}&lt;/strong&gt; &lt;xf:if is="$row.category.is_active"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0235') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0340') }}&lt;/span&gt;&lt;/xf:if&gt; &lt;xf:if is="$row.category.thread_integration_enabled"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_thread_integration') }}&lt;/span&gt;&lt;/xf:if&gt;&lt;/div&gt;
-                &lt;div class="contentRow-minor"&gt;Kısa ad: {$row.category.slug} · Kullanım: {$row.usageCount} sunucu&lt;xf:if is="$row.category.Forum"&gt; · Forum: {$row.category.Forum.title}&lt;/xf:if&gt;&lt;/div&gt;
+                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_category_usage', {'slug': $row.category.slug, 'count': $row.usageCount}) }}&lt;xf:if is="$row.category.Forum"&gt; · Forum: {$row.category.Forum.title}&lt;/xf:if&gt;&lt;/div&gt;
                 &lt;div class="buttonGroup" style="margin-top:8px"&gt;&lt;xf:button href="{{ link('warext-minecraft/category-edit', $row.category) }}"&gt;{{ phrase('warext_mc_i18n_0249') }}&lt;/xf:button&gt;
                     &lt;xf:form action="{{ link('warext-minecraft/category-toggle', $row.category) }}" ajax="true" class="buttonGroup"&gt;&lt;xf:button type="submit"&gt;&lt;xf:if is="$row.category.is_active"&gt;{{ phrase('warext_mc_i18n_0341') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0342') }}&lt;/xf:if&gt;&lt;/xf:button&gt;&lt;/xf:form&gt;
                     &lt;xf:form action="{{ link('warext-minecraft/category-delete', $row.category) }}" ajax="true" data-xf-init="delete" class="buttonGroup"&gt;&lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0343') }}&lt;/xf:button&gt;&lt;/xf:form&gt;
@@ -2544,7 +2544,7 @@
                 &lt;xf:if is="$oldestPending"&gt; {{ phrase('warext_mc_i18n_0349') }} &lt;xf:date time="$oldestPending" /&gt;&lt;/xf:if&gt;
             &lt;/div&gt;
             &lt;div class="block-row"&gt;
-                Takılı processing kaydı: {$staleProcessing} · Çevrimdışı aktif sunucu: {$offlineServers} · 1 saattir kontrol edilmemiş aktif sunucu: {$staleServers}
+                {{ phrase('warext_mc_dyn_health_stale', {'processing': $staleProcessing, 'offline': $offlineServers, 'stale': $staleServers}) }}
             &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class="block-footer"&gt;
@@ -2626,7 +2626,7 @@
                                 &lt;xf:if is="$report.Reporter"&gt;
                                     {$report.Reporter.username}
                                 &lt;xf:else /&gt;
-                                    Kullanıcı #{$report.reporter_user_id}
+                                    {{ phrase('warext_mc_dyn_user_id', {'id': $report.reporter_user_id}) }}
                                 &lt;/xf:if&gt;
                             &lt;/dd&gt;
                             &lt;dt&gt;Tarih&lt;/dt&gt;&lt;dd&gt;&lt;xf:date time="$report.created_date" /&gt;&lt;/dd&gt;
@@ -2691,7 +2691,7 @@
                                 &lt;div class="contentRow-title"&gt;
                                     &lt;strong&gt;{$server.title}&lt;/strong&gt;
                                     &lt;span class="label"&gt;{$server.state}&lt;/span&gt;
-                                    &lt;xf:if is="$server.rank_popular"&gt;&lt;span class="label label--primary"&gt;Popüler #{$server.rank_popular}&lt;/span&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$server.rank_popular"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_dyn_popular_rank', {'rank': $server.rank_popular}) }}&lt;/span&gt;&lt;/xf:if&gt;
                                     &lt;xf:if is="$server.rank_trending"&gt;&lt;span class="label label--orange"&gt;Trend #{$server.rank_trending}&lt;/span&gt;&lt;/xf:if&gt;
                                     &lt;xf:if is="$server.is_verified"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;/xf:if&gt;
                                     &lt;xf:if is="$server.is_online"&gt;
@@ -2704,7 +2704,7 @@
                                 &lt;div class="contentRow-minor"&gt;
                                     {$server.host}:{$server.port}
                                     &lt;xf:if is="$server.Owner"&gt; · Sahip: {$server.Owner.username}&lt;/xf:if&gt;
-                                    · Tür: {$server.server_type}
+                                    {{ phrase('warext_mc_i18n_type_prefix') }} {$server.server_type}
                                     · Oy: {$server.vote_count_month}
                                     · Benzersiz: {$server.unique_voters_month}
                                 &lt;/div&gt;
@@ -2714,9 +2714,9 @@
                                     · Ping: {$server.ping_ms} ms
                                     · Uptime: {$server.uptime_percent}%
                                     · 24s oy: {$server.votes_24h}
-                                    · Popülerlik: {$server.popular_score}
+                                    {{ phrase('warext_mc_i18n_popularity_prefix') }} {$server.popular_score}
                                     · Trend: {$server.trend_score}
-                                    &lt;xf:if is="$server.detected_version"&gt; · Sürüm: {$server.detected_version}&lt;/xf:if&gt;
+                                    &lt;xf:if is="$server.detected_version"&gt; {{ phrase('warext_mc_i18n_version_prefix') }} {$server.detected_version}&lt;/xf:if&gt;
                                 &lt;/div&gt;
 
                                 &lt;div class="contentRow-minor"&gt;
@@ -2730,7 +2730,7 @@
                                 &lt;/xf:if&gt;
 
                                 &lt;xf:if is="$server.last_ping_error"&gt;
-                                    &lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;Son ping hatası: {$server.last_ping_error}&lt;/div&gt;
+                                    &lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;{{ phrase('warext_mc_dyn_ping_error', {'error': $server.last_ping_error}) }}&lt;/div&gt;
                                 &lt;/xf:if&gt;
 
                                 &lt;div class="buttonGroup buttonGroup--alignOpposite" style="margin-top:10px"&gt;
@@ -2765,7 +2765,7 @@
   <template type="admin" title="warext_mc_admin_setup" version_id="1011010" version_string="1.1.1">&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0369') }}&lt;/xf:title&gt;
 
 &lt;div class="blockMessage blockMessage--important"&gt;
-    Bu sayfa eklentiyi ilk kez kuran yöneticiler için başlangıç merkezidir. Minecraft kategorileri XenForo forum kategorilerine bağlı değildir; sunucu listesindeki filtreleme ve sınıflandırma etiketleridir.
+    {{ phrase('warext_mc_dyn_setup_intro') }}
 &lt;/div&gt;
 
 &lt;div class="block"&gt;
@@ -2792,7 +2792,7 @@
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_setup_general') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
-                Admin CP → Setup → Options bölümünde &lt;strong&gt;Warext Minecraft Sunucu &amp; Vote&lt;/strong&gt; seçenek grubunu açın. Oy bekleme süresi, CAPTCHA, misafir oyları, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir.
+                {{ phrase('warext_mc_dyn_setup_options') }}
             &lt;/div&gt;
             &lt;div class="block-row"&gt;
                 JSON API: &lt;xf:if is="$publicApiEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; {{ phrase('warext_mc_i18n_https_webhook') }} &lt;xf:if is="$webhookEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
@@ -2888,18 +2888,18 @@
                         &lt;div class="contentRow"&gt;
                             &lt;div class="contentRow-main"&gt;
                                 &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;&lt;xf:if is="$sponsor.Server"&gt;{$sponsor.Server.title}&lt;xf:else /&gt;Silinmiş sunucu #{$sponsor.server_id}&lt;/xf:if&gt;&lt;/strong&gt;
+                                    &lt;strong&gt;&lt;xf:if is="$sponsor.Server"&gt;{$sponsor.Server.title}&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_deleted_server', {'id': $sponsor.server_id}) }}&lt;/xf:if&gt;&lt;/strong&gt;
                                     &lt;span class="label label--orange"&gt;{$sponsor.label}&lt;/span&gt;
                                     &lt;xf:if is="$sponsor.is_current"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0408') }}&lt;/span&gt;&lt;xf:elseif is="$sponsor.state == 'paused'" /&gt;&lt;span class="label"&gt;{{ phrase('warext_mc_i18n_0409') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0410') }}&lt;/span&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    Başlangıç: &lt;xf:date time="$sponsor.start_date" /&gt; ·
+                                    {{ phrase('warext_mc_i18n_start_prefix') }} &lt;xf:date time="$sponsor.start_date" /&gt; ·
                                     Bitiş: &lt;xf:if is="$sponsor.end_date"&gt;&lt;xf:date time="$sponsor.end_date" /&gt;&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0411') }}&lt;/xf:if&gt; ·
-                                    Sıra: {$sponsor.display_order}
+                                    {{ phrase('warext_mc_dyn_order_x', {'order': $sponsor.display_order}) }}
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    Oluşturan: &lt;xf:if is="$sponsor.Creator"&gt;&lt;xf:username user="$sponsor.Creator" /&gt;&lt;xf:else /&gt;Sistem&lt;/xf:if&gt; ·
-                                    Son değişiklik: &lt;xf:date time="$sponsor.updated_date" /&gt;
+                                    {{ phrase('warext_mc_i18n_created_by') }} &lt;xf:if is="$sponsor.Creator"&gt;&lt;xf:username user="$sponsor.Creator" /&gt;&lt;xf:else /&gt;Sistem&lt;/xf:if&gt; ·
+                                    {{ phrase('warext_mc_i18n_last_change') }} &lt;xf:date time="$sponsor.updated_date" /&gt;
                                 &lt;/div&gt;
                                 &lt;div class="buttonGroup" style="margin-top:8px"&gt;
                                     &lt;xf:form action="{{ link('warext-minecraft/sponsor-toggle', $sponsor) }}" ajax="true"&gt;
@@ -3026,13 +3026,13 @@
         &lt;div class="block-body block-row"&gt;
             &lt;div class="buttonGroup"&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'pending'}) }}"&gt;Bekleyen ({$statusCounts.pending})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'processing'}) }}"&gt;İşleniyor ({$statusCounts.processing})&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'processing'}) }}"&gt;{{ phrase('warext_mc_dyn_status_processing', {'count': $statusCounts.processing}) }}&lt;/xf:button&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'retry'}) }}"&gt;Tekrar ({$statusCounts.retry})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'failed'}) }}"&gt;Başarısız ({$statusCounts.failed})&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'failed'}) }}"&gt;{{ phrase('warext_mc_dyn_status_failed', {'count': $statusCounts.failed}) }}&lt;/xf:button&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'delivered'}) }}"&gt;{{ phrase('warext_mc_i18n_delivered') }} ({$statusCounts.delivered})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'skipped'}) }}"&gt;Atlandı ({$statusCounts.skipped})&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'skipped'}) }}"&gt;{{ phrase('warext_mc_dyn_status_skipped', {'count': $statusCounts.skipped}) }}&lt;/xf:button&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'rejected'}) }}"&gt;Reddedildi ({$statusCounts.rejected})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}"&gt;Tümü ({$statusCounts.all})&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}"&gt;{{ phrase('warext_mc_dyn_status_all', {'count': $statusCounts.all}) }}&lt;/xf:button&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -3069,7 +3069,7 @@
                                 &lt;/div&gt;
 
                                 &lt;div class="contentRow-minor"&gt;
-                                    Oy zamanı: &lt;xf:date time="$vote.vote_date" /&gt;
+                                    {{ phrase('warext_mc_i18n_vote_time') }} &lt;xf:date time="$vote.vote_date" /&gt;
                                     · Deneme: {$vote.attempt_count}
                                     · Risk: {$vote.fraud_score}
                                     &lt;xf:if is="$vote.next_attempt_date"&gt; {{ phrase('warext_mc_i18n_next_attempt_lease') }} &lt;xf:date time="$vote.next_attempt_date" /&gt;&lt;/xf:if&gt;
