@@ -31,11 +31,11 @@ class Creator extends AbstractService
 
         if (!in_array($reason, ['fake', 'malicious', 'scam', 'offline', 'inappropriate', 'other'], true))
         {
-            throw new PrintableException('Geçerli bir rapor nedeni seçin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_report_reason_required'));
         }
         if (mb_strlen($message) < 10 || mb_strlen($message) > 1000)
         {
-            throw new PrintableException('Rapor açıklaması 10 ile 1000 karakter arasında olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_report_message_length'));
         }
 
         $this->reason = $reason;
@@ -46,15 +46,15 @@ class Creator extends AbstractService
     {
         if (!$this->user->user_id)
         {
-            throw new PrintableException('Rapor göndermek için giriş yapmanız gerekiyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_report_login_required'));
         }
         if ($this->server->state !== 'active')
         {
-            throw new PrintableException('Bu sunucu şu anda raporlanamaz.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_server_not_reportable'));
         }
         if ($this->server->owner_user_id === $this->user->user_id)
         {
-            throw new PrintableException('Kendi sunucunuzu raporlayamazsınız.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_own_server_report'));
         }
 
         $this->assertFloodRate();
@@ -62,7 +62,7 @@ class Creator extends AbstractService
         $repo = $this->repository('Warext\MinecraftVote:Report');
         if ($repo->hasRecentReport($this->server->server_id, $this->user->user_id, \XF::$time - 86400))
         {
-            throw new PrintableException('Bu sunucuyu son 24 saat içinde zaten raporladınız.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_report_duplicate_24h'));
         }
 
         $report = $this->em()->create('Warext\MinecraftVote:Report');
@@ -87,7 +87,7 @@ class Creator extends AbstractService
         $remaining = (int)$flood->checkFlooding('warextMinecraftReport', $this->user->user_id, 30);
         if ($remaining > 0)
         {
-            throw new PrintableException("Çok hızlı rapor gönderiyorsunuz. {$remaining} saniye sonra tekrar deneyin.");
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_report_rate_seconds', ['seconds' => $remaining]));
         }
     }
 }
