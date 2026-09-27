@@ -26,7 +26,58 @@ class Achievement extends Entity
             'updated_date' => ['type' => self::UINT, 'default' => 0]
         ];
 
+        $structure->getters = [
+            'display_title' => true,
+            'display_description' => true
+        ];
+
         return $structure;
+    }
+
+    public function getDisplayTitle(): string
+    {
+        $stock = [
+            'votes_100' => ['100 Oy', '100 Votes'],
+            'votes_1000' => ['1.000 Oy', '1,000 Votes'],
+            'votes_10000' => ['10.000 Oy', '10,000 Votes'],
+            'uptime_99' => ['%99 Uptime', '99% Uptime'],
+            'peak_100' => ['100 Eş Zamanlı Oyuncu', '100 Concurrent Players'],
+            'peak_500' => ['500 Eş Zamanlı Oyuncu', '500 Concurrent Players'],
+            'one_year' => ['1 Yıllık Sunucu', 'One-Year Server'],
+            'verified' => ['Doğrulanmış Sunucu', 'Verified Server'],
+            'month_champion' => ['Ayın Sunucusu', 'Server of the Month'],
+            'rising_star' => ['Yükselen Yıldız', 'Rising Star']
+        ];
+
+        if (isset($stock[$this->achievement_key]) && in_array($this->title, $stock[$this->achievement_key], true))
+        {
+            return (string)\XF::phrase('warext_mc_achievement_' . $this->achievement_key . '_title');
+        }
+
+        return (string)$this->title;
+    }
+
+    public function getDisplayDescription(): string
+    {
+        $stock = [
+            'votes_100' => ['Toplam 100 topluluk oyuna ulaştı.', 'Reached 100 total community votes.'],
+            'votes_1000' => ['Toplam 1.000 topluluk oyuna ulaştı.', 'Reached 1,000 total community votes.'],
+            'votes_10000' => ['Toplam 10.000 topluluk oyuna ulaştı.', 'Reached 10,000 total community votes.'],
+            'uptime_99' => ['İzlenen çalışma süresinde %99 uptime seviyesine ulaştı.', 'Reached 99% uptime across monitored availability.'],
+            'peak_100' => ['En az 100 eş zamanlı oyuncu gördü.', 'Reached at least 100 concurrent players.'],
+            'peak_500' => ['En az 500 eş zamanlı oyuncu gördü.', 'Reached at least 500 concurrent players.'],
+            'one_year' => ['Platformda 365 günü tamamladı.', 'Completed 365 days on the platform.'],
+            'verified' => ['Sunucu sahipliği başarıyla doğrulandı.', 'Server ownership was successfully verified.'],
+            'month_champion' => ['Bir aylık oy sezonunu birinci tamamladı.', 'Finished first in a monthly vote season.'],
+            'rising_star' => ['Trend sıralamasında ilk 3 içine girdi.', 'Reached the top 3 in the trending ranking.']
+        ];
+
+        if (isset($stock[$this->achievement_key]) && in_array($this->description, $stock[$this->achievement_key], true))
+        {
+            return (string)\XF::phrase('warext_mc_achievement_' . $this->achievement_key . '_desc');
+        }
+
+        return (string)$this->description;
     }
 
     protected function _preSave(): void
