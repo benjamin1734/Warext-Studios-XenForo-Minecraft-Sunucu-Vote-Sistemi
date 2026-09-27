@@ -37,7 +37,7 @@
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0192') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:checkboxrow label="{{ phrase('admin_navigation.warextMinecraftCategories') }}"&gt;
-                &lt;xf:foreach loop="$categories" value="$category"&gt;&lt;xf:option name="category_ids[]" value="{$category.category_id}" selected="{{ in_array($category.category_id, $selectedCategoryIds) }}"&gt;{$category.title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
+                &lt;xf:foreach loop="$categories" value="$category"&gt;&lt;xf:option name="category_ids[]" value="{$category.category_id}" selected="{{ in_array($category.category_id, $selectedCategoryIds) }}"&gt;{$category.display_title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
             &lt;/xf:checkboxrow&gt;
             &lt;xf:textboxrow name="game_modes" value="{$server.game_modes}" label="{{ phrase('warext_mc_i18n_0039') }}" maxlength="255" /&gt;
             &lt;xf:textboxrow name="version_min" value="{$server.version_min}" label="{{ phrase('warext_mc_i18n_0040') }}" maxlength="30" /&gt;
