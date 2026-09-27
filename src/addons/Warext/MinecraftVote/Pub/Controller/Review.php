@@ -46,7 +46,7 @@ class Review extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/degerlendir', $server),
-                'Değerlendirmeniz kaydedildi.'
+                \XF::phrase('warext_mc_dyn_review_saved')
             );
         }
 
@@ -107,7 +107,7 @@ class Review extends AbstractController
 
         return $this->redirect(
             $this->buildLink('sunucular/degerlendir', $server),
-            'Değerlendirmeniz silindi.'
+            \XF::phrase('warext_mc_dyn_review_deleted')
         );
     }
 
@@ -134,7 +134,7 @@ class Review extends AbstractController
         $state = $this->filter('state', 'str');
         if (!in_array($state, ['visible', 'moderated'], true))
         {
-            return $this->error('Geçersiz değerlendirme durumu.', 400);
+            return $this->error(\XF::phrase('warext_mc_dyn_invalid_review_status'), 400);
         }
 
         $previousState = (string)$review->state;
@@ -159,7 +159,7 @@ class Review extends AbstractController
 
         return $this->redirect(
             $this->buildLink('sunucular/degerlendir', $review->Server),
-            $state === 'visible' ? 'Değerlendirme yeniden görünür yapıldı.' : 'Değerlendirme gizlendi.'
+            $state === 'visible' ? \XF::phrase('warext_mc_dyn_review_restored') : \XF::phrase('warext_mc_dyn_review_hidden')
         );
     }
 
