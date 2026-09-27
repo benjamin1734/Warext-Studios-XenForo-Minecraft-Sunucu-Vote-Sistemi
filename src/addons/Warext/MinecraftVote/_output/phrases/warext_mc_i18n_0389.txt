@@ -1,0 +1,1 @@
+Bir kullanıcıda ilgili izin kapalıysa buton görünmez veya işlem reddedilir. Eklentiyi test ederken test hesabının kullanıcı grubuna bu izinleri verdiğinizden emin olun.

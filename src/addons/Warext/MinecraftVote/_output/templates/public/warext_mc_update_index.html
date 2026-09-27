@@ -1,57 +1,57 @@
-<xf:title>{$server.title} - Güncellemeler</xf:title>
-<xf:description>Sunucu sahibinin ve yetkili ekip üyelerinin yayınladığı sürüm notları ve değişiklikler.</xf:description>
+&lt;xf:title&gt;{$server.title} - Güncellemeler&lt;/xf:title&gt;
+&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0318') }}&lt;/xf:description&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
-<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
-<xf:pageaction>
-    <xf:if is="$canEdit">
-        <xf:button href="{{ link('sunucular/duzenle', $server) }}">Sunucuyu Düzenle</xf:button>
-    </xf:if>
-    <xf:if is="$canViewStats">
-        <xf:button href="{{ link('sunucular/istatistik', $server) }}">İstatistikler</xf:button>
-    </xf:if>
-    <xf:if is="$canManageVotifier">
-        <xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier Ayarları</xf:button>
-    </xf:if>
-</xf:pageaction>
+&lt;xf:pageaction&gt;
+    &lt;xf:if is="$canEdit"&gt;
+        &lt;xf:button href="{{ link('sunucular/duzenle', $server) }}"&gt;{{ phrase('warext_mc_i18n_0269') }}&lt;/xf:button&gt;
+    &lt;/xf:if&gt;
+    &lt;xf:if is="$canViewStats"&gt;
+        &lt;xf:button href="{{ link('sunucular/istatistik', $server) }}"&gt;{{ phrase('warext_mc_i18n_0271') }}&lt;/xf:button&gt;
+    &lt;/xf:if&gt;
+    &lt;xf:if is="$canManageVotifier"&gt;
+        &lt;xf:button href="{{ link('sunucular/votifier', $server) }}"&gt;{{ phrase('warext_mc_i18n_0272') }}&lt;/xf:button&gt;
+    &lt;/xf:if&gt;
+&lt;/xf:pageaction&gt;
 
-<xf:if is="$canPublish">
-    <xf:form action="{{ link('sunucular/guncellemeler', $server) }}" class="block" ajax="true">
-        <div class="block-container">
-            <div class="block-header">Yeni Güncelleme Yayınla</div>
-            <div class="block-body">
-                <xf:textboxrow name="title" maxlength="100" label="Başlık" required="required" />
-                <xf:textboxrow name="version_label" maxlength="50" label="Sürüm Etiketi" explain="İsteğe bağlı. Örnek: 1.4.2, Sezon 3 veya Ağustos Güncellemesi." />
-                <xf:textarearow name="message" rows="7" maxlength="10000" label="Değişiklikler" required="required" explain="En az 10, en fazla 10000 karakter." />
-            </div>
-            <xf:submitrow submit="Yayınla" />
-        </div>
-    </xf:form>
-</xf:if>
+&lt;xf:if is="$canPublish"&gt;
+    &lt;xf:form action="{{ link('sunucular/guncellemeler', $server) }}" class="block" ajax="true"&gt;
+        &lt;div class="block-container"&gt;
+            &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0319') }}&lt;/div&gt;
+            &lt;div class="block-body"&gt;
+                &lt;xf:textboxrow name="title" maxlength="100" label="{{ phrase('warext_mc_i18n_0086') }}" required="required" /&gt;
+                &lt;xf:textboxrow name="version_label" maxlength="50" label="{{ phrase('warext_mc_i18n_0087') }}" explain="{{ phrase('warext_mc_i18n_0088') }}" /&gt;
+                &lt;xf:textarearow name="message" rows="7" maxlength="10000" label="{{ phrase('warext_mc_i18n_0089') }}" required="required" explain="{{ phrase('warext_mc_i18n_0090') }}" /&gt;
+            &lt;/div&gt;
+            &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0091') }}" /&gt;
+        &lt;/div&gt;
+    &lt;/xf:form&gt;
+&lt;/xf:if&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Güncelleme Geçmişi</div>
-        <div class="block-body">
-            <xf:if is="$updates is not empty">
-                <xf:foreach loop="$updates" value="$update">
-                    <article class="block-row block-row--separated">
-                        <div class="contentRow"><div class="contentRow-main">
-                            <div class="contentRow-title"><strong>{$update.title}</strong> <xf:if is="$update.version_label"><span class="label label--primary">{$update.version_label}</span></xf:if></div>
-                            <div class="contentRow-minor"><xf:if is="$update.User"><xf:username user="$update.User" /> · </xf:if><xf:date time="$update.created_date" /></div>
-                            <div class="contentRow-snippet" style="margin-top:10px; white-space:pre-wrap">{$update.message}</div>
-                            <xf:if is="$canPublish">
-                                <xf:form action="{{ link('sunucular/guncelleme-sil', $update) }}" ajax="true" data-xf-init="delete" style="margin-top:10px"><xf:button type="submit" class="button--link">Güncellemeyi Sil</xf:button></xf:form>
-                            </xf:if>
-                        </div></div>
-                    </article>
-                </xf:foreach>
-            <xf:else />
-                <div class="blockMessage">Bu sunucu henüz bir güncelleme yayınlamamış.</div>
-            </xf:if>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0320') }}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$updates is not empty"&gt;
+                &lt;xf:foreach loop="$updates" value="$update"&gt;
+                    &lt;article class="block-row block-row--separated"&gt;
+                        &lt;div class="contentRow"&gt;&lt;div class="contentRow-main"&gt;
+                            &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$update.title}&lt;/strong&gt; &lt;xf:if is="$update.version_label"&gt;&lt;span class="label label--primary"&gt;{$update.version_label}&lt;/span&gt;&lt;/xf:if&gt;&lt;/div&gt;
+                            &lt;div class="contentRow-minor"&gt;&lt;xf:if is="$update.User"&gt;&lt;xf:username user="$update.User" /&gt; · &lt;/xf:if&gt;&lt;xf:date time="$update.created_date" /&gt;&lt;/div&gt;
+                            &lt;div class="contentRow-snippet" style="margin-top:10px; white-space:pre-wrap"&gt;{$update.message}&lt;/div&gt;
+                            &lt;xf:if is="$canPublish"&gt;
+                                &lt;xf:form action="{{ link('sunucular/guncelleme-sil', $update) }}" ajax="true" data-xf-init="delete" style="margin-top:10px"&gt;&lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0321') }}&lt;/xf:button&gt;&lt;/xf:form&gt;
+                            &lt;/xf:if&gt;
+                        &lt;/div&gt;&lt;/div&gt;
+                    &lt;/article&gt;
+                &lt;/xf:foreach&gt;
+            &lt;xf:else /&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0322') }}&lt;/div&gt;
+            &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/guncellemeler" data="{$server}" />
+&lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/guncellemeler" data="{$server}" /&gt;

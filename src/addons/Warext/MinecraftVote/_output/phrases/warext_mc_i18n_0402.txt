@@ -1,0 +1,1 @@
+alanından bağlantıyı yapılandırır. Oy kaydı ile oyun içi ödül teslimatı birbirinden ayrıdır; oy önce kaydedilir, ardından teslimat kuyruğu çalışır.

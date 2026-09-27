@@ -1,63 +1,63 @@
-<xf:title>{$server.title} - NuVotifier Ayarları</xf:title>
+&lt;xf:title&gt;{$server.title} - NuVotifier Ayarları&lt;/xf:title&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
-<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">NuVotifier V2 Entegrasyonu</div>
-        <div class="block-body block-row">
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;NuVotifier V2 Entegrasyonu&lt;/div&gt;
+        &lt;div class="block-body block-row"&gt;
             Oylar platformda kaydedildikten sonra bu bağlantı üzerinden Minecraft sunucunuza gönderilir. Token şifreli saklanır ve kaydedildikten sonra arayüzde tekrar gösterilmez.
-            <xf:if is="$config.last_success_date">
-                <div class="contentRow-minor" style="margin-top:8px">Son başarılı bağlantı: <xf:date time="$config.last_success_date" /></div>
-            </xf:if>
-            <xf:if is="$config.last_error">
-                <div class="blockMessage blockMessage--error" style="margin-top:8px">Son hata: {$config.last_error}</div>
-            </xf:if>
-        </div>
-    </div>
-</div>
+            &lt;xf:if is="$config.last_success_date"&gt;
+                &lt;div class="contentRow-minor" style="margin-top:8px"&gt;Son başarılı bağlantı: &lt;xf:date time="$config.last_success_date" /&gt;&lt;/div&gt;
+            &lt;/xf:if&gt;
+            &lt;xf:if is="$config.last_error"&gt;
+                &lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;Son hata: {$config.last_error}&lt;/div&gt;
+            &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<xf:form action="{{ link('sunucular/votifier', $server) }}" class="block">
-    <div class="block-container">
-        <div class="block-body">
-            <xf:checkboxrow>
-                <xf:option name="enabled" value="1" selected="$config.enabled">NuVotifier ödül teslimatını etkinleştir</xf:option>
-            </xf:checkboxrow>
+&lt;xf:form action="{{ link('sunucular/votifier', $server) }}" class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:checkboxrow&gt;
+                &lt;xf:option name="enabled" value="1" selected="$config.enabled"&gt;{{ phrase('warext_mc_i18n_0324') }}&lt;/xf:option&gt;
+            &lt;/xf:checkboxrow&gt;
 
-            <xf:textboxrow
+            &lt;xf:textboxrow
                 name="host"
                 value="{$config.host}"
-                label="NuVotifier Host"
-                explain="Aynı bilgisayarda test ediyorsanız lokal test izni açıkken 127.0.0.1 veya localhost kullanabilirsiniz." />
+                label="{{ phrase('warext_mc_i18n_0092') }}"
+                explain="{{ phrase('warext_mc_i18n_0093') }}" /&gt;
 
-            <xf:numberboxrow
+            &lt;xf:numberboxrow
                 name="port"
                 value="{$config.port}"
                 min="1"
                 max="65535"
-                label="NuVotifier Port"
-                explain="Varsayılan NuVotifier portu 8192'dir." />
+                label="{{ phrase('warext_mc_i18n_0094') }}"
+                explain="{{ phrase('warext_mc_i18n_0095') }}" /&gt;
 
-            <xf:textboxrow
+            &lt;xf:textboxrow
                 name="service_name"
                 value="{$config.service_name}"
                 maxlength="64"
-                label="Servis Adı"
-                explain="NuVotifier tarafında vote serviceName olarak gönderilir. Örnek: Warext." />
+                label="{{ phrase('warext_mc_i18n_0096') }}"
+                explain="{{ phrase('warext_mc_i18n_0097') }}" /&gt;
 
-            <xf:textboxrow
+            &lt;xf:textboxrow
                 name="token"
                 type="password"
                 maxlength="255"
-                label="NuVotifier V2 Token"
-                explain="{$tokenExplain}" />
-        </div>
+                label="{{ phrase('warext_mc_i18n_0098') }}"
+                explain="{$tokenExplain}" /&gt;
+        &lt;/div&gt;
 
-        <xf:submitrow submit="Kaydet">
-            <xf:html>
-                <xf:button type="submit" name="test" value="1">Kaydet ve Test Oyu Gönder</xf:button>
-            </xf:html>
-        </xf:submitrow>
-    </div>
-</xf:form>
+        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0021') }}"&gt;
+            &lt;xf:html&gt;
+                &lt;xf:button type="submit" name="test" value="1"&gt;{{ phrase('warext_mc_i18n_0325') }}&lt;/xf:button&gt;
+            &lt;/xf:html&gt;
+        &lt;/xf:submitrow&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;

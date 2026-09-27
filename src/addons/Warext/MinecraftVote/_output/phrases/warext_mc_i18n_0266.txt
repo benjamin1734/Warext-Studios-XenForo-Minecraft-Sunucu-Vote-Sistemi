@@ -1,0 +1,1 @@
+Sunucu alan adının DNS yönetimine erişiminiz varsa MOTD'yi değiştirmeden doğrulama yapabilirsiniz.

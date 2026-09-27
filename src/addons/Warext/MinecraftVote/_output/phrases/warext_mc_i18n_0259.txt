@@ -1,0 +1,1 @@
+DNS yayılımına bağlı olarak yeni kayıtların görünmesi biraz gecikebilir.

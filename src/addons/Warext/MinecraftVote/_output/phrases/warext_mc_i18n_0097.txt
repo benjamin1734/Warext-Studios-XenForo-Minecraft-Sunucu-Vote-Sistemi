@@ -1,0 +1,1 @@
+NuVotifier tarafında vote serviceName olarak gönderilir. Örnek: Warext.

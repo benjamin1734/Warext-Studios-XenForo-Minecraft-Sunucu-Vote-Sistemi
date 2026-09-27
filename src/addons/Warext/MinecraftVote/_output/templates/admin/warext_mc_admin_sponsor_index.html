@@ -1,63 +1,63 @@
-<xf:title>Sponsorlu Sunucular</xf:title>
-<xf:description>Sponsorlu gösterimler organik Popüler ve Yükselişte sıralama skorlarını değiştirmez.</xf:description>
+&lt;xf:title&gt;Sponsorlu Sunucular&lt;/xf:title&gt;
+&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0404') }}&lt;/xf:description&gt;
 
-<xf:form action="{{ link('warext-minecraft/sponsors') }}" class="block" ajax="true">
-    <div class="block-container">
-        <div class="block-header">Yeni Sponsorlu Gösterim</div>
-        <div class="block-body">
-            <xf:selectrow name="server_id" label="Sunucu" required="required">
-                <xf:option value="0">Sunucu seçin</xf:option>
-                <xf:foreach loop="$servers" value="$server">
-                    <xf:option value="{$server.server_id}">{$server.title} · {$server.host}:{$server.port}</xf:option>
-                </xf:foreach>
-            </xf:selectrow>
-            <xf:textboxrow name="label" value="Sponsorlu" maxlength="50" label="Etiket" />
-            <xf:textboxrow name="start_date" placeholder="2026-09-01 18:00" label="Başlangıç" explain="Boş bırakırsanız hemen başlar." />
-            <xf:textboxrow name="end_date" placeholder="2026-09-08 18:00" label="Bitiş" explain="Boş bırakırsanız süresiz devam eder." />
-            <xf:numberboxrow name="display_order" value="10" min="1" max="10000" label="Gösterim sırası" />
-        </div>
-        <xf:submitrow submit="Sponsor Kaydı Oluştur" />
-    </div>
-</xf:form>
+&lt;xf:form action="{{ link('warext-minecraft/sponsors') }}" class="block" ajax="true"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0405') }}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:selectrow name="server_id" label="{{ phrase('warext_mc_i18n_0118') }}" required="required"&gt;
+                &lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0406') }}&lt;/xf:option&gt;
+                &lt;xf:foreach loop="$servers" value="$server"&gt;
+                    &lt;xf:option value="{$server.server_id}"&gt;{$server.title} · {$server.host}:{$server.port}&lt;/xf:option&gt;
+                &lt;/xf:foreach&gt;
+            &lt;/xf:selectrow&gt;
+            &lt;xf:textboxrow name="label" value="Sponsorlu" maxlength="50" label="{{ phrase('warext_mc_i18n_0119') }}" /&gt;
+            &lt;xf:textboxrow name="start_date" placeholder="2026-09-01 18:00" label="{{ phrase('warext_mc_i18n_0120') }}" explain="{{ phrase('warext_mc_i18n_0121') }}" /&gt;
+            &lt;xf:textboxrow name="end_date" placeholder="2026-09-08 18:00" label="{{ phrase('warext_mc_i18n_0122') }}" explain="{{ phrase('warext_mc_i18n_0123') }}" /&gt;
+            &lt;xf:numberboxrow name="display_order" value="10" min="1" max="10000" label="{{ phrase('warext_mc_i18n_0103') }}" /&gt;
+        &lt;/div&gt;
+        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0124') }}" /&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Sponsor Kayıtları</div>
-        <div class="block-body">
-            <xf:if is="$sponsors is not empty">
-                <xf:foreach loop="$sponsors" value="$sponsor">
-                    <div class="block-row block-row--separated">
-                        <div class="contentRow">
-                            <div class="contentRow-main">
-                                <div class="contentRow-title">
-                                    <strong><xf:if is="$sponsor.Server">{$sponsor.Server.title}<xf:else />Silinmiş sunucu #{$sponsor.server_id}</xf:if></strong>
-                                    <span class="label label--orange">{$sponsor.label}</span>
-                                    <xf:if is="$sponsor.is_current"><span class="label label--green">Yayında</span><xf:elseif is="$sponsor.state == 'paused'" /><span class="label">Duraklatıldı</span><xf:else /><span class="label label--red">Süresi dışında</span></xf:if>
-                                </div>
-                                <div class="contentRow-minor">
-                                    Başlangıç: <xf:date time="$sponsor.start_date" /> ·
-                                    Bitiş: <xf:if is="$sponsor.end_date"><xf:date time="$sponsor.end_date" /><xf:else />Süresiz</xf:if> ·
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0407') }}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$sponsors is not empty"&gt;
+                &lt;xf:foreach loop="$sponsors" value="$sponsor"&gt;
+                    &lt;div class="block-row block-row--separated"&gt;
+                        &lt;div class="contentRow"&gt;
+                            &lt;div class="contentRow-main"&gt;
+                                &lt;div class="contentRow-title"&gt;
+                                    &lt;strong&gt;&lt;xf:if is="$sponsor.Server"&gt;{$sponsor.Server.title}&lt;xf:else /&gt;Silinmiş sunucu #{$sponsor.server_id}&lt;/xf:if&gt;&lt;/strong&gt;
+                                    &lt;span class="label label--orange"&gt;{$sponsor.label}&lt;/span&gt;
+                                    &lt;xf:if is="$sponsor.is_current"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0408') }}&lt;/span&gt;&lt;xf:elseif is="$sponsor.state == 'paused'" /&gt;&lt;span class="label"&gt;{{ phrase('warext_mc_i18n_0409') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0410') }}&lt;/span&gt;&lt;/xf:if&gt;
+                                &lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;
+                                    Başlangıç: &lt;xf:date time="$sponsor.start_date" /&gt; ·
+                                    Bitiş: &lt;xf:if is="$sponsor.end_date"&gt;&lt;xf:date time="$sponsor.end_date" /&gt;&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0411') }}&lt;/xf:if&gt; ·
                                     Sıra: {$sponsor.display_order}
-                                </div>
-                                <div class="contentRow-minor">
-                                    Oluşturan: <xf:if is="$sponsor.Creator"><xf:username user="$sponsor.Creator" /><xf:else />Sistem</xf:if> ·
-                                    Son değişiklik: <xf:date time="$sponsor.updated_date" />
-                                </div>
-                                <div class="buttonGroup" style="margin-top:8px">
-                                    <xf:form action="{{ link('warext-minecraft/sponsor-toggle', $sponsor) }}" ajax="true">
-                                        <xf:button type="submit"><xf:if is="$sponsor.state == 'active'">Duraklat<xf:else />Etkinleştir</xf:if></xf:button>
-                                    </xf:form>
-                                    <xf:form action="{{ link('warext-minecraft/sponsor-delete', $sponsor) }}" ajax="true" data-xf-init="delete">
-                                        <xf:button type="submit" class="button--link">Sil</xf:button>
-                                    </xf:form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </xf:foreach>
-            <xf:else />
-                <div class="blockMessage">Henüz sponsor kaydı bulunmuyor.</div>
-            </xf:if>
-        </div>
-    </div>
-</div>
+                                &lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;
+                                    Oluşturan: &lt;xf:if is="$sponsor.Creator"&gt;&lt;xf:username user="$sponsor.Creator" /&gt;&lt;xf:else /&gt;Sistem&lt;/xf:if&gt; ·
+                                    Son değişiklik: &lt;xf:date time="$sponsor.updated_date" /&gt;
+                                &lt;/div&gt;
+                                &lt;div class="buttonGroup" style="margin-top:8px"&gt;
+                                    &lt;xf:form action="{{ link('warext-minecraft/sponsor-toggle', $sponsor) }}" ajax="true"&gt;
+                                        &lt;xf:button type="submit"&gt;&lt;xf:if is="$sponsor.state == 'active'"&gt;Duraklat&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0330') }}&lt;/xf:if&gt;&lt;/xf:button&gt;
+                                    &lt;/xf:form&gt;
+                                    &lt;xf:form action="{{ link('warext-minecraft/sponsor-delete', $sponsor) }}" ajax="true" data-xf-init="delete"&gt;
+                                        &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0343') }}&lt;/xf:button&gt;
+                                    &lt;/xf:form&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/xf:foreach&gt;
+            &lt;xf:else /&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0412') }}&lt;/div&gt;
+            &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;

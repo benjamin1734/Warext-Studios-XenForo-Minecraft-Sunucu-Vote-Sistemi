@@ -1,0 +1,1 @@
+Sunucu türü, IP/adres veya port bilgileri değiştirilirse sahiplik doğrulaması sıfırlanır ve sunucu yeniden moderasyon onayına gönderilir.

@@ -1,52 +1,52 @@
-<xf:title>Favori Minecraft Sunucularım</xf:title>
-<xf:description>Takip ettiğiniz Minecraft sunucularına hızlıca ulaşın ve yeni güncellemelerini görün.</xf:description>
+&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0152') }}&lt;/xf:title&gt;
+&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0153') }}&lt;/xf:description&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Favorilerim</div>
-        <div class="block-body">
-            <xf:if is="$entries is not empty">
-                <xf:foreach loop="$entries" value="$entry">
-                    <xf:set var="$favorite" value="{$entry.favorite}" />
-                    <xf:if is="$favorite.Server">
-                        <div class="block-row block-row--separated">
-                            <div class="contentRow">
-                                <div class="contentRow-main">
-                                    <div class="contentRow-title">
-                                        <a href="{{ link('sunucular/detay', $favorite.Server) }}"><strong>{$favorite.Server.title}</strong></a>
-                                        <xf:if is="$favorite.Server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
-                                        <xf:if is="$favorite.Server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
-                                        <xf:if is="$favorite.notify_updates && $entry.unread_count">
-                                            <span class="label label--orange">{$entry.unread_count} yeni güncelleme</span>
-                                        </xf:if>
-                                    </div>
-                                    <div class="contentRow-minor">
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;Favorilerim&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$entries is not empty"&gt;
+                &lt;xf:foreach loop="$entries" value="$entry"&gt;
+                    &lt;xf:set var="$favorite" value="{$entry.favorite}" /&gt;
+                    &lt;xf:if is="$favorite.Server"&gt;
+                        &lt;div class="block-row block-row--separated"&gt;
+                            &lt;div class="contentRow"&gt;
+                                &lt;div class="contentRow-main"&gt;
+                                    &lt;div class="contentRow-title"&gt;
+                                        &lt;a href="{{ link('sunucular/detay', $favorite.Server) }}"&gt;&lt;strong&gt;{$favorite.Server.title}&lt;/strong&gt;&lt;/a&gt;
+                                        &lt;xf:if is="$favorite.Server.is_online"&gt;&lt;span class="label label--green"&gt;Online&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Offline&lt;/span&gt;&lt;/xf:if&gt;
+                                        &lt;xf:if is="$favorite.Server.is_verified"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;/xf:if&gt;
+                                        &lt;xf:if is="$favorite.notify_updates &amp;&amp; $entry.unread_count"&gt;
+                                            &lt;span class="label label--orange"&gt;{$entry.unread_count} yeni güncelleme&lt;/span&gt;
+                                        &lt;/xf:if&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class="contentRow-minor"&gt;
                                         {$favorite.Server.host}:{$favorite.Server.port} · Oyuncu: {$favorite.Server.players_online}/{$favorite.Server.players_max} · Bu ay oy: {$favorite.Server.vote_count_month} · Uptime: {$favorite.Server.uptime_percent}%
-                                    </div>
-                                    <div class="contentRow-minor">
-                                        Favoriye eklenme: <xf:date time="$favorite.created_date" /> · Güncelleme bildirimi: <xf:if is="$favorite.notify_updates">Açık<xf:else />Kapalı</xf:if>
-                                    </div>
-                                    <div class="buttonGroup" style="margin-top:8px">
-                                        <xf:button href="{{ link('sunucular/detay', $favorite.Server) }}" class="button--primary">Sunucuya Git</xf:button>
-                                        <xf:button href="{{ link('sunucular/guncellemeler', $favorite.Server) }}">Güncellemeler</xf:button>
-                                        <xf:form action="{{ link('sunucular/favori-bildirim', $favorite.Server) }}" ajax="true" class="buttonGroup">
-                                            <xf:hiddenval name="enabled" value="{{ $favorite.notify_updates ? 0 : 1 }}" />
-                                            <xf:button type="submit">{{ $favorite.notify_updates ? 'Bildirimleri Kapat' : 'Bildirimleri Aç' }}</xf:button>
-                                        </xf:form>
-                                        <xf:form action="{{ link('sunucular/favori', $favorite.Server) }}" ajax="true" class="buttonGroup">
-                                            <xf:button type="submit" class="button--link">Favoriden Çıkar</xf:button>
-                                        </xf:form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </xf:if>
-                </xf:foreach>
-            <xf:else />
-                <div class="blockMessage">Henüz favoriye eklediğiniz bir Minecraft sunucusu bulunmuyor.</div>
-            </xf:if>
-        </div>
-    </div>
-</div>
+                                    &lt;/div&gt;
+                                    &lt;div class="contentRow-minor"&gt;
+                                        Favoriye eklenme: &lt;xf:date time="$favorite.created_date" /&gt; · Güncelleme bildirimi: &lt;xf:if is="$favorite.notify_updates"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class="buttonGroup" style="margin-top:8px"&gt;
+                                        &lt;xf:button href="{{ link('sunucular/detay', $favorite.Server) }}" class="button--primary"&gt;Sunucuya Git&lt;/xf:button&gt;
+                                        &lt;xf:button href="{{ link('sunucular/guncellemeler', $favorite.Server) }}"&gt;{{ phrase('warext_mc_i18n_0157') }}&lt;/xf:button&gt;
+                                        &lt;xf:form action="{{ link('sunucular/favori-bildirim', $favorite.Server) }}" ajax="true" class="buttonGroup"&gt;
+                                            &lt;xf:hiddenval name="enabled" value="{{ $favorite.notify_updates ? 0 : 1 }}" /&gt;
+                                            &lt;xf:button type="submit"&gt;{{ $favorite.notify_updates ? 'Bildirimleri Kapat' : 'Bildirimleri Aç' }}&lt;/xf:button&gt;
+                                        &lt;/xf:form&gt;
+                                        &lt;xf:form action="{{ link('sunucular/favori', $favorite.Server) }}" ajax="true" class="buttonGroup"&gt;
+                                            &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0158') }}&lt;/xf:button&gt;
+                                        &lt;/xf:form&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/xf:if&gt;
+                &lt;/xf:foreach&gt;
+            &lt;xf:else /&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0159') }}&lt;/div&gt;
+            &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;

@@ -1,10 +1,10 @@
-<xf:set var="$messageHtml">
-    <h4 class="message-title"><a href="{{ link('sunucular/detay', $content) }}">{$content.title}</a></h4>
-    <xf:if is="$content.description"><div>{$content.description}</div></xf:if>
-    <div class="contentRow-minor">{$content.host}:{$content.port}</div>
-</xf:set>
+&lt;xf:set var="$messageHtml"&gt;
+    &lt;h4 class="message-title"&gt;&lt;a href="{{ link('sunucular/detay', $content) }}"&gt;{$content.title}&lt;/a&gt;&lt;/h4&gt;
+    &lt;xf:if is="$content.description"&gt;&lt;div&gt;{$content.description}&lt;/div&gt;&lt;/xf:if&gt;
+    &lt;div class="contentRow-minor"&gt;{$content.host}:{$content.port}&lt;/div&gt;
+&lt;/xf:set&gt;
 
-<xf:macro template="approval_queue_macros" name="item_message_type"
+&lt;xf:macro template="approval_queue_macros" name="item_message_type"
     arg-content="{$content}"
     arg-contentDate="{$content.created_date}"
     arg-user="{$content.Owner}"
@@ -13,4 +13,4 @@
     arg-spamDetails="{$spamDetails}"
     arg-unapprovedItem="{$unapprovedItem}"
     arg-handler="{$handler}"
-    arg-headerPhraseHtml="{$content.title}" />
+    arg-headerPhraseHtml="{$content.title}" /&gt;

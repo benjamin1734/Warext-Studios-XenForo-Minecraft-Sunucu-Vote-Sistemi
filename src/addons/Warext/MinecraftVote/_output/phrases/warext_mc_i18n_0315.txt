@@ -1,0 +1,1 @@
+Tanıtım konusundan otomatik oluşan sunucunun banner, hareketli GIF banner ve kapak görselini daha sonra Sunucularım → Düzenle bölümünden ekleyebilirsiniz. Konu formuna ikinci bir görsel yükleme sistemi eklenmez.

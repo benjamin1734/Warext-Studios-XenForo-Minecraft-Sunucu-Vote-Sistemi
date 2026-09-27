@@ -1,0 +1,1 @@
+Ana adres sunucunun temel adresidir; Bedrock adresi boş bırakılırsa ana adres kullanılır. Bedrock portunu gerçek portunuza göre ayarlayın.

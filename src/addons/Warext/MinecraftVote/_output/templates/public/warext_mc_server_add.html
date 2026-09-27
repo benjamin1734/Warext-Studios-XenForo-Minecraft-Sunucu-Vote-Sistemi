@@ -1,57 +1,57 @@
-<xf:title>Sunucu Ekle</xf:title>
-<xf:description>Minecraft sunucunuzu platforma ekleyin. Yeni kayıtlar moderasyon onayından sonra listelenir.</xf:description>
+&lt;xf:title&gt;{{ phrase('nav.warextMcServerAdd') }}&lt;/xf:title&gt;
+&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0188') }}&lt;/xf:description&gt;
 
-<div class="blockMessage blockMessage--important">Kategoriler sınıflandırma içindir. Tanıtım konusu bağlantısı ve tüm görseller isteğe bağlıdır; yalnızca sunucu adresi temel kayıt için zorunludur.</div>
+&lt;div class="blockMessage blockMessage--important"&gt;{{ phrase('warext_mc_i18n_0189') }}&lt;/div&gt;
 
-<xf:form action="{{ link('sunucular/ekle') }}" ajax="true" upload="true" class="block">
-    <div class="block-container">
-        <h2 class="block-header">Temel Bilgiler</h2>
-        <div class="block-body">
-            <xf:textboxrow name="title" label="Sunucu adı" required="true" maxlength="100" />
-            <xf:selectrow name="server_type" label="Sunucu türü">
-                <xf:option value="java">Java</xf:option>
-                <xf:option value="bedrock">Bedrock</xf:option>
-                <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
-            </xf:selectrow>
-            <xf:textboxrow name="host" label="Ana sunucu adresi" required="true" maxlength="255" placeholder="play.sunucum.com" />
-            <xf:numberboxrow name="port" value="25565" min="1" max="65535" label="Ana / Java portu" />
-            <xf:textboxrow name="bedrock_host" label="Bedrock adresi" maxlength="255" explain="Bedrock/Crossplay içindir. Ana adres ile aynıysa boş bırakabilirsiniz." />
-            <xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" />
-            <xf:textarearow name="description" label="Sunucu açıklaması" rows="8" />
-        </div>
+&lt;xf:form action="{{ link('sunucular/ekle') }}" ajax="true" upload="true" class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;Temel Bilgiler&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:textboxrow name="title" label="{{ phrase('warext_mc_i18n_0022') }}" required="true" maxlength="100" /&gt;
+            &lt;xf:selectrow name="server_type" label="{{ phrase('warext_mc_i18n_0023') }}"&gt;
+                &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
+                &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;
+                &lt;xf:option value="crossplay"&gt;Java + Bedrock / Crossplay&lt;/xf:option&gt;
+            &lt;/xf:selectrow&gt;
+            &lt;xf:textboxrow name="host" label="{{ phrase('warext_mc_i18n_0024') }}" required="true" maxlength="255" placeholder="play.sunucum.com" /&gt;
+            &lt;xf:numberboxrow name="port" value="25565" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0025') }}" /&gt;
+            &lt;xf:textboxrow name="bedrock_host" label="{{ phrase('warext_mc_i18n_0026') }}" maxlength="255" explain="{{ phrase('warext_mc_i18n_0027') }}" /&gt;
+            &lt;xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0028') }}" /&gt;
+            &lt;xf:textarearow name="description" label="{{ phrase('warext_mc_i18n_0029') }}" rows="8" /&gt;
+        &lt;/div&gt;
 
-        <h2 class="block-header">Görsel Kimlik</h2>
-        <div class="block-body">
-            <div class="blockMessage">Görselleri istediğiniz oranda yükleyebilirsiniz. Sistem liste bannerlarını merkezden kırparak otomatik 468×60 piksele küçültür ve optimize eder. Statik görseller destekleniyorsa WebP olarak saklanır. Hareketli GIF 468×60 olarak yeniden işlenir. Detay kapağı 1200×400 hazırlanır.</div>
-            <xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="Liste bannerı" explain="JPG, PNG veya WebP · otomatik 468×60 · yükleme en fazla 12 MB" />
-            <xf:uploadrow name="animated_banner" accept=".gif" label="Hareketli banner" explain="GIF · otomatik 468×60 ve optimize · yükleme en fazla 20 MB · varsa statik bannerı geçersiz kılar" />
-            <xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="Detay kapağı" explain="JPG, PNG veya WebP · otomatik 1200×400 · yükleme en fazla 15 MB" />
-            <xf:textboxrow name="trailer_url" label="Tanıtım videosu" placeholder="https://" maxlength="255" explain="İsteğe bağlı video/trailer bağlantısı." />
-        </div>
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0190') }}&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0191') }}&lt;/div&gt;
+            &lt;xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="{{ phrase('warext_mc_i18n_0030') }}" explain="{{ phrase('warext_mc_i18n_0031') }}" /&gt;
+            &lt;xf:uploadrow name="animated_banner" accept=".gif" label="{{ phrase('warext_mc_i18n_0032') }}" explain="{{ phrase('warext_mc_i18n_0033') }}" /&gt;
+            &lt;xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="{{ phrase('warext_mc_i18n_0034') }}" explain="{{ phrase('warext_mc_i18n_0035') }}" /&gt;
+            &lt;xf:textboxrow name="trailer_url" label="{{ phrase('warext_mc_i18n_0036') }}" placeholder="https://" maxlength="255" explain="{{ phrase('warext_mc_i18n_0037') }}" /&gt;
+        &lt;/div&gt;
 
-        <h2 class="block-header">Kategori, Mod ve Sürüm</h2>
-        <div class="block-body">
-            <xf:checkboxrow name="category_ids" label="Kategoriler" explain="En fazla 5 kategori seçebilirsiniz.">
-                <xf:foreach loop="$categories" value="$category"><xf:option value="{$category.category_id}">{$category.title}</xf:option></xf:foreach>
-            </xf:checkboxrow>
-            <xf:textboxrow name="game_modes" label="Oyun modları" placeholder="Survival, SkyBlock, PvP" maxlength="255" />
-            <xf:textboxrow name="version_min" label="Minimum sürüm" maxlength="30" />
-            <xf:textboxrow name="version_max" label="Maksimum sürüm" maxlength="30" />
-            <xf:textboxrow name="country_code" label="Ülke kodu" value="TR" maxlength="2" />
-            <xf:checkboxrow>
-                <xf:option name="is_premium" value="1">Premium hesap zorunlu</xf:option>
-                <xf:option name="allow_cracked" value="1">Crack giriş destekleniyor</xf:option>
-            </xf:checkboxrow>
-        </div>
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0192') }}&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:checkboxrow name="category_ids" label="{{ phrase('admin_navigation.warextMinecraftCategories') }}" explain="{{ phrase('warext_mc_i18n_0038') }}"&gt;
+                &lt;xf:foreach loop="$categories" value="$category"&gt;&lt;xf:option value="{$category.category_id}"&gt;{$category.title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
+            &lt;/xf:checkboxrow&gt;
+            &lt;xf:textboxrow name="game_modes" label="{{ phrase('warext_mc_i18n_0039') }}" placeholder="Survival, SkyBlock, PvP" maxlength="255" /&gt;
+            &lt;xf:textboxrow name="version_min" label="{{ phrase('warext_mc_i18n_0040') }}" maxlength="30" /&gt;
+            &lt;xf:textboxrow name="version_max" label="{{ phrase('warext_mc_i18n_0041') }}" maxlength="30" /&gt;
+            &lt;xf:textboxrow name="country_code" label="{{ phrase('warext_mc_i18n_0042') }}" value="TR" maxlength="2" /&gt;
+            &lt;xf:checkboxrow&gt;
+                &lt;xf:option name="is_premium" value="1"&gt;Premium hesap zorunlu&lt;/xf:option&gt;
+                &lt;xf:option name="allow_cracked" value="1"&gt;{{ phrase('warext_mc_i18n_0193') }}&lt;/xf:option&gt;
+            &lt;/xf:checkboxrow&gt;
+        &lt;/div&gt;
 
-        <h2 class="block-header">Bağlantılar</h2>
-        <div class="block-body">
-            <xf:textboxrow name="website_url" label="Web sitesi" placeholder="https://" maxlength="255" />
-            <xf:textboxrow name="discord_url" label="Discord" placeholder="https://discord.gg/..." maxlength="255" />
-            <xf:textboxrow name="store_url" label="Mağaza" placeholder="https://" maxlength="255" />
-            <xf:textboxrow name="discussion_thread_url" label="Sunucu tanıtım konusu" placeholder="https://forum.site.com/threads/..." maxlength="500" explain="İsteğe bağlı. Kendi XenForo tanıtım konunuzun bağlantısını girerseniz vote kaydı ile konu çift yönlü bağlanır." />
-        </div>
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0194') }}&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:textboxrow name="website_url" label="{{ phrase('warext_mc_i18n_0043') }}" placeholder="https://" maxlength="255" /&gt;
+            &lt;xf:textboxrow name="discord_url" label="{{ phrase('warext_mc_i18n_0044') }}" placeholder="https://discord.gg/..." maxlength="255" /&gt;
+            &lt;xf:textboxrow name="store_url" label="{{ phrase('warext_mc_i18n_0045') }}" placeholder="https://" maxlength="255" /&gt;
+            &lt;xf:textboxrow name="discussion_thread_url" label="{{ phrase('warext_mc_i18n_0046') }}" placeholder="https://forum.site.com/threads/..." maxlength="500" explain="{{ phrase('warext_mc_i18n_0047') }}" /&gt;
+        &lt;/div&gt;
 
-        <xf:submitrow submit="Sunucuyu Gönder" />
-    </div>
-</xf:form>
+        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0048') }}" /&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;

@@ -1,62 +1,62 @@
-<xf:title>{$server.title} - Değerlendirmeler</xf:title>
+&lt;xf:title&gt;{$server.title} - Değerlendirmeler&lt;/xf:title&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
-<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Sunucu Değerlendirmeleri</div>
-        <div class="block-body block-row"><strong>{$server.rating_average} / 5</strong> · {$server.rating_count} değerlendirme</div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0167') }}&lt;/div&gt;
+        &lt;div class="block-body block-row"&gt;&lt;strong&gt;{$server.rating_average} / 5&lt;/strong&gt; · {$server.rating_count} değerlendirme&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<xf:if is="$canReview && $xf.visitor.user_id != $server.owner_user_id">
-    <xf:form action="{{ link('sunucular/degerlendir', $server) }}" ajax="true" class="block">
-        <div class="block-container">
-            <div class="block-header"><xf:if is="$userReview">Değerlendirmeni Güncelle<xf:else />Değerlendirme Yap</xf:if></div>
-            <div class="block-body">
-                <xf:selectrow name="rating" value="{{ $userReview ? $userReview.rating : 5 }}" label="Genel Puan">
-                    <xf:option value="5">5 - Mükemmel</xf:option><xf:option value="4">4 - İyi</xf:option><xf:option value="3">3 - Orta</xf:option><xf:option value="2">2 - Zayıf</xf:option><xf:option value="1">1 - Kötü</xf:option>
-                </xf:selectrow>
-                <xf:selectrow name="gameplay_rating" value="{{ $userReview ? $userReview.gameplay_rating : 0 }}" label="Oynanış"><xf:option value="0">Puan verme</xf:option><xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option></xf:selectrow>
-                <xf:selectrow name="staff_rating" value="{{ $userReview ? $userReview.staff_rating : 0 }}" label="Yetkili Ekibi"><xf:option value="0">Puan verme</xf:option><xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option></xf:selectrow>
-                <xf:selectrow name="performance_rating" value="{{ $userReview ? $userReview.performance_rating : 0 }}" label="Performans"><xf:option value="0">Puan verme</xf:option><xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option></xf:selectrow>
-                <xf:selectrow name="community_rating" value="{{ $userReview ? $userReview.community_rating : 0 }}" label="Topluluk"><xf:option value="0">Puan verme</xf:option><xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option></xf:selectrow>
-                <xf:selectrow name="originality_rating" value="{{ $userReview ? $userReview.originality_rating : 0 }}" label="Özgünlük"><xf:option value="0">Puan verme</xf:option><xf:option value="5">5</xf:option><xf:option value="4">4</xf:option><xf:option value="3">3</xf:option><xf:option value="2">2</xf:option><xf:option value="1">1</xf:option></xf:selectrow>
-                <xf:textarearow name="message" value="{{ $userReview ? $userReview.message : '' }}" maxlength="2000" rows="5" label="Yorum" explain="İsteğe bağlıdır. Yorum yazarsanız en az 10, en fazla 2000 karakter olmalıdır." />
-            </div>
-            <xf:submitrow submit="Kaydet" />
-        </div>
-    </xf:form>
-    <xf:if is="$userReview">
-        <xf:form action="{{ link('sunucular/degerlendirme-sil', $server) }}" ajax="true" data-xf-init="delete" class="block"><div class="block-container"><div class="block-body block-row"><xf:button type="submit" class="button--link">Değerlendirmemi Sil</xf:button></div></div></xf:form>
-    </xf:if>
-</xf:if>
+&lt;xf:if is="$canReview &amp;&amp; $xf.visitor.user_id != $server.owner_user_id"&gt;
+    &lt;xf:form action="{{ link('sunucular/degerlendir', $server) }}" ajax="true" class="block"&gt;
+        &lt;div class="block-container"&gt;
+            &lt;div class="block-header"&gt;&lt;xf:if is="$userReview"&gt;{{ phrase('warext_mc_i18n_0168') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0169') }}&lt;/xf:if&gt;&lt;/div&gt;
+            &lt;div class="block-body"&gt;
+                &lt;xf:selectrow name="rating" value="{{ $userReview ? $userReview.rating : 5 }}" label="{{ phrase('warext_mc_i18n_0013') }}"&gt;
+                    &lt;xf:option value="5"&gt;{{ phrase('warext_mc_i18n_0170') }}&lt;/xf:option&gt;&lt;xf:option value="4"&gt;{{ phrase('warext_mc_i18n_0171') }}&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3 - Orta&lt;/xf:option&gt;&lt;xf:option value="2"&gt;{{ phrase('warext_mc_i18n_0172') }}&lt;/xf:option&gt;&lt;xf:option value="1"&gt;{{ phrase('warext_mc_i18n_0173') }}&lt;/xf:option&gt;
+                &lt;/xf:selectrow&gt;
+                &lt;xf:selectrow name="gameplay_rating" value="{{ $userReview ? $userReview.gameplay_rating : 0 }}" label="{{ phrase('warext_mc_i18n_0014') }}"&gt;&lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0174') }}&lt;/xf:option&gt;&lt;xf:option value="5"&gt;5&lt;/xf:option&gt;&lt;xf:option value="4"&gt;4&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3&lt;/xf:option&gt;&lt;xf:option value="2"&gt;2&lt;/xf:option&gt;&lt;xf:option value="1"&gt;1&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+                &lt;xf:selectrow name="staff_rating" value="{{ $userReview ? $userReview.staff_rating : 0 }}" label="{{ phrase('warext_mc_i18n_0015') }}"&gt;&lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0174') }}&lt;/xf:option&gt;&lt;xf:option value="5"&gt;5&lt;/xf:option&gt;&lt;xf:option value="4"&gt;4&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3&lt;/xf:option&gt;&lt;xf:option value="2"&gt;2&lt;/xf:option&gt;&lt;xf:option value="1"&gt;1&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+                &lt;xf:selectrow name="performance_rating" value="{{ $userReview ? $userReview.performance_rating : 0 }}" label="{{ phrase('warext_mc_i18n_0016') }}"&gt;&lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0174') }}&lt;/xf:option&gt;&lt;xf:option value="5"&gt;5&lt;/xf:option&gt;&lt;xf:option value="4"&gt;4&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3&lt;/xf:option&gt;&lt;xf:option value="2"&gt;2&lt;/xf:option&gt;&lt;xf:option value="1"&gt;1&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+                &lt;xf:selectrow name="community_rating" value="{{ $userReview ? $userReview.community_rating : 0 }}" label="{{ phrase('warext_mc_i18n_0017') }}"&gt;&lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0174') }}&lt;/xf:option&gt;&lt;xf:option value="5"&gt;5&lt;/xf:option&gt;&lt;xf:option value="4"&gt;4&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3&lt;/xf:option&gt;&lt;xf:option value="2"&gt;2&lt;/xf:option&gt;&lt;xf:option value="1"&gt;1&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+                &lt;xf:selectrow name="originality_rating" value="{{ $userReview ? $userReview.originality_rating : 0 }}" label="{{ phrase('warext_mc_i18n_0018') }}"&gt;&lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0174') }}&lt;/xf:option&gt;&lt;xf:option value="5"&gt;5&lt;/xf:option&gt;&lt;xf:option value="4"&gt;4&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3&lt;/xf:option&gt;&lt;xf:option value="2"&gt;2&lt;/xf:option&gt;&lt;xf:option value="1"&gt;1&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
+                &lt;xf:textarearow name="message" value="{{ $userReview ? $userReview.message : '' }}" maxlength="2000" rows="5" label="{{ phrase('warext_mc_i18n_0019') }}" explain="{{ phrase('warext_mc_i18n_0020') }}" /&gt;
+            &lt;/div&gt;
+            &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0021') }}" /&gt;
+        &lt;/div&gt;
+    &lt;/xf:form&gt;
+    &lt;xf:if is="$userReview"&gt;
+        &lt;xf:form action="{{ link('sunucular/degerlendirme-sil', $server) }}" ajax="true" data-xf-init="delete" class="block"&gt;&lt;div class="block-container"&gt;&lt;div class="block-body block-row"&gt;&lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0175') }}&lt;/xf:button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:form&gt;
+    &lt;/xf:if&gt;
+&lt;/xf:if&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Topluluk Yorumları</div>
-        <div class="block-body">
-            <xf:if is="$reviews is not empty">
-                <xf:foreach loop="$reviews" value="$review">
-                    <div class="block-row block-row--separated">
-                        <div class="contentRow"><div class="contentRow-main">
-                            <div class="contentRow-title"><xf:username user="$review.User" rich="true" /> · <strong>{$review.rating}/5</strong> <xf:if is="$review.is_verified_player"><span class="label label--green">Doğrulanmış Oyuncu</span></xf:if> <xf:if is="$review.state == 'moderated'"><span class="label label--orange">Gizli</span></xf:if></div>
-                            <div class="contentRow-minor"><xf:date time="$review.updated_date" /></div>
-                            <xf:if is="$review.message"><div class="contentRow-snippet" style="margin-top:8px">{$review.message}</div></xf:if>
-                            <div class="contentRow-minor" style="margin-top:8px">Oynanış: {{ $review.gameplay_rating ?: '-' }} · Yetkili: {{ $review.staff_rating ?: '-' }} · Performans: {{ $review.performance_rating ?: '-' }} · Topluluk: {{ $review.community_rating ?: '-' }} · Özgünlük: {{ $review.originality_rating ?: '-' }}</div>
-                            <xf:if is="$canModerate">
-                                <xf:form action="{{ link('sunucular/degerlendirme-yonet', $review) }}" ajax="true" style="margin-top:8px">
-                                    <xf:hiddenval name="state" value="{{ $review.state == 'visible' ? 'moderated' : 'visible' }}" />
-                                    <xf:button type="submit" class="button--link">{{ $review.state == 'visible' ? 'Değerlendirmeyi Gizle' : 'Yeniden Görünür Yap' }}</xf:button>
-                                </xf:form>
-                            </xf:if>
-                        </div></div>
-                    </div>
-                </xf:foreach>
-            <xf:else /><div class="blockMessage">Henüz değerlendirme yapılmamış.</div></xf:if>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0176') }}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$reviews is not empty"&gt;
+                &lt;xf:foreach loop="$reviews" value="$review"&gt;
+                    &lt;div class="block-row block-row--separated"&gt;
+                        &lt;div class="contentRow"&gt;&lt;div class="contentRow-main"&gt;
+                            &lt;div class="contentRow-title"&gt;&lt;xf:username user="$review.User" rich="true" /&gt; · &lt;strong&gt;{$review.rating}/5&lt;/strong&gt; &lt;xf:if is="$review.is_verified_player"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0177') }}&lt;/span&gt;&lt;/xf:if&gt; &lt;xf:if is="$review.state == 'moderated'"&gt;&lt;span class="label label--orange"&gt;Gizli&lt;/span&gt;&lt;/xf:if&gt;&lt;/div&gt;
+                            &lt;div class="contentRow-minor"&gt;&lt;xf:date time="$review.updated_date" /&gt;&lt;/div&gt;
+                            &lt;xf:if is="$review.message"&gt;&lt;div class="contentRow-snippet" style="margin-top:8px"&gt;{$review.message}&lt;/div&gt;&lt;/xf:if&gt;
+                            &lt;div class="contentRow-minor" style="margin-top:8px"&gt;Oynanış: {{ $review.gameplay_rating ?: '-' }} · Yetkili: {{ $review.staff_rating ?: '-' }} · Performans: {{ $review.performance_rating ?: '-' }} · Topluluk: {{ $review.community_rating ?: '-' }} · Özgünlük: {{ $review.originality_rating ?: '-' }}&lt;/div&gt;
+                            &lt;xf:if is="$canModerate"&gt;
+                                &lt;xf:form action="{{ link('sunucular/degerlendirme-yonet', $review) }}" ajax="true" style="margin-top:8px"&gt;
+                                    &lt;xf:hiddenval name="state" value="{{ $review.state == 'visible' ? 'moderated' : 'visible' }}" /&gt;
+                                    &lt;xf:button type="submit" class="button--link"&gt;{{ $review.state == 'visible' ? 'Değerlendirmeyi Gizle' : 'Yeniden Görünür Yap' }}&lt;/xf:button&gt;
+                                &lt;/xf:form&gt;
+                            &lt;/xf:if&gt;
+                        &lt;/div&gt;&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/xf:foreach&gt;
+            &lt;xf:else /&gt;&lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0178') }}&lt;/div&gt;&lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/degerlendir" data="{$server}" />
+&lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="sunucular/degerlendir" data="{$server}" /&gt;

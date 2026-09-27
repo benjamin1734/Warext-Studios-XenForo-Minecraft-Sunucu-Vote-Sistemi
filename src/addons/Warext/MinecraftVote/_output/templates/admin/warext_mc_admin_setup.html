@@ -1,93 +1,93 @@
-<xf:title>Kurulum ve Yapılandırma</xf:title>
+&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0369') }}&lt;/xf:title&gt;
 
-<div class="blockMessage blockMessage--important">
+&lt;div class="blockMessage blockMessage--important"&gt;
     Bu sayfa eklentiyi ilk kez kuran yöneticiler için başlangıç merkezidir. Minecraft kategorileri XenForo forum kategorilerine bağlı değildir; sunucu listesindeki filtreleme ve sınıflandırma etiketleridir.
-</div>
+&lt;/div&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">Sistem Durumu</h2>
-        <div class="block-body">
-            <div class="block-row">
-                <strong>Aktif kategori:</strong> {$counts.categories} ·
-                <strong>Onay bekleyen sunucu:</strong> {$counts.pending} ·
-                <strong>Aktif sunucu:</strong> {$counts.active}
-            </div>
-            <div class="block-row">
-                <strong>Oy politikası:</strong> Yalnız kayıtlı üyeler · 24 saatte 1 oy / sunucu ·
-                <strong>Oy CAPTCHA:</strong> <xf:if is="$captchaEnabled">Açık<xf:else />Kapalı</xf:if> ·
-                <strong>Doğrulanmış hesap zorunluluğu:</strong> <xf:if is="$requireVerified">Açık<xf:else />Kapalı</xf:if> ·
-                <strong>Sponsor satışları:</strong> <xf:if is="$sponsorEnabled">Açık<xf:else />Kapalı</xf:if>
-            </div>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;Sistem Durumu&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_0370') }}&lt;/strong&gt; {$counts.categories} ·
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_0371') }}&lt;/strong&gt; {$counts.pending} ·
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_0372') }}&lt;/strong&gt; {$counts.active}
+            &lt;/div&gt;
+            &lt;div class="block-row"&gt;
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_0373') }}&lt;/strong&gt; &lt;xf:if is="$captchaEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_0374') }}&lt;/strong&gt; &lt;xf:if is="$requireVerified"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
+                &lt;strong&gt;Misafir oy:&lt;/strong&gt; &lt;xf:if is="$allowGuests"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_0375') }}&lt;/strong&gt; &lt;xf:if is="$sponsorEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">1. Genel Ayarlar</h2>
-        <div class="block-body">
-            <div class="block-row">
-                Admin CP → Setup → Options bölümünde <strong>Warext Minecraft Sunucu & Vote</strong> seçenek grubunu açın. CAPTCHA, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir. Oy verme süresi sabit 24 saattir ve yalnız forum üyeleri oy kullanabilir.
-            </div>
-            <div class="block-row">
-                JSON API: <xf:if is="$publicApiEnabled">Açık<xf:else />Kapalı</xf:if> · HTTPS webhook: <xf:if is="$webhookEnabled">Açık<xf:else />Kapalı</xf:if>
-            </div>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;1. Genel Ayarlar&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;
+                Admin CP → Setup → Options bölümünde &lt;strong&gt;Warext Minecraft Sunucu &amp; Vote&lt;/strong&gt; seçenek grubunu açın. Oy bekleme süresi, CAPTCHA, misafir oyları, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir.
+            &lt;/div&gt;
+            &lt;div class="block-row"&gt;
+                JSON API: &lt;xf:if is="$publicApiEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; · HTTPS webhook: &lt;xf:if is="$webhookEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">2. Kullanıcı Grubu İzinleri</h2>
-        <div class="block-body">
-            <div class="block-row">Admin CP → Groups & permissions → User group permissions bölümünde <strong>Minecraft Sunucu & Vote</strong> izin grubunu düzenleyin.</div>
-            <div class="block-row"><strong>Sunucu ekleyebilir:</strong> Kullanıcının yeni Minecraft sunucusu göndermesini sağlar.</div>
-            <div class="block-row"><strong>Oy verebilir:</strong> Aktif sunuculara oy verme yetkisidir. Kayıtlı üye aynı sunucuya 24 saatte yalnız bir kez oy verebilir.</div>
-            <div class="block-row"><strong>Değerlendirme yapabilir:</strong> Sunuculara puan ve yorum bırakma yetkisidir.</div>
-            <div class="block-row"><strong>Favorilere ekleyebilir:</strong> Favori ve güncelleme bildirimi özelliklerini açar.</div>
-            <div class="block-row"><strong>Raporlayabilir:</strong> Sunucu raporu göndermeyi açar.</div>
-            <div class="block-row block-rowMessage block-rowMessage--warning">Bir kullanıcıda ilgili izin kapalıysa buton görünmez veya işlem reddedilir. Eklentiyi test ederken test hesabının kullanıcı grubuna bu izinleri verdiğinizden emin olun.</div>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0377') }}&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;Admin CP → Groups &amp; permissions → User group permissions bölümünde &lt;strong&gt;Minecraft Sunucu &amp; Vote&lt;/strong&gt; izin grubunu düzenleyin.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0381') }}&lt;/strong&gt; Kullanıcının yeni Minecraft sunucusu göndermesini sağlar.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0383') }}&lt;/strong&gt; Aktif sunuculara oy verme yetkisidir.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0385') }}&lt;/strong&gt; Sunuculara puan ve yorum bırakma yetkisidir.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;Favorilere ekleyebilir:&lt;/strong&gt; Favori ve güncelleme bildirimi özelliklerini açar.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;Raporlayabilir:&lt;/strong&gt; Sunucu raporu göndermeyi açar.&lt;/div&gt;
+            &lt;div class="block-row block-rowMessage block-rowMessage--warning"&gt;{{ phrase('warext_mc_i18n_0389') }}&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">3. Kategoriler</h2>
-        <div class="block-body">
-            <div class="block-row">Survival, SkyBlock, BoxPvP gibi kategoriler sunucuyu sınıflandırır. <strong>Kategori seçimi ek form alanı oluşturmaz ve alan zorunluluğunu değiştirmez.</strong> Java/Bedrock alanları sunucu türüne göre anlam kazanır.</div>
-            <div class="block-row"><xf:button href="{{ link('warext-minecraft/categories') }}" class="button--primary">Kategorileri Yönet</xf:button></div>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;3. Kategoriler&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;Survival, SkyBlock, BoxPvP gibi kategoriler sunucuyu sınıflandırır. &lt;strong&gt;{{ phrase('warext_mc_i18n_0391') }}&lt;/strong&gt; Java/Bedrock alanları sunucu türüne göre anlam kazanır.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;xf:button href="{{ link('warext-minecraft/categories') }}" class="button--primary"&gt;{{ phrase('warext_mc_i18n_0393') }}&lt;/xf:button&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">4. Sunucu Ekleme Akışı</h2>
-        <div class="block-body">
-            <div class="block-row"><strong>Java:</strong> Ana adres ve Java portu kullanılır. Bedrock alanları boş bırakılabilir.</div>
-            <div class="block-row"><strong>Bedrock:</strong> Ana adres sunucunun temel adresidir; Bedrock adresi boş bırakılırsa ana adres kullanılır. Bedrock portunu gerçek portunuza göre ayarlayın.</div>
-            <div class="block-row"><strong>Crossplay:</strong> Java ana adresi ile Bedrock adresi/portu birlikte girilir.</div>
-            <div class="block-row">Yeni kayıt önce <strong>Onay bekliyor</strong> durumuna gelir. Yönetici onayından sonra genel listede görünür ve oy alabilir.</div>
-            <div class="block-row">
-                <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}" class="button--primary">Bekleyen Sunucular</xf:button>
-                <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'all'}) }}">Tüm Sunucular</xf:button>
-            </div>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0394') }}&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;Java:&lt;/strong&gt; Ana adres ve Java portu kullanılır. Bedrock alanları boş bırakılabilir.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;Bedrock:&lt;/strong&gt; Ana adres sunucunun temel adresidir; Bedrock adresi boş bırakılırsa ana adres kullanılır. Bedrock portunu gerçek portunuza göre ayarlayın.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;Crossplay:&lt;/strong&gt; Java ana adresi ile Bedrock adresi/portu birlikte girilir.&lt;/div&gt;
+            &lt;div class="block-row"&gt;Yeni kayıt önce &lt;strong&gt;{{ phrase('warext_mc_i18n_0279') }}&lt;/strong&gt; durumuna gelir. Yönetici onayından sonra genel listede görünür ve oy alabilir.&lt;/div&gt;
+            &lt;div class="block-row"&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}" class="button--primary"&gt;Bekleyen Sunucular&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'all'}) }}"&gt;{{ phrase('warext_mc_i18n_0399') }}&lt;/xf:button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">5. NuVotifier ve Oy Teslimatı</h2>
-        <div class="block-body">
-            <div class="block-row">Sunucu sahibi, kendi sunucu detay sayfasındaki <strong>NuVotifier Ayarları</strong> alanından bağlantıyı yapılandırır. Oy kaydı ile oyun içi ödül teslimatı birbirinden ayrıdır; oy önce kaydedilir, ardından teslimat kuyruğu çalışır.</div>
-            <div class="block-row">Teslimat sorunlarını Admin CP → Minecraft Sunucu & Vote → Sistem Sağlığı ve Oy Teslimat Kuyruğu ekranlarından takip edebilirsiniz.</div>
-            <div class="block-row">
-                <xf:button href="{{ link('warext-minecraft/health') }}">Sistem Sağlığı</xf:button>
-                <xf:button href="{{ link('warext-minecraft/votes') }}">Oy Teslimat Kuyruğu</xf:button>
-            </div>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0400') }}&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;Sunucu sahibi, kendi sunucu detay sayfasındaki &lt;strong&gt;{{ phrase('warext_mc_i18n_0272') }}&lt;/strong&gt; alanından bağlantıyı yapılandırır. Oy kaydı ile oyun içi ödül teslimatı birbirinden ayrıdır; oy önce kaydedilir, ardından teslimat kuyruğu çalışır.&lt;/div&gt;
+            &lt;div class="block-row"&gt;Teslimat sorunlarını Admin CP → Minecraft Sunucu &amp; Vote → Sistem Sağlığı ve Oy Teslimat Kuyruğu ekranlarından takip edebilirsiniz.&lt;/div&gt;
+            &lt;div class="block-row"&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/health') }}"&gt;{{ phrase('admin_navigation.warextMinecraftHealth') }}&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes') }}"&gt;{{ phrase('warext_mc_i18n_0362') }}&lt;/xf:button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;

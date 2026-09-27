@@ -1,0 +1,1 @@
+Sunucuları canlı oyuncu sayısı, oy performansı, uptime ve topluluk puanına göre tek ekranda karşılaştır.

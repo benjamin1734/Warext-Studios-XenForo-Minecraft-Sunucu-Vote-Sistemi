@@ -1,0 +1,1 @@
+Kullanılabilir XenForo ödeme profili bulunmuyor. Yönetici ACP &gt; Setup &gt; Payment profiles alanından bir ödeme profili eklemelidir.

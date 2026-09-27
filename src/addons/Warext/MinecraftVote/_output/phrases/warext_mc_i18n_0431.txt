@@ -1,0 +1,1 @@
+Bir hesap seçerseniz aşağıdaki elle girilen kullanıcı adı ve UUID alanları yok sayılır.

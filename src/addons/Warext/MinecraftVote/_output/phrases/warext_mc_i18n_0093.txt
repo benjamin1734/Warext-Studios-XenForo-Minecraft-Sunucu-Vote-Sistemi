@@ -1,0 +1,1 @@
+Aynı bilgisayarda test ediyorsanız lokal test izni açıkken 127.0.0.1 veya localhost kullanabilirsiniz.

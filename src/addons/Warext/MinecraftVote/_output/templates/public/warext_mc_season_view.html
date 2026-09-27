@@ -1,50 +1,50 @@
-<xf:title>{$season.season_key} Minecraft Sunucu Sezonu</xf:title>
-<xf:description>Tamamlanan sezonun kalıcı sunucu sıralaması ve istatistikleri.</xf:description>
+&lt;xf:title&gt;{$season.season_key} Minecraft Sunucu Sezonu&lt;/xf:title&gt;
+&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0185') }}&lt;/xf:description&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
-<xf:breadcrumb href="{{ link('sunucular/sezonlar') }}">Sezonlar</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+&lt;xf:breadcrumb href="{{ link('sunucular/sezonlar') }}"&gt;Sezonlar&lt;/xf:breadcrumb&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">{$season.season_key} Sezon Özeti</h2>
-        <div class="block-body">
-            <div class="block-row">
-                <div class="contentRow-minor">
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;{$season.season_key} Sezon Özeti&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;
+                &lt;div class="contentRow-minor"&gt;
                     {$season.total_votes} toplam oy · {$season.unique_voters} benzersiz seçmen · {$season.server_count} sıralanan sunucu
-                    <xf:if is="$season.winner_title"> · Kazanan: {$season.winner_title}</xf:if>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    &lt;xf:if is="$season.winner_title"&gt; · Kazanan: {$season.winner_title}&lt;/xf:if&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">Sezon Sıralaması</h2>
-        <div class="block-body">
-            <xf:if is="$ranks is not empty">
-                <xf:foreach loop="$ranks" value="$rank">
-                    <div class="block-row block-row--separated">
-                        <div class="contentRow">
-                            <div class="contentRow-main">
-                                <div class="contentRow-title">
-                                    <strong>#{$rank.rank}</strong>
-                                    <xf:if is="$rank.Server">
-                                        <a href="{{ link('sunucular/detay', $rank.Server) }}">{$rank.server_title}</a>
-                                    <xf:else />
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0186') }}&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$ranks is not empty"&gt;
+                &lt;xf:foreach loop="$ranks" value="$rank"&gt;
+                    &lt;div class="block-row block-row--separated"&gt;
+                        &lt;div class="contentRow"&gt;
+                            &lt;div class="contentRow-main"&gt;
+                                &lt;div class="contentRow-title"&gt;
+                                    &lt;strong&gt;#{$rank.rank}&lt;/strong&gt;
+                                    &lt;xf:if is="$rank.Server"&gt;
+                                        &lt;a href="{{ link('sunucular/detay', $rank.Server) }}"&gt;{$rank.server_title}&lt;/a&gt;
+                                    &lt;xf:else /&gt;
                                         {$rank.server_title}
-                                    </xf:if>
-                                </div>
-                                <div class="contentRow-minor">
+                                    &lt;/xf:if&gt;
+                                &lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;
                                     {$rank.vote_count} oy · {$rank.unique_voters} benzersiz seçmen · Peak {$rank.peak_players} oyuncu · Uptime {$rank.uptime_percent}% · Sezon puanı {$rank.season_score}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </xf:foreach>
-            <xf:else />
-                <div class="blockMessage">Bu sezon için sıralama kaydı bulunmuyor.</div>
-            </xf:if>
-        </div>
-    </div>
-</div>
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/xf:foreach&gt;
+            &lt;xf:else /&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0187') }}&lt;/div&gt;
+            &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;

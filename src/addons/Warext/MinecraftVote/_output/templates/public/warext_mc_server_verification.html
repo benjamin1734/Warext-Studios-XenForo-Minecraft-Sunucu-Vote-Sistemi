@@ -1,88 +1,88 @@
-<xf:title>{$server.title} - Sunucu Sahipliğini Doğrula</xf:title>
+&lt;xf:title&gt;{$server.title} - Sunucu Sahipliğini Doğrula&lt;/xf:title&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
-<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
-<xf:if is="$server.is_verified">
-    <div class="blockMessage blockMessage--success">
+&lt;xf:if is="$server.is_verified"&gt;
+    &lt;div class="blockMessage blockMessage--success"&gt;
         Bu sunucunun sahipliği doğrulanmış durumda.
-        <xf:if is="$server.verified_date">
-            Doğrulama tarihi: <xf:date time="$server.verified_date" />.
-        </xf:if>
-        Yöntem: <xf:if is="$server.verification_method == 'dns_txt'">DNS TXT<xf:else />MOTD</xf:if>.
-    </div>
-</xf:if>
+        &lt;xf:if is="$server.verified_date"&gt;
+            Doğrulama tarihi: &lt;xf:date time="$server.verified_date" /&gt;.
+        &lt;/xf:if&gt;
+        Yöntem: &lt;xf:if is="$server.verification_method == 'dns_txt'"&gt;DNS TXT&lt;xf:else /&gt;MOTD&lt;/xf:if&gt;.
+    &lt;/div&gt;
+&lt;/xf:if&gt;
 
-<xf:if is="$server.verification_token">
-    <div class="block">
-        <div class="block-container">
-            <div class="block-header">Aktif Doğrulama</div>
-            <div class="block-body">
-                <div class="block-row">
-                    <div class="contentRow">
-                        <div class="contentRow-main">
-                            <div class="contentRow-title">Doğrulama Kodu</div>
-                            <div class="contentRow-minor">Kod {$tokenLifetimeHours} saat geçerlidir.</div>
-                            <div style="margin-top:8px"><code>{$server.verification_token}</code></div>
-                        </div>
-                    </div>
-                </div>
+&lt;xf:if is="$server.verification_token"&gt;
+    &lt;div class="block"&gt;
+        &lt;div class="block-container"&gt;
+            &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0253') }}&lt;/div&gt;
+            &lt;div class="block-body"&gt;
+                &lt;div class="block-row"&gt;
+                    &lt;div class="contentRow"&gt;
+                        &lt;div class="contentRow-main"&gt;
+                            &lt;div class="contentRow-title"&gt;{{ phrase('warext_mc_i18n_0254') }}&lt;/div&gt;
+                            &lt;div class="contentRow-minor"&gt;Kod {$tokenLifetimeHours} saat geçerlidir.&lt;/div&gt;
+                            &lt;div style="margin-top:8px"&gt;&lt;code&gt;{$server.verification_token}&lt;/code&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
 
-                <xf:if is="$server.verification_method == 'motd'">
-                    <div class="block-row">
-                        <strong>MOTD doğrulaması</strong>
-                        <div class="contentRow-minor" style="margin-top:6px">
-                            Sunucunuzun MOTD metninin herhangi bir yerine <code>{$server.verification_token}</code> kodunu ekleyin.
+                &lt;xf:if is="$server.verification_method == 'motd'"&gt;
+                    &lt;div class="block-row"&gt;
+                        &lt;strong&gt;{{ phrase('warext_mc_i18n_0255') }}&lt;/strong&gt;
+                        &lt;div class="contentRow-minor" style="margin-top:6px"&gt;
+                            Sunucunuzun MOTD metninin herhangi bir yerine &lt;code&gt;{$server.verification_token}&lt;/code&gt; kodunu ekleyin.
                             Değişiklik gerekiyorsa sunucuyu yeniden başlatın ve ardından aşağıdaki kontrol düğmesini kullanın.
-                        </div>
-                    </div>
-                <xf:elseif is="$server.verification_method == 'dns_txt'" />
-                    <div class="block-row">
-                        <strong>DNS TXT doğrulaması</strong>
-                        <dl class="pairs pairs--columns pairs--fixedSmall" style="margin-top:8px">
-                            <dt>Kayıt adı</dt>
-                            <dd><code>{$dnsRecordName}</code></dd>
-                        </dl>
-                        <dl class="pairs pairs--columns pairs--fixedSmall">
-                            <dt>TXT değeri</dt>
-                            <dd><code>{$dnsRecordValue}</code></dd>
-                        </dl>
-                        <div class="contentRow-minor">DNS yayılımına bağlı olarak yeni kayıtların görünmesi biraz gecikebilir.</div>
-                    </div>
-                </xf:if>
-            </div>
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;xf:elseif is="$server.verification_method == 'dns_txt'" /&gt;
+                    &lt;div class="block-row"&gt;
+                        &lt;strong&gt;{{ phrase('warext_mc_i18n_0256') }}&lt;/strong&gt;
+                        &lt;dl class="pairs pairs--columns pairs--fixedSmall" style="margin-top:8px"&gt;
+                            &lt;dt&gt;{{ phrase('warext_mc_i18n_0257') }}&lt;/dt&gt;
+                            &lt;dd&gt;&lt;code&gt;{$dnsRecordName}&lt;/code&gt;&lt;/dd&gt;
+                        &lt;/dl&gt;
+                        &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;
+                            &lt;dt&gt;{{ phrase('warext_mc_i18n_0258') }}&lt;/dt&gt;
+                            &lt;dd&gt;&lt;code&gt;{$dnsRecordValue}&lt;/code&gt;&lt;/dd&gt;
+                        &lt;/dl&gt;
+                        &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0259') }}&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/xf:if&gt;
+            &lt;/div&gt;
 
-            <xf:form action="{{ link('sunucular/dogrula', $server) }}">
-                <xf:hiddenval name="operation" value="verify" />
-                <xf:submitrow submit="Doğrulamayı Kontrol Et" />
-            </xf:form>
-        </div>
-    </div>
-</xf:if>
+            &lt;xf:form action="{{ link('sunucular/dogrula', $server) }}"&gt;
+                &lt;xf:hiddenval name="operation" value="verify" /&gt;
+                &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0072') }}" /&gt;
+            &lt;/xf:form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/xf:if&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header"><xf:if is="$server.verification_token">Yeni Kod Oluştur<xf:else />Doğrulama Yöntemi Seç</xf:if></div>
-        <div class="block-body">
-            <div class="block-row">
-                <strong>MOTD ile doğrulama</strong>
-                <div class="contentRow-minor">Lokal sunucular ve alan adı yönetimi olmayan sunucular için en kolay yöntemdir.</div>
-                <xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px">
-                    <xf:hiddenval name="operation" value="start" />
-                    <xf:hiddenval name="method" value="motd" />
-                    <xf:button type="submit">MOTD Kodu Oluştur</xf:button>
-                </xf:form>
-            </div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;&lt;xf:if is="$server.verification_token"&gt;{{ phrase('warext_mc_i18n_0260') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0261') }}&lt;/xf:if&gt;&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_0262') }}&lt;/strong&gt;
+                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0263') }}&lt;/div&gt;
+                &lt;xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px"&gt;
+                    &lt;xf:hiddenval name="operation" value="start" /&gt;
+                    &lt;xf:hiddenval name="method" value="motd" /&gt;
+                    &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_0264') }}&lt;/xf:button&gt;
+                &lt;/xf:form&gt;
+            &lt;/div&gt;
 
-            <div class="block-row block-row--separated">
-                <strong>DNS TXT ile doğrulama</strong>
-                <div class="contentRow-minor">Sunucu alan adının DNS yönetimine erişiminiz varsa MOTD'yi değiştirmeden doğrulama yapabilirsiniz.</div>
-                <xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px">
-                    <xf:hiddenval name="operation" value="start" />
-                    <xf:hiddenval name="method" value="dns_txt" />
-                    <xf:button type="submit">DNS TXT Kodu Oluştur</xf:button>
-                </xf:form>
-            </div>
-        </div>
-    </div>
-</div>
+            &lt;div class="block-row block-row--separated"&gt;
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_0265') }}&lt;/strong&gt;
+                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0266') }}&lt;/div&gt;
+                &lt;xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px"&gt;
+                    &lt;xf:hiddenval name="operation" value="start" /&gt;
+                    &lt;xf:hiddenval name="method" value="dns_txt" /&gt;
+                    &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_0267') }}&lt;/xf:button&gt;
+                &lt;/xf:form&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;

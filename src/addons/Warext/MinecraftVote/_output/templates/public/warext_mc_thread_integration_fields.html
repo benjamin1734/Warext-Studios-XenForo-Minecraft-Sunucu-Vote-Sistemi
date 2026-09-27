@@ -1,22 +1,22 @@
-<xf:if is="$warextMcThreadCategory">
-    <h2 class="block-formSectionHeader"><span class="block-formSectionHeader-aligner">Sunucu dizininde de yayınla</span></h2>
-    <div class="block-body">
-        <div class="blockMessage blockMessage--important">Sunucu adresini boş bırakırsanız yalnızca normal tanıtım konusu oluşturulur. Adres girerseniz konu başlığı ve ilk mesaj kullanılarak {$warextMcThreadCategory.title} kategorisinde onay bekleyen bir vote kaydı oluşturulur.</div>
-        <xf:textboxrow name="warext_mc_host" label="Sunucu adresi" placeholder="play.sunucum.com" maxlength="255" />
-        <xf:selectrow name="warext_mc_server_type" value="{$warextMcThreadCategory.thread_default_server_type}" label="Sunucu türü">
-            <xf:option value="java">Java</xf:option>
-            <xf:option value="bedrock">Bedrock</xf:option>
-            <xf:option value="crossplay">Java + Bedrock / Crossplay</xf:option>
-        </xf:selectrow>
-        <xf:numberboxrow name="warext_mc_port" value="25565" min="1" max="65535" label="Java / ana port" />
-        <xf:textboxrow name="warext_mc_bedrock_host" label="Bedrock adresi" maxlength="255" explain="Yalnız Bedrock/Crossplay kullanıyorsanız doldurun. Ana adres ile aynıysa boş bırakabilirsiniz." />
-        <xf:numberboxrow name="warext_mc_bedrock_port" value="19132" min="1" max="65535" label="Bedrock portu" />
-        <xf:textboxrow name="warext_mc_website_url" label="Web sitesi" maxlength="255" />
-        <xf:textboxrow name="warext_mc_discord_url" label="Discord" maxlength="255" />
-        <xf:checkboxrow>
-            <xf:option name="warext_mc_is_premium" value="1">Premium hesap zorunlu</xf:option>
-            <xf:option name="warext_mc_allow_cracked" value="1">Crack giriş destekleniyor</xf:option>
-        </xf:checkboxrow>
-        <div class="formRow"><div class="formRow-labelWrapper"><label class="formRow-label">Görseller</label></div><div class="formRow-main"><div class="formRow-explain">Tanıtım konusundan otomatik oluşan sunucunun banner, hareketli GIF banner ve kapak görselini daha sonra Sunucularım → Düzenle bölümünden ekleyebilirsiniz. Konu formuna ikinci bir görsel yükleme sistemi eklenmez.</div></div></div>
-    </div>
-</xf:if>
+&lt;xf:if is="$warextMcThreadCategory"&gt;
+    &lt;h2 class="block-formSectionHeader"&gt;&lt;span class="block-formSectionHeader-aligner"&gt;{{ phrase('warext_mc_i18n_0313') }}&lt;/span&gt;&lt;/h2&gt;
+    &lt;div class="block-body"&gt;
+        &lt;div class="blockMessage blockMessage--important"&gt;Sunucu adresini boş bırakırsanız yalnızca normal tanıtım konusu oluşturulur. Adres girerseniz konu başlığı ve ilk mesaj kullanılarak {$warextMcThreadCategory.title} kategorisinde onay bekleyen bir vote kaydı oluşturulur.&lt;/div&gt;
+        &lt;xf:textboxrow name="warext_mc_host" label="{{ phrase('warext_mc_i18n_0083') }}" placeholder="play.sunucum.com" maxlength="255" /&gt;
+        &lt;xf:selectrow name="warext_mc_server_type" value="{$warextMcThreadCategory.thread_default_server_type}" label="{{ phrase('warext_mc_i18n_0023') }}"&gt;
+            &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
+            &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;
+            &lt;xf:option value="crossplay"&gt;Java + Bedrock / Crossplay&lt;/xf:option&gt;
+        &lt;/xf:selectrow&gt;
+        &lt;xf:numberboxrow name="warext_mc_port" value="25565" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0084') }}" /&gt;
+        &lt;xf:textboxrow name="warext_mc_bedrock_host" label="{{ phrase('warext_mc_i18n_0026') }}" maxlength="255" explain="{{ phrase('warext_mc_i18n_0085') }}" /&gt;
+        &lt;xf:numberboxrow name="warext_mc_bedrock_port" value="19132" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0028') }}" /&gt;
+        &lt;xf:textboxrow name="warext_mc_website_url" label="{{ phrase('warext_mc_i18n_0043') }}" maxlength="255" /&gt;
+        &lt;xf:textboxrow name="warext_mc_discord_url" label="{{ phrase('warext_mc_i18n_0044') }}" maxlength="255" /&gt;
+        &lt;xf:checkboxrow&gt;
+            &lt;xf:option name="warext_mc_is_premium" value="1"&gt;Premium hesap zorunlu&lt;/xf:option&gt;
+            &lt;xf:option name="warext_mc_allow_cracked" value="1"&gt;{{ phrase('warext_mc_i18n_0193') }}&lt;/xf:option&gt;
+        &lt;/xf:checkboxrow&gt;
+        &lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;{{ phrase('warext_mc_i18n_0314') }}&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;div class="formRow-explain"&gt;{{ phrase('warext_mc_i18n_0315') }}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/xf:if&gt;

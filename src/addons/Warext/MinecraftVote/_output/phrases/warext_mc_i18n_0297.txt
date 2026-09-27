@@ -1,0 +1,1 @@
+Sunucuyu yönetecek XenForo kullanıcılarını ve yetkilerini belirleyin.

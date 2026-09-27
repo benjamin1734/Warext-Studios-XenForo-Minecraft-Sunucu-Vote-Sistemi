@@ -1,0 +1,1 @@
+Varsayılan NuVotifier portu 8192'dir.

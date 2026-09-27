@@ -1,27 +1,27 @@
-<xf:title>{$server.title} - Sunucuyu Raporla</xf:title>
+&lt;xf:title&gt;{$server.title} - Sunucuyu Raporla&lt;/xf:title&gt;
 
-<div class="block">
-    <div class="block-container">
-        <h2 class="block-header">Sunucuyu raporla</h2>
-        <div class="block-body">
-            <xf:form action="{{ link('sunucular/rapor', $server) }}" method="post" class="block">
-                <xf:selectrow name="reason" label="Rapor nedeni" required="true">
-                    <xf:option value="fake">Sahte / yanıltıcı sunucu bilgisi</xf:option>
-                    <xf:option value="malicious">Zararlı içerik veya güvenlik riski</xf:option>
-                    <xf:option value="scam">Dolandırıcılık / yanıltıcı satış</xf:option>
-                    <xf:option value="offline">Uzun süredir kapalı / erişilemiyor</xf:option>
-                    <xf:option value="inappropriate">Uygunsuz içerik</xf:option>
-                    <xf:option value="other">Diğer</xf:option>
-                </xf:selectrow>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;h2 class="block-header"&gt;Sunucuyu raporla&lt;/h2&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:form action="{{ link('sunucular/rapor', $server) }}" method="post" class="block"&gt;
+                &lt;xf:selectrow name="reason" label="{{ phrase('warext_mc_i18n_0009') }}" required="true"&gt;
+                    &lt;xf:option value="fake"&gt;{{ phrase('warext_mc_i18n_0161') }}&lt;/xf:option&gt;
+                    &lt;xf:option value="malicious"&gt;{{ phrase('warext_mc_i18n_0162') }}&lt;/xf:option&gt;
+                    &lt;xf:option value="scam"&gt;{{ phrase('warext_mc_i18n_0163') }}&lt;/xf:option&gt;
+                    &lt;xf:option value="offline"&gt;{{ phrase('warext_mc_i18n_0164') }}&lt;/xf:option&gt;
+                    &lt;xf:option value="inappropriate"&gt;{{ phrase('warext_mc_i18n_0165') }}&lt;/xf:option&gt;
+                    &lt;xf:option value="other"&gt;{{ phrase('warext_mc_i18n_0166') }}&lt;/xf:option&gt;
+                &lt;/xf:selectrow&gt;
 
-                <xf:textarearow name="message"
-                    label="Açıklama"
-                    explain="Sorunu açıkça belirtin. 10-1000 karakter."
+                &lt;xf:textarearow name="message"
+                    label="{{ phrase('warext_mc_i18n_0010') }}"
+                    explain="{{ phrase('warext_mc_i18n_0011') }}"
                     maxlength="1000"
-                    required="true" />
+                    required="true" /&gt;
 
-                <xf:submitrow submit="Raporu gönder" />
-            </xf:form>
-        </div>
-    </div>
-</div>
+                &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0012') }}" /&gt;
+            &lt;/xf:form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;

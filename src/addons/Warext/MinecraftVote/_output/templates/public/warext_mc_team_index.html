@@ -1,65 +1,65 @@
-<xf:title>{$server.title} - Sunucu Ekibi</xf:title>
-<xf:description>Sunucuyu yönetecek XenForo kullanıcılarını ve yetkilerini belirleyin.</xf:description>
+&lt;xf:title&gt;{$server.title} - Sunucu Ekibi&lt;/xf:title&gt;
+&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0297') }}&lt;/xf:description&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
-<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
-<xf:form action="{{ link('sunucular/ekip', $server) }}" ajax="true" class="block">
-    <div class="block-container">
-        <div class="block-header">Ekip Üyesi Ekle / Güncelle</div>
-        <div class="block-body">
-            <xf:textboxrow name="username" label="XenForo Kullanıcı Adı" required="required" />
-            <xf:selectrow name="role" value="member" label="Rol">
-                <xf:option value="manager">Yönetici</xf:option>
-                <xf:option value="editor">Editör</xf:option>
-                <xf:option value="analyst">Analist</xf:option>
-                <xf:option value="support">Destek</xf:option>
-                <xf:option value="member">Ekip Üyesi</xf:option>
-            </xf:selectrow>
-            <xf:checkboxrow label="Yetkiler">
-                <xf:option name="edit_content" value="1">Sunucu içeriğini düzenleyebilir</xf:option>
-                <xf:option name="publish_updates" value="1">Güncelleme yayınlayabilir</xf:option>
-                <xf:option name="view_stats" value="1">Sunucu istatistiklerini görebilir</xf:option>
-                <xf:option name="manage_votifier" value="1">NuVotifier ayarlarını yönetebilir</xf:option>
-                <xf:option name="manage_reviews" value="1">Değerlendirme yönetimine erişebilir</xf:option>
-            </xf:checkboxrow>
-        </div>
-        <xf:submitrow submit="Kaydet" />
-    </div>
-</xf:form>
+&lt;xf:form action="{{ link('sunucular/ekip', $server) }}" ajax="true" class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0298') }}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:textboxrow name="username" label="{{ phrase('warext_mc_i18n_0080') }}" required="required" /&gt;
+            &lt;xf:selectrow name="role" value="member" label="{{ phrase('warext_mc_i18n_0081') }}"&gt;
+                &lt;xf:option value="manager"&gt;{{ phrase('warext_mc_i18n_0299') }}&lt;/xf:option&gt;
+                &lt;xf:option value="editor"&gt;{{ phrase('warext_mc_i18n_0300') }}&lt;/xf:option&gt;
+                &lt;xf:option value="analyst"&gt;Analist&lt;/xf:option&gt;
+                &lt;xf:option value="support"&gt;Destek&lt;/xf:option&gt;
+                &lt;xf:option value="member"&gt;{{ phrase('warext_mc_i18n_0301') }}&lt;/xf:option&gt;
+            &lt;/xf:selectrow&gt;
+            &lt;xf:checkboxrow label="{{ phrase('warext_mc_i18n_0082') }}"&gt;
+                &lt;xf:option name="edit_content" value="1"&gt;{{ phrase('warext_mc_i18n_0302') }}&lt;/xf:option&gt;
+                &lt;xf:option name="publish_updates" value="1"&gt;{{ phrase('warext_mc_i18n_0303') }}&lt;/xf:option&gt;
+                &lt;xf:option name="view_stats" value="1"&gt;{{ phrase('warext_mc_i18n_0304') }}&lt;/xf:option&gt;
+                &lt;xf:option name="manage_votifier" value="1"&gt;{{ phrase('warext_mc_i18n_0305') }}&lt;/xf:option&gt;
+                &lt;xf:option name="manage_reviews" value="1"&gt;{{ phrase('warext_mc_i18n_0306') }}&lt;/xf:option&gt;
+            &lt;/xf:checkboxrow&gt;
+        &lt;/div&gt;
+        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0021') }}" /&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Mevcut Ekip</div>
-        <div class="block-body">
-            <xf:if is="$members is not empty">
-                <xf:foreach loop="$members" value="$member">
-                    <div class="block-row block-row--separated">
-                        <div class="contentRow">
-                            <div class="contentRow-main">
-                                <div class="contentRow-title">
-                                    <xf:username user="$member.User" rich="true" />
-                                    <span class="label label--primary">{$member.role}</span>
-                                </div>
-                                <div class="contentRow-minor">
-                                    <xf:if is="$member.permissions.edit_content">İçerik düzenleme · </xf:if>
-                                    <xf:if is="$member.permissions.publish_updates">Güncelleme yayınlama · </xf:if>
-                                    <xf:if is="$member.permissions.view_stats">İstatistik · </xf:if>
-                                    <xf:if is="$member.permissions.manage_votifier">NuVotifier · </xf:if>
-                                    <xf:if is="$member.permissions.manage_reviews">Değerlendirme yönetimi</xf:if>
-                                </div>
-                                <div class="contentRow-minor">Eklenme: <xf:date time="$member.joined_date" /></div>
-                                <xf:form action="{{ link('sunucular/ekip-sil', $server) }}" ajax="true" data-xf-init="delete" style="margin-top:8px">
-                                    <xf:hiddenval name="user_id" value="{$member.user_id}" />
-                                    <xf:button type="submit" class="button--link">Ekipten Çıkar</xf:button>
-                                </xf:form>
-                            </div>
-                        </div>
-                    </div>
-                </xf:foreach>
-            <xf:else />
-                <div class="blockMessage">Bu sunucuya henüz ekip üyesi eklenmemiş.</div>
-            </xf:if>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;Mevcut Ekip&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$members is not empty"&gt;
+                &lt;xf:foreach loop="$members" value="$member"&gt;
+                    &lt;div class="block-row block-row--separated"&gt;
+                        &lt;div class="contentRow"&gt;
+                            &lt;div class="contentRow-main"&gt;
+                                &lt;div class="contentRow-title"&gt;
+                                    &lt;xf:username user="$member.User" rich="true" /&gt;
+                                    &lt;span class="label label--primary"&gt;{$member.role}&lt;/span&gt;
+                                &lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;
+                                    &lt;xf:if is="$member.permissions.edit_content"&gt;İçerik düzenleme · &lt;/xf:if&gt;
+                                    &lt;xf:if is="$member.permissions.publish_updates"&gt;Güncelleme yayınlama · &lt;/xf:if&gt;
+                                    &lt;xf:if is="$member.permissions.view_stats"&gt;İstatistik · &lt;/xf:if&gt;
+                                    &lt;xf:if is="$member.permissions.manage_votifier"&gt;NuVotifier · &lt;/xf:if&gt;
+                                    &lt;xf:if is="$member.permissions.manage_reviews"&gt;{{ phrase('warext_mc_i18n_0310') }}&lt;/xf:if&gt;
+                                &lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;Eklenme: &lt;xf:date time="$member.joined_date" /&gt;&lt;/div&gt;
+                                &lt;xf:form action="{{ link('sunucular/ekip-sil', $server) }}" ajax="true" data-xf-init="delete" style="margin-top:8px"&gt;
+                                    &lt;xf:hiddenval name="user_id" value="{$member.user_id}" /&gt;
+                                    &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0311') }}&lt;/xf:button&gt;
+                                &lt;/xf:form&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/xf:foreach&gt;
+            &lt;xf:else /&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0312') }}&lt;/div&gt;
+            &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;

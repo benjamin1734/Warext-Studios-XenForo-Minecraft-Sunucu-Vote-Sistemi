@@ -1,0 +1,1 @@
+Bağlı hesap seçmediyseniz Java/Minecraft kullanıcı adınızı yazın. 3-16 karakter; harf, rakam ve alt çizgi kullanılabilir.

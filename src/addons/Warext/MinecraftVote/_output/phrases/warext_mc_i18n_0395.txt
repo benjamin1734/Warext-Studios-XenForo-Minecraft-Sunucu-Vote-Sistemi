@@ -1,0 +1,1 @@
+Ana adres ve Java portu kullanılır. Bedrock alanları boş bırakılabilir.

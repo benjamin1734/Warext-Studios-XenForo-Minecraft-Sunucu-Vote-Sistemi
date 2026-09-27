@@ -1,0 +1,1 @@
+Kategori bir XenForo forumuna bağlanırsa o forumda yeni konu açarken isteğe bağlı sunucu dizini alanları görünür. Sunucu adresi boşsa konu normal şekilde açılır ve vote kaydı oluşturulmaz.

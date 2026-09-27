@@ -1,0 +1,1 @@
+Vote kuyruğu, NuVotifier entegrasyonları ve sunucu durum görevleri için operasyon ekranı.

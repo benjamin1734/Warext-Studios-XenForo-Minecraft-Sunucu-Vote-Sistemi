@@ -1,73 +1,73 @@
-<xf:title>Minecraft Hesaplarım</xf:title>
+&lt;xf:title&gt;{{ phrase('nav.warextMcAccounts') }}&lt;/xf:title&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Bağlı Minecraft Hesapları</div>
-        <div class="block-body">
-            <xf:if is="$accounts is not empty">
-                <xf:foreach loop="$accounts" value="$account">
-                    <div class="block-row block-row--separated">
-                        <div class="contentRow">
-                            <div class="contentRow-main">
-                                <div class="contentRow-title">
-                                    <strong>{$account.minecraft_username}</strong>
-                                    <xf:if is="$account.is_primary"><span class="label label--primary">Birincil</span></xf:if>
-                                    <xf:if is="$account.verification_state == 'verified'">
-                                        <span class="label label--green">Doğrulanmış</span>
-                                    <xf:elseif is="$account.verification_state == 'pending'" />
-                                        <span class="label label--orange">Doğrulama Bekliyor</span>
-                                    <xf:else />
-                                        <span class="label">Doğrulanmamış</span>
-                                    </xf:if>
-                                </div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0129') }}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$accounts is not empty"&gt;
+                &lt;xf:foreach loop="$accounts" value="$account"&gt;
+                    &lt;div class="block-row block-row--separated"&gt;
+                        &lt;div class="contentRow"&gt;
+                            &lt;div class="contentRow-main"&gt;
+                                &lt;div class="contentRow-title"&gt;
+                                    &lt;strong&gt;{$account.minecraft_username}&lt;/strong&gt;
+                                    &lt;xf:if is="$account.is_primary"&gt;&lt;span class="label label--primary"&gt;Birincil&lt;/span&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$account.verification_state == 'verified'"&gt;
+                                        &lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;
+                                    &lt;xf:elseif is="$account.verification_state == 'pending'" /&gt;
+                                        &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_i18n_0131') }}&lt;/span&gt;
+                                    &lt;xf:else /&gt;
+                                        &lt;span class="label"&gt;{{ phrase('warext_mc_i18n_0132') }}&lt;/span&gt;
+                                    &lt;/xf:if&gt;
+                                &lt;/div&gt;
 
-                                <div class="contentRow-minor">
-                                    UUID: <xf:if is="$account.minecraft_uuid">{$account.minecraft_uuid}<xf:else />Belirtilmedi</xf:if>
-                                    · Eklenme: <xf:date time="$account.created_date" />
-                                </div>
+                                &lt;div class="contentRow-minor"&gt;
+                                    UUID: &lt;xf:if is="$account.minecraft_uuid"&gt;{$account.minecraft_uuid}&lt;xf:else /&gt;Belirtilmedi&lt;/xf:if&gt;
+                                    · Eklenme: &lt;xf:date time="$account.created_date" /&gt;
+                                &lt;/div&gt;
 
-                                <div class="buttonGroup" style="margin-top:10px">
-                                    <xf:if is="!$account.is_primary">
-                                        <xf:form action="{{ link('sunucular/hesap-birincil', $account) }}" class="buttonGroup">
-                                            <xf:button type="submit">Birincil Yap</xf:button>
-                                        </xf:form>
-                                    </xf:if>
+                                &lt;div class="buttonGroup" style="margin-top:10px"&gt;
+                                    &lt;xf:if is="!$account.is_primary"&gt;
+                                        &lt;xf:form action="{{ link('sunucular/hesap-birincil', $account) }}" class="buttonGroup"&gt;
+                                            &lt;xf:button type="submit"&gt;Birincil Yap&lt;/xf:button&gt;
+                                        &lt;/xf:form&gt;
+                                    &lt;/xf:if&gt;
 
-                                    <xf:form action="{{ link('sunucular/hesap-sil', $account) }}" data-xf-init="delete" class="buttonGroup">
-                                        <xf:button type="submit" class="button--link">Bağlantıyı Kaldır</xf:button>
-                                    </xf:form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </xf:foreach>
-            <xf:else />
-                <div class="blockMessage">Henüz profilinize bağlı Minecraft hesabı bulunmuyor.</div>
-            </xf:if>
-        </div>
-    </div>
-</div>
+                                    &lt;xf:form action="{{ link('sunucular/hesap-sil', $account) }}" data-xf-init="delete" class="buttonGroup"&gt;
+                                        &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0133') }}&lt;/xf:button&gt;
+                                    &lt;/xf:form&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/xf:foreach&gt;
+            &lt;xf:else /&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0134') }}&lt;/div&gt;
+            &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<xf:form action="{{ link('sunucular/hesaplar') }}" class="block">
-    <div class="block-container">
-        <div class="block-header">Minecraft Hesabı Ekle</div>
-        <div class="block-body">
-            <xf:textboxrow
+&lt;xf:form action="{{ link('sunucular/hesaplar') }}" class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0135') }}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:textboxrow
                 name="minecraft_username"
-                label="Minecraft kullanıcı adı"
+                label="{{ phrase('warext_mc_i18n_0001') }}"
                 maxlength="16"
                 required="required"
-                explain="Java Edition kullanıcı adınızı girin. Hesap ilk aşamada doğrulanmamış olarak eklenir." />
+                explain="{{ phrase('warext_mc_i18n_0002') }}" /&gt;
 
-            <xf:textboxrow
+            &lt;xf:textboxrow
                 name="minecraft_uuid"
-                label="Minecraft UUID"
+                label="{{ phrase('warext_mc_i18n_0003') }}"
                 maxlength="36"
-                explain="İsteğe bağlıdır. UUID biliyorsanız tireli veya tiresiz biçimde girebilirsiniz." />
-        </div>
+                explain="{{ phrase('warext_mc_i18n_0004') }}" /&gt;
+        &lt;/div&gt;
 
-        <xf:submitrow submit="Hesabı Ekle" />
-    </div>
-</xf:form>
+        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0005') }}" /&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;

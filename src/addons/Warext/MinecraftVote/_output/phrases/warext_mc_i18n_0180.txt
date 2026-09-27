@@ -1,0 +1,1 @@
+Aylık oy sezonlarını, mevcut yarışmayı ve önceki sezon kazananlarını görüntüle.

@@ -1,50 +1,50 @@
-<xf:title>Minecraft Sunucu Audit Kayıtları</xf:title>
-<xf:description>Kritik sahiplik, ekip, moderasyon, sponsor ve başarım yönetim işlemleri.</xf:description>
+&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0332') }}&lt;/xf:title&gt;
+&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0333') }}&lt;/xf:description&gt;
 
-<xf:form action="{{ link('warext-minecraft/audit') }}" class="block">
-    <div class="block-container">
-        <div class="block-body">
-            <xf:numberboxrow name="server_id" value="{$serverId}" min="0" label="Sunucu ID" explain="0 bırakırsanız tüm sunucular gösterilir." />
-            <xf:textboxrow name="action_key" value="{$actionKey}" label="İşlem anahtarı" placeholder="ownership_transferred" />
-        </div>
-        <xf:submitrow submit="Filtrele" />
-    </div>
-</xf:form>
+&lt;xf:form action="{{ link('warext-minecraft/audit') }}" class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:numberboxrow name="server_id" value="{$serverId}" min="0" label="{{ phrase('warext_mc_i18n_0105') }}" explain="{{ phrase('warext_mc_i18n_0106') }}" /&gt;
+            &lt;xf:textboxrow name="action_key" value="{$actionKey}" label="{{ phrase('warext_mc_i18n_0107') }}" placeholder="ownership_transferred" /&gt;
+        &lt;/div&gt;
+        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0108') }}" /&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;
 
-<div class="block">
-    <div class="block-container">
-        <div class="block-header">Audit Geçmişi</div>
-        <div class="block-body">
-            <xf:if is="$logs is not empty">
-                <xf:foreach loop="$logs" value="$log">
-                    <div class="block-row block-row--separated">
-                        <div class="contentRow">
-                            <div class="contentRow-main">
-                                <div class="contentRow-title">
-                                    <strong>{$log.action}</strong>
-                                    <xf:if is="$log.Server"><span class="label">{$log.Server.title}</span><xf:elseif is="$log.server_id" /><span class="label">Sunucu #{$log.server_id}</span></xf:if>
-                                </div>
-                                <div class="contentRow-minor">
-                                    İşlemi yapan: <xf:if is="$log.Actor"><xf:username user="$log.Actor" /><xf:else />Sistem / #{$log.actor_user_id}</xf:if>
-                                    <xf:if is="$log.target_user_id"> · Hedef: <xf:if is="$log.Target"><xf:username user="$log.Target" /><xf:else />#{$log.target_user_id}</xf:if></xf:if>
-                                    · <xf:date time="$log.log_date" />
-                                </div>
-                                <xf:if is="$log.details is not empty">
-                                    <div class="contentRow-minor" style="margin-top:6px">
-                                        <xf:foreach loop="$log.details" key="$detailKey" value="$detailValue">
-                                            <span style="margin-right:10px"><strong>{$detailKey}:</strong> {$detailValue}</span>
-                                        </xf:foreach>
-                                    </div>
-                                </xf:if>
-                            </div>
-                        </div>
-                    </div>
-                </xf:foreach>
-            <xf:else />
-                <div class="blockMessage">Bu filtrede audit kaydı bulunmuyor.</div>
-            </xf:if>
-        </div>
-    </div>
-</div>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0334') }}&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:if is="$logs is not empty"&gt;
+                &lt;xf:foreach loop="$logs" value="$log"&gt;
+                    &lt;div class="block-row block-row--separated"&gt;
+                        &lt;div class="contentRow"&gt;
+                            &lt;div class="contentRow-main"&gt;
+                                &lt;div class="contentRow-title"&gt;
+                                    &lt;strong&gt;{$log.action}&lt;/strong&gt;
+                                    &lt;xf:if is="$log.Server"&gt;&lt;span class="label"&gt;{$log.Server.title}&lt;/span&gt;&lt;xf:elseif is="$log.server_id" /&gt;&lt;span class="label"&gt;Sunucu #{$log.server_id}&lt;/span&gt;&lt;/xf:if&gt;
+                                &lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;
+                                    İşlemi yapan: &lt;xf:if is="$log.Actor"&gt;&lt;xf:username user="$log.Actor" /&gt;&lt;xf:else /&gt;Sistem / #{$log.actor_user_id}&lt;/xf:if&gt;
+                                    &lt;xf:if is="$log.target_user_id"&gt; · Hedef: &lt;xf:if is="$log.Target"&gt;&lt;xf:username user="$log.Target" /&gt;&lt;xf:else /&gt;#{$log.target_user_id}&lt;/xf:if&gt;&lt;/xf:if&gt;
+                                    · &lt;xf:date time="$log.log_date" /&gt;
+                                &lt;/div&gt;
+                                &lt;xf:if is="$log.details is not empty"&gt;
+                                    &lt;div class="contentRow-minor" style="margin-top:6px"&gt;
+                                        &lt;xf:foreach loop="$log.details" key="$detailKey" value="$detailValue"&gt;
+                                            &lt;span style="margin-right:10px"&gt;&lt;strong&gt;{$detailKey}:&lt;/strong&gt; {$detailValue}&lt;/span&gt;
+                                        &lt;/xf:foreach&gt;
+                                    &lt;/div&gt;
+                                &lt;/xf:if&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/xf:foreach&gt;
+            &lt;xf:else /&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0335') }}&lt;/div&gt;
+            &lt;/xf:if&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-<xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/audit" params="{{ {'server_id': $serverId, 'action_key': $actionKey} }}" />
+&lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/audit" params="{{ {'server_id': $serverId, 'action_key': $actionKey} }}" /&gt;

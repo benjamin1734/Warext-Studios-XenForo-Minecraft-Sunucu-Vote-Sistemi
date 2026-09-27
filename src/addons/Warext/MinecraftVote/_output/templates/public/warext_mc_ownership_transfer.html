@@ -1,20 +1,20 @@
-<xf:title>{$server.title} - Sahipliği Devret</xf:title>
-<xf:description>Bu işlem geri alınamaz. Yeni kullanıcı sunucunun asıl sahibi olur.</xf:description>
+&lt;xf:title&gt;{$server.title} - Sahipliği Devret&lt;/xf:title&gt;
+&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0160') }}&lt;/xf:description&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
-<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
-<div class="blockMessage blockMessage--warning">
+&lt;div class="blockMessage blockMessage--warning"&gt;
     Sahiplik devrinden sonra mevcut hesabınızın sunucu yönetim erişimi otomatik olarak kaldırılır. Sunucu sahiplik doğrulaması güvenlik nedeniyle sıfırlanır ve yeni sahibin yeniden doğrulama yapması gerekir.
-</div>
+&lt;/div&gt;
 
-<xf:form action="{{ link('sunucular/sahiplik-devret', $server) }}" ajax="true" class="block">
-    <div class="block-container">
-        <div class="block-header">Sahiplik Devri</div>
-        <div class="block-body">
-            <xf:textboxrow name="target_username" label="Yeni sahibin XenForo kullanıcı adı" required="required" />
-            <xf:textboxrow name="confirm_title" label="Onay için sunucu adını yazın" required="required" explain="Birebir şu değeri yazın: {$server.title}" />
-        </div>
-        <xf:submitrow submit="Sahipliği Kalıcı Olarak Devret" />
-    </div>
-</xf:form>
+&lt;xf:form action="{{ link('sunucular/sahiplik-devret', $server) }}" ajax="true" class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;Sahiplik Devri&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;xf:textboxrow name="target_username" label="{{ phrase('warext_mc_i18n_0006') }}" required="required" /&gt;
+            &lt;xf:textboxrow name="confirm_title" label="{{ phrase('warext_mc_i18n_0007') }}" required="required" explain="Birebir şu değeri yazın: {$server.title}" /&gt;
+        &lt;/div&gt;
+        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0008') }}" /&gt;
+    &lt;/div&gt;
+&lt;/xf:form&gt;

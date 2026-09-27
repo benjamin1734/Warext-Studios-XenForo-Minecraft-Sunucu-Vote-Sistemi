@@ -1,0 +1,1 @@
+Bağlı hesap seçmediyseniz isteğe bağlı olarak UUID girebilirsiniz.

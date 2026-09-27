@@ -1,0 +1,1 @@
+Açıkken XenForo hesabı olmayan ziyaretçiler Minecraft kullanıcı adlarını girerek oy verebilir. Misafirlerde tekrar oy kontrolü güvenli IP hash ve Minecraft kullanıcı adı üzerinden yapılır.

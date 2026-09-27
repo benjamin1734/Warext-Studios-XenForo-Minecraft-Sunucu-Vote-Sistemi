@@ -1,0 +1,1 @@
+Favori ve güncelleme bildirimi özelliklerini açar.

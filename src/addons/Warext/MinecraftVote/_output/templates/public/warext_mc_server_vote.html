@@ -1,180 +1,71 @@
-<xf:title>{$server.title} - Oy Ver</xf:title>
-<xf:css src="warext_mc_server_vote.less" />
+&lt;xf:title&gt;{$server.title} - Oy Ver&lt;/xf:title&gt;
 
-<xf:breadcrumb href="{{ link('sunucular') }}">Minecraft Sunucuları</xf:breadcrumb>
-<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
+&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
-<xf:if is="$server.cover_path">
-    <div class="warextMcVotePage-cover">
-        <img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" alt="{$server.title}" />
-    </div>
-</xf:if>
+&lt;div class="block"&gt;
+    &lt;div class="block-container"&gt;
+        &lt;div class="block-header"&gt;{$server.title} sunucusuna oy ver&lt;/div&gt;
+        &lt;div class="block-body"&gt;
+            &lt;div class="block-row"&gt;
+                &lt;div class="contentRow"&gt;
+                    &lt;div class="contentRow-main"&gt;
+                        &lt;div class="contentRow-title"&gt;{$server.host}:{$server.port}&lt;/div&gt;
+                        &lt;div class="contentRow-minor"&gt;
+                            Bu sunucuya yeniden oy verebilmek için {$cooldownHours} saat beklemeniz gerekir.
+                            Oy başarıyla kaydedildiğinde sunucunun Votifier entegrasyonu aktifse oyun içi ödül teslimatı kuyruğa alınır.
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
 
-<section class="warextMcVotePage-hero">
-    <div class="warextMcVotePage-banner">
-        <xf:if is="$server.animated_banner_path">
-            <img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" />
-        <xf:elseif is="$server.banner_path" />
-            <img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" />
-        <xf:else />
-            <div class="warextMcVotePage-bannerFallback"><i class="fa--xf far fa-server" aria-hidden="true"></i></div>
-        </xf:if>
-    </div>
+            &lt;xf:form action="{{ link('sunucular/oy', $server) }}" class="block" ajax="true"&gt;
+                &lt;div class="block-body"&gt;
+                    &lt;xf:if is="$linkedAccounts is not empty"&gt;
+                        &lt;xf:selectrow
+                            name="minecraft_account_id"
+                            label="{{ phrase('warext_mc_i18n_0073') }}"
+                            explain="{{ $requireVerifiedAccount ? 'Yalnızca doğrulanmış Minecraft hesaplarıyla oy verilebilir.' : 'Bir hesap seçerseniz aşağıdaki elle girilen kullanıcı adı ve UUID alanları yok sayılır.' }}"&gt;
+                            &lt;xf:if is="!$requireVerifiedAccount"&gt;
+                                &lt;xf:option value="0"&gt;Elle gir&lt;/xf:option&gt;
+                            &lt;/xf:if&gt;
+                            &lt;xf:foreach loop="$linkedAccounts" value="$account"&gt;
+                                &lt;xf:if is="!$requireVerifiedAccount OR $account.verification_state == 'verified'"&gt;
+                                    &lt;xf:if is="$account.verification_state == 'verified'"&gt;
+                                        &lt;xf:option value="{$account.account_id}" selected="$account.is_primary"&gt;{$account.minecraft_username} · Doğrulanmış&lt;/xf:option&gt;
+                                    &lt;xf:else /&gt;
+                                        &lt;xf:option value="{$account.account_id}" selected="$account.is_primary"&gt;{$account.minecraft_username}&lt;/xf:option&gt;
+                                    &lt;/xf:if&gt;
+                                &lt;/xf:if&gt;
+                            &lt;/xf:foreach&gt;
+                        &lt;/xf:selectrow&gt;
+                    &lt;/xf:if&gt;
 
-    <div class="warextMcVotePage-identity">
-        <div class="warextMcVotePage-titleLine">
-            <h1>{$server.title}</h1>
-            <xf:if is="$server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if>
-            <xf:if is="$server.is_verified"><span class="label label--primary">Doğrulanmış</span></xf:if>
-            <span class="label">{{ $server.server_type == 'crossplay' ? 'CROSSPLAY' : ($server.server_type == 'bedrock' ? 'BEDROCK' : 'JAVA') }}</span>
-        </div>
+                    &lt;xf:if is="!$requireVerifiedAccount"&gt;
+                        &lt;xf:textboxrow
+                            name="minecraft_username"
+                            label="{{ phrase('warext_mc_i18n_0001') }}"
+                            maxlength="16"
+                            explain="{{ phrase('warext_mc_i18n_0074') }}" /&gt;
 
-        <xf:if is="$server.motd"><div class="warextMcVotePage-motd">{$server.motd}</div></xf:if>
+                        &lt;xf:textboxrow
+                            name="minecraft_uuid"
+                            label="{{ phrase('warext_mc_i18n_0003') }}"
+                            maxlength="36"
+                            explain="{{ phrase('warext_mc_i18n_0075') }}" /&gt;
+                    &lt;xf:elseif is="$linkedAccounts is empty" /&gt;
+                        &lt;div class="block-rowMessage block-rowMessage--warning"&gt;
+                            Oy verebilmek için önce hesabınıza bir Minecraft hesabı bağlayıp doğrulamanız gerekiyor.
+                        &lt;/div&gt;
+                    &lt;/xf:if&gt;
 
-        <div class="warextMcVotePage-address">
-            <div>
-                <span>Sunucu adresi</span>
-                <strong>{$server.host}:{$server.port}</strong>
-            </div>
-            <xf:button type="button" data-xf-init="copy-to-clipboard" data-copy-text="{$server.host}:{$server.port}" class="button--link">IP Kopyala</xf:button>
-        </div>
+                    &lt;xf:if is="$requireCaptcha"&gt;
+                        &lt;xf:captcharow label="{{ phrase('warext_mc_i18n_0068') }}" hint="Gerekli" force="true" /&gt;
+                    &lt;/xf:if&gt;
+                &lt;/div&gt;
 
-        <div class="warextMcVotePage-links">
-            <a href="{{ link('sunucular/detay', $server) }}">Sunucu sayfası</a>
-            <xf:if is="$server.DiscussionThread"><a href="{{ link('threads', $server.DiscussionThread) }}">Tanıtım konusu</a></xf:if>
-            <xf:if is="$server.website_url"><a href="{$server.website_url}" target="_blank" rel="nofollow noopener">Web sitesi</a></xf:if>
-            <xf:if is="$server.discord_url"><a href="{$server.discord_url}" target="_blank" rel="nofollow noopener">Discord</a></xf:if>
-        </div>
-    </div>
-</section>
-
-<div class="warextMcVotePage-metrics">
-    <div><strong>{$server.players_online}<small>/{$server.players_max}</small></strong><span>Oyuncu</span></div>
-    <div><strong>{$server.vote_count_month}</strong><span>Bu ay oy</span></div>
-    <div><strong>{$server.vote_count_total}</strong><span>Toplam oy</span></div>
-    <div><strong><xf:if is="$server.rank_popular">#{$server.rank_popular}<xf:else />—</xf:if></strong><span>Sıralama</span></div>
-    <div><strong>{$server.uptime_percent}%</strong><span>Uptime</span></div>
-    <div><strong><xf:if is="$server.ping_ms">{$server.ping_ms} ms<xf:else />—</xf:if></strong><span>Ping</span></div>
-    <div><strong>{$server.rating_average}</strong><span>Puan</span></div>
-</div>
-
-<div class="warextMcVotePage-layout">
-    <main class="warextMcVotePage-content">
-        <section class="block warextMcVotePage-infoBlock">
-            <div class="block-container">
-                <h2 class="block-header">Sunucu Bilgileri</h2>
-                <div class="block-body warextMcVotePage-infoGrid">
-                    <div><span>Sunucu türü</span><strong>{{ $server.server_type == 'crossplay' ? 'Crossplay' : ($server.server_type == 'bedrock' ? 'Bedrock' : 'Java') }}</strong></div>
-                    <div><span>Sürüm</span><strong><xf:if is="$server.detected_version">{$server.detected_version}<xf:elseif is="$server.version_min" />{$server.version_min}<xf:if is="$server.version_max"> - {$server.version_max}</xf:if><xf:else />Belirtilmedi</xf:if></strong></div>
-                    <div><span>Oyun modları</span><strong><xf:if is="$server.game_modes">{$server.game_modes}<xf:else />Belirtilmedi</xf:if></strong></div>
-                    <div><span>Ülke</span><strong><xf:if is="$server.country_code">{$server.country_code}<xf:else />Belirtilmedi</xf:if></strong></div>
-                    <div><span>Giriş tipi</span><strong><xf:if is="$server.allow_cracked">Crack destekli<xf:elseif is="$server.is_premium" />Premium<xf:else />Belirtilmedi</xf:if></strong></div>
-                    <div><span>Sunucu sahibi</span><strong><xf:if is="$server.Owner">{$server.Owner.username}<xf:else />Belirtilmedi</xf:if></strong></div>
-                    <div><span>Son kontrol</span><strong><xf:if is="$server.last_ping_date"><xf:date time="$server.last_ping_date" /><xf:else />Henüz kontrol edilmedi</xf:if></strong></div>
-                    <div><span>Kayıt tarihi</span><strong><xf:date time="$server.created_date" /></strong></div>
-                </div>
-            </div>
-        </section>
-
-        <xf:if is="$server.description">
-            <section class="block warextMcVotePage-about">
-                <div class="block-container">
-                    <h2 class="block-header">Sunucu Hakkında</h2>
-                    <div class="block-body block-row">{{ bb_code($server.description, 'warext_mc_server', $server) }}</div>
-                </div>
-            </section>
-        </xf:if>
-
-        <xf:if is="$server.trailer_url || $server.store_url">
-            <section class="block">
-                <div class="block-container">
-                    <h2 class="block-header">Ek Bağlantılar</h2>
-                    <div class="block-body block-row warextMcVotePage-extraLinks">
-                        <xf:if is="$server.trailer_url"><a class="button" href="{$server.trailer_url}" target="_blank" rel="nofollow noopener">Tanıtım Videosu</a></xf:if>
-                        <xf:if is="$server.store_url"><a class="button" href="{$server.store_url}" target="_blank" rel="nofollow noopener">Mağaza</a></xf:if>
-                    </div>
-                </div>
-            </section>
-        </xf:if>
-    </main>
-
-    <aside class="warextMcVotePage-voteColumn">
-        <section class="block warextMcVotePage-voteCard">
-            <div class="block-container">
-                <div class="block-header">
-                    <div class="warextMcVotePage-voteHeading">
-                        <div>
-                            <strong>Oyunu Kullan</strong>
-                            <span>24 saatte 1 oy</span>
-                        </div>
-                        <span class="warextMcVotePage-voteCount">{$server.vote_count_month}</span>
-                    </div>
-                </div>
-                <div class="block-body">
-                    <div class="warextMcVotePage-voteIntro">
-                        Bu sunucuya verdiğiniz oy aylık sıralamayı etkiler. NuVotifier aktifse oy kaydedildikten sonra oyun içi ödül teslimatı kuyruğa alınır.
-                    </div>
-
-                    <xf:if is="$voteBlocked">
-                        <div class="blockMessage blockMessage--warning warextMcVotePage-blocked">
-                            <strong>Bu sunucuya son 24 saat içinde zaten oy verdiniz.</strong>
-                            <span>24 saat sonra tekrar deneyin.</span>
-                        </div>
-                        <div class="warextMcVotePage-voteActions">
-                            <xf:button href="{{ link('sunucular/detay', $server) }}">Sunucuyu İncele</xf:button>
-                        </div>
-                    <xf:elseif is="$requireVerifiedAccount && !$hasEligibleAccount" />
-                        <div class="blockMessage blockMessage--important warextMcVotePage-blocked">
-                            <strong>Doğrulanmış Minecraft hesabı gerekiyor.</strong>
-                            <span>Oy vermeden önce Minecraft hesabınızı bağlayıp doğrulayın.</span>
-                        </div>
-                        <div class="warextMcVotePage-voteActions">
-                            <xf:button href="{{ link('sunucular/hesaplar') }}" class="button--cta">Minecraft Hesabını Bağla</xf:button>
-                        </div>
-                    <xf:else />
-                        <xf:form action="{{ link('sunucular/oy', $server) }}" ajax="true" class="warextMcVotePage-form">
-                            <xf:if is="$linkedAccounts is not empty">
-                                <xf:selectrow
-                                    name="minecraft_account_id"
-                                    label="Bağlı Minecraft hesabı"
-                                    explain="{{ $requireVerifiedAccount ? 'Yalnızca doğrulanmış Minecraft hesaplarıyla oy verilebilir.' : 'Bir hesap seçerseniz elle girilen kullanıcı adı ve UUID alanları yok sayılır.' }}">
-                                    <xf:if is="!$requireVerifiedAccount">
-                                        <xf:option value="0">Elle gir</xf:option>
-                                    </xf:if>
-                                    <xf:foreach loop="$linkedAccounts" value="$account">
-                                        <xf:if is="!$requireVerifiedAccount OR $account.verification_state == 'verified'">
-                                            <xf:if is="$account.verification_state == 'verified'">
-                                                <xf:option value="{$account.account_id}" selected="$account.is_primary">{$account.minecraft_username} · Doğrulanmış</xf:option>
-                                            <xf:else />
-                                                <xf:option value="{$account.account_id}" selected="$account.is_primary">{$account.minecraft_username}</xf:option>
-                                            </xf:if>
-                                        </xf:if>
-                                    </xf:foreach>
-                                </xf:selectrow>
-                            </xf:if>
-
-                            <xf:if is="!$requireVerifiedAccount">
-                                <xf:textboxrow
-                                    name="minecraft_username"
-                                    label="Minecraft kullanıcı adı"
-                                    maxlength="16"
-                                    explain="Bağlı hesap seçmediyseniz Minecraft kullanıcı adınızı yazın." />
-                                <xf:textboxrow
-                                    name="minecraft_uuid"
-                                    label="Minecraft UUID"
-                                    maxlength="36"
-                                    explain="İsteğe bağlıdır." />
-                            </xf:if>
-
-                            <xf:if is="$requireCaptcha">
-                                <xf:captcharow label="Doğrulama" hint="Gerekli" force="true" />
-                            </xf:if>
-
-                            <xf:submitrow submit="Oy Ver" />
-                        </xf:form>
-                    </xf:if>
-                </div>
-            </div>
-        </section>
-    </aside>
-</div>
+                &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0076') }}" /&gt;
+            &lt;/xf:form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
