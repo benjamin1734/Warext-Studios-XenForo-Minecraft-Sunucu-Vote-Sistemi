@@ -60,7 +60,7 @@ class PingRecorder extends AbstractService
             $this->server->last_ping_date = \XF::$time;
             $this->server->last_ping_error = $isOnline
                 ? ''
-                : mb_substr(trim((string)($result['error'] ?? 'Bilinmeyen ping hatası')), 0, 500);
+                : mb_substr(trim((string)($result['error'] ?? (string)\XF::phrase('warext_mc_dyn_unknown_ping_error'))), 0, 500);
 
             if ($isOnline)
             {
