@@ -18,14 +18,14 @@ class Sponsor extends AbstractPurchasable
 
     public function getTitle()
     {
-        return 'Minecraft sunucu sponsorluğu';
+        return \XF::phrase('warext_mc_dyn_sponsor_purchase_title');
     }
 
     public function getPurchaseFromRequest(Request $request, User $purchaser, &$error = null)
     {
         if (!(bool)(\XF::options()->warextMcSponsorSalesEnabled ?? false))
         {
-            $error = 'Sponsor satın alma sistemi şu anda kapalı.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_sales_disabled');
             return null;
         }
 
@@ -35,39 +35,39 @@ class Sponsor extends AbstractPurchasable
 
         if (!in_array($days, [7, 30], true))
         {
-            $error = 'Geçersiz sponsor paketi.';
+            $error = (string)\XF::phrase('warext_mc_dyn_invalid_sponsor_package');
             return null;
         }
 
         $server = $this->app->em()->find('Warext\\MinecraftVote:Server', $serverId);
         if (!$server || $server->state !== 'active')
         {
-            $error = 'Sponsor yapılacak aktif sunucu bulunamadı.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_server_missing');
             return null;
         }
         if (!$purchaser->user_id || (int)$server->owner_user_id !== (int)$purchaser->user_id)
         {
-            $error = 'Yalnızca sunucu sahibi kendi sunucusu için sponsor paketi satın alabilir.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_owner_only');
             return null;
         }
 
         if ($this->hasIndefiniteSponsor((int)$server->server_id))
         {
-            $error = 'Bu sunucunun süresiz sponsorluğu zaten aktif.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_permanent_active');
             return null;
         }
 
         $paymentProfile = $this->app->em()->find('XF:PaymentProfile', $profileId);
         if (!$paymentProfile)
         {
-            $error = 'Geçerli bir ödeme yöntemi seçin.';
+            $error = (string)\XF::phrase('warext_mc_dyn_payment_method_required');
             return null;
         }
 
         $price = $this->getPackagePrice($days);
         if ($price <= 0)
         {
-            $error = 'Seçilen sponsor paketinin fiyatı yapılandırılmamış.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_price_unconfigured');
             return null;
         }
 
@@ -122,7 +122,7 @@ class Sponsor extends AbstractPurchasable
 
         $sponsor = $this->app->em()->create('Warext\\MinecraftVote:Sponsor');
         $sponsor->server_id = $serverId;
-        $sponsor->label = 'Sponsorlu';
+        $sponsor->label = (string)\XF::phrase('warext_mc_dyn_sponsored_label');
         $sponsor->placement = 'list_top';
         $sponsor->start_date = $start;
         $sponsor->end_date = $start + ($days * 86400);
@@ -212,25 +212,25 @@ class Sponsor extends AbstractPurchasable
         $server = $serverId ? $this->app->em()->find('Warext\\MinecraftVote:Server', $serverId) : null;
         if (!$server || !in_array($days, [7, 30], true))
         {
-            $error = 'Sponsor satın alma kaydı bulunamadı.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_purchase_missing');
             return null;
         }
         if (!$purchaser->user_id || (int)$server->owner_user_id !== (int)$purchaser->user_id)
         {
-            $error = 'Sponsor satın alma yetkiniz yok.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_purchase_forbidden');
             return null;
         }
 
         if ($this->hasIndefiniteSponsor((int)$server->server_id))
         {
-            $error = 'Bu sunucunun süresiz sponsorluğu zaten aktif.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_permanent_active');
             return null;
         }
 
         $price = $this->getPackagePrice($days);
         if ($price <= 0)
         {
-            $error = 'Sponsor paketi fiyatı geçersiz.';
+            $error = (string)\XF::phrase('warext_mc_dyn_sponsor_price_invalid');
             return null;
         }
 
@@ -251,8 +251,8 @@ class Sponsor extends AbstractPurchasable
         }
 
         $purchase = new Purchase();
-        $purchase->title = $server->title . ' - ' . $days . ' günlük sponsor';
-        $purchase->description = $server->title . ' Minecraft sunucusu için ' . $days . ' günlük sponsorlu listeleme.';
+        $purchase->title = (string)\XF::phrase('warext_mc_dyn_sponsor_package_label', ['server' => $server->title, 'days' => $days]);
+        $purchase->description = (string)\XF::phrase('warext_mc_dyn_sponsor_package_description', ['server' => $server->title, 'days' => $days]);
         $purchase->cost = $price;
         $purchase->currency = $currency;
         $purchase->recurring = false;
@@ -262,7 +262,7 @@ class Sponsor extends AbstractPurchasable
         $purchase->paymentProfile = $paymentProfile;
         $purchase->purchasableTypeId = $this->getPurchasableTypeId();
         $purchase->purchasableId = $this->encodePurchasableId((int)$server->server_id, $days);
-        $purchase->purchasableTitle = $server->title . ' sponsorluğu';
+        $purchase->purchasableTitle = (string)\XF::phrase('warext_mc_dyn_sponsor_purchasable_title', ['server' => $server->title]);
 
         $router = $this->app->router('public');
         $returnUrl = $router->buildLink('canonical:sunucular/sponsor', $server);
