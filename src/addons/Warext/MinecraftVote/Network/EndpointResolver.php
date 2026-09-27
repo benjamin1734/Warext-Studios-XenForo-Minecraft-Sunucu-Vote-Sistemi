@@ -29,7 +29,7 @@ class EndpointResolver
     {
         if ($port < 1 || $port > 65535)
         {
-            throw new \InvalidArgumentException('Geçersiz sunucu portu.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_invalid_server_port'));
         }
 
         $originalHost = $this->normalizeHost($host);
@@ -68,14 +68,14 @@ class EndpointResolver
 
         if ($host === '' || strlen($host) > 253)
         {
-            throw new \InvalidArgumentException('Geçersiz sunucu adresi.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_invalid_server_address'));
         }
 
         if ($host === 'localhost')
         {
             if (!$this->privateHostsAllowed())
             {
-                throw new \RuntimeException('Yerel adreslere bağlantı kapalı. ACP ayarlarından lokal test iznini açın.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_local_addresses_disabled'));
             }
 
             return $host;
@@ -88,7 +88,7 @@ class EndpointResolver
 
         if (!filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME))
         {
-            throw new \InvalidArgumentException('Geçersiz sunucu alan adı.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_invalid_server_host'));
         }
 
         return $host;
@@ -145,7 +145,7 @@ class EndpointResolver
         $addresses = $this->resolveAddresses($host);
         if (!$addresses)
         {
-            throw new \RuntimeException('Sunucu adresi çözümlenemedi.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_server_dns_failed'));
         }
 
         foreach ($addresses as $address)
@@ -156,7 +156,7 @@ class EndpointResolver
                 FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
             ))
             {
-                throw new \RuntimeException('Özel veya ayrılmış ağ adreslerine bağlantı engellendi.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_private_address_blocked'));
             }
         }
 

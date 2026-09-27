@@ -51,19 +51,19 @@ class JavaStatus
             $packetLength = $this->readVarInt($stream);
             if ($packetLength < 1 || $packetLength > $this->maxStatusBytes)
             {
-                throw new \RuntimeException('Geçersiz Java durum paketi uzunluğu.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_invalid_java_packet_length'));
             }
 
             $packetId = $this->readVarInt($stream);
             if ($packetId !== 0)
             {
-                throw new \RuntimeException('Beklenmeyen Java durum paketi alındı.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_unexpected_java_packet'));
             }
 
             $jsonLength = $this->readVarInt($stream);
             if ($jsonLength < 2 || $jsonLength > $this->maxStatusBytes || $jsonLength > $packetLength)
             {
-                throw new \RuntimeException('Geçersiz Java durum yanıtı.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_invalid_java_response'));
             }
 
             $json = $this->readBytes($stream, $jsonLength);
@@ -133,7 +133,7 @@ class JavaStatus
             $position += 7;
             if ($position >= 35)
             {
-                throw new \RuntimeException('Java VarInt değeri geçersiz.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_invalid_java_varint'));
             }
         }
     }
@@ -142,7 +142,7 @@ class JavaStatus
     {
         if ($length < 0 || $length > $this->maxStatusBytes)
         {
-            throw new \RuntimeException('Java durum yanıtı güvenli boyut sınırını aşıyor.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_java_response_too_large'));
         }
 
         $buffer = '';
@@ -155,10 +155,10 @@ class JavaStatus
                 $meta = stream_get_meta_data($stream);
                 if (!empty($meta['timed_out']))
                 {
-                    throw new \RuntimeException('Java sunucu durum sorgusu zaman aşımına uğradı.');
+                    throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_java_timeout'));
                 }
 
-                throw new \RuntimeException('Java sunucu durum bağlantısı beklenmedik şekilde kapandı.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_java_connection_closed'));
             }
 
             $buffer .= $chunk;
@@ -177,7 +177,7 @@ class JavaStatus
             $result = fwrite($stream, substr($data, $written));
             if ($result === false || $result === 0)
             {
-                throw new \RuntimeException('Java sunucu durum isteği gönderilemedi.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_java_request_failed'));
             }
 
             $written += $result;

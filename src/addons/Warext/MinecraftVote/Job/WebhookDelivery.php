@@ -46,7 +46,7 @@ class WebhookDelivery extends AbstractJob
 
     public function getStatusMessage()
     {
-        return 'Minecraft vote webhook teslimatı yapılıyor...';
+        return \XF::phrase('warext_mc_dyn_job_webhook_delivery');
     }
 
     public function canCancel()

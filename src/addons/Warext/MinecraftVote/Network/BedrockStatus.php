@@ -40,7 +40,7 @@ class BedrockStatus
             $magic = hex2bin('00ffff00fefefefefdfdfdfd12345678');
             if ($magic === false)
             {
-                throw new \RuntimeException('RakNet magic değeri oluşturulamadı.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_raknet_magic_failed'));
             }
 
             $timestamp = (int)floor(microtime(true) * 1000);
@@ -51,7 +51,7 @@ class BedrockStatus
             $written = fwrite($stream, $packet);
             if ($written === false || $written !== strlen($packet))
             {
-                throw new \RuntimeException('Bedrock durum isteği gönderilemedi.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_bedrock_request_failed'));
             }
 
             $response = fread($stream, 4096);
@@ -60,22 +60,22 @@ class BedrockStatus
                 $meta = stream_get_meta_data($stream);
                 if (!empty($meta['timed_out']))
                 {
-                    throw new \RuntimeException('Bedrock sunucu durum sorgusu zaman aşımına uğradı.');
+                    throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_bedrock_timeout'));
                 }
 
-                throw new \RuntimeException('Bedrock sunucusundan durum yanıtı alınamadı.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_bedrock_no_response'));
             }
 
             if (strlen($response) < 35 || ord($response[0]) !== 0x1C)
             {
-                throw new \RuntimeException('Geçersiz Bedrock RakNet yanıtı.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_invalid_bedrock_response'));
             }
 
             $lengthData = unpack('nlength', substr($response, 33, 2));
             $serverIdLength = (int)($lengthData['length'] ?? 0);
             if ($serverIdLength < 1 || $serverIdLength > 2048 || strlen($response) < 35 + $serverIdLength)
             {
-                throw new \RuntimeException('Geçersiz Bedrock sunucu kimliği uzunluğu.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_invalid_bedrock_id_length'));
             }
 
             $serverId = substr($response, 35, $serverIdLength);
@@ -83,7 +83,7 @@ class BedrockStatus
 
             if (($fields[0] ?? '') !== 'MCPE')
             {
-                throw new \RuntimeException('Beklenmeyen Bedrock durum biçimi.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_unexpected_bedrock_format'));
             }
 
             $motdParts = [];

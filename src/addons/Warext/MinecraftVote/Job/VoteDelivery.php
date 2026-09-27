@@ -61,7 +61,7 @@ class VoteDelivery extends AbstractJob
 
     public function getStatusMessage()
     {
-        return 'Minecraft oy ödülleri teslim ediliyor... (' . (int)$this->data['start'] . ')';
+        return \XF::phrase('warext_mc_dyn_job_vote_delivery', ['current' => (int)$this->data['start']]);
     }
 
     public function canCancel()
