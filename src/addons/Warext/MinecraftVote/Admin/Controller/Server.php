@@ -145,12 +145,12 @@ class Server extends AbstractController
 
         if (!in_array($operation, ['reject', 'restore'], true))
         {
-            return $this->error('Geçersiz oy moderasyon işlemi.');
+            return $this->error(\XF::phrase('warext_mc_dyn_invalid_vote_action'));
         }
 
         if ($vote->status === 'processing')
         {
-            return $this->error('Bu oy şu anda NuVotifier teslimatı tarafından işleniyor. İşlem tamamlandıktan veya lease süresi dolduktan sonra tekrar deneyin.');
+            return $this->error(\XF::phrase('warext_mc_dyn_vote_delivery_processing'));
         }
 
         $db = $this->app->db();
@@ -170,8 +170,8 @@ class Server extends AbstractController
                 $vote->status = 'rejected';
                 $vote->next_attempt_date = 0;
                 $vote->last_error = $vote->delivered_date
-                    ? 'ACP tarafından sıralama hesabından çıkarıldı. NuVotifier teslimatı daha önce tamamlanmıştı.'
-                    : 'ACP tarafından şüpheli oy olarak reddedildi.';
+                    ? (string)\XF::phrase('warext_mc_dyn_vote_excluded_delivered')
+                    : (string)\XF::phrase('warext_mc_dyn_vote_rejected_suspect');
                 $vote->save();
 
                 if ($vote->Server)
@@ -197,7 +197,7 @@ class Server extends AbstractController
                 if ($vote->status !== 'rejected')
                 {
                     $db->rollback();
-                    return $this->error('Yalnızca reddedilmiş bir oy geri alınabilir.');
+                    return $this->error(\XF::phrase('warext_mc_dyn_only_rejected_restore'));
                 }
 
                 $vote->status = $vote->delivered_date ? 'delivered' : 'skipped';
@@ -234,7 +234,7 @@ class Server extends AbstractController
 
         return $this->redirect(
             $this->buildLink('warext-minecraft/suspect-votes', null, ['min_score' => 40]),
-            $operation === 'reject' ? 'Oy sıralama hesaplarından çıkarıldı.' : 'Oy yeniden geçerli sayıldı.'
+            $operation === 'reject' ? \XF::phrase('warext_mc_dyn_vote_excluded') : \XF::phrase('warext_mc_dyn_vote_restored')
         );
     }
 
@@ -250,7 +250,7 @@ class Server extends AbstractController
 
         if (!in_array($vote->status, ['pending', 'retry', 'failed', 'skipped'], true))
         {
-            return $this->error('Bu oy teslimat için tekrar kuyruğa alınamaz.');
+            return $this->error(\XF::phrase('warext_mc_dyn_vote_cannot_requeue'));
         }
 
         $vote->status = 'retry';
@@ -264,7 +264,7 @@ class Server extends AbstractController
 
         return $this->redirect(
             $this->buildLink('warext-minecraft/votes', null, ['status' => 'retry']),
-            'Oy teslimat kuyruğuna yeniden eklendi.'
+            \XF::phrase('warext_mc_dyn_vote_requeued')
         );
     }
 
@@ -278,7 +278,7 @@ class Server extends AbstractController
 
         return $this->redirect(
             $this->buildLink('warext-minecraft/votes', null, ['status' => 'all']),
-            'Oy teslimat işi kuyruğa alındı.'
+            \XF::phrase('warext_mc_dyn_vote_job_queued')
         );
     }
 
@@ -293,7 +293,7 @@ class Server extends AbstractController
 
         return $this->redirect(
             $this->buildLink('warext-minecraft/servers', null, ['state' => 'all']),
-            sprintf('%d aktif sunucu için Popüler ve Trend sıralamaları yeniden hesaplandı.', (int)$result['updated'])
+            \XF::phrase('warext_mc_dyn_ranking_recalculated', ['count' => (int)$result['updated']])
         );
     }
 
@@ -309,7 +309,7 @@ class Server extends AbstractController
 
         if (!in_array($state, ['pending', 'active', 'rejected', 'suspended'], true))
         {
-            return $this->error('Geçersiz sunucu durumu.');
+            return $this->error(\XF::phrase('warext_mc_dyn_invalid_server_status'));
         }
 
         $server = $this->assertServerExists($serverId);
@@ -368,17 +368,16 @@ class Server extends AbstractController
 
         if (!empty($result['is_online']))
         {
-            $message = sprintf(
-                'Sunucu çevrimiçi. Ping: %d ms, Oyuncu: %d/%d, Sürüm: %s',
-                (int)$result['ping_ms'],
-                (int)$result['players_online'],
-                (int)$result['players_max'],
-                (string)($result['detected_version'] ?? '-')
-            );
+            $message = (string)\XF::phrase('warext_mc_dyn_server_online', [
+                'ping' => (int)$result['ping_ms'],
+                'online' => (int)$result['players_online'],
+                'max' => (int)$result['players_max'],
+                'version' => (string)($result['detected_version'] ?? '-')
+            ]);
         }
         else
         {
-            $message = 'Sunucuya ulaşılamadı: ' . (string)($result['error'] ?? 'Bilinmeyen hata');
+            $message = (string)\XF::phrase('warext_mc_dyn_server_unreachable', ['error' => (string)($result['error'] ?? \XF::phrase('warext_mc_dyn_unknown_error'))]);
         }
 
         return $this->redirect(
