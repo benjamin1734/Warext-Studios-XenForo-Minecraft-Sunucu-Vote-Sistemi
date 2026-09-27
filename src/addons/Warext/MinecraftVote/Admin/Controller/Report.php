@@ -50,11 +50,11 @@ class Report extends AbstractController
         $resolution = trim($this->filter('resolution', 'str'));
         if (!in_array($newState, ['open', 'resolved', 'rejected'], true))
         {
-            return $this->error('Geçersiz rapor durumu.', 400);
+            return $this->error(\XF::phrase('warext_mc_dyn_invalid_report_status'), 400);
         }
         if (mb_strlen($resolution) > 255)
         {
-            return $this->error('Moderasyon notu en fazla 255 karakter olabilir.', 400);
+            return $this->error(\XF::phrase('warext_mc_dyn_report_resolution_too_long'), 400);
         }
 
         $oldState = $report->state;
@@ -89,6 +89,6 @@ class Report extends AbstractController
             throw $e;
         }
 
-        return $this->redirect($this->buildLink('warext-minecraft/reports'), 'Rapor durumu güncellendi.');
+        return $this->redirect($this->buildLink('warext-minecraft/reports'), \XF::phrase('warext_mc_dyn_report_status_updated'));
     }
 }
