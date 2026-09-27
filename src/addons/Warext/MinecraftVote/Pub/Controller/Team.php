@@ -45,7 +45,7 @@ class Team extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/ekip', $server),
-                'Sunucu ekip üyesi kaydedildi.'
+                \XF::phrase('warext_mc_dyn_team_member_saved')
             );
         }
 
@@ -81,7 +81,7 @@ class Team extends AbstractController
 
         return $this->redirect(
             $this->buildLink('sunucular/ekip', $server),
-            'Ekip üyesi kaldırıldı.'
+            \XF::phrase('warext_mc_dyn_team_member_removed')
         );
     }
 
