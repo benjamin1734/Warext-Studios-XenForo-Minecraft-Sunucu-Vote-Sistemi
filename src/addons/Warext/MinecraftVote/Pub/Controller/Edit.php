@@ -95,8 +95,8 @@ class Edit extends AbstractController
             }
 
             $message = $wasActive && $server->state === 'pending'
-                ? 'Sunucu bağlantı bilgileri değişti. Sahiplik doğrulaması sıfırlandı ve kayıt yeniden yönetici onayına gönderildi.'
-                : 'Sunucu bilgileri güncellendi.';
+                ? \XF::phrase('warext_mc_dyn_server_connection_changed')
+                : \XF::phrase('warext_mc_dyn_server_updated');
 
             return $this->redirect(
                 $this->buildLink('sunucular/detay', $server),
