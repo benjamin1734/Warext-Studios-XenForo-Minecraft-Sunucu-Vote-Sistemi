@@ -32,7 +32,7 @@ class Creator extends AbstractService
         $username = trim($username);
         if (!preg_match('/^[A-Za-z0-9_]{3,16}$/', $username))
         {
-            throw new PrintableException('Minecraft kullanıcı adı 3-16 karakter olmalı ve yalnızca harf, rakam veya alt çizgi içermelidir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_minecraft_username_format'));
         }
 
         $this->minecraftUsername = $username;
@@ -44,7 +44,7 @@ class Creator extends AbstractService
         $salt = (string)\XF::config('globalSalt');
         if ($salt === '')
         {
-            throw new \RuntimeException('XenForo globalSalt yapılandırması bulunamadı.');
+            throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_globalsalt_missing'));
         }
 
         $ip = trim($ip);
@@ -64,17 +64,17 @@ class Creator extends AbstractService
     {
         if ($this->server->state !== 'active')
         {
-            throw new PrintableException('Bu sunucu şu anda oy kabul etmiyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_server_not_accepting_votes'));
         }
 
         if ($this->minecraftUsername === '')
         {
-            throw new PrintableException('Minecraft kullanıcı adı gereklidir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_minecraft_username_required'));
         }
 
         if (!$this->user->user_id)
         {
-            throw new PrintableException('Oy verebilmek için forum hesabınızla giriş yapmanız gerekiyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_vote_login_required'));
         }
 
         $this->assertRequestRate();
@@ -140,7 +140,7 @@ class Creator extends AbstractService
 
         if ($remaining > 0)
         {
-            throw new PrintableException("Çok hızlı oy isteği gönderiyorsunuz. {$remaining} saniye sonra tekrar deneyin.");
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_vote_rate_seconds', ['seconds' => $remaining]));
         }
     }
 
@@ -155,13 +155,13 @@ class Creator extends AbstractService
         $lastTenMinutes = $voteRepo->countRecentIpActivity($serverId, $this->ipHash, \XF::$time - 600);
         if ($lastTenMinutes >= 12)
         {
-            throw new PrintableException('Bu bağlantı üzerinden kısa sürede çok fazla oy gönderildi. Birkaç dakika sonra tekrar deneyin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_vote_ip_burst'));
         }
 
         $lastHour = $voteRepo->countRecentIpActivity($serverId, $this->ipHash, \XF::$time - 3600);
         if ($lastHour >= 40)
         {
-            throw new PrintableException('Bu bağlantı için saatlik oy sınırına ulaşıldı. Daha sonra tekrar deneyin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_vote_ip_hourly'));
         }
     }
 
@@ -174,18 +174,18 @@ class Creator extends AbstractService
 
         if ($voteRepo->hasRecentMinecraftUsernameVote($this->server->server_id, $this->minecraftUsername, $since))
         {
-            throw new PrintableException("Bu Minecraft kullanıcı adıyla son {$cooldownHours} saat içinde zaten oy verilmiş.");
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_vote_username_cooldown', ['hours' => $cooldownHours]));
         }
 
         if ($this->minecraftUuid !== '' && $voteRepo->hasRecentMinecraftVote($this->server->server_id, $this->minecraftUuid, $since))
         {
-            throw new PrintableException("Bu Minecraft hesabıyla son {$cooldownHours} saat içinde zaten oy verilmiş.");
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_vote_account_cooldown', ['hours' => $cooldownHours]));
         }
 
         if (!$this->user->user_id && $this->ipHash !== null
             && $voteRepo->hasRecentIpVote($this->server->server_id, $this->ipHash, $since))
         {
-            throw new PrintableException("Bu bağlantı üzerinden son {$cooldownHours} saat içinde zaten oy verilmiş.");
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_vote_ip_cooldown', ['hours' => $cooldownHours]));
         }
     }
 
@@ -240,7 +240,7 @@ class Creator extends AbstractService
         $hex = str_replace('-', '', $uuid);
         if (!preg_match('/^[a-f0-9]{32}$/', $hex))
         {
-            throw new PrintableException('Minecraft UUID biçimi geçersiz.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_invalid_minecraft_uuid'));
         }
 
         return substr($hex, 0, 8) . '-'
