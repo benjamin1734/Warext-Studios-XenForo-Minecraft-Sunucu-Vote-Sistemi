@@ -1,61 +1,61 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0345') }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0346') }}&lt;/xf:description&gt;
+<xf:title>{{ phrase('warext_mc_i18n_0345') }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0346') }}</xf:description>
 
-&lt;xf:pageaction&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}"&gt;{{ phrase('warext_mc_i18n_0347') }}&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/servers') }}"&gt;Sunucular&lt;/xf:button&gt;
-&lt;/xf:pageaction&gt;
+<xf:pageaction>
+    <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}">{{ phrase('warext_mc_i18n_0347') }}</xf:button>
+    <xf:button href="{{ link('warext-minecraft/servers') }}">Sunucular</xf:button>
+</xf:pageaction>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0348') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0348') }}</div>
+        <div class="block-body">
+            <div class="block-row">
                 Bekleyen: {{ $voteCounts.pending ?: 0 }} · İşleniyor: {{ $voteCounts.processing ?: 0 }} · Tekrar: {{ $voteCounts.retry ?: 0 }} · Başarısız: {{ $voteCounts.failed ?: 0 }} {{ phrase('warext_mc_i18n_delivery_bullet') }} {{ $voteCounts.delivered ?: 0 }}
-                &lt;xf:if is="$oldestPending"&gt; {{ phrase('warext_mc_i18n_0349') }} &lt;xf:date time="$oldestPending" /&gt;&lt;/xf:if&gt;
-            &lt;/div&gt;
-            &lt;div class="block-row"&gt;
+                <xf:if is="$oldestPending"> {{ phrase('warext_mc_i18n_0349') }} <xf:date time="$oldestPending" /></xf:if>
+            </div>
+            <div class="block-row">
                 {{ phrase('warext_mc_dyn_health_stale', {'processing': $staleProcessing, 'offline': $offlineServers, 'stale': $staleServers}) }}
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="block-footer"&gt;
-            &lt;div class="buttonGroup"&gt;
-                &lt;xf:form action="{{ link('warext-minecraft/health/retry-failed') }}" ajax="true"&gt;
-                    &lt;xf:button type="submit" class="button--primary" icon="refresh"&gt;{{ phrase('warext_mc_i18n_0350') }}&lt;/xf:button&gt;
-                &lt;/xf:form&gt;
-                &lt;xf:form action="{{ link('warext-minecraft/health/recover-stale') }}" ajax="true"&gt;
-                    &lt;xf:button type="submit" icon="refresh"&gt;{{ phrase('warext_mc_i18n_0351') }}&lt;/xf:button&gt;
-                &lt;/xf:form&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+            </div>
+        </div>
+        <div class="block-footer">
+            <div class="buttonGroup">
+                <xf:form action="{{ link('warext-minecraft/health/retry-failed') }}" ajax="true">
+                    <xf:button type="submit" class="button--primary" icon="refresh">{{ phrase('warext_mc_i18n_0350') }}</xf:button>
+                </xf:form>
+                <xf:form action="{{ link('warext-minecraft/health/recover-stale') }}" ajax="true">
+                    <xf:button type="submit" icon="refresh">{{ phrase('warext_mc_i18n_0351') }}</xf:button>
+                </xf:form>
+            </div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0352') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$votifier is not empty"&gt;
-                &lt;xf:foreach loop="$votifier" value="$row"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;{{ $row.title ?: 'Sunucu #' . $row.server_id }}&lt;/strong&gt;
-                                    &lt;xf:if is="$row.enabled"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0235') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label"&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/span&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0352') }}</div>
+        <div class="block-body">
+            <xf:if is="$votifier is not empty">
+                <xf:foreach loop="$votifier" value="$row">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{{ $row.title ?: 'Sunucu #' . $row.server_id }}</strong>
+                                    <xf:if is="$row.enabled"><span class="label label--green">{{ phrase('warext_mc_i18n_0235') }}</span><xf:else /><span class="label">{{ phrase('warext_mc_i18n_0156') }}</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">
                                     Hedef: {{ $row.host ?: 'Sunucu adresi' }}:{$row.port} · Servis: {{ $row.service_name ?: 'Warext' }}
-                                    &lt;xf:if is="$row.last_success_date"&gt; {{ phrase('warext_mc_i18n_0353') }} &lt;xf:date time="$row.last_success_date" /&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
-                                &lt;xf:if is="$row.last_error"&gt;&lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;{$row.last_error}&lt;/div&gt;&lt;/xf:if&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0354') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+                                    <xf:if is="$row.last_success_date"> {{ phrase('warext_mc_i18n_0353') }} <xf:date time="$row.last_success_date" /></xf:if>
+                                </div>
+                                <xf:if is="$row.last_error"><div class="blockMessage blockMessage--error" style="margin-top:8px">{$row.last_error}</div></xf:if>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0354') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>

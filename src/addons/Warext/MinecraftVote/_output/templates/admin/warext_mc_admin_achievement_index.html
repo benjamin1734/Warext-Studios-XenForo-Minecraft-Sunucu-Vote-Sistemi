@@ -1,61 +1,61 @@
-&lt;xf:title&gt;{{ phrase('admin_navigation.warextMcAchievements') }}&lt;/xf:title&gt;
+<xf:title>{{ phrase('admin_navigation.warextMcAchievements') }}</xf:title>
 
-&lt;xf:pageaction&gt;
-    &lt;xf:form action="{{ link('warext-minecraft/achievement-rebuild') }}" class="buttonGroup"&gt;
-        &lt;xf:button type="submit" class="button--primary"&gt;{{ phrase('warext_mc_i18n_0326') }}&lt;/xf:button&gt;
-    &lt;/xf:form&gt;
-&lt;/xf:pageaction&gt;
+<xf:pageaction>
+    <xf:form action="{{ link('warext-minecraft/achievement-rebuild') }}" class="buttonGroup">
+        <xf:button type="submit" class="button--primary">{{ phrase('warext_mc_i18n_0326') }}</xf:button>
+    </xf:form>
+</xf:pageaction>
 
-&lt;xf:form action="{{ link('warext-minecraft/achievements') }}" class="block" ajax="true"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0327') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:textboxrow name="achievement_key" label="{{ phrase('warext_mc_i18n_0099') }}" placeholder="{{ phrase('warext_mc_dyn_achievement_key_placeholder') }}" maxlength="50" required="required" /&gt;
-            &lt;xf:textboxrow name="title" label="{{ phrase('warext_mc_i18n_0086') }}" maxlength="100" required="required" /&gt;
-            &lt;xf:textboxrow name="description" label="{{ phrase('warext_mc_i18n_0010') }}" maxlength="255" /&gt;
-            &lt;xf:textboxrow name="icon" value="fa-trophy" label="{{ phrase('warext_mc_i18n_0100') }}" maxlength="50" /&gt;
-            &lt;xf:selectrow name="metric" label="{{ phrase('warext_mc_i18n_0101') }}"&gt;
-                &lt;xf:foreach loop="$metrics" key="$metric" value="$metricTitle"&gt;
-                    &lt;xf:option value="{$metric}"&gt;{$metricTitle}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
-            &lt;/xf:selectrow&gt;
-            &lt;xf:numberboxrow name="threshold" value="1" min="0" label="{{ phrase('warext_mc_i18n_0102') }}" /&gt;
-            &lt;xf:numberboxrow name="display_order" value="100" min="0" label="{{ phrase('warext_mc_i18n_0103') }}" /&gt;
-            &lt;xf:checkboxrow&gt;&lt;xf:option name="is_active" value="1" selected="true"&gt;{{ phrase('warext_mc_i18n_0235') }}&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;
-        &lt;/div&gt;
-        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0104') }}" /&gt;
-    &lt;/div&gt;
-&lt;/xf:form&gt;
+<xf:form action="{{ link('warext-minecraft/achievements') }}" class="block" ajax="true">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0327') }}</div>
+        <div class="block-body">
+            <xf:textboxrow name="achievement_key" label="{{ phrase('warext_mc_i18n_0099') }}" placeholder="{{ phrase('warext_mc_dyn_achievement_key_placeholder') }}" maxlength="50" required="required" />
+            <xf:textboxrow name="title" label="{{ phrase('warext_mc_i18n_0086') }}" maxlength="100" required="required" />
+            <xf:textboxrow name="description" label="{{ phrase('warext_mc_i18n_0010') }}" maxlength="255" />
+            <xf:textboxrow name="icon" value="fa-trophy" label="{{ phrase('warext_mc_i18n_0100') }}" maxlength="50" />
+            <xf:selectrow name="metric" label="{{ phrase('warext_mc_i18n_0101') }}">
+                <xf:foreach loop="$metrics" key="$metric" value="$metricTitle">
+                    <xf:option value="{$metric}">{$metricTitle}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:numberboxrow name="threshold" value="1" min="0" label="{{ phrase('warext_mc_i18n_0102') }}" />
+            <xf:numberboxrow name="display_order" value="100" min="0" label="{{ phrase('warext_mc_i18n_0103') }}" />
+            <xf:checkboxrow><xf:option name="is_active" value="1" selected="true">{{ phrase('warext_mc_i18n_0235') }}</xf:option></xf:checkboxrow>
+        </div>
+        <xf:submitrow submit="{{ phrase('warext_mc_i18n_0104') }}" />
+    </div>
+</xf:form>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0328') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$achievements is not empty"&gt;
-                &lt;xf:foreach loop="$achievements" value="$achievement"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;{$achievement.display_title}&lt;/strong&gt;
-                                    &lt;span class="label"&gt;{$achievement.achievement_key}&lt;/span&gt;
-                                    &lt;xf:if is="$achievement.is_active"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0235') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/span&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
-                                &lt;div class="contentRow-snippet"&gt;{$achievement.display_description}&lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_achievement_meta', {'metric': $achievement.metric, 'threshold': $achievement.threshold, 'order': $achievement.display_order}) }}&lt;/div&gt;
-                                &lt;div class="buttonGroup" style="margin-top:8px"&gt;
-                                    &lt;xf:button href="{{ link('warext-minecraft/achievement-edit', $achievement) }}"&gt;{{ phrase('warext_mc_i18n_0249') }}&lt;/xf:button&gt;
-                                    &lt;xf:form action="{{ link('warext-minecraft/achievement-toggle', $achievement) }}" ajax="true"&gt;
-                                        &lt;xf:button type="submit"&gt;&lt;xf:if is="$achievement.is_active"&gt;{{ phrase('warext_mc_i18n_0329') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0330') }}&lt;/xf:if&gt;&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0331') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0328') }}</div>
+        <div class="block-body">
+            <xf:if is="$achievements is not empty">
+                <xf:foreach loop="$achievements" value="$achievement">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{$achievement.display_title}</strong>
+                                    <span class="label">{$achievement.achievement_key}</span>
+                                    <xf:if is="$achievement.is_active"><span class="label label--green">{{ phrase('warext_mc_i18n_0235') }}</span><xf:else /><span class="label label--red">{{ phrase('warext_mc_i18n_0156') }}</span></xf:if>
+                                </div>
+                                <div class="contentRow-snippet">{$achievement.display_description}</div>
+                                <div class="contentRow-minor">{{ phrase('warext_mc_dyn_achievement_meta', {'metric': $achievement.metric, 'threshold': $achievement.threshold, 'order': $achievement.display_order}) }}</div>
+                                <div class="buttonGroup" style="margin-top:8px">
+                                    <xf:button href="{{ link('warext-minecraft/achievement-edit', $achievement) }}">{{ phrase('warext_mc_i18n_0249') }}</xf:button>
+                                    <xf:form action="{{ link('warext-minecraft/achievement-toggle', $achievement) }}" ajax="true">
+                                        <xf:button type="submit"><xf:if is="$achievement.is_active">{{ phrase('warext_mc_i18n_0329') }}<xf:else />{{ phrase('warext_mc_i18n_0330') }}</xf:if></xf:button>
+                                    </xf:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0331') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>

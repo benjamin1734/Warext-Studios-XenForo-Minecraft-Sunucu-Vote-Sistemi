@@ -1,71 +1,71 @@
-&lt;xf:title&gt;{{ phrase('admin_navigation.warextMcReports') }}&lt;/xf:title&gt;
+<xf:title>{{ phrase('admin_navigation.warextMcReports') }}</xf:title>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:form action="{{ link('warext-minecraft/reports') }}" method="get" class="block"&gt;
-                &lt;xf:selectrow name="state" value="{$state}" label="{{ phrase('warext_mc_i18n_0115') }}"&gt;
-                    &lt;xf:option value=""&gt;{{ phrase('warext_mc_i18n_0233') }}&lt;/xf:option&gt;
-                    &lt;xf:option value="open"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;/xf:option&gt;
-                    &lt;xf:option value="resolved"&gt;{{ phrase('warext_mc_i18n_0355') }}&lt;/xf:option&gt;
-                    &lt;xf:option value="rejected"&gt;Reddedildi&lt;/xf:option&gt;
-                &lt;/xf:selectrow&gt;
-                &lt;xf:textboxrow name="server_id" value="{$serverId}" label="{{ phrase('warext_mc_i18n_0105') }}" inputmode="numeric" /&gt;
-                &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0108') }}" /&gt;
-            &lt;/xf:form&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:form action="{{ link('warext-minecraft/reports') }}" method="get" class="block">
+                <xf:selectrow name="state" value="{$state}" label="{{ phrase('warext_mc_i18n_0115') }}">
+                    <xf:option value="">{{ phrase('warext_mc_i18n_0233') }}</xf:option>
+                    <xf:option value="open">{{ phrase('warext_mc_i18n_0155') }}</xf:option>
+                    <xf:option value="resolved">{{ phrase('warext_mc_i18n_0355') }}</xf:option>
+                    <xf:option value="rejected">Reddedildi</xf:option>
+                </xf:selectrow>
+                <xf:textboxrow name="server_id" value="{$serverId}" label="{{ phrase('warext_mc_i18n_0105') }}" inputmode="numeric" />
+                <xf:submitrow submit="{{ phrase('warext_mc_i18n_0108') }}" />
+            </xf:form>
+        </div>
+    </div>
+</div>
 
-&lt;xf:if is="$reports is not empty"&gt;
-    &lt;xf:foreach loop="$reports" value="$report"&gt;
-        &lt;div class="block"&gt;
-            &lt;div class="block-container"&gt;
-                &lt;h3 class="block-header"&gt;
+<xf:if is="$reports is not empty">
+    <xf:foreach loop="$reports" value="$report">
+        <div class="block">
+            <div class="block-container">
+                <h3 class="block-header">
                     Rapor #{$report.report_id}
-                    &lt;span class="u-muted"&gt;— &lt;xf:if is="$report.Server"&gt;{$report.Server.title}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0356') }}&lt;/xf:if&gt;&lt;/span&gt;
-                &lt;/h3&gt;
-                &lt;div class="block-body"&gt;
-                    &lt;div class="block-row"&gt;
-                        &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;
-                            &lt;dt&gt;{{ phrase('warext_mc_i18n_0115') }}&lt;/dt&gt;&lt;dd&gt;{$report.state}&lt;/dd&gt;
-                            &lt;dt&gt;Neden&lt;/dt&gt;&lt;dd&gt;{$report.reason}&lt;/dd&gt;
-                            &lt;dt&gt;Raporlayan&lt;/dt&gt;
-                            &lt;dd&gt;
-                                &lt;xf:if is="$report.Reporter"&gt;
+                    <span class="u-muted">— <xf:if is="$report.Server">{$report.Server.title}<xf:else />{{ phrase('warext_mc_i18n_0356') }}</xf:if></span>
+                </h3>
+                <div class="block-body">
+                    <div class="block-row">
+                        <dl class="pairs pairs--columns pairs--fixedSmall">
+                            <dt>{{ phrase('warext_mc_i18n_0115') }}</dt><dd>{$report.state}</dd>
+                            <dt>Neden</dt><dd>{$report.reason}</dd>
+                            <dt>Raporlayan</dt>
+                            <dd>
+                                <xf:if is="$report.Reporter">
                                     {$report.Reporter.username}
-                                &lt;xf:else /&gt;
+                                <xf:else />
                                     {{ phrase('warext_mc_dyn_user_id', {'id': $report.reporter_user_id}) }}
-                                &lt;/xf:if&gt;
-                            &lt;/dd&gt;
-                            &lt;dt&gt;Tarih&lt;/dt&gt;&lt;dd&gt;&lt;xf:date time="$report.created_date" /&gt;&lt;/dd&gt;
-                            &lt;xf:if is="$report.Moderator"&gt;
-                                &lt;dt&gt;{{ phrase('warext_mc_i18n_0357') }}&lt;/dt&gt;&lt;dd&gt;{$report.Moderator.username}&lt;/dd&gt;
-                            &lt;/xf:if&gt;
-                            &lt;xf:if is="$report.resolved_date"&gt;
-                                &lt;dt&gt;{{ phrase('warext_mc_i18n_0358') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:date time="$report.resolved_date" /&gt;&lt;/dd&gt;
-                            &lt;/xf:if&gt;
-                        &lt;/dl&gt;
-                        &lt;div class="message-body"&gt;{{ nl2br($report.message) }}&lt;/div&gt;
-                        &lt;xf:if is="$report.resolution"&gt;
-                            &lt;div class="blockMessage blockMessage--important" style="margin-top:10px"&gt;{$report.resolution}&lt;/div&gt;
-                        &lt;/xf:if&gt;
-                    &lt;/div&gt;
-                    &lt;xf:form action="{{ link('warext-minecraft/report-update', $report) }}" method="post" class="block"&gt;
-                        &lt;xf:selectrow name="state" value="{$report.state}" label="{{ phrase('warext_mc_i18n_0116') }}"&gt;
-                            &lt;xf:option value="open"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;/xf:option&gt;
-                            &lt;xf:option value="resolved"&gt;{{ phrase('warext_mc_i18n_0355') }}&lt;/xf:option&gt;
-                            &lt;xf:option value="rejected"&gt;Reddedildi&lt;/xf:option&gt;
-                        &lt;/xf:selectrow&gt;
-                        &lt;xf:textboxrow name="resolution" value="{$report.resolution}" maxlength="255" label="{{ phrase('warext_mc_i18n_0117') }}" /&gt;
-                        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0021') }}" /&gt;
-                    &lt;/xf:form&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/xf:foreach&gt;
+                                </xf:if>
+                            </dd>
+                            <dt>Tarih</dt><dd><xf:date time="$report.created_date" /></dd>
+                            <xf:if is="$report.Moderator">
+                                <dt>{{ phrase('warext_mc_i18n_0357') }}</dt><dd>{$report.Moderator.username}</dd>
+                            </xf:if>
+                            <xf:if is="$report.resolved_date">
+                                <dt>{{ phrase('warext_mc_i18n_0358') }}</dt><dd><xf:date time="$report.resolved_date" /></dd>
+                            </xf:if>
+                        </dl>
+                        <div class="message-body">{{ nl2br($report.message) }}</div>
+                        <xf:if is="$report.resolution">
+                            <div class="blockMessage blockMessage--important" style="margin-top:10px">{$report.resolution}</div>
+                        </xf:if>
+                    </div>
+                    <xf:form action="{{ link('warext-minecraft/report-update', $report) }}" method="post" class="block">
+                        <xf:selectrow name="state" value="{$report.state}" label="{{ phrase('warext_mc_i18n_0116') }}">
+                            <xf:option value="open">{{ phrase('warext_mc_i18n_0155') }}</xf:option>
+                            <xf:option value="resolved">{{ phrase('warext_mc_i18n_0355') }}</xf:option>
+                            <xf:option value="rejected">Reddedildi</xf:option>
+                        </xf:selectrow>
+                        <xf:textboxrow name="resolution" value="{$report.resolution}" maxlength="255" label="{{ phrase('warext_mc_i18n_0117') }}" />
+                        <xf:submitrow submit="{{ phrase('warext_mc_i18n_0021') }}" />
+                    </xf:form>
+                </div>
+            </div>
+        </div>
+    </xf:foreach>
 
-    &lt;xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/reports" params="{{ {'state': $state, 'server_id': $serverId} }}" /&gt;
-&lt;xf:else /&gt;
-    &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0359') }}&lt;/div&gt;
-&lt;/xf:if&gt;
+    <xf:pagenav page="$page" perpage="$perPage" total="$total" link="warext-minecraft/reports" params="{{ {'state': $state, 'server_id': $serverId} }}" />
+<xf:else />
+    <div class="blockMessage">{{ phrase('warext_mc_i18n_0359') }}</div>
+</xf:if>

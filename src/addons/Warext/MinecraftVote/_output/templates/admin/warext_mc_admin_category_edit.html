@@ -1,17 +1,17 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_dyn_edit_category', {'title': $category.display_title}) }}&lt;/xf:title&gt;
-&lt;xf:form action="{{ link('warext-minecraft/category-edit', $category) }}" class="block"&gt;
-    &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
-        &lt;xf:textboxrow name="title" value="{$category.title}" label="{{ phrase('warext_mc_i18n_0109') }}" required="true" maxlength="50" /&gt;
-        &lt;xf:textboxrow name="slug" value="{$category.slug}" label="{{ phrase('warext_mc_i18n_0110') }}" required="true" maxlength="50" /&gt;
-        &lt;xf:textboxrow name="description" value="{$category.description}" label="{{ phrase('warext_mc_i18n_0010') }}" maxlength="255" /&gt;
-        &lt;xf:numberboxrow name="display_order" value="{$category.display_order}" min="1" label="{{ phrase('warext_mc_i18n_0111') }}" /&gt;
-        &lt;xf:selectrow name="forum_node_id" value="{$category.forum_node_id}" label="{{ phrase('warext_mc_i18n_0112') }}"&gt;
-            &lt;xf:foreach loop="$forumOptions" key="$forumId" value="$forumTitle"&gt;&lt;xf:option value="{$forumId}"&gt;{$forumTitle}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
-        &lt;/xf:selectrow&gt;
-        &lt;xf:selectrow name="thread_default_server_type" value="{$category.thread_default_server_type}" label="{{ phrase('warext_mc_i18n_0113') }}"&gt;&lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;&lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;&lt;xf:option value="crossplay"&gt;Crossplay&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
-        &lt;xf:checkboxrow&gt;
-            &lt;xf:option name="is_active" value="1" selected="{$category.is_active}"&gt;{{ phrase('warext_mc_i18n_0235') }}&lt;/xf:option&gt;
-            &lt;xf:option name="thread_integration_enabled" value="1" selected="{$category.thread_integration_enabled}"&gt;{{ phrase('warext_mc_i18n_0336') }}&lt;/xf:option&gt;
-        &lt;/xf:checkboxrow&gt;
-    &lt;/div&gt;&lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0021') }}" /&gt;&lt;/div&gt;
-&lt;/xf:form&gt;
+<xf:title>{{ phrase('warext_mc_dyn_edit_category', {'title': $category.display_title}) }}</xf:title>
+<xf:form action="{{ link('warext-minecraft/category-edit', $category) }}" class="block">
+    <div class="block-container"><div class="block-body">
+        <xf:textboxrow name="title" value="{$category.title}" label="{{ phrase('warext_mc_i18n_0109') }}" required="true" maxlength="50" />
+        <xf:textboxrow name="slug" value="{$category.slug}" label="{{ phrase('warext_mc_i18n_0110') }}" required="true" maxlength="50" />
+        <xf:textboxrow name="description" value="{$category.description}" label="{{ phrase('warext_mc_i18n_0010') }}" maxlength="255" />
+        <xf:numberboxrow name="display_order" value="{$category.display_order}" min="1" label="{{ phrase('warext_mc_i18n_0111') }}" />
+        <xf:selectrow name="forum_node_id" value="{$category.forum_node_id}" label="{{ phrase('warext_mc_i18n_0112') }}">
+            <xf:foreach loop="$forumOptions" key="$forumId" value="$forumTitle"><xf:option value="{$forumId}">{$forumTitle}</xf:option></xf:foreach>
+        </xf:selectrow>
+        <xf:selectrow name="thread_default_server_type" value="{$category.thread_default_server_type}" label="{{ phrase('warext_mc_i18n_0113') }}"><xf:option value="java">Java</xf:option><xf:option value="bedrock">Bedrock</xf:option><xf:option value="crossplay">Crossplay</xf:option></xf:selectrow>
+        <xf:checkboxrow>
+            <xf:option name="is_active" value="1" selected="{$category.is_active}">{{ phrase('warext_mc_i18n_0235') }}</xf:option>
+            <xf:option name="thread_integration_enabled" value="1" selected="{$category.thread_integration_enabled}">{{ phrase('warext_mc_i18n_0336') }}</xf:option>
+        </xf:checkboxrow>
+    </div><xf:submitrow submit="{{ phrase('warext_mc_i18n_0021') }}" /></div>
+</xf:form>

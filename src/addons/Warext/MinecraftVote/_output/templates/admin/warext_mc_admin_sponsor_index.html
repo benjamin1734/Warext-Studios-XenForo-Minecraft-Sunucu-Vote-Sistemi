@@ -1,63 +1,63 @@
-&lt;xf:title&gt;{{ phrase('admin_navigation.warextMinecraftSponsors') }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0404') }}&lt;/xf:description&gt;
+<xf:title>{{ phrase('admin_navigation.warextMinecraftSponsors') }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0404') }}</xf:description>
 
-&lt;xf:form action="{{ link('warext-minecraft/sponsors') }}" class="block" ajax="true"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0405') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:selectrow name="server_id" label="{{ phrase('warext_mc_i18n_0118') }}" required="required"&gt;
-                &lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0406') }}&lt;/xf:option&gt;
-                &lt;xf:foreach loop="$servers" value="$server"&gt;
-                    &lt;xf:option value="{$server.server_id}"&gt;{$server.title} · {$server.host}:{$server.port}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
-            &lt;/xf:selectrow&gt;
-            &lt;xf:textboxrow name="label" value="Sponsorlu" maxlength="50" label="{{ phrase('warext_mc_i18n_0119') }}" /&gt;
-            &lt;xf:textboxrow name="start_date" placeholder="2026-09-01 18:00" label="{{ phrase('warext_mc_i18n_0120') }}" explain="{{ phrase('warext_mc_i18n_0121') }}" /&gt;
-            &lt;xf:textboxrow name="end_date" placeholder="2026-09-08 18:00" label="{{ phrase('warext_mc_i18n_0122') }}" explain="{{ phrase('warext_mc_i18n_0123') }}" /&gt;
-            &lt;xf:numberboxrow name="display_order" value="10" min="1" max="10000" label="{{ phrase('warext_mc_i18n_0103') }}" /&gt;
-        &lt;/div&gt;
-        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0124') }}" /&gt;
-    &lt;/div&gt;
-&lt;/xf:form&gt;
+<xf:form action="{{ link('warext-minecraft/sponsors') }}" class="block" ajax="true">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0405') }}</div>
+        <div class="block-body">
+            <xf:selectrow name="server_id" label="{{ phrase('warext_mc_i18n_0118') }}" required="required">
+                <xf:option value="0">{{ phrase('warext_mc_i18n_0406') }}</xf:option>
+                <xf:foreach loop="$servers" value="$server">
+                    <xf:option value="{$server.server_id}">{$server.title} · {$server.host}:{$server.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:textboxrow name="label" value="Sponsorlu" maxlength="50" label="{{ phrase('warext_mc_i18n_0119') }}" />
+            <xf:textboxrow name="start_date" placeholder="2026-09-01 18:00" label="{{ phrase('warext_mc_i18n_0120') }}" explain="{{ phrase('warext_mc_i18n_0121') }}" />
+            <xf:textboxrow name="end_date" placeholder="2026-09-08 18:00" label="{{ phrase('warext_mc_i18n_0122') }}" explain="{{ phrase('warext_mc_i18n_0123') }}" />
+            <xf:numberboxrow name="display_order" value="10" min="1" max="10000" label="{{ phrase('warext_mc_i18n_0103') }}" />
+        </div>
+        <xf:submitrow submit="{{ phrase('warext_mc_i18n_0124') }}" />
+    </div>
+</xf:form>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0407') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$sponsors is not empty"&gt;
-                &lt;xf:foreach loop="$sponsors" value="$sponsor"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;&lt;xf:if is="$sponsor.Server"&gt;{$sponsor.Server.title}&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_deleted_server', {'id': $sponsor.server_id}) }}&lt;/xf:if&gt;&lt;/strong&gt;
-                                    &lt;span class="label label--orange"&gt;{$sponsor.label}&lt;/span&gt;
-                                    &lt;xf:if is="$sponsor.is_current"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0408') }}&lt;/span&gt;&lt;xf:elseif is="$sponsor.state == 'paused'" /&gt;&lt;span class="label"&gt;{{ phrase('warext_mc_i18n_0409') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0410') }}&lt;/span&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;
-                                    {{ phrase('warext_mc_i18n_start_prefix') }} &lt;xf:date time="$sponsor.start_date" /&gt; ·
-                                    Bitiş: &lt;xf:if is="$sponsor.end_date"&gt;&lt;xf:date time="$sponsor.end_date" /&gt;&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0411') }}&lt;/xf:if&gt; ·
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0407') }}</div>
+        <div class="block-body">
+            <xf:if is="$sponsors is not empty">
+                <xf:foreach loop="$sponsors" value="$sponsor">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong><xf:if is="$sponsor.Server">{$sponsor.Server.title}<xf:else />{{ phrase('warext_mc_dyn_deleted_server', {'id': $sponsor.server_id}) }}</xf:if></strong>
+                                    <span class="label label--orange">{$sponsor.label}</span>
+                                    <xf:if is="$sponsor.is_current"><span class="label label--green">{{ phrase('warext_mc_i18n_0408') }}</span><xf:elseif is="$sponsor.state == 'paused'" /><span class="label">{{ phrase('warext_mc_i18n_0409') }}</span><xf:else /><span class="label label--red">{{ phrase('warext_mc_i18n_0410') }}</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">
+                                    {{ phrase('warext_mc_i18n_start_prefix') }} <xf:date time="$sponsor.start_date" /> ·
+                                    Bitiş: <xf:if is="$sponsor.end_date"><xf:date time="$sponsor.end_date" /><xf:else />{{ phrase('warext_mc_i18n_0411') }}</xf:if> ·
                                     {{ phrase('warext_mc_dyn_order_x', {'order': $sponsor.display_order}) }}
-                                &lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;
-                                    {{ phrase('warext_mc_i18n_created_by') }} &lt;xf:if is="$sponsor.Creator"&gt;&lt;xf:username user="$sponsor.Creator" /&gt;&lt;xf:else /&gt;Sistem&lt;/xf:if&gt; ·
-                                    {{ phrase('warext_mc_i18n_last_change') }} &lt;xf:date time="$sponsor.updated_date" /&gt;
-                                &lt;/div&gt;
-                                &lt;div class="buttonGroup" style="margin-top:8px"&gt;
-                                    &lt;xf:form action="{{ link('warext-minecraft/sponsor-toggle', $sponsor) }}" ajax="true"&gt;
-                                        &lt;xf:button type="submit"&gt;&lt;xf:if is="$sponsor.state == 'active'"&gt;Duraklat&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0330') }}&lt;/xf:if&gt;&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
-                                    &lt;xf:form action="{{ link('warext-minecraft/sponsor-delete', $sponsor) }}" ajax="true" data-xf-init="delete"&gt;
-                                        &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0343') }}&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0412') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+                                </div>
+                                <div class="contentRow-minor">
+                                    {{ phrase('warext_mc_i18n_created_by') }} <xf:if is="$sponsor.Creator"><xf:username user="$sponsor.Creator" /><xf:else />Sistem</xf:if> ·
+                                    {{ phrase('warext_mc_i18n_last_change') }} <xf:date time="$sponsor.updated_date" />
+                                </div>
+                                <div class="buttonGroup" style="margin-top:8px">
+                                    <xf:form action="{{ link('warext-minecraft/sponsor-toggle', $sponsor) }}" ajax="true">
+                                        <xf:button type="submit"><xf:if is="$sponsor.state == 'active'">Duraklat<xf:else />{{ phrase('warext_mc_i18n_0330') }}</xf:if></xf:button>
+                                    </xf:form>
+                                    <xf:form action="{{ link('warext-minecraft/sponsor-delete', $sponsor) }}" ajax="true" data-xf-init="delete">
+                                        <xf:button type="submit" class="button--link">{{ phrase('warext_mc_i18n_0343') }}</xf:button>
+                                    </xf:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0412') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>

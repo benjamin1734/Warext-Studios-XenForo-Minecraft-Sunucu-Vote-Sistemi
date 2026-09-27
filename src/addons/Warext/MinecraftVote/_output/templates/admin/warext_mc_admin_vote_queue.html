@@ -1,93 +1,93 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0362') }}&lt;/xf:title&gt;
+<xf:title>{{ phrase('warext_mc_i18n_0362') }}</xf:title>
 
-&lt;xf:pageaction&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/suspect-votes') }}"&gt;{{ phrase('warext_mc_i18n_0361') }}&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/servers') }}"&gt;Sunucular&lt;/xf:button&gt;
-    &lt;xf:form action="{{ link('warext-minecraft/run-vote-queue') }}" class="buttonGroup"&gt;
-        &lt;xf:button type="submit" class="button--primary"&gt;{{ phrase('warext_mc_i18n_0421') }}&lt;/xf:button&gt;
-    &lt;/xf:form&gt;
-&lt;/xf:pageaction&gt;
+<xf:pageaction>
+    <xf:button href="{{ link('warext-minecraft/suspect-votes') }}">{{ phrase('warext_mc_i18n_0361') }}</xf:button>
+    <xf:button href="{{ link('warext-minecraft/servers') }}">Sunucular</xf:button>
+    <xf:form action="{{ link('warext-minecraft/run-vote-queue') }}" class="buttonGroup">
+        <xf:button type="submit" class="button--primary">{{ phrase('warext_mc_i18n_0421') }}</xf:button>
+    </xf:form>
+</xf:pageaction>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0422') }}&lt;/div&gt;
-        &lt;div class="block-body block-row"&gt;
-            &lt;div class="buttonGroup"&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'pending'}) }}"&gt;{{ phrase('warext_mc_dyn_pending_count', {'count': $statusCounts.pending}) }}&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'processing'}) }}"&gt;{{ phrase('warext_mc_dyn_status_processing', {'count': $statusCounts.processing}) }}&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'retry'}) }}"&gt;{{ phrase('warext_mc_dyn_retry_count', {'count': $statusCounts.retry}) }}&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'failed'}) }}"&gt;{{ phrase('warext_mc_dyn_status_failed', {'count': $statusCounts.failed}) }}&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'delivered'}) }}"&gt;{{ phrase('warext_mc_i18n_delivered') }} ({$statusCounts.delivered})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'skipped'}) }}"&gt;{{ phrase('warext_mc_dyn_status_skipped', {'count': $statusCounts.skipped}) }}&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'rejected'}) }}"&gt;{{ phrase('warext_mc_dyn_rejected_count', {'count': $statusCounts.rejected}) }}&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}"&gt;{{ phrase('warext_mc_dyn_status_all', {'count': $statusCounts.all}) }}&lt;/xf:button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0422') }}</div>
+        <div class="block-body block-row">
+            <div class="buttonGroup">
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'pending'}) }}">{{ phrase('warext_mc_dyn_pending_count', {'count': $statusCounts.pending}) }}</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'processing'}) }}">{{ phrase('warext_mc_dyn_status_processing', {'count': $statusCounts.processing}) }}</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'retry'}) }}">{{ phrase('warext_mc_dyn_retry_count', {'count': $statusCounts.retry}) }}</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'failed'}) }}">{{ phrase('warext_mc_dyn_status_failed', {'count': $statusCounts.failed}) }}</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'delivered'}) }}">{{ phrase('warext_mc_i18n_delivered') }} ({$statusCounts.delivered})</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'skipped'}) }}">{{ phrase('warext_mc_dyn_status_skipped', {'count': $statusCounts.skipped}) }}</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'rejected'}) }}">{{ phrase('warext_mc_dyn_rejected_count', {'count': $statusCounts.rejected}) }}</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}">{{ phrase('warext_mc_dyn_status_all', {'count': $statusCounts.all}) }}</xf:button>
+            </div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0423') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$votes is not empty"&gt;
-                &lt;xf:foreach loop="$votes" value="$vote"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;#{$vote.vote_id} · {$vote.minecraft_username}&lt;/strong&gt;
-                                    &lt;xf:if is="$vote.status == 'delivered'"&gt;
-                                        &lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_delivered') }}&lt;/span&gt;
-                                    &lt;xf:elseif is="$vote.status == 'failed' || $vote.status == 'rejected'" /&gt;
-                                        &lt;span class="label label--red"&gt;{$vote.status}&lt;/span&gt;
-                                    &lt;xf:elseif is="$vote.status == 'retry'" /&gt;
-                                        &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_i18n_retry_later') }}&lt;/span&gt;
-                                    &lt;xf:elseif is="$vote.status == 'processing'" /&gt;
-                                        &lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0424') }}&lt;/span&gt;
-                                    &lt;xf:else /&gt;
-                                        &lt;span class="label"&gt;{$vote.status}&lt;/span&gt;
-                                    &lt;/xf:if&gt;
-                                &lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0423') }}</div>
+        <div class="block-body">
+            <xf:if is="$votes is not empty">
+                <xf:foreach loop="$votes" value="$vote">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>#{$vote.vote_id} · {$vote.minecraft_username}</strong>
+                                    <xf:if is="$vote.status == 'delivered'">
+                                        <span class="label label--green">{{ phrase('warext_mc_i18n_delivered') }}</span>
+                                    <xf:elseif is="$vote.status == 'failed' || $vote.status == 'rejected'" />
+                                        <span class="label label--red">{$vote.status}</span>
+                                    <xf:elseif is="$vote.status == 'retry'" />
+                                        <span class="label label--orange">{{ phrase('warext_mc_i18n_retry_later') }}</span>
+                                    <xf:elseif is="$vote.status == 'processing'" />
+                                        <span class="label label--primary">{{ phrase('warext_mc_i18n_0424') }}</span>
+                                    <xf:else />
+                                        <span class="label">{$vote.status}</span>
+                                    </xf:if>
+                                </div>
 
-                                &lt;div class="contentRow-minor"&gt;
-                                    &lt;xf:if is="$vote.Server"&gt;{{ phrase('warext_mc_dyn_server_label', {'title': $vote.Server.title}) }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0416') }}&lt;/xf:if&gt;
-                                    &lt;xf:if is="$vote.User"&gt; · {{ phrase('warext_mc_dyn_xenforo_user_label', {'username': $vote.User.username}) }}&lt;xf:else /&gt; {{ phrase('warext_mc_i18n_guest_vote_bullet') }}&lt;/xf:if&gt;
+                                <div class="contentRow-minor">
+                                    <xf:if is="$vote.Server">{{ phrase('warext_mc_dyn_server_label', {'title': $vote.Server.title}) }}<xf:else />{{ phrase('warext_mc_i18n_0416') }}</xf:if>
+                                    <xf:if is="$vote.User"> · {{ phrase('warext_mc_dyn_xenforo_user_label', {'username': $vote.User.username}) }}<xf:else /> {{ phrase('warext_mc_i18n_guest_vote_bullet') }}</xf:if>
                                     · Kaynak: {$vote.source}
-                                &lt;/div&gt;
+                                </div>
 
-                                &lt;div class="contentRow-minor"&gt;
-                                    {{ phrase('warext_mc_i18n_vote_time') }} &lt;xf:date time="$vote.vote_date" /&gt;
+                                <div class="contentRow-minor">
+                                    {{ phrase('warext_mc_i18n_vote_time') }} <xf:date time="$vote.vote_date" />
                                     · Deneme: {$vote.attempt_count}
                                     · Risk: {$vote.fraud_score}
-                                    &lt;xf:if is="$vote.next_attempt_date"&gt; {{ phrase('warext_mc_i18n_next_attempt_lease') }} &lt;xf:date time="$vote.next_attempt_date" /&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$vote.delivered_date"&gt; {{ phrase('warext_mc_i18n_delivery_bullet') }} &lt;xf:date time="$vote.delivered_date" /&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
+                                    <xf:if is="$vote.next_attempt_date"> {{ phrase('warext_mc_i18n_next_attempt_lease') }} <xf:date time="$vote.next_attempt_date" /></xf:if>
+                                    <xf:if is="$vote.delivered_date"> {{ phrase('warext_mc_i18n_delivery_bullet') }} <xf:date time="$vote.delivered_date" /></xf:if>
+                                </div>
 
-                                &lt;xf:if is="$vote.last_error"&gt;
-                                    &lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;{$vote.last_error}&lt;/div&gt;
-                                &lt;/xf:if&gt;
+                                <xf:if is="$vote.last_error">
+                                    <div class="blockMessage blockMessage--error" style="margin-top:8px">{$vote.last_error}</div>
+                                </xf:if>
 
-                                &lt;xf:if is="$vote.status == 'pending' || $vote.status == 'retry' || $vote.status == 'failed' || $vote.status == 'skipped'"&gt;
-                                    &lt;xf:form action="{{ link('warext-minecraft/vote-retry') }}" style="margin-top:10px"&gt;
-                                        &lt;xf:hiddenval name="vote_id" value="{$vote.vote_id}" /&gt;
-                                        &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_0425') }}&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
-                                &lt;/xf:if&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0426') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+                                <xf:if is="$vote.status == 'pending' || $vote.status == 'retry' || $vote.status == 'failed' || $vote.status == 'skipped'">
+                                    <xf:form action="{{ link('warext-minecraft/vote-retry') }}" style="margin-top:10px">
+                                        <xf:hiddenval name="vote_id" value="{$vote.vote_id}" />
+                                        <xf:button type="submit">{{ phrase('warext_mc_i18n_0425') }}</xf:button>
+                                    </xf:form>
+                                </xf:if>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0426') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
 
-&lt;xf:pagenav
+<xf:pagenav
     page="$page"
     perpage="$perPage"
     total="$total"
     link="warext-minecraft/votes"
-    params="{{ {'status': $status} }}" /&gt;
+    params="{{ {'status': $status} }}" />

@@ -1,89 +1,89 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0361') }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0413') }}&lt;/xf:description&gt;
+<xf:title>{{ phrase('warext_mc_i18n_0361') }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0413') }}</xf:description>
 
-&lt;xf:pageaction&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/votes') }}"&gt;{{ phrase('warext_mc_i18n_0414') }}&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/servers') }}"&gt;Sunucular&lt;/xf:button&gt;
-&lt;/xf:pageaction&gt;
+<xf:pageaction>
+    <xf:button href="{{ link('warext-minecraft/votes') }}">{{ phrase('warext_mc_i18n_0414') }}</xf:button>
+    <xf:button href="{{ link('warext-minecraft/servers') }}">Sunucular</xf:button>
+</xf:pageaction>
 
-&lt;xf:form action="{{ link('warext-minecraft/suspect-votes') }}" class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:numberboxrow name="min_score" value="{$minScore}" min="1" max="100" label="{{ phrase('warext_mc_i18n_0125') }}" /&gt;
-            &lt;xf:numberboxrow name="server_id" value="{$serverId}" min="0" label="{{ phrase('warext_mc_i18n_0105') }}" explain="{{ phrase('warext_mc_i18n_0126') }}" /&gt;
-        &lt;/div&gt;
-        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0108') }}" /&gt;
-    &lt;/div&gt;
-&lt;/xf:form&gt;
+<xf:form action="{{ link('warext-minecraft/suspect-votes') }}" class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:numberboxrow name="min_score" value="{$minScore}" min="1" max="100" label="{{ phrase('warext_mc_i18n_0125') }}" />
+            <xf:numberboxrow name="server_id" value="{$serverId}" min="0" label="{{ phrase('warext_mc_i18n_0105') }}" explain="{{ phrase('warext_mc_i18n_0126') }}" />
+        </div>
+        <xf:submitrow submit="{{ phrase('warext_mc_i18n_0108') }}" />
+    </div>
+</xf:form>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0415') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$votes is not empty"&gt;
-                &lt;xf:foreach loop="$votes" value="$vote"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;#{$vote.vote_id} · {$vote.minecraft_username}&lt;/strong&gt;
-                                    &lt;xf:if is="$vote.fraud_score &gt;= 70"&gt;
-                                        &lt;span class="label label--red"&gt;{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}&lt;/span&gt;
-                                    &lt;xf:elseif is="$vote.fraud_score &gt;= 50" /&gt;
-                                        &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}&lt;/span&gt;
-                                    &lt;xf:else /&gt;
-                                        &lt;span class="label"&gt;{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}&lt;/span&gt;
-                                    &lt;/xf:if&gt;
-                                    &lt;span class="label"&gt;{$vote.status}&lt;/span&gt;
-                                &lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0415') }}</div>
+        <div class="block-body">
+            <xf:if is="$votes is not empty">
+                <xf:foreach loop="$votes" value="$vote">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>#{$vote.vote_id} · {$vote.minecraft_username}</strong>
+                                    <xf:if is="$vote.fraud_score >= 70">
+                                        <span class="label label--red">{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}</span>
+                                    <xf:elseif is="$vote.fraud_score >= 50" />
+                                        <span class="label label--orange">{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}</span>
+                                    <xf:else />
+                                        <span class="label">{{ phrase('warext_mc_dyn_risk_score', {'score': $vote.fraud_score}) }}</span>
+                                    </xf:if>
+                                    <span class="label">{$vote.status}</span>
+                                </div>
 
-                                &lt;div class="contentRow-minor"&gt;
-                                    &lt;xf:if is="$vote.Server"&gt;{{ phrase('warext_mc_dyn_server_label', {'title': $vote.Server.title}) }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0416') }}&lt;/xf:if&gt;
-                                    &lt;xf:if is="$vote.User"&gt; · {{ phrase('warext_mc_dyn_xenforo_user_label', {'username': $vote.User.username}) }}&lt;xf:else /&gt; {{ phrase('warext_mc_i18n_guest_vote_bullet') }}&lt;/xf:if&gt;
-                                    · &lt;xf:date time="$vote.vote_date" /&gt;
-                                &lt;/div&gt;
+                                <div class="contentRow-minor">
+                                    <xf:if is="$vote.Server">{{ phrase('warext_mc_dyn_server_label', {'title': $vote.Server.title}) }}<xf:else />{{ phrase('warext_mc_i18n_0416') }}</xf:if>
+                                    <xf:if is="$vote.User"> · {{ phrase('warext_mc_dyn_xenforo_user_label', {'username': $vote.User.username}) }}<xf:else /> {{ phrase('warext_mc_i18n_guest_vote_bullet') }}</xf:if>
+                                    · <xf:date time="$vote.vote_date" />
+                                </div>
 
-                                &lt;div class="contentRow-minor"&gt;
-                                    UUID: &lt;xf:if is="$vote.minecraft_uuid"&gt;{$vote.minecraft_uuid}&lt;xf:else /&gt;Yok&lt;/xf:if&gt;
+                                <div class="contentRow-minor">
+                                    UUID: <xf:if is="$vote.minecraft_uuid">{$vote.minecraft_uuid}<xf:else />Yok</xf:if>
                                     · Deneme: {$vote.attempt_count}
-                                    &lt;xf:if is="$vote.delivered_date"&gt; {{ phrase('warext_mc_i18n_nuvotifier_delivered_bullet') }} &lt;xf:date time="$vote.delivered_date" /&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
+                                    <xf:if is="$vote.delivered_date"> {{ phrase('warext_mc_i18n_nuvotifier_delivered_bullet') }} <xf:date time="$vote.delivered_date" /></xf:if>
+                                </div>
 
-                                &lt;xf:if is="$vote.last_error"&gt;
-                                    &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_status_note', {'note': $vote.last_error}) }}&lt;/div&gt;
-                                &lt;/xf:if&gt;
+                                <xf:if is="$vote.last_error">
+                                    <div class="contentRow-minor">{{ phrase('warext_mc_dyn_status_note', {'note': $vote.last_error}) }}</div>
+                                </xf:if>
 
-                                &lt;div class="buttonGroup" style="margin-top:10px"&gt;
-                                    &lt;xf:if is="$vote.status != 'rejected' &amp;&amp; $vote.status != 'processing'"&gt;
-                                        &lt;xf:form action="{{ link('warext-minecraft/vote-moderate') }}" ajax="true" class="buttonGroup"&gt;
-                                            &lt;xf:hiddenval name="vote_id" value="{$vote.vote_id}" /&gt;
-                                            &lt;xf:hiddenval name="operation" value="reject" /&gt;
-                                            &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0417') }}&lt;/xf:button&gt;
-                                        &lt;/xf:form&gt;
-                                    &lt;xf:elseif is="$vote.status == 'rejected'" /&gt;
-                                        &lt;xf:form action="{{ link('warext-minecraft/vote-moderate') }}" ajax="true" class="buttonGroup"&gt;
-                                            &lt;xf:hiddenval name="vote_id" value="{$vote.vote_id}" /&gt;
-                                            &lt;xf:hiddenval name="operation" value="restore" /&gt;
-                                            &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_0418') }}&lt;/xf:button&gt;
-                                        &lt;/xf:form&gt;
-                                    &lt;xf:else /&gt;
-                                        &lt;span class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0419') }}&lt;/span&gt;
-                                    &lt;/xf:if&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0420') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+                                <div class="buttonGroup" style="margin-top:10px">
+                                    <xf:if is="$vote.status != 'rejected' &amp;&amp; $vote.status != 'processing'">
+                                        <xf:form action="{{ link('warext-minecraft/vote-moderate') }}" ajax="true" class="buttonGroup">
+                                            <xf:hiddenval name="vote_id" value="{$vote.vote_id}" />
+                                            <xf:hiddenval name="operation" value="reject" />
+                                            <xf:button type="submit" class="button--link">{{ phrase('warext_mc_i18n_0417') }}</xf:button>
+                                        </xf:form>
+                                    <xf:elseif is="$vote.status == 'rejected'" />
+                                        <xf:form action="{{ link('warext-minecraft/vote-moderate') }}" ajax="true" class="buttonGroup">
+                                            <xf:hiddenval name="vote_id" value="{$vote.vote_id}" />
+                                            <xf:hiddenval name="operation" value="restore" />
+                                            <xf:button type="submit">{{ phrase('warext_mc_i18n_0418') }}</xf:button>
+                                        </xf:form>
+                                    <xf:else />
+                                        <span class="contentRow-minor">{{ phrase('warext_mc_i18n_0419') }}</span>
+                                    </xf:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0420') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
 
-&lt;xf:pagenav
+<xf:pagenav
     page="$page"
     perpage="$perPage"
     total="$total"
     link="warext-minecraft/suspect-votes"
-    params="{{ {'min_score': $minScore, 'server_id': $serverId} }}" /&gt;
+    params="{{ {'min_score': $minScore, 'server_id': $serverId} }}" />

@@ -1,100 +1,100 @@
-&lt;xf:title&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:title&gt;
+<xf:title>{{ phrase('nav.warextMcServers') }}</xf:title>
 
-&lt;xf:pageaction&gt;
-    &lt;xf:form action="{{ link('warext-minecraft/ranking') }}" class="buttonGroup"&gt;
-        &lt;xf:button type="submit" class="button--primary"&gt;{{ phrase('warext_mc_i18n_0360') }}&lt;/xf:button&gt;
-    &lt;/xf:form&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/sponsors') }}"&gt;Sponsorlar&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/achievements') }}"&gt;{{ phrase('warext_mc_i18n_0282') }}&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/audit') }}"&gt;{{ phrase('admin_navigation.warextMinecraftAudit') }}&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/suspect-votes') }}"&gt;{{ phrase('warext_mc_i18n_0361') }}&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/votes') }}"&gt;{{ phrase('warext_mc_i18n_0362') }}&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}"&gt;Bekleyenler&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'active'}) }}"&gt;Aktifler&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'suspended'}) }}"&gt;{{ phrase('warext_mc_i18n_0363') }}&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'rejected'}) }}"&gt;Reddedilenler&lt;/xf:button&gt;
-    &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'all'}) }}"&gt;{{ phrase('warext_mc_i18n_0233') }}&lt;/xf:button&gt;
-&lt;/xf:pageaction&gt;
+<xf:pageaction>
+    <xf:form action="{{ link('warext-minecraft/ranking') }}" class="buttonGroup">
+        <xf:button type="submit" class="button--primary">{{ phrase('warext_mc_i18n_0360') }}</xf:button>
+    </xf:form>
+    <xf:button href="{{ link('warext-minecraft/sponsors') }}">Sponsorlar</xf:button>
+    <xf:button href="{{ link('warext-minecraft/achievements') }}">{{ phrase('warext_mc_i18n_0282') }}</xf:button>
+    <xf:button href="{{ link('warext-minecraft/audit') }}">{{ phrase('admin_navigation.warextMinecraftAudit') }}</xf:button>
+    <xf:button href="{{ link('warext-minecraft/suspect-votes') }}">{{ phrase('warext_mc_i18n_0361') }}</xf:button>
+    <xf:button href="{{ link('warext-minecraft/votes') }}">{{ phrase('warext_mc_i18n_0362') }}</xf:button>
+    <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}">Bekleyenler</xf:button>
+    <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'active'}) }}">Aktifler</xf:button>
+    <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'suspended'}) }}">{{ phrase('warext_mc_i18n_0363') }}</xf:button>
+    <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'rejected'}) }}">Reddedilenler</xf:button>
+    <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'all'}) }}">{{ phrase('warext_mc_i18n_0233') }}</xf:button>
+</xf:pageaction>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0364') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$servers is not empty"&gt;
-                &lt;xf:foreach loop="$servers" value="$server"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;{$server.title}&lt;/strong&gt;
-                                    &lt;span class="label"&gt;{$server.state}&lt;/span&gt;
-                                    &lt;xf:if is="$server.rank_popular"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_dyn_popular_rank', {'rank': $server.rank_popular}) }}&lt;/span&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.rank_trending"&gt;&lt;span class="label label--orange"&gt;{{ phrase('warext_mc_dyn_trend_rank', {'rank': $server.rank_trending}) }}&lt;/span&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.is_verified"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.is_online"&gt;
-                                        &lt;span class="label label--green"&gt;Online&lt;/span&gt;
-                                    &lt;xf:else /&gt;
-                                        &lt;span class="label label--red"&gt;Offline&lt;/span&gt;
-                                    &lt;/xf:if&gt;
-                                &lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0364') }}</div>
+        <div class="block-body">
+            <xf:if is="$servers is not empty">
+                <xf:foreach loop="$servers" value="$server">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{$server.title}</strong>
+                                    <span class="label">{$server.state}</span>
+                                    <xf:if is="$server.rank_popular"><span class="label label--primary">{{ phrase('warext_mc_dyn_popular_rank', {'rank': $server.rank_popular}) }}</span></xf:if>
+                                    <xf:if is="$server.rank_trending"><span class="label label--orange">{{ phrase('warext_mc_dyn_trend_rank', {'rank': $server.rank_trending}) }}</span></xf:if>
+                                    <xf:if is="$server.is_verified"><span class="label label--green">{{ phrase('warext_mc_i18n_0130') }}</span></xf:if>
+                                    <xf:if is="$server.is_online">
+                                        <span class="label label--green">Online</span>
+                                    <xf:else />
+                                        <span class="label label--red">Offline</span>
+                                    </xf:if>
+                                </div>
 
-                                &lt;div class="contentRow-minor"&gt;
+                                <div class="contentRow-minor">
                                     {$server.host}:{$server.port}
-                                    &lt;xf:if is="$server.Owner"&gt; · {{ phrase('warext_mc_dyn_owner_label', {'username': $server.Owner.username}) }}&lt;/xf:if&gt;
+                                    <xf:if is="$server.Owner"> · {{ phrase('warext_mc_dyn_owner_label', {'username': $server.Owner.username}) }}</xf:if>
                                     {{ phrase('warext_mc_i18n_type_prefix') }} {$server.server_type}
                                     · Oy: {$server.vote_count_month}
                                     · Benzersiz: {$server.unique_voters_month}
-                                &lt;/div&gt;
+                                </div>
 
-                                &lt;div class="contentRow-minor"&gt;
+                                <div class="contentRow-minor">
                                     Oyuncu: {$server.players_online}/{$server.players_max}
                                     · Ping: {$server.ping_ms} ms
                                     · Uptime: {$server.uptime_percent}%
                                     · 24s oy: {$server.votes_24h}
                                     {{ phrase('warext_mc_i18n_popularity_prefix') }} {$server.popular_score}
                                     · Trend: {$server.trend_score}
-                                    &lt;xf:if is="$server.detected_version"&gt; {{ phrase('warext_mc_i18n_version_prefix') }} {$server.detected_version}&lt;/xf:if&gt;
-                                &lt;/div&gt;
+                                    <xf:if is="$server.detected_version"> {{ phrase('warext_mc_i18n_version_prefix') }} {$server.detected_version}</xf:if>
+                                </div>
 
-                                &lt;div class="contentRow-minor"&gt;
-                                    Eklenme: &lt;xf:date time="$server.created_date" /&gt;
-                                    &lt;xf:if is="$server.last_ping_date"&gt; {{ phrase('warext_mc_i18n_last_check') }} &lt;xf:date time="$server.last_ping_date" /&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.ranking_updated_date"&gt; {{ phrase('warext_mc_i18n_0365') }} &lt;xf:date time="$server.ranking_updated_date" /&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
+                                <div class="contentRow-minor">
+                                    Eklenme: <xf:date time="$server.created_date" />
+                                    <xf:if is="$server.last_ping_date"> {{ phrase('warext_mc_i18n_last_check') }} <xf:date time="$server.last_ping_date" /></xf:if>
+                                    <xf:if is="$server.ranking_updated_date"> {{ phrase('warext_mc_i18n_0365') }} <xf:date time="$server.ranking_updated_date" /></xf:if>
+                                </div>
 
-                                &lt;xf:if is="$server.motd"&gt;
-                                    &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_motd_label', {'motd': $server.motd}) }}&lt;/div&gt;
-                                &lt;/xf:if&gt;
+                                <xf:if is="$server.motd">
+                                    <div class="contentRow-minor">{{ phrase('warext_mc_dyn_motd_label', {'motd': $server.motd}) }}</div>
+                                </xf:if>
 
-                                &lt;xf:if is="$server.last_ping_error"&gt;
-                                    &lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;{{ phrase('warext_mc_dyn_ping_error', {'error': $server.last_ping_error}) }}&lt;/div&gt;
-                                &lt;/xf:if&gt;
+                                <xf:if is="$server.last_ping_error">
+                                    <div class="blockMessage blockMessage--error" style="margin-top:8px">{{ phrase('warext_mc_dyn_ping_error', {'error': $server.last_ping_error}) }}</div>
+                                </xf:if>
 
-                                &lt;div class="buttonGroup buttonGroup--alignOpposite" style="margin-top:10px"&gt;
-                                    &lt;xf:form action="{{ link('warext-minecraft/ping') }}" class="buttonGroup"&gt;
-                                        &lt;xf:hiddenval name="server_id" value="{$server.server_id}" /&gt;
-                                        &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_ping_test') }}&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
+                                <div class="buttonGroup buttonGroup--alignOpposite" style="margin-top:10px">
+                                    <xf:form action="{{ link('warext-minecraft/ping') }}" class="buttonGroup">
+                                        <xf:hiddenval name="server_id" value="{$server.server_id}" />
+                                        <xf:button type="submit">{{ phrase('warext_mc_i18n_ping_test') }}</xf:button>
+                                    </xf:form>
 
-                                    &lt;xf:form action="{{ link('warext-minecraft/state') }}" ajax="true" class="buttonGroup"&gt;
-                                        &lt;xf:hiddenval name="server_id" value="{$server.server_id}" /&gt;
-                                        &lt;xf:button type="submit" name="state" value="active" class="button--primary"&gt;Onayla&lt;/xf:button&gt;
-                                        &lt;xf:button type="submit" name="state" value="suspended"&gt;{{ phrase('warext_mc_i18n_0366') }}&lt;/xf:button&gt;
-                                        &lt;xf:button type="submit" name="state" value="rejected"&gt;{{ phrase('warext_mc_i18n_0367') }}&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
+                                    <xf:form action="{{ link('warext-minecraft/state') }}" ajax="true" class="buttonGroup">
+                                        <xf:hiddenval name="server_id" value="{$server.server_id}" />
+                                        <xf:button type="submit" name="state" value="active" class="button--primary">Onayla</xf:button>
+                                        <xf:button type="submit" name="state" value="suspended">{{ phrase('warext_mc_i18n_0366') }}</xf:button>
+                                        <xf:button type="submit" name="state" value="rejected">{{ phrase('warext_mc_i18n_0367') }}</xf:button>
+                                    </xf:form>
 
-                                    &lt;xf:form action="{{ link('warext-minecraft/delete') }}" ajax="true" data-xf-init="delete" class="buttonGroup"&gt;
-                                        &lt;xf:hiddenval name="server_id" value="{$server.server_id}" /&gt;
-                                        &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0343') }}&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0368') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+                                    <xf:form action="{{ link('warext-minecraft/delete') }}" ajax="true" data-xf-init="delete" class="buttonGroup">
+                                        <xf:hiddenval name="server_id" value="{$server.server_id}" />
+                                        <xf:button type="submit" class="button--link">{{ phrase('warext_mc_i18n_0343') }}</xf:button>
+                                    </xf:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0368') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>

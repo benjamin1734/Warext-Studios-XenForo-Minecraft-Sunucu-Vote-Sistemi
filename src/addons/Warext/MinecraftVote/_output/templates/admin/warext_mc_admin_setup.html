@@ -1,93 +1,93 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0369') }}&lt;/xf:title&gt;
+<xf:title>{{ phrase('warext_mc_i18n_0369') }}</xf:title>
 
-&lt;div class="blockMessage blockMessage--important"&gt;
+<div class="blockMessage blockMessage--important">
     {{ phrase('warext_mc_dyn_setup_intro') }}
-&lt;/div&gt;
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_system_status') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_0370') }}&lt;/strong&gt; {$counts.categories} ·
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_0371') }}&lt;/strong&gt; {$counts.pending} ·
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_0372') }}&lt;/strong&gt; {$counts.active}
-            &lt;/div&gt;
-            &lt;div class="block-row"&gt;
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_0373') }}&lt;/strong&gt; &lt;xf:if is="$captchaEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_0374') }}&lt;/strong&gt; &lt;xf:if is="$requireVerified"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_guest_vote') }}&lt;/strong&gt; &lt;xf:if is="$allowGuests"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_0375') }}&lt;/strong&gt; &lt;xf:if is="$sponsorEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_system_status') }}</h2>
+        <div class="block-body">
+            <div class="block-row">
+                <strong>{{ phrase('warext_mc_i18n_0370') }}</strong> {$counts.categories} ·
+                <strong>{{ phrase('warext_mc_i18n_0371') }}</strong> {$counts.pending} ·
+                <strong>{{ phrase('warext_mc_i18n_0372') }}</strong> {$counts.active}
+            </div>
+            <div class="block-row">
+                <strong>{{ phrase('warext_mc_i18n_0373') }}</strong> <xf:if is="$captchaEnabled">{{ phrase('warext_mc_i18n_0155') }}<xf:else />{{ phrase('warext_mc_i18n_0156') }}</xf:if> ·
+                <strong>{{ phrase('warext_mc_i18n_0374') }}</strong> <xf:if is="$requireVerified">{{ phrase('warext_mc_i18n_0155') }}<xf:else />{{ phrase('warext_mc_i18n_0156') }}</xf:if> ·
+                <strong>{{ phrase('warext_mc_i18n_guest_vote') }}</strong> <xf:if is="$allowGuests">{{ phrase('warext_mc_i18n_0155') }}<xf:else />{{ phrase('warext_mc_i18n_0156') }}</xf:if> ·
+                <strong>{{ phrase('warext_mc_i18n_0375') }}</strong> <xf:if is="$sponsorEnabled">{{ phrase('warext_mc_i18n_0155') }}<xf:else />{{ phrase('warext_mc_i18n_0156') }}</xf:if>
+            </div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_setup_general') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_setup_general') }}</h2>
+        <div class="block-body">
+            <div class="block-row">
                 {{ phrase('warext_mc_dyn_setup_options') }}
-            &lt;/div&gt;
-            &lt;div class="block-row"&gt;
-                JSON API: &lt;xf:if is="$publicApiEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; {{ phrase('warext_mc_i18n_https_webhook') }} &lt;xf:if is="$webhookEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+            </div>
+            <div class="block-row">
+                JSON API: <xf:if is="$publicApiEnabled">{{ phrase('warext_mc_i18n_0155') }}<xf:else />{{ phrase('warext_mc_i18n_0156') }}</xf:if> {{ phrase('warext_mc_i18n_https_webhook') }} <xf:if is="$webhookEnabled">{{ phrase('warext_mc_i18n_0155') }}<xf:else />{{ phrase('warext_mc_i18n_0156') }}</xf:if>
+            </div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0377') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_permissions_path') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_permission_group_name') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0380') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0381') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0382') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0383') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0384') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0385') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0386') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_can_favorite') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0387') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_can_report') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0388') }}&lt;/div&gt;
-            &lt;div class="block-row block-rowMessage block-rowMessage--warning"&gt;{{ phrase('warext_mc_i18n_0389') }}&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_0377') }}</h2>
+        <div class="block-body">
+            <div class="block-row">{{ phrase('warext_mc_i18n_permissions_path') }} <strong>{{ phrase('warext_mc_i18n_permission_group_name') }}</strong> {{ phrase('warext_mc_i18n_0380') }}</div>
+            <div class="block-row"><strong>{{ phrase('warext_mc_i18n_0381') }}</strong> {{ phrase('warext_mc_i18n_0382') }}</div>
+            <div class="block-row"><strong>{{ phrase('warext_mc_i18n_0383') }}</strong> {{ phrase('warext_mc_i18n_0384') }}</div>
+            <div class="block-row"><strong>{{ phrase('warext_mc_i18n_0385') }}</strong> {{ phrase('warext_mc_i18n_0386') }}</div>
+            <div class="block-row"><strong>{{ phrase('warext_mc_i18n_can_favorite') }}</strong> {{ phrase('warext_mc_i18n_0387') }}</div>
+            <div class="block-row"><strong>{{ phrase('warext_mc_i18n_can_report') }}</strong> {{ phrase('warext_mc_i18n_0388') }}</div>
+            <div class="block-row block-rowMessage block-rowMessage--warning">{{ phrase('warext_mc_i18n_0389') }}</div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_setup_categories') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_0390') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_0391') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0392') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;xf:button href="{{ link('warext-minecraft/categories') }}" class="button--primary"&gt;{{ phrase('warext_mc_i18n_0393') }}&lt;/xf:button&gt;&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_setup_categories') }}</h2>
+        <div class="block-body">
+            <div class="block-row">{{ phrase('warext_mc_i18n_0390') }} <strong>{{ phrase('warext_mc_i18n_0391') }}</strong> {{ phrase('warext_mc_i18n_0392') }}</div>
+            <div class="block-row"><xf:button href="{{ link('warext-minecraft/categories') }}" class="button--primary">{{ phrase('warext_mc_i18n_0393') }}</xf:button></div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0394') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_java_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0395') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_bedrock_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0396') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_crossplay_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_java_bedrock_combined') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_0397') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_0279') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0398') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}" class="button--primary"&gt;{{ phrase('warext_mc_i18n_pending_servers') }}&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'all'}) }}"&gt;{{ phrase('warext_mc_i18n_0399') }}&lt;/xf:button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_0394') }}</h2>
+        <div class="block-body">
+            <div class="block-row"><strong>{{ phrase('warext_mc_i18n_java_label') }}</strong> {{ phrase('warext_mc_i18n_0395') }}</div>
+            <div class="block-row"><strong>{{ phrase('warext_mc_i18n_bedrock_label') }}</strong> {{ phrase('warext_mc_i18n_0396') }}</div>
+            <div class="block-row"><strong>{{ phrase('warext_mc_i18n_crossplay_label') }}</strong> {{ phrase('warext_mc_i18n_java_bedrock_combined') }}</div>
+            <div class="block-row">{{ phrase('warext_mc_i18n_0397') }} <strong>{{ phrase('warext_mc_i18n_0279') }}</strong> {{ phrase('warext_mc_i18n_0398') }}</div>
+            <div class="block-row">
+                <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}" class="button--primary">{{ phrase('warext_mc_i18n_pending_servers') }}</xf:button>
+                <xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'all'}) }}">{{ phrase('warext_mc_i18n_0399') }}</xf:button>
+            </div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0400') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_0401') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_0272') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0402') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;{{ phrase('warext_mc_dyn_delivery_help') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/health') }}"&gt;{{ phrase('admin_navigation.warextMinecraftHealth') }}&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes') }}"&gt;{{ phrase('warext_mc_i18n_0362') }}&lt;/xf:button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_0400') }}</h2>
+        <div class="block-body">
+            <div class="block-row">{{ phrase('warext_mc_i18n_0401') }} <strong>{{ phrase('warext_mc_i18n_0272') }}</strong> {{ phrase('warext_mc_i18n_0402') }}</div>
+            <div class="block-row">{{ phrase('warext_mc_dyn_delivery_help') }}</div>
+            <div class="block-row">
+                <xf:button href="{{ link('warext-minecraft/health') }}">{{ phrase('admin_navigation.warextMinecraftHealth') }}</xf:button>
+                <xf:button href="{{ link('warext-minecraft/votes') }}">{{ phrase('warext_mc_i18n_0362') }}</xf:button>
+            </div>
+        </div>
+    </div>
+</div>
