@@ -539,4 +539,63 @@
   <phrase title="warext_mc_i18n_retry_later" version_id="1020010" version_string="1.2.1"><![CDATA[Tekrar Denenecek]]></phrase>
   <phrase title="warext_mc_i18n_next_attempt_lease" version_id="1020010" version_string="1.2.1"><![CDATA[· Sonraki deneme / lease:]]></phrase>
   <phrase title="warext_mc_i18n_delivery_bullet" version_id="1020010" version_string="1.2.1"><![CDATA[· Teslim:]]></phrase>
+  <phrase title="warext_mc_dyn_server_statistics_title" version_id="1020010" version_string="1.2.1"><![CDATA[{server} - Sunucu İstatistikleri]]></phrase>
+  <phrase title="warext_mc_dyn_new_updates_x" version_id="1020010" version_string="1.2.1"><![CDATA[{count} yeni güncelleme]]></phrase>
+  <phrase title="warext_mc_i18n_disable_notifications" version_id="1020010" version_string="1.2.1"><![CDATA[Bildirimleri Kapat]]></phrase>
+  <phrase title="warext_mc_dyn_transfer_ownership_title" version_id="1020010" version_string="1.2.1"><![CDATA[{server} - Sahipliği Devret]]></phrase>
+  <phrase title="warext_mc_dyn_transfer_warning" version_id="1020010" version_string="1.2.1"><![CDATA[Sahiplik devrinden sonra mevcut hesabınızın sunucu yönetim erişimi otomatik olarak kaldırılır. Sunucu sahiplik doğrulaması güvenlik nedeniyle sıfırlanır ve yeni sahibin yeniden doğrulama yapması gerekir.]]></phrase>
+  <phrase title="warext_mc_dyn_reviews_title" version_id="1020010" version_string="1.2.1"><![CDATA[{server} - Değerlendirmeler]]></phrase>
+  <phrase title="warext_mc_dyn_review_count_x" version_id="1020010" version_string="1.2.1"><![CDATA[{count} değerlendirme]]></phrase>
+  <phrase title="warext_mc_dyn_review_scores" version_id="1020010" version_string="1.2.1"><![CDATA[Oynanış: {gameplay} · Yetkili: {staff} · Performans: {performance} · Topluluk: {community} · Özgünlük: {originality}]]></phrase>
+  <phrase title="warext_mc_dyn_server_month_summary" version_id="1020010" version_string="1.2.1"><![CDATA[Bu ay {votes} oy · {unique} benzersiz seçmen · {players} online oyuncu]]></phrase>
+  <phrase title="warext_mc_dyn_season_totals" version_id="1020010" version_string="1.2.1"><![CDATA[{votes} oy · {unique} benzersiz seçmen · {servers} sunucu]]></phrase>
+  <phrase title="warext_mc_dyn_season_summary_title" version_id="1020010" version_string="1.2.1"><![CDATA[{season} Sezon Özeti]]></phrase>
+  <phrase title="warext_mc_dyn_season_ranked_totals" version_id="1020010" version_string="1.2.1"><![CDATA[{votes} toplam oy · {unique} benzersiz seçmen · {servers} sıralanan sunucu]]></phrase>
+  <phrase title="warext_mc_dyn_rank_summary" version_id="1020010" version_string="1.2.1"><![CDATA[{votes} oy · {unique} benzersiz seçmen · Peak {peak} oyuncu · Uptime {uptime}% · Sezon puanı {score}]]></phrase>
+  <phrase title="warext_mc_dyn_edit_server_title" version_id="1020010" version_string="1.2.1"><![CDATA[{server} - Sunucuyu Düzenle]]></phrase>
+  <phrase title="warext_mc_dyn_results_x" version_id="1020010" version_string="1.2.1"><![CDATA[{count} sonuç]]></phrase>
+  <phrase title="warext_mc_dyn_verify_ownership_title" version_id="1020010" version_string="1.2.1"><![CDATA[{server} - Sunucu Sahipliğini Doğrula]]></phrase>
+  <phrase title="warext_mc_dyn_ownership_verified" version_id="1020010" version_string="1.2.1"><![CDATA[Bu sunucunun sahipliği doğrulanmış durumda.]]></phrase>
+  <phrase title="warext_mc_i18n_verification_date" version_id="1020010" version_string="1.2.1"><![CDATA[Doğrulama tarihi:]]></phrase>
+  <phrase title="warext_mc_dyn_code_valid_hours" version_id="1020010" version_string="1.2.1"><![CDATA[Kod {hours} saat geçerlidir.]]></phrase>
+  <phrase title="warext_mc_dyn_restart_verify" version_id="1020010" version_string="1.2.1"><![CDATA[Değişiklik gerekiyorsa sunucuyu yeniden başlatın ve ardından aşağıdaki kontrol düğmesini kullanın.]]></phrase>
+  <phrase title="warext_mc_dyn_reviews_x" version_id="1020010" version_string="1.2.1"><![CDATA[Değerlendirmeler ({count})]]></phrase>
+  <phrase title="warext_mc_dyn_vote_cooldown" version_id="1020010" version_string="1.2.1"><![CDATA[Bu sunucuya yeniden oy verebilmek için {hours} saat beklemeniz gerekir.]]></phrase>
+  <phrase title="warext_mc_dyn_vote_delivery_info" version_id="1020010" version_string="1.2.1"><![CDATA[Oy başarıyla kaydedildiğinde sunucunun Votifier entegrasyonu aktifse oyun içi ödül teslimatı kuyruğa alınır.]]></phrase>
+  <phrase title="warext_mc_dyn_link_account_required" version_id="1020010" version_string="1.2.1"><![CDATA[Oy verebilmek için önce hesabınıza bir Minecraft hesabı bağlayıp doğrulamanız gerekiyor.]]></phrase>
+  <phrase title="warext_mc_dyn_sponsor_active_until" version_id="1020010" version_string="1.2.1"><![CDATA[Bu sunucunun aktif sponsorluğu {date} tarihine kadar devam ediyor. Yeni satın alım mevcut sürenin sonuna eklenir.]]></phrase>
+  <phrase title="warext_mc_dyn_sponsor_payment_info" version_id="1020010" version_string="1.2.1"><![CDATA[Sponsorlu sunucular liste üstünde ayrı olarak gösterilir. Ödeme XenForo'nun yapılandırılmış Payment Profile sistemi üzerinden güvenli biçimde işlenir.]]></phrase>
+  <phrase title="warext_mc_dyn_sponsor_price" version_id="1020010" version_string="1.2.1"><![CDATA[{days} gün — {price} {currency}]]></phrase>
+  <phrase title="warext_mc_dyn_thread_server_notice" version_id="1020010" version_string="1.2.1"><![CDATA[Sunucu adresini boş bırakırsanız yalnızca normal tanıtım konusu oluşturulur. Adres girerseniz konu başlığı ve ilk mesaj kullanılarak {category} kategorisinde onay bekleyen bir vote kaydı oluşturulur.]]></phrase>
+  <phrase title="warext_mc_dyn_linked_server_summary" version_id="1020010" version_string="1.2.1"><![CDATA[{host}:{port} · {online}/{max} oyuncu · {votes} aylık oy]]></phrase>
+  <phrase title="warext_mc_dyn_updates_title" version_id="1020010" version_string="1.2.1"><![CDATA[{server} - Güncellemeler]]></phrase>
+  <phrase title="warext_mc_dyn_votifier_title" version_id="1020010" version_string="1.2.1"><![CDATA[{server} - NuVotifier Ayarları]]></phrase>
+  <phrase title="warext_mc_dyn_votifier_info" version_id="1020010" version_string="1.2.1"><![CDATA[Oylar platformda kaydedildikten sonra bu bağlantı üzerinden Minecraft sunucunuza gönderilir. Token şifreli saklanır ve kaydedildikten sonra arayüzde tekrar gösterilmez.]]></phrase>
+  <phrase title="warext_mc_dyn_edit_achievement" version_id="1020010" version_string="1.2.1"><![CDATA[Başarımı Düzenle: {title}]]></phrase>
+  <phrase title="warext_mc_dyn_achievement_meta" version_id="1020010" version_string="1.2.1"><![CDATA[Metrik: {metric} · Eşik: {threshold} · Sıra: {order}]]></phrase>
+  <phrase title="warext_mc_i18n_actor" version_id="1020010" version_string="1.2.1"><![CDATA[İşlemi yapan:]]></phrase>
+  <phrase title="warext_mc_dyn_edit_category" version_id="1020010" version_string="1.2.1"><![CDATA[Kategori Düzenle: {title}]]></phrase>
+  <phrase title="warext_mc_dyn_category_usage" version_id="1020010" version_string="1.2.1"><![CDATA[Kısa ad: {slug} · Kullanım: {count} sunucu]]></phrase>
+  <phrase title="warext_mc_dyn_health_stale" version_id="1020010" version_string="1.2.1"><![CDATA[Takılı processing kaydı: {processing} · Çevrimdışı aktif sunucu: {offline} · 1 saattir kontrol edilmemiş aktif sunucu: {stale}]]></phrase>
+  <phrase title="warext_mc_dyn_user_id" version_id="1020010" version_string="1.2.1"><![CDATA[Kullanıcı #{id}]]></phrase>
+  <phrase title="warext_mc_dyn_popular_rank" version_id="1020010" version_string="1.2.1"><![CDATA[Popüler #{rank}]]></phrase>
+  <phrase title="warext_mc_i18n_type_prefix" version_id="1020010" version_string="1.2.1"><![CDATA[· Tür:]]></phrase>
+  <phrase title="warext_mc_i18n_popularity_prefix" version_id="1020010" version_string="1.2.1"><![CDATA[· Popülerlik:]]></phrase>
+  <phrase title="warext_mc_i18n_version_prefix" version_id="1020010" version_string="1.2.1"><![CDATA[· Sürüm:]]></phrase>
+  <phrase title="warext_mc_dyn_ping_error" version_id="1020010" version_string="1.2.1"><![CDATA[Son ping hatası: {error}]]></phrase>
+  <phrase title="warext_mc_dyn_setup_intro" version_id="1020010" version_string="1.2.1"><![CDATA[Bu sayfa eklentiyi ilk kez kuran yöneticiler için başlangıç merkezidir. Minecraft kategorileri XenForo forum kategorilerine bağlı değildir; sunucu listesindeki filtreleme ve sınıflandırma etiketleridir.]]></phrase>
+  <phrase title="warext_mc_dyn_setup_options" version_id="1020010" version_string="1.2.1"><![CDATA[Admin CP → Setup → Options bölümünde Warext Minecraft Sunucu & Vote seçenek grubunu açın. Oy bekleme süresi, CAPTCHA, misafir oyları, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir.]]></phrase>
+  <phrase title="warext_mc_dyn_delivery_help" version_id="1020010" version_string="1.2.1"><![CDATA[Teslimat sorunlarını Admin CP → Minecraft Sunucu & Vote → Sistem Sağlığı ve Oy Teslimat Kuyruğu ekranlarından takip edebilirsiniz.]]></phrase>
+  <phrase title="warext_mc_dyn_deleted_server" version_id="1020010" version_string="1.2.1"><![CDATA[Silinmiş sunucu #{id}]]></phrase>
+  <phrase title="warext_mc_i18n_start_prefix" version_id="1020010" version_string="1.2.1"><![CDATA[Başlangıç:]]></phrase>
+  <phrase title="warext_mc_dyn_order_x" version_id="1020010" version_string="1.2.1"><![CDATA[Sıra: {order}]]></phrase>
+  <phrase title="warext_mc_i18n_created_by" version_id="1020010" version_string="1.2.1"><![CDATA[Oluşturan:]]></phrase>
+  <phrase title="warext_mc_i18n_last_change" version_id="1020010" version_string="1.2.1"><![CDATA[Son değişiklik:]]></phrase>
+  <phrase title="warext_mc_dyn_status_processing" version_id="1020010" version_string="1.2.1"><![CDATA[İşleniyor ({count})]]></phrase>
+  <phrase title="warext_mc_dyn_status_failed" version_id="1020010" version_string="1.2.1"><![CDATA[Başarısız ({count})]]></phrase>
+  <phrase title="warext_mc_dyn_status_skipped" version_id="1020010" version_string="1.2.1"><![CDATA[Atlandı ({count})]]></phrase>
+  <phrase title="warext_mc_dyn_status_all" version_id="1020010" version_string="1.2.1"><![CDATA[Tümü ({count})]]></phrase>
+  <phrase title="warext_mc_i18n_vote_time" version_id="1020010" version_string="1.2.1"><![CDATA[Oy zamanı:]]></phrase>
+  <phrase title="warext_mc_i18n_notifications_off" version_id="1020010" version_string="1.2.1"><![CDATA[Bildirimleri Kapat]]></phrase>
+  <phrase title="warext_mc_i18n_skipped" version_id="1020010" version_string="1.2.1"><![CDATA[Atlandı]]></phrase>
 </phrases>
