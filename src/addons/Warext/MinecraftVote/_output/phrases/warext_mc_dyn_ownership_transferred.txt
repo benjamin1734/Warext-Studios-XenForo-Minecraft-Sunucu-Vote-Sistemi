@@ -1,0 +1,1 @@
+Sunucu sahipliği {username} kullanıcısına devredildi. Sahiplik doğrulaması güvenlik nedeniyle sıfırlandı.

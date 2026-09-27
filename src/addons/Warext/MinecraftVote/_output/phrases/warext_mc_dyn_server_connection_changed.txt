@@ -1,0 +1,1 @@
+Sunucu bağlantı bilgileri değişti. Sahiplik doğrulaması sıfırlandı ve kayıt yeniden yönetici onayına gönderildi.

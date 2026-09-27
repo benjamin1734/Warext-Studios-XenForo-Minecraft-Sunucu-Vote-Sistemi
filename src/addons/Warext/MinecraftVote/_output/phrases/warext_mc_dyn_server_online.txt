@@ -1,0 +1,1 @@
+Sunucu çevrimiçi. Ping: {ping} ms, Oyuncu: {online}/{max}, Sürüm: {version}

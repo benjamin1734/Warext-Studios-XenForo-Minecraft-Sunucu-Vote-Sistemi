@@ -1,0 +1,1 @@
+NuVotifier V2 test oyu başarıyla gönderildi. Bağlantı: {connection}

@@ -1,0 +1,1 @@
+{count} aktif sunucu için Popüler ve Trend sıralamaları yeniden hesaplandı.

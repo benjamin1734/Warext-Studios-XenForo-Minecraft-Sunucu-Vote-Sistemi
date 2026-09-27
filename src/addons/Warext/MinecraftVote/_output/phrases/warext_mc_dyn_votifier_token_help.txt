@@ -1,0 +1,1 @@
+NuVotifier config dosyanızdaki default veya Warext servis tokenını girin.

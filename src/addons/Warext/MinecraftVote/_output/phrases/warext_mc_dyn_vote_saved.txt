@@ -1,0 +1,1 @@
+Oyunuz kaydedildi. Sunucu ödül entegrasyonu aktifse ödül teslimatı kuyruğa alındı.

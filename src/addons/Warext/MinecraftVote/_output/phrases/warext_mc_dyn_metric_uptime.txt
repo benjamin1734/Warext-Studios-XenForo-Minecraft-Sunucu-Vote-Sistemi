@@ -1,0 +1,1 @@
+Son 30 günlük uptime (basis point, %99 = 9900; en az 100 kontrol)
