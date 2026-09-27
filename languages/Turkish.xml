@@ -865,4 +865,7 @@
   <phrase title="warext_mc_dyn_webhook_https_only" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Webhook yalnızca geçerli HTTPS adreslerine gönderilebilir.]]></phrase>
   <phrase title="warext_mc_dyn_webhook_userinfo_forbidden" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Webhook URL içinde kullanıcı adı veya parola kullanılamaz.]]></phrase>
   <phrase title="warext_mc_dyn_sponsor_purchasable_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[{server} sponsorluğu]]></phrase>
+  <phrase title="warext_mc_dyn_max_categories" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bir sunucu en fazla 5 kategoriye eklenebilir.]]></phrase>
+  <phrase title="warext_mc_dyn_max_game_modes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[En fazla 12 oyun modu girebilirsiniz.]]></phrase>
+  <phrase title="warext_mc_dyn_gif_save_failed" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Hareketli banner optimize edilerek kaydedilemedi.]]></phrase>
 </language>
