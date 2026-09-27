@@ -29,7 +29,7 @@ class Sponsor extends AbstractController
             $server = $this->em()->find('Warext\MinecraftVote:Server', $input['server_id']);
             if (!$server || $server->state !== 'active')
             {
-                return $this->error('Sponsor yalnızca aktif bir sunucuya atanabilir.', 400);
+                return $this->error(\XF::phrase('warext_mc_dyn_sponsor_active_only'), 400);
             }
 
             try
@@ -45,12 +45,12 @@ class Sponsor extends AbstractController
 
             if ($endDate && $endDate <= $startDate)
             {
-                return $this->error('Sponsor bitiş tarihi başlangıç tarihinden sonra olmalıdır.', 400);
+                return $this->error(\XF::phrase('warext_mc_dyn_sponsor_end_after_start'), 400);
             }
 
             $sponsor = $this->em()->create('Warext\MinecraftVote:Sponsor');
             $sponsor->server_id = $server->server_id;
-            $sponsor->label = trim($input['label']) ?: 'Sponsorlu';
+            $sponsor->label = trim($input['label']) ?: (string)\XF::phrase('warext_mc_dyn_sponsored_label');
             $sponsor->placement = 'list_top';
             $sponsor->start_date = $startDate;
             $sponsor->end_date = $endDate;
@@ -74,7 +74,7 @@ class Sponsor extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('warext-minecraft/sponsors'),
-                'Sponsorlu gösterim oluşturuldu.'
+                \XF::phrase('warext_mc_dyn_sponsor_created')
             );
         }
 
@@ -152,7 +152,7 @@ class Sponsor extends AbstractController
 
         return $this->redirect(
             $this->buildLink('warext-minecraft/sponsors'),
-            'Sponsor kaydı silindi.'
+            \XF::phrase('warext_mc_dyn_sponsor_deleted')
         );
     }
 
@@ -184,7 +184,7 @@ class Sponsor extends AbstractController
 
         if ($existingId)
         {
-            throw new PrintableException('Bu sunucunun seçilen tarih aralığıyla çakışan başka bir sponsor kaydı var.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_sponsor_overlap'));
         }
     }
 
@@ -199,7 +199,7 @@ class Sponsor extends AbstractController
         $timestamp = strtotime($value);
         if ($timestamp === false || $timestamp <= 0)
         {
-            throw new PrintableException('Geçerli bir tarih girin. Örnek: 2026-09-01 18:00');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_sponsor_date_example'));
         }
 
         return $timestamp;
