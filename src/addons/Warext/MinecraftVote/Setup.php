@@ -108,7 +108,7 @@ class Setup extends AbstractSetup
             ['Factions', 'factions', '', 50, 1], ['Towny', 'towny', '', 60, 1],
             ['Prison', 'prison', '', 70, 1], ['SMP', 'smp', '', 80, 1],
             ['Roleplay', 'roleplay', '', 90, 1], ['Minigames', 'minigames', '', 100, 1],
-            ['Modlu', 'modlu', '', 110, 1], ['Vanilla', 'vanilla', '', 120, 1]
+            ['Modded', 'modlu', '', 110, 1], ['Vanilla', 'vanilla', '', 120, 1]
         ];
         foreach ($defaults as [$title, $slug, $description, $displayOrder, $isActive])
         {
