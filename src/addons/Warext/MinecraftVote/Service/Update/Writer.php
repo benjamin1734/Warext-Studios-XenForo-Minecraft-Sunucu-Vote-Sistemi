@@ -25,7 +25,7 @@ class Writer extends AbstractService
     {
         if (!$this->canPublish())
         {
-            throw new PrintableException('Bu sunucu için güncelleme yayınlama yetkiniz yok.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_update_publish_forbidden'));
         }
 
         $title = trim((string)($input['title'] ?? ''));
@@ -34,15 +34,15 @@ class Writer extends AbstractService
 
         if (mb_strlen($title) < 3 || mb_strlen($title) > 100)
         {
-            throw new PrintableException('Güncelleme başlığı 3-100 karakter arasında olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_update_title_length'));
         }
         if (mb_strlen($versionLabel) > 50)
         {
-            throw new PrintableException('Sürüm etiketi en fazla 50 karakter olabilir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_version_label_length'));
         }
         if (mb_strlen($message) < 10 || mb_strlen($message) > 10000)
         {
-            throw new PrintableException('Güncelleme açıklaması 10-10000 karakter arasında olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_update_message_length'));
         }
 
         $update = $this->em()->create('Warext\MinecraftVote:ServerUpdate');
@@ -63,11 +63,11 @@ class Writer extends AbstractService
     {
         if (!$this->canPublish())
         {
-            throw new PrintableException('Bu güncellemeyi silme yetkiniz yok.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_update_delete_forbidden'));
         }
         if ($update->server_id !== $this->server->server_id)
         {
-            throw new PrintableException('Güncelleme bu sunucuya ait değil.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_update_wrong_server'));
         }
 
         $this->repository('XF:UserAlert')
