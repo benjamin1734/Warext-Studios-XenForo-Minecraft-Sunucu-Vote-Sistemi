@@ -13,13 +13,13 @@ def require(path: str, needles: list[str]) -> None:
 
 
 require('Pub/Controller/Vote.php', ['captchaIsValid()', 'warextMcRequireVerifiedAccountForVotes', "verification_state !== 'verified'", 'setRequestFingerprint(', 'enqueueVoteDelivery()', 'enqueueWebhookDelivery(', '!$visitor->user_id', 'voteBlocked', '86400', "warext_mc_vote_cooldown_24h_error"])
-require('_output/templates/public/warext_mc_server_vote.html', ['<xf:captcharow', 'force="true"', '$requireVerifiedAccount', 'warext_mc_server_vote.less', 'Sunucu Bilgileri', 'Sunucu Hakkında', 'IP Kopyala', 'Sıralama', '24 saat sonra tekrar deneyin', '$hasEligibleAccount'])
+require('_output/templates/public/warext_mc_server_vote.html', ['<xf:captcharow', 'force="true"', '$requireVerifiedAccount', 'warext_mc_server_vote.less', 'warext_mc_dyn_vote_cooldown', 'warext_mc_i18n_0430', 'warext_mc_i18n_0431', '$hasEligibleAccount'])
 require('_output/templates/public/warext_mc_server_vote.less', ['.warextMcVotePage-hero', '.warextMcVotePage-banner', 'width: 468px;', 'height: 60px;', '.warextMcVotePage-metrics', '.warextMcVotePage-layout', '.warextMcVotePage-voteCard'])
 require('Pub/Controller/Detail.php', ['findRecentPublicVotes(', 'getTopVotersThisMonth(', "findVisibleForServer", "PublicPermissions::allows('vote', false, true)", "['Owner', 'DiscussionThread']"])
 require('Repository/Vote.php', ['findRecentPublicVotes(', 'getTopVotersThisMonth(', 'INNER JOIN xf_user', "status <> 'rejected'"])
 require('_output/templates/public/warext_mc_server_view.html', ['warext_mc_server_profile.less', '<xf:h1 hidden="true" />', 'warextMcProfileHero', 'warext_mc_i18n_0268', 'warext_mc_i18n_0284', 'warext_mc_dyn_reviews_x', 'warext_mc_i18n_0076'])
 require('_output/templates/public/warext_mc_server_profile.less', ['.warextMcProfileHero', 'width: 468px;', 'height: 60px;', '.warextMcProfileGrid', 'grid-template-columns: 250px minmax(0, 1fr) 280px;', '.warextMcProfileSupport', '.warextMcProfileLeaderboard'])
-require('Service/Vote/Creator.php', ["hash_hmac('sha256', $ip", 'assertCooldown(', 'assertIpVelocity(', 'calculateFraudScore(', '!$this->user->user_id', '$since = \XF::$time - 86400', '24 saat sonra tekrar deneyin'])
+require('Service/Vote/Creator.php', ["hash_hmac('sha256', $ip", 'assertCooldown(', 'assertIpVelocity(', 'calculateFraudScore(', '!$this->user->user_id', '$since = \XF::$time - 86400', 'warext_mc_vote_cooldown_24h_error'])
 require('Network/EndpointResolver.php', ['FILTER_FLAG_NO_PRIV_RANGE', 'FILTER_FLAG_NO_RES_RANGE'])
 require('Service/Webhook/Dispatcher.php', ["$scheme !== 'https'", "'allow_redirects' => false", 'X-Warext-Signature', 'resolveTcp('])
 require('Pub/Controller/Api.php', ['warextMcPublicApiEnabled', "->where('state', 'active')", "'warextMcApi'"])
