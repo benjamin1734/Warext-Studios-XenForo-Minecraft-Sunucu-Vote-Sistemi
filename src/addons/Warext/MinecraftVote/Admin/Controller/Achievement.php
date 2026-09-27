@@ -31,7 +31,7 @@ class Achievement extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('warext-minecraft/achievements'),
-                'Başarım tanımı oluşturuldu.'
+                \XF::phrase('warext_mc_dyn_achievement_created')
             );
         }
 
@@ -65,7 +65,7 @@ class Achievement extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('warext-minecraft/achievements'),
-                'Başarım güncellendi.'
+                \XF::phrase('warext_mc_dyn_achievement_updated')
             );
         }
 
@@ -127,7 +127,7 @@ class Achievement extends AbstractController
 
         return $this->redirect(
             $this->buildLink('warext-minecraft/achievements'),
-            'Başarım hesaplama işi kuyruğa alındı.'
+            \XF::phrase('warext_mc_dyn_achievement_job_queued')
         );
     }
 
@@ -171,13 +171,13 @@ class Achievement extends AbstractController
     protected function getMetrics(): array
     {
         return [
-            'vote_total' => 'Toplam oy',
-            'uptime_bp' => 'Son 30 günlük uptime (basis point, %99 = 9900; en az 100 kontrol)',
-            'peak_players' => 'Zirve eş zamanlı oyuncu',
-            'age_days' => 'Platform yaşı (gün)',
-            'verified' => 'Sahiplik doğrulaması (1)',
-            'season_wins' => 'Aylık sezon birinciliği',
-            'trend_rank_max' => 'Trend sıralaması (en fazla değer)'
+            'vote_total' => (string)\XF::phrase('warext_mc_dyn_metric_total_votes'),
+            'uptime_bp' => (string)\XF::phrase('warext_mc_dyn_metric_uptime'),
+            'peak_players' => (string)\XF::phrase('warext_mc_dyn_metric_peak_players'),
+            'age_days' => (string)\XF::phrase('warext_mc_dyn_metric_platform_age'),
+            'verified' => (string)\XF::phrase('warext_mc_dyn_metric_ownership'),
+            'season_wins' => (string)\XF::phrase('warext_mc_dyn_metric_monthly_winner'),
+            'trend_rank_max' => (string)\XF::phrase('warext_mc_dyn_metric_trending')
         ];
     }
 }
