@@ -78,7 +78,7 @@ class Server extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/hesaplar'),
-                'Minecraft hesabı profilinize eklendi.'
+                \XF::phrase('warext_mc_dyn_account_added')
             );
         }
 
@@ -110,7 +110,7 @@ class Server extends AbstractController
 
         return $this->redirect(
             $this->buildLink('sunucular/hesaplar'),
-            'Minecraft hesabı bağlantısı kaldırıldı.'
+            \XF::phrase('warext_mc_dyn_account_removed')
         );
     }
 
@@ -126,7 +126,7 @@ class Server extends AbstractController
 
         return $this->redirect(
             $this->buildLink('sunucular/hesaplar'),
-            'Birincil Minecraft hesabınız güncellendi.'
+            \XF::phrase('warext_mc_dyn_primary_account_updated')
         );
     }
 
@@ -148,7 +148,7 @@ class Server extends AbstractController
 
                     return $this->redirect(
                         $this->buildLink('sunucular/dogrula', $server),
-                        'Yeni sunucu doğrulama kodu oluşturuldu.'
+                        \XF::phrase('warext_mc_dyn_verification_code_created')
                     );
                 }
 
@@ -167,7 +167,7 @@ class Server extends AbstractController
                 return $this->error($e->getMessage(), 400);
             }
 
-            return $this->error('Geçersiz doğrulama işlemi.', 400);
+            return $this->error(\XF::phrase('warext_mc_dyn_invalid_verification'), 400);
         }
 
         return $this->view('Warext\MinecraftVote:Server\Verification', 'warext_mc_server_verification', [
