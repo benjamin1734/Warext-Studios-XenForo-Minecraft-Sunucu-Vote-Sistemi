@@ -12,7 +12,7 @@
                 &lt;div class="contentRow-minor" style="margin-top:8px"&gt;{{ phrase('warext_mc_i18n_0323') }} &lt;xf:date time="$config.last_success_date" /&gt;&lt;/div&gt;
             &lt;/xf:if&gt;
             &lt;xf:if is="$config.last_error"&gt;
-                &lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;Son hata: {$config.last_error}&lt;/div&gt;
+                &lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;{{ phrase('warext_mc_dyn_last_error', {'error': $config.last_error}) }}&lt;/div&gt;
             &lt;/xf:if&gt;
         &lt;/div&gt;
     &lt;/div&gt;
