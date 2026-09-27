@@ -31,7 +31,7 @@ class Favorite extends Repository
     {
         if ($userId <= 0)
         {
-            throw new \InvalidArgumentException('Favori işlemi için kullanıcı gereklidir.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_favorite_user_required'));
         }
 
         $db = $this->db();
