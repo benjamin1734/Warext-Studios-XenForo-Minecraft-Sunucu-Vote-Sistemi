@@ -35,10 +35,6 @@ After installation, follow **Admin CP > Minecraft Server & Vote System > Install
 - Sponsored listings
 - JSON API, HTTPS/HMAC webhook support, and sitemap integration
 
-## Versioning
-
-After patch version 9, the minor version is incremented: `1.0.9 → 1.1.0`, followed by `1.1.1` ... `1.1.9 → 1.2.0`.
-
 ## Requirements
 
 - XenForo 2.3.0+
@@ -61,7 +57,7 @@ XenForo 2.3 için Minecraft sunucu listeleme ve güvenli oy sistemi.
 
 ## Kurulum
 
-`Warext-MinecraftVote-1.1.9.zip` dosyasını açmadan **Admin CP > Add-ons > Install/upgrade from archive** üzerinden yükleyin. Mevcut sürümün üzerine doğrudan yükseltilebilir.
+En güncel ZIP paketini [Releases](https://github.com/benjamin1734/Warext-Studios-XenForo-Minecraft-Sunucu-Vote-Sistemi/releases) sayfasından indirip açmadan **Admin CP > Add-ons > Install/upgrade from archive** üzerinden yükleyin.
 
 Kurulumdan sonra **Admin CP > Minecraft Sunucu & Vote Sistemi > Kurulum & Yapılandırma** ekranını takip edin.
 
@@ -90,10 +86,6 @@ Kurulumdan sonra **Admin CP > Minecraft Sunucu & Vote Sistemi > Kurulum & Yapıl
 - Sponsorlu listeleme
 - JSON API, HTTPS/HMAC webhook ve sitemap
 
-## Sürümleme
-
-Yama hanesi 9'dan sonra orta hane artırılır: `1.0.9 → 1.1.0`, ardından `1.1.1` ... `1.1.9 → 1.2.0`.
-
 ## Gereksinimler
 
 - XenForo 2.3.0+
@@ -108,14 +100,5 @@ Sorularınız, hata bildirimleriniz, kurulum desteği ve Warext Studios XenForo 
 
 **Discord:** https://discord.gg/tgsV5XMcFS
 
-
 ## Language support / Dil desteği
 
-Version 1.2.0 adds native Turkish/English XenForo language support. Import the XML packs under `languages/`; the add-on then follows XenForo's normal user language selector. See `LANGUAGE.md`.
-
-
-## 1.2.1 language completion
-
-- XenForo _output source and generated _data now share the same phrase-backed UI.
-- Remaining dynamic counters, server summaries, setup text and vote cooldown backend errors use phrases.
-- Turkish and English XML packs are published with the direct-install release.
