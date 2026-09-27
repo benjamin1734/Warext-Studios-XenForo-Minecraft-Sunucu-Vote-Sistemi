@@ -705,10 +705,10 @@
   <phrase title="warext_mc_dyn_invalid_sponsor_status" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Geçersiz sponsor durumu.]]></phrase>
   <phrase title="warext_mc_dyn_votifier_port_range" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[NuVotifier portu 1-65535 arasında olmalıdır.]]></phrase>
   <phrase title="warext_mc_dyn_votifier_v2_only" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Şu anda yalnızca güvenli NuVotifier V2 protokolü desteklenmektedir.]]></phrase>
-  <phrase title="warext_mc_dyn_job_achievement_rebuild" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft sunucu başarımları hesaplanıyor... ({current}/{total})]]></phrase>
-  <phrase title="warext_mc_dyn_job_server_ping" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft sunucuları kontrol ediliyor... ({current}/{total})]]></phrase>
+  <phrase title="warext_mc_dyn_job_achievement_rebuild" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft sunucu başarımları hesaplanıyor... ({current})]]></phrase>
+  <phrase title="warext_mc_dyn_job_server_ping" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft sunucuları kontrol ediliyor... ({current})]]></phrase>
   <phrase title="warext_mc_dyn_job_update_alert" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft sunucu güncelleme bildirimleri gönderiliyor...]]></phrase>
-  <phrase title="warext_mc_dyn_job_vote_delivery" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft oy ödülleri teslim ediliyor... ({current}/{total})]]></phrase>
+  <phrase title="warext_mc_dyn_job_vote_delivery" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft oy ödülleri teslim ediliyor... ({current})]]></phrase>
   <phrase title="warext_mc_dyn_job_webhook_delivery" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft vote webhook teslimatı yapılıyor...]]></phrase>
   <phrase title="warext_mc_dyn_bedrock_connect_failed" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft Bedrock sunucusuna bağlanılamadı: {error}]]></phrase>
   <phrase title="warext_mc_dyn_raknet_magic_failed" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[RakNet magic değeri oluşturulamadı.]]></phrase>
@@ -864,4 +864,5 @@
   <phrase title="warext_mc_dyn_webhook_invalid_url" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Webhook URL geçersiz.]]></phrase>
   <phrase title="warext_mc_dyn_webhook_https_only" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Webhook yalnızca geçerli HTTPS adreslerine gönderilebilir.]]></phrase>
   <phrase title="warext_mc_dyn_webhook_userinfo_forbidden" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Webhook URL içinde kullanıcı adı veya parola kullanılamaz.]]></phrase>
+  <phrase title="warext_mc_dyn_sponsor_purchasable_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[{server} sponsorluğu]]></phrase>
 </language>

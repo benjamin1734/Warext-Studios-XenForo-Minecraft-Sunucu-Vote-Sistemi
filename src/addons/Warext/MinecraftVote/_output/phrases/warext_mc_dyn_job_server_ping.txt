@@ -1,1 +1,1 @@
-Minecraft sunucuları kontrol ediliyor... ({current}/{total})
+Minecraft sunucuları kontrol ediliyor... ({current})

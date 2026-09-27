@@ -1,1 +1,1 @@
-Minecraft sunucu başarımları hesaplanıyor... ({current}/{total})
+Minecraft sunucu başarımları hesaplanıyor... ({current})

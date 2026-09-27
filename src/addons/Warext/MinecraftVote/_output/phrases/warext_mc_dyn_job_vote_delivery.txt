@@ -1,1 +1,1 @@
-Minecraft oy ödülleri teslim ediliyor... ({current}/{total})
+Minecraft oy ödülleri teslim ediliyor... ({current})
