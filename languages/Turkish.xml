@@ -868,4 +868,33 @@
   <phrase title="warext_mc_dyn_max_categories" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bir sunucu en fazla 5 kategoriye eklenebilir.]]></phrase>
   <phrase title="warext_mc_dyn_max_game_modes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[En fazla 12 oyun modu girebilirsiniz.]]></phrase>
   <phrase title="warext_mc_dyn_gif_save_failed" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Hareketli banner optimize edilerek kaydedilemedi.]]></phrase>
+  <phrase title="warext_mc_achievement_votes_100_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[100 Oy]]></phrase>
+  <phrase title="warext_mc_achievement_votes_100_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Toplam 100 topluluk oyuna ulaştı.]]></phrase>
+  <phrase title="warext_mc_achievement_votes_1000_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[1.000 Oy]]></phrase>
+  <phrase title="warext_mc_achievement_votes_1000_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Toplam 1.000 topluluk oyuna ulaştı.]]></phrase>
+  <phrase title="warext_mc_achievement_votes_10000_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[10.000 Oy]]></phrase>
+  <phrase title="warext_mc_achievement_votes_10000_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Toplam 10.000 topluluk oyuna ulaştı.]]></phrase>
+  <phrase title="warext_mc_achievement_uptime_99_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[%99 Uptime]]></phrase>
+  <phrase title="warext_mc_achievement_uptime_99_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[İzlenen çalışma süresinde %99 uptime seviyesine ulaştı.]]></phrase>
+  <phrase title="warext_mc_achievement_peak_100_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[100 Eş Zamanlı Oyuncu]]></phrase>
+  <phrase title="warext_mc_achievement_peak_100_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[En az 100 eş zamanlı oyuncu gördü.]]></phrase>
+  <phrase title="warext_mc_achievement_peak_500_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[500 Eş Zamanlı Oyuncu]]></phrase>
+  <phrase title="warext_mc_achievement_peak_500_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[En az 500 eş zamanlı oyuncu gördü.]]></phrase>
+  <phrase title="warext_mc_achievement_one_year_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[1 Yıllık Sunucu]]></phrase>
+  <phrase title="warext_mc_achievement_one_year_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Platformda 365 günü tamamladı.]]></phrase>
+  <phrase title="warext_mc_achievement_verified_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Doğrulanmış Sunucu]]></phrase>
+  <phrase title="warext_mc_achievement_verified_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu sahipliği başarıyla doğrulandı.]]></phrase>
+  <phrase title="warext_mc_achievement_month_champion_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ayın Sunucusu]]></phrase>
+  <phrase title="warext_mc_achievement_month_champion_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bir aylık oy sezonunu birinci tamamladı.]]></phrase>
+  <phrase title="warext_mc_achievement_rising_star_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Yükselen Yıldız]]></phrase>
+  <phrase title="warext_mc_achievement_rising_star_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Trend sıralamasında ilk 3 içine girdi.]]></phrase>
+  <phrase title="warext_mc_dyn_report" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Raporla]]></phrase>
+  <phrase title="warext_mc_dyn_online" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Çevrimiçi]]></phrase>
+  <phrase title="warext_mc_dyn_offline" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Çevrimdışı]]></phrase>
+  <phrase title="warext_mc_dyn_measurement_value" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ölçüm değeri]]></phrase>
+  <phrase title="warext_mc_dyn_not_specified" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Belirtilmedi]]></phrase>
+  <phrase title="warext_mc_dyn_yes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Evet]]></phrase>
+  <phrase title="warext_mc_dyn_premium" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Premium]]></phrase>
+  <phrase title="warext_mc_dyn_uptime" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Uptime]]></phrase>
+  <phrase title="warext_mc_dyn_ping" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ping]]></phrase>
 </language>

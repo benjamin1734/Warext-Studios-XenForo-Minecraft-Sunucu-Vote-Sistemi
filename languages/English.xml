@@ -868,4 +868,33 @@
   <phrase title="warext_mc_dyn_max_categories" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[A server can be added to at most 5 categories.]]></phrase>
   <phrase title="warext_mc_dyn_max_game_modes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[You can enter at most 12 game modes.]]></phrase>
   <phrase title="warext_mc_dyn_gif_save_failed" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Optimized animated banner could not be saved.]]></phrase>
+  <phrase title="warext_mc_achievement_votes_100_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[100 Votes]]></phrase>
+  <phrase title="warext_mc_achievement_votes_100_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Reached 100 total community votes.]]></phrase>
+  <phrase title="warext_mc_achievement_votes_1000_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[1,000 Votes]]></phrase>
+  <phrase title="warext_mc_achievement_votes_1000_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Reached 1,000 total community votes.]]></phrase>
+  <phrase title="warext_mc_achievement_votes_10000_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[10,000 Votes]]></phrase>
+  <phrase title="warext_mc_achievement_votes_10000_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Reached 10,000 total community votes.]]></phrase>
+  <phrase title="warext_mc_achievement_uptime_99_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[99% Uptime]]></phrase>
+  <phrase title="warext_mc_achievement_uptime_99_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Reached 99% uptime across monitored availability.]]></phrase>
+  <phrase title="warext_mc_achievement_peak_100_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[100 Concurrent Players]]></phrase>
+  <phrase title="warext_mc_achievement_peak_100_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Reached at least 100 concurrent players.]]></phrase>
+  <phrase title="warext_mc_achievement_peak_500_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[500 Concurrent Players]]></phrase>
+  <phrase title="warext_mc_achievement_peak_500_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Reached at least 500 concurrent players.]]></phrase>
+  <phrase title="warext_mc_achievement_one_year_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[One-Year Server]]></phrase>
+  <phrase title="warext_mc_achievement_one_year_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Completed 365 days on the platform.]]></phrase>
+  <phrase title="warext_mc_achievement_verified_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Verified Server]]></phrase>
+  <phrase title="warext_mc_achievement_verified_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Server ownership was successfully verified.]]></phrase>
+  <phrase title="warext_mc_achievement_month_champion_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Server of the Month]]></phrase>
+  <phrase title="warext_mc_achievement_month_champion_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Finished first in a monthly vote season.]]></phrase>
+  <phrase title="warext_mc_achievement_rising_star_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Rising Star]]></phrase>
+  <phrase title="warext_mc_achievement_rising_star_desc" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Reached the top 3 in the trending ranking.]]></phrase>
+  <phrase title="warext_mc_dyn_report" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Report]]></phrase>
+  <phrase title="warext_mc_dyn_online" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Online]]></phrase>
+  <phrase title="warext_mc_dyn_offline" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Offline]]></phrase>
+  <phrase title="warext_mc_dyn_measurement_value" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Measurement value]]></phrase>
+  <phrase title="warext_mc_dyn_not_specified" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Not specified]]></phrase>
+  <phrase title="warext_mc_dyn_yes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Yes]]></phrase>
+  <phrase title="warext_mc_dyn_premium" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Premium]]></phrase>
+  <phrase title="warext_mc_dyn_uptime" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Uptime]]></phrase>
+  <phrase title="warext_mc_dyn_ping" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ping]]></phrase>
 </language>
