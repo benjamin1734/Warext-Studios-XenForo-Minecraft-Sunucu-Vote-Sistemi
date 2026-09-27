@@ -29,34 +29,34 @@ class ThreadLinker extends AbstractService
         $boardHost = parse_url((string)$this->app->options()->boardUrl, PHP_URL_HOST);
         if ($host && $boardHost && strcasecmp((string)$host, (string)$boardHost) !== 0)
         {
-            throw new PrintableException('Tanıtım konusu bu XenForo sitesine ait olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_thread_same_site'));
         }
 
         if (!preg_match('~(?:^|[/?&])threads/(?:[^/?#]*\.)?(\d+)(?:/|$|[?#&])~i', $url, $match))
         {
-            throw new PrintableException('Geçerli bir XenForo tanıtım konusu bağlantısı girin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_valid_thread_url'));
         }
 
         $thread = $this->em()->find('XF:Thread', (int)$match[1], ['Forum', 'User']);
         if (!$thread)
         {
-            throw new PrintableException('Tanıtım konusu bulunamadı.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_thread_not_found'));
         }
 
         if (!$thread->canView($error))
         {
-            throw new PrintableException('Bu tanıtım konusunu görüntüleme yetkiniz yok.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_thread_no_view'));
         }
 
         $visitor = \XF::visitor();
         if ((int)$thread->user_id !== (int)$actor->user_id && !$visitor->is_moderator && !$visitor->is_admin)
         {
-            throw new PrintableException('Yalnızca kendi tanıtım konunuzu sunucuya bağlayabilirsiniz.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_own_thread_only'));
         }
 
         if (!$this->getMappedCategory($thread))
         {
-            throw new PrintableException('Bu konu, sunucu tanıtım entegrasyonu açık bir foruma ait değil.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_thread_forum_disabled'));
         }
 
         $linked = $this->finder('Warext\MinecraftVote:Server')
@@ -64,7 +64,7 @@ class ThreadLinker extends AbstractService
             ->fetchOne();
         if ($linked && (!$server || (int)$linked->server_id !== (int)$server->server_id))
         {
-            throw new PrintableException('Bu tanıtım konusu başka bir sunucu kaydına bağlı.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_thread_already_linked'));
         }
 
         return $thread;
