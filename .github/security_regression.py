@@ -36,7 +36,7 @@ require('_output/templates/admin/warext_mc_admin_setup.html', ['warext_mc_i18n_0
 require('_output/templates/admin/warext_mc_admin_category_index.html', ['$categoryRows', '$row.usageCount'])
 require('_output/templates/public/warext_mc_server_add.html', ['warext_mc_i18n_0046', 'warext_mc_i18n_0190', 'warext_mc_i18n_0024', 'warext_mc_i18n_java_bedrock_crossplay', 'warext_mc_i18n_0031', 'warext_mc_i18n_0035'])
 require('Pub/Controller/Index.php', ['networkStatsRow', "'votes_month'", 'sortLinks', 'categoryItems', 'hasAdvancedFilters'])
-require('_output/templates/public/warext_mc_server_index.html', ['warextMcDirectoryList', "link('sunucular/oy'", 'copy-to-clipboard', 'data-copy-text', 'warext_mc_i18n_0234', '$networkStats.server_count', 'warext_mc_server_directory.less'])
+require('_output/templates/public/warext_mc_server_index.html', ['warextMcVoteRow', 'warextMcFeaturedGrid', 'warextMcAdvancedFilters', "link('sunucular/oy'", 'copy-to-clipboard', 'data-copy-text', 'warext_mc_i18n_0234', '$networkStats.server_count', 'warext_mc_servers.less'])
 require('_output/templates/public/warext_mc_servers.less', ['.warextMcDirectoryHero', '.warextMcVoteRow', '.warextMcFeaturedGrid', '.warextMcAdvancedFilters'])
 require('_output/templates/public/warext_mc_server_directory.less', ['.warextMcDirectoryRow', 'flex: 0 0 484px;', 'width: 468px;', 'height: 60px;', 'flex: 1 1 auto;', 'flex: 0 0 138px;', 'aspect-ratio: 39 / 5'])
 require('_output/admin_navigation/warextMinecraftVote.json', ['"parent_navigation_id": ""', '"link": "warext-minecraft"', '"hide_no_children": true'])
