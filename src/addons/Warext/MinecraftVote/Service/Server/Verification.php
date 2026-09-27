@@ -23,12 +23,12 @@ class Verification extends AbstractService
     {
         if (!in_array($method, ['motd', 'dns_txt'], true))
         {
-            throw new PrintableException('Geçersiz sunucu doğrulama yöntemi.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_invalid_verification_method'));
         }
 
         if ($method === 'dns_txt' && !$this->canUseDnsVerification())
         {
-            throw new PrintableException('DNS TXT doğrulaması için sunucu adresi geçerli bir alan adı olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_dns_domain_required'));
         }
 
         $this->server->is_verified = false;
@@ -48,13 +48,13 @@ class Verification extends AbstractService
 
         if ($token === '' || !in_array($method, ['motd', 'dns_txt'], true))
         {
-            throw new PrintableException('Önce bir doğrulama işlemi başlatın.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_verification_start_first'));
         }
 
         if (!$this->server->verification_token_date
             || $this->server->verification_token_date < \XF::$time - self::TOKEN_LIFETIME)
         {
-            throw new PrintableException('Doğrulama kodunun süresi dolmuş. Yeni bir kod oluşturun.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_verification_expired'));
         }
 
         if ($method === 'motd')
@@ -104,7 +104,7 @@ class Verification extends AbstractService
         {
             return [
                 'success' => false,
-                'message' => 'Sunucuya ulaşılamadı: ' . (string)($result['error'] ?? 'Bilinmeyen bağlantı hatası.')
+                'message' => (string)\XF::phrase('warext_mc_dyn_server_unreachable', ['error' => (string)($result['error'] ?? \XF::phrase('warext_mc_dyn_unknown_connection_error'))])
             ];
         }
 
@@ -113,14 +113,14 @@ class Verification extends AbstractService
         {
             return [
                 'success' => false,
-                'message' => 'Doğrulama kodu sunucunun MOTD alanında bulunamadı. MOTD değişikliğini kaydedip sunucuyu yeniden başlattığınızdan emin olun.'
+                'message' => (string)\XF::phrase('warext_mc_dyn_motd_code_missing')
             ];
         }
 
         return [
             'success' => true,
             'method' => 'motd',
-            'message' => 'Sunucu sahipliği MOTD üzerinden doğrulandı.'
+            'message' => (string)\XF::phrase('warext_mc_dyn_ownership_motd_verified')
         ];
     }
 
@@ -130,7 +130,7 @@ class Verification extends AbstractService
         {
             return [
                 'success' => false,
-                'message' => 'DNS TXT doğrulaması için geçerli bir alan adı gerekiyor.'
+                'message' => (string)\XF::phrase('warext_mc_dyn_dns_domain_required')
             ];
         }
 
@@ -138,7 +138,7 @@ class Verification extends AbstractService
         {
             return [
                 'success' => false,
-                'message' => 'Sunucuda DNS sorgulama desteği bulunmuyor.'
+                'message' => (string)\XF::phrase('warext_mc_dyn_dns_support_missing')
             ];
         }
 
@@ -150,7 +150,7 @@ class Verification extends AbstractService
         {
             return [
                 'success' => false,
-                'message' => 'DNS TXT kaydı henüz bulunamadı. DNS yayılımı tamamlanmamış olabilir.'
+                'message' => (string)\XF::phrase('warext_mc_dyn_dns_record_pending')
             ];
         }
 
@@ -173,7 +173,7 @@ class Verification extends AbstractService
                     return [
                         'success' => true,
                         'method' => 'dns_txt',
-                        'message' => 'Sunucu sahipliği DNS TXT kaydı üzerinden doğrulandı.'
+                        'message' => (string)\XF::phrase('warext_mc_dyn_ownership_dns_verified')
                     ];
                 }
             }
@@ -181,7 +181,7 @@ class Verification extends AbstractService
 
         return [
             'success' => false,
-            'message' => 'DNS TXT kaydı bulundu ancak doğrulama değeri eşleşmedi.'
+            'message' => (string)\XF::phrase('warext_mc_dyn_dns_value_mismatch')
         ];
     }
 
