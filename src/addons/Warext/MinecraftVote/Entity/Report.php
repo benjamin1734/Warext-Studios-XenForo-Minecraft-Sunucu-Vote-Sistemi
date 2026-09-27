@@ -57,11 +57,11 @@ class Report extends Entity
 
         if (!in_array($this->reason, ['fake', 'malicious', 'scam', 'offline', 'inappropriate', 'other'], true))
         {
-            $this->error('Geçersiz rapor nedeni.', 'reason');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_report_reason'), 'reason');
         }
         if (!in_array($this->state, ['open', 'resolved', 'rejected'], true))
         {
-            $this->error('Geçersiz rapor durumu.', 'state');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_report_status'), 'state');
         }
     }
 }

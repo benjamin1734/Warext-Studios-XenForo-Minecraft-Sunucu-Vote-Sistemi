@@ -39,7 +39,7 @@ class Achievement extends Entity
 
         if (!preg_match('/^[a-z0-9_]{2,50}$/', $this->achievement_key))
         {
-            $this->error('Başarım anahtarı yalnızca küçük harf, sayı ve alt çizgi içerebilir.', 'achievement_key');
+            $this->error((string)\XF::phrase('warext_mc_dyn_achievement_key_format'), 'achievement_key');
         }
 
         if (!in_array($this->metric, [
@@ -47,7 +47,7 @@ class Achievement extends Entity
             'verified', 'season_wins', 'trend_rank_max'
         ], true))
         {
-            $this->error('Geçersiz başarım metriği.', 'metric');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_achievement_metric'), 'metric');
         }
 
         if (!$this->created_date)

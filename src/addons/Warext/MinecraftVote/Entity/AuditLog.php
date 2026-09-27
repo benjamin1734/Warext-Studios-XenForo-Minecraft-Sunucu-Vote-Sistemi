@@ -50,7 +50,7 @@ class AuditLog extends Entity
         $this->action = strtolower(trim($this->action));
         if (!preg_match('/^[a-z0-9_]{2,50}$/', $this->action))
         {
-            $this->error('Geçersiz audit işlem anahtarı.', 'action');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_audit_action'), 'action');
         }
 
         if (!$this->log_date)

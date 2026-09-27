@@ -42,14 +42,14 @@ class MinecraftAccount extends Entity
         $this->minecraft_username = trim($this->minecraft_username);
         if (!preg_match('/^[A-Za-z0-9_]{3,16}$/', $this->minecraft_username))
         {
-            $this->error('Minecraft kullanıcı adı 3-16 karakter olmalı ve yalnızca harf, rakam veya alt çizgi içermelidir.', 'minecraft_username');
+            $this->error((string)\XF::phrase('warext_mc_dyn_minecraft_username_format'), 'minecraft_username');
         }
 
         $this->minecraft_uuid = $this->normalizeUuid($this->minecraft_uuid);
 
         if (!in_array($this->verification_state, ['unverified', 'pending', 'verified', 'revoked'], true))
         {
-            $this->error('Geçersiz Minecraft hesap doğrulama durumu.', 'verification_state');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_account_verification_state'), 'verification_state');
         }
 
         if (!$this->created_date)
@@ -80,7 +80,7 @@ class MinecraftAccount extends Entity
         $hex = str_replace('-', '', $uuid);
         if (!preg_match('/^[a-f0-9]{32}$/', $hex))
         {
-            $this->error('Minecraft UUID biçimi geçersiz.', 'minecraft_uuid');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_minecraft_uuid'), 'minecraft_uuid');
             return '';
         }
 

@@ -23,7 +23,7 @@ class Maintenance
             [
                 'status' => 'retry',
                 'next_attempt_date' => $now,
-                'last_error' => 'Süresi dolmuş teslimat lease kaydı otomatik kurtarıldı.'
+                'last_error' => (string)\XF::phrase('warext_mc_dyn_delivery_lease_recovered')
             ],
             "status = 'processing' AND next_attempt_date > 0 AND next_attempt_date <= ?",
             [$now]
