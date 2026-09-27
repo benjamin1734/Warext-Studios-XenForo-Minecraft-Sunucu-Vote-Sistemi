@@ -19,7 +19,7 @@ class Sponsor extends AbstractController
         $server = $this->assertPurchasableServer((int)$params->server_id);
         if (!(bool)(\XF::options()->warextMcSponsorSalesEnabled ?? false))
         {
-            return $this->error('Sponsor satın alma sistemi şu anda kapalı.');
+            return $this->error(\XF::phrase('warext_mc_dyn_sponsor_sales_disabled'));
         }
 
         $this->ensurePurchasableRegistered();
