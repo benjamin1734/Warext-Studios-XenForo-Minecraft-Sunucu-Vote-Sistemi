@@ -112,7 +112,8 @@
                 </div>
                 <div class="block-body">
                     <div class="warextMcVotePage-voteIntro">
-                        {{ phrase('warext_mc_vote_intro') }}
+                        {{ phrase('warext_mc_dyn_vote_cooldown', {'hours': $cooldownHours}) }}
+                        {{ phrase('warext_mc_dyn_vote_delivery_info') }}
                     </div>
 
                     <xf:if is="$voteBlocked">
