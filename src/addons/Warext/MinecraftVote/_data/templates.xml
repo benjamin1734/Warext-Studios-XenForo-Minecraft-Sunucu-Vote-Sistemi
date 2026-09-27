@@ -2805,12 +2805,12 @@
     &lt;div class="block-container"&gt;
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0377') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;Admin CP → Groups &amp; permissions → User group permissions bölümünde &lt;strong&gt;Minecraft Sunucu &amp; Vote&lt;/strong&gt; {{ phrase('warext_mc_i18n_0380') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_permissions_path') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_permission_group_name') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0380') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0381') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0382') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0383') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0384') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0385') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0386') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_can_favorite') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0387') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Raporlayabilir:&lt;/strong&gt; {{ phrase('warext_mc_i18n_0388') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_can_report') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0388') }}&lt;/div&gt;
             &lt;div class="block-row block-rowMessage block-rowMessage--warning"&gt;{{ phrase('warext_mc_i18n_0389') }}&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -2830,9 +2830,9 @@
     &lt;div class="block-container"&gt;
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0394') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Java:&lt;/strong&gt; {{ phrase('warext_mc_i18n_0395') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Bedrock:&lt;/strong&gt; {{ phrase('warext_mc_i18n_0396') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Crossplay:&lt;/strong&gt; {{ phrase('warext_mc_i18n_java_bedrock_combined') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_java_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0395') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_bedrock_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0396') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_crossplay_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_java_bedrock_combined') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_0397') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_0279') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0398') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}" class="button--primary"&gt;{{ phrase('warext_mc_i18n_pending_servers') }}&lt;/xf:button&gt;
@@ -2847,7 +2847,7 @@
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0400') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_0401') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_0272') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0402') }}&lt;/div&gt;
-            &lt;div class="block-row"&gt;Teslimat sorunlarını Admin CP → Minecraft Sunucu &amp; Vote → Sistem Sağlığı ve Oy Teslimat Kuyruğu ekranlarından takip edebilirsiniz.&lt;/div&gt;
+            &lt;div class="block-row"&gt;{{ phrase('warext_mc_dyn_delivery_help') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/health') }}"&gt;{{ phrase('admin_navigation.warextMinecraftHealth') }}&lt;/xf:button&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes') }}"&gt;{{ phrase('warext_mc_i18n_0362') }}&lt;/xf:button&gt;
