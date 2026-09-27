@@ -25,7 +25,7 @@ class Creator extends AbstractService
         $username = trim($username);
         if (!preg_match('/^[A-Za-z0-9_]{3,16}$/', $username))
         {
-            throw new PrintableException('Minecraft kullanıcı adı 3-16 karakter olmalı ve yalnızca harf, rakam veya alt çizgi içermelidir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_minecraft_username_format'));
         }
 
         $uuid = $this->normalizeUuid($uuid);
@@ -33,7 +33,7 @@ class Creator extends AbstractService
         if ($this->repository('Warext\MinecraftVote:MinecraftAccount')
             ->hasUsernameForUser($this->user->user_id, $username))
         {
-            throw new PrintableException('Bu Minecraft kullanıcı adı hesabınıza zaten bağlı.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_account_already_linked'));
         }
 
         $this->username = $username;
@@ -44,12 +44,12 @@ class Creator extends AbstractService
     {
         if (!$this->user->user_id)
         {
-            throw new PrintableException('Minecraft hesabı eklemek için giriş yapmanız gerekiyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_account_login_required'));
         }
 
         if ($this->username === '')
         {
-            throw new PrintableException('Minecraft kullanıcı adı gereklidir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_minecraft_username_required'));
         }
 
         $repo = $this->repository('Warext\MinecraftVote:MinecraftAccount');
@@ -77,7 +77,7 @@ class Creator extends AbstractService
         $hex = str_replace('-', '', $uuid);
         if (!preg_match('/^[a-f0-9]{32}$/', $hex))
         {
-            throw new PrintableException('Minecraft UUID biçimi geçersiz.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_invalid_minecraft_uuid'));
         }
 
         return substr($hex, 0, 8) . '-'
