@@ -35,7 +35,7 @@ class Votifier extends AbstractController
                     $result = $writer->testConnection();
                     return $this->redirect(
                         $this->buildLink('sunucular/votifier', $server),
-                        'NuVotifier V2 test oyu başarıyla gönderildi. Bağlantı: ' . (int)$result['ping_ms'] . ' ms.'
+                        \XF::phrase('warext_mc_dyn_votifier_test_success', ['connection' => (int)$result['ping_ms'] . ' ms'])
                     );
                 }
             }
@@ -46,7 +46,7 @@ class Votifier extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/votifier', $server),
-                'NuVotifier ayarları kaydedildi.'
+                \XF::phrase('warext_mc_dyn_votifier_saved')
             );
         }
 
@@ -54,8 +54,8 @@ class Votifier extends AbstractController
             'server' => $server,
             'config' => $config,
             'tokenExplain' => $config->token_encrypted
-                ? 'Token kayıtlı ve şifrelenmiş durumda. Değiştirmek istemiyorsanız bu alanı boş bırakın.'
-                : 'NuVotifier config dosyanızdaki default veya Warext servis tokenını girin.'
+                ? \XF::phrase('warext_mc_dyn_votifier_token_saved_explain')
+                : \XF::phrase('warext_mc_dyn_votifier_token_help')
         ]);
     }
 
