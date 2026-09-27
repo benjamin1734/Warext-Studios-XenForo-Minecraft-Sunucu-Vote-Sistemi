@@ -42,7 +42,7 @@ class Creator extends AbstractService
 
         if (!in_array($serverType, ['java', 'bedrock', 'crossplay'], true))
         {
-            $this->server->error('Geçerli bir sunucu türü seçin.', 'server_type');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_invalid_server_type'), 'server_type');
             $serverType = 'java';
             $data['server_type'] = 'java';
         }
@@ -57,28 +57,28 @@ class Creator extends AbstractService
             $data[$urlField] = trim((string)($data[$urlField] ?? ''));
             if ($data[$urlField] !== '' && !$this->isValidHttpUrl($data[$urlField]))
             {
-                $this->server->error('Yalnızca geçerli http veya https bağlantıları kullanılabilir.', $urlField);
+                $this->server->error((string)\XF::phrase('warext_mc_dyn_valid_http_https'), $urlField);
             }
         }
 
         if ($data['title'] === '')
         {
-            $this->server->error('Sunucu adı boş bırakılamaz.', 'title');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_server_name_required'), 'title');
         }
 
         if (!$this->isValidHost($data['host']))
         {
-            $this->server->error('Geçerli bir Java sunucu adresi girin.', 'host');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_valid_java_address'), 'host');
         }
 
         if (in_array($serverType, ['bedrock', 'crossplay'], true) && !$this->isValidHost($data['bedrock_host']))
         {
-            $this->server->error('Bedrock veya Crossplay sunucuları için geçerli bir Bedrock adresi girin.', 'bedrock_host');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_valid_bedrock_address'), 'bedrock_host');
         }
 
         if ($data['country_code'] !== '' && !preg_match('/^[A-Z]{2}$/', $data['country_code']))
         {
-            $this->server->error('Ülke kodu iki harfli ISO kodu olmalıdır.', 'country_code');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_country_code_iso'), 'country_code');
         }
 
         $fields = [
@@ -114,7 +114,7 @@ class Creator extends AbstractService
 
         if (count($categoryIds) > 5)
         {
-            $this->server->error('Bir sunucu en fazla 5 kategoriye eklenebilir.', 'category_ids');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_max_categories'), 'category_ids');
             return;
         }
 
@@ -134,7 +134,7 @@ class Creator extends AbstractService
 
         if (count($this->categoryIds) !== count($categoryIds))
         {
-            $this->server->error('Geçersiz bir sunucu kategorisi seçildi.', 'category_ids');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_invalid_server_category'), 'category_ids');
         }
     }
 
@@ -202,7 +202,7 @@ class Creator extends AbstractService
 
         if (count($clean) > 12)
         {
-            $this->server->error('En fazla 12 oyun modu girebilirsiniz.', 'game_modes');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_max_game_modes'), 'game_modes');
             $clean = array_slice($clean, 0, 12);
         }
 
@@ -298,7 +298,7 @@ class Creator extends AbstractService
             ->where('port', $this->server->port)
             ->fetchOne())
         {
-            $this->server->error('Bu Java sunucusu daha önce platforma eklenmiş.', 'host');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_duplicate_java_server'), 'host');
         }
 
         if ($this->server->bedrock_host !== '' && $this->finder('Warext\MinecraftVote:Server')
@@ -306,7 +306,7 @@ class Creator extends AbstractService
             ->where('bedrock_port', $this->server->bedrock_port)
             ->fetchOne())
         {
-            $this->server->error('Bu Bedrock sunucusu daha önce platforma eklenmiş.', 'bedrock_host');
+            $this->server->error((string)\XF::phrase('warext_mc_dyn_duplicate_bedrock_server'), 'bedrock_host');
         }
     }
 }
