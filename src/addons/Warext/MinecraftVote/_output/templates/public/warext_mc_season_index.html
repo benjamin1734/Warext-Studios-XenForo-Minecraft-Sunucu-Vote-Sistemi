@@ -1,64 +1,64 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0179') }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0180') }}&lt;/xf:description&gt;
+<xf:title>{{ phrase('warext_mc_i18n_0179') }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0180') }}</xf:description>
 
-&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+<xf:breadcrumb href="{{ link('sunucular') }}">{{ phrase('nav.warextMcServers') }}</xf:breadcrumb>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_dyn_current_season', {'season': $currentSeason.season_key}) }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;
-                &lt;div class="contentRow-minor"&gt;
-                    {{ phrase('warext_mc_i18n_start_prefix') }} &lt;xf:date time="$currentSeason.start_date" /&gt; {{ phrase('warext_mc_i18n_0181') }} &lt;xf:date time="$currentSeason.end_date" /&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_dyn_current_season', {'season': $currentSeason.season_key}) }}</h2>
+        <div class="block-body">
+            <div class="block-row">
+                <div class="contentRow-minor">
+                    {{ phrase('warext_mc_i18n_start_prefix') }} <xf:date time="$currentSeason.start_date" /> {{ phrase('warext_mc_i18n_0181') }} <xf:date time="$currentSeason.end_date" />
+                </div>
+            </div>
 
-            &lt;xf:if is="$currentTop is not empty"&gt;
-                &lt;xf:foreach loop="$currentTop" value="$server"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;a href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/a&gt;
-                                    &lt;xf:if is="$server.is_verified"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;
+            <xf:if is="$currentTop is not empty">
+                <xf:foreach loop="$currentTop" value="$server">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <a href="{{ link('sunucular/detay', $server) }}">{$server.title}</a>
+                                    <xf:if is="$server.is_verified"><span class="label label--primary">{{ phrase('warext_mc_i18n_0130') }}</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">
                                     {{ phrase('warext_mc_dyn_server_month_summary', {'votes': $server.vote_count_month, 'unique': $server.unique_voters_month, 'players': $server.players_online}) }}
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0182') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0182') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0183') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$closedSeasons is not empty"&gt;
-                &lt;xf:foreach loop="$closedSeasons" value="$season"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;a href="{{ link('sunucular/sezon', $season) }}"&gt;{$season.season_key} Sezonu&lt;/a&gt;
-                                &lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;
-                                    &lt;xf:if is="$season.winner_title"&gt;{{ phrase('warext_mc_dyn_winner_label', {'title': $season.winner_title}) }} · &lt;/xf:if&gt;
+<div class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_0183') }}</h2>
+        <div class="block-body">
+            <xf:if is="$closedSeasons is not empty">
+                <xf:foreach loop="$closedSeasons" value="$season">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <a href="{{ link('sunucular/sezon', $season) }}">{$season.season_key} Sezonu</a>
+                                </div>
+                                <div class="contentRow-minor">
+                                    <xf:if is="$season.winner_title">{{ phrase('warext_mc_dyn_winner_label', {'title': $season.winner_title}) }} · </xf:if>
                                     {{ phrase('warext_mc_dyn_season_totals', {'votes': $season.total_votes, 'unique': $season.unique_voters, 'servers': $season.server_count}) }}
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0184') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0184') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>

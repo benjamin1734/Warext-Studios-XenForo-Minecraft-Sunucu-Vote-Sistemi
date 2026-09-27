@@ -1,70 +1,70 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_i18n_0195') }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0196') }}&lt;/xf:description&gt;
-&lt;xf:css src="warext_mc_servers.less" /&gt;
+<xf:title>{{ phrase('warext_mc_i18n_0195') }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0196') }}</xf:description>
+<xf:css src="warext_mc_servers.less" />
 
-&lt;xf:form action="{{ link('sunucular/karsilastir') }}" class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0197') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:selectrow name="server_ids[]" label="{{ phrase('warext_mc_i18n_0049') }}"&gt;
-                &lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0198') }}&lt;/xf:option&gt;
-                &lt;xf:foreach loop="$availableServers" value="$candidate"&gt;
-                    &lt;xf:option value="{$candidate.server_id}" selected="{{ $selected0 == $candidate.server_id }}"&gt;{$candidate.title} · {$candidate.host}:{$candidate.port}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
-            &lt;/xf:selectrow&gt;
-            &lt;xf:selectrow name="server_ids[]" label="{{ phrase('warext_mc_i18n_0050') }}"&gt;
-                &lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0198') }}&lt;/xf:option&gt;
-                &lt;xf:foreach loop="$availableServers" value="$candidate"&gt;
-                    &lt;xf:option value="{$candidate.server_id}" selected="{{ $selected1 == $candidate.server_id }}"&gt;{$candidate.title} · {$candidate.host}:{$candidate.port}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
-            &lt;/xf:selectrow&gt;
-            &lt;xf:selectrow name="server_ids[]" label="{{ phrase('warext_mc_i18n_0051') }}"&gt;
-                &lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0198') }}&lt;/xf:option&gt;
-                &lt;xf:foreach loop="$availableServers" value="$candidate"&gt;
-                    &lt;xf:option value="{$candidate.server_id}" selected="{{ $selected2 == $candidate.server_id }}"&gt;{$candidate.title} · {$candidate.host}:{$candidate.port}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
-            &lt;/xf:selectrow&gt;
-            &lt;xf:selectrow name="server_ids[]" label="{{ phrase('warext_mc_i18n_0052') }}"&gt;
-                &lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0198') }}&lt;/xf:option&gt;
-                &lt;xf:foreach loop="$availableServers" value="$candidate"&gt;
-                    &lt;xf:option value="{$candidate.server_id}" selected="{{ $selected3 == $candidate.server_id }}"&gt;{$candidate.title} · {$candidate.host}:{$candidate.port}&lt;/xf:option&gt;
-                &lt;/xf:foreach&gt;
-            &lt;/xf:selectrow&gt;
-        &lt;/div&gt;
-        &lt;xf:submitrow submit="{{ phrase('nav.warextMcCompare') }}" /&gt;
-    &lt;/div&gt;
-&lt;/xf:form&gt;
+<xf:form action="{{ link('sunucular/karsilastir') }}" class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_0197') }}</h2>
+        <div class="block-body">
+            <xf:selectrow name="server_ids[]" label="{{ phrase('warext_mc_i18n_0049') }}">
+                <xf:option value="0">{{ phrase('warext_mc_i18n_0198') }}</xf:option>
+                <xf:foreach loop="$availableServers" value="$candidate">
+                    <xf:option value="{$candidate.server_id}" selected="{{ $selected0 == $candidate.server_id }}">{$candidate.title} · {$candidate.host}:{$candidate.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:selectrow name="server_ids[]" label="{{ phrase('warext_mc_i18n_0050') }}">
+                <xf:option value="0">{{ phrase('warext_mc_i18n_0198') }}</xf:option>
+                <xf:foreach loop="$availableServers" value="$candidate">
+                    <xf:option value="{$candidate.server_id}" selected="{{ $selected1 == $candidate.server_id }}">{$candidate.title} · {$candidate.host}:{$candidate.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:selectrow name="server_ids[]" label="{{ phrase('warext_mc_i18n_0051') }}">
+                <xf:option value="0">{{ phrase('warext_mc_i18n_0198') }}</xf:option>
+                <xf:foreach loop="$availableServers" value="$candidate">
+                    <xf:option value="{$candidate.server_id}" selected="{{ $selected2 == $candidate.server_id }}">{$candidate.title} · {$candidate.host}:{$candidate.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+            <xf:selectrow name="server_ids[]" label="{{ phrase('warext_mc_i18n_0052') }}">
+                <xf:option value="0">{{ phrase('warext_mc_i18n_0198') }}</xf:option>
+                <xf:foreach loop="$availableServers" value="$candidate">
+                    <xf:option value="{$candidate.server_id}" selected="{{ $selected3 == $candidate.server_id }}">{$candidate.title} · {$candidate.host}:{$candidate.port}</xf:option>
+                </xf:foreach>
+            </xf:selectrow>
+        </div>
+        <xf:submitrow submit="{{ phrase('nav.warextMcCompare') }}" />
+    </div>
+</xf:form>
 
-&lt;xf:if is="$servers is not empty"&gt;
-    &lt;div class="block"&gt;
-        &lt;div class="block-container"&gt;
-            &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0199') }}&lt;/h2&gt;
-            &lt;div class="block-body"&gt;
-                &lt;div class="dataList"&gt;
-                    &lt;div class="dataList-row dataList-row--header"&gt;
-                        &lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0200') }}&lt;/div&gt;
-                        &lt;xf:foreach loop="$servers" value="$server"&gt;
-                            &lt;div class="dataList-cell"&gt;&lt;a href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/a&gt;&lt;/div&gt;
-                        &lt;/xf:foreach&gt;
-                    &lt;/div&gt;
+<xf:if is="$servers is not empty">
+    <div class="block">
+        <div class="block-container">
+            <h2 class="block-header">{{ phrase('warext_mc_i18n_0199') }}</h2>
+            <div class="block-body">
+                <div class="dataList">
+                    <div class="dataList-row dataList-row--header">
+                        <div class="dataList-cell">{{ phrase('warext_mc_i18n_0200') }}</div>
+                        <xf:foreach loop="$servers" value="$server">
+                            <div class="dataList-cell"><a href="{{ link('sunucular/detay', $server) }}">{$server.title}</a></div>
+                        </xf:foreach>
+                    </div>
 
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0115') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;&lt;xf:if is="$server.is_online"&gt;&lt;span class="label label--green"&gt;Online&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Offline&lt;/span&gt;&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0201') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.players_online} / {$server.players_max}&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;Ping&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.ping_ms} ms&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;Uptime&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.uptime_percent}%&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0202') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.vote_count_month}&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_votes_24h') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.votes_24h}&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_votes_72h') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.votes_72h}&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0203') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.unique_voters_month}&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0204') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;&lt;xf:if is="$server.rank_popular"&gt;#{$server.rank_popular}&lt;xf:else /&gt;-&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0205') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;&lt;xf:if is="$server.rank_trending"&gt;#{$server.rank_trending}&lt;xf:else /&gt;-&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0206') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.rating_average} / 5 ({$server.rating_count})&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0207') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;{$server.server_type}&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0208') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;&lt;xf:if is="$server.detected_version"&gt;{$server.detected_version}&lt;xf:else /&gt;-&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;{{ phrase('warext_mc_i18n_0068') }}&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;&lt;xf:if is="$server.is_verified"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;xf:else /&gt;-&lt;/xf:if&gt;&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                    &lt;div class="dataList-row"&gt;&lt;div class="dataList-cell"&gt;Eklenme&lt;/div&gt;&lt;xf:foreach loop="$servers" value="$server"&gt;&lt;div class="dataList-cell"&gt;&lt;xf:date time="$server.created_date" /&gt;&lt;/div&gt;&lt;/xf:foreach&gt;&lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/xf:if&gt;
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0115') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.is_online"><span class="label label--green">Online</span><xf:else /><span class="label label--red">Offline</span></xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0201') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.players_online} / {$server.players_max}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Ping</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.ping_ms} ms</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Uptime</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.uptime_percent}%</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0202') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.vote_count_month}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_votes_24h') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.votes_24h}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_votes_72h') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.votes_72h}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0203') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.unique_voters_month}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0204') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.rank_popular">#{$server.rank_popular}<xf:else />-</xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0205') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.rank_trending">#{$server.rank_trending}<xf:else />-</xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0206') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.rating_average} / 5 ({$server.rating_count})</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0207') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell">{$server.server_type}</div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0208') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.detected_version">{$server.detected_version}<xf:else />-</xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">{{ phrase('warext_mc_i18n_0068') }}</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:if is="$server.is_verified"><span class="label label--primary">{{ phrase('warext_mc_i18n_0130') }}</span><xf:else />-</xf:if></div></xf:foreach></div>
+                    <div class="dataList-row"><div class="dataList-cell">Eklenme</div><xf:foreach loop="$servers" value="$server"><div class="dataList-cell"><xf:date time="$server.created_date" /></div></xf:foreach></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</xf:if>

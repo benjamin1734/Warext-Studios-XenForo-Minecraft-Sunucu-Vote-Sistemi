@@ -1,56 +1,56 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_dyn_server_statistics_title', {'server': $server.title}) }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0136') }}&lt;/xf:description&gt;
+<xf:title>{{ phrase('warext_mc_dyn_server_statistics_title', {'server': $server.title}) }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0136') }}</xf:description>
 
-&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
-&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
+<xf:breadcrumb href="{{ link('sunucular') }}">{{ phrase('nav.warextMcServers') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0137') }}&lt;/div&gt;
-        &lt;div class="block-body block-row"&gt;
-            &lt;div class="pairs-group pairs-group--columns"&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_24_hours') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.votes_24h ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0138') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.votes_7d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0139') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.votes_30d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0140') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.unique_voters_30d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0141') }}&lt;/dt&gt;&lt;dd&gt;{$deliveryRate}%&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0142') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.delivered_30d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0143') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.failed_30d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0144') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.retry_30d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0137') }}</div>
+        <div class="block-body block-row">
+            <div class="pairs-group pairs-group--columns">
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_24_hours') }}</dt><dd>{{ $voteStats.votes_24h ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0138') }}</dt><dd>{{ $voteStats.votes_7d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0139') }}</dt><dd>{{ $voteStats.votes_30d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0140') }}</dt><dd>{{ $voteStats.unique_voters_30d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0141') }}</dt><dd>{$deliveryRate}%</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0142') }}</dt><dd>{{ $voteStats.delivered_30d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0143') }}</dt><dd>{{ $voteStats.failed_30d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0144') }}</dt><dd>{{ $voteStats.retry_30d ?: 0 }}</dd></dl>
+            </div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0145') }}&lt;/div&gt;
-        &lt;div class="block-body block-row"&gt;
-            &lt;div class="pairs-group pairs-group--columns"&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;Uptime&lt;/dt&gt;&lt;dd&gt;{$uptime7d}%&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0146') }}&lt;/dt&gt;&lt;dd&gt;{{ $pingStats.peak_players_7d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0147') }}&lt;/dt&gt;&lt;dd&gt;{{ $pingStats.avg_players_7d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_average_ping') }}&lt;/dt&gt;&lt;dd&gt;{{ $pingStats.avg_ping_7d ?: 0 }} ms&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0148') }}&lt;/dt&gt;&lt;dd&gt;{$favorites}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0149') }}&lt;/dt&gt;&lt;dd&gt;{$reviews}&lt;/dd&gt;&lt;/dl&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0145') }}</div>
+        <div class="block-body block-row">
+            <div class="pairs-group pairs-group--columns">
+                <dl class="pairs pairs--columns"><dt>Uptime</dt><dd>{$uptime7d}%</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0146') }}</dt><dd>{{ $pingStats.peak_players_7d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0147') }}</dt><dd>{{ $pingStats.avg_players_7d ?: 0 }}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_average_ping') }}</dt><dd>{{ $pingStats.avg_ping_7d ?: 0 }} ms</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0148') }}</dt><dd>{$favorites}</dd></dl>
+                <dl class="pairs pairs--columns"><dt>{{ phrase('warext_mc_i18n_0149') }}</dt><dd>{$reviews}</dd></dl>
+            </div>
+        </div>
+    </div>
+</div>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0150') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$dailyVotes is not empty"&gt;
-                &lt;xf:foreach loop="$dailyVotes" value="$row"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{$row.vote_day}&lt;/dt&gt;&lt;dd&gt;{$row.total} oy&lt;/dd&gt;&lt;/dl&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0151') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0150') }}</div>
+        <div class="block-body">
+            <xf:if is="$dailyVotes is not empty">
+                <xf:foreach loop="$dailyVotes" value="$row">
+                    <div class="block-row block-row--separated">
+                        <dl class="pairs pairs--columns"><dt>{$row.vote_day}</dt><dd>{$row.total} oy</dd></dl>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0151') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>

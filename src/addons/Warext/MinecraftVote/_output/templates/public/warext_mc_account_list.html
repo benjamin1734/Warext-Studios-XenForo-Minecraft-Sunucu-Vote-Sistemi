@@ -1,73 +1,73 @@
-&lt;xf:title&gt;{{ phrase('nav.warextMcAccounts') }}&lt;/xf:title&gt;
+<xf:title>{{ phrase('nav.warextMcAccounts') }}</xf:title>
 
-&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
+<xf:breadcrumb href="{{ link('sunucular') }}">{{ phrase('nav.warextMcServers') }}</xf:breadcrumb>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0129') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:if is="$accounts is not empty"&gt;
-                &lt;xf:foreach loop="$accounts" value="$account"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;{$account.minecraft_username}&lt;/strong&gt;
-                                    &lt;xf:if is="$account.is_primary"&gt;&lt;span class="label label--primary"&gt;Birincil&lt;/span&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$account.verification_state == 'verified'"&gt;
-                                        &lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;
-                                    &lt;xf:elseif is="$account.verification_state == 'pending'" /&gt;
-                                        &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_i18n_0131') }}&lt;/span&gt;
-                                    &lt;xf:else /&gt;
-                                        &lt;span class="label"&gt;{{ phrase('warext_mc_i18n_0132') }}&lt;/span&gt;
-                                    &lt;/xf:if&gt;
-                                &lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0129') }}</div>
+        <div class="block-body">
+            <xf:if is="$accounts is not empty">
+                <xf:foreach loop="$accounts" value="$account">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <strong>{$account.minecraft_username}</strong>
+                                    <xf:if is="$account.is_primary"><span class="label label--primary">Birincil</span></xf:if>
+                                    <xf:if is="$account.verification_state == 'verified'">
+                                        <span class="label label--green">{{ phrase('warext_mc_i18n_0130') }}</span>
+                                    <xf:elseif is="$account.verification_state == 'pending'" />
+                                        <span class="label label--orange">{{ phrase('warext_mc_i18n_0131') }}</span>
+                                    <xf:else />
+                                        <span class="label">{{ phrase('warext_mc_i18n_0132') }}</span>
+                                    </xf:if>
+                                </div>
 
-                                &lt;div class="contentRow-minor"&gt;
-                                    UUID: &lt;xf:if is="$account.minecraft_uuid"&gt;{$account.minecraft_uuid}&lt;xf:else /&gt;Belirtilmedi&lt;/xf:if&gt;
-                                    · Eklenme: &lt;xf:date time="$account.created_date" /&gt;
-                                &lt;/div&gt;
+                                <div class="contentRow-minor">
+                                    UUID: <xf:if is="$account.minecraft_uuid">{$account.minecraft_uuid}<xf:else />Belirtilmedi</xf:if>
+                                    · Eklenme: <xf:date time="$account.created_date" />
+                                </div>
 
-                                &lt;div class="buttonGroup" style="margin-top:10px"&gt;
-                                    &lt;xf:if is="!$account.is_primary"&gt;
-                                        &lt;xf:form action="{{ link('sunucular/hesap-birincil', $account) }}" class="buttonGroup"&gt;
-                                            &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_primary_make') }}&lt;/xf:button&gt;
-                                        &lt;/xf:form&gt;
-                                    &lt;/xf:if&gt;
+                                <div class="buttonGroup" style="margin-top:10px">
+                                    <xf:if is="!$account.is_primary">
+                                        <xf:form action="{{ link('sunucular/hesap-birincil', $account) }}" class="buttonGroup">
+                                            <xf:button type="submit">{{ phrase('warext_mc_i18n_primary_make') }}</xf:button>
+                                        </xf:form>
+                                    </xf:if>
 
-                                    &lt;xf:form action="{{ link('sunucular/hesap-sil', $account) }}" data-xf-init="delete" class="buttonGroup"&gt;
-                                        &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0133') }}&lt;/xf:button&gt;
-                                    &lt;/xf:form&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;xf:else /&gt;
-                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0134') }}&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+                                    <xf:form action="{{ link('sunucular/hesap-sil', $account) }}" data-xf-init="delete" class="buttonGroup">
+                                        <xf:button type="submit" class="button--link">{{ phrase('warext_mc_i18n_0133') }}</xf:button>
+                                    </xf:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            <xf:else />
+                <div class="blockMessage">{{ phrase('warext_mc_i18n_0134') }}</div>
+            </xf:if>
+        </div>
+    </div>
+</div>
 
-&lt;xf:form action="{{ link('sunucular/hesaplar') }}" class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0135') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:textboxrow
+<xf:form action="{{ link('sunucular/hesaplar') }}" class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_0135') }}</div>
+        <div class="block-body">
+            <xf:textboxrow
                 name="minecraft_username"
                 label="{{ phrase('warext_mc_i18n_0001') }}"
                 maxlength="16"
                 required="required"
-                explain="{{ phrase('warext_mc_i18n_0002') }}" /&gt;
+                explain="{{ phrase('warext_mc_i18n_0002') }}" />
 
-            &lt;xf:textboxrow
+            <xf:textboxrow
                 name="minecraft_uuid"
                 label="{{ phrase('warext_mc_i18n_0003') }}"
                 maxlength="36"
-                explain="{{ phrase('warext_mc_i18n_0004') }}" /&gt;
-        &lt;/div&gt;
+                explain="{{ phrase('warext_mc_i18n_0004') }}" />
+        </div>
 
-        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0005') }}" /&gt;
-    &lt;/div&gt;
-&lt;/xf:form&gt;
+        <xf:submitrow submit="{{ phrase('warext_mc_i18n_0005') }}" />
+    </div>
+</xf:form>

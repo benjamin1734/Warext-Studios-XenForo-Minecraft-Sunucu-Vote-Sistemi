@@ -1,20 +1,20 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_dyn_transfer_ownership_title', {'server': $server.title}) }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0160') }}&lt;/xf:description&gt;
+<xf:title>{{ phrase('warext_mc_dyn_transfer_ownership_title', {'server': $server.title}) }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0160') }}</xf:description>
 
-&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
-&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
+<xf:breadcrumb href="{{ link('sunucular') }}">{{ phrase('nav.warextMcServers') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
 
-&lt;div class="blockMessage blockMessage--warning"&gt;
+<div class="blockMessage blockMessage--warning">
     {{ phrase('warext_mc_dyn_transfer_warning') }}
-&lt;/div&gt;
+</div>
 
-&lt;xf:form action="{{ link('sunucular/sahiplik-devret', $server) }}" ajax="true" class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_ownership_transfer_label') }}&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:textboxrow name="target_username" label="{{ phrase('warext_mc_i18n_0006') }}" required="required" /&gt;
-            &lt;xf:textboxrow name="confirm_title" label="{{ phrase('warext_mc_i18n_0007') }}" required="required" explain="{{ phrase('warext_mc_dyn_transfer_confirm_explain', {'server': $server.title}) }}" /&gt;
-        &lt;/div&gt;
-        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0008') }}" /&gt;
-    &lt;/div&gt;
-&lt;/xf:form&gt;
+<xf:form action="{{ link('sunucular/sahiplik-devret', $server) }}" ajax="true" class="block">
+    <div class="block-container">
+        <div class="block-header">{{ phrase('warext_mc_i18n_ownership_transfer_label') }}</div>
+        <div class="block-body">
+            <xf:textboxrow name="target_username" label="{{ phrase('warext_mc_i18n_0006') }}" required="required" />
+            <xf:textboxrow name="confirm_title" label="{{ phrase('warext_mc_i18n_0007') }}" required="required" explain="{{ phrase('warext_mc_dyn_transfer_confirm_explain', {'server': $server.title}) }}" />
+        </div>
+        <xf:submitrow submit="{{ phrase('warext_mc_i18n_0008') }}" />
+    </div>
+</xf:form>
