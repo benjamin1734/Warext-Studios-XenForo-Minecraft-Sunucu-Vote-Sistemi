@@ -1,88 +1,88 @@
-&lt;xf:title&gt;{{ phrase('warext_mc_dyn_verify_ownership_title', {'server': $server.title}) }}&lt;/xf:title&gt;
+<xf:title>{{ phrase('warext_mc_dyn_verify_ownership_title', {'server': $server.title}) }}</xf:title>
 
-&lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
-&lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
+<xf:breadcrumb href="{{ link('sunucular') }}">{{ phrase('nav.warextMcServers') }}</xf:breadcrumb>
+<xf:breadcrumb href="{{ link('sunucular/detay', $server) }}">{$server.title}</xf:breadcrumb>
 
-&lt;xf:if is="$server.is_verified"&gt;
-    &lt;div class="blockMessage blockMessage--success"&gt;
+<xf:if is="$server.is_verified">
+    <div class="blockMessage blockMessage--success">
         {{ phrase('warext_mc_dyn_ownership_verified') }}
-        &lt;xf:if is="$server.verified_date"&gt;
-            {{ phrase('warext_mc_i18n_verification_date') }} &lt;xf:date time="$server.verified_date" /&gt;.
-        &lt;/xf:if&gt;
-        Yöntem: &lt;xf:if is="$server.verification_method == 'dns_txt'"&gt;{{ phrase('warext_mc_i18n_dns_txt') }}&lt;xf:else /&gt;MOTD&lt;/xf:if&gt;.
-    &lt;/div&gt;
-&lt;/xf:if&gt;
+        <xf:if is="$server.verified_date">
+            {{ phrase('warext_mc_i18n_verification_date') }} <xf:date time="$server.verified_date" />.
+        </xf:if>
+        Yöntem: <xf:if is="$server.verification_method == 'dns_txt'">{{ phrase('warext_mc_i18n_dns_txt') }}<xf:else />MOTD</xf:if>.
+    </div>
+</xf:if>
 
-&lt;xf:if is="$server.verification_token"&gt;
-    &lt;div class="block"&gt;
-        &lt;div class="block-container"&gt;
-            &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0253') }}&lt;/div&gt;
-            &lt;div class="block-body"&gt;
-                &lt;div class="block-row"&gt;
-                    &lt;div class="contentRow"&gt;
-                        &lt;div class="contentRow-main"&gt;
-                            &lt;div class="contentRow-title"&gt;{{ phrase('warext_mc_i18n_0254') }}&lt;/div&gt;
-                            &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_code_valid_hours', {'hours': $tokenLifetimeHours}) }}&lt;/div&gt;
-                            &lt;div style="margin-top:8px"&gt;&lt;code&gt;{$server.verification_token}&lt;/code&gt;&lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
+<xf:if is="$server.verification_token">
+    <div class="block">
+        <div class="block-container">
+            <div class="block-header">{{ phrase('warext_mc_i18n_0253') }}</div>
+            <div class="block-body">
+                <div class="block-row">
+                    <div class="contentRow">
+                        <div class="contentRow-main">
+                            <div class="contentRow-title">{{ phrase('warext_mc_i18n_0254') }}</div>
+                            <div class="contentRow-minor">{{ phrase('warext_mc_dyn_code_valid_hours', {'hours': $tokenLifetimeHours}) }}</div>
+                            <div style="margin-top:8px"><code>{$server.verification_token}</code></div>
+                        </div>
+                    </div>
+                </div>
 
-                &lt;xf:if is="$server.verification_method == 'motd'"&gt;
-                    &lt;div class="block-row"&gt;
-                        &lt;strong&gt;{{ phrase('warext_mc_i18n_0255') }}&lt;/strong&gt;
-                        &lt;div class="contentRow-minor" style="margin-top:6px"&gt;
-                            Sunucunuzun MOTD metninin herhangi bir yerine &lt;code&gt;{$server.verification_token}&lt;/code&gt; kodunu ekleyin.
+                <xf:if is="$server.verification_method == 'motd'">
+                    <div class="block-row">
+                        <strong>{{ phrase('warext_mc_i18n_0255') }}</strong>
+                        <div class="contentRow-minor" style="margin-top:6px">
+                            Sunucunuzun MOTD metninin herhangi bir yerine <code>{$server.verification_token}</code> kodunu ekleyin.
                             {{ phrase('warext_mc_dyn_restart_verify') }}
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;xf:elseif is="$server.verification_method == 'dns_txt'" /&gt;
-                    &lt;div class="block-row"&gt;
-                        &lt;strong&gt;{{ phrase('warext_mc_i18n_0256') }}&lt;/strong&gt;
-                        &lt;dl class="pairs pairs--columns pairs--fixedSmall" style="margin-top:8px"&gt;
-                            &lt;dt&gt;{{ phrase('warext_mc_i18n_0257') }}&lt;/dt&gt;
-                            &lt;dd&gt;&lt;code&gt;{$dnsRecordName}&lt;/code&gt;&lt;/dd&gt;
-                        &lt;/dl&gt;
-                        &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;
-                            &lt;dt&gt;{{ phrase('warext_mc_i18n_0258') }}&lt;/dt&gt;
-                            &lt;dd&gt;&lt;code&gt;{$dnsRecordValue}&lt;/code&gt;&lt;/dd&gt;
-                        &lt;/dl&gt;
-                        &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0259') }}&lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:if&gt;
-            &lt;/div&gt;
+                        </div>
+                    </div>
+                <xf:elseif is="$server.verification_method == 'dns_txt'" />
+                    <div class="block-row">
+                        <strong>{{ phrase('warext_mc_i18n_0256') }}</strong>
+                        <dl class="pairs pairs--columns pairs--fixedSmall" style="margin-top:8px">
+                            <dt>{{ phrase('warext_mc_i18n_0257') }}</dt>
+                            <dd><code>{$dnsRecordName}</code></dd>
+                        </dl>
+                        <dl class="pairs pairs--columns pairs--fixedSmall">
+                            <dt>{{ phrase('warext_mc_i18n_0258') }}</dt>
+                            <dd><code>{$dnsRecordValue}</code></dd>
+                        </dl>
+                        <div class="contentRow-minor">{{ phrase('warext_mc_i18n_0259') }}</div>
+                    </div>
+                </xf:if>
+            </div>
 
-            &lt;xf:form action="{{ link('sunucular/dogrula', $server) }}"&gt;
-                &lt;xf:hiddenval name="operation" value="verify" /&gt;
-                &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0072') }}" /&gt;
-            &lt;/xf:form&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/xf:if&gt;
+            <xf:form action="{{ link('sunucular/dogrula', $server) }}">
+                <xf:hiddenval name="operation" value="verify" />
+                <xf:submitrow submit="{{ phrase('warext_mc_i18n_0072') }}" />
+            </xf:form>
+        </div>
+    </div>
+</xf:if>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;&lt;xf:if is="$server.verification_token"&gt;{{ phrase('warext_mc_i18n_0260') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0261') }}&lt;/xf:if&gt;&lt;/div&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_0262') }}&lt;/strong&gt;
-                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0263') }}&lt;/div&gt;
-                &lt;xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px"&gt;
-                    &lt;xf:hiddenval name="operation" value="start" /&gt;
-                    &lt;xf:hiddenval name="method" value="motd" /&gt;
-                    &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_0264') }}&lt;/xf:button&gt;
-                &lt;/xf:form&gt;
-            &lt;/div&gt;
+<div class="block">
+    <div class="block-container">
+        <div class="block-header"><xf:if is="$server.verification_token">{{ phrase('warext_mc_i18n_0260') }}<xf:else />{{ phrase('warext_mc_i18n_0261') }}</xf:if></div>
+        <div class="block-body">
+            <div class="block-row">
+                <strong>{{ phrase('warext_mc_i18n_0262') }}</strong>
+                <div class="contentRow-minor">{{ phrase('warext_mc_i18n_0263') }}</div>
+                <xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px">
+                    <xf:hiddenval name="operation" value="start" />
+                    <xf:hiddenval name="method" value="motd" />
+                    <xf:button type="submit">{{ phrase('warext_mc_i18n_0264') }}</xf:button>
+                </xf:form>
+            </div>
 
-            &lt;div class="block-row block-row--separated"&gt;
-                &lt;strong&gt;{{ phrase('warext_mc_i18n_0265') }}&lt;/strong&gt;
-                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0266') }}&lt;/div&gt;
-                &lt;xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px"&gt;
-                    &lt;xf:hiddenval name="operation" value="start" /&gt;
-                    &lt;xf:hiddenval name="method" value="dns_txt" /&gt;
-                    &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_0267') }}&lt;/xf:button&gt;
-                &lt;/xf:form&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+            <div class="block-row block-row--separated">
+                <strong>{{ phrase('warext_mc_i18n_0265') }}</strong>
+                <div class="contentRow-minor">{{ phrase('warext_mc_i18n_0266') }}</div>
+                <xf:form action="{{ link('sunucular/dogrula', $server) }}" style="margin-top:10px">
+                    <xf:hiddenval name="operation" value="start" />
+                    <xf:hiddenval name="method" value="dns_txt" />
+                    <xf:button type="submit">{{ phrase('warext_mc_i18n_0267') }}</xf:button>
+                </xf:form>
+            </div>
+        </div>
+    </div>
+</div>

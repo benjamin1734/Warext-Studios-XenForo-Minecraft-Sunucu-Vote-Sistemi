@@ -1,47 +1,47 @@
-&lt;xf:title&gt;{{ phrase('nav.warextMcMyServers') }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0245') }}&lt;/xf:description&gt;
-&lt;xf:css src="warext_mc_servers.less" /&gt;
+<xf:title>{{ phrase('nav.warextMcMyServers') }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0245') }}</xf:description>
+<xf:css src="warext_mc_servers.less" />
 
-&lt;xf:pageaction&gt;
-    &lt;xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta"&gt;{{ phrase('nav.warextMcServerAdd') }}&lt;/xf:button&gt;
-&lt;/xf:pageaction&gt;
+<xf:pageaction>
+    <xf:button href="{{ link('sunucular/ekle') }}" icon="add" class="button--cta">{{ phrase('nav.warextMcServerAdd') }}</xf:button>
+</xf:pageaction>
 
-&lt;xf:if is="$servers is not empty"&gt;
-    &lt;div class="block"&gt;
-        &lt;div class="block-container"&gt;
-            &lt;div class="block-body"&gt;
-                &lt;xf:foreach loop="$servers" value="$server"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;
-                                    &lt;a href="{{ link('sunucular/detay', $server) }}"&gt;&lt;strong&gt;{$server.title}&lt;/strong&gt;&lt;/a&gt;
-                                    &lt;xf:if is="$server.state == 'active'"&gt;
-                                        &lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0235') }}&lt;/span&gt;
-                                    &lt;xf:elseif is="$server.state == 'pending'" /&gt;
-                                        &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_i18n_0246') }}&lt;/span&gt;
-                                    &lt;xf:elseif is="$server.state == 'rejected'" /&gt;
-                                        &lt;span class="label label--red"&gt;Reddedildi&lt;/span&gt;
-                                    &lt;xf:else /&gt;
-                                        &lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0247') }}&lt;/span&gt;
-                                    &lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.is_owner"&gt;&lt;span class="label label--primary"&gt;Sahibi&lt;/span&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;{$server.host}:{$server.port}&lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0248') }} &lt;xf:date time="$server.last_update_date" /&gt;&lt;/div&gt;
-                                &lt;div class="buttonGroup buttonGroup--alignLeft"&gt;
-                                    &lt;xf:button href="{{ link('sunucular/detay', $server) }}"&gt;Detay&lt;/xf:button&gt;
-                                    &lt;xf:if is="$server.can_edit"&gt;&lt;xf:button href="{{ link('sunucular/duzenle', $server) }}"&gt;{{ phrase('warext_mc_i18n_0249') }}&lt;/xf:button&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.can_view_stats"&gt;&lt;xf:button href="{{ link('sunucular/istatistik', $server) }}"&gt;{{ phrase('warext_mc_i18n_0250') }}&lt;/xf:button&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.can_manage_votifier"&gt;&lt;xf:button href="{{ link('sunucular/votifier', $server) }}"&gt;NuVotifier&lt;/xf:button&gt;&lt;/xf:if&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;xf:else /&gt;
-    &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0251') }} &lt;a href="{{ link('sunucular/ekle') }}"&gt;{{ phrase('warext_mc_i18n_0252') }}&lt;/a&gt;&lt;/div&gt;
-&lt;/xf:if&gt;
+<xf:if is="$servers is not empty">
+    <div class="block">
+        <div class="block-container">
+            <div class="block-body">
+                <xf:foreach loop="$servers" value="$server">
+                    <div class="block-row block-row--separated">
+                        <div class="contentRow">
+                            <div class="contentRow-main">
+                                <div class="contentRow-title">
+                                    <a href="{{ link('sunucular/detay', $server) }}"><strong>{$server.title}</strong></a>
+                                    <xf:if is="$server.state == 'active'">
+                                        <span class="label label--green">{{ phrase('warext_mc_i18n_0235') }}</span>
+                                    <xf:elseif is="$server.state == 'pending'" />
+                                        <span class="label label--orange">{{ phrase('warext_mc_i18n_0246') }}</span>
+                                    <xf:elseif is="$server.state == 'rejected'" />
+                                        <span class="label label--red">Reddedildi</span>
+                                    <xf:else />
+                                        <span class="label label--red">{{ phrase('warext_mc_i18n_0247') }}</span>
+                                    </xf:if>
+                                    <xf:if is="$server.is_owner"><span class="label label--primary">Sahibi</span></xf:if>
+                                </div>
+                                <div class="contentRow-minor">{$server.host}:{$server.port}</div>
+                                <div class="contentRow-minor">{{ phrase('warext_mc_i18n_0248') }} <xf:date time="$server.last_update_date" /></div>
+                                <div class="buttonGroup buttonGroup--alignLeft">
+                                    <xf:button href="{{ link('sunucular/detay', $server) }}">Detay</xf:button>
+                                    <xf:if is="$server.can_edit"><xf:button href="{{ link('sunucular/duzenle', $server) }}">{{ phrase('warext_mc_i18n_0249') }}</xf:button></xf:if>
+                                    <xf:if is="$server.can_view_stats"><xf:button href="{{ link('sunucular/istatistik', $server) }}">{{ phrase('warext_mc_i18n_0250') }}</xf:button></xf:if>
+                                    <xf:if is="$server.can_manage_votifier"><xf:button href="{{ link('sunucular/votifier', $server) }}">NuVotifier</xf:button></xf:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xf:foreach>
+            </div>
+        </div>
+    </div>
+<xf:else />
+    <div class="blockMessage">{{ phrase('warext_mc_i18n_0251') }} <a href="{{ link('sunucular/ekle') }}">{{ phrase('warext_mc_i18n_0252') }}</a></div>
+</xf:if>
