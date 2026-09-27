@@ -23,7 +23,7 @@ class Category extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('warext-minecraft/categories'),
-                'Kategori oluşturuldu.'
+                \XF::phrase('warext_mc_dyn_category_created')
             );
         }
 
@@ -63,7 +63,7 @@ class Category extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('warext-minecraft/categories'),
-                'Kategori güncellendi.'
+                \XF::phrase('warext_mc_dyn_category_updated')
             );
         }
 
@@ -100,7 +100,7 @@ class Category extends AbstractController
 
         return $this->redirect(
             $this->buildLink('warext-minecraft/categories'),
-            'Kategori silindi.'
+            \XF::phrase('warext_mc_dyn_category_deleted')
         );
     }
 
@@ -120,7 +120,7 @@ class Category extends AbstractController
         $title = trim($input['title']);
         if ($title === '')
         {
-            $category->error('Kategori adı boş bırakılamaz.', 'title');
+            $category->error((string)\XF::phrase('warext_mc_dyn_category_name_required'), 'title');
         }
 
         $slug = trim($input['slug']);
@@ -130,7 +130,7 @@ class Category extends AbstractController
             ->fetchOne();
         if ($existing && (int)$existing->category_id !== (int)$category->category_id)
         {
-            $category->error('Bu kategori kısa adı zaten kullanılıyor.', 'slug');
+            $category->error((string)\XF::phrase('warext_mc_dyn_category_slug_taken'), 'slug');
         }
 
         $serverType = strtolower(trim($input['thread_default_server_type']));
@@ -141,7 +141,7 @@ class Category extends AbstractController
 
         if ($input['thread_integration_enabled'] && !$input['forum_node_id'])
         {
-            $category->error('Konu entegrasyonu için bir XenForo forumu seçin.', 'forum_node_id');
+            $category->error((string)\XF::phrase('warext_mc_dyn_category_forum_required'), 'forum_node_id');
         }
 
         if ($input['forum_node_id'])
@@ -149,7 +149,7 @@ class Category extends AbstractController
             $forum = $this->em()->find('XF:Forum', (int)$input['forum_node_id']);
             if (!$forum)
             {
-                $category->error('Seçilen XenForo forumu bulunamadı.', 'forum_node_id');
+                $category->error((string)\XF::phrase('warext_mc_dyn_category_forum_missing'), 'forum_node_id');
             }
 
             $mapped = $this->finder('Warext\MinecraftVote:Category')
@@ -157,7 +157,7 @@ class Category extends AbstractController
                 ->fetchOne();
             if ($mapped && (int)$mapped->category_id !== (int)$category->category_id)
             {
-                $category->error('Bu XenForo forumu başka bir Minecraft kategorisine bağlı.', 'forum_node_id');
+                $category->error((string)\XF::phrase('warext_mc_dyn_category_forum_bound'), 'forum_node_id');
             }
         }
 
@@ -173,7 +173,7 @@ class Category extends AbstractController
 
     protected function getForumOptions(): array
     {
-        $options = [0 => 'Bağlantı yok'];
+        $options = [0 => (string)\XF::phrase('warext_mc_dyn_no_connection')];
         $forums = $this->finder('XF:Forum')->order('title')->fetch();
         foreach ($forums as $forum)
         {
