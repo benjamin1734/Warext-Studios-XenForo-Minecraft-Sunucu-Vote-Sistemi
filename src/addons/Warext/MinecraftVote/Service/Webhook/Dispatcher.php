@@ -80,7 +80,7 @@ class Dispatcher extends AbstractService
     {
         if (!filter_var($url, FILTER_VALIDATE_URL))
         {
-            throw new \InvalidArgumentException('Webhook URL geçersiz.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_webhook_invalid_url'));
         }
 
         $parts = parse_url($url);
@@ -88,11 +88,11 @@ class Dispatcher extends AbstractService
         $host = strtolower((string)($parts['host'] ?? ''));
         if ($scheme !== 'https' || $host === '')
         {
-            throw new \InvalidArgumentException('Webhook yalnızca geçerli HTTPS adreslerine gönderilebilir.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_webhook_https_only'));
         }
         if (isset($parts['user']) || isset($parts['pass']))
         {
-            throw new \InvalidArgumentException('Webhook URL içinde kullanıcı adı veya parola kullanılamaz.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_webhook_userinfo_forbidden'));
         }
 
         $port = (int)($parts['port'] ?? 443);
