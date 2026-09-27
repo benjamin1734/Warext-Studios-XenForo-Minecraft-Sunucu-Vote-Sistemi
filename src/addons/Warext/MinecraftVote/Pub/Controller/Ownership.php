@@ -30,7 +30,7 @@ class Ownership extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular'),
-                'Sunucu sahipliği ' . $newOwner->username . ' kullanıcısına devredildi. Sahiplik doğrulaması güvenlik nedeniyle sıfırlandı.'
+                \XF::phrase('warext_mc_dyn_ownership_transferred', ['username' => $newOwner->username])
             );
         }
 
