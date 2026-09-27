@@ -675,4 +675,6 @@
   <phrase title="warext_mc_dyn_sponsor_deleted" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sponsor kaydı silindi.]]></phrase>
   <phrase title="warext_mc_dyn_sponsor_overlap" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bu sunucunun seçilen tarih aralığıyla çakışan başka bir sponsor kaydı var.]]></phrase>
   <phrase title="warext_mc_dyn_sponsor_date_example" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Geçerli bir tarih girin. Örnek: 2026-09-01 18:00]]></phrase>
+  <phrase title="warext_mc_dyn_favorite_added" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu favorilerinize eklendi.]]></phrase>
+  <phrase title="warext_mc_dyn_detail_server_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[{server} Minecraft sunucusu]]></phrase>
 </language>
