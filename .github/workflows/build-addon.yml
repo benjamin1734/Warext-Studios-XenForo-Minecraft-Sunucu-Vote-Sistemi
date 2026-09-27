@@ -53,6 +53,35 @@ jobs:
               ET.parse(file)
               print(file)
           PY
+      - name: Validate language-pack coverage
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          phrase_dir = Path('src/addons/Warext/MinecraftVote/_output/phrases')
+          base = {p.stem for p in phrase_dir.glob('*.txt')}
+
+          def titles(path):
+              root = ET.parse(path).getroot()
+              return {node.attrib['title'] for node in root.findall('phrase')}
+
+          en = titles('languages/English.xml')
+          tr = titles('languages/Turkish.xml')
+          missing_en = sorted(base - en)
+          missing_tr = sorted(base - tr)
+          extra_en = sorted(en - base)
+          extra_tr = sorted(tr - base)
+
+          if missing_en or missing_tr or extra_en or extra_tr:
+              raise SystemExit(
+                  'Language pack mismatch\n'
+                  f'missing_en={missing_en}\nmissing_tr={missing_tr}\n'
+                  f'extra_en={extra_en}\nextra_tr={extra_tr}'
+              )
+
+          print(f'Language coverage OK: {len(base)} phrases')
+          PY
       - name: Build direct-install ZIP
         id: package
         run: |
