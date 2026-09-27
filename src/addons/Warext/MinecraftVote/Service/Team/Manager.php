@@ -27,7 +27,7 @@ class Manager extends AbstractService
         $username = trim($username);
         if ($username === '')
         {
-            throw new PrintableException('Ekip üyesi kullanıcı adı gereklidir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_team_username_required'));
         }
 
         $user = $this->finder('XF:User')
@@ -35,12 +35,12 @@ class Manager extends AbstractService
             ->fetchOne();
         if (!$user)
         {
-            throw new PrintableException('Belirtilen XenForo kullanıcısı bulunamadı.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_xf_user_not_found'));
         }
 
         if ((int)$user->user_id === (int)$this->server->owner_user_id)
         {
-            throw new PrintableException('Sunucu sahibi ekip üyesi olarak eklenemez.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_owner_cannot_be_team'));
         }
 
         $role = trim($role);
@@ -116,7 +116,7 @@ class Manager extends AbstractService
     {
         if (!$this->actor->user_id || (int)$this->actor->user_id !== (int)$this->server->owner_user_id)
         {
-            throw new PrintableException('Sunucu ekibini yalnızca sunucu sahibi yönetebilir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_team_owner_only'));
         }
     }
 }
