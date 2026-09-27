@@ -604,4 +604,5 @@
   <phrase title="warext_mc_i18n_java_label" version_id="1020010" version_string="1.2.1"><![CDATA[Java:]]></phrase>
   <phrase title="warext_mc_i18n_bedrock_label" version_id="1020010" version_string="1.2.1"><![CDATA[Bedrock:]]></phrase>
   <phrase title="warext_mc_i18n_crossplay_label" version_id="1020010" version_string="1.2.1"><![CDATA[Crossplay:]]></phrase>
+  <phrase title="warext_mc_vote_cooldown_24h_error" version_id="1020010" version_string="1.2.1"><![CDATA[Bu sunucuya son 24 saat içinde zaten oy verdiniz. 24 saat sonra tekrar deneyin.]]></phrase>
 </phrases>
