@@ -595,4 +595,5 @@
   <phrase title="warext_mc_i18n_java_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Java:]]></phrase>
   <phrase title="warext_mc_i18n_bedrock_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Bedrock:]]></phrase>
   <phrase title="warext_mc_i18n_crossplay_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Crossplay:]]></phrase>
+  <phrase title="warext_mc_vote_cooldown_24h_error" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[You already voted for this server within the last 24 hours. Please try again after 24 hours.]]></phrase>
 </language>
