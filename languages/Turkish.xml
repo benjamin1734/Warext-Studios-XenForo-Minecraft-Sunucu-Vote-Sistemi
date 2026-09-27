@@ -677,4 +677,9 @@
   <phrase title="warext_mc_dyn_sponsor_date_example" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Geçerli bir tarih girin. Örnek: 2026-09-01 18:00]]></phrase>
   <phrase title="warext_mc_dyn_favorite_added" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu favorilerinize eklendi.]]></phrase>
   <phrase title="warext_mc_dyn_detail_server_title" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[{server} Minecraft sunucusu]]></phrase>
+  <phrase title="warext_mc_dyn_metric_total_votes" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Toplam oy]]></phrase>
+  <phrase title="warext_mc_dyn_category_deleted" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Kategori silindi.]]></phrase>
+  <phrase title="warext_mc_dyn_report_resolution_too_long" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Moderasyon notu en fazla 255 karakter olabilir.]]></phrase>
+  <phrase title="warext_mc_dyn_unknown_error" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bilinmeyen hata]]></phrase>
+  <phrase title="warext_mc_dyn_sponsored_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sponsorlu]]></phrase>
 </language>

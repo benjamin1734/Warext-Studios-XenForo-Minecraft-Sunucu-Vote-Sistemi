@@ -1,0 +1,1 @@
+Moderasyon notu en fazla 255 karakter olabilir.
