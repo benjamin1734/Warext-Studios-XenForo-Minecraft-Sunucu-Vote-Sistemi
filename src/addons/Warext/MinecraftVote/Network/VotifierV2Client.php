@@ -26,23 +26,23 @@ class VotifierV2Client
         $token = trim($token);
         if ($token === '')
         {
-            throw new \InvalidArgumentException('NuVotifier token boş olamaz.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_votifier_token_required'));
         }
 
         if ($port < 1 || $port > 65535)
         {
-            throw new \InvalidArgumentException('NuVotifier portu geçersiz.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_votifier_port_invalid'));
         }
 
         if (!preg_match('/^[A-Za-z0-9_]{1,16}$/', $username))
         {
-            throw new \InvalidArgumentException('NuVotifier kullanıcı adı geçersiz.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_votifier_username_invalid'));
         }
 
         $serviceName = trim($serviceName);
         if ($serviceName === '' || mb_strlen($serviceName) > 64)
         {
-            throw new \InvalidArgumentException('NuVotifier servis adı geçersiz.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_votifier_service_invalid'));
         }
 
         $endpoint = $this->resolver->resolveTcp($host, $port);
@@ -71,13 +71,13 @@ class VotifierV2Client
             $header = fgets($stream, 256);
             if ($header === false || $header === '')
             {
-                throw new \RuntimeException('NuVotifier sunucusundan protokol başlığı alınamadı.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_votifier_header_missing'));
             }
 
             $header = trim($header);
             if (!preg_match('/^VOTIFIER\s+2\s+([A-Za-z0-9+\/_=-]+)$/', $header, $matches))
             {
-                throw new \RuntimeException('Hedef sunucu NuVotifier Protocol V2 yanıtı vermedi.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_votifier_v2_required'));
             }
 
             $challenge = $matches[1];
@@ -98,7 +98,7 @@ class VotifierV2Client
             $messageLength = strlen($messageJson);
             if ($messageLength < 1 || $messageLength > 65535)
             {
-                throw new \RuntimeException('NuVotifier paketi izin verilen boyutu aşıyor.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_votifier_packet_too_large'));
             }
 
             $this->writeAll($stream, pack('nn', 0x733a, $messageLength) . $messageJson);
@@ -109,17 +109,17 @@ class VotifierV2Client
                 $meta = stream_get_meta_data($stream);
                 if (!empty($meta['timed_out']))
                 {
-                    throw new \RuntimeException('NuVotifier yanıtı zaman aşımına uğradı.');
+                    throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_votifier_response_timeout'));
                 }
 
-                throw new \RuntimeException('NuVotifier sunucusundan teslimat yanıtı alınamadı.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_votifier_response_missing'));
             }
 
             $result = json_decode(trim($response), true, 16, JSON_THROW_ON_ERROR);
             if (($result['status'] ?? '') !== 'ok')
             {
                 $cause = trim((string)($result['cause'] ?? 'server_error'));
-                $detail = trim((string)($result['error'] ?? 'Bilinmeyen NuVotifier hatası'));
+                $detail = trim((string)($result['error'] ?? (string)\XF::phrase('warext_mc_dyn_votifier_unknown_error')));
                 throw new \RuntimeException($cause . ': ' . $detail);
             }
 
@@ -146,7 +146,7 @@ class VotifierV2Client
             $written = fwrite($stream, substr($data, $offset));
             if ($written === false || $written === 0)
             {
-                throw new \RuntimeException('NuVotifier paketi gönderilemedi.');
+                throw new \RuntimeException((string)\XF::phrase('warext_mc_dyn_votifier_send_failed'));
             }
 
             $offset += $written;
