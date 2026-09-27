@@ -24,18 +24,18 @@ class Transfer extends AbstractService
     {
         if (!$this->actor->user_id || (int)$this->actor->user_id !== (int)$this->server->owner_user_id)
         {
-            throw new PrintableException('Sunucu sahipliğini yalnızca mevcut sunucu sahibi devredebilir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_ownership_current_owner_only'));
         }
 
         if (trim($confirmTitle) !== (string)$this->server->title)
         {
-            throw new PrintableException('Onay için sunucu adını birebir yazmalısınız.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_ownership_confirm_exact'));
         }
 
         $targetUsername = trim($targetUsername);
         if ($targetUsername === '')
         {
-            throw new PrintableException('Yeni sahibin XenForo kullanıcı adını girin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_ownership_target_required'));
         }
 
         $target = $this->finder('XF:User')
@@ -43,11 +43,11 @@ class Transfer extends AbstractService
             ->fetchOne();
         if (!$target)
         {
-            throw new PrintableException('Belirtilen XenForo kullanıcısı bulunamadı.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_xf_user_not_found'));
         }
         if ((int)$target->user_id === (int)$this->actor->user_id)
         {
-            throw new PrintableException('Sunucu zaten bu kullanıcıya ait.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_ownership_same_owner'));
         }
 
         $oldOwnerId = (int)$this->server->owner_user_id;
