@@ -26,7 +26,7 @@ class Media extends AbstractService
         $upload->requireImage()->setMaxFileSize($config['max_upload']);
         if (!$upload->isValid($errors))
         {
-            throw new PrintableException('Yüklenen dosya güvenli ve geçerli bir görsel olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_valid_image_required'));
         }
 
         $extension = $this->extensionFromImageType((int)$upload->getImageType());
@@ -44,12 +44,12 @@ class Media extends AbstractService
 
         if ($width > 10000 || $height > 10000 || ($width * $height) > 40000000)
         {
-            throw new PrintableException('Görsel çözünürlüğü işlenemeyecek kadar yüksek.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_image_pixels_too_large'));
         }
 
         if ($type === 'animated_banner' && !class_exists('Imagick'))
         {
-            throw new PrintableException('Hareketli GIF otomatik boyutlandırması için sunucuda Imagick PHP eklentisi etkin olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_imagick_gif_required'));
         }
     }
 
@@ -123,7 +123,7 @@ class Media extends AbstractService
             return $this->processStaticWithImagick($sourceFile, $config);
         }
 
-        throw new PrintableException('Görsel otomatik boyutlandırması için GD veya Imagick PHP eklentisi etkin olmalıdır.');
+        throw new PrintableException((string)\XF::phrase('warext_mc_dyn_image_extension_required'));
     }
 
     protected function processStaticWithGd(string $sourceFile, int $imageType, array $config): ?array
@@ -191,7 +191,7 @@ class Media extends AbstractService
         if (!$resampled)
         {
             imagedestroy($target);
-            throw new PrintableException('Görsel yeniden boyutlandırılamadı.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_image_resize_failed'));
         }
 
         $tempFile = $this->createTempFile();
@@ -204,7 +204,7 @@ class Media extends AbstractService
         if (!$saved)
         {
             @unlink($tempFile);
-            throw new PrintableException('Görsel optimize edilerek kaydedilemedi.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_image_save_failed'));
         }
 
         $this->assertProcessedFile($tempFile, $config['max_output']);
@@ -238,7 +238,7 @@ class Media extends AbstractService
             if (!$image->writeImage($tempFile))
             {
                 @unlink($tempFile);
-                throw new PrintableException('Görsel optimize edilerek kaydedilemedi.');
+                throw new PrintableException((string)\XF::phrase('warext_mc_dyn_image_save_failed'));
             }
             $image->clear();
         }
@@ -248,7 +248,7 @@ class Media extends AbstractService
         }
         catch (\Throwable $e)
         {
-            throw new PrintableException('Görsel işlenirken bir hata oluştu.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_image_processing_failed'));
         }
 
         $this->assertProcessedFile($tempFile, $config['max_output']);
@@ -264,7 +264,7 @@ class Media extends AbstractService
             if ($frameCount < 1 || $frameCount > 240)
             {
                 $gif->clear();
-                throw new PrintableException('Hareketli banner en fazla 240 kare içerebilir.');
+                throw new PrintableException((string)\XF::phrase('warext_mc_dyn_gif_frame_limit'));
             }
 
             $iterations = $gif->getImageIterations();
@@ -287,7 +287,7 @@ class Media extends AbstractService
                 @unlink($tempFile);
                 $optimized->clear();
                 $gif->clear();
-                throw new PrintableException('Hareketli banner optimize edilerek kaydedilemedi.');
+                throw new PrintableException((string)\XF::phrase('warext_mc_dyn_gif_save_failed'));
             }
             $optimized->clear();
             $gif->clear();
@@ -298,7 +298,7 @@ class Media extends AbstractService
         }
         catch (\Throwable $e)
         {
-            throw new PrintableException('Hareketli banner işlenirken bir hata oluştu.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_gif_processing_failed'));
         }
 
         $this->assertProcessedFile($tempFile, $config['max_output']);
@@ -335,7 +335,7 @@ class Media extends AbstractService
         if (!$size || $size > $maxBytes)
         {
             @unlink($path);
-            throw new PrintableException('Görsel optimize edildikten sonra izin verilen dosya boyutunu aşıyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_optimized_image_too_large'));
         }
     }
 
@@ -344,7 +344,7 @@ class Media extends AbstractService
         $path = tempnam(sys_get_temp_dir(), 'warext_mc_');
         if (!$path)
         {
-            throw new PrintableException('Görsel işleme için geçici dosya oluşturulamadı.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_temp_file_failed'));
         }
 
         return $path;
@@ -362,8 +362,8 @@ class Media extends AbstractService
                 'height' => 60,
                 'min_width' => 468,
                 'min_height' => 60,
-                'format_error' => 'Statik banner JPG, PNG veya WebP olmalıdır.',
-                'size_error' => 'Liste bannerı en az 468×60 piksel olmalıdır.'
+                'format_error' => (string)\XF::phrase('warext_mc_dyn_static_banner_format'),
+                'size_error' => (string)\XF::phrase('warext_mc_dyn_static_banner_size')
             ],
             'animated_banner' => [
                 'field' => 'animated_banner_path',
@@ -374,8 +374,8 @@ class Media extends AbstractService
                 'height' => 60,
                 'min_width' => 468,
                 'min_height' => 60,
-                'format_error' => 'Hareketli banner GIF olmalıdır.',
-                'size_error' => 'Hareketli banner en az 468×60 piksel olmalıdır.'
+                'format_error' => (string)\XF::phrase('warext_mc_dyn_gif_banner_format'),
+                'size_error' => (string)\XF::phrase('warext_mc_dyn_gif_banner_size')
             ],
             'cover' => [
                 'field' => 'cover_path',
@@ -386,14 +386,14 @@ class Media extends AbstractService
                 'height' => 400,
                 'min_width' => 600,
                 'min_height' => 200,
-                'format_error' => 'Kapak görseli JPG, PNG veya WebP olmalıdır.',
-                'size_error' => 'Kapak görseli en az 600×200 piksel olmalıdır.'
+                'format_error' => (string)\XF::phrase('warext_mc_dyn_cover_format'),
+                'size_error' => (string)\XF::phrase('warext_mc_dyn_cover_size')
             ]
         ];
 
         if (!isset($configs[$type]))
         {
-            throw new PrintableException('Geçersiz sunucu medya türü.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_invalid_media_type'));
         }
 
         return $configs[$type];
