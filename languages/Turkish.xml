@@ -956,4 +956,34 @@
   <phrase title="warext_mc_vote_country" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ülke]]></phrase>
   <phrase title="warext_mc_vote_login_type" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Giriş tipi]]></phrase>
   <phrase title="warext_mc_vote_promotional_video" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Tanıtım Videosu]]></phrase>
+  <phrase title="warext_mc_profile_banner_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[468 × 60 sunucu bannerı]]></phrase>
+  <phrase title="warext_mc_profile_pending" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Onay bekliyor]]></phrase>
+  <phrase title="warext_mc_profile_minecraft_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft sunucusu]]></phrase>
+  <phrase title="warext_mc_profile_today" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bugün]]></phrase>
+  <phrase title="warext_mc_profile_views" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Görüntülenme]]></phrase>
+  <phrase title="warext_mc_profile_quick_access" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Hızlı Erişim]]></phrase>
+  <phrase title="warext_mc_profile_promotional_thread" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Tanıtım konusu]]></phrase>
+  <phrase title="warext_mc_profile_details" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Detaylar]]></phrase>
+  <phrase title="warext_mc_profile_recent_voters" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Son Oy Verenler]]></phrase>
+  <phrase title="warext_mc_profile_no_recent_voters" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Henüz oy kullanan olmadı.]]></phrase>
+  <phrase title="warext_mc_profile_support_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucuyu destekle]]></phrase>
+  <phrase title="warext_mc_profile_vote_for_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[{server} için oyunu kullan]]></phrase>
+  <phrase title="warext_mc_profile_vote_explain" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Oy vererek sunucunun sıralamadaki görünürlüğünü artırabilirsin. Aynı sunucuya 24 saatte bir oy verilebilir.]]></phrase>
+  <phrase title="warext_mc_profile_server_pending" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu onay bekliyor]]></phrase>
+  <phrase title="warext_mc_profile_vote_now" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Şimdi Oy Ver]]></phrase>
+  <phrase title="warext_mc_profile_login_vote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Giriş Yap ve Oy Ver]]></phrase>
+  <phrase title="warext_mc_profile_vote_permission_denied" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bu hesap için oy verme izni bulunmuyor.]]></phrase>
+  <phrase title="warext_mc_profile_no_description" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu sahibi henüz ayrıntılı bir tanıtım eklemedi.]]></phrase>
+  <phrase title="warext_mc_profile_achievements" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Başarımlar]]></phrase>
+  <phrase title="warext_mc_profile_view_all_reviews" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Tümünü gör ({count})]]></phrase>
+  <phrase title="warext_mc_profile_no_reviews" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Henüz onaylı değerlendirme yok. İlk değerlendirmeyi sen yapabilirsin.]]></phrase>
+  <phrase title="warext_mc_profile_top_voter" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bu Ay Top Voter]]></phrase>
+  <phrase title="warext_mc_profile_no_top_voter" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bu ay henüz sıralama oluşmadı.]]></phrase>
+  <phrase title="warext_mc_profile_community" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Topluluk]]></phrase>
+  <phrase title="warext_mc_profile_join_discord" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Discord'a Katıl]]></phrase>
+  <phrase title="warext_mc_profile_none_yet" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Henüz yok]]></phrase>
+  <phrase title="warext_mc_profile_manage_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucuyu Yönet]]></phrase>
+  <phrase title="warext_mc_profile_sponsor" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sponsor Ol]]></phrase>
+  <phrase title="warext_mc_profile_supported" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Destekliyor]]></phrase>
+  <phrase title="warext_mc_profile_not_supported" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Desteklemiyor]]></phrase>
 </language>

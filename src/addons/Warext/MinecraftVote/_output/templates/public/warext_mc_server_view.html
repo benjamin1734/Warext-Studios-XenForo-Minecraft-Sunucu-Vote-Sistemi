@@ -1,149 +1,237 @@
-&lt;xf:title&gt;{$server.title}&lt;/xf:title&gt;
-&lt;xf:description&gt;{$seoDescription}&lt;/xf:description&gt;
-&lt;xf:css src="warext_mc_servers.less" /&gt;
+<xf:title>{$server.title}</xf:title>
+<xf:description>{$seoDescription}</xf:description>
+<xf:h1 hidden="true" />
+<xf:css src="warext_mc_server_profile.less" />
 
-&lt;xf:pageaction&gt;
-    &lt;xf:if is="$server.state == 'active'"&gt;
-        &lt;xf:if is="$canVote"&gt;
-            &lt;xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta"&gt;{{ phrase('warext_mc_i18n_0076') }}&lt;/xf:button&gt;
-        &lt;/xf:if&gt;
-        &lt;xf:button href="{{ link('sunucular/guncellemeler', $server) }}"&gt;{{ phrase('warext_mc_i18n_0157') }}&lt;/xf:button&gt;
-        &lt;xf:button href="{{ link('sunucular/degerlendir', $server) }}"&gt;{{ phrase('warext_mc_dyn_reviews_x', {'count': $server.rating_count}) }}&lt;/xf:button&gt;
-    &lt;/xf:if&gt;
-    &lt;xf:if is="$canFavorite"&gt;
-        &lt;xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true" class="buttonGroup"&gt;
-            &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_0268') }}&lt;/xf:button&gt;
-        &lt;/xf:form&gt;
-    &lt;/xf:if&gt;
-    &lt;xf:if is="$canReport"&gt;
-        &lt;xf:button href="{{ link('sunucular/rapor', $server) }}"&gt;{{ phrase('warext_mc_dyn_report') }}&lt;/xf:button&gt;
-    &lt;/xf:if&gt;
+<section class="warextMcProfileHero">
+    <xf:if is="$server.cover_path">
+        <img class="warextMcProfileHero-cover" src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" alt="" />
+    </xf:if>
 
-    &lt;xf:if is="$server.can_edit"&gt;
-        &lt;xf:button href="{{ link('sunucular/duzenle', $server) }}"&gt;{{ phrase('warext_mc_i18n_0269') }}&lt;/xf:button&gt;
-    &lt;/xf:if&gt;
-    &lt;xf:if is="$server.can_publish_updates"&gt;
-        &lt;xf:button href="{{ link('sunucular/guncellemeler', $server) }}"&gt;{{ phrase('warext_mc_i18n_0270') }}&lt;/xf:button&gt;
-    &lt;/xf:if&gt;
-    &lt;xf:if is="$server.can_view_stats"&gt;
-        &lt;xf:button href="{{ link('sunucular/istatistik', $server) }}"&gt;{{ phrase('warext_mc_i18n_0271') }}&lt;/xf:button&gt;
-    &lt;/xf:if&gt;
-    &lt;xf:if is="$server.can_manage_votifier"&gt;
-        &lt;xf:button href="{{ link('sunucular/votifier', $server) }}"&gt;{{ phrase('warext_mc_i18n_0272') }}&lt;/xf:button&gt;
-    &lt;/xf:if&gt;
-    &lt;xf:if is="$server.can_manage_reviews"&gt;
-        &lt;xf:button href="{{ link('sunucular/degerlendirme-yonet', $server) }}"&gt;{{ phrase('warext_mc_i18n_0273') }}&lt;/xf:button&gt;
-    &lt;/xf:if&gt;
+    <div class="warextMcProfileHero-inner">
+        <div class="warextMcProfileHero-banner">
+            <xf:if is="$server.animated_banner_path">
+                <img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" alt="{$server.title}" />
+            <xf:elseif is="$server.banner_path" />
+                <img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" alt="{$server.title}" />
+            <xf:else />
+                <div class="warextMcProfileHero-bannerFallback"><i class="fa--xf far fa-server" aria-hidden="true"></i><span>{{ phrase('warext_mc_profile_banner_placeholder') }}</span></div>
+            </xf:if>
+        </div>
 
-    &lt;xf:if is="$server.is_owner"&gt;
-        &lt;xf:button href="{{ link('sunucular/ekip', $server) }}"&gt;{{ phrase('warext_mc_i18n_0274') }}&lt;/xf:button&gt;
-        &lt;xf:button href="{{ link('sunucular/dogrula', $server) }}"&gt;
-            &lt;xf:if is="$server.is_verified"&gt;{{ phrase('warext_mc_i18n_0275') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0276') }}&lt;/xf:if&gt;
-        &lt;/xf:button&gt;
-        &lt;xf:button href="{{ link('sunucular/sahiplik-devret', $server) }}"&gt;{{ phrase('warext_mc_i18n_0277') }}&lt;/xf:button&gt;
-        &lt;xf:if is="$server.state == 'active' &amp;&amp; $xf.options.warextMcSponsorSalesEnabled"&gt;
-            &lt;xf:button href="{{ link('sunucular/sponsor', $server) }}" class="button--cta"&gt;{{ phrase('warext_mc_i18n_0278') }}&lt;/xf:button&gt;
-        &lt;/xf:if&gt;
-    &lt;/xf:if&gt;
-&lt;/xf:pageaction&gt;
+        <div class="warextMcProfileHero-main">
+            <div class="warextMcProfileIdentity">
+                <div class="warextMcProfileIdentity-icon"><i class="fa--xf far fa-server" aria-hidden="true"></i></div>
+                <div class="warextMcProfileIdentity-copy">
+                    <div class="warextMcProfileIdentity-titleLine">
+                        <h1>{$server.title}</h1>
+                        <xf:if is="$server.state != 'active'">
+                            <span class="label label--orange">{{ phrase('warext_mc_profile_pending') }}</span>
+                        <xf:elseif is="$server.is_online" />
+                            <span class="label label--green">{{ phrase('warext_mc_dyn_online') }}</span>
+                        <xf:else />
+                            <span class="label label--red">{{ phrase('warext_mc_dyn_offline') }}</span>
+                        </xf:if>
+                        <xf:if is="$server.is_verified"><span class="label label--primary">{{ phrase('warext_mc_i18n_0130') }}</span></xf:if>
+                    </div>
+                    <div class="warextMcProfileIdentity-sub">{{ phrase('warext_mc_profile_minecraft_server') }}<xf:if is="$server.game_modes"> · {$server.game_modes}</xf:if></div>
+                    <xf:if is="$server.motd"><div class="warextMcProfileIdentity-motd">{$server.motd}</div></xf:if>
+                    <div class="warextMcProfileIp">
+                        <strong>{$server.host}:{$server.port}</strong>
+                        <xf:button type="button" data-xf-init="copy-to-clipboard" data-copy-text="{$server.host}:{$server.port}" class="button--link">{{ phrase('warext_mc_i18n_copy_ip') }}</xf:button>
+                    </div>
+                </div>
+            </div>
 
-&lt;xf:if is="$server.cover_path"&gt;
-    &lt;div class="warextMcServerCover"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" alt="{$server.title}" /&gt;&lt;/div&gt;
-&lt;/xf:if&gt;
+            <div class="warextMcProfileHero-stats">
+                <div><span>{{ phrase('warext_mc_vote_rank') }}</span><strong><xf:if is="$server.rank_popular">#{$server.rank_popular}<xf:else />—</xf:if></strong></div>
+                <div><span>{{ phrase('warext_mc_profile_today') }}</span><strong>{$server.vote_count_today}</strong></div>
+                <div><span>{{ phrase('warext_mc_vote_votes_this_month') }}</span><strong>{$server.vote_count_month}</strong></div>
+                <div><span>{{ phrase('warext_mc_vote_total_votes') }}</span><strong>{$server.vote_count_total}</strong></div>
+                <div><span>{{ phrase('warext_mc_profile_views') }}</span><strong>{$server.view_count}</strong></div>
+            </div>
+        </div>
+    </div>
+</section>
 
-&lt;div class="block warextMcServerHero"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="warextMcServerHero-head"&gt;
-                &lt;div&gt;
-                    &lt;h1&gt;{$server.title}&lt;/h1&gt;
-                    &lt;div class="warextMcServerHero-address"&gt;{$server.host}:{$server.port}&lt;/div&gt;
-                    &lt;xf:if is="$server.motd"&gt;&lt;div class="contentRow-minor"&gt;{$server.motd}&lt;/div&gt;&lt;/xf:if&gt;
-                &lt;/div&gt;
-                &lt;div&gt;
-                    &lt;xf:if is="$server.state != 'active'"&gt;
-                        &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_i18n_0279') }}&lt;/span&gt;
-                    &lt;xf:elseif is="$server.is_online" /&gt;
-                        &lt;span class="label label--green"&gt;{{ phrase('warext_mc_dyn_online') }}&lt;/span&gt;
-                    &lt;xf:else /&gt;
-                        &lt;span class="label label--red"&gt;{{ phrase('warext_mc_dyn_offline') }}&lt;/span&gt;
-                    &lt;/xf:if&gt;
-                    &lt;xf:if is="$server.is_verified"&gt;
-                        &lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;
-                    &lt;/xf:if&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+<div class="warextMcProfileGrid">
+    <aside class="warextMcProfileColumn warextMcProfileColumn--left">
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-link" aria-hidden="true"></i> {{ phrase('warext_mc_profile_quick_access') }}</div>
+            <div class="warextMcProfileQuickLinks">
+                <xf:if is="$server.website_url"><a href="{$server.website_url}" target="_blank" rel="nofollow noopener"><span>{{ phrase('warext_mc_i18n_0043') }}</span><i class="fa--xf far fa-arrow-up-right-from-square" aria-hidden="true"></i></a></xf:if>
+                <xf:if is="$server.store_url"><a href="{$server.store_url}" target="_blank" rel="nofollow noopener"><span>{{ phrase('warext_mc_i18n_0045') }}</span><i class="fa--xf far fa-cart-shopping" aria-hidden="true"></i></a></xf:if>
+                <xf:if is="$server.DiscussionThread"><a href="{{ link('threads', $server.DiscussionThread) }}"><span>{{ phrase('warext_mc_profile_promotional_thread') }}</span><i class="fa--xf far fa-messages" aria-hidden="true"></i></a></xf:if>
+                <xf:if is="$server.trailer_url"><a href="{$server.trailer_url}" target="_blank" rel="nofollow noopener"><span>{{ phrase('warext_mc_i18n_0291') }}</span><i class="fa--xf far fa-play" aria-hidden="true"></i></a></xf:if>
+                <a href="{{ link('sunucular/guncellemeler', $server) }}"><span>{{ phrase('warext_mc_i18n_0157') }}</span><i class="fa--xf far fa-clock-rotate-left" aria-hidden="true"></i></a>
+                <a href="{{ link('sunucular/degerlendir', $server) }}"><span>{{ phrase('warext_mc_dyn_reviews_x', {'count': $server.rating_count}) }}</span><strong>{$server.rating_count}</strong></a>
+            </div>
+            <xf:if is="$canFavorite || $canReport">
+                <div class="warextMcProfileSecondaryActions">
+                    <xf:if is="$canFavorite">
+                        <xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true">
+                            <xf:button type="submit" class="button--fullWidth">{{ phrase('warext_mc_i18n_0268') }}</xf:button>
+                        </xf:form>
+                    </xf:if>
+                    <xf:if is="$canReport"><xf:button href="{{ link('sunucular/rapor', $server) }}" class="button--link button--fullWidth">{{ phrase('warext_mc_dyn_report') }}</xf:button></xf:if>
+                </div>
+            </xf:if>
+        </section>
 
-            &lt;div class="warextMcServerStats warextMcServerStats--large"&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.players_online} / {$server.players_max}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0201') }}&lt;/span&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.vote_count_month}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0202') }}&lt;/span&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.vote_count_total}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_total_votes') }}&lt;/span&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.uptime_percent}%&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_dyn_uptime') }}&lt;/span&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.ping_ms} ms&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_dyn_ping') }}&lt;/span&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.rating_average} / 5&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0149') }}&lt;/span&gt;&lt;/div&gt;
-            &lt;/div&gt;
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-circle-info" aria-hidden="true"></i> {{ phrase('warext_mc_i18n_0284') }}</div>
+            <dl class="warextMcProfileDetails">
+                <div><dt>{{ phrase('warext_mc_i18n_0222') }}</dt><dd><strong>{$server.players_online}</strong> / {$server.players_max}</dd></div>
+                <div><dt>{{ phrase('warext_mc_i18n_0208') }}</dt><dd><xf:if is="$server.detected_version">{$server.detected_version}<xf:elseif is="$server.version_min" />{$server.version_min}<xf:if is="$server.version_max"> - {$server.version_max}</xf:if><xf:else />{{ phrase('warext_mc_dyn_not_specified') }}</xf:if></dd></div>
+                <div><dt>{{ phrase('warext_mc_i18n_0060') }}</dt><dd>{{ $server.server_type == 'crossplay' ? 'Crossplay' : ($server.server_type == 'bedrock' ? 'Bedrock' : 'Java') }}</dd></div>
+                <div><dt>{{ phrase('warext_mc_i18n_0064') }}</dt><dd><xf:if is="$server.game_modes">{$server.game_modes}<xf:else />{{ phrase('warext_mc_dyn_not_specified') }}</xf:if></dd></div>
+                <div><dt>Premium</dt><dd><xf:if is="$server.is_premium">{{ phrase('warext_mc_dyn_yes') }}<xf:else />{{ phrase('warext_mc_i18n_61e6be1a') }}</xf:if></dd></div>
+                <div><dt>Crack</dt><dd><xf:if is="$server.allow_cracked">{{ phrase('warext_mc_profile_supported') }}<xf:else />{{ phrase('warext_mc_profile_not_supported') }}</xf:if></dd></div>
+                <div><dt>{{ phrase('warext_mc_dyn_uptime') }}</dt><dd>{$server.uptime_percent}%</dd></div>
+                <div><dt>{{ phrase('warext_mc_dyn_ping') }}</dt><dd>{$server.ping_ms} ms</dd></div>
+                <xf:if is="$server.country_code"><div><dt>{{ phrase('warext_mc_i18n_0061') }}</dt><dd>{$server.country_code}</dd></div></xf:if>
+            </dl>
+        </section>
 
-            &lt;xf:if is="$server.last_ping_date"&gt;
-                &lt;div class="contentRow-minor" style="margin-top:10px"&gt;{{ phrase('warext_mc_i18n_0280') }} &lt;xf:date time="$server.last_ping_date" /&gt;&lt;/div&gt;
-            &lt;/xf:if&gt;
-            &lt;xf:if is="$server.is_verified &amp;&amp; $server.verified_date"&gt;
-                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0281') }} &lt;xf:date time="$server.verified_date" /&gt;&lt;/div&gt;
-            &lt;/xf:if&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-clock" aria-hidden="true"></i> {{ phrase('warext_mc_profile_recent_voters') }}</div>
+            <xf:if is="$recentVotes is not empty">
+                <div class="warextMcProfilePeople">
+                    <xf:foreach loop="$recentVotes" value="$vote">
+                        <div class="warextMcProfilePerson">
+                            <xf:if is="$vote.User"><xf:avatar user="$vote.User" size="xxs" /><xf:else /><span class="warextMcProfilePerson-fallback"><i class="fa--xf far fa-user" aria-hidden="true"></i></span></xf:if>
+                            <div><strong><xf:if is="$vote.User">{$vote.User.username}<xf:else />{$vote.minecraft_username}</xf:if></strong><span>{$vote.minecraft_username}</span></div>
+                            <time><xf:date time="$vote.vote_date" /></time>
+                        </div>
+                    </xf:foreach>
+                </div>
+            <xf:else />
+                <div class="warextMcProfileEmpty">{{ phrase('warext_mc_profile_no_recent_voters') }}</div>
+            </xf:if>
+        </section>
+    </aside>
 
-&lt;xf:if is="$achievements is not empty"&gt;
-    &lt;div class="block"&gt;
-        &lt;div class="block-container"&gt;
-            &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0282') }}&lt;/h2&gt;
-            &lt;div class="block-body"&gt;
-                &lt;xf:foreach loop="$achievements" value="$award"&gt;
-                    &lt;div class="block-row block-row--separated"&gt;
-                        &lt;div class="contentRow"&gt;
-                            &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$award.Achievement.display_title}&lt;/strong&gt;&lt;/div&gt;
-                                &lt;div class="contentRow-snippet"&gt;{$award.Achievement.display_description}&lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0283') }} &lt;xf:date time="$award.awarded_date" /&gt; · {{ phrase('warext_mc_dyn_measurement_value') }}: {$award.metric_value}&lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/xf:foreach&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/xf:if&gt;
+    <main class="warextMcProfileColumn warextMcProfileColumn--main">
+        <section class="warextMcProfileCard warextMcProfileSupport">
+            <div class="warextMcProfileSupport-icon"><i class="fa--xf far fa-heart" aria-hidden="true"></i></div>
+            <div class="warextMcProfileSupport-copy">
+                <span>{{ phrase('warext_mc_profile_support_server') }}</span>
+                <h2>{{ phrase('warext_mc_profile_vote_for_server', {'server': $server.title}) }}</h2>
+                <p>{{ phrase('warext_mc_profile_vote_explain') }}</p>
+            </div>
+            <div class="warextMcProfileSupport-action">
+                <xf:if is="$server.state != 'active'">
+                    <span class="label label--orange">{{ phrase('warext_mc_profile_server_pending') }}</span>
+                <xf:elseif is="$canVote" />
+                    <xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta button--fullWidth">{{ phrase('warext_mc_i18n_0076') }}</xf:button>
+                <xf:elseif is="!$xf.visitor.user_id" />
+                    <xf:button href="{{ link('login') }}" class="button--cta button--fullWidth">{{ phrase('warext_mc_profile_login_vote') }}</xf:button>
+                <xf:else />
+                    <span class="contentRow-minor">{{ phrase('warext_mc_profile_vote_permission_denied') }}</span>
+                </xf:if>
+            </div>
+        </section>
 
-&lt;div class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0284') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0207') }}&lt;/dt&gt;&lt;dd&gt;{$server.server_type}&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0039') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.game_modes"&gt;{$server.game_modes}&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_not_specified') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0285') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.detected_version"&gt;{$server.detected_version}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0286') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0287') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.version_min"&gt;{$server.version_min}&lt;xf:if is="$server.version_max"&gt; - {$server.version_max}&lt;/xf:if&gt;&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_not_specified') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0061') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.country_code"&gt;{$server.country_code}&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_not_specified') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_dyn_premium') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.is_premium"&gt;{{ phrase('warext_mc_dyn_yes') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0288') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0289') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.allow_cracked"&gt;{{ phrase('warext_mc_dyn_yes') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0288') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+        <section class="warextMcProfileCard warextMcProfileAbout">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-bars-staggered" aria-hidden="true"></i> {{ phrase('warext_mc_vote_about_server') }}</div>
+            <div class="warextMcProfileAbout-body">
+                <xf:if is="$server.description">
+                    {{ bb_code($server.description, 'warext_mc_server', $server) }}
+                <xf:elseif is="$server.motd" />
+                    <p>{$server.motd}</p>
+                <xf:else />
+                    <p class="contentRow-minor">{{ phrase('warext_mc_profile_no_description') }}</p>
+                </xf:if>
+            </div>
+            <xf:if is="$server.website_url || $server.discord_url || $server.store_url || $server.DiscussionThread">
+                <div class="warextMcProfileAbout-links">
+                    <xf:if is="$server.website_url"><a href="{$server.website_url}" target="_blank" rel="nofollow noopener">{{ phrase('warext_mc_i18n_0290') }}</a></xf:if>
+                    <xf:if is="$server.discord_url"><a href="{$server.discord_url}" target="_blank" rel="nofollow noopener">Discord</a></xf:if>
+                    <xf:if is="$server.store_url"><a href="{$server.store_url}" target="_blank" rel="nofollow noopener">{{ phrase('warext_mc_i18n_0045') }}</a></xf:if>
+                    <xf:if is="$server.DiscussionThread"><a href="{{ link('threads', $server.DiscussionThread) }}">{{ phrase('warext_mc_profile_promotional_thread') }}</a></xf:if>
+                </div>
+            </xf:if>
+        </section>
 
-&lt;xf:if is="$server.description"&gt;
-    &lt;div class="block"&gt;&lt;div class="block-container"&gt;&lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0010') }}&lt;/h2&gt;&lt;div class="block-body block-row"&gt;{{ bb_code($server.description, 'warext_mc_server', $server) }}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/xf:if&gt;
+        <xf:if is="$achievements is not empty">
+            <section class="warextMcProfileCard">
+                <div class="warextMcProfileCard-title"><i class="fa--xf far fa-award" aria-hidden="true"></i> {{ phrase('warext_mc_profile_achievements') }}</div>
+                <div class="warextMcProfileAchievements">
+                    <xf:foreach loop="$achievements" value="$award">
+                        <div><i class="fa--xf far fa-medal" aria-hidden="true"></i><span><strong>{$award.Achievement.title}</strong><small>{$award.Achievement.description}</small></span></div>
+                    </xf:foreach>
+                </div>
+            </section>
+        </xf:if>
 
-&lt;xf:if is="$server.website_url || $server.discord_url || $server.store_url || $server.trailer_url || $server.DiscussionThread"&gt;
-    &lt;div class="block"&gt;
-        &lt;div class="block-container"&gt;
-            &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0194') }}&lt;/h2&gt;
-            &lt;div class="block-body block-row warextMcServerLinks"&gt;
-                &lt;xf:if is="$server.website_url"&gt;&lt;a class="button" href="{$server.website_url}" target="_blank" rel="nofollow noopener"&gt;{{ phrase('warext_mc_i18n_0290') }}&lt;/a&gt;&lt;/xf:if&gt;
-                &lt;xf:if is="$server.discord_url"&gt;&lt;a class="button" href="{$server.discord_url}" target="_blank" rel="nofollow noopener"&gt;{{ phrase('warext_mc_i18n_0044') }}&lt;/a&gt;&lt;/xf:if&gt;
-                &lt;xf:if is="$server.store_url"&gt;&lt;a class="button" href="{$server.store_url}" target="_blank" rel="nofollow noopener"&gt;{{ phrase('warext_mc_i18n_0045') }}&lt;/a&gt;&lt;/xf:if&gt;
-                &lt;xf:if is="$server.trailer_url"&gt;&lt;a class="button" href="{$server.trailer_url}" target="_blank" rel="nofollow noopener"&gt;{{ phrase('warext_mc_i18n_0291') }}&lt;/a&gt;&lt;/xf:if&gt;
-                &lt;xf:if is="$server.DiscussionThread"&gt;&lt;a class="button" href="{{ link('threads', $server.DiscussionThread) }}"&gt;{{ phrase('warext_mc_i18n_0292') }}&lt;/a&gt;&lt;/xf:if&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/xf:if&gt;
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-headingRow">
+                <div class="warextMcProfileCard-title"><i class="fa--xf far fa-comments" aria-hidden="true"></i> {{ phrase('warext_mc_i18n_0167') }}</div>
+                <a href="{{ link('sunucular/degerlendir', $server) }}">{{ phrase('warext_mc_profile_view_all_reviews', {'count': $server.rating_count}) }}</a>
+            </div>
+            <xf:if is="$reviews is not empty">
+                <div class="warextMcProfileReviews">
+                    <xf:foreach loop="$reviews" value="$review">
+                        <article>
+                            <div class="warextMcProfileReview-head">
+                                <div class="warextMcProfileReview-user"><xf:avatar user="$review.User" size="xxs" /><strong>{$review.User.username}</strong></div>
+                                <span class="warextMcProfileReview-score">{$review.rating} / 5</span>
+                            </div>
+                            <xf:if is="$review.message"><p>{$review.message}</p></xf:if>
+                            <time><xf:date time="$review.updated_date" /></time>
+                        </article>
+                    </xf:foreach>
+                </div>
+            <xf:else />
+                <div class="warextMcProfileEmpty">{{ phrase('warext_mc_profile_no_reviews') }}</div>
+            </xf:if>
+        </section>
+    </main>
+
+    <aside class="warextMcProfileColumn warextMcProfileColumn--right">
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-trophy" aria-hidden="true"></i> {{ phrase('warext_mc_profile_top_voter') }}</div>
+            <xf:if is="$topVoters is not empty">
+                <div class="warextMcProfileLeaderboard">
+                    <xf:foreach loop="$topVoters" value="$row" i="$i">
+                        <div><span class="warextMcProfileLeaderboard-rank">#{$i}</span><strong>{$row.username}</strong><em>{$row.vote_count}</em></div>
+                    </xf:foreach>
+                </div>
+            <xf:else />
+                <div class="warextMcProfileEmpty">{{ phrase('warext_mc_profile_no_top_voter') }}</div>
+            </xf:if>
+        </section>
+
+        <section class="warextMcProfileCard">
+            <div class="warextMcProfileCard-title"><i class="fa--xf far fa-users" aria-hidden="true"></i> {{ phrase('warext_mc_profile_community') }}</div>
+            <div class="warextMcProfileCommunity">
+                <div class="warextMcProfileCommunity-owner">
+                    <xf:avatar user="$server.Owner" size="s" />
+                    <div><span>{{ phrase('warext_mc_vote_server_owner') }}</span><strong>{$server.Owner.username}</strong></div>
+                </div>
+                <xf:if is="$server.discord_url"><a class="button button--fullWidth" href="{$server.discord_url}" target="_blank" rel="nofollow noopener">{{ phrase('warext_mc_profile_join_discord') }}</a></xf:if>
+                <div class="warextMcProfileCommunity-meta"><span>{{ phrase('warext_mc_vote_rating') }}</span><strong>{$server.rating_average} / 5</strong></div>
+                <div class="warextMcProfileCommunity-meta"><span>{{ phrase('warext_mc_vote_last_check') }}</span><strong><xf:if is="$server.last_ping_date"><xf:date time="$server.last_ping_date" /><xf:else />{{ phrase('warext_mc_profile_none_yet') }}</xf:if></strong></div>
+            </div>
+        </section>
+
+        <xf:if is="$canManage">
+            <section class="warextMcProfileCard warextMcProfileManage">
+                <div class="warextMcProfileCard-title"><i class="fa--xf far fa-gear" aria-hidden="true"></i> {{ phrase('warext_mc_profile_manage_server') }}</div>
+                <div class="warextMcProfileManage-links">
+                    <xf:if is="$server.can_edit"><a href="{{ link('sunucular/duzenle', $server) }}">{{ phrase('warext_mc_i18n_0269') }}</a></xf:if>
+                    <xf:if is="$server.can_publish_updates"><a href="{{ link('sunucular/guncellemeler', $server) }}">{{ phrase('warext_mc_i18n_0270') }}</a></xf:if>
+                    <xf:if is="$server.can_view_stats"><a href="{{ link('sunucular/istatistik', $server) }}">{{ phrase('warext_mc_i18n_0271') }}</a></xf:if>
+                    <xf:if is="$server.can_manage_votifier"><a href="{{ link('sunucular/votifier', $server) }}">{{ phrase('warext_mc_i18n_0272') }}</a></xf:if>
+                    <xf:if is="$server.can_manage_reviews"><a href="{{ link('sunucular/degerlendirme-yonet', $server) }}">{{ phrase('warext_mc_i18n_0273') }}</a></xf:if>
+                    <xf:if is="$server.is_owner">
+                        <a href="{{ link('sunucular/ekip', $server) }}">{{ phrase('warext_mc_i18n_0274') }}</a>
+                        <a href="{{ link('sunucular/dogrula', $server) }}"><xf:if is="$server.is_verified">{{ phrase('warext_mc_i18n_0275') }}<xf:else />{{ phrase('warext_mc_i18n_0276') }}</xf:if></a>
+                        <a href="{{ link('sunucular/sahiplik-devret', $server) }}">{{ phrase('warext_mc_i18n_0277') }}</a>
+                        <xf:if is="$server.state == 'active' && $xf.options.warextMcSponsorSalesEnabled"><a href="{{ link('sunucular/sponsor', $server) }}">{{ phrase('warext_mc_profile_sponsor') }}</a></xf:if>
+                    </xf:if>
+                </div>
+            </section>
+        </xf:if>
+    </aside>
+</div>

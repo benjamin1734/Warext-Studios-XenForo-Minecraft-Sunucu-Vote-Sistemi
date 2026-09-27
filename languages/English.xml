@@ -956,4 +956,34 @@
   <phrase title="warext_mc_vote_country" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Country]]></phrase>
   <phrase title="warext_mc_vote_login_type" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Login type]]></phrase>
   <phrase title="warext_mc_vote_promotional_video" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Promotional Video]]></phrase>
+  <phrase title="warext_mc_profile_banner_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[468 × 60 server banner]]></phrase>
+  <phrase title="warext_mc_profile_pending" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Pending approval]]></phrase>
+  <phrase title="warext_mc_profile_minecraft_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Minecraft server]]></phrase>
+  <phrase title="warext_mc_profile_today" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Today]]></phrase>
+  <phrase title="warext_mc_profile_views" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Views]]></phrase>
+  <phrase title="warext_mc_profile_quick_access" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Quick Access]]></phrase>
+  <phrase title="warext_mc_profile_promotional_thread" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Promotional thread]]></phrase>
+  <phrase title="warext_mc_profile_details" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Details]]></phrase>
+  <phrase title="warext_mc_profile_recent_voters" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Recent Voters]]></phrase>
+  <phrase title="warext_mc_profile_no_recent_voters" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[No one has voted yet.]]></phrase>
+  <phrase title="warext_mc_profile_support_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Support the server]]></phrase>
+  <phrase title="warext_mc_profile_vote_for_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Vote for {server}]]></phrase>
+  <phrase title="warext_mc_profile_vote_explain" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Voting increases the server's visibility in the rankings. You can vote for the same server once every 24 hours.]]></phrase>
+  <phrase title="warext_mc_profile_server_pending" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Server pending approval]]></phrase>
+  <phrase title="warext_mc_profile_vote_now" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Vote Now]]></phrase>
+  <phrase title="warext_mc_profile_login_vote" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Log In and Vote]]></phrase>
+  <phrase title="warext_mc_profile_vote_permission_denied" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[This account does not have permission to vote.]]></phrase>
+  <phrase title="warext_mc_profile_no_description" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[The server owner has not added a detailed description yet.]]></phrase>
+  <phrase title="warext_mc_profile_achievements" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Achievements]]></phrase>
+  <phrase title="warext_mc_profile_view_all_reviews" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[View all ({count})]]></phrase>
+  <phrase title="warext_mc_profile_no_reviews" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[There are no approved reviews yet. You can be the first to review.]]></phrase>
+  <phrase title="warext_mc_profile_top_voter" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Top Voter This Month]]></phrase>
+  <phrase title="warext_mc_profile_no_top_voter" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[No ranking has formed yet this month.]]></phrase>
+  <phrase title="warext_mc_profile_community" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Community]]></phrase>
+  <phrase title="warext_mc_profile_join_discord" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Join Discord]]></phrase>
+  <phrase title="warext_mc_profile_none_yet" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[None yet]]></phrase>
+  <phrase title="warext_mc_profile_manage_server" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Manage Server]]></phrase>
+  <phrase title="warext_mc_profile_sponsor" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Become a Sponsor]]></phrase>
+  <phrase title="warext_mc_profile_supported" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Supported]]></phrase>
+  <phrase title="warext_mc_profile_not_supported" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Not supported]]></phrase>
 </language>
