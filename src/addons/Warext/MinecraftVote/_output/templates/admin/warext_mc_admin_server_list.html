@@ -29,7 +29,7 @@
                                     &lt;strong&gt;{$server.title}&lt;/strong&gt;
                                     &lt;span class="label"&gt;{$server.state}&lt;/span&gt;
                                     &lt;xf:if is="$server.rank_popular"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_dyn_popular_rank', {'rank': $server.rank_popular}) }}&lt;/span&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$server.rank_trending"&gt;&lt;span class="label label--orange"&gt;Trend #{$server.rank_trending}&lt;/span&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$server.rank_trending"&gt;&lt;span class="label label--orange"&gt;{{ phrase('warext_mc_dyn_trend_rank', {'rank': $server.rank_trending}) }}&lt;/span&gt;&lt;/xf:if&gt;
                                     &lt;xf:if is="$server.is_verified"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;/xf:if&gt;
                                     &lt;xf:if is="$server.is_online"&gt;
                                         &lt;span class="label label--green"&gt;Online&lt;/span&gt;
@@ -40,7 +40,7 @@
 
                                 &lt;div class="contentRow-minor"&gt;
                                     {$server.host}:{$server.port}
-                                    &lt;xf:if is="$server.Owner"&gt; · Sahip: {$server.Owner.username}&lt;/xf:if&gt;
+                                    &lt;xf:if is="$server.Owner"&gt; · {{ phrase('warext_mc_dyn_owner_label', {'username': $server.Owner.username}) }}&lt;/xf:if&gt;
                                     {{ phrase('warext_mc_i18n_type_prefix') }} {$server.server_type}
                                     · Oy: {$server.vote_count_month}
                                     · Benzersiz: {$server.unique_voters_month}
@@ -63,7 +63,7 @@
                                 &lt;/div&gt;
 
                                 &lt;xf:if is="$server.motd"&gt;
-                                    &lt;div class="contentRow-minor"&gt;MOTD: {$server.motd}&lt;/div&gt;
+                                    &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_motd_label', {'motd': $server.motd}) }}&lt;/div&gt;
                                 &lt;/xf:if&gt;
 
                                 &lt;xf:if is="$server.last_ping_error"&gt;
