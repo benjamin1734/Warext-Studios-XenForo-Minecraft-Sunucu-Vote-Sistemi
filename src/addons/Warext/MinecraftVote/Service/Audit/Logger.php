@@ -35,12 +35,14 @@ class Logger extends AbstractService
             'achievement_rebuild_requested',
             'vote_rejected',
             'vote_restored',
-            'report_state_changed'
+            'report_state_changed',
+            'sponsor_purchase_completed',
+            'sponsor_purchase_reversed'
         ];
 
         if (!in_array($action, $allowed, true))
         {
-            throw new \InvalidArgumentException('Geçersiz audit action.');
+            throw new \InvalidArgumentException((string)\XF::phrase('warext_mc_dyn_invalid_audit_action'));
         }
 
         $safeDetails = [];
