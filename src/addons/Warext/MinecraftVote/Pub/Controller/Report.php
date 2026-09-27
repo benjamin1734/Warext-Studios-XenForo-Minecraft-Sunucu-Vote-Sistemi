@@ -45,7 +45,7 @@ class Report extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/detay', $server),
-                'Raporunuz moderasyon ekibine gönderildi.'
+                \XF::phrase('warext_mc_dyn_report_submitted')
             );
         }
 
