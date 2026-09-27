@@ -25,7 +25,7 @@ class Editor extends AbstractService
         if (!$this->repository('Warext\MinecraftVote:ServerTeam')
             ->hasPermission($this->server, $this->actorUserId, 'edit_content'))
         {
-            throw new PrintableException('Bu sunucuyu düzenleme yetkiniz yok.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_server_edit_forbidden'));
         }
 
         $data['title'] = trim((string)($data['title'] ?? ''));
@@ -40,7 +40,7 @@ class Editor extends AbstractService
 
         if (!in_array($serverType, ['java', 'bedrock', 'crossplay'], true))
         {
-            throw new PrintableException('Geçerli bir sunucu türü seçin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_invalid_server_type'));
         }
 
         if (in_array($serverType, ['bedrock', 'crossplay'], true) && $data['bedrock_host'] === '')
@@ -50,19 +50,19 @@ class Editor extends AbstractService
 
         if ($data['title'] === '')
         {
-            throw new PrintableException('Sunucu adı boş bırakılamaz.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_server_name_required'));
         }
         if (!$this->isValidHost($data['host']))
         {
-            throw new PrintableException('Geçerli bir Java sunucu adresi girin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_valid_java_address'));
         }
         if (in_array($serverType, ['bedrock', 'crossplay'], true) && !$this->isValidHost($data['bedrock_host']))
         {
-            throw new PrintableException('Bedrock veya Crossplay sunucuları için geçerli bir Bedrock adresi girin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_valid_bedrock_address'));
         }
         if ($data['country_code'] !== '' && !preg_match('/^[A-Z]{2}$/', $data['country_code']))
         {
-            throw new PrintableException('Ülke kodu iki harfli ISO kodu olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_country_code_iso'));
         }
 
         foreach (['website_url', 'discord_url', 'store_url', 'trailer_url'] as $field)
@@ -70,7 +70,7 @@ class Editor extends AbstractService
             $data[$field] = trim((string)($data[$field] ?? ''));
             if ($data[$field] !== '' && !$this->isValidHttpUrl($data[$field]))
             {
-                throw new PrintableException('Yalnızca geçerli http veya https bağlantıları kullanılabilir.');
+                throw new PrintableException((string)\XF::phrase('warext_mc_dyn_valid_http_https'));
             }
         }
 
@@ -101,7 +101,7 @@ class Editor extends AbstractService
         $categoryIds = array_values(array_unique(array_filter(array_map('intval', $categoryIds))));
         if (count($categoryIds) > 5)
         {
-            throw new PrintableException('Bir sunucu en fazla 5 kategoriye eklenebilir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_max_categories'));
         }
 
         if (!$categoryIds)
@@ -119,7 +119,7 @@ class Editor extends AbstractService
 
         if (count($this->categoryIds) !== count($categoryIds))
         {
-            throw new PrintableException('Geçersiz bir sunucu kategorisi seçildi.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_invalid_server_category'));
         }
     }
 
@@ -179,7 +179,7 @@ class Editor extends AbstractService
 
         if (count($clean) > 12)
         {
-            throw new PrintableException('En fazla 12 oyun modu girebilirsiniz.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_max_game_modes'));
         }
 
         return mb_substr(implode(', ', $clean), 0, 255);
@@ -194,7 +194,7 @@ class Editor extends AbstractService
             ->fetchOne();
         if ($java)
         {
-            throw new PrintableException('Bu Java sunucusu başka bir kayıt tarafından kullanılıyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_java_server_used'));
         }
 
         if ($data['bedrock_host'] !== '')
@@ -206,7 +206,7 @@ class Editor extends AbstractService
                 ->fetchOne();
             if ($bedrock)
             {
-                throw new PrintableException('Bu Bedrock sunucusu başka bir kayıt tarafından kullanılıyor.');
+                throw new PrintableException((string)\XF::phrase('warext_mc_dyn_bedrock_server_used'));
             }
         }
     }
