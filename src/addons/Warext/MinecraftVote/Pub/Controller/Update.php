@@ -48,7 +48,7 @@ class Update extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/guncellemeler', $server),
-                'Sunucu güncellemesi yayınlandı.'
+                \XF::phrase('warext_mc_dyn_update_published')
             );
         }
 
@@ -112,7 +112,7 @@ class Update extends AbstractController
 
         return $this->redirect(
             $this->buildLink('sunucular/guncellemeler', $server),
-            'Sunucu güncellemesi silindi.'
+            \XF::phrase('warext_mc_dyn_update_deleted')
         );
     }
 
