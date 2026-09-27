@@ -897,4 +897,21 @@
   <phrase title="warext_mc_dyn_premium" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Premium]]></phrase>
   <phrase title="warext_mc_dyn_uptime" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Uptime]]></phrase>
   <phrase title="warext_mc_dyn_ping" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Ping]]></phrase>
+  <phrase title="warext_mc_dyn_achievement_key_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[ornek_basari]]></phrase>
+  <phrase title="warext_mc_dyn_server_number" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu #{id}]]></phrase>
+  <phrase title="warext_mc_dyn_system_actor" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sistem / #{id}]]></phrase>
+  <phrase title="warext_mc_dyn_forum_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Forum: {title}]]></phrase>
+  <phrase title="warext_mc_dyn_trend_rank" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Trend #{rank}]]></phrase>
+  <phrase title="warext_mc_dyn_owner_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sahip: {username}]]></phrase>
+  <phrase title="warext_mc_dyn_motd_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[MOTD: {motd}]]></phrase>
+  <phrase title="warext_mc_dyn_risk_score" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Risk {score}]]></phrase>
+  <phrase title="warext_mc_dyn_server_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sunucu: {title}]]></phrase>
+  <phrase title="warext_mc_dyn_xenforo_user_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[XenForo: {username}]]></phrase>
+  <phrase title="warext_mc_dyn_status_note" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Durum notu: {note}]]></phrase>
+  <phrase title="warext_mc_dyn_pending_count" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bekleyen ({count})]]></phrase>
+  <phrase title="warext_mc_dyn_retry_count" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Tekrar ({count})]]></phrase>
+  <phrase title="warext_mc_dyn_rejected_count" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Reddedildi ({count})]]></phrase>
+  <phrase title="warext_mc_dyn_current_season" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Aktif Sezon: {season}]]></phrase>
+  <phrase title="warext_mc_dyn_winner_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Kazanan: {title}]]></phrase>
+  <phrase title="warext_mc_dyn_last_error" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Son hata: {error}]]></phrase>
 </language>
