@@ -77,7 +77,7 @@ class Vote extends AbstractController
 
             if ($requireVerifiedAccount && !$accountId)
             {
-                return $this->error('Oy verebilmek için doğrulanmış Minecraft hesabınızı seçmeniz gerekiyor.');
+                return $this->error(\XF::phrase('warext_mc_dyn_verified_account_required'));
             }
 
             if ($accountId)
@@ -86,11 +86,11 @@ class Vote extends AbstractController
                     ->getForUser($accountId, $visitor->user_id);
                 if (!$linkedAccount)
                 {
-                    return $this->error('Seçilen Minecraft hesabı bulunamadı.', 404);
+                    return $this->error(\XF::phrase('warext_mc_dyn_selected_account_missing'), 404);
                 }
                 if ($requireVerifiedAccount && $linkedAccount->verification_state !== 'verified')
                 {
-                    return $this->error('Bu Minecraft hesabı doğrulanmamış. Oy vermeden önce hesabı doğrulayın.');
+                    return $this->error(\XF::phrase('warext_mc_dyn_account_not_verified'));
                 }
 
                 $username = $linkedAccount->minecraft_username;
@@ -117,7 +117,7 @@ class Vote extends AbstractController
 
             return $this->redirect(
                 $this->buildLink('sunucular/detay', $server),
-                'Oyunuz kaydedildi. Sunucu ödül entegrasyonu aktifse ödül teslimatı kuyruğa alındı.'
+                \XF::phrase('warext_mc_dyn_vote_saved')
             );
         }
 
