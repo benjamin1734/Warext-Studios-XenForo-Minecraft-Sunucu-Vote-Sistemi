@@ -30,7 +30,7 @@ class Delivery extends AbstractService
         $server = $this->vote->Server;
         if (!$server)
         {
-            return $this->markFailed('Oy kaydına bağlı sunucu bulunamadı.');
+            return $this->markFailed((string)\XF::phrase('warext_mc_dyn_vote_server_missing'));
         }
 
         $config = $this->em()->find('Warext\MinecraftVote:VotifierConfig', $server->server_id);
@@ -45,7 +45,7 @@ class Delivery extends AbstractService
 
         if (!$config->token_encrypted)
         {
-            return $this->handleFailure($config, 'NuVotifier token yapılandırılmamış.');
+            return $this->handleFailure($config, (string)\XF::phrase('warext_mc_dyn_votifier_token_unconfigured'));
         }
 
         try
@@ -131,7 +131,7 @@ class Delivery extends AbstractService
 
     protected function handleFailure(VotifierConfig $config, string $message): string
     {
-        $message = trim($message) ?: 'Bilinmeyen NuVotifier teslimat hatası.';
+        $message = trim($message) ?: (string)\XF::phrase('warext_mc_dyn_votifier_delivery_unknown');
         $maxAttempts = min(10, max(1, (int)(\XF::options()->warextMcVotifierMaxAttempts ?? 5)));
 
         $config->last_error = mb_substr($message, 0, 500);
