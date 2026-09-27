@@ -72,7 +72,7 @@ class Health extends AbstractController
         );
         $this->enqueueVoteDelivery();
 
-        return $this->redirect($this->buildLink('warext-minecraft/health'), $count . ' başarısız oy yeniden kuyruğa alındı.');
+        return $this->redirect($this->buildLink('warext-minecraft/health'), \XF::phrase('warext_mc_dyn_health_failed_requeued', ['count' => $count]));
     }
 
     public function actionRecoverStale()
@@ -86,14 +86,14 @@ class Health extends AbstractController
             [
                 'status' => 'retry',
                 'next_attempt_date' => \XF::$time,
-                'last_error' => 'Süresi dolmuş processing kaydı otomatik kurtarıldı.'
+                'last_error' => (string)\XF::phrase('warext_mc_dyn_health_expired_processing_recovered')
             ],
             "status = 'processing' AND next_attempt_date > 0 AND next_attempt_date <= ?",
             [\XF::$time]
         );
         $this->enqueueVoteDelivery();
 
-        return $this->redirect($this->buildLink('warext-minecraft/health'), $count . ' takılı teslimat kurtarıldı.');
+        return $this->redirect($this->buildLink('warext-minecraft/health'), \XF::phrase('warext_mc_dyn_health_stuck_recovered', ['count' => $count]));
     }
 
     protected function enqueueVoteDelivery(): void
