@@ -1,57 +1,57 @@
-&lt;xf:title&gt;{{ phrase('nav.warextMcServerAdd') }}&lt;/xf:title&gt;
-&lt;xf:description&gt;{{ phrase('warext_mc_i18n_0188') }}&lt;/xf:description&gt;
+<xf:title>{{ phrase('nav.warextMcServerAdd') }}</xf:title>
+<xf:description>{{ phrase('warext_mc_i18n_0188') }}</xf:description>
 
-&lt;div class="blockMessage blockMessage--important"&gt;{{ phrase('warext_mc_i18n_0189') }}&lt;/div&gt;
+<div class="blockMessage blockMessage--important">{{ phrase('warext_mc_i18n_0189') }}</div>
 
-&lt;xf:form action="{{ link('sunucular/ekle') }}" ajax="true" upload="true" class="block"&gt;
-    &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_basic_information') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:textboxrow name="title" label="{{ phrase('warext_mc_i18n_0022') }}" required="true" maxlength="100" /&gt;
-            &lt;xf:selectrow name="server_type" label="{{ phrase('warext_mc_i18n_0023') }}"&gt;
-                &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
-                &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;
-                &lt;xf:option value="crossplay"&gt;{{ phrase('warext_mc_i18n_java_bedrock_crossplay') }}&lt;/xf:option&gt;
-            &lt;/xf:selectrow&gt;
-            &lt;xf:textboxrow name="host" label="{{ phrase('warext_mc_i18n_0024') }}" required="true" maxlength="255" placeholder="{{ phrase('warext_mc_dyn_server_address_placeholder') }}" /&gt;
-            &lt;xf:numberboxrow name="port" value="25565" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0025') }}" /&gt;
-            &lt;xf:textboxrow name="bedrock_host" label="{{ phrase('warext_mc_i18n_0026') }}" maxlength="255" explain="{{ phrase('warext_mc_i18n_0027') }}" /&gt;
-            &lt;xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0028') }}" /&gt;
-            &lt;xf:textarearow name="description" label="{{ phrase('warext_mc_i18n_0029') }}" rows="8" /&gt;
-        &lt;/div&gt;
+<xf:form action="{{ link('sunucular/ekle') }}" ajax="true" upload="true" class="block">
+    <div class="block-container">
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_basic_information') }}</h2>
+        <div class="block-body">
+            <xf:textboxrow name="title" label="{{ phrase('warext_mc_i18n_0022') }}" required="true" maxlength="100" />
+            <xf:selectrow name="server_type" label="{{ phrase('warext_mc_i18n_0023') }}">
+                <xf:option value="java">Java</xf:option>
+                <xf:option value="bedrock">Bedrock</xf:option>
+                <xf:option value="crossplay">{{ phrase('warext_mc_i18n_java_bedrock_crossplay') }}</xf:option>
+            </xf:selectrow>
+            <xf:textboxrow name="host" label="{{ phrase('warext_mc_i18n_0024') }}" required="true" maxlength="255" placeholder="{{ phrase('warext_mc_dyn_server_address_placeholder') }}" />
+            <xf:numberboxrow name="port" value="25565" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0025') }}" />
+            <xf:textboxrow name="bedrock_host" label="{{ phrase('warext_mc_i18n_0026') }}" maxlength="255" explain="{{ phrase('warext_mc_i18n_0027') }}" />
+            <xf:numberboxrow name="bedrock_port" value="19132" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0028') }}" />
+            <xf:textarearow name="description" label="{{ phrase('warext_mc_i18n_0029') }}" rows="8" />
+        </div>
 
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0190') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0191') }}&lt;/div&gt;
-            &lt;xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="{{ phrase('warext_mc_i18n_0030') }}" explain="{{ phrase('warext_mc_i18n_0031') }}" /&gt;
-            &lt;xf:uploadrow name="animated_banner" accept=".gif" label="{{ phrase('warext_mc_i18n_0032') }}" explain="{{ phrase('warext_mc_i18n_0033') }}" /&gt;
-            &lt;xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="{{ phrase('warext_mc_i18n_0034') }}" explain="{{ phrase('warext_mc_i18n_0035') }}" /&gt;
-            &lt;xf:textboxrow name="trailer_url" label="{{ phrase('warext_mc_i18n_0036') }}" placeholder="https://" maxlength="255" explain="{{ phrase('warext_mc_i18n_0037') }}" /&gt;
-        &lt;/div&gt;
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_0190') }}</h2>
+        <div class="block-body">
+            <div class="blockMessage">{{ phrase('warext_mc_i18n_0191') }}</div>
+            <xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="{{ phrase('warext_mc_i18n_0030') }}" explain="{{ phrase('warext_mc_i18n_0031') }}" />
+            <xf:uploadrow name="animated_banner" accept=".gif" label="{{ phrase('warext_mc_i18n_0032') }}" explain="{{ phrase('warext_mc_i18n_0033') }}" />
+            <xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="{{ phrase('warext_mc_i18n_0034') }}" explain="{{ phrase('warext_mc_i18n_0035') }}" />
+            <xf:textboxrow name="trailer_url" label="{{ phrase('warext_mc_i18n_0036') }}" placeholder="https://" maxlength="255" explain="{{ phrase('warext_mc_i18n_0037') }}" />
+        </div>
 
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0192') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:checkboxrow name="category_ids" label="{{ phrase('admin_navigation.warextMinecraftCategories') }}" explain="{{ phrase('warext_mc_i18n_0038') }}"&gt;
-                &lt;xf:foreach loop="$categories" value="$category"&gt;&lt;xf:option value="{$category.category_id}"&gt;{$category.display_title}&lt;/xf:option&gt;&lt;/xf:foreach&gt;
-            &lt;/xf:checkboxrow&gt;
-            &lt;xf:textboxrow name="game_modes" label="{{ phrase('warext_mc_i18n_0039') }}" placeholder="{{ phrase('warext_mc_dyn_game_modes_placeholder') }}" maxlength="255" /&gt;
-            &lt;xf:textboxrow name="version_min" label="{{ phrase('warext_mc_i18n_0040') }}" maxlength="30" /&gt;
-            &lt;xf:textboxrow name="version_max" label="{{ phrase('warext_mc_i18n_0041') }}" maxlength="30" /&gt;
-            &lt;xf:textboxrow name="country_code" label="{{ phrase('warext_mc_i18n_0042') }}" value="TR" maxlength="2" /&gt;
-            &lt;xf:checkboxrow&gt;
-                &lt;xf:option name="is_premium" value="1"&gt;{{ phrase('warext_mc_i18n_premium_required') }}&lt;/xf:option&gt;
-                &lt;xf:option name="allow_cracked" value="1"&gt;{{ phrase('warext_mc_i18n_0193') }}&lt;/xf:option&gt;
-            &lt;/xf:checkboxrow&gt;
-        &lt;/div&gt;
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_0192') }}</h2>
+        <div class="block-body">
+            <xf:checkboxrow name="category_ids" label="{{ phrase('admin_navigation.warextMinecraftCategories') }}" explain="{{ phrase('warext_mc_i18n_0038') }}">
+                <xf:foreach loop="$categories" value="$category"><xf:option value="{$category.category_id}">{$category.display_title}</xf:option></xf:foreach>
+            </xf:checkboxrow>
+            <xf:textboxrow name="game_modes" label="{{ phrase('warext_mc_i18n_0039') }}" placeholder="{{ phrase('warext_mc_dyn_game_modes_placeholder') }}" maxlength="255" />
+            <xf:textboxrow name="version_min" label="{{ phrase('warext_mc_i18n_0040') }}" maxlength="30" />
+            <xf:textboxrow name="version_max" label="{{ phrase('warext_mc_i18n_0041') }}" maxlength="30" />
+            <xf:textboxrow name="country_code" label="{{ phrase('warext_mc_i18n_0042') }}" value="TR" maxlength="2" />
+            <xf:checkboxrow>
+                <xf:option name="is_premium" value="1">{{ phrase('warext_mc_i18n_premium_required') }}</xf:option>
+                <xf:option name="allow_cracked" value="1">{{ phrase('warext_mc_i18n_0193') }}</xf:option>
+            </xf:checkboxrow>
+        </div>
 
-        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0194') }}&lt;/h2&gt;
-        &lt;div class="block-body"&gt;
-            &lt;xf:textboxrow name="website_url" label="{{ phrase('warext_mc_i18n_0043') }}" placeholder="https://" maxlength="255" /&gt;
-            &lt;xf:textboxrow name="discord_url" label="{{ phrase('warext_mc_i18n_0044') }}" placeholder="{{ phrase('warext_mc_dyn_discord_placeholder') }}" maxlength="255" /&gt;
-            &lt;xf:textboxrow name="store_url" label="{{ phrase('warext_mc_i18n_0045') }}" placeholder="https://" maxlength="255" /&gt;
-            &lt;xf:textboxrow name="discussion_thread_url" label="{{ phrase('warext_mc_i18n_0046') }}" placeholder="{{ phrase('warext_mc_dyn_thread_url_placeholder') }}" maxlength="500" explain="{{ phrase('warext_mc_i18n_0047') }}" /&gt;
-        &lt;/div&gt;
+        <h2 class="block-header">{{ phrase('warext_mc_i18n_0194') }}</h2>
+        <div class="block-body">
+            <xf:textboxrow name="website_url" label="{{ phrase('warext_mc_i18n_0043') }}" placeholder="https://" maxlength="255" />
+            <xf:textboxrow name="discord_url" label="{{ phrase('warext_mc_i18n_0044') }}" placeholder="{{ phrase('warext_mc_dyn_discord_placeholder') }}" maxlength="255" />
+            <xf:textboxrow name="store_url" label="{{ phrase('warext_mc_i18n_0045') }}" placeholder="https://" maxlength="255" />
+            <xf:textboxrow name="discussion_thread_url" label="{{ phrase('warext_mc_i18n_0046') }}" placeholder="{{ phrase('warext_mc_dyn_thread_url_placeholder') }}" maxlength="500" explain="{{ phrase('warext_mc_i18n_0047') }}" />
+        </div>
 
-        &lt;xf:submitrow submit="{{ phrase('warext_mc_i18n_0048') }}" /&gt;
-    &lt;/div&gt;
-&lt;/xf:form&gt;
+        <xf:submitrow submit="{{ phrase('warext_mc_i18n_0048') }}" />
+    </div>
+</xf:form>
