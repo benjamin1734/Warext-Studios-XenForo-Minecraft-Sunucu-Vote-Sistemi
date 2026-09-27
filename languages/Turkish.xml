@@ -589,4 +589,10 @@
   <phrase title="warext_mc_i18n_vote_time" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Oy zamanı:]]></phrase>
   <phrase title="warext_mc_i18n_notifications_off" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Bildirimleri Kapat]]></phrase>
   <phrase title="warext_mc_i18n_skipped" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Atlandı]]></phrase>
+  <phrase title="warext_mc_i18n_permissions_path" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Admin CP → Groups & permissions → User group permissions bölümünde]]></phrase>
+  <phrase title="warext_mc_i18n_permission_group_name" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Minecraft Sunucu & Vote]]></phrase>
+  <phrase title="warext_mc_i18n_can_report" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Raporlayabilir:]]></phrase>
+  <phrase title="warext_mc_i18n_java_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Java:]]></phrase>
+  <phrase title="warext_mc_i18n_bedrock_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Bedrock:]]></phrase>
+  <phrase title="warext_mc_i18n_crossplay_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020010" version_string="1.2.1"><![CDATA[Crossplay:]]></phrase>
 </language>
