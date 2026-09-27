@@ -16,7 +16,7 @@
         &lt;/xf:form&gt;
     &lt;/xf:if&gt;
     &lt;xf:if is="$canReport"&gt;
-        &lt;xf:button href="{{ link('sunucular/rapor', $server) }}"&gt;Raporla&lt;/xf:button&gt;
+        &lt;xf:button href="{{ link('sunucular/rapor', $server) }}"&gt;{{ phrase('warext_mc_dyn_report') }}&lt;/xf:button&gt;
     &lt;/xf:if&gt;
 
     &lt;xf:if is="$server.can_edit"&gt;
@@ -64,9 +64,9 @@
                     &lt;xf:if is="$server.state != 'active'"&gt;
                         &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_i18n_0279') }}&lt;/span&gt;
                     &lt;xf:elseif is="$server.is_online" /&gt;
-                        &lt;span class="label label--green"&gt;Online&lt;/span&gt;
+                        &lt;span class="label label--green"&gt;{{ phrase('warext_mc_dyn_online') }}&lt;/span&gt;
                     &lt;xf:else /&gt;
-                        &lt;span class="label label--red"&gt;Offline&lt;/span&gt;
+                        &lt;span class="label label--red"&gt;{{ phrase('warext_mc_dyn_offline') }}&lt;/span&gt;
                     &lt;/xf:if&gt;
                     &lt;xf:if is="$server.is_verified"&gt;
                         &lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;
@@ -78,8 +78,8 @@
                 &lt;div&gt;&lt;strong&gt;{$server.players_online} / {$server.players_max}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0201') }}&lt;/span&gt;&lt;/div&gt;
                 &lt;div&gt;&lt;strong&gt;{$server.vote_count_month}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0202') }}&lt;/span&gt;&lt;/div&gt;
                 &lt;div&gt;&lt;strong&gt;{$server.vote_count_total}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_total_votes') }}&lt;/span&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.uptime_percent}%&lt;/strong&gt;&lt;span&gt;Uptime&lt;/span&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.ping_ms} ms&lt;/strong&gt;&lt;span&gt;Ping&lt;/span&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;strong&gt;{$server.uptime_percent}%&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_dyn_uptime') }}&lt;/span&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;strong&gt;{$server.ping_ms} ms&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_dyn_ping') }}&lt;/span&gt;&lt;/div&gt;
                 &lt;div&gt;&lt;strong&gt;{$server.rating_average} / 5&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0149') }}&lt;/span&gt;&lt;/div&gt;
             &lt;/div&gt;
 
@@ -102,9 +102,9 @@
                     &lt;div class="block-row block-row--separated"&gt;
                         &lt;div class="contentRow"&gt;
                             &lt;div class="contentRow-main"&gt;
-                                &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$award.Achievement.title}&lt;/strong&gt;&lt;/div&gt;
-                                &lt;div class="contentRow-snippet"&gt;{$award.Achievement.description}&lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0283') }} &lt;xf:date time="$award.awarded_date" /&gt; · Ölçüm değeri: {$award.metric_value}&lt;/div&gt;
+                                &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$award.Achievement.display_title}&lt;/strong&gt;&lt;/div&gt;
+                                &lt;div class="contentRow-snippet"&gt;{$award.Achievement.display_description}&lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0283') }} &lt;xf:date time="$award.awarded_date" /&gt; · {{ phrase('warext_mc_dyn_measurement_value') }}: {$award.metric_value}&lt;/div&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
@@ -119,12 +119,12 @@
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0284') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0207') }}&lt;/dt&gt;&lt;dd&gt;{$server.server_type}&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0039') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.game_modes"&gt;{$server.game_modes}&lt;xf:else /&gt;Belirtilmedi&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
+            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0039') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.game_modes"&gt;{$server.game_modes}&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_not_specified') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
             &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0285') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.detected_version"&gt;{$server.detected_version}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0286') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0287') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.version_min"&gt;{$server.version_min}&lt;xf:if is="$server.version_max"&gt; - {$server.version_max}&lt;/xf:if&gt;&lt;xf:else /&gt;Belirtilmedi&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0061') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.country_code"&gt;{$server.country_code}&lt;xf:else /&gt;Belirtilmedi&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;Premium&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.is_premium"&gt;Evet&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0288') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
-            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0289') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.allow_cracked"&gt;Evet&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0288') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
+            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0287') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.version_min"&gt;{$server.version_min}&lt;xf:if is="$server.version_max"&gt; - {$server.version_max}&lt;/xf:if&gt;&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_not_specified') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
+            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0061') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.country_code"&gt;{$server.country_code}&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_not_specified') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
+            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_dyn_premium') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.is_premium"&gt;{{ phrase('warext_mc_dyn_yes') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0288') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
+            &lt;dl class="pairs pairs--columns pairs--fixedSmall"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0289') }}&lt;/dt&gt;&lt;dd&gt;&lt;xf:if is="$server.allow_cracked"&gt;{{ phrase('warext_mc_dyn_yes') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0288') }}&lt;/xf:if&gt;&lt;/dd&gt;&lt;/dl&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
