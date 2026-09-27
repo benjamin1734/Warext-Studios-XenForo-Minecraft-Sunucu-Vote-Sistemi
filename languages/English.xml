@@ -682,4 +682,8 @@
   <phrase title="warext_mc_dyn_report_resolution_too_long" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Moderation note can be at most 255 characters.]]></phrase>
   <phrase title="warext_mc_dyn_unknown_error" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Unknown error]]></phrase>
   <phrase title="warext_mc_dyn_sponsored_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sponsored]]></phrase>
+  <phrase title="warext_mc_dyn_server_address_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[play.example.com]]></phrase>
+  <phrase title="warext_mc_dyn_game_modes_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Survival, SkyBlock, PvP]]></phrase>
+  <phrase title="warext_mc_dyn_discord_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[https://discord.gg/example]]></phrase>
+  <phrase title="warext_mc_dyn_thread_url_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[https://forum.example.com/threads/...]]></phrase>
 </language>

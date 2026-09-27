@@ -2,7 +2,7 @@
     &lt;h2 class="block-formSectionHeader"&gt;&lt;span class="block-formSectionHeader-aligner"&gt;{{ phrase('warext_mc_i18n_0313') }}&lt;/span&gt;&lt;/h2&gt;
     &lt;div class="block-body"&gt;
         &lt;div class="blockMessage blockMessage--important"&gt;{{ phrase('warext_mc_dyn_thread_server_notice', {'category': $warextMcThreadCategory.title}) }}&lt;/div&gt;
-        &lt;xf:textboxrow name="warext_mc_host" label="{{ phrase('warext_mc_i18n_0083') }}" placeholder="play.sunucum.com" maxlength="255" /&gt;
+        &lt;xf:textboxrow name="warext_mc_host" label="{{ phrase('warext_mc_i18n_0083') }}" placeholder="{{ phrase('warext_mc_dyn_server_address_placeholder') }}" maxlength="255" /&gt;
         &lt;xf:selectrow name="warext_mc_server_type" value="{$warextMcThreadCategory.thread_default_server_type}" label="{{ phrase('warext_mc_i18n_0023') }}"&gt;
             &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
             &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;

@@ -682,4 +682,8 @@
   <phrase title="warext_mc_dyn_report_resolution_too_long" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Moderasyon notu en fazla 255 karakter olabilir.]]></phrase>
   <phrase title="warext_mc_dyn_unknown_error" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Bilinmeyen hata]]></phrase>
   <phrase title="warext_mc_dyn_sponsored_label" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Sponsorlu]]></phrase>
+  <phrase title="warext_mc_dyn_server_address_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[play.sunucum.com]]></phrase>
+  <phrase title="warext_mc_dyn_game_modes_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[Survival, SkyBlock, PvP]]></phrase>
+  <phrase title="warext_mc_dyn_discord_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[https://discord.gg/ornek]]></phrase>
+  <phrase title="warext_mc_dyn_thread_url_placeholder" addon_id="Warext/MinecraftVote" global_cache="0" version_id="1020020" version_string="1.2.2"><![CDATA[https://forum.site.com/threads/...]]></phrase>
 </language>
