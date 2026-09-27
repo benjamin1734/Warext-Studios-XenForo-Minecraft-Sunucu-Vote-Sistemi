@@ -87,7 +87,7 @@ class UpdateAlert extends AbstractJob
 
     public function getStatusMessage()
     {
-        return 'Minecraft sunucu güncelleme bildirimleri gönderiliyor...';
+        return \XF::phrase('warext_mc_dyn_job_update_alert');
     }
 
     public function canCancel()

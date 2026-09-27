@@ -61,7 +61,7 @@ class AchievementRebuild extends AbstractJob
 
     public function getStatusMessage()
     {
-        return 'Minecraft sunucu başarımları hesaplanıyor... (' . (int)$this->data['start'] . ')';
+        return \XF::phrase('warext_mc_dyn_job_achievement_rebuild', ['current' => (int)$this->data['start']]);
     }
 
     public function canCancel()

@@ -65,15 +65,15 @@ class Sponsor extends Entity
 
         if (!in_array($this->placement, ['list_top'], true))
         {
-            $this->error('Geçersiz sponsor alanı.', 'placement');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_sponsor_placement'), 'placement');
         }
         if (!in_array($this->state, ['active', 'paused'], true))
         {
-            $this->error('Geçersiz sponsor durumu.', 'state');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_sponsor_status'), 'state');
         }
         if ($this->end_date && $this->end_date <= $this->start_date)
         {
-            $this->error('Sponsor bitiş tarihi başlangıç tarihinden sonra olmalıdır.', 'end_date');
+            $this->error((string)\XF::phrase('warext_mc_dyn_sponsor_end_after_start'), 'end_date');
         }
 
         if (!$this->created_date)

@@ -45,12 +45,12 @@ class VotifierConfig extends Entity
 
         if ($this->port < 1 || $this->port > 65535)
         {
-            $this->error('NuVotifier portu 1-65535 arasında olmalıdır.', 'port');
+            $this->error((string)\XF::phrase('warext_mc_dyn_votifier_port_range'), 'port');
         }
 
         if (!in_array($this->protocol, ['v2'], true))
         {
-            $this->error('Şu anda yalnızca güvenli NuVotifier V2 protokolü desteklenmektedir.', 'protocol');
+            $this->error((string)\XF::phrase('warext_mc_dyn_votifier_v2_only'), 'protocol');
         }
     }
 }

@@ -81,7 +81,7 @@ class ServerPing extends AbstractJob
 
     public function getStatusMessage()
     {
-        return 'Minecraft sunucuları kontrol ediliyor... (' . (int)$this->data['start'] . ')';
+        return \XF::phrase('warext_mc_dyn_job_server_ping', ['current' => (int)$this->data['start']]);
     }
 
     public function canCancel()
