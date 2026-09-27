@@ -7,7 +7,7 @@
 
 &lt;xf:if is="$currentSponsor"&gt;
     &lt;div class="blockMessage blockMessage--important"&gt;
-        Bu sunucunun aktif sponsorluğu &lt;xf:date time="$currentSponsor.end_date" /&gt; tarihine kadar devam ediyor. Yeni satın alım mevcut sürenin sonuna eklenir.
+        {{ phrase('warext_mc_dyn_sponsor_active_until', {'date': date_time($currentSponsor.end_date)}) }}
     &lt;/div&gt;
 &lt;/xf:if&gt;
 
@@ -16,7 +16,7 @@
         &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0294') }}&lt;/div&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
-                Sponsorlu sunucular liste üstünde ayrı olarak gösterilir. Ödeme XenForo'nun yapılandırılmış Payment Profile sistemi üzerinden güvenli biçimde işlenir.
+                {{ phrase('warext_mc_dyn_sponsor_payment_info') }}
             &lt;/div&gt;
 
             &lt;xf:if is="$profiles is not empty &amp;&amp; ($price7 &gt; 0 || $price30 &gt; 0)"&gt;
@@ -25,8 +25,8 @@
 
                     &lt;div class="block-body"&gt;
                         &lt;xf:selectrow name="package_days" label="{{ phrase('warext_mc_i18n_0077') }}" explain="{{ phrase('warext_mc_i18n_0078') }}"&gt;
-                            &lt;xf:if is="$price7 &gt; 0"&gt;&lt;xf:option value="7"&gt;7 gün — {$price7} {$currency}&lt;/xf:option&gt;&lt;/xf:if&gt;
-                            &lt;xf:if is="$price30 &gt; 0"&gt;&lt;xf:option value="30"&gt;30 gün — {$price30} {$currency}&lt;/xf:option&gt;&lt;/xf:if&gt;
+                            &lt;xf:if is="$price7 &gt; 0"&gt;&lt;xf:option value="7"&gt;{{ phrase('warext_mc_dyn_sponsor_price', {'days': 7, 'price': $price7, 'currency': $currency}) }}&lt;/xf:option&gt;&lt;/xf:if&gt;
+                            &lt;xf:if is="$price30 &gt; 0"&gt;&lt;xf:option value="30"&gt;{{ phrase('warext_mc_dyn_sponsor_price', {'days': 30, 'price': $price30, 'currency': $currency}) }}&lt;/xf:option&gt;&lt;/xf:if&gt;
                         &lt;/xf:selectrow&gt;
 
                         &lt;xf:formrow label="{{ phrase('warext_mc_i18n_0079') }}"&gt;
@@ -42,7 +42,7 @@
                 &lt;/xf:form&gt;
                 &lt;div class="js-paymentProviderReply-warext_mc_sponsor"&gt;&lt;/div&gt;
             &lt;xf:elseif is="$profiles is empty" /&gt;
-                &lt;div class="blockMessage"&gt;Kullanılabilir XenForo ödeme profili bulunmuyor. Yönetici ACP &amp;gt; Setup &amp;gt; Payment profiles alanından bir ödeme profili eklemelidir.&lt;/div&gt;
+                &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0295') }}&lt;/div&gt;
             &lt;xf:else /&gt;
                 &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0296') }}&lt;/div&gt;
             &lt;/xf:if&gt;

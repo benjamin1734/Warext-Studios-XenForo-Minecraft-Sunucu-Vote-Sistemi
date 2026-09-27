@@ -1,0 +1,1 @@
+Bu ay {votes} oy · {unique} benzersiz seçmen · {players} online oyuncu

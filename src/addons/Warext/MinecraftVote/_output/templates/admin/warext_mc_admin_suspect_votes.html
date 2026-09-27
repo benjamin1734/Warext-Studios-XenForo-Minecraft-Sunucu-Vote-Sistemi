@@ -39,14 +39,14 @@
 
                                 &lt;div class="contentRow-minor"&gt;
                                     &lt;xf:if is="$vote.Server"&gt;Sunucu: {$vote.Server.title}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0416') }}&lt;/xf:if&gt;
-                                    &lt;xf:if is="$vote.User"&gt; · XenForo: {$vote.User.username}&lt;xf:else /&gt; · Misafir oy&lt;/xf:if&gt;
+                                    &lt;xf:if is="$vote.User"&gt; · XenForo: {$vote.User.username}&lt;xf:else /&gt; {{ phrase('warext_mc_i18n_guest_vote_bullet') }}&lt;/xf:if&gt;
                                     · &lt;xf:date time="$vote.vote_date" /&gt;
                                 &lt;/div&gt;
 
                                 &lt;div class="contentRow-minor"&gt;
                                     UUID: &lt;xf:if is="$vote.minecraft_uuid"&gt;{$vote.minecraft_uuid}&lt;xf:else /&gt;Yok&lt;/xf:if&gt;
                                     · Deneme: {$vote.attempt_count}
-                                    &lt;xf:if is="$vote.delivered_date"&gt; · NuVotifier teslim edildi: &lt;xf:date time="$vote.delivered_date" /&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$vote.delivered_date"&gt; {{ phrase('warext_mc_i18n_nuvotifier_delivered_bullet') }} &lt;xf:date time="$vote.delivered_date" /&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
 
                                 &lt;xf:if is="$vote.last_error"&gt;

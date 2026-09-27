@@ -1,4 +1,4 @@
-&lt;xf:title&gt;Başarımı Düzenle: {$achievement.title}&lt;/xf:title&gt;
+&lt;xf:title&gt;{{ phrase('warext_mc_dyn_edit_achievement', {'title': $achievement.title}) }}&lt;/xf:title&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/achievement-edit', $achievement) }}" class="block" ajax="true"&gt;
     &lt;div class="block-container"&gt;

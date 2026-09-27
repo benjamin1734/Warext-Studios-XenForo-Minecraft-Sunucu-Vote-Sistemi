@@ -35,7 +35,7 @@
                                 &lt;xf:if is="$report.Reporter"&gt;
                                     {$report.Reporter.username}
                                 &lt;xf:else /&gt;
-                                    Kullanıcı #{$report.reporter_user_id}
+                                    {{ phrase('warext_mc_dyn_user_id', {'id': $report.reporter_user_id}) }}
                                 &lt;/xf:if&gt;
                             &lt;/dd&gt;
                             &lt;dt&gt;Tarih&lt;/dt&gt;&lt;dd&gt;&lt;xf:date time="$report.created_date" /&gt;&lt;/dd&gt;

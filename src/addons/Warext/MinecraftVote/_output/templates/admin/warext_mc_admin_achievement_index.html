@@ -42,7 +42,7 @@
                                     &lt;xf:if is="$achievement.is_active"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0235') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/span&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-snippet"&gt;{$achievement.description}&lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;Metrik: {$achievement.metric} · Eşik: {$achievement.threshold} · Sıra: {$achievement.display_order}&lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_achievement_meta', {'metric': $achievement.metric, 'threshold': $achievement.threshold, 'order': $achievement.display_order}) }}&lt;/div&gt;
                                 &lt;div class="buttonGroup" style="margin-top:8px"&gt;
                                     &lt;xf:button href="{{ link('warext-minecraft/achievement-edit', $achievement) }}"&gt;{{ phrase('warext_mc_i18n_0249') }}&lt;/xf:button&gt;
                                     &lt;xf:form action="{{ link('warext-minecraft/achievement-toggle', $achievement) }}" ajax="true"&gt;

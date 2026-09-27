@@ -1,4 +1,4 @@
-&lt;xf:title&gt;{$server.title} - Sunucuyu Düzenle&lt;/xf:title&gt;
+&lt;xf:title&gt;{{ phrase('warext_mc_dyn_edit_server_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 &lt;xf:description&gt;{{ phrase('warext_mc_i18n_0209') }}&lt;/xf:description&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -7,11 +7,11 @@
 
 &lt;xf:form action="{{ link('sunucular/duzenle', $server) }}" ajax="true" upload="true" class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;Temel Bilgiler&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_basic_information') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:textboxrow name="title" value="{$server.title}" label="{{ phrase('warext_mc_i18n_0022') }}" required="true" maxlength="100" /&gt;
             &lt;xf:selectrow name="server_type" value="{$server.server_type}" label="{{ phrase('warext_mc_i18n_0023') }}"&gt;
-                &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;&lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;&lt;xf:option value="crossplay"&gt;Java + Bedrock / Crossplay&lt;/xf:option&gt;
+                &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;&lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;&lt;xf:option value="crossplay"&gt;{{ phrase('warext_mc_i18n_java_bedrock_crossplay') }}&lt;/xf:option&gt;
             &lt;/xf:selectrow&gt;
             &lt;xf:textboxrow name="host" value="{$server.host}" label="{{ phrase('warext_mc_i18n_0024') }}" required="true" maxlength="255" /&gt;
             &lt;xf:numberboxrow name="port" value="{$server.port}" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0025') }}" /&gt;
@@ -22,13 +22,13 @@
 
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0190') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;xf:if is="$server.banner_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;Mevcut statik banner&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" style="max-width:468px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+            &lt;xf:if is="$server.banner_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;{{ phrase('warext_mc_i18n_current_static_banner') }}&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.banner_path}" style="max-width:468px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
             &lt;xf:uploadrow name="banner" accept=".jpg,.jpeg,.png,.webp" label="{{ phrase('warext_mc_i18n_0030') }}" explain="{{ phrase('warext_mc_i18n_0053') }}" /&gt;
             &lt;xf:if is="$server.banner_path"&gt;&lt;xf:checkboxrow&gt;&lt;xf:option name="remove_banner" value="1"&gt;{{ phrase('warext_mc_i18n_0211') }}&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;&lt;/xf:if&gt;
-            &lt;xf:if is="$server.animated_banner_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;Mevcut hareketli banner&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" style="max-width:468px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+            &lt;xf:if is="$server.animated_banner_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;{{ phrase('warext_mc_i18n_current_animated_banner') }}&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.animated_banner_path}" style="max-width:468px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
             &lt;xf:uploadrow name="animated_banner" accept=".gif" label="{{ phrase('warext_mc_i18n_0032') }}" explain="{{ phrase('warext_mc_i18n_0054') }}" /&gt;
             &lt;xf:if is="$server.animated_banner_path"&gt;&lt;xf:checkboxrow&gt;&lt;xf:option name="remove_animated_banner" value="1"&gt;{{ phrase('warext_mc_i18n_0212') }}&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;&lt;/xf:if&gt;
-            &lt;xf:if is="$server.cover_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;Mevcut kapak&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" style="max-width:640px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
+            &lt;xf:if is="$server.cover_path"&gt;&lt;div class="formRow"&gt;&lt;div class="formRow-labelWrapper"&gt;&lt;label class="formRow-label"&gt;{{ phrase('warext_mc_i18n_current_cover') }}&lt;/label&gt;&lt;/div&gt;&lt;div class="formRow-main"&gt;&lt;img src="{$xf.app.config.externalDataUrl}/{$server.cover_path}" style="max-width:640px;width:100%;height:auto" alt="" /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/xf:if&gt;
             &lt;xf:uploadrow name="cover" accept=".jpg,.jpeg,.png,.webp" label="{{ phrase('warext_mc_i18n_0034') }}" explain="{{ phrase('warext_mc_i18n_0055') }}" /&gt;
             &lt;xf:if is="$server.cover_path"&gt;&lt;xf:checkboxrow&gt;&lt;xf:option name="remove_cover" value="1"&gt;{{ phrase('warext_mc_i18n_0213') }}&lt;/xf:option&gt;&lt;/xf:checkboxrow&gt;&lt;/xf:if&gt;
             &lt;xf:textboxrow name="trailer_url" value="{$server.trailer_url}" label="{{ phrase('warext_mc_i18n_0036') }}" maxlength="255" /&gt;
@@ -44,7 +44,7 @@
             &lt;xf:textboxrow name="version_max" value="{$server.version_max}" label="{{ phrase('warext_mc_i18n_0041') }}" maxlength="30" /&gt;
             &lt;xf:textboxrow name="country_code" value="{$server.country_code}" label="{{ phrase('warext_mc_i18n_0042') }}" maxlength="2" /&gt;
             &lt;xf:checkboxrow&gt;
-                &lt;xf:option name="is_premium" value="1" selected="$server.is_premium"&gt;Premium hesap zorunlu&lt;/xf:option&gt;
+                &lt;xf:option name="is_premium" value="1" selected="$server.is_premium"&gt;{{ phrase('warext_mc_i18n_premium_required') }}&lt;/xf:option&gt;
                 &lt;xf:option name="allow_cracked" value="1" selected="$server.allow_cracked"&gt;{{ phrase('warext_mc_i18n_0193') }}&lt;/xf:option&gt;
             &lt;/xf:checkboxrow&gt;
         &lt;/div&gt;

@@ -1,4 +1,4 @@
-&lt;xf:title&gt;Sponsorlu Sunucular&lt;/xf:title&gt;
+&lt;xf:title&gt;{{ phrase('admin_navigation.warextMinecraftSponsors') }}&lt;/xf:title&gt;
 &lt;xf:description&gt;{{ phrase('warext_mc_i18n_0404') }}&lt;/xf:description&gt;
 
 &lt;xf:form action="{{ link('warext-minecraft/sponsors') }}" class="block" ajax="true"&gt;
@@ -30,18 +30,18 @@
                         &lt;div class="contentRow"&gt;
                             &lt;div class="contentRow-main"&gt;
                                 &lt;div class="contentRow-title"&gt;
-                                    &lt;strong&gt;&lt;xf:if is="$sponsor.Server"&gt;{$sponsor.Server.title}&lt;xf:else /&gt;Silinmiş sunucu #{$sponsor.server_id}&lt;/xf:if&gt;&lt;/strong&gt;
+                                    &lt;strong&gt;&lt;xf:if is="$sponsor.Server"&gt;{$sponsor.Server.title}&lt;xf:else /&gt;{{ phrase('warext_mc_dyn_deleted_server', {'id': $sponsor.server_id}) }}&lt;/xf:if&gt;&lt;/strong&gt;
                                     &lt;span class="label label--orange"&gt;{$sponsor.label}&lt;/span&gt;
                                     &lt;xf:if is="$sponsor.is_current"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0408') }}&lt;/span&gt;&lt;xf:elseif is="$sponsor.state == 'paused'" /&gt;&lt;span class="label"&gt;{{ phrase('warext_mc_i18n_0409') }}&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;{{ phrase('warext_mc_i18n_0410') }}&lt;/span&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    Başlangıç: &lt;xf:date time="$sponsor.start_date" /&gt; ·
+                                    {{ phrase('warext_mc_i18n_start_prefix') }} &lt;xf:date time="$sponsor.start_date" /&gt; ·
                                     Bitiş: &lt;xf:if is="$sponsor.end_date"&gt;&lt;xf:date time="$sponsor.end_date" /&gt;&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0411') }}&lt;/xf:if&gt; ·
-                                    Sıra: {$sponsor.display_order}
+                                    {{ phrase('warext_mc_dyn_order_x', {'order': $sponsor.display_order}) }}
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    Oluşturan: &lt;xf:if is="$sponsor.Creator"&gt;&lt;xf:username user="$sponsor.Creator" /&gt;&lt;xf:else /&gt;Sistem&lt;/xf:if&gt; ·
-                                    Son değişiklik: &lt;xf:date time="$sponsor.updated_date" /&gt;
+                                    {{ phrase('warext_mc_i18n_created_by') }} &lt;xf:if is="$sponsor.Creator"&gt;&lt;xf:username user="$sponsor.Creator" /&gt;&lt;xf:else /&gt;Sistem&lt;/xf:if&gt; ·
+                                    {{ phrase('warext_mc_i18n_last_change') }} &lt;xf:date time="$sponsor.updated_date" /&gt;
                                 &lt;/div&gt;
                                 &lt;div class="buttonGroup" style="margin-top:8px"&gt;
                                     &lt;xf:form action="{{ link('warext-minecraft/sponsor-toggle', $sponsor) }}" ajax="true"&gt;

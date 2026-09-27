@@ -28,7 +28,7 @@
                                     &lt;xf:if is="$server.is_owner"&gt;&lt;span class="label label--primary"&gt;Sahibi&lt;/span&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;{$server.host}:{$server.port}&lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;Son güncelleme: &lt;xf:date time="$server.last_update_date" /&gt;&lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0248') }} &lt;xf:date time="$server.last_update_date" /&gt;&lt;/div&gt;
                                 &lt;div class="buttonGroup buttonGroup--alignLeft"&gt;
                                     &lt;xf:button href="{{ link('sunucular/detay', $server) }}"&gt;Detay&lt;/xf:button&gt;
                                     &lt;xf:if is="$server.can_edit"&gt;&lt;xf:button href="{{ link('sunucular/duzenle', $server) }}"&gt;{{ phrase('warext_mc_i18n_0249') }}&lt;/xf:button&gt;&lt;/xf:if&gt;
@@ -43,5 +43,5 @@
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;xf:else /&gt;
-    &lt;div class="blockMessage"&gt;Henüz eklediğiniz veya ekip yetkisiyle yönettiğiniz bir sunucu yok. &lt;a href="{{ link('sunucular/ekle') }}"&gt;{{ phrase('warext_mc_i18n_0252') }}&lt;/a&gt;&lt;/div&gt;
+    &lt;div class="blockMessage"&gt;{{ phrase('warext_mc_i18n_0251') }} &lt;a href="{{ link('sunucular/ekle') }}"&gt;{{ phrase('warext_mc_i18n_0252') }}&lt;/a&gt;&lt;/div&gt;
 &lt;/xf:if&gt;

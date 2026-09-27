@@ -1,0 +1,1 @@
+Oy başarıyla kaydedildiğinde sunucunun Votifier entegrasyonu aktifse oyun içi ödül teslimatı kuyruğa alınır.

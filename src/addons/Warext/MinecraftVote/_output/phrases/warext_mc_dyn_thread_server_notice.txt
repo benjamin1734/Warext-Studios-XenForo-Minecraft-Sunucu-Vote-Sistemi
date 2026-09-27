@@ -1,0 +1,1 @@
+Sunucu adresini boş bırakırsanız yalnızca normal tanıtım konusu oluşturulur. Adres girerseniz konu başlığı ve ilk mesaj kullanılarak {category} kategorisinde onay bekleyen bir vote kaydı oluşturulur.

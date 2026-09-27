@@ -1,0 +1,1 @@
+Takılı processing kaydı: {processing} · Çevrimdışı aktif sunucu: {offline} · 1 saattir kontrol edilmemiş aktif sunucu: {stale}

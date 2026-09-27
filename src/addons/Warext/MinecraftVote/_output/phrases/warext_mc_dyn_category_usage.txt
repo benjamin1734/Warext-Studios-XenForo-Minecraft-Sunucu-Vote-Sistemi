@@ -1,0 +1,1 @@
+Kısa ad: {slug} · Kullanım: {count} sunucu

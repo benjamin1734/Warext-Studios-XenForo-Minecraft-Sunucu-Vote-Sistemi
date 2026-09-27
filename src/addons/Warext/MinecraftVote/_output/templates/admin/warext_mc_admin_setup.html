@@ -1,12 +1,12 @@
 &lt;xf:title&gt;{{ phrase('warext_mc_i18n_0369') }}&lt;/xf:title&gt;
 
 &lt;div class="blockMessage blockMessage--important"&gt;
-    Bu sayfa eklentiyi ilk kez kuran yöneticiler için başlangıç merkezidir. Minecraft kategorileri XenForo forum kategorilerine bağlı değildir; sunucu listesindeki filtreleme ve sınıflandırma etiketleridir.
+    {{ phrase('warext_mc_dyn_setup_intro') }}
 &lt;/div&gt;
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;Sistem Durumu&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_system_status') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
                 &lt;strong&gt;{{ phrase('warext_mc_i18n_0370') }}&lt;/strong&gt; {$counts.categories} ·
@@ -16,7 +16,7 @@
             &lt;div class="block-row"&gt;
                 &lt;strong&gt;{{ phrase('warext_mc_i18n_0373') }}&lt;/strong&gt; &lt;xf:if is="$captchaEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
                 &lt;strong&gt;{{ phrase('warext_mc_i18n_0374') }}&lt;/strong&gt; &lt;xf:if is="$requireVerified"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
-                &lt;strong&gt;Misafir oy:&lt;/strong&gt; &lt;xf:if is="$allowGuests"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
+                &lt;strong&gt;{{ phrase('warext_mc_i18n_guest_vote') }}&lt;/strong&gt; &lt;xf:if is="$allowGuests"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; ·
                 &lt;strong&gt;{{ phrase('warext_mc_i18n_0375') }}&lt;/strong&gt; &lt;xf:if is="$sponsorEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
             &lt;/div&gt;
         &lt;/div&gt;
@@ -25,13 +25,13 @@
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;1. Genel Ayarlar&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_setup_general') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
-                Admin CP → Setup → Options bölümünde &lt;strong&gt;Warext Minecraft Sunucu &amp; Vote&lt;/strong&gt; seçenek grubunu açın. Oy bekleme süresi, CAPTCHA, misafir oyları, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir.
+                {{ phrase('warext_mc_dyn_setup_options') }}
             &lt;/div&gt;
             &lt;div class="block-row"&gt;
-                JSON API: &lt;xf:if is="$publicApiEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; · HTTPS webhook: &lt;xf:if is="$webhookEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
+                JSON API: &lt;xf:if is="$publicApiEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt; {{ phrase('warext_mc_i18n_https_webhook') }} &lt;xf:if is="$webhookEnabled"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -41,12 +41,12 @@
     &lt;div class="block-container"&gt;
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0377') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;Admin CP → Groups &amp; permissions → User group permissions bölümünde &lt;strong&gt;Minecraft Sunucu &amp; Vote&lt;/strong&gt; izin grubunu düzenleyin.&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0381') }}&lt;/strong&gt; Kullanıcının yeni Minecraft sunucusu göndermesini sağlar.&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0383') }}&lt;/strong&gt; Aktif sunuculara oy verme yetkisidir.&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0385') }}&lt;/strong&gt; Sunuculara puan ve yorum bırakma yetkisidir.&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Favorilere ekleyebilir:&lt;/strong&gt; Favori ve güncelleme bildirimi özelliklerini açar.&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Raporlayabilir:&lt;/strong&gt; Sunucu raporu göndermeyi açar.&lt;/div&gt;
+            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_permissions_path') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_permission_group_name') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0380') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0381') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0382') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0383') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0384') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_0385') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0386') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_can_favorite') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0387') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_can_report') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0388') }}&lt;/div&gt;
             &lt;div class="block-row block-rowMessage block-rowMessage--warning"&gt;{{ phrase('warext_mc_i18n_0389') }}&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -54,9 +54,9 @@
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;3. Kategoriler&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_setup_categories') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;Survival, SkyBlock, BoxPvP gibi kategoriler sunucuyu sınıflandırır. &lt;strong&gt;{{ phrase('warext_mc_i18n_0391') }}&lt;/strong&gt; Java/Bedrock alanları sunucu türüne göre anlam kazanır.&lt;/div&gt;
+            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_0390') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_0391') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0392') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;&lt;xf:button href="{{ link('warext-minecraft/categories') }}" class="button--primary"&gt;{{ phrase('warext_mc_i18n_0393') }}&lt;/xf:button&gt;&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -66,12 +66,12 @@
     &lt;div class="block-container"&gt;
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0394') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Java:&lt;/strong&gt; Ana adres ve Java portu kullanılır. Bedrock alanları boş bırakılabilir.&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Bedrock:&lt;/strong&gt; Ana adres sunucunun temel adresidir; Bedrock adresi boş bırakılırsa ana adres kullanılır. Bedrock portunu gerçek portunuza göre ayarlayın.&lt;/div&gt;
-            &lt;div class="block-row"&gt;&lt;strong&gt;Crossplay:&lt;/strong&gt; Java ana adresi ile Bedrock adresi/portu birlikte girilir.&lt;/div&gt;
-            &lt;div class="block-row"&gt;Yeni kayıt önce &lt;strong&gt;{{ phrase('warext_mc_i18n_0279') }}&lt;/strong&gt; durumuna gelir. Yönetici onayından sonra genel listede görünür ve oy alabilir.&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_java_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0395') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_bedrock_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0396') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;&lt;strong&gt;{{ phrase('warext_mc_i18n_crossplay_label') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_java_bedrock_combined') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_0397') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_0279') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0398') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}" class="button--primary"&gt;Bekleyen Sunucular&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'pending'}) }}" class="button--primary"&gt;{{ phrase('warext_mc_i18n_pending_servers') }}&lt;/xf:button&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/servers', null, {'state': 'all'}) }}"&gt;{{ phrase('warext_mc_i18n_0399') }}&lt;/xf:button&gt;
             &lt;/div&gt;
         &lt;/div&gt;
@@ -82,8 +82,8 @@
     &lt;div class="block-container"&gt;
         &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_0400') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
-            &lt;div class="block-row"&gt;Sunucu sahibi, kendi sunucu detay sayfasındaki &lt;strong&gt;{{ phrase('warext_mc_i18n_0272') }}&lt;/strong&gt; alanından bağlantıyı yapılandırır. Oy kaydı ile oyun içi ödül teslimatı birbirinden ayrıdır; oy önce kaydedilir, ardından teslimat kuyruğu çalışır.&lt;/div&gt;
-            &lt;div class="block-row"&gt;Teslimat sorunlarını Admin CP → Minecraft Sunucu &amp; Vote → Sistem Sağlığı ve Oy Teslimat Kuyruğu ekranlarından takip edebilirsiniz.&lt;/div&gt;
+            &lt;div class="block-row"&gt;{{ phrase('warext_mc_i18n_0401') }} &lt;strong&gt;{{ phrase('warext_mc_i18n_0272') }}&lt;/strong&gt; {{ phrase('warext_mc_i18n_0402') }}&lt;/div&gt;
+            &lt;div class="block-row"&gt;{{ phrase('warext_mc_dyn_delivery_help') }}&lt;/div&gt;
             &lt;div class="block-row"&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/health') }}"&gt;{{ phrase('admin_navigation.warextMinecraftHealth') }}&lt;/xf:button&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes') }}"&gt;{{ phrase('warext_mc_i18n_0362') }}&lt;/xf:button&gt;

@@ -1,0 +1,1 @@
+Sahiplik devrinden sonra mevcut hesabınızın sunucu yönetim erişimi otomatik olarak kaldırılır. Sunucu sahiplik doğrulaması güvenlik nedeniyle sıfırlanır ve yeni sahibin yeniden doğrulama yapması gerekir.

@@ -1,0 +1,1 @@
+{votes} oy · {unique} benzersiz seçmen · Peak {peak} oyuncu · Uptime {uptime}% · Sezon puanı {score}

@@ -1,4 +1,4 @@
-&lt;xf:title&gt;{$server.title} - Sunucu İstatistikleri&lt;/xf:title&gt;
+&lt;xf:title&gt;{{ phrase('warext_mc_dyn_server_statistics_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 &lt;xf:description&gt;{{ phrase('warext_mc_i18n_0136') }}&lt;/xf:description&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
@@ -9,7 +9,7 @@
         &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0137') }}&lt;/div&gt;
         &lt;div class="block-body block-row"&gt;
             &lt;div class="pairs-group pairs-group--columns"&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;24 Saat&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.votes_24h ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
+                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_24_hours') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.votes_24h ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
                 &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0138') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.votes_7d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
                 &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0139') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.votes_30d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
                 &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0140') }}&lt;/dt&gt;&lt;dd&gt;{{ $voteStats.unique_voters_30d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
@@ -30,7 +30,7 @@
                 &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;Uptime&lt;/dt&gt;&lt;dd&gt;{$uptime7d}%&lt;/dd&gt;&lt;/dl&gt;
                 &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0146') }}&lt;/dt&gt;&lt;dd&gt;{{ $pingStats.peak_players_7d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
                 &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0147') }}&lt;/dt&gt;&lt;dd&gt;{{ $pingStats.avg_players_7d ?: 0 }}&lt;/dd&gt;&lt;/dl&gt;
-                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;Ortalama Ping&lt;/dt&gt;&lt;dd&gt;{{ $pingStats.avg_ping_7d ?: 0 }} ms&lt;/dd&gt;&lt;/dl&gt;
+                &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_average_ping') }}&lt;/dt&gt;&lt;dd&gt;{{ $pingStats.avg_ping_7d ?: 0 }} ms&lt;/dd&gt;&lt;/dl&gt;
                 &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0148') }}&lt;/dt&gt;&lt;dd&gt;{$favorites}&lt;/dd&gt;&lt;/dl&gt;
                 &lt;dl class="pairs pairs--columns"&gt;&lt;dt&gt;{{ phrase('warext_mc_i18n_0149') }}&lt;/dt&gt;&lt;dd&gt;{$reviews}&lt;/dd&gt;&lt;/dl&gt;
             &lt;/div&gt;

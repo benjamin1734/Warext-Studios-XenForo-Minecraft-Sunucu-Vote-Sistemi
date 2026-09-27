@@ -30,7 +30,7 @@
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;Mevcut Ekip&lt;/div&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_current_team') }}&lt;/div&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:if is="$members is not empty"&gt;
                 &lt;xf:foreach loop="$members" value="$member"&gt;
@@ -42,10 +42,10 @@
                                     &lt;span class="label label--primary"&gt;{$member.role}&lt;/span&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    &lt;xf:if is="$member.permissions.edit_content"&gt;İçerik düzenleme · &lt;/xf:if&gt;
-                                    &lt;xf:if is="$member.permissions.publish_updates"&gt;Güncelleme yayınlama · &lt;/xf:if&gt;
-                                    &lt;xf:if is="$member.permissions.view_stats"&gt;İstatistik · &lt;/xf:if&gt;
-                                    &lt;xf:if is="$member.permissions.manage_votifier"&gt;NuVotifier · &lt;/xf:if&gt;
+                                    &lt;xf:if is="$member.permissions.edit_content"&gt;{{ phrase('warext_mc_i18n_0307') }} &lt;/xf:if&gt;
+                                    &lt;xf:if is="$member.permissions.publish_updates"&gt;{{ phrase('warext_mc_i18n_0308') }} &lt;/xf:if&gt;
+                                    &lt;xf:if is="$member.permissions.view_stats"&gt;{{ phrase('warext_mc_i18n_0309') }} &lt;/xf:if&gt;
+                                    &lt;xf:if is="$member.permissions.manage_votifier"&gt;{{ phrase('warext_mc_i18n_nuvotifier_dot') }} &lt;/xf:if&gt;
                                     &lt;xf:if is="$member.permissions.manage_reviews"&gt;{{ phrase('warext_mc_i18n_0310') }}&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;Eklenme: &lt;xf:date time="$member.joined_date" /&gt;&lt;/div&gt;

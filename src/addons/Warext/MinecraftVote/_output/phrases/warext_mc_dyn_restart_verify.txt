@@ -1,0 +1,1 @@
+Değişiklik gerekiyorsa sunucuyu yeniden başlatın ve ardından aşağıdaki kontrol düğmesini kullanın.

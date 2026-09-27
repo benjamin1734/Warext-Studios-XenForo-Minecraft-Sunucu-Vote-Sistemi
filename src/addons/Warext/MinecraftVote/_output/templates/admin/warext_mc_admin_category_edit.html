@@ -1,4 +1,4 @@
-&lt;xf:title&gt;Kategori Düzenle: {$category.title}&lt;/xf:title&gt;
+&lt;xf:title&gt;{{ phrase('warext_mc_dyn_edit_category', {'title': $category.title}) }}&lt;/xf:title&gt;
 &lt;xf:form action="{{ link('warext-minecraft/category-edit', $category) }}" class="block"&gt;
     &lt;div class="block-container"&gt;&lt;div class="block-body"&gt;
         &lt;xf:textboxrow name="title" value="{$category.title}" label="{{ phrase('warext_mc_i18n_0109') }}" required="true" maxlength="50" /&gt;

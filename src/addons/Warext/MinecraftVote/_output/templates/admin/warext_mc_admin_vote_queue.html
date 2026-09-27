@@ -14,13 +14,13 @@
         &lt;div class="block-body block-row"&gt;
             &lt;div class="buttonGroup"&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'pending'}) }}"&gt;Bekleyen ({$statusCounts.pending})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'processing'}) }}"&gt;İşleniyor ({$statusCounts.processing})&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'processing'}) }}"&gt;{{ phrase('warext_mc_dyn_status_processing', {'count': $statusCounts.processing}) }}&lt;/xf:button&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'retry'}) }}"&gt;Tekrar ({$statusCounts.retry})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'failed'}) }}"&gt;Başarısız ({$statusCounts.failed})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'delivered'}) }}"&gt;Teslim Edildi ({$statusCounts.delivered})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'skipped'}) }}"&gt;Atlandı ({$statusCounts.skipped})&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'failed'}) }}"&gt;{{ phrase('warext_mc_dyn_status_failed', {'count': $statusCounts.failed}) }}&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'delivered'}) }}"&gt;{{ phrase('warext_mc_i18n_delivered') }} ({$statusCounts.delivered})&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'skipped'}) }}"&gt;{{ phrase('warext_mc_dyn_status_skipped', {'count': $statusCounts.skipped}) }}&lt;/xf:button&gt;
                 &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'rejected'}) }}"&gt;Reddedildi ({$statusCounts.rejected})&lt;/xf:button&gt;
-                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}"&gt;Tümü ({$statusCounts.all})&lt;/xf:button&gt;
+                &lt;xf:button href="{{ link('warext-minecraft/votes', null, {'status': 'all'}) }}"&gt;{{ phrase('warext_mc_dyn_status_all', {'count': $statusCounts.all}) }}&lt;/xf:button&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -38,11 +38,11 @@
                                 &lt;div class="contentRow-title"&gt;
                                     &lt;strong&gt;#{$vote.vote_id} · {$vote.minecraft_username}&lt;/strong&gt;
                                     &lt;xf:if is="$vote.status == 'delivered'"&gt;
-                                        &lt;span class="label label--green"&gt;Teslim Edildi&lt;/span&gt;
+                                        &lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_delivered') }}&lt;/span&gt;
                                     &lt;xf:elseif is="$vote.status == 'failed' || $vote.status == 'rejected'" /&gt;
                                         &lt;span class="label label--red"&gt;{$vote.status}&lt;/span&gt;
                                     &lt;xf:elseif is="$vote.status == 'retry'" /&gt;
-                                        &lt;span class="label label--orange"&gt;Tekrar Denenecek&lt;/span&gt;
+                                        &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_i18n_retry_later') }}&lt;/span&gt;
                                     &lt;xf:elseif is="$vote.status == 'processing'" /&gt;
                                         &lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0424') }}&lt;/span&gt;
                                     &lt;xf:else /&gt;
@@ -52,16 +52,16 @@
 
                                 &lt;div class="contentRow-minor"&gt;
                                     &lt;xf:if is="$vote.Server"&gt;Sunucu: {$vote.Server.title}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0416') }}&lt;/xf:if&gt;
-                                    &lt;xf:if is="$vote.User"&gt; · XenForo: {$vote.User.username}&lt;xf:else /&gt; · Misafir oy&lt;/xf:if&gt;
+                                    &lt;xf:if is="$vote.User"&gt; · XenForo: {$vote.User.username}&lt;xf:else /&gt; {{ phrase('warext_mc_i18n_guest_vote_bullet') }}&lt;/xf:if&gt;
                                     · Kaynak: {$vote.source}
                                 &lt;/div&gt;
 
                                 &lt;div class="contentRow-minor"&gt;
-                                    Oy zamanı: &lt;xf:date time="$vote.vote_date" /&gt;
+                                    {{ phrase('warext_mc_i18n_vote_time') }} &lt;xf:date time="$vote.vote_date" /&gt;
                                     · Deneme: {$vote.attempt_count}
                                     · Risk: {$vote.fraud_score}
-                                    &lt;xf:if is="$vote.next_attempt_date"&gt; · Sonraki deneme / lease: &lt;xf:date time="$vote.next_attempt_date" /&gt;&lt;/xf:if&gt;
-                                    &lt;xf:if is="$vote.delivered_date"&gt; · Teslim: &lt;xf:date time="$vote.delivered_date" /&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$vote.next_attempt_date"&gt; {{ phrase('warext_mc_i18n_next_attempt_lease') }} &lt;xf:date time="$vote.next_attempt_date" /&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$vote.delivered_date"&gt; {{ phrase('warext_mc_i18n_delivery_bullet') }} &lt;xf:date time="$vote.delivered_date" /&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
 
                                 &lt;xf:if is="$vote.last_error"&gt;

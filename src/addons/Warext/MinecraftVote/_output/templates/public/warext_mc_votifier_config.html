@@ -1,15 +1,15 @@
-&lt;xf:title&gt;{$server.title} - NuVotifier Ayarları&lt;/xf:title&gt;
+&lt;xf:title&gt;{{ phrase('warext_mc_dyn_votifier_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;div class="block-header"&gt;NuVotifier V2 Entegrasyonu&lt;/div&gt;
+        &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_nuvotifier_v2_integration') }}&lt;/div&gt;
         &lt;div class="block-body block-row"&gt;
-            Oylar platformda kaydedildikten sonra bu bağlantı üzerinden Minecraft sunucunuza gönderilir. Token şifreli saklanır ve kaydedildikten sonra arayüzde tekrar gösterilmez.
+            {{ phrase('warext_mc_dyn_votifier_info') }}
             &lt;xf:if is="$config.last_success_date"&gt;
-                &lt;div class="contentRow-minor" style="margin-top:8px"&gt;Son başarılı bağlantı: &lt;xf:date time="$config.last_success_date" /&gt;&lt;/div&gt;
+                &lt;div class="contentRow-minor" style="margin-top:8px"&gt;{{ phrase('warext_mc_i18n_0323') }} &lt;xf:date time="$config.last_success_date" /&gt;&lt;/div&gt;
             &lt;/xf:if&gt;
             &lt;xf:if is="$config.last_error"&gt;
                 &lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;Son hata: {$config.last_error}&lt;/div&gt;

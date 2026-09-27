@@ -6,7 +6,7 @@
                 &lt;div class="contentRow"&gt;
                     &lt;div class="contentRow-main"&gt;
                         &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$warextMcLinkedServer.title}&lt;/strong&gt; &lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0316') }}&lt;/span&gt;&lt;/div&gt;
-                        &lt;div class="contentRow-minor"&gt;{$warextMcLinkedServer.host}:{$warextMcLinkedServer.port} · {$warextMcLinkedServer.players_online}/{$warextMcLinkedServer.players_max} oyuncu · {$warextMcLinkedServer.vote_count_month} aylık oy&lt;/div&gt;
+                        &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_linked_server_summary', {'host': $warextMcLinkedServer.host, 'port': $warextMcLinkedServer.port, 'online': $warextMcLinkedServer.players_online, 'max': $warextMcLinkedServer.players_max, 'votes': $warextMcLinkedServer.vote_count_month}) }}&lt;/div&gt;
                     &lt;/div&gt;
                     &lt;div class="contentRow-extra"&gt;
                         &lt;xf:button href="{{ link('sunucular/detay', $warextMcLinkedServer) }}"&gt;{{ phrase('warext_mc_i18n_0317') }}&lt;/xf:button&gt;

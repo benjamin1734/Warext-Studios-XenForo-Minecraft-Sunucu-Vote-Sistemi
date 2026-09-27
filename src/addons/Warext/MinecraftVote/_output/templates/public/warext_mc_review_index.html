@@ -1,4 +1,4 @@
-&lt;xf:title&gt;{$server.title} - Değerlendirmeler&lt;/xf:title&gt;
+&lt;xf:title&gt;{{ phrase('warext_mc_dyn_reviews_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
@@ -6,7 +6,7 @@
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
         &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0167') }}&lt;/div&gt;
-        &lt;div class="block-body block-row"&gt;&lt;strong&gt;{$server.rating_average} / 5&lt;/strong&gt; · {$server.rating_count} değerlendirme&lt;/div&gt;
+        &lt;div class="block-body block-row"&gt;&lt;strong&gt;{$server.rating_average} / 5&lt;/strong&gt; · {{ phrase('warext_mc_dyn_review_count_x', {'count': $server.rating_count}) }}&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -16,7 +16,7 @@
             &lt;div class="block-header"&gt;&lt;xf:if is="$userReview"&gt;{{ phrase('warext_mc_i18n_0168') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0169') }}&lt;/xf:if&gt;&lt;/div&gt;
             &lt;div class="block-body"&gt;
                 &lt;xf:selectrow name="rating" value="{{ $userReview ? $userReview.rating : 5 }}" label="{{ phrase('warext_mc_i18n_0013') }}"&gt;
-                    &lt;xf:option value="5"&gt;{{ phrase('warext_mc_i18n_0170') }}&lt;/xf:option&gt;&lt;xf:option value="4"&gt;{{ phrase('warext_mc_i18n_0171') }}&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3 - Orta&lt;/xf:option&gt;&lt;xf:option value="2"&gt;{{ phrase('warext_mc_i18n_0172') }}&lt;/xf:option&gt;&lt;xf:option value="1"&gt;{{ phrase('warext_mc_i18n_0173') }}&lt;/xf:option&gt;
+                    &lt;xf:option value="5"&gt;{{ phrase('warext_mc_i18n_0170') }}&lt;/xf:option&gt;&lt;xf:option value="4"&gt;{{ phrase('warext_mc_i18n_0171') }}&lt;/xf:option&gt;&lt;xf:option value="3"&gt;{{ phrase('warext_mc_i18n_rating_average') }}&lt;/xf:option&gt;&lt;xf:option value="2"&gt;{{ phrase('warext_mc_i18n_0172') }}&lt;/xf:option&gt;&lt;xf:option value="1"&gt;{{ phrase('warext_mc_i18n_0173') }}&lt;/xf:option&gt;
                 &lt;/xf:selectrow&gt;
                 &lt;xf:selectrow name="gameplay_rating" value="{{ $userReview ? $userReview.gameplay_rating : 0 }}" label="{{ phrase('warext_mc_i18n_0014') }}"&gt;&lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0174') }}&lt;/xf:option&gt;&lt;xf:option value="5"&gt;5&lt;/xf:option&gt;&lt;xf:option value="4"&gt;4&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3&lt;/xf:option&gt;&lt;xf:option value="2"&gt;2&lt;/xf:option&gt;&lt;xf:option value="1"&gt;1&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
                 &lt;xf:selectrow name="staff_rating" value="{{ $userReview ? $userReview.staff_rating : 0 }}" label="{{ phrase('warext_mc_i18n_0015') }}"&gt;&lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_0174') }}&lt;/xf:option&gt;&lt;xf:option value="5"&gt;5&lt;/xf:option&gt;&lt;xf:option value="4"&gt;4&lt;/xf:option&gt;&lt;xf:option value="3"&gt;3&lt;/xf:option&gt;&lt;xf:option value="2"&gt;2&lt;/xf:option&gt;&lt;xf:option value="1"&gt;1&lt;/xf:option&gt;&lt;/xf:selectrow&gt;
@@ -44,11 +44,11 @@
                             &lt;div class="contentRow-title"&gt;&lt;xf:username user="$review.User" rich="true" /&gt; · &lt;strong&gt;{$review.rating}/5&lt;/strong&gt; &lt;xf:if is="$review.is_verified_player"&gt;&lt;span class="label label--green"&gt;{{ phrase('warext_mc_i18n_0177') }}&lt;/span&gt;&lt;/xf:if&gt; &lt;xf:if is="$review.state == 'moderated'"&gt;&lt;span class="label label--orange"&gt;Gizli&lt;/span&gt;&lt;/xf:if&gt;&lt;/div&gt;
                             &lt;div class="contentRow-minor"&gt;&lt;xf:date time="$review.updated_date" /&gt;&lt;/div&gt;
                             &lt;xf:if is="$review.message"&gt;&lt;div class="contentRow-snippet" style="margin-top:8px"&gt;{$review.message}&lt;/div&gt;&lt;/xf:if&gt;
-                            &lt;div class="contentRow-minor" style="margin-top:8px"&gt;Oynanış: {{ $review.gameplay_rating ?: '-' }} · Yetkili: {{ $review.staff_rating ?: '-' }} · Performans: {{ $review.performance_rating ?: '-' }} · Topluluk: {{ $review.community_rating ?: '-' }} · Özgünlük: {{ $review.originality_rating ?: '-' }}&lt;/div&gt;
+                            &lt;div class="contentRow-minor" style="margin-top:8px"&gt;{{ phrase('warext_mc_dyn_review_scores', {'gameplay': ($review.gameplay_rating ?: '-'), 'staff': ($review.staff_rating ?: '-'), 'performance': ($review.performance_rating ?: '-'), 'community': ($review.community_rating ?: '-'), 'originality': ($review.originality_rating ?: '-')}) }}&lt;/div&gt;
                             &lt;xf:if is="$canModerate"&gt;
                                 &lt;xf:form action="{{ link('sunucular/degerlendirme-yonet', $review) }}" ajax="true" style="margin-top:8px"&gt;
                                     &lt;xf:hiddenval name="state" value="{{ $review.state == 'visible' ? 'moderated' : 'visible' }}" /&gt;
-                                    &lt;xf:button type="submit" class="button--link"&gt;{{ $review.state == 'visible' ? 'Değerlendirmeyi Gizle' : 'Yeniden Görünür Yap' }}&lt;/xf:button&gt;
+                                    &lt;xf:button type="submit" class="button--link"&gt;{{ $review.state == 'visible' ? phrase('warext_mc_i18n_0428') : phrase('warext_mc_i18n_0429') }}&lt;/xf:button&gt;
                                 &lt;/xf:form&gt;
                             &lt;/xf:if&gt;
                         &lt;/div&gt;&lt;/div&gt;

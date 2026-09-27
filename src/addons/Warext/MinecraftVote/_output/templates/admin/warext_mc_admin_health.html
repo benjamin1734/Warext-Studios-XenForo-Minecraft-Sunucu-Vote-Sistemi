@@ -11,11 +11,11 @@
         &lt;div class="block-header"&gt;{{ phrase('warext_mc_i18n_0348') }}&lt;/div&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
-                Bekleyen: {{ $voteCounts.pending ?: 0 }} · İşleniyor: {{ $voteCounts.processing ?: 0 }} · Tekrar: {{ $voteCounts.retry ?: 0 }} · Başarısız: {{ $voteCounts.failed ?: 0 }} · Teslim: {{ $voteCounts.delivered ?: 0 }}
-                &lt;xf:if is="$oldestPending"&gt; · En eski bekleyen: &lt;xf:date time="$oldestPending" /&gt;&lt;/xf:if&gt;
+                Bekleyen: {{ $voteCounts.pending ?: 0 }} · İşleniyor: {{ $voteCounts.processing ?: 0 }} · Tekrar: {{ $voteCounts.retry ?: 0 }} · Başarısız: {{ $voteCounts.failed ?: 0 }} {{ phrase('warext_mc_i18n_delivery_bullet') }} {{ $voteCounts.delivered ?: 0 }}
+                &lt;xf:if is="$oldestPending"&gt; {{ phrase('warext_mc_i18n_0349') }} &lt;xf:date time="$oldestPending" /&gt;&lt;/xf:if&gt;
             &lt;/div&gt;
             &lt;div class="block-row"&gt;
-                Takılı processing kaydı: {$staleProcessing} · Çevrimdışı aktif sunucu: {$offlineServers} · 1 saattir kontrol edilmemiş aktif sunucu: {$staleServers}
+                {{ phrase('warext_mc_dyn_health_stale', {'processing': $staleProcessing, 'offline': $offlineServers, 'stale': $staleServers}) }}
             &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class="block-footer"&gt;
@@ -46,7 +46,7 @@
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
                                     Hedef: {{ $row.host ?: 'Sunucu adresi' }}:{$row.port} · Servis: {{ $row.service_name ?: 'Warext' }}
-                                    &lt;xf:if is="$row.last_success_date"&gt; · Son başarı: &lt;xf:date time="$row.last_success_date" /&gt;&lt;/xf:if&gt;
+                                    &lt;xf:if is="$row.last_success_date"&gt; {{ phrase('warext_mc_i18n_0353') }} &lt;xf:date time="$row.last_success_date" /&gt;&lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;xf:if is="$row.last_error"&gt;&lt;div class="blockMessage blockMessage--error" style="margin-top:8px"&gt;{$row.last_error}&lt;/div&gt;&lt;/xf:if&gt;
                             &lt;/div&gt;

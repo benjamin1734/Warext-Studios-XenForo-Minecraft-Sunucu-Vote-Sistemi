@@ -1,15 +1,15 @@
-&lt;xf:title&gt;{$server.title} - Sunucu Sahipliğini Doğrula&lt;/xf:title&gt;
+&lt;xf:title&gt;{{ phrase('warext_mc_dyn_verify_ownership_title', {'server': $server.title}) }}&lt;/xf:title&gt;
 
 &lt;xf:breadcrumb href="{{ link('sunucular') }}"&gt;{{ phrase('nav.warextMcServers') }}&lt;/xf:breadcrumb&gt;
 &lt;xf:breadcrumb href="{{ link('sunucular/detay', $server) }}"&gt;{$server.title}&lt;/xf:breadcrumb&gt;
 
 &lt;xf:if is="$server.is_verified"&gt;
     &lt;div class="blockMessage blockMessage--success"&gt;
-        Bu sunucunun sahipliği doğrulanmış durumda.
+        {{ phrase('warext_mc_dyn_ownership_verified') }}
         &lt;xf:if is="$server.verified_date"&gt;
-            Doğrulama tarihi: &lt;xf:date time="$server.verified_date" /&gt;.
+            {{ phrase('warext_mc_i18n_verification_date') }} &lt;xf:date time="$server.verified_date" /&gt;.
         &lt;/xf:if&gt;
-        Yöntem: &lt;xf:if is="$server.verification_method == 'dns_txt'"&gt;DNS TXT&lt;xf:else /&gt;MOTD&lt;/xf:if&gt;.
+        Yöntem: &lt;xf:if is="$server.verification_method == 'dns_txt'"&gt;{{ phrase('warext_mc_i18n_dns_txt') }}&lt;xf:else /&gt;MOTD&lt;/xf:if&gt;.
     &lt;/div&gt;
 &lt;/xf:if&gt;
 
@@ -22,7 +22,7 @@
                     &lt;div class="contentRow"&gt;
                         &lt;div class="contentRow-main"&gt;
                             &lt;div class="contentRow-title"&gt;{{ phrase('warext_mc_i18n_0254') }}&lt;/div&gt;
-                            &lt;div class="contentRow-minor"&gt;Kod {$tokenLifetimeHours} saat geçerlidir.&lt;/div&gt;
+                            &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_dyn_code_valid_hours', {'hours': $tokenLifetimeHours}) }}&lt;/div&gt;
                             &lt;div style="margin-top:8px"&gt;&lt;code&gt;{$server.verification_token}&lt;/code&gt;&lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
@@ -33,7 +33,7 @@
                         &lt;strong&gt;{{ phrase('warext_mc_i18n_0255') }}&lt;/strong&gt;
                         &lt;div class="contentRow-minor" style="margin-top:6px"&gt;
                             Sunucunuzun MOTD metninin herhangi bir yerine &lt;code&gt;{$server.verification_token}&lt;/code&gt; kodunu ekleyin.
-                            Değişiklik gerekiyorsa sunucuyu yeniden başlatın ve ardından aşağıdaki kontrol düğmesini kullanın.
+                            {{ phrase('warext_mc_dyn_restart_verify') }}
                         &lt;/div&gt;
                     &lt;/div&gt;
                 &lt;xf:elseif is="$server.verification_method == 'dns_txt'" /&gt;

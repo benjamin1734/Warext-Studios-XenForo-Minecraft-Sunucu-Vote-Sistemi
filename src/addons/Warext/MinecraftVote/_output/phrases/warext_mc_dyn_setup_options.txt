@@ -1,0 +1,1 @@
+Admin CP → Setup → Options bölümünde Warext Minecraft Sunucu & Vote seçenek grubunu açın. Oy bekleme süresi, CAPTCHA, misafir oyları, doğrulanmış Minecraft hesabı zorunluluğu, NuVotifier retry, sponsor, API ve webhook ayarları burada yönetilir.

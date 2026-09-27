@@ -1,0 +1,1 @@
+Sponsorlu sunucular liste üstünde ayrı olarak gösterilir. Ödeme XenForo'nun yapılandırılmış Payment Profile sistemi üzerinden güvenli biçimde işlenir.

@@ -19,21 +19,21 @@
                                         &lt;xf:if is="$favorite.Server.is_online"&gt;&lt;span class="label label--green"&gt;Online&lt;/span&gt;&lt;xf:else /&gt;&lt;span class="label label--red"&gt;Offline&lt;/span&gt;&lt;/xf:if&gt;
                                         &lt;xf:if is="$favorite.Server.is_verified"&gt;&lt;span class="label label--primary"&gt;{{ phrase('warext_mc_i18n_0130') }}&lt;/span&gt;&lt;/xf:if&gt;
                                         &lt;xf:if is="$favorite.notify_updates &amp;&amp; $entry.unread_count"&gt;
-                                            &lt;span class="label label--orange"&gt;{$entry.unread_count} yeni güncelleme&lt;/span&gt;
+                                            &lt;span class="label label--orange"&gt;{{ phrase('warext_mc_dyn_new_updates_x', {'count': $entry.unread_count}) }}&lt;/span&gt;
                                         &lt;/xf:if&gt;
                                     &lt;/div&gt;
                                     &lt;div class="contentRow-minor"&gt;
                                         {$favorite.Server.host}:{$favorite.Server.port} · Oyuncu: {$favorite.Server.players_online}/{$favorite.Server.players_max} · Bu ay oy: {$favorite.Server.vote_count_month} · Uptime: {$favorite.Server.uptime_percent}%
                                     &lt;/div&gt;
                                     &lt;div class="contentRow-minor"&gt;
-                                        Favoriye eklenme: &lt;xf:date time="$favorite.created_date" /&gt; · Güncelleme bildirimi: &lt;xf:if is="$favorite.notify_updates"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
+                                        Favoriye eklenme: &lt;xf:date time="$favorite.created_date" /&gt; {{ phrase('warext_mc_i18n_0154') }} &lt;xf:if is="$favorite.notify_updates"&gt;{{ phrase('warext_mc_i18n_0155') }}&lt;xf:else /&gt;{{ phrase('warext_mc_i18n_0156') }}&lt;/xf:if&gt;
                                     &lt;/div&gt;
                                     &lt;div class="buttonGroup" style="margin-top:8px"&gt;
-                                        &lt;xf:button href="{{ link('sunucular/detay', $favorite.Server) }}" class="button--primary"&gt;Sunucuya Git&lt;/xf:button&gt;
+                                        &lt;xf:button href="{{ link('sunucular/detay', $favorite.Server) }}" class="button--primary"&gt;{{ phrase('warext_mc_i18n_go_to_server') }}&lt;/xf:button&gt;
                                         &lt;xf:button href="{{ link('sunucular/guncellemeler', $favorite.Server) }}"&gt;{{ phrase('warext_mc_i18n_0157') }}&lt;/xf:button&gt;
                                         &lt;xf:form action="{{ link('sunucular/favori-bildirim', $favorite.Server) }}" ajax="true" class="buttonGroup"&gt;
                                             &lt;xf:hiddenval name="enabled" value="{{ $favorite.notify_updates ? 0 : 1 }}" /&gt;
-                                            &lt;xf:button type="submit"&gt;{{ $favorite.notify_updates ? 'Bildirimleri Kapat' : 'Bildirimleri Aç' }}&lt;/xf:button&gt;
+                                            &lt;xf:button type="submit"&gt;{{ $favorite.notify_updates ? phrase('warext_mc_i18n_notifications_off') : phrase('warext_mc_i18n_0427') }}&lt;/xf:button&gt;
                                         &lt;/xf:form&gt;
                                         &lt;xf:form action="{{ link('sunucular/favori', $favorite.Server) }}" ajax="true" class="buttonGroup"&gt;
                                             &lt;xf:button type="submit" class="button--link"&gt;{{ phrase('warext_mc_i18n_0158') }}&lt;/xf:button&gt;

@@ -1,0 +1,1 @@
+Oylar platformda kaydedildikten sonra bu bağlantı üzerinden Minecraft sunucunuza gönderilir. Token şifreli saklanır ve kaydedildikten sonra arayüzde tekrar gösterilmez.

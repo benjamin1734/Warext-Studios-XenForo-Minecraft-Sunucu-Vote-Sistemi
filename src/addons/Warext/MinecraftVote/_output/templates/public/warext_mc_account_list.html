@@ -31,7 +31,7 @@
                                 &lt;div class="buttonGroup" style="margin-top:10px"&gt;
                                     &lt;xf:if is="!$account.is_primary"&gt;
                                         &lt;xf:form action="{{ link('sunucular/hesap-birincil', $account) }}" class="buttonGroup"&gt;
-                                            &lt;xf:button type="submit"&gt;Birincil Yap&lt;/xf:button&gt;
+                                            &lt;xf:button type="submit"&gt;{{ phrase('warext_mc_i18n_primary_make') }}&lt;/xf:button&gt;
                                         &lt;/xf:form&gt;
                                     &lt;/xf:if&gt;
 

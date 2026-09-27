@@ -8,7 +8,7 @@
             &lt;xf:button href="{{ link('sunucular/oy', $server) }}" class="button--cta"&gt;{{ phrase('warext_mc_i18n_0076') }}&lt;/xf:button&gt;
         &lt;/xf:if&gt;
         &lt;xf:button href="{{ link('sunucular/guncellemeler', $server) }}"&gt;{{ phrase('warext_mc_i18n_0157') }}&lt;/xf:button&gt;
-        &lt;xf:button href="{{ link('sunucular/degerlendir', $server) }}"&gt;Değerlendirmeler ({$server.rating_count})&lt;/xf:button&gt;
+        &lt;xf:button href="{{ link('sunucular/degerlendir', $server) }}"&gt;{{ phrase('warext_mc_dyn_reviews_x', {'count': $server.rating_count}) }}&lt;/xf:button&gt;
     &lt;/xf:if&gt;
     &lt;xf:if is="$canFavorite"&gt;
         &lt;xf:form action="{{ link('sunucular/favori', $server) }}" ajax="true" class="buttonGroup"&gt;
@@ -77,17 +77,17 @@
             &lt;div class="warextMcServerStats warextMcServerStats--large"&gt;
                 &lt;div&gt;&lt;strong&gt;{$server.players_online} / {$server.players_max}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0201') }}&lt;/span&gt;&lt;/div&gt;
                 &lt;div&gt;&lt;strong&gt;{$server.vote_count_month}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0202') }}&lt;/span&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;strong&gt;{$server.vote_count_total}&lt;/strong&gt;&lt;span&gt;Toplam oy&lt;/span&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;strong&gt;{$server.vote_count_total}&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_total_votes') }}&lt;/span&gt;&lt;/div&gt;
                 &lt;div&gt;&lt;strong&gt;{$server.uptime_percent}%&lt;/strong&gt;&lt;span&gt;Uptime&lt;/span&gt;&lt;/div&gt;
                 &lt;div&gt;&lt;strong&gt;{$server.ping_ms} ms&lt;/strong&gt;&lt;span&gt;Ping&lt;/span&gt;&lt;/div&gt;
                 &lt;div&gt;&lt;strong&gt;{$server.rating_average} / 5&lt;/strong&gt;&lt;span&gt;{{ phrase('warext_mc_i18n_0149') }}&lt;/span&gt;&lt;/div&gt;
             &lt;/div&gt;
 
             &lt;xf:if is="$server.last_ping_date"&gt;
-                &lt;div class="contentRow-minor" style="margin-top:10px"&gt;Son durum kontrolü: &lt;xf:date time="$server.last_ping_date" /&gt;&lt;/div&gt;
+                &lt;div class="contentRow-minor" style="margin-top:10px"&gt;{{ phrase('warext_mc_i18n_0280') }} &lt;xf:date time="$server.last_ping_date" /&gt;&lt;/div&gt;
             &lt;/xf:if&gt;
             &lt;xf:if is="$server.is_verified &amp;&amp; $server.verified_date"&gt;
-                &lt;div class="contentRow-minor"&gt;Sahiplik doğrulaması: &lt;xf:date time="$server.verified_date" /&gt;&lt;/div&gt;
+                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0281') }} &lt;xf:date time="$server.verified_date" /&gt;&lt;/div&gt;
             &lt;/xf:if&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -104,7 +104,7 @@
                             &lt;div class="contentRow-main"&gt;
                                 &lt;div class="contentRow-title"&gt;&lt;strong&gt;{$award.Achievement.title}&lt;/strong&gt;&lt;/div&gt;
                                 &lt;div class="contentRow-snippet"&gt;{$award.Achievement.description}&lt;/div&gt;
-                                &lt;div class="contentRow-minor"&gt;Kazanılma: &lt;xf:date time="$award.awarded_date" /&gt; · Ölçüm değeri: {$award.metric_value}&lt;/div&gt;
+                                &lt;div class="contentRow-minor"&gt;{{ phrase('warext_mc_i18n_0283') }} &lt;xf:date time="$award.awarded_date" /&gt; · Ölçüm değeri: {$award.metric_value}&lt;/div&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;

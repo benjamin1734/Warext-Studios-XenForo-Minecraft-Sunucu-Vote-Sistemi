@@ -1,0 +1,1 @@
+Java ana adresi ile Bedrock adresi/portu birlikte girilir.

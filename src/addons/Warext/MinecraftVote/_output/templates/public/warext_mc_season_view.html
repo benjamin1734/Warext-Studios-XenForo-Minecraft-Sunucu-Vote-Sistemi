@@ -6,11 +6,11 @@
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;{$season.season_key} Sezon Özeti&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_dyn_season_summary_title', {'season': $season.season_key}) }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;div class="block-row"&gt;
                 &lt;div class="contentRow-minor"&gt;
-                    {$season.total_votes} toplam oy · {$season.unique_voters} benzersiz seçmen · {$season.server_count} sıralanan sunucu
+                    {{ phrase('warext_mc_dyn_season_ranked_totals', {'votes': $season.total_votes, 'unique': $season.unique_voters, 'servers': $season.server_count}) }}
                     &lt;xf:if is="$season.winner_title"&gt; · Kazanan: {$season.winner_title}&lt;/xf:if&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -36,7 +36,7 @@
                                     &lt;/xf:if&gt;
                                 &lt;/div&gt;
                                 &lt;div class="contentRow-minor"&gt;
-                                    {$rank.vote_count} oy · {$rank.unique_voters} benzersiz seçmen · Peak {$rank.peak_players} oyuncu · Uptime {$rank.uptime_percent}% · Sezon puanı {$rank.season_score}
+                                    {{ phrase('warext_mc_dyn_rank_summary', {'votes': $rank.vote_count, 'unique': $rank.unique_voters, 'peak': $rank.peak_players, 'uptime': $rank.uptime_percent, 'score': $rank.season_score}) }}
                                 &lt;/div&gt;
                             &lt;/div&gt;
                         &lt;/div&gt;

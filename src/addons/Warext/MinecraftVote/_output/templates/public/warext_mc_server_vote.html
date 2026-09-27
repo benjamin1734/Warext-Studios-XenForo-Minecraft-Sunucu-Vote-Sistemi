@@ -12,8 +12,8 @@
                     &lt;div class="contentRow-main"&gt;
                         &lt;div class="contentRow-title"&gt;{$server.host}:{$server.port}&lt;/div&gt;
                         &lt;div class="contentRow-minor"&gt;
-                            Bu sunucuya yeniden oy verebilmek için {$cooldownHours} saat beklemeniz gerekir.
-                            Oy başarıyla kaydedildiğinde sunucunun Votifier entegrasyonu aktifse oyun içi ödül teslimatı kuyruğa alınır.
+                            {{ phrase('warext_mc_dyn_vote_cooldown', {'hours': $cooldownHours}) }}
+                            {{ phrase('warext_mc_dyn_vote_delivery_info') }}
                         &lt;/div&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
@@ -25,14 +25,14 @@
                         &lt;xf:selectrow
                             name="minecraft_account_id"
                             label="{{ phrase('warext_mc_i18n_0073') }}"
-                            explain="{{ $requireVerifiedAccount ? 'Yalnızca doğrulanmış Minecraft hesaplarıyla oy verilebilir.' : 'Bir hesap seçerseniz aşağıdaki elle girilen kullanıcı adı ve UUID alanları yok sayılır.' }}"&gt;
+                            explain="{{ $requireVerifiedAccount ? phrase('warext_mc_i18n_0430') : phrase('warext_mc_i18n_0431') }}"&gt;
                             &lt;xf:if is="!$requireVerifiedAccount"&gt;
-                                &lt;xf:option value="0"&gt;Elle gir&lt;/xf:option&gt;
+                                &lt;xf:option value="0"&gt;{{ phrase('warext_mc_i18n_manual_entry') }}&lt;/xf:option&gt;
                             &lt;/xf:if&gt;
                             &lt;xf:foreach loop="$linkedAccounts" value="$account"&gt;
                                 &lt;xf:if is="!$requireVerifiedAccount OR $account.verification_state == 'verified'"&gt;
                                     &lt;xf:if is="$account.verification_state == 'verified'"&gt;
-                                        &lt;xf:option value="{$account.account_id}" selected="$account.is_primary"&gt;{$account.minecraft_username} · Doğrulanmış&lt;/xf:option&gt;
+                                        &lt;xf:option value="{$account.account_id}" selected="$account.is_primary"&gt;{$account.minecraft_username} · {{ phrase('warext_mc_i18n_0130') }}&lt;/xf:option&gt;
                                     &lt;xf:else /&gt;
                                         &lt;xf:option value="{$account.account_id}" selected="$account.is_primary"&gt;{$account.minecraft_username}&lt;/xf:option&gt;
                                     &lt;/xf:if&gt;
@@ -55,7 +55,7 @@
                             explain="{{ phrase('warext_mc_i18n_0075') }}" /&gt;
                     &lt;xf:elseif is="$linkedAccounts is empty" /&gt;
                         &lt;div class="block-rowMessage block-rowMessage--warning"&gt;
-                            Oy verebilmek için önce hesabınıza bir Minecraft hesabı bağlayıp doğrulamanız gerekiyor.
+                            {{ phrase('warext_mc_dyn_link_account_required') }}
                         &lt;/div&gt;
                     &lt;/xf:if&gt;
 

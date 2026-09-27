@@ -5,13 +5,13 @@
 
 &lt;xf:form action="{{ link('sunucular/ekle') }}" ajax="true" upload="true" class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;Temel Bilgiler&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_basic_information') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:textboxrow name="title" label="{{ phrase('warext_mc_i18n_0022') }}" required="true" maxlength="100" /&gt;
             &lt;xf:selectrow name="server_type" label="{{ phrase('warext_mc_i18n_0023') }}"&gt;
                 &lt;xf:option value="java"&gt;Java&lt;/xf:option&gt;
                 &lt;xf:option value="bedrock"&gt;Bedrock&lt;/xf:option&gt;
-                &lt;xf:option value="crossplay"&gt;Java + Bedrock / Crossplay&lt;/xf:option&gt;
+                &lt;xf:option value="crossplay"&gt;{{ phrase('warext_mc_i18n_java_bedrock_crossplay') }}&lt;/xf:option&gt;
             &lt;/xf:selectrow&gt;
             &lt;xf:textboxrow name="host" label="{{ phrase('warext_mc_i18n_0024') }}" required="true" maxlength="255" placeholder="play.sunucum.com" /&gt;
             &lt;xf:numberboxrow name="port" value="25565" min="1" max="65535" label="{{ phrase('warext_mc_i18n_0025') }}" /&gt;
@@ -39,7 +39,7 @@
             &lt;xf:textboxrow name="version_max" label="{{ phrase('warext_mc_i18n_0041') }}" maxlength="30" /&gt;
             &lt;xf:textboxrow name="country_code" label="{{ phrase('warext_mc_i18n_0042') }}" value="TR" maxlength="2" /&gt;
             &lt;xf:checkboxrow&gt;
-                &lt;xf:option name="is_premium" value="1"&gt;Premium hesap zorunlu&lt;/xf:option&gt;
+                &lt;xf:option name="is_premium" value="1"&gt;{{ phrase('warext_mc_i18n_premium_required') }}&lt;/xf:option&gt;
                 &lt;xf:option name="allow_cracked" value="1"&gt;{{ phrase('warext_mc_i18n_0193') }}&lt;/xf:option&gt;
             &lt;/xf:checkboxrow&gt;
         &lt;/div&gt;

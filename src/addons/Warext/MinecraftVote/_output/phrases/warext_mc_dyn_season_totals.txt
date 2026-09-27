@@ -1,0 +1,1 @@
+{votes} oy · {unique} benzersiz seçmen · {servers} sunucu

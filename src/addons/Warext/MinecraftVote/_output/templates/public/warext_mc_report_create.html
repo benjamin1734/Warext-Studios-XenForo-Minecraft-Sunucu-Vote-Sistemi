@@ -2,7 +2,7 @@
 
 &lt;div class="block"&gt;
     &lt;div class="block-container"&gt;
-        &lt;h2 class="block-header"&gt;Sunucuyu raporla&lt;/h2&gt;
+        &lt;h2 class="block-header"&gt;{{ phrase('warext_mc_i18n_report_server') }}&lt;/h2&gt;
         &lt;div class="block-body"&gt;
             &lt;xf:form action="{{ link('sunucular/rapor', $server) }}" method="post" class="block"&gt;
                 &lt;xf:selectrow name="reason" label="{{ phrase('warext_mc_i18n_0009') }}" required="true"&gt;
