@@ -112,3 +112,10 @@ Sorularınız, hata bildirimleriniz, kurulum desteği ve Warext Studios XenForo 
 ## Language support / Dil desteği
 
 Version 1.2.0 adds native Turkish/English XenForo language support. Import the XML packs under `languages/`; the add-on then follows XenForo's normal user language selector. See `LANGUAGE.md`.
+
+
+## 1.2.1 language completion
+
+- XenForo _output source and generated _data now share the same phrase-backed UI.
+- Remaining dynamic counters, server summaries, setup text and vote cooldown backend errors use phrases.
+- Turkish and English XML packs are published with the direct-install release.
