@@ -32,6 +32,35 @@ class Category extends Entity
             ]
         ];
 
+        $structure->getters = [
+            'display_title' => true
+        ];
+
         return $structure;
+    }
+
+    public function getDisplayTitle(): string
+    {
+        $stock = [
+            'survival' => ['Survival'],
+            'skyblock' => ['SkyBlock'],
+            'boxpvp' => ['BoxPvP'],
+            'oneblock' => ['OneBlock'],
+            'factions' => ['Factions'],
+            'towny' => ['Towny'],
+            'prison' => ['Prison'],
+            'smp' => ['SMP'],
+            'roleplay' => ['Roleplay', 'Rol Yapma'],
+            'minigames' => ['Minigames', 'Mini Oyunlar'],
+            'modlu' => ['Modlu', 'Modded'],
+            'vanilla' => ['Vanilla']
+        ];
+
+        if (isset($stock[$this->slug]) && in_array($this->title, $stock[$this->slug], true))
+        {
+            return (string)\XF::phrase('warext_mc_category_' . $this->slug . '_title');
+        }
+
+        return (string)$this->title;
     }
 }
