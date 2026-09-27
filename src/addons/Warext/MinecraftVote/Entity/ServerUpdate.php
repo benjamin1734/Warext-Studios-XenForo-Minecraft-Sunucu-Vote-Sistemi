@@ -56,7 +56,7 @@ class ServerUpdate extends Entity
 
         if (!in_array($this->state, ['visible', 'deleted'], true))
         {
-            $this->error('Geçersiz güncelleme durumu.', 'state');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_update_status'), 'state');
         }
     }
 }

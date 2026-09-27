@@ -60,13 +60,13 @@ class Review extends Entity
             $minimum = $field === 'rating' ? 1 : 0;
             if ($value < $minimum || $value > 5)
             {
-                $this->error('Puan 1-5 arasında olmalıdır.', $field);
+                $this->error((string)\XF::phrase('warext_mc_dyn_review_rating_range'), $field);
             }
         }
 
         if (!in_array($this->state, ['visible', 'moderated', 'deleted'], true))
         {
-            $this->error('Geçersiz değerlendirme durumu.', 'state');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_review_status'), 'state');
         }
 
         $this->message = trim($this->message);

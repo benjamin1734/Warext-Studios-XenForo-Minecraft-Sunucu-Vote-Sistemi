@@ -237,7 +237,7 @@ class Server extends Entity
 
         if ($this->verification_method !== '' && !in_array($this->verification_method, ['motd', 'dns_txt'], true))
         {
-            $this->error('Geçersiz sunucu doğrulama yöntemi.', 'verification_method');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_verification_method'), 'verification_method');
         }
     }
 

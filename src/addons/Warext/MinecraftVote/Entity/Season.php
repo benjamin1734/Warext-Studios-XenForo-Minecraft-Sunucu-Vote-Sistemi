@@ -47,17 +47,17 @@ class Season extends Entity
 
         if (!preg_match('/^\d{4}-\d{2}$/', $this->season_key))
         {
-            $this->error('Geçersiz sezon anahtarı.', 'season_key');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_season_key'), 'season_key');
         }
 
         if (!in_array($this->status, ['open', 'closed'], true))
         {
-            $this->error('Geçersiz sezon durumu.', 'status');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_season_status'), 'status');
         }
 
         if ($this->end_date <= $this->start_date)
         {
-            $this->error('Sezon bitiş tarihi başlangıç tarihinden sonra olmalıdır.', 'end_date');
+            $this->error((string)\XF::phrase('warext_mc_dyn_season_end_after_start'), 'end_date');
         }
     }
 }

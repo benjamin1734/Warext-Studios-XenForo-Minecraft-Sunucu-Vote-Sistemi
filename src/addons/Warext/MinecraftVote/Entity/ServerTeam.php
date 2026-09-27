@@ -46,7 +46,7 @@ class ServerTeam extends Entity
 
         if (!in_array($this->role, ['manager', 'editor', 'analyst', 'support', 'member'], true))
         {
-            $this->error('Geçersiz ekip rolü.', 'role');
+            $this->error((string)\XF::phrase('warext_mc_dyn_invalid_team_role'), 'role');
         }
 
         $allowed = ['edit_content', 'publish_updates', 'view_stats', 'manage_votifier', 'manage_reviews'];
