@@ -57,17 +57,17 @@ class ConfigWriter extends AbstractService
 
         if (!$this->isValidHost($host))
         {
-            throw new PrintableException('Geçerli bir NuVotifier host adresi girin.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_valid_votifier_host'));
         }
 
         if ($port < 1 || $port > 65535)
         {
-            throw new PrintableException('NuVotifier portu 1-65535 arasında olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_votifier_port_range'));
         }
 
         if ($serviceName === '' || mb_strlen($serviceName) > 64)
         {
-            throw new PrintableException('NuVotifier servis adı 1-64 karakter arasında olmalıdır.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_votifier_service_length'));
         }
 
         if ($token !== '')
@@ -77,7 +77,7 @@ class ConfigWriter extends AbstractService
 
         if ($enabled && !$this->config->token_encrypted)
         {
-            throw new PrintableException('NuVotifier entegrasyonunu açmak için token girmeniz gerekiyor.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_votifier_token_enable'));
         }
 
         $this->config->enabled = $enabled;
@@ -97,7 +97,7 @@ class ConfigWriter extends AbstractService
     {
         if (!$this->config->token_encrypted)
         {
-            throw new PrintableException('Bağlantı testi için NuVotifier token kaydedilmelidir.');
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_votifier_token_test'));
         }
 
         $this->config->last_test_date = \XF::$time;
@@ -124,7 +124,7 @@ class ConfigWriter extends AbstractService
         {
             $this->config->last_error = mb_substr($e->getMessage(), 0, 500);
             $this->config->save();
-            throw new PrintableException('NuVotifier bağlantı testi başarısız: ' . $e->getMessage());
+            throw new PrintableException((string)\XF::phrase('warext_mc_dyn_votifier_test_failed', ['error' => $e->getMessage()]));
         }
     }
 
